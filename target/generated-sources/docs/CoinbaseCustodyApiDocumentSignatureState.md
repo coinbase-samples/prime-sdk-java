@@ -1,0 +1,16 @@
+
+# CoinbaseCustodyApiDocumentSignatureState
+
+## Enum
+
+
+* `UNKNOWN` (value: `"DOCUMENT_SIGNATURE_STATE_UNKNOWN"`)
+
+* `CREATED` (value: `"DOCUMENT_SIGNATURE_STATE_CREATED"`)
+
+* `APPROVED` (value: `"DOCUMENT_SIGNATURE_STATE_APPROVED"`)
+
+* `EXPIRED` (value: `"DOCUMENT_SIGNATURE_STATE_EXPIRED"`)
+
+
+

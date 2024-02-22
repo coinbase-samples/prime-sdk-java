@@ -1,0 +1,18 @@
+
+# CoinbaseCustodyApiInvestmentVehicleEntity
+
+## Enum
+
+
+* `UNKNOWN` (value: `"INVESTMENT_VEHICLE_ENTITY_UNKNOWN"`)
+
+* `US` (value: `"INVESTMENT_VEHICLE_ENTITY_US"`)
+
+* `IRELAND` (value: `"INVESTMENT_VEHICLE_ENTITY_IRELAND"`)
+
+* `GERMANY` (value: `"INVESTMENT_VEHICLE_ENTITY_GERMANY"`)
+
+* `CB_INC` (value: `"INVESTMENT_VEHICLE_ENTITY_CB_INC"`)
+
+
+

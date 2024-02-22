@@ -1,0 +1,22 @@
+
+# CoinbaseEngPrimeApiApiAddressState
+
+## Enum
+
+
+* `UNKNOWN` (value: `"ADDRESS_STATE_UNKNOWN"`)
+
+* `COLD` (value: `"ADDRESS_STATE_COLD"`)
+
+* `WARM` (value: `"ADDRESS_STATE_WARM"`)
+
+* `RESTORE_IN_PROGRESS` (value: `"ADDRESS_STATE_RESTORE_IN_PROGRESS"`)
+
+* `RESTORED` (value: `"ADDRESS_STATE_RESTORED"`)
+
+* `FOREIGN` (value: `"ADDRESS_STATE_FOREIGN"`)
+
+* `INVALIDATED` (value: `"ADDRESS_STATE_INVALIDATED"`)
+
+
+

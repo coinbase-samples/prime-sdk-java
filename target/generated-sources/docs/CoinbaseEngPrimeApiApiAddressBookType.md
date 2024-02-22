@@ -1,0 +1,14 @@
+
+# CoinbaseEngPrimeApiApiAddressBookType
+
+## Enum
+
+
+* `UNSPECIFIED` (value: `"ADDRESS_BOOK_TYPE_UNSPECIFIED"`)
+
+* `ADDRESS` (value: `"ADDRESS_BOOK_TYPE_ADDRESS"`)
+
+* `COUNTERPARTY_ID` (value: `"ADDRESS_BOOK_TYPE_COUNTERPARTY_ID"`)
+
+
+

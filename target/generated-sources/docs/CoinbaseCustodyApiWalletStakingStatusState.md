@@ -1,0 +1,18 @@
+
+# CoinbaseCustodyApiWalletStakingStatusState
+
+## Enum
+
+
+* `UNKNOWN` (value: `"WALLET_STAKING_STATUS_UNKNOWN"`)
+
+* `ACTIVATING` (value: `"WALLET_STAKING_STATUS_ACTIVATING"`)
+
+* `STAKED` (value: `"WALLET_STAKING_STATUS_STAKED"`)
+
+* `UNSTAKING` (value: `"WALLET_STAKING_STATUS_UNSTAKING"`)
+
+* `UNSTAKED` (value: `"WALLET_STAKING_STATUS_UNSTAKED"`)
+
+
+

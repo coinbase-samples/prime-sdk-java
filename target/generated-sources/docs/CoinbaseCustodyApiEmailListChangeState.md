@@ -1,0 +1,16 @@
+
+# CoinbaseCustodyApiEmailListChangeState
+
+## Enum
+
+
+* `UNKNOWN` (value: `"EMAIL_LIST_CHANGE_STATE_UNKNOWN"`)
+
+* `CREATED` (value: `"EMAIL_LIST_CHANGE_STATE_CREATED"`)
+
+* `APPROVED` (value: `"EMAIL_LIST_CHANGE_STATE_APPROVED"`)
+
+* `EXPIRED` (value: `"EMAIL_LIST_CHANGE_STATE_EXPIRED"`)
+
+
+

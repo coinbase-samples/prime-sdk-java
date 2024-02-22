@@ -1,0 +1,14 @@
+
+# CoinbaseEngPrimeApiApiBillingPreferenceState
+
+## Enum
+
+
+* `UNSPECIFIED` (value: `"BILLING_PREFERENCE_STATE_UNSPECIFIED"`)
+
+* `ENABLED` (value: `"BILLING_PREFERENCE_STATE_ENABLED"`)
+
+* `DISABLED` (value: `"BILLING_PREFERENCE_STATE_DISABLED"`)
+
+
+

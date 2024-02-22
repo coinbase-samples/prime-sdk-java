@@ -1,0 +1,44 @@
+
+# ScannerBlockchain
+
+## Enum
+
+
+* `UNKNOWN` (value: `"BLOCKCHAIN_UNKNOWN"`)
+
+* `STELLAR` (value: `"BLOCKCHAIN_STELLAR"`)
+
+* `RIPPLE` (value: `"BLOCKCHAIN_RIPPLE"`)
+
+* `SOLANA` (value: `"BLOCKCHAIN_SOLANA"`)
+
+* `BITCOIN` (value: `"BLOCKCHAIN_BITCOIN"`)
+
+* `ETHEREUM` (value: `"BLOCKCHAIN_ETHEREUM"`)
+
+* `BITCOINCASH` (value: `"BLOCKCHAIN_BITCOINCASH"`)
+
+* `LITECOIN` (value: `"BLOCKCHAIN_LITECOIN"`)
+
+* `DOGECOIN` (value: `"BLOCKCHAIN_DOGECOIN"`)
+
+* `BSC` (value: `"BLOCKCHAIN_BSC"`)
+
+* `AVACCHAIN` (value: `"BLOCKCHAIN_AVACCHAIN"`)
+
+* `POLYGON` (value: `"BLOCKCHAIN_POLYGON"`)
+
+* `OPTIMISM` (value: `"BLOCKCHAIN_OPTIMISM"`)
+
+* `ARBITRUM` (value: `"BLOCKCHAIN_ARBITRUM"`)
+
+* `BASE` (value: `"BLOCKCHAIN_BASE"`)
+
+* `BASE_SEPOLIA` (value: `"BLOCKCHAIN_BASE_SEPOLIA"`)
+
+* `TEST` (value: `"BLOCKCHAIN_TEST"`)
+
+* `HARDHAT` (value: `"BLOCKCHAIN_HARDHAT"`)
+
+
+

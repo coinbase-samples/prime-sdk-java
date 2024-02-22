@@ -1,0 +1,22 @@
+
+# CoinbaseEngPrimeApiApiWarningMsg
+
+## Enum
+
+
+* `UNKNOWN` (value: `"UNKNOWN"`)
+
+* `BIG_ORDER` (value: `"BIG_ORDER"`)
+
+* `SMALL_ORDER` (value: `"SMALL_ORDER"`)
+
+* `LIMIT_PRICE_THROUGH_MARKET` (value: `"LIMIT_PRICE_THROUGH_MARKET"`)
+
+* `LIMIT_PRICE_AWAY_FROM_MARKET` (value: `"LIMIT_PRICE_AWAY_FROM_MARKET"`)
+
+* `LARGE_USD_ORDER_SIZE` (value: `"LARGE_USD_ORDER_SIZE"`)
+
+* `HISTORICAL_POV_NOT_FOUND` (value: `"HISTORICAL_POV_NOT_FOUND"`)
+
+
+

@@ -1,0 +1,16 @@
+
+# CoinbaseCustodyApiSecondaryRole
+
+## Enum
+
+
+* `UNKNOWN` (value: `"SECONDARY_ROLE_UNKNOWN"`)
+
+* `VIDEO_APPROVER` (value: `"SECONDARY_ROLE_VIDEO_APPROVER"`)
+
+* `TEAM_APPROVER` (value: `"SECONDARY_ROLE_TEAM_APPROVER"`)
+
+* `WEB3_SIGNER` (value: `"SECONDARY_ROLE_WEB3_SIGNER"`)
+
+
+

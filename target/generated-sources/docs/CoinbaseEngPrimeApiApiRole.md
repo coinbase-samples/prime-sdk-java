@@ -1,0 +1,30 @@
+
+# CoinbaseEngPrimeApiApiRole
+
+## Enum
+
+
+* `UNKNOWN` (value: `"ROLE_UNKNOWN"`)
+
+* `AUTHORIZED_SIGNATORY` (value: `"ROLE_AUTHORIZED_SIGNATORY"`)
+
+* `INITIATOR` (value: `"ROLE_INITIATOR"`)
+
+* `APPROVER` (value: `"ROLE_APPROVER"`)
+
+* `AUDITOR` (value: `"ROLE_AUDITOR"`)
+
+* `ADMINISTRATOR` (value: `"ROLE_ADMINISTRATOR"`)
+
+* `TRADER` (value: `"ROLE_TRADER"`)
+
+* `INTERNAL_TRADER` (value: `"ROLE_INTERNAL_TRADER"`)
+
+* `TEAM_MANAGER` (value: `"ROLE_TEAM_MANAGER"`)
+
+* `FULL_TRADER` (value: `"ROLE_FULL_TRADER"`)
+
+* `INTERNAL_AUDITOR` (value: `"ROLE_INTERNAL_AUDITOR"`)
+
+
+

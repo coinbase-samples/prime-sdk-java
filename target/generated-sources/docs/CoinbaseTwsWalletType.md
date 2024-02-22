@@ -1,0 +1,20 @@
+
+# CoinbaseTwsWalletType
+
+## Enum
+
+
+* `UNSPECIFIED` (value: `"WALLET_TYPE_UNSPECIFIED"`)
+
+* `PRIME_TRADING` (value: `"WALLET_TYPE_PRIME_TRADING"`)
+
+* `PRIME_VAULT` (value: `"WALLET_TYPE_PRIME_VAULT"`)
+
+* `CONSUMER` (value: `"WALLET_TYPE_CONSUMER"`)
+
+* `PRIME_WEB3` (value: `"WALLET_TYPE_PRIME_WEB3"`)
+
+* `PRIME_OMNIBUS_QC` (value: `"WALLET_TYPE_PRIME_OMNIBUS_QC"`)
+
+
+

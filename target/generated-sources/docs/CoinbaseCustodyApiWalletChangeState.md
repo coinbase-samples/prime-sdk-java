@@ -1,0 +1,20 @@
+
+# CoinbaseCustodyApiWalletChangeState
+
+## Enum
+
+
+* `UNKNOWN` (value: `"WALLET_CHANGE_STATE_UNKNOWN"`)
+
+* `CREATED` (value: `"WALLET_CHANGE_STATE_CREATED"`)
+
+* `APPROVED` (value: `"WALLET_CHANGE_STATE_APPROVED"`)
+
+* `REJECTED` (value: `"WALLET_CHANGE_STATE_REJECTED"`)
+
+* `ADMIN_CREATED` (value: `"WALLET_CHANGE_STATE_ADMIN_CREATED"`)
+
+* `EXPIRED` (value: `"WALLET_CHANGE_STATE_EXPIRED"`)
+
+
+

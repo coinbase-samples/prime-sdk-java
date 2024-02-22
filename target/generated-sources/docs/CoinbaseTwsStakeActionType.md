@@ -1,0 +1,18 @@
+
+# CoinbaseTwsStakeActionType
+
+## Enum
+
+
+* `UNSPECIFIED` (value: `"STAKE_ACTION_TYPE_UNSPECIFIED"`)
+
+* `STAKE` (value: `"STAKE_ACTION_TYPE_STAKE"`)
+
+* `UNSTAKE` (value: `"STAKE_ACTION_TYPE_UNSTAKE"`)
+
+* `RESTAKE` (value: `"STAKE_ACTION_TYPE_RESTAKE"`)
+
+* `CHANGE_VALIDATOR` (value: `"STAKE_ACTION_TYPE_CHANGE_VALIDATOR"`)
+
+
+

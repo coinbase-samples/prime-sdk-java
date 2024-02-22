@@ -1,0 +1,14 @@
+
+# CoinbaseCustodyApiAssignedValueStrategy
+
+## Enum
+
+
+* `UNKNOWN` (value: `"ASSIGNED_VALUE_STRATEGY_UNKNOWN"`)
+
+* `UNASSIGNED` (value: `"ASSIGNED_VALUE_STRATEGY_UNASSIGNED"`)
+
+* `LAST_SALE_PRICE` (value: `"ASSIGNED_VALUE_STRATEGY_LAST_SALE_PRICE"`)
+
+
+

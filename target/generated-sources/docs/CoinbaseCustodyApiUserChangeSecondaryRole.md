@@ -1,0 +1,14 @@
+
+# CoinbaseCustodyApiUserChangeSecondaryRole
+
+## Enum
+
+
+* `UNKNOWN` (value: `"USER_CHANGE_SECONDARY_ROLE_UNKNOWN"`)
+
+* `VIDEO_APPROVER` (value: `"USER_CHANGE_SECONDARY_ROLE_VIDEO_APPROVER"`)
+
+* `WEB3_SIGNER` (value: `"USER_CHANGE_SECONDARY_ROLE_WEB3_SIGNER"`)
+
+
+

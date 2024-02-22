@@ -1,0 +1,18 @@
+
+# CoinbaseCustodyApiApiKeyChangeState
+
+## Enum
+
+
+* `UNKNOWN` (value: `"API_KEY_CHANGE_STATE_UNKNOWN"`)
+
+* `CREATED` (value: `"API_KEY_CHANGE_STATE_CREATED"`)
+
+* `APPROVED` (value: `"API_KEY_CHANGE_STATE_APPROVED"`)
+
+* `REJECTED` (value: `"API_KEY_CHANGE_STATE_REJECTED"`)
+
+* `EXPIRED` (value: `"API_KEY_CHANGE_STATE_EXPIRED"`)
+
+
+

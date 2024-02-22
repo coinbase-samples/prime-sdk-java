@@ -1,0 +1,14 @@
+
+# CoinbaseCustodyApiSmartContractReleaseType
+
+## Enum
+
+
+* `UNKNOWN` (value: `"SMART_CONTRACT_RELEASE_TYPE_UNKNOWN"`)
+
+* `SIGNALLING_PROXY` (value: `"SMART_CONTRACT_RELEASE_TYPE_SIGNALLING_PROXY"`)
+
+* `VOTE_PROXY` (value: `"SMART_CONTRACT_RELEASE_TYPE_VOTE_PROXY"`)
+
+
+
