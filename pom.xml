@@ -11,122 +11,59 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.21</java.version>
-        <swagger.file>${project.basedir}/src/main/resources/codegen/prime.swagger.json</swagger.file>
-        <generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
-        <generated-sources-java-path>main/java</generated-sources-java-path>
+        <jackson.version>2.16.1</jackson.version>
+        <maven.compiler.source>1.21</maven.compiler.source>
+        <maven.compiler.target>1.21</maven.compiler.target>
     </properties>
     <build>
-        <plugins>
-            <plugin>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-                    <language>java</language>
-                    <inputSpec>${swagger.file}</inputSpec>
-                    <configOptions>
-                        <sourceFolder>${generated-sources-java-path}</sourceFolder>
-                    </configOptions>
-                    <output>${generated-sources-path}</output>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-swagger</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>3.0.0-M5</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>integration-test</goal>
+                        <goal>verify</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
     </build>
     <dependencies>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.5.21</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <!-- HTTP client: jersey-client -->
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>3.1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>3.1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-multipart</artifactId>
-            <version>3.1.5</version>
-        </dependency>
-
         <!-- JSON processing: jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-base</artifactId>
-            <version>2.16.1</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.16.1</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.16.1</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.16.1</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
-            <version>2.16.1</version>
+            <version>${jackson.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.threeten/threetenbp -->
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
-            <groupId>org.threeten</groupId>
-            <artifactId>threetenbp</artifactId>
-            <version>1.6.8</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp -->
-        <dependency>
-            <groupId>com.squareup.okhttp</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>2.7.5</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.gsonfire/gson-fire -->
-        <dependency>
-            <groupId>io.gsonfire</groupId>
-            <artifactId>gson-fire</artifactId>
-            <version>1.9.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp/logging-interceptor -->
-        <dependency>
-            <groupId>com.squareup.okhttp</groupId>
-            <artifactId>logging-interceptor</artifactId>
-            <version>2.7.5</version>
-        </dependency>
-
     </dependencies>
     <repositories>
         <repository>
