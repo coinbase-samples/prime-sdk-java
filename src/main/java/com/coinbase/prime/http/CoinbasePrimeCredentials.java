@@ -1,6 +1,7 @@
 package com.coinbase.prime.http;
 
 import com.coinbase.prime.errors.InternalException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -16,6 +17,15 @@ public class CoinbasePrimeCredentials {
     private String svcAccountId;
 
     public CoinbasePrimeCredentials() {}
+
+    public CoinbasePrimeCredentials(Builder builder) {
+        this.accessKey = builder.accessKey;
+        this.passphrase = builder.passphrase;
+        this.signingKey = builder.signingKey;
+        this.portfolioId = builder.portfolioId;
+        this.entityId = builder.entityId;
+        this.svcAccountId = builder.svcAccountId;
+    }
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
@@ -108,14 +118,7 @@ public class CoinbasePrimeCredentials {
         }
 
         public CoinbasePrimeCredentials build() {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials();
-            credentials.setAccessKey(accessKey);
-            credentials.setPassphrase(passphrase);
-            credentials.setSigningKey(signingKey);
-            credentials.setPortfolioId(portfolioId);
-            credentials.setEntityId(entityId);
-            credentials.setSvcAccountId(svcAccountId);
-            return credentials;
+           return new CoinbasePrimeCredentials(this);
         }
     }
 }
