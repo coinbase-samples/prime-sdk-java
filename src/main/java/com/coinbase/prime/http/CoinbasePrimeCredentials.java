@@ -1,10 +1,10 @@
 package com.coinbase.prime.http;
 
 import com.coinbase.prime.errors.InternalException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.util.Base64;
 
 public class CoinbasePrimeCredentials {
@@ -14,32 +14,6 @@ public class CoinbasePrimeCredentials {
     private String portfolioId;
     private String entityId;
     private String svcAccountId;
-
-    public CoinbasePrimeCredentials(
-            String accessKey,
-            String passphrase,
-            String signingKey,
-            String portfolioId,
-            String entityId,
-            String svcAccountId
-    ) {
-        this.accessKey = accessKey;
-        this.passphrase = passphrase;
-        this.signingKey = signingKey;
-        this.portfolioId = portfolioId;
-        this.entityId = entityId;
-        this.svcAccountId = svcAccountId;
-    }
-
-    public CoinbasePrimeCredentials(
-            String accessKey,
-            String passphrase,
-            String signingKey
-    ) {
-        this.accessKey = accessKey;
-        this.passphrase = passphrase;
-        this.signingKey = signingKey;
-    }
 
     public CoinbasePrimeCredentials() {}
 
@@ -93,11 +67,55 @@ public class CoinbasePrimeCredentials {
 
     public String Sign(long timestamp, String method, String path, String key, String body) throws InternalException {
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest((timestamp + method + path + body).getBytes(StandardCharsets.UTF_8));
+            SecretKeySpec secretKeySpec = new SecretKeySpec(Base64.getDecoder().decode(signingKey), "HmacSHA256");
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(secretKeySpec);
+            byte[] hash = mac.doFinal((timestamp + method + path + body).getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(hash);
         } catch (Exception e) {
             throw new InternalException("Failed to sign request", e);
+        }
+    }
+
+    public static class Builder {
+        private final String accessKey;
+        private final String passphrase;
+        private final String signingKey;
+
+        private String portfolioId;
+        private String entityId;
+        private String svcAccountId;
+
+        public Builder(String accessKey, String passphrase, String signingKey) {
+            this.accessKey = accessKey;
+            this.passphrase = passphrase;
+            this.signingKey = signingKey;
+        }
+
+        public Builder withPortfolioId(String portfolioId) {
+            this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder withEntityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        public Builder withSvcAccountId(String svcAccountId) {
+            this.svcAccountId = svcAccountId;
+            return this;
+        }
+
+        public CoinbasePrimeCredentials build() {
+            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials();
+            credentials.setAccessKey(accessKey);
+            credentials.setPassphrase(passphrase);
+            credentials.setSigningKey(signingKey);
+            credentials.setPortfolioId(portfolioId);
+            credentials.setEntityId(entityId);
+            credentials.setSvcAccountId(svcAccountId);
+            return credentials;
         }
     }
 }
