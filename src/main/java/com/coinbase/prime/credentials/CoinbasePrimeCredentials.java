@@ -1,4 +1,4 @@
-package com.coinbase.prime.http;
+package com.coinbase.prime.credentials;
 
 import com.coinbase.prime.errors.CoinbasePrimeException;
 

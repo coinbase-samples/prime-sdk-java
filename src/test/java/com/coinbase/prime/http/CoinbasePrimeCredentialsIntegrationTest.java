@@ -1,5 +1,6 @@
 package com.coinbase.prime.http;
 
+import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
