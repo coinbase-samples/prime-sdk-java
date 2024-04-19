@@ -3,6 +3,8 @@ package com.coinbase.prime.client;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.*;
 import com.coinbase.prime.model.portfolio.ListPortfoliosResponse;
+import com.coinbase.prime.model.wallets.CreateWalletRequest;
+import com.coinbase.prime.model.wallets.CreateWalletResponse;
 import com.coinbase.prime.model.wallets.ListWalletsRequest;
 import com.coinbase.prime.model.wallets.ListWalletsResponse;
 import com.coinbase.prime.utils.Utils;
@@ -23,76 +25,6 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         this.credentials = builder.credentials;
         this.client = builder.client;
         this.baseUrl = builder.baseUrl;
-    }
-
-    private String get(String path, String query) {
-        String callUrl = baseUrl + path + query;
-        URI uri = URI.create(callUrl);
-        long unixTime = System.currentTimeMillis() / 1000L;
-        String signature;
-        try {
-           signature = credentials.Sign(unixTime, "GET", uri.getPath(), "");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(uri)
-                .header("X-CB-ACCESS-KEY", credentials.getAccessKey())
-                .header("X-CB-ACCESS-PASSPHRASE", credentials.getPassphrase())
-                .header("X-CB-ACCESS-SIGNATURE", signature)
-                .header("X-CB-ACCESS-TIMESTAMP", String.valueOf(unixTime))
-                .GET()
-                .build();
-
-        try {
-            HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (resp.statusCode() != 200) {
-                System.out.println("Request failed with status code: " + resp.statusCode());
-                System.out.println("Response body: " + resp.body());
-                throw new CoinbasePrimeException(resp.statusCode(), resp.body());
-            }
-            return resp.body();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private String post(String path, String query, Object request) {
-        String callUrl = baseUrl + path + query;
-        URI uri = URI.create(callUrl);
-        long unixTime = System.currentTimeMillis() / 1000L;
-        String signature;
-        try {
-            signature = credentials.Sign(unixTime, "GET", uri.getPath(), "");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(uri)
-                    .header("X-CB-ACCESS-KEY", credentials.getAccessKey())
-                    .header("X-CB-ACCESS-PASSPHRASE", credentials.getPassphrase())
-                    .header("X-CB-ACCESS-SIGNATURE", signature)
-                    .header("X-CB-ACCESS-TIMESTAMP", String.valueOf(unixTime))
-                    .POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(request)))
-                    .build();
-
-            HttpResponse<String> resp = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            if (resp.statusCode() != 200) {
-                System.out.println("Request failed with status code: " + resp.statusCode());
-                System.out.println("Response body: " + resp.body());
-                throw new CoinbasePrimeException(resp.statusCode(), resp.body());
-            }
-            return resp.body();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     @Override
@@ -119,6 +51,19 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.readValue(response, ListWalletsResponse.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public CreateWalletResponse createWallet(CreateWalletRequest request) {
+        String path = String.format("/portfolio/%s/wallets", request.getPortfolioId());
+        String response = post(path, "", request);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(response, CreateWalletResponse.class);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -156,6 +101,75 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
             if (credentials == null) {
                 throw new IllegalStateException("Credentials must be provided");
             }
+        }
+    }
+
+    private String get(String path, String query) {
+        HttpRequest.Builder builder = generateHttpRequest(path, query);
+        if (builder == null) {
+            return null;
+        }
+
+        HttpRequest httpRequest = builder
+                .GET()
+                .build();
+
+        return sendRequest(httpRequest);
+    }
+
+    private String post(String path, String query, Object request) {
+        HttpRequest.Builder builder = generateHttpRequest(path, query);
+        if (builder == null) {
+            return null;
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        HttpRequest httpRequest;
+        try {
+            httpRequest = builder
+                    .POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(request)))
+                    .build();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return sendRequest(httpRequest);
+    }
+
+    private HttpRequest.Builder generateHttpRequest(String path, String query) {
+        String callUrl = baseUrl + path + query;
+        URI uri = URI.create(callUrl);
+        long unixTime = System.currentTimeMillis() / 1000L;
+        String signature;
+        try {
+            signature = credentials.Sign(unixTime, "GET", uri.getPath(), "");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        return HttpRequest.newBuilder()
+                .uri(uri)
+                .header("X-CB-ACCESS-KEY", credentials.getAccessKey())
+                .header("X-CB-ACCESS-PASSPHRASE", credentials.getPassphrase())
+                .header("X-CB-ACCESS-SIGNATURE", signature)
+                .header("X-CB-ACCESS-TIMESTAMP", String.valueOf(unixTime));
+    }
+
+    private String sendRequest(HttpRequest request) {
+        try {
+            HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (resp.statusCode() != 200) {
+                System.out.println("Request failed with status code: " + resp.statusCode());
+                System.out.println("Response body: " + resp.body());
+                throw new CoinbasePrimeException(resp.statusCode(), resp.body());
+            }
+            return resp.body();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            throw new CoinbasePrimeException("Failed to send request", e);
         }
     }
 }
