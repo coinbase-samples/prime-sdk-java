@@ -1,7 +1,6 @@
 package com.coinbase.prime.http;
 
-import com.coinbase.prime.errors.InternalException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.errors.CoinbasePrimeException;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -75,15 +74,15 @@ public class CoinbasePrimeCredentials {
         this.svcAccountId = svcAccountId;
     }
 
-    public String Sign(long timestamp, String method, String path, String key, String body) throws InternalException {
+    public String Sign(long timestamp, String method, String path, String body) throws CoinbasePrimeException {
         try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(Base64.getDecoder().decode(signingKey), "HmacSHA256");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(secretKeySpec);
             byte[] hash = mac.doFinal((timestamp + method + path + body).getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(hash);
         } catch (Exception e) {
-            throw new InternalException("Failed to sign request", e);
+            throw new CoinbasePrimeException("Failed to sign request", e);
         }
     }
 

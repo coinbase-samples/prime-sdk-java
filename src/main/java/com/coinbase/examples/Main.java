@@ -2,6 +2,7 @@ package com.coinbase.examples;
 
 import com.coinbase.prime.http.CoinbasePrimeCredentials;
 import com.coinbase.prime.http.CoinbasePrimeHttpClient;
+import com.coinbase.prime.model.portfolio.ListPortfoliosResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
@@ -13,6 +14,8 @@ public class Main {
 
             CoinbasePrimeHttpClient client = new CoinbasePrimeHttpClient.Builder(credentials).build();
 
+            ListPortfoliosResponse resp = client.listPortfolios();
+            System.out.println(resp);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,6 +9,8 @@ public class ListPortfoliosResponse{
         this.portfolios = portfolios;
     }
 
+    public ListPortfoliosResponse() {}
+
     public List<Portfolio> getPortfolios() {
         return portfolios;
     }
