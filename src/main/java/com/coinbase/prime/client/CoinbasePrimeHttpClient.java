@@ -3,10 +3,7 @@ package com.coinbase.prime.client;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.*;
 import com.coinbase.prime.model.portfolio.ListPortfoliosResponse;
-import com.coinbase.prime.model.wallets.CreateWalletRequest;
-import com.coinbase.prime.model.wallets.CreateWalletResponse;
-import com.coinbase.prime.model.wallets.ListWalletsRequest;
-import com.coinbase.prime.model.wallets.ListWalletsResponse;
+import com.coinbase.prime.model.wallets.*;
 import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,7 +43,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     @Override
     public ListWalletsResponse listWallets(ListWalletsRequest request) {
         String queryParams = Utils.appendQueryParams("", "type", request.getType());
-        String path = String.format("/portfolio/%s/wallets", request.getPortfolioId());
+        String path = String.format("/portfolios/%s/wallets", request.getPortfolioId());
         String response = get(path, queryParams);
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -59,11 +56,37 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     @Override
     public CreateWalletResponse createWallet(CreateWalletRequest request) {
-        String path = String.format("/portfolio/%s/wallets", request.getPortfolioId());
+        String path = String.format("/portfolios/%s/wallets", request.getPortfolioId());
         String response = post(path, "", request);
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.readValue(response, CreateWalletResponse.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetWalletByIdResponse getWalletById(GetWalletByIdRequest request) {
+        String path = String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(response, GetWalletByIdResponse.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) {
+        String path = String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(), request.getWalletId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(response, GetWalletDepositInstructionsResponse.class);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
