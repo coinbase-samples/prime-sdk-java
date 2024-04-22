@@ -26,6 +26,14 @@ public class Portfolio {
 
     public Portfolio() {}
 
+    public Portfolio(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.entityId = builder.entityId;
+        this.organizationId = builder.organizationId;
+        this.entityName = builder.entityName;
+    }
+
     public String getId() {
         return id;
     }
@@ -64,6 +72,46 @@ public class Portfolio {
 
     public void setEntityName(String entityName) {
         this.entityName = entityName;
+    }
+
+    public static class Builder {
+        private String id;
+        private String name;
+        private String entityId;
+        private String organizationId;
+        private String entityName;
+
+        public Builder() {
+        }
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder entityId(String entityId) {
+            this.entityId = entityId;
+            return this;
+        }
+
+        public Builder organizationId(String organizationId) {
+            this.organizationId = organizationId;
+            return this;
+        }
+
+        public Builder entityName(String entityName) {
+            this.entityName = entityName;
+            return this;
+        }
+
+        public Portfolio build() {
+            return new Portfolio(this);
+        }
     }
 }
 

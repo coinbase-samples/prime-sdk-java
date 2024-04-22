@@ -8,8 +8,8 @@ public class Wallet {
     private String id;
     private String name;
     private String symbol;
-
     private WalletType type;
+    private String address;
 
     @JsonProperty("created_at")
     private Date createdAt;
@@ -54,5 +54,13 @@ public class Wallet {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
