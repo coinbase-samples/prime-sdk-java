@@ -2,6 +2,8 @@ package com.coinbase.prime.client;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.*;
+import com.coinbase.prime.model.allocations.CreatePortfolioAllocationsRequest;
+import com.coinbase.prime.model.allocations.CreatePortfolioAllocationsResponse;
 import com.coinbase.prime.model.portfolio.*;
 import com.coinbase.prime.model.wallets.*;
 import com.coinbase.prime.utils.Utils;
@@ -22,6 +24,21 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         this.credentials = builder.credentials;
         this.client = builder.client;
         this.baseUrl = builder.baseUrl;
+    }
+
+    @Override
+    public CreatePortfolioAllocationsResponse createPortfolioAllocations(CreatePortfolioAllocationsRequest request) {
+        String path = "/allocations";
+        String response = post(path, "", request);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            CreatePortfolioAllocationsResponse resp = mapper.readValue(response, CreatePortfolioAllocationsResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
