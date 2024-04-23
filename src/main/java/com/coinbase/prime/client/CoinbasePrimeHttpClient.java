@@ -2,9 +2,7 @@ package com.coinbase.prime.client;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.*;
-import com.coinbase.prime.model.portfolio.GetPortfolioByIdRequest;
-import com.coinbase.prime.model.portfolio.GetPortfolioByIdResponse;
-import com.coinbase.prime.model.portfolio.ListPortfoliosResponse;
+import com.coinbase.prime.model.portfolio.*;
 import com.coinbase.prime.model.wallets.*;
 import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,6 +47,21 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             GetPortfolioByIdResponse resp = mapper.readValue(response, GetPortfolioByIdResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) {
+        String path = String.format("/portfolios/%s/credit", request.getPortfolioId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            GetPortfolioCreditInformationResponse resp = mapper.readValue(response, GetPortfolioCreditInformationResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
