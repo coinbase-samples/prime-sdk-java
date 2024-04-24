@@ -14,7 +14,7 @@ public class CreatePortfolioAllocationsRequest {
     @JsonProperty("allocation_legs")
     private AllocationLeg[] allocationLegs;
     @JsonProperty("size_type")
-    private String sizeType;
+    private SizeType sizeType;
     @JsonProperty("remainder_destination_portfolio")
     private String remainderDestinationPortfolio;
 
@@ -71,11 +71,11 @@ public class CreatePortfolioAllocationsRequest {
         this.allocationLegs = allocationLegs;
     }
 
-    public String getSizeType() {
+    public SizeType getSizeType() {
         return sizeType;
     }
 
-    public void setSizeType(String sizeType) {
+    public void setSizeType(SizeType sizeType) {
         this.sizeType = sizeType;
     }
 
@@ -93,7 +93,7 @@ public class CreatePortfolioAllocationsRequest {
         private String productId;
         private String[] orderIds;
         private AllocationLeg[] allocationLegs;
-        private String sizeType;
+        private SizeType sizeType;
         private String remainderDestinationPortfolio;
 
         public Builder() {
@@ -124,7 +124,7 @@ public class CreatePortfolioAllocationsRequest {
             return this;
         }
 
-        public Builder sizeType(String sizeType) {
+        public Builder sizeType(SizeType sizeType) {
             this.sizeType = sizeType;
             return this;
         }

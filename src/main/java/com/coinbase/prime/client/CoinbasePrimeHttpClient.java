@@ -4,6 +4,7 @@ import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.*;
 import com.coinbase.prime.model.allocations.CreatePortfolioAllocationsRequest;
 import com.coinbase.prime.model.allocations.CreatePortfolioAllocationsResponse;
+import com.coinbase.prime.model.allocations.CreatePortfolioNetAllocationsResponse;
 import com.coinbase.prime.model.portfolio.*;
 import com.coinbase.prime.model.wallets.*;
 import com.coinbase.prime.utils.Utils;
@@ -33,6 +34,21 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             CreatePortfolioAllocationsResponse resp = mapper.readValue(response, CreatePortfolioAllocationsResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public CreatePortfolioNetAllocationsResponse createPortfolioNetAllocations(CreatePortfolioAllocationsRequest request) {
+        String path = "/allocations/net";
+        String response = post(path, "", request);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            CreatePortfolioNetAllocationsResponse resp = mapper.readValue(response, CreatePortfolioNetAllocationsResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {

@@ -1,17 +1,15 @@
 package com.coinbase.prime.utils;
 
-import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public final class Utils {
     public static String appendQueryParams(String queryParams, String key, String value) {
         return String.format("%s%s%s=%s", queryParams, queryParams.isEmpty() ? "?" : "&", key, value);
     }
 
-
+    public static String formatDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        return sdf.format(date);
+    }
 }
