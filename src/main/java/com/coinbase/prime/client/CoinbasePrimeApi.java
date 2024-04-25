@@ -9,6 +9,7 @@ public interface CoinbasePrimeApi {
     CreatePortfolioNetAllocationsResponse createPortfolioNetAllocations(CreatePortfolioAllocationsRequest request);
     ListPortfolioAllocationsResponse listPortfolioAllocations(ListPortfolioAllocationsRequest request);
     GetAllocationByIdResponse getAllocationById(GetAllocationByIdRequest request);
+    GetNetAllocationsByNettingIdResponse getNetAllocationsByNettingId(GetNetAllocationsByNettingIdRequest request);
 
     ListPortfoliosResponse listPortfolios();
     GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request);
