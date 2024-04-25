@@ -2,9 +2,7 @@ package com.coinbase.prime.client;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.*;
-import com.coinbase.prime.model.allocations.CreatePortfolioAllocationsRequest;
-import com.coinbase.prime.model.allocations.CreatePortfolioAllocationsResponse;
-import com.coinbase.prime.model.allocations.CreatePortfolioNetAllocationsResponse;
+import com.coinbase.prime.model.allocations.*;
 import com.coinbase.prime.model.portfolio.*;
 import com.coinbase.prime.model.wallets.*;
 import com.coinbase.prime.utils.Utils;
@@ -49,6 +47,21 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             CreatePortfolioNetAllocationsResponse resp = mapper.readValue(response, CreatePortfolioNetAllocationsResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetAllocationByIdResponse getAllocationById(GetAllocationByIdRequest request) {
+        String path = String.format("/portfolios/%s/allocations/%s", request.getPortfolioId(), request.getAllocationId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            GetAllocationByIdResponse resp = mapper.readValue(response, GetAllocationByIdResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
@@ -105,7 +118,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     @Override
     public ListWalletsResponse listWallets(ListWalletsRequest request) {
-        String queryParams = Utils.appendQueryParams("", "type", request.getType().toString());
+        String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/wallets", request.getPortfolioId());
         String response = get(path, queryParams);
         ObjectMapper mapper = new ObjectMapper();

@@ -1,7 +1,10 @@
 package com.coinbase.prime.model.wallets;
 
 import com.coinbase.prime.model.common.PaginationParams;
+import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListWalletsRequest {
     @JsonProperty("portfolio_id")
@@ -21,6 +24,22 @@ public class ListWalletsRequest {
         this.type = builder.type;
         this.symbols = builder.symbols;
         this.paginationParams = builder.paginationParams;
+    }
+
+    public String getQueryString() {
+        String queryParams = "";
+        if (this.getSymbols() != null) {
+            for (String symbol : this.getSymbols()) {
+                queryParams = appendQueryParams(queryParams, "symbols", symbol);
+            }
+        }
+        if (this.getType() != null) {
+            queryParams = appendQueryParams(queryParams, "type", this.getType().toString());
+        }
+        if (this.getPaginationParams() != null) {
+            queryParams = this.getPaginationParams().generateQueryString(queryParams);
+        }
+        return queryParams;
     }
 
     public String getPortfolioId() {

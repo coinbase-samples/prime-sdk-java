@@ -1,7 +1,6 @@
 package com.coinbase.prime.model.allocations;
 
 import com.coinbase.prime.model.common.OrderSide;
-import com.coinbase.prime.model.common.Pagination;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Allocation {
