@@ -56,6 +56,22 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     @Override
+    public ListPortfolioAllocationsResponse listPortfolioAllocations(ListPortfolioAllocationsRequest request) {
+        String queryParams = request.getQueryString();
+        String path = String.format("/portfolios/%s/allocations", request.getPortfolioId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListPortfolioAllocationsResponse resp = mapper.readValue(response, ListPortfolioAllocationsResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public GetAllocationByIdResponse getAllocationById(GetAllocationByIdRequest request) {
         String path = String.format("/portfolios/%s/allocations/%s", request.getPortfolioId(), request.getAllocationId());
         String response = get(path, "");

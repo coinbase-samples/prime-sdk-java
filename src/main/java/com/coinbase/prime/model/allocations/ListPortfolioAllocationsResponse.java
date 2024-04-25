@@ -2,16 +2,19 @@ package com.coinbase.prime.model.allocations;
 
 import com.coinbase.prime.model.common.Pagination;
 
-public class ListPorfolioAllocationsResponse {
+public class ListPortfolioAllocationsResponse {
     private Allocation[] allocations;
     private Pagination pagination;
 
-    public ListPorfolioAllocationsResponse() {
+    private ListPortfolioAllocationsRequest request;
+
+    public ListPortfolioAllocationsResponse() {
     }
 
-    public ListPorfolioAllocationsResponse(Builder builder) {
+    public ListPortfolioAllocationsResponse(Builder builder) {
         this.allocations = builder.allocations;
         this.pagination = builder.pagination;
+        this.request = builder.request;
     }
 
     public Allocation[] getAllocations() {
@@ -30,9 +33,19 @@ public class ListPorfolioAllocationsResponse {
         this.pagination = pagination;
     }
 
+    public ListPortfolioAllocationsRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(ListPortfolioAllocationsRequest request) {
+        this.request = request;
+    }
+
     public static class Builder {
         private Allocation[] allocations;
         private Pagination pagination;
+
+        private ListPortfolioAllocationsRequest request;
 
         public Builder() {
         }
@@ -47,8 +60,13 @@ public class ListPorfolioAllocationsResponse {
             return this;
         }
 
-        public ListPorfolioAllocationsResponse build() {
-            return new ListPorfolioAllocationsResponse(this);
+        public Builder request(ListPortfolioAllocationsRequest request) {
+            this.request = request;
+            return this;
+        }
+
+        public ListPortfolioAllocationsResponse build() {
+            return new ListPortfolioAllocationsResponse(this);
         }
     }
 }

@@ -7,6 +7,7 @@ import com.coinbase.prime.model.wallets.*;
 public interface CoinbasePrimeApi {
     CreatePortfolioAllocationsResponse createPortfolioAllocations(CreatePortfolioAllocationsRequest request);
     CreatePortfolioNetAllocationsResponse createPortfolioNetAllocations(CreatePortfolioAllocationsRequest request);
+    ListPortfolioAllocationsResponse listPortfolioAllocations(ListPortfolioAllocationsRequest request);
     GetAllocationByIdResponse getAllocationById(GetAllocationByIdRequest request);
 
     ListPortfoliosResponse listPortfolios();
