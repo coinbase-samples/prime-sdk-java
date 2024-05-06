@@ -1,16 +1,16 @@
-package com.coinbase.prime.model.portfolio;
+package com.coinbase.prime.model.portfolios;
 
-public class GetPortfolioCreditInformationRequest {
+public class GetPortfolioByIdRequest {
     private String portfolioId;
 
-    public GetPortfolioCreditInformationRequest() {
+    public GetPortfolioByIdRequest() {
     }
 
-    public GetPortfolioCreditInformationRequest(String portfolioId) {
+    public GetPortfolioByIdRequest(String portfolioId) {
         this.portfolioId = portfolioId;
     }
 
-    public GetPortfolioCreditInformationRequest(Builder builder) {
+    public GetPortfolioByIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
     }
 
@@ -33,8 +33,8 @@ public class GetPortfolioCreditInformationRequest {
             return this;
         }
 
-        public GetPortfolioCreditInformationRequest build() {
-            return new GetPortfolioCreditInformationRequest(this);
+        public GetPortfolioByIdRequest build() {
+            return new GetPortfolioByIdRequest(this);
         }
     }
 }

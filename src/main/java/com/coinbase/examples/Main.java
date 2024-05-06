@@ -2,9 +2,9 @@ package com.coinbase.examples;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.client.CoinbasePrimeHttpClient;
-import com.coinbase.prime.model.portfolio.GetPortfolioByIdRequest;
-import com.coinbase.prime.model.portfolio.GetPortfolioByIdResponse;
-import com.coinbase.prime.model.portfolio.ListPortfoliosResponse;
+import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
+import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
+import com.coinbase.prime.model.portfolios.ListPortfoliosResponse;
 import com.coinbase.prime.model.wallets.ListWalletsRequest;
 import com.coinbase.prime.model.wallets.ListWalletsResponse;
 import com.coinbase.prime.model.wallets.WalletType;

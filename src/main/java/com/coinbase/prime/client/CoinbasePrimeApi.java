@@ -9,7 +9,11 @@ import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsResponse;
-import com.coinbase.prime.model.portfolio.*;
+import com.coinbase.prime.model.portfolios.*;
+import com.coinbase.prime.model.users.ListPortfolioUsersRequest;
+import com.coinbase.prime.model.users.ListPortfolioUsersResponse;
+import com.coinbase.prime.model.users.ListUsersRequest;
+import com.coinbase.prime.model.users.ListUsersResponse;
 import com.coinbase.prime.model.wallets.*;
 
 public interface CoinbasePrimeApi {
@@ -25,6 +29,9 @@ public interface CoinbasePrimeApi {
 
     ListEntityPaymentMethodsResponse listEntityPaymentMethods(ListEntityPaymentMethodsRequest entityId);
     GetEntityPaymentMethodResponse getEntityPaymentMethod(GetEntityPaymentMethodRequest request);
+
+    ListUsersResponse listUsers(ListUsersRequest request);
+    ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request);
 
     ListPortfoliosResponse listPortfolios();
     GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request);

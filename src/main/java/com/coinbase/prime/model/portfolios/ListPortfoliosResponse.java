@@ -1,4 +1,4 @@
-package com.coinbase.prime.model.portfolio;
+package com.coinbase.prime.model.portfolios;
 
 import java.util.List;
 

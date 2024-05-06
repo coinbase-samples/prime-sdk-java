@@ -11,9 +11,12 @@ import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsResponse;
-import com.coinbase.prime.model.portfolio.*;
+import com.coinbase.prime.model.portfolios.*;
+import com.coinbase.prime.model.users.ListPortfolioUsersRequest;
+import com.coinbase.prime.model.users.ListPortfolioUsersResponse;
+import com.coinbase.prime.model.users.ListUsersRequest;
+import com.coinbase.prime.model.users.ListUsersResponse;
 import com.coinbase.prime.model.wallets.*;
-import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -162,6 +165,38 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             GetEntityPaymentMethodResponse resp = mapper.readValue(response, GetEntityPaymentMethodResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListUsersResponse listUsers(ListUsersRequest request) {
+        String queryParams = request.getPagination().generateQueryString("");
+        String path = String.format("/entities/%s/users", request.getEntityId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListUsersResponse resp = mapper.readValue(response, ListUsersResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) {
+        String queryParams = request.getPagination().generateQueryString("");
+        String path = String.format("/portfolios/%s/users", request.getPortfolioId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListPortfolioUsersResponse resp = mapper.readValue(response, ListPortfolioUsersResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
