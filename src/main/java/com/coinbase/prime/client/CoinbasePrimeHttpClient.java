@@ -2,6 +2,8 @@ package com.coinbase.prime.client;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.*;
+import com.coinbase.prime.model.activities.ListActivitiesRequest;
+import com.coinbase.prime.model.activities.ListActivitiesResponse;
 import com.coinbase.prime.model.allocations.*;
 import com.coinbase.prime.model.assets.ListAssetsRequest;
 import com.coinbase.prime.model.assets.ListAssetsResponse;
@@ -243,6 +245,22 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             GetPortfolioCreditInformationResponse resp = mapper.readValue(response, GetPortfolioCreditInformationResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListActivitiesResponse listActivities(ListActivitiesRequest request) {
+        String queryParams = request.getQueryString();
+        String path = String.format("/portfolios/%s/activities", request.getPortfolioId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListActivitiesResponse resp = mapper.readValue(response, ListActivitiesResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
