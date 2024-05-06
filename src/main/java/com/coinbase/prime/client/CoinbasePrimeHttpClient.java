@@ -3,6 +3,14 @@ package com.coinbase.prime.client;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.*;
 import com.coinbase.prime.model.allocations.*;
+import com.coinbase.prime.model.assets.ListAssetsRequest;
+import com.coinbase.prime.model.assets.ListAssetsResponse;
+import com.coinbase.prime.model.invoice.ListInvoicesRequest;
+import com.coinbase.prime.model.invoice.ListInvoicesResponse;
+import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
+import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
+import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
+import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsResponse;
 import com.coinbase.prime.model.portfolio.*;
 import com.coinbase.prime.model.wallets.*;
 import com.coinbase.prime.utils.Utils;
@@ -93,6 +101,67 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             GetNetAllocationsByNettingIdResponse resp = mapper.readValue(response, GetNetAllocationsByNettingIdResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListInvoicesResponse listInvoices(ListInvoicesRequest request) {
+        String queryParams = request.getQueryString();
+        String path = String.format("/entities/%s/invoices", request.getEntityId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListInvoicesResponse resp = mapper.readValue(response, ListInvoicesResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListAssetsResponse listAssets(ListAssetsRequest request) {
+        String path = "/assets";
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListAssetsResponse resp = mapper.readValue(response, ListAssetsResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListEntityPaymentMethodsResponse listEntityPaymentMethods(ListEntityPaymentMethodsRequest request) {
+        String path = String.format("/entities/%s/payment-methods", request.getEntityId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListEntityPaymentMethodsResponse resp = mapper.readValue(response, ListEntityPaymentMethodsResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetEntityPaymentMethodResponse getEntityPaymentMethod(GetEntityPaymentMethodRequest request) {
+        String path = String.format("/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            GetEntityPaymentMethodResponse resp = mapper.readValue(response, GetEntityPaymentMethodResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
