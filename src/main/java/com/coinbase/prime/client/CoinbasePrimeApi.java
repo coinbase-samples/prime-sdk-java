@@ -1,5 +1,7 @@
 package com.coinbase.prime.client;
 
+import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
+import com.coinbase.prime.model.activities.GetActivityByActivityIdResponse;
 import com.coinbase.prime.model.activities.ListActivitiesRequest;
 import com.coinbase.prime.model.activities.ListActivitiesResponse;
 import com.coinbase.prime.model.allocations.*;
@@ -36,6 +38,7 @@ public interface CoinbasePrimeApi {
     ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request);
 
     ListActivitiesResponse listActivities(ListActivitiesRequest request);
+    GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request);
 
     ListPortfoliosResponse listPortfolios();
     GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request);
