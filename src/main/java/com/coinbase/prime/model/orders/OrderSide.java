@@ -1,4 +1,4 @@
-package com.coinbase.prime.model.common;
+package com.coinbase.prime.model.orders;
 
 public enum OrderSide {
     BUY("BUY"),

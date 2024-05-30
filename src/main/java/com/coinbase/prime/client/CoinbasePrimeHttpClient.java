@@ -13,8 +13,13 @@ import com.coinbase.prime.model.addressbook.GetAddressBookResponse;
 import com.coinbase.prime.model.allocations.*;
 import com.coinbase.prime.model.assets.ListAssetsRequest;
 import com.coinbase.prime.model.assets.ListAssetsResponse;
+import com.coinbase.prime.model.balances.*;
+import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
+import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.model.invoice.ListInvoicesRequest;
 import com.coinbase.prime.model.invoice.ListInvoicesResponse;
+import com.coinbase.prime.model.orders.ListOpenOrdersRequest;
+import com.coinbase.prime.model.orders.ListOpenOrdersResponse;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
@@ -313,6 +318,83 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             CreateAddressBookEntryResponse resp = mapper.readValue(response, CreateAddressBookEntryResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) {
+        String queryParams = request.getQueryString();
+        String path = String.format("/portfolios/%s/balances", request.getPortfolioId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListPortfolioBalancesResponse resp = mapper.readValue(response, ListPortfolioBalancesResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) {
+        String path = String.format("/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            GetWalletBalanceResponse resp = mapper.readValue(response, GetWalletBalanceResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListWeb3WalletBalancesResponse listWeb3WalletBalances(ListWeb3WalletBalancesRequest request) {
+        String path = String.format("/portfolios/%s/wallets/%s/web3_balances", request.getPortfolioId(), request.getWalletId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListWeb3WalletBalancesResponse resp = mapper.readValue(response, ListWeb3WalletBalancesResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) {
+        String path = String.format("/portfolios/%s/commission", request.getPortfolioId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            GetPortfolioCommissionResponse resp = mapper.readValue(response, GetPortfolioCommissionResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) {
+        String queryParams = request.getQueryString();
+        String path = String.format("/portfolios/%s/open_orders", request.getPortfolioId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListOpenOrdersResponse resp = mapper.readValue(response, ListOpenOrdersResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {

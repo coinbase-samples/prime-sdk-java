@@ -1,35 +1,36 @@
-package com.coinbase.prime.model.allocations;
+package com.coinbase.prime.model.orders;
 
-import com.coinbase.prime.model.orders.OrderSide;
 import com.coinbase.prime.model.common.PaginationParams;
-import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListPortfolioAllocationsRequest {
+public class ListOpenOrdersRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("product_ids")
     private String[] productIds;
-    @JsonProperty("order_side")
-    private OrderSide orderSide;
+    @JsonProperty("order_type")
+    private OrderType orderType;
     @JsonProperty("start_date")
     private Date startDate;
+    @JsonProperty("order_side")
+    private OrderSide orderSide;
     @JsonProperty("end_date")
     private Date endDate;
     private PaginationParams paginationParams;
 
-    public ListPortfolioAllocationsRequest() {
+    public ListOpenOrdersRequest() {
     }
 
-    public ListPortfolioAllocationsRequest(Builder builder) {
+    public ListOpenOrdersRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.productIds = builder.productIds;
-        this.orderSide = builder.orderSide;
+        this.orderType = builder.orderType;
         this.startDate = builder.startDate;
+        this.orderSide = builder.orderSide;
         this.endDate = builder.endDate;
         this.paginationParams = builder.paginationParams;
     }
@@ -41,15 +42,22 @@ public class ListPortfolioAllocationsRequest {
                 queryParams = appendQueryParams(queryParams, "product_ids", productId);
             }
         }
-        if (this.getOrderSide() != null) {
-            queryParams = appendQueryParams(queryParams, "order_side", this.getOrderSide().toString());
+        if (this.getOrderType() != null) {
+            queryParams = appendQueryParams(queryParams, "order_type", this.getOrderType().name());
         }
+
         if (this.getStartDate() != null) {
-            queryParams = appendQueryParams(queryParams, "start_date", Utils.formatDate(this.getStartDate()));
+            queryParams = appendQueryParams(queryParams, "start_date", this.getStartDate().toString());
         }
+
+        if (this.getOrderSide() != null) {
+            queryParams = appendQueryParams(queryParams, "order_side", this.getOrderSide().name());
+        }
+
         if (this.getEndDate() != null) {
-            queryParams = appendQueryParams(queryParams, "start_date", Utils.formatDate(this.getEndDate()));
+            queryParams = appendQueryParams(queryParams, "end_date", this.getEndDate().toString());
         }
+
         if (this.getPaginationParams() != null) {
             queryParams = this.getPaginationParams().generateQueryString(queryParams);
         }
@@ -72,12 +80,12 @@ public class ListPortfolioAllocationsRequest {
         this.productIds = productIds;
     }
 
-    public OrderSide getOrderSide() {
-        return orderSide;
+    public OrderType getOrderType() {
+        return orderType;
     }
 
-    public void setOrderSide(OrderSide orderSide) {
-        this.orderSide = orderSide;
+    public void setOrderType(OrderType orderType) {
+        this.orderType = orderType;
     }
 
     public Date getStartDate() {
@@ -86,6 +94,14 @@ public class ListPortfolioAllocationsRequest {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public OrderSide getOrderSide() {
+        return orderSide;
+    }
+
+    public void setOrderSide(OrderSide orderSide) {
+        this.orderSide = orderSide;
     }
 
     public Date getEndDate() {
@@ -107,8 +123,9 @@ public class ListPortfolioAllocationsRequest {
     public static class Builder {
         private String portfolioId;
         private String[] productIds;
-        private OrderSide orderSide;
+        private OrderType orderType;
         private Date startDate;
+        private OrderSide orderSide;
         private Date endDate;
         private PaginationParams paginationParams;
 
@@ -125,13 +142,18 @@ public class ListPortfolioAllocationsRequest {
             return this;
         }
 
-        public Builder orderSide(OrderSide orderSide) {
-            this.orderSide = orderSide;
+        public Builder orderType(OrderType orderType) {
+            this.orderType = orderType;
             return this;
         }
 
         public Builder startDate(Date startDate) {
             this.startDate = startDate;
+            return this;
+        }
+
+        public Builder orderSide(OrderSide orderSide) {
+            this.orderSide = orderSide;
             return this;
         }
 
@@ -145,8 +167,8 @@ public class ListPortfolioAllocationsRequest {
             return this;
         }
 
-        public ListPortfolioAllocationsRequest build() {
-            return new ListPortfolioAllocationsRequest(this);
+        public ListOpenOrdersRequest build() {
+            return new ListOpenOrdersRequest(this);
         }
     }
 }

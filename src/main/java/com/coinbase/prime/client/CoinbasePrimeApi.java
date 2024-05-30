@@ -11,8 +11,13 @@ import com.coinbase.prime.model.addressbook.GetAddressBookResponse;
 import com.coinbase.prime.model.allocations.*;
 import com.coinbase.prime.model.assets.ListAssetsRequest;
 import com.coinbase.prime.model.assets.ListAssetsResponse;
+import com.coinbase.prime.model.balances.*;
+import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
+import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.model.invoice.ListInvoicesRequest;
 import com.coinbase.prime.model.invoice.ListInvoicesResponse;
+import com.coinbase.prime.model.orders.ListOpenOrdersRequest;
+import com.coinbase.prime.model.orders.ListOpenOrdersResponse;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
@@ -46,6 +51,14 @@ public interface CoinbasePrimeApi {
 
     GetAddressBookResponse getAddressBook(GetAddressBookRequest request);
     CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request);
+
+    ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request);
+    GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request);
+    ListWeb3WalletBalancesResponse listWeb3WalletBalances(ListWeb3WalletBalancesRequest request);
+
+    GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request);
+
+    ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request);
 
     ListPortfoliosResponse listPortfolios();
     GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request);
