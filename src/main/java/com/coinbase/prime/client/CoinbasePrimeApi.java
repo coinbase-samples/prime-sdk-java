@@ -4,6 +4,10 @@ import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdResponse;
 import com.coinbase.prime.model.activities.ListActivitiesRequest;
 import com.coinbase.prime.model.activities.ListActivitiesResponse;
+import com.coinbase.prime.model.addressbook.CreateAddressBookEntryRequest;
+import com.coinbase.prime.model.addressbook.CreateAddressBookEntryResponse;
+import com.coinbase.prime.model.addressbook.GetAddressBookRequest;
+import com.coinbase.prime.model.addressbook.GetAddressBookResponse;
 import com.coinbase.prime.model.allocations.*;
 import com.coinbase.prime.model.assets.ListAssetsRequest;
 import com.coinbase.prime.model.assets.ListAssetsResponse;
@@ -39,6 +43,9 @@ public interface CoinbasePrimeApi {
 
     ListActivitiesResponse listActivities(ListActivitiesRequest request);
     GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request);
+
+    GetAddressBookResponse getAddressBook(GetAddressBookRequest request);
+    CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request);
 
     ListPortfoliosResponse listPortfolios();
     GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request);

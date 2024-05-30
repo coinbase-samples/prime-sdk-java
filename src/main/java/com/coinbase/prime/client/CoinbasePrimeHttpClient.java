@@ -6,6 +6,10 @@ import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdResponse;
 import com.coinbase.prime.model.activities.ListActivitiesRequest;
 import com.coinbase.prime.model.activities.ListActivitiesResponse;
+import com.coinbase.prime.model.addressbook.CreateAddressBookEntryRequest;
+import com.coinbase.prime.model.addressbook.CreateAddressBookEntryResponse;
+import com.coinbase.prime.model.addressbook.GetAddressBookRequest;
+import com.coinbase.prime.model.addressbook.GetAddressBookResponse;
 import com.coinbase.prime.model.allocations.*;
 import com.coinbase.prime.model.assets.ListAssetsRequest;
 import com.coinbase.prime.model.assets.ListAssetsResponse;
@@ -278,6 +282,37 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             GetActivityByActivityIdResponse resp = mapper.readValue(response, GetActivityByActivityIdResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetAddressBookResponse getAddressBook(GetAddressBookRequest request) {
+        String queryParams = request.getQueryString();
+        String path = String.format("/portfolios/%s/address_book", request.getPortfolioId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            GetAddressBookResponse resp = mapper.readValue(response, GetAddressBookResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) {
+        String path = String.format("/portfolios/%s/address_book", request.getPortfolioId());
+        String response = post(path, "", request);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            CreateAddressBookEntryResponse resp = mapper.readValue(response, CreateAddressBookEntryResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
