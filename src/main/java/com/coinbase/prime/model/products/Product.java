@@ -1,0 +1,156 @@
+package com.coinbase.prime.model.products;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Product {
+    private String id;
+    @JsonProperty("base_increment")
+    private String baseIncrement;
+    @JsonProperty("quote_increment")
+    private String quoteIncrement;
+    @JsonProperty("base_min_size")
+    private String baseMinSize;
+    @JsonProperty("quote_min_size")
+    private String quoteMinSize;
+    @JsonProperty("base_max_size")
+    private String baseMaxSize;
+    @JsonProperty("quote_max_size")
+    private String quoteMaxSize;
+    private String[] permissions;
+
+    public Product() {
+    }
+
+    public Product(Builder builder) {
+        this.id = builder.id;
+        this.baseIncrement = builder.baseIncrement;
+        this.quoteIncrement = builder.quoteIncrement;
+        this.baseMinSize = builder.baseMinSize;
+        this.quoteMinSize = builder.quoteMinSize;
+        this.baseMaxSize = builder.baseMaxSize;
+        this.quoteMaxSize = builder.quoteMaxSize;
+        this.permissions = builder.permissions;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getBaseIncrement() {
+        return baseIncrement;
+    }
+
+    public void setBaseIncrement(String baseIncrement) {
+        this.baseIncrement = baseIncrement;
+    }
+
+    public String getQuoteIncrement() {
+        return quoteIncrement;
+    }
+
+    public void setQuoteIncrement(String quoteIncrement) {
+        this.quoteIncrement = quoteIncrement;
+    }
+
+    public String getBaseMinSize() {
+        return baseMinSize;
+    }
+
+    public void setBaseMinSize(String baseMinSize) {
+        this.baseMinSize = baseMinSize;
+    }
+
+    public String getQuoteMinSize() {
+        return quoteMinSize;
+    }
+
+    public void setQuoteMinSize(String quoteMinSize) {
+        this.quoteMinSize = quoteMinSize;
+    }
+
+    public String getBaseMaxSize() {
+        return baseMaxSize;
+    }
+
+    public void setBaseMaxSize(String baseMaxSize) {
+        this.baseMaxSize = baseMaxSize;
+    }
+
+    public String getQuoteMaxSize() {
+        return quoteMaxSize;
+    }
+
+    public void setQuoteMaxSize(String quoteMaxSize) {
+        this.quoteMaxSize = quoteMaxSize;
+    }
+
+    public String[] getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(String[] permissions) {
+        this.permissions = permissions;
+    }
+
+    public static class Builder {
+        private String id;
+        private String baseIncrement;
+        private String quoteIncrement;
+        private String baseMinSize;
+        private String quoteMinSize;
+        private String baseMaxSize;
+        private String quoteMaxSize;
+        private String[] permissions;
+
+        public Builder() {
+        }
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder baseIncrement(String baseIncrement) {
+            this.baseIncrement = baseIncrement;
+            return this;
+        }
+
+        public Builder quoteIncrement(String quoteIncrement) {
+            this.quoteIncrement = quoteIncrement;
+            return this;
+        }
+
+        public Builder baseMinSize(String baseMinSize) {
+            this.baseMinSize = baseMinSize;
+            return this;
+        }
+
+        public Builder quoteMinSize(String quoteMinSize) {
+            this.quoteMinSize = quoteMinSize;
+            return this;
+        }
+
+        public Builder baseMaxSize(String baseMaxSize) {
+            this.baseMaxSize = baseMaxSize;
+            return this;
+        }
+
+        public Builder quoteMaxSize(String quoteMaxSize) {
+            this.quoteMaxSize = quoteMaxSize;
+            return this;
+        }
+
+        public Builder permissions(String[] permissions) {
+            this.permissions = permissions;
+            return this;
+        }
+
+        public Product build() {
+            return new Product(this);
+        }
+    }
+}

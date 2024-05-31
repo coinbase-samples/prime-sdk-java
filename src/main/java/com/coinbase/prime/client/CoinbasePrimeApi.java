@@ -22,6 +22,9 @@ import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsResponse;
 import com.coinbase.prime.model.portfolios.*;
+import com.coinbase.prime.model.products.ListPortfolioProductsRequest;
+import com.coinbase.prime.model.products.ListPortfolioProductsResponse;
+import com.coinbase.prime.model.transactions.*;
 import com.coinbase.prime.model.users.ListPortfolioUsersRequest;
 import com.coinbase.prime.model.users.ListPortfolioUsersResponse;
 import com.coinbase.prime.model.users.ListUsersRequest;
@@ -64,6 +67,13 @@ public interface CoinbasePrimeApi {
     GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request);
     CancelOrderResponse cancelOrder(CancelOrderRequest request);
     ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request);
+
+    ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request);
+    GetTransactionByTransactionIdResponse getTransactionByTransactionId(GetTransactionByTransactionIdRequest request);
+    CreateConversionResponse createConversion(CreateConversionRequest request);
+    ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request);
+    CreateTransferResponse createTransfer(CreateTransferRequest request);
+    CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request);
 
     ListPortfoliosResponse listPortfolios();
     GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request);
