@@ -18,8 +18,7 @@ import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.model.invoice.ListInvoicesRequest;
 import com.coinbase.prime.model.invoice.ListInvoicesResponse;
-import com.coinbase.prime.model.orders.ListOpenOrdersRequest;
-import com.coinbase.prime.model.orders.ListOpenOrdersResponse;
+import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
@@ -395,6 +394,98 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             ListOpenOrdersResponse resp = mapper.readValue(response, ListOpenOrdersResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public CreateOrderResponse createOrder(CreateOrderRequest request) {
+        String path = String.format("/portfolios/%s/order", request.getPortfolioId());
+        String response = post(path, "", request);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            CreateOrderResponse resp = mapper.readValue(response, CreateOrderResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) {
+        String path = String.format("/portfolios/%s/order_preview", request.getPortfolioId());
+        String response = post(path, "", request);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            GetOrderPreviewResponse resp = mapper.readValue(response, GetOrderPreviewResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) {
+        String response = get(String.format("/portfolios/%s/orders", request.getPortfolioId()), "");
+        if (response == null) {
+            return null;
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(response, ListPortfolioOrdersResponse.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) {
+        String path = String.format("/portfolios/%s/orders/%s", request.getPortfolioId(), request.getOrderId());
+        String response = get(path, "");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            GetOrderByOrderIdResponse resp = mapper.readValue(response, GetOrderByOrderIdResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public CancelOrderResponse cancelOrder(CancelOrderRequest request) {
+        String path = String.format("/portfolios/%s/orders/%s/cancel", request.getPortfolioId(), request.getOrderId());
+        String response = post(path, "", request);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            CancelOrderResponse resp = mapper.readValue(response, CancelOrderResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) {
+        String queryParams = request.getQueryString();
+        String path = String.format("/portfolios/%s/orders/%s/fills", request.getPortfolioId(), request.getOrderId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListOrderFillsResponse resp = mapper.readValue(response, ListOrderFillsResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {

@@ -16,8 +16,7 @@ import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.model.invoice.ListInvoicesRequest;
 import com.coinbase.prime.model.invoice.ListInvoicesResponse;
-import com.coinbase.prime.model.orders.ListOpenOrdersRequest;
-import com.coinbase.prime.model.orders.ListOpenOrdersResponse;
+import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
@@ -59,6 +58,12 @@ public interface CoinbasePrimeApi {
     GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request);
 
     ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request);
+    CreateOrderResponse createOrder(CreateOrderRequest request);
+    GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request);
+    ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request);
+    GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request);
+    CancelOrderResponse cancelOrder(CancelOrderRequest request);
+    ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request);
 
     ListPortfoliosResponse listPortfolios();
     GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request);
