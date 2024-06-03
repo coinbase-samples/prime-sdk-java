@@ -197,7 +197,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     @Override
     public ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
-        String queryParams = request.getPagination().generateQueryString("");
+        String queryParams = request.getPaginationParams() != null ? request.getPaginationParams().generateQueryString(""): "";
         String path = String.format("/portfolios/%s/users", request.getPortfolioId());
         String response = get(path, queryParams);
         ObjectMapper mapper = new ObjectMapper();

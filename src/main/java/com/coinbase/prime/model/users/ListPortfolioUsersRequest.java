@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ListPortfolioUsersRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
-    private PaginationParams pagination;
+    private PaginationParams paginationParams;
 
     public ListPortfolioUsersRequest() {
     }
 
     public ListPortfolioUsersRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
-        this.pagination = builder.pagination;
+        this.paginationParams = builder.paginationParams;
     }
 
     public String getPortfolioId() {
@@ -24,25 +24,25 @@ public class ListPortfolioUsersRequest {
         this.portfolioId = portfolioId;
     }
 
-    public PaginationParams getPagination() {
-        return pagination;
+    public PaginationParams getPaginationParams() {
+        return paginationParams;
     }
 
-    public void setPagination(PaginationParams pagination) {
-        this.pagination = pagination;
+    public void setPaginationParams(PaginationParams paginationParams) {
+        this.paginationParams = paginationParams;
     }
 
     public static class Builder {
         private String portfolioId;
-        private PaginationParams pagination;
+        private PaginationParams paginationParams;
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
             return this;
         }
 
-        public Builder paginationParams(PaginationParams pagination) {
-            this.pagination = pagination;
+        public Builder paginationParams(PaginationParams paginationParams) {
+            this.paginationParams = paginationParams;
             return this;
         }
 
