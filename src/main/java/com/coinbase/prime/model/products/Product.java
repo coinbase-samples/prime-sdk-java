@@ -8,6 +8,8 @@ public class Product {
     private String baseIncrement;
     @JsonProperty("quote_increment")
     private String quoteIncrement;
+    @JsonProperty("price_increment")
+    private String priceIncrement;
     @JsonProperty("base_min_size")
     private String baseMinSize;
     @JsonProperty("quote_min_size")
@@ -25,6 +27,7 @@ public class Product {
         this.id = builder.id;
         this.baseIncrement = builder.baseIncrement;
         this.quoteIncrement = builder.quoteIncrement;
+        this.priceIncrement = builder.priceIncrement;
         this.baseMinSize = builder.baseMinSize;
         this.quoteMinSize = builder.quoteMinSize;
         this.baseMaxSize = builder.baseMaxSize;
@@ -54,6 +57,14 @@ public class Product {
 
     public void setQuoteIncrement(String quoteIncrement) {
         this.quoteIncrement = quoteIncrement;
+    }
+
+    public String getPriceIncrement() {
+        return priceIncrement;
+    }
+
+    public void setPriceIncrement(String priceIncrement) {
+        this.priceIncrement = priceIncrement;
     }
 
     public String getBaseMinSize() {
@@ -100,6 +111,7 @@ public class Product {
         private String id;
         private String baseIncrement;
         private String quoteIncrement;
+        private String priceIncrement;
         private String baseMinSize;
         private String quoteMinSize;
         private String baseMaxSize;
@@ -121,6 +133,11 @@ public class Product {
 
         public Builder quoteIncrement(String quoteIncrement) {
             this.quoteIncrement = quoteIncrement;
+            return this;
+        }
+
+        public Builder priceIncrement(String priceIncrement) {
+            this.priceIncrement = priceIncrement;
             return this;
         }
 
