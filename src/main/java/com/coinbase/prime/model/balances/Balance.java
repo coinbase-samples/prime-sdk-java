@@ -22,6 +22,8 @@ public class Balance {
     private String bondableAmount;
     @JsonProperty("withdrawable_amount")
     private String withdrawableAmount;
+    @JsonProperty("fiat_amount")
+    private String fiatAmount;
 
     public Balance() {
     }
@@ -38,6 +40,7 @@ public class Balance {
         this.pastRewardsAmount = builder.pastRewardsAmount;
         this.bondableAmount = builder.bondableAmount;
         this.withdrawableAmount = builder.withdrawableAmount;
+        this.fiatAmount = builder.fiatAmount;
     }
 
     public String getSymbol() {
@@ -128,6 +131,14 @@ public class Balance {
         this.withdrawableAmount = withdrawableAmount;
     }
 
+    public String getFiatAmount() {
+        return fiatAmount;
+    }
+
+    public void setFiatAmount(String fiatAmount) {
+        this.fiatAmount = fiatAmount;
+    }
+
     public static class Builder {
         private String symbol;
         private String amount;
@@ -140,6 +151,7 @@ public class Balance {
         private String pastRewardsAmount;
         private String bondableAmount;
         private String withdrawableAmount;
+        private String fiatAmount;
 
         public Builder symbol(String symbol) {
             this.symbol = symbol;
@@ -193,6 +205,11 @@ public class Balance {
 
         public Builder withdrawableAmount(String withdrawableAmount) {
             this.withdrawableAmount = withdrawableAmount;
+            return this;
+        }
+
+        public Builder fiatAmount(String fiatAmount) {
+            this.fiatAmount = fiatAmount;
             return this;
         }
 

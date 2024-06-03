@@ -6,7 +6,7 @@ public class CreateAddressBookEntryResponse {
     @JsonProperty("activity_type")
     private AddressBookActivityType activityType;
     @JsonProperty("num_approvals_remaining")
-    private int numApprovalsRemaining;
+    private Integer numApprovalsRemaining;
     @JsonProperty("activity_id")
     private String activityId;
     private CreateAddressBookEntryRequest request;
@@ -55,7 +55,7 @@ public class CreateAddressBookEntryResponse {
 
     public static class Builder {
         private AddressBookActivityType activityType;
-        private int numApprovalsRemaining;
+        private Integer numApprovalsRemaining;
         private String activityId;
         private CreateAddressBookEntryRequest request;
 

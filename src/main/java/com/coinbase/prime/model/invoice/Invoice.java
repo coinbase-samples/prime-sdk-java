@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Invoice {
     private String id;
     @JsonProperty("billing_month")
-    private int billingMonth;
+    private Integer billingMonth;
     @JsonProperty("billing_year")
-    private int billingYear;
+    private Integer billingYear;
     @JsonProperty("due_date")
     private String dueDate;
     @JsonProperty("invoice_number")
@@ -108,8 +108,8 @@ public class Invoice {
 
     public static class Builder {
         private String id;
-        private int billingMonth;
-        private int billingYear;
+        private Integer billingMonth;
+        private Integer billingYear;
         private String dueDate;
         private String invoiceNumber;
         private InvoiceState state;
