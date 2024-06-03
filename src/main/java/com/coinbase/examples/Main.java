@@ -2,6 +2,7 @@ package com.coinbase.examples;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.client.CoinbasePrimeHttpClient;
+import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsResponse;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
 import com.coinbase.prime.model.portfolios.ListPortfoliosResponse;
@@ -53,6 +54,12 @@ public class Main {
                             .portfolioId(resp.getPortfolios().get(0).getId())
                             .build());
             System.out.println(mapper.writeValueAsString(resp5));
+
+            ListEntityPaymentMethodsResponse resp6 = client.listEntityPaymentMethods(
+                    new com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest.Builder()
+                            .entityId(resp.getPortfolios().get(0).getEntityId())
+                            .build());
+            System.out.println(mapper.writeValueAsString(resp6));
         } catch (Exception e) {
             e.printStackTrace();
         }

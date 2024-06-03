@@ -6,7 +6,7 @@ public class EntityPaymentMethod {
     private String id;
     private String symbol;
     @JsonProperty("payment_method_type")
-    private EntityPaymentMethod paymentMethodType;
+    private PaymentMethodType paymentMethodType;
     @JsonProperty("bank_name")
     private String bankName;
     @JsonProperty("account_number")
@@ -39,11 +39,11 @@ public class EntityPaymentMethod {
         this.symbol = symbol;
     }
 
-    public EntityPaymentMethod getPaymentMethodType() {
+    public PaymentMethodType getPaymentMethodType() {
         return paymentMethodType;
     }
 
-    public void setPaymentMethodType(EntityPaymentMethod paymentMethodType) {
+    public void setPaymentMethodType(PaymentMethodType paymentMethodType) {
         this.paymentMethodType = paymentMethodType;
     }
 
@@ -66,7 +66,7 @@ public class EntityPaymentMethod {
     public static class Builder {
         private String id;
         private String symbol;
-        private EntityPaymentMethod paymentMethodType;
+        private PaymentMethodType paymentMethodType;
         private String bankName;
         private String accountNumber;
 
@@ -80,7 +80,7 @@ public class EntityPaymentMethod {
             return this;
         }
 
-        public Builder paymentMethodType(EntityPaymentMethod paymentMethodType) {
+        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
             this.paymentMethodType = paymentMethodType;
             return this;
         }
