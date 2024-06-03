@@ -17,6 +17,7 @@ import com.coinbase.prime.model.balances.*;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.model.invoice.ListInvoicesRequest;
+import com.coinbase.prime.model.invoice.Invoice;
 import com.coinbase.prime.model.invoice.ListInvoicesResponse;
 import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;

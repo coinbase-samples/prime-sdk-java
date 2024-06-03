@@ -3,145 +3,165 @@ package com.coinbase.prime.model.invoice;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Invoice {
-    private String description;
-    @JsonProperty("currency_symbol")
-    private String currencySymbol;
-    @JsonProperty("invoice_type")
-    private InvoiceType invoiceType;
-    private double rate;
-    private double quantity;
-    private double price;
-    @JsonProperty("average_auc")
-    private double averageAuc;
-    private double total;
+    private String id;
+    @JsonProperty("billing_month")
+    private int billingMonth;
+    @JsonProperty("billing_year")
+    private int billingYear;
+    @JsonProperty("due_date")
+    private String dueDate;
+    @JsonProperty("invoice_number")
+    private String invoiceNumber;
+    private InvoiceState state;
+    @JsonProperty("usd_amount_paid")
+    private double usdAmountPaid;
+    @JsonProperty("usd_amount_owed")
+    private double usdAmountOwed;
+    @JsonProperty("invoice_items")
+    private InvoiceItem[] invoiceItems;
 
     public Invoice() {
     }
     public Invoice(Builder builder) {
-        this.description = builder.description;
-        this.currencySymbol = builder.currencySymbol;
-        this.invoiceType = builder.invoiceType;
-        this.rate = builder.rate;
-        this.quantity = builder.quantity;
-        this.price = builder.price;
-        this.averageAuc = builder.averageAuc;
-        this.total = builder.total;
+        this.id = builder.id;
+        this.billingMonth = builder.billingMonth;
+        this.billingYear = builder.billingYear;
+        this.dueDate = builder.dueDate;
+        this.invoiceNumber = builder.invoiceNumber;
+        this.state = builder.state;
+        this.usdAmountPaid = builder.usdAmountPaid;
+        this.usdAmountOwed = builder.usdAmountOwed;
+        this.invoiceItems = builder.invoiceItemItems;
     }
 
-    public String getDescription() {
-        return description;
+    public String getId() {
+        return id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCurrencySymbol() {
-        return currencySymbol;
+    public int getBillingMonth() {
+        return billingMonth;
     }
 
-    public void setCurrencySymbol(String currencySymbol) {
-        this.currencySymbol = currencySymbol;
+    public void setBillingMonth(int billingMonth) {
+        this.billingMonth = billingMonth;
     }
 
-    public InvoiceType getInvoiceType() {
-        return invoiceType;
+    public int getBillingYear() {
+        return billingYear;
     }
 
-    public void setInvoiceType(InvoiceType invoiceType) {
-        this.invoiceType = invoiceType;
+    public void setBillingYear(int billingYear) {
+        this.billingYear = billingYear;
     }
 
-    public double getRate() {
-        return rate;
+    public String getDueDate() {
+        return dueDate;
     }
 
-    public void setRate(double rate) {
-        this.rate = rate;
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public double getQuantity() {
-        return quantity;
+    public String getInvoiceNumber() {
+        return invoiceNumber;
     }
 
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
-    public double getPrice() {
-        return price;
+    public InvoiceState getState() {
+        return state;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setState(InvoiceState state) {
+        this.state = state;
     }
 
-    public double getAverageAuc() {
-        return averageAuc;
+    public double getUsdAmountPaid() {
+        return usdAmountPaid;
     }
 
-    public void setAverageAuc(double averageAuc) {
-        this.averageAuc = averageAuc;
+    public void setUsdAmountPaid(double usdAmountPaid) {
+        this.usdAmountPaid = usdAmountPaid;
     }
 
-    public double getTotal() {
-        return total;
+    public double getUsdAmountOwed() {
+        return usdAmountOwed;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setUsdAmountOwed(double usdAmountOwed) {
+        this.usdAmountOwed = usdAmountOwed;
+    }
+
+    public InvoiceItem[] getInvoiceItems() {
+        return invoiceItems;
+    }
+
+    public void setInvoiceItems(InvoiceItem[] invoiceItemItems) {
+        this.invoiceItems = invoiceItemItems;
     }
 
     public static class Builder {
-        private String description;
-        private String currencySymbol;
-        private InvoiceType invoiceType;
-        private double rate;
-        private double quantity;
-        private double price;
-        private double averageAuc;
-        private double total;
+        private String id;
+        private int billingMonth;
+        private int billingYear;
+        private String dueDate;
+        private String invoiceNumber;
+        private InvoiceState state;
+        private double usdAmountPaid;
+        private double usdAmountOwed;
+        private InvoiceItem[] invoiceItemItems;
 
         public Builder() {
         }
 
-        public Builder description(String description) {
-            this.description = description;
+        public Builder id(String id) {
+            this.id = id;
             return this;
         }
 
-        public Builder currencySymbol(String currencySymbol) {
-            this.currencySymbol = currencySymbol;
+        public Builder billingMonth(int billingMonth) {
+            this.billingMonth = billingMonth;
             return this;
         }
 
-        public Builder invoiceType(InvoiceType invoiceType) {
-            this.invoiceType = invoiceType;
+        public Builder billingYear(int billingYear) {
+            this.billingYear = billingYear;
             return this;
         }
 
-        public Builder rate(double rate) {
-            this.rate = rate;
+        public Builder dueDate(String dueDate) {
+            this.dueDate = dueDate;
             return this;
         }
 
-        public Builder quantity(double quantity) {
-            this.quantity = quantity;
+        public Builder invoiceNumber(String invoiceNumber) {
+            this.invoiceNumber = invoiceNumber;
             return this;
         }
 
-        public Builder price(double price) {
-            this.price = price;
+        public Builder state(InvoiceState state) {
+            this.state = state;
             return this;
         }
 
-        public Builder averageAuc(double averageAuc) {
-            this.averageAuc = averageAuc;
+        public Builder usdAmountPaid(double usdAmountPaid) {
+            this.usdAmountPaid = usdAmountPaid;
             return this;
         }
 
-        public Builder total(double total) {
-            this.total = total;
+        public Builder usdAmountOwed(double usdAmountOwed) {
+            this.usdAmountOwed = usdAmountOwed;
+            return this;
+        }
+
+        public Builder invoiceItems(InvoiceItem[] invoiceItemItems) {
+            this.invoiceItemItems = invoiceItemItems;
             return this;
         }
 
