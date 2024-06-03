@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ListUsersRequest {
     @JsonProperty("entity_id")
     private String entityId;
-    private PaginationParams pagination;
+    private PaginationParams paginationParams;
 
     public ListUsersRequest() {
     }
 
     public ListUsersRequest(Builder builder) {
         this.entityId = builder.entityId;
-        this.pagination = builder.pagination;
+        this.paginationParams = builder.pagination;
     }
 
     public String getEntityId() {
@@ -24,12 +24,12 @@ public class ListUsersRequest {
         this.entityId = entityId;
     }
 
-    public PaginationParams getPagination() {
-        return pagination;
+    public PaginationParams getPaginationParams() {
+        return paginationParams;
     }
 
-    public void setPagination(PaginationParams pagination) {
-        this.pagination = pagination;
+    public void setPaginationParams(PaginationParams paginationParams) {
+        this.paginationParams = paginationParams;
     }
 
     public static class Builder {

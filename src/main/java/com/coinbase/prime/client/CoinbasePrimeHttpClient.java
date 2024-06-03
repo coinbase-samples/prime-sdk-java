@@ -182,7 +182,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     @Override
     public ListUsersResponse listUsers(ListUsersRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
-        String queryParams = request.getPagination().generateQueryString("");
+        String queryParams = request.getPaginationParams() != null ? request.getPaginationParams().generateQueryString(""): "";
         String path = String.format("/entities/%s/users", request.getEntityId());
         String response = get(path, queryParams);
         ObjectMapper mapper = new ObjectMapper();
