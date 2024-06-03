@@ -40,6 +40,8 @@ public class Order {
     private String commission;
     @JsonProperty("exchange_fee")
     private String exchangeFee;
+    @JsonProperty("historical_pov")
+    private String historicalPov;
 
     public Order() {
     }
@@ -66,6 +68,7 @@ public class Order {
         this.averageFilledPrice = builder.averageFilledPrice;
         this.commission = builder.commission;
         this.exchangeFee = builder.exchangeFee;
+        this.historicalPov = builder.historicalPov;
     }
 
     public String getId() {
@@ -236,6 +239,14 @@ public class Order {
         this.exchangeFee = exchangeFee;
     }
 
+    public String getHistoricalPov() {
+        return historicalPov;
+    }
+
+    public void setHistoricalPov(String historicalPov) {
+        this.historicalPov = historicalPov;
+    }
+
     public static class Builder {
         private String id;
         private String userId;
@@ -258,6 +269,7 @@ public class Order {
         private String averageFilledPrice;
         private String commission;
         private String exchangeFee;
+        private String historicalPov;
 
         public Builder() {
         }
@@ -364,6 +376,11 @@ public class Order {
 
         public Builder exchangeFee(String exchangeFee) {
             this.exchangeFee = exchangeFee;
+            return this;
+        }
+
+        public Builder historicalPov(String historicalPov) {
+            this.historicalPov = historicalPov;
             return this;
         }
 
