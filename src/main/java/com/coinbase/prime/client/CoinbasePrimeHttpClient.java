@@ -141,7 +141,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     @Override
     public ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
-        String path = "/assets";
+        String path = String.format("/entities/%s/assets", request.getEntityId());
         String response = get(path, "");
         ObjectMapper mapper = new ObjectMapper();
         try {

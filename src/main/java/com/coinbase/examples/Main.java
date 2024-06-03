@@ -2,6 +2,8 @@ package com.coinbase.examples;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.client.CoinbasePrimeHttpClient;
+import com.coinbase.prime.model.assets.ListAssetsRequest;
+import com.coinbase.prime.model.assets.ListAssetsResponse;
 import com.coinbase.prime.model.balances.ListPortfolioBalancesRequest;
 import com.coinbase.prime.model.balances.ListPortfolioBalancesResponse;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
@@ -24,11 +26,12 @@ public class Main {
             ListPortfoliosResponse resp = client.listPortfolios();
             System.out.println(mapper.writeValueAsString(resp));
 
-            ListPortfolioBalancesResponse resp2 = client.listPortfolioBalances(
-                    new ListPortfolioBalancesRequest.Builder()
-                            .portfolioId(resp.getPortfolios().get(0).getId())
-                            .build());
-            System.out.println(mapper.writeValueAsString(resp2));
+            ListAssetsResponse assets = client.listAssets(
+                    new ListAssetsRequest.Builder()
+                            .entityId(resp.getPortfolios().get(0).getEntityId())
+                            .build()
+            );
+            System.out.println(mapper.writeValueAsString(assets));
         } catch (Exception e) {
             e.printStackTrace();
         }
