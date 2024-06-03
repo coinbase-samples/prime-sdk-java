@@ -5,6 +5,8 @@ import com.coinbase.prime.client.CoinbasePrimeHttpClient;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
 import com.coinbase.prime.model.portfolios.ListPortfoliosResponse;
+import com.coinbase.prime.model.transactions.ListWalletTransactionsRequest;
+import com.coinbase.prime.model.transactions.ListWalletTransactionsResponse;
 import com.coinbase.prime.model.wallets.ListWalletsRequest;
 import com.coinbase.prime.model.wallets.ListWalletsResponse;
 import com.coinbase.prime.model.wallets.WalletType;
@@ -36,6 +38,13 @@ public class Main {
 
             ListWalletsResponse resp3 = client.listWallets(req2);
             System.out.println(mapper.writeValueAsString(resp3));
+
+            ListWalletTransactionsResponse resp4 = client.listWalletTransactions(
+                    new ListWalletTransactionsRequest.Builder()
+                            .portfolioId(resp.getPortfolios().get(0).getId())
+                            .walletId(resp3.getWallets()[0].getId())
+                            .build());
+            System.out.println(mapper.writeValueAsString(resp4));
         } catch (Exception e) {
             e.printStackTrace();
         }

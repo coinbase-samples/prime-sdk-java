@@ -36,6 +36,7 @@ public class Transaction {
     private String network;
     @JsonProperty("estimated_asset_changes")
     private AssetChange[] estimatedAssetChanges;
+    private TransactionMetadata metadata;
 
     public Transaction() {
     }
@@ -61,6 +62,7 @@ public class Transaction {
         this.estimatedNetworkFees = builder.estimatedNetworkFees;
         this.estimatedAssetChanges = builder.estimatedAssetChanges;
         this.network = builder.network;
+        this.metadata = builder.metadata;
     }
 
     public String getId() {
@@ -215,6 +217,14 @@ public class Transaction {
         this.network = network;
     }
 
+    public TransactionMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(TransactionMetadata metadata) {
+        this.metadata = metadata;
+    }
+
     public AssetChange[] getEstimatedAssetChanges() {
         return estimatedAssetChanges;
     }
@@ -244,6 +254,7 @@ public class Transaction {
         private EstimatedNetworkFees estimatedNetworkFees;
         private AssetChange[] estimatedAssetChanges;
         private String network;
+        private TransactionMetadata metadata;
 
         public Builder() {
         }
@@ -345,6 +356,11 @@ public class Transaction {
 
         public Builder estimatedAssetChanges(AssetChange[] estimatedAssetChanges) {
             this.estimatedAssetChanges = estimatedAssetChanges;
+            return this;
+        }
+
+        public Builder metadata(TransactionMetadata metadata) {
+            this.metadata = metadata;
             return this;
         }
 
