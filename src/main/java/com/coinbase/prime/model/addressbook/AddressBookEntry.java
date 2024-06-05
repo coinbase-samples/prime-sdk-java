@@ -1,8 +1,26 @@
+/*
+ * *
+ *  * Copyright 2024-present Coinbase Global, Inc.
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *  http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ */
+
 package com.coinbase.prime.model.addressbook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Address {
+public class AddressBookEntry {
     private String id;
     @JsonProperty("currency_symbol")
     private String currencySymbol;
@@ -21,11 +39,14 @@ public class Address {
     private String addedAt;
     @JsonProperty("added_by")
     private User addedBy;
+    private AddressBookType type;
+    @JsonProperty("counterparty_id")
+    private String counterpartyId;
 
-    public Address() {
+    public AddressBookEntry() {
     }
 
-    public Address(Builder builder) {
+    public AddressBookEntry(Builder builder) {
         this.id = builder.id;
         this.currencySymbol = builder.currencySymbol;
         this.name = builder.name;
@@ -37,6 +58,8 @@ public class Address {
         this.lastUsedAt = builder.lastUsedAt;
         this.addedAt = builder.addedAt;
         this.addedBy = builder.addedBy;
+        this.type = builder.type;
+        this.counterpartyId = builder.counterpartyId;
     }
 
     public String getId() {
@@ -127,6 +150,22 @@ public class Address {
         this.addedBy = addedBy;
     }
 
+    public AddressBookType getType() {
+        return type;
+    }
+
+    public void setType(AddressBookType type) {
+        this.type = type;
+    }
+
+    public String getCounterpartyId() {
+        return counterpartyId;
+    }
+
+    public void setCounterpartyId(String counterpartyId) {
+        this.counterpartyId = counterpartyId;
+    }
+
     public static class Builder {
         private String id;
         private String currencySymbol;
@@ -139,6 +178,8 @@ public class Address {
         private String lastUsedAt;
         private String addedAt;
         private User addedBy;
+        private AddressBookType type;
+        private String counterpartyId;
 
         public Builder id(String id) {
             this.id = id;
@@ -195,8 +236,18 @@ public class Address {
             return this;
         }
 
-        public Address build() {
-            return new Address(this);
+        public Builder type(AddressBookType type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder counterpartyId(String counterpartyId) {
+            this.counterpartyId = counterpartyId;
+            return this;
+        }
+
+        public AddressBookEntry build() {
+            return new AddressBookEntry(this);
         }
     }
 }

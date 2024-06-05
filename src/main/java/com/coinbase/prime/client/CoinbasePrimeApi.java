@@ -1,3 +1,21 @@
+/*
+ * *
+ *  * Copyright 2024-present Coinbase Global, Inc.
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *  http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ */
+
 package com.coinbase.prime.client;
 
 import com.coinbase.prime.errors.CoinbasePrimeClientException;
@@ -8,8 +26,8 @@ import com.coinbase.prime.model.activities.ListActivitiesRequest;
 import com.coinbase.prime.model.activities.ListActivitiesResponse;
 import com.coinbase.prime.model.addressbook.CreateAddressBookEntryRequest;
 import com.coinbase.prime.model.addressbook.CreateAddressBookEntryResponse;
-import com.coinbase.prime.model.addressbook.GetAddressBookRequest;
-import com.coinbase.prime.model.addressbook.GetAddressBookResponse;
+import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookRequest;
+import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookResponse;
 import com.coinbase.prime.model.allocations.*;
 import com.coinbase.prime.model.assets.ListAssetsRequest;
 import com.coinbase.prime.model.assets.ListAssetsResponse;
@@ -53,7 +71,7 @@ public interface CoinbasePrimeApi {
     ListActivitiesResponse listActivities(ListActivitiesRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
     GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
 
-    GetAddressBookResponse getAddressBook(GetAddressBookRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
+    GetPortfolioAddressBookResponse getAddressBook(GetPortfolioAddressBookRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
     CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
 
     ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
@@ -73,6 +91,7 @@ public interface CoinbasePrimeApi {
     ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
     GetTransactionByTransactionIdResponse getTransactionByTransactionId(GetTransactionByTransactionIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
     CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
+    ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
     ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
     CreateTransferResponse createTransfer(CreateTransferRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
     CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;

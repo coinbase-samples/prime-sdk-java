@@ -1,3 +1,21 @@
+/*
+ * *
+ *  * Copyright 2024-present Coinbase Global, Inc.
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *  http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ */
+
 package com.coinbase.prime.client;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
@@ -9,8 +27,8 @@ import com.coinbase.prime.model.activities.ListActivitiesRequest;
 import com.coinbase.prime.model.activities.ListActivitiesResponse;
 import com.coinbase.prime.model.addressbook.CreateAddressBookEntryRequest;
 import com.coinbase.prime.model.addressbook.CreateAddressBookEntryResponse;
-import com.coinbase.prime.model.addressbook.GetAddressBookRequest;
-import com.coinbase.prime.model.addressbook.GetAddressBookResponse;
+import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookRequest;
+import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookResponse;
 import com.coinbase.prime.model.allocations.*;
 import com.coinbase.prime.model.assets.ListAssetsRequest;
 import com.coinbase.prime.model.assets.ListAssetsResponse;
@@ -283,13 +301,13 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     @Override
-    public GetAddressBookResponse getAddressBook(GetAddressBookRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
+    public GetPortfolioAddressBookResponse getAddressBook(GetPortfolioAddressBookRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/address_book", request.getPortfolioId());
         String response = get(path, queryParams);
         ObjectMapper mapper = new ObjectMapper();
         try {
-            GetAddressBookResponse resp = mapper.readValue(response, GetAddressBookResponse.class);
+            GetPortfolioAddressBookResponse resp = mapper.readValue(response, GetPortfolioAddressBookResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
@@ -505,6 +523,21 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         ObjectMapper mapper = new ObjectMapper();
         try {
             CreateConversionResponse resp = mapper.readValue(response, CreateConversionResponse.class);
+            resp.setRequest(request);
+            return resp;
+        } catch (IOException e) {
+            throw new CoinbasePrimeClientException(e);
+        }
+    }
+
+    @Override
+    public ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
+        String queryParams = request.getQueryString();
+        String path = String.format("/portfolios/%s/transactions", request.getPortfolioId());
+        String response = get(path, queryParams);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ListPortfolioTransactionsResponse resp = mapper.readValue(response, ListPortfolioTransactionsResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {

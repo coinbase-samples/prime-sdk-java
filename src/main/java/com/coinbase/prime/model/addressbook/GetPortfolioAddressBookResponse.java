@@ -2,33 +2,33 @@ package com.coinbase.prime.model.addressbook;
 
 import com.coinbase.prime.model.common.Pagination;
 
-public class GetAddressBookResponse {
-    private GetAddressBookRequest request;
-    private Address[] addresses;
+public class GetPortfolioAddressBookResponse {
+    private GetPortfolioAddressBookRequest request;
+    private AddressBookEntry[] addresses;
     private Pagination pagination;
 
-    public GetAddressBookResponse() {
+    public GetPortfolioAddressBookResponse() {
     }
 
-    public GetAddressBookResponse(Builder builder) {
+    public GetPortfolioAddressBookResponse(Builder builder) {
         this.request = builder.request;
         this.addresses = builder.addresses;
         this.pagination = builder.pagination;
     }
 
-    public GetAddressBookRequest getRequest() {
+    public GetPortfolioAddressBookRequest getRequest() {
         return request;
     }
 
-    public void setRequest(GetAddressBookRequest request) {
+    public void setRequest(GetPortfolioAddressBookRequest request) {
         this.request = request;
     }
 
-    public Address[] getAddresses() {
+    public AddressBookEntry[] getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(Address[] addresses) {
+    public void setAddresses(AddressBookEntry[] addresses) {
         this.addresses = addresses;
     }
 
@@ -41,16 +41,16 @@ public class GetAddressBookResponse {
     }
 
     public static class Builder {
-        private GetAddressBookRequest request;
-        private Address[] addresses;
+        private GetPortfolioAddressBookRequest request;
+        private AddressBookEntry[] addresses;
         private Pagination pagination;
 
-        public Builder request(GetAddressBookRequest request) {
+        public Builder request(GetPortfolioAddressBookRequest request) {
             this.request = request;
             return this;
         }
 
-        public Builder addresses(Address[] addresses) {
+        public Builder addresses(AddressBookEntry[] addresses) {
             this.addresses = addresses;
             return this;
         }
@@ -60,8 +60,8 @@ public class GetAddressBookResponse {
             return this;
         }
 
-        public GetAddressBookResponse build() {
-            return new GetAddressBookResponse(this);
+        public GetPortfolioAddressBookResponse build() {
+            return new GetPortfolioAddressBookResponse(this);
         }
     }
 }

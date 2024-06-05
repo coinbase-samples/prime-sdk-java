@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class GetAddressBookRequest {
+public class GetPortfolioAddressBookRequest {
     private String portfolioId;
     @JsonProperty("currency_symbol")
     private String currencySymbol;
     private String search;
     private PaginationParams paginationParams;
 
-    public GetAddressBookRequest() {
+    public GetPortfolioAddressBookRequest() {
     }
 
-    public GetAddressBookRequest(Builder builder) {
+    public GetPortfolioAddressBookRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.currencySymbol = builder.currencySymbol;
         this.search = builder.search;
@@ -94,8 +94,8 @@ public class GetAddressBookRequest {
             return this;
         }
 
-        public GetAddressBookRequest build() {
-            return new GetAddressBookRequest(this);
+        public GetPortfolioAddressBookRequest build() {
+            return new GetPortfolioAddressBookRequest(this);
         }
     }
 }

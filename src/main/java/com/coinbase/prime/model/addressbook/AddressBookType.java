@@ -16,10 +16,10 @@
  *
  */
 
-package com.coinbase.prime.model.allocations;
+package com.coinbase.prime.model.addressbook;
 
-public enum SizeType {
-    BASE,
-    QUOTE,
-    PERCENT
+public enum AddressBookType {
+    ADDRESS_BOOK_TYPE_UNSPECIFIED,
+    ADDRESS_BOOK_TYPE_ADDRESS,
+    ADDRESS_BOOK_TYPE_COUNTERPARTY_ID
 }
