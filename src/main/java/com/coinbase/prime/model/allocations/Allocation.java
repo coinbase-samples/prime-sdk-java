@@ -27,6 +27,8 @@ public class Allocation {
     private String source;
     @JsonProperty("order_ids")
     private String[] orderIds;
+    @JsonProperty("netting_id")
+    private String nettingId;
     private AllocationDestination[] destinations;
 
     public Allocation() {
@@ -47,6 +49,7 @@ public class Allocation {
         this.source = builder.source;
         this.orderIds = builder.orderIds;
         this.destinations = builder.destinations;
+        this.nettingId = builder.nettingId;
     }
 
     public String getRootId() {
@@ -161,6 +164,14 @@ public class Allocation {
         this.destinations = destinations;
     }
 
+    public String getNettingId() {
+        return nettingId;
+    }
+
+    public void setNettingId(String nettingId) {
+        this.nettingId = nettingId;
+    }
+
     public static class Builder {
         private String rootId;
         private String reversalId;
@@ -176,6 +187,7 @@ public class Allocation {
         private String source;
         private String[] orderIds;
         private AllocationDestination[] destinations;
+        private String nettingId;
 
         public Builder() {
         }
@@ -247,6 +259,11 @@ public class Allocation {
 
         public Builder destinations(AllocationDestination[] destinations) {
             this.destinations = destinations;
+            return this;
+        }
+
+        public Builder nettingId(String nettingId) {
+            this.nettingId = nettingId;
             return this;
         }
 

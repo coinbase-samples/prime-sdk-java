@@ -9,7 +9,7 @@ import java.util.Date;
 
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListPortfolioAllocationsRequest {
+public class GetPortfolioAllocationsRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("product_ids")
@@ -22,10 +22,10 @@ public class ListPortfolioAllocationsRequest {
     private Date endDate;
     private PaginationParams paginationParams;
 
-    public ListPortfolioAllocationsRequest() {
+    public GetPortfolioAllocationsRequest() {
     }
 
-    public ListPortfolioAllocationsRequest(Builder builder) {
+    public GetPortfolioAllocationsRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.productIds = builder.productIds;
         this.orderSide = builder.orderSide;
@@ -145,8 +145,8 @@ public class ListPortfolioAllocationsRequest {
             return this;
         }
 
-        public ListPortfolioAllocationsRequest build() {
-            return new ListPortfolioAllocationsRequest(this);
+        public GetPortfolioAllocationsRequest build() {
+            return new GetPortfolioAllocationsRequest(this);
         }
     }
 }

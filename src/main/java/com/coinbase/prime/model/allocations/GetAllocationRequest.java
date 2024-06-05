@@ -2,18 +2,18 @@ package com.coinbase.prime.model.allocations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetNetAllocationsByNettingIdRequest {
+public class GetAllocationRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
-    @JsonProperty("netting_id")
-    private String nettingId;
+    @JsonProperty("allocation_id")
+    private String allocationId;
 
-    public GetNetAllocationsByNettingIdRequest() {
+    public GetAllocationRequest() {
     }
 
-    public GetNetAllocationsByNettingIdRequest(Builder builder) {
+    public GetAllocationRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
-        this.nettingId = builder.nettingId;
+        this.allocationId = builder.allocationId;
     }
 
     public String getPortfolioId() {
@@ -24,17 +24,17 @@ public class GetNetAllocationsByNettingIdRequest {
         this.portfolioId = portfolioId;
     }
 
-    public String getNettingId() {
-        return nettingId;
+    public String getAllocationId() {
+        return allocationId;
     }
 
-    public void setNettingId(String nettingId) {
-        this.nettingId = nettingId;
+    public void setAllocationId(String allocationId) {
+        this.allocationId = allocationId;
     }
 
     public static class Builder {
         private String portfolioId;
-        private String nettingId;
+        private String allocationId;
 
         public Builder() {
         }
@@ -44,13 +44,13 @@ public class GetNetAllocationsByNettingIdRequest {
             return this;
         }
 
-        public Builder nettingId(String nettingId) {
-            this.nettingId = nettingId;
+        public Builder allocationId(String allocationId) {
+            this.allocationId = allocationId;
             return this;
         }
 
-        public GetNetAllocationsByNettingIdRequest build() {
-            return new GetNetAllocationsByNettingIdRequest(this);
+        public GetAllocationRequest build() {
+            return new GetAllocationRequest(this);
         }
     }
 }

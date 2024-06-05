@@ -2,17 +2,12 @@ package com.coinbase.examples;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.client.CoinbasePrimeHttpClient;
-import com.coinbase.prime.model.assets.ListAssetsRequest;
-import com.coinbase.prime.model.assets.ListAssetsResponse;
-import com.coinbase.prime.model.balances.ListPortfolioBalancesRequest;
-import com.coinbase.prime.model.balances.ListPortfolioBalancesResponse;
-import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
-import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
-import com.coinbase.prime.model.invoice.ListInvoicesRequest;
-import com.coinbase.prime.model.invoice.Invoice;
-import com.coinbase.prime.model.invoice.ListInvoicesResponse;
+import com.coinbase.prime.model.allocations.GetPortfolioAllocationsRequest;
+import com.coinbase.prime.model.allocations.GetPortfolioAllocationsResponse;
 import com.coinbase.prime.model.portfolios.ListPortfoliosResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.sql.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,12 +21,13 @@ public class Main {
             ListPortfoliosResponse resp = client.listPortfolios();
             System.out.println(mapper.writeValueAsString(resp));
 
-            ListAssetsResponse assets = client.listAssets(
-                    new ListAssetsRequest.Builder()
-                            .entityId(resp.getPortfolios().get(0).getEntityId())
+            GetPortfolioAllocationsResponse resp2 = client.getPortfolioAllocations(
+                    new GetPortfolioAllocationsRequest.Builder()
+                            .portfolioId(resp.getPortfolios().get(0).getId())
+                            .startDate(new Date(1704096000000L))
                             .build()
             );
-            System.out.println(mapper.writeValueAsString(assets));
+            System.out.println(mapper.writeValueAsString(resp2));
         } catch (Exception e) {
             e.printStackTrace();
         }

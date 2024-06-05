@@ -2,7 +2,7 @@ package com.coinbase.prime.model.allocations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreatePortfolioAllocationsRequest {
+public class CreateAllocationRequest {
     @JsonProperty("allocation_id")
     private String allocationId;
     @JsonProperty("source_portfolio_id")
@@ -17,11 +17,13 @@ public class CreatePortfolioAllocationsRequest {
     private SizeType sizeType;
     @JsonProperty("remainder_destination_portfolio")
     private String remainderDestinationPortfolio;
+    @JsonProperty("netting_id")
+    private String nettingId;
 
-    public CreatePortfolioAllocationsRequest() {
+    public CreateAllocationRequest() {
     }
 
-    public CreatePortfolioAllocationsRequest(Builder builder) {
+    public CreateAllocationRequest(Builder builder) {
         this.allocationId = builder.allocationId;
         this.sourcePortfolioId = builder.sourcePortfolioId;
         this.productId = builder.productId;
@@ -29,6 +31,7 @@ public class CreatePortfolioAllocationsRequest {
         this.allocationLegs = builder.allocationLegs;
         this.sizeType = builder.sizeType;
         this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
+        this.nettingId = builder.nettingId;
     }
 
     public String getAllocationId() {
@@ -87,6 +90,14 @@ public class CreatePortfolioAllocationsRequest {
         this.remainderDestinationPortfolio = remainderDestinationPortfolio;
     }
 
+    public String getNettingId() {
+        return nettingId;
+    }
+
+    public void setNettingId(String nettingId) {
+        this.nettingId = nettingId;
+    }
+
     public static class Builder {
         private String allocationId;
         private String sourcePortfolioId;
@@ -95,6 +106,7 @@ public class CreatePortfolioAllocationsRequest {
         private AllocationLeg[] allocationLegs;
         private SizeType sizeType;
         private String remainderDestinationPortfolio;
+        private String nettingId;
 
         public Builder() {
         }
@@ -134,8 +146,13 @@ public class CreatePortfolioAllocationsRequest {
             return this;
         }
 
-        public CreatePortfolioAllocationsRequest build() {
-            return new CreatePortfolioAllocationsRequest(this);
+        public Builder nettingId(String nettingId) {
+            this.nettingId = nettingId;
+            return this;
+        }
+
+        public CreateAllocationRequest build() {
+            return new CreateAllocationRequest(this);
         }
     }
 }

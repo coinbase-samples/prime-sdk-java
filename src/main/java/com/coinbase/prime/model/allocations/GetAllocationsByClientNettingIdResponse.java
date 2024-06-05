@@ -1,13 +1,13 @@
 package com.coinbase.prime.model.allocations;
 
-public class GetNetAllocationsByNettingIdResponse {
+public class GetAllocationsByClientNettingIdResponse {
     private Allocation[] allocations;
-    private GetNetAllocationsByNettingIdRequest request;
+    private GetAllocationsByClientNettingIdRequest request;
 
-    public GetNetAllocationsByNettingIdResponse() {
+    public GetAllocationsByClientNettingIdResponse() {
     }
 
-    public GetNetAllocationsByNettingIdResponse(Builder builder) {
+    public GetAllocationsByClientNettingIdResponse(Builder builder) {
         this.allocations = builder.allocations;
         this.request = builder.request;
     }
@@ -20,17 +20,17 @@ public class GetNetAllocationsByNettingIdResponse {
         this.allocations = allocations;
     }
 
-    public GetNetAllocationsByNettingIdRequest getRequest() {
+    public GetAllocationsByClientNettingIdRequest getRequest() {
         return request;
     }
 
-    public void setRequest(GetNetAllocationsByNettingIdRequest request) {
+    public void setRequest(GetAllocationsByClientNettingIdRequest request) {
         this.request = request;
     }
 
     public static class Builder {
         private Allocation[] allocations;
-        private GetNetAllocationsByNettingIdRequest request;
+        private GetAllocationsByClientNettingIdRequest request;
 
         public Builder() {
         }
@@ -40,13 +40,13 @@ public class GetNetAllocationsByNettingIdResponse {
             return this;
         }
 
-        public Builder request(GetNetAllocationsByNettingIdRequest request) {
+        public Builder request(GetAllocationsByClientNettingIdRequest request) {
             this.request = request;
             return this;
         }
 
-        public GetNetAllocationsByNettingIdResponse build() {
-            return new GetNetAllocationsByNettingIdResponse(this);
+        public GetAllocationsByClientNettingIdResponse build() {
+            return new GetAllocationsByClientNettingIdResponse(this);
         }
     }
 }

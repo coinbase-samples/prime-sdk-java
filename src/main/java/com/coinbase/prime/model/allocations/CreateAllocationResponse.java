@@ -2,18 +2,20 @@ package com.coinbase.prime.model.allocations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreatePortfolioAllocationsResponse {
+public class CreateAllocationResponse {
     private boolean success;
     @JsonProperty("allocation_id")
     private String allocationId;
     @JsonProperty("failure_reason")
     private String failureReason;
-    private CreatePortfolioAllocationsRequest request;
+    @JsonProperty("netting_id")
+    private String nettingId;
+    private CreateAllocationRequest request;
 
-    public CreatePortfolioAllocationsResponse() {
+    public CreateAllocationResponse() {
     }
 
-    public CreatePortfolioAllocationsResponse(Builder builder) {
+    public CreateAllocationResponse(Builder builder) {
         this.success = builder.success;
         this.allocationId = builder.allocationId;
         this.failureReason = builder.failureReason;
@@ -44,11 +46,11 @@ public class CreatePortfolioAllocationsResponse {
         this.failureReason = failureReason;
     }
 
-    public CreatePortfolioAllocationsRequest getRequest() {
+    public CreateAllocationRequest getRequest() {
         return request;
     }
 
-    public void setRequest(CreatePortfolioAllocationsRequest request) {
+    public void setRequest(CreateAllocationRequest request) {
         this.request = request;
     }
 
@@ -56,7 +58,7 @@ public class CreatePortfolioAllocationsResponse {
         private boolean success;
         private String allocationId;
         private String failureReason;
-        private CreatePortfolioAllocationsRequest request;
+        private CreateAllocationRequest request;
 
         public Builder() {
         }
@@ -76,13 +78,13 @@ public class CreatePortfolioAllocationsResponse {
             return this;
         }
 
-        public Builder request(CreatePortfolioAllocationsRequest request) {
+        public Builder request(CreateAllocationRequest request) {
             this.request = request;
             return this;
         }
 
-        public CreatePortfolioAllocationsResponse build() {
-            return new CreatePortfolioAllocationsResponse(this);
+        public CreateAllocationResponse build() {
+            return new CreateAllocationResponse(this);
         }
     }
 }

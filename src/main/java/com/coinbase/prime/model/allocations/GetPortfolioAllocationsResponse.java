@@ -2,16 +2,16 @@ package com.coinbase.prime.model.allocations;
 
 import com.coinbase.prime.model.common.Pagination;
 
-public class ListPortfolioAllocationsResponse {
+public class GetPortfolioAllocationsResponse {
     private Allocation[] allocations;
     private Pagination pagination;
 
-    private ListPortfolioAllocationsRequest request;
+    private GetPortfolioAllocationsRequest request;
 
-    public ListPortfolioAllocationsResponse() {
+    public GetPortfolioAllocationsResponse() {
     }
 
-    public ListPortfolioAllocationsResponse(Builder builder) {
+    public GetPortfolioAllocationsResponse(Builder builder) {
         this.allocations = builder.allocations;
         this.pagination = builder.pagination;
         this.request = builder.request;
@@ -33,11 +33,11 @@ public class ListPortfolioAllocationsResponse {
         this.pagination = pagination;
     }
 
-    public ListPortfolioAllocationsRequest getRequest() {
+    public GetPortfolioAllocationsRequest getRequest() {
         return request;
     }
 
-    public void setRequest(ListPortfolioAllocationsRequest request) {
+    public void setRequest(GetPortfolioAllocationsRequest request) {
         this.request = request;
     }
 
@@ -45,7 +45,7 @@ public class ListPortfolioAllocationsResponse {
         private Allocation[] allocations;
         private Pagination pagination;
 
-        private ListPortfolioAllocationsRequest request;
+        private GetPortfolioAllocationsRequest request;
 
         public Builder() {
         }
@@ -60,13 +60,13 @@ public class ListPortfolioAllocationsResponse {
             return this;
         }
 
-        public Builder request(ListPortfolioAllocationsRequest request) {
+        public Builder request(GetPortfolioAllocationsRequest request) {
             this.request = request;
             return this;
         }
 
-        public ListPortfolioAllocationsResponse build() {
-            return new ListPortfolioAllocationsResponse(this);
+        public GetPortfolioAllocationsResponse build() {
+            return new GetPortfolioAllocationsResponse(this);
         }
     }
 }

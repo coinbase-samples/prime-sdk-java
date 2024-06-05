@@ -18,7 +18,6 @@ import com.coinbase.prime.model.balances.*;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.model.invoice.ListInvoicesRequest;
-import com.coinbase.prime.model.invoice.Invoice;
 import com.coinbase.prime.model.invoice.ListInvoicesResponse;
 import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
@@ -54,12 +53,12 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     @Override
-    public CreatePortfolioAllocationsResponse createPortfolioAllocations(CreatePortfolioAllocationsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
+    public CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = "/allocations";
         String response = post(path, request);
         ObjectMapper mapper = new ObjectMapper();
         try {
-            CreatePortfolioAllocationsResponse resp = mapper.readValue(response, CreatePortfolioAllocationsResponse.class);
+            CreateAllocationResponse resp = mapper.readValue(response, CreateAllocationResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
@@ -68,12 +67,12 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     @Override
-    public CreatePortfolioNetAllocationsResponse createPortfolioNetAllocations(CreatePortfolioAllocationsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
+    public CreateNetAllocationResponse createNetAllocation(CreateAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = "/allocations/net";
         String response = post(path, request);
         ObjectMapper mapper = new ObjectMapper();
         try {
-            CreatePortfolioNetAllocationsResponse resp = mapper.readValue(response, CreatePortfolioNetAllocationsResponse.class);
+            CreateNetAllocationResponse resp = mapper.readValue(response, CreateNetAllocationResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
@@ -82,13 +81,13 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     @Override
-    public ListPortfolioAllocationsResponse listPortfolioAllocations(ListPortfolioAllocationsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
+    public GetPortfolioAllocationsResponse getPortfolioAllocations(GetPortfolioAllocationsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/allocations", request.getPortfolioId());
         String response = get(path, queryParams);
         ObjectMapper mapper = new ObjectMapper();
         try {
-            ListPortfolioAllocationsResponse resp = mapper.readValue(response, ListPortfolioAllocationsResponse.class);
+            GetPortfolioAllocationsResponse resp = mapper.readValue(response, GetPortfolioAllocationsResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
@@ -97,12 +96,12 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     @Override
-    public GetAllocationByIdResponse getAllocationById(GetAllocationByIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
+    public GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/allocations/%s", request.getPortfolioId(), request.getAllocationId());
         String response = get(path, "");
         ObjectMapper mapper = new ObjectMapper();
         try {
-            GetAllocationByIdResponse resp = mapper.readValue(response, GetAllocationByIdResponse.class);
+            GetAllocationResponse resp = mapper.readValue(response, GetAllocationResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {
@@ -111,12 +110,12 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     @Override
-    public GetNetAllocationsByNettingIdResponse getNetAllocationsByNettingId(GetNetAllocationsByNettingIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
+    public GetAllocationsByClientNettingIdResponse getNetAllocationsByNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/allocations/net/%s", request.getPortfolioId(), request.getNettingId());
         String response = get(path, "");
         ObjectMapper mapper = new ObjectMapper();
         try {
-            GetNetAllocationsByNettingIdResponse resp = mapper.readValue(response, GetNetAllocationsByNettingIdResponse.class);
+            GetAllocationsByClientNettingIdResponse resp = mapper.readValue(response, GetAllocationsByClientNettingIdResponse.class);
             resp.setRequest(request);
             return resp;
         } catch (IOException e) {

@@ -1,14 +1,14 @@
 package com.coinbase.prime.model.allocations;
 
-public class GetAllocationByIdResponse {
+public class GetAllocationResponse {
     private Allocation allocation;
 
-    private GetAllocationByIdRequest request;
+    private GetAllocationRequest request;
 
-    public GetAllocationByIdResponse() {
+    public GetAllocationResponse() {
     }
 
-    public GetAllocationByIdResponse(Builder builder) {
+    public GetAllocationResponse(Builder builder) {
         this.allocation = builder.allocation;
         this.request = builder.request;
     }
@@ -21,17 +21,17 @@ public class GetAllocationByIdResponse {
         this.allocation = allocation;
     }
 
-    public GetAllocationByIdRequest getRequest() {
+    public GetAllocationRequest getRequest() {
         return request;
     }
 
-    public void setRequest(GetAllocationByIdRequest request) {
+    public void setRequest(GetAllocationRequest request) {
         this.request = request;
     }
 
     public static class Builder {
         private Allocation allocation;
-        private GetAllocationByIdRequest request;
+        private GetAllocationRequest request;
 
         public Builder() {
         }
@@ -41,13 +41,13 @@ public class GetAllocationByIdResponse {
             return this;
         }
 
-        public Builder request(GetAllocationByIdRequest request) {
+        public Builder request(GetAllocationRequest request) {
             this.request = request;
             return this;
         }
 
-        public GetAllocationByIdResponse build() {
-            return new GetAllocationByIdResponse(this);
+        public GetAllocationResponse build() {
+            return new GetAllocationResponse(this);
         }
     }
 }

@@ -2,18 +2,18 @@ package com.coinbase.prime.model.allocations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetAllocationByIdRequest {
+public class GetAllocationsByClientNettingIdRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
-    @JsonProperty("allocation_id")
-    private String allocationId;
+    @JsonProperty("netting_id")
+    private String nettingId;
 
-    public GetAllocationByIdRequest() {
+    public GetAllocationsByClientNettingIdRequest() {
     }
 
-    public GetAllocationByIdRequest(Builder builder) {
+    public GetAllocationsByClientNettingIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
-        this.allocationId = builder.allocationId;
+        this.nettingId = builder.nettingId;
     }
 
     public String getPortfolioId() {
@@ -24,17 +24,17 @@ public class GetAllocationByIdRequest {
         this.portfolioId = portfolioId;
     }
 
-    public String getAllocationId() {
-        return allocationId;
+    public String getNettingId() {
+        return nettingId;
     }
 
-    public void setAllocationId(String allocationId) {
-        this.allocationId = allocationId;
+    public void setNettingId(String nettingId) {
+        this.nettingId = nettingId;
     }
 
     public static class Builder {
         private String portfolioId;
-        private String allocationId;
+        private String nettingId;
 
         public Builder() {
         }
@@ -44,13 +44,13 @@ public class GetAllocationByIdRequest {
             return this;
         }
 
-        public Builder allocationId(String allocationId) {
-            this.allocationId = allocationId;
+        public Builder nettingId(String nettingId) {
+            this.nettingId = nettingId;
             return this;
         }
 
-        public GetAllocationByIdRequest build() {
-            return new GetAllocationByIdRequest(this);
+        public GetAllocationsByClientNettingIdRequest build() {
+            return new GetAllocationsByClientNettingIdRequest(this);
         }
     }
 }

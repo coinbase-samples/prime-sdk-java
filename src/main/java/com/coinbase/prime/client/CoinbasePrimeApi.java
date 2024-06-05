@@ -17,7 +17,6 @@ import com.coinbase.prime.model.balances.*;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.model.invoice.ListInvoicesRequest;
-import com.coinbase.prime.model.invoice.Invoice;
 import com.coinbase.prime.model.invoice.ListInvoicesResponse;
 import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
@@ -35,11 +34,11 @@ import com.coinbase.prime.model.users.ListUsersResponse;
 import com.coinbase.prime.model.wallets.*;
 
 public interface CoinbasePrimeApi {
-    CreatePortfolioAllocationsResponse createPortfolioAllocations(CreatePortfolioAllocationsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
-    CreatePortfolioNetAllocationsResponse createPortfolioNetAllocations(CreatePortfolioAllocationsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
-    ListPortfolioAllocationsResponse listPortfolioAllocations(ListPortfolioAllocationsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
-    GetAllocationByIdResponse getAllocationById(GetAllocationByIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
-    GetNetAllocationsByNettingIdResponse getNetAllocationsByNettingId(GetNetAllocationsByNettingIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
+    CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
+    CreateNetAllocationResponse createNetAllocation(CreateAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
+    GetPortfolioAllocationsResponse getPortfolioAllocations(GetPortfolioAllocationsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
+    GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
+    GetAllocationsByClientNettingIdResponse getNetAllocationsByNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
 
     ListInvoicesResponse listInvoices(ListInvoicesRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException;
 

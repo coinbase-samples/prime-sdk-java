@@ -2,7 +2,7 @@ package com.coinbase.prime.model.allocations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreatePortfolioNetAllocationsResponse {
+public class CreateNetAllocationResponse {
     private boolean success;
     @JsonProperty("netting_id")
     private String nettingId;
@@ -13,12 +13,12 @@ public class CreatePortfolioNetAllocationsResponse {
     @JsonProperty("failure_reason")
     private String failureReason;
 
-    private CreatePortfolioAllocationsRequest request;
+    private CreateAllocationRequest request;
 
-    public CreatePortfolioNetAllocationsResponse() {
+    public CreateNetAllocationResponse() {
     }
 
-    public CreatePortfolioNetAllocationsResponse(Builder builder) {
+    public CreateNetAllocationResponse(Builder builder) {
         this.success = builder.success;
         this.nettingId = builder.nettingId;
         this.buyAllocationId = builder.buyAllocationId;
@@ -67,11 +67,11 @@ public class CreatePortfolioNetAllocationsResponse {
         this.failureReason = failureReason;
     }
 
-    public CreatePortfolioAllocationsRequest getRequest() {
+    public CreateAllocationRequest getRequest() {
         return request;
     }
 
-    public void setRequest(CreatePortfolioAllocationsRequest request) {
+    public void setRequest(CreateAllocationRequest request) {
         this.request = request;
     }
 
@@ -82,7 +82,7 @@ public class CreatePortfolioNetAllocationsResponse {
         private String sellAllocationId;
         private String failureReason;
 
-        private CreatePortfolioAllocationsRequest request;
+        private CreateAllocationRequest request;
 
         public Builder() {
         }
@@ -112,13 +112,13 @@ public class CreatePortfolioNetAllocationsResponse {
             return this;
         }
 
-        public Builder request(CreatePortfolioAllocationsRequest request) {
+        public Builder request(CreateAllocationRequest request) {
             this.request = request;
             return this;
         }
 
-        public CreatePortfolioNetAllocationsResponse build() {
-            return new CreatePortfolioNetAllocationsResponse(this);
+        public CreateNetAllocationResponse build() {
+            return new CreateNetAllocationResponse(this);
         }
     }
 }

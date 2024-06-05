@@ -11,8 +11,8 @@ public class AllocationDestination {
     private String allocationBase;
     @JsonProperty("allocation_quote")
     private String allocationQuote;
-    @JsonProperty("fee_allocated_leg")
-    private String feeAllocatedLeg;
+    @JsonProperty("fees_allocated_leg")
+    private String feesAllocatedLeg;
 
     public AllocationDestination() {}
     public AllocationDestination(Builder builder) {
@@ -20,7 +20,7 @@ public class AllocationDestination {
         this.portfolioId = builder.portfolioId;
         this.allocationBase = builder.allocationBase;
         this.allocationQuote = builder.allocationQuote;
-        this.feeAllocatedLeg = builder.feeAllocatedLeg;
+        this.feesAllocatedLeg = builder.feeAllocatedLeg;
     }
 
     public String getLegId() {
@@ -55,12 +55,12 @@ public class AllocationDestination {
         this.allocationQuote = allocationQuote;
     }
 
-    public String getFeeAllocatedLeg() {
-        return feeAllocatedLeg;
+    public String getFeesAllocatedLeg() {
+        return feesAllocatedLeg;
     }
 
-    public void setFeeAllocatedLeg(String feeAllocatedLeg) {
-        this.feeAllocatedLeg = feeAllocatedLeg;
+    public void setFeesAllocatedLeg(String feesAllocatedLeg) {
+        this.feesAllocatedLeg = feesAllocatedLeg;
     }
 
     public static class Builder {
