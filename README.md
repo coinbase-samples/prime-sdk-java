@@ -42,7 +42,7 @@ The JSON format expected for `COINBASE_PRIME_CREDENTIALS` is:
 {
   "accessKey": "",
   "passphrase": "",
-  "signingKey": "",
+  "signingKey": ""
 }
 ```
 
