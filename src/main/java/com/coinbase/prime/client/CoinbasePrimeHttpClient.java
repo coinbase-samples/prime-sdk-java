@@ -76,6 +76,12 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         this.baseUrl = builder.baseUrl;
     }
 
+    public CoinbasePrimeHttpClient(CoinbasePrimeCredentials credentials) {
+        this.credentials = credentials;
+        this.baseUrl = "https://api.prime.coinbase.com";
+        this.client = HttpClient.newHttpClient();
+    }
+
     @Override
     public CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = "/allocations";
@@ -716,7 +722,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     public static class Builder {
         private final CoinbasePrimeCredentials credentials;
-        private HttpClient client;
+        private HttpClient client = HttpClient.newHttpClient();
         private String baseUrl = "https://api.prime.coinbase.com/v1";
 
         public Builder(CoinbasePrimeCredentials credentials) {
