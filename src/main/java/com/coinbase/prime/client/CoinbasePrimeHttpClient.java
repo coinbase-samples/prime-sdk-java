@@ -58,6 +58,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Instant;
 
 public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     private final CoinbasePrimeCredentials credentials;
@@ -680,7 +681,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     private HttpRequest.Builder generateHttpRequest(String path, String query) {
         String callUrl = baseUrl + path + query;
         URI uri = URI.create(callUrl);
-        long unixTime = System.currentTimeMillis() / 1000L;
+        long unixTime = Instant.now().toEpochMilli() / 1000L;
         String signature;
         try {
             signature = credentials.Sign(unixTime, "GET", uri.getPath(), "");

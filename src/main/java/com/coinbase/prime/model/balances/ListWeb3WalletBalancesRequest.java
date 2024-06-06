@@ -21,6 +21,7 @@ package com.coinbase.prime.model.balances;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListWeb3WalletBalancesRequest {
@@ -43,16 +44,10 @@ public class ListWeb3WalletBalancesRequest {
     }
 
     public String getQueryString() {
-        String queryParams = "";
-        if (this.getVisibilityStatuses() != null) {
-            for (VisibilityStatus visibilityStatus : this.visibilityStatuses) {
-                queryParams = appendQueryParams(queryParams, "visibility_statuses", visibilityStatus.name());
-            }
-        }
-        if (this.getPaginationParams() != null) {
-            queryParams = this.getPaginationParams().generateQueryString(queryParams);
-        }
-        return queryParams;
+        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
+        queryString = appendAllQueryParams(this.getVisibilityStatuses(), "visibility_statuses", queryString);
+
+        return queryString;
     }
 
     public String getPortfolioId() {

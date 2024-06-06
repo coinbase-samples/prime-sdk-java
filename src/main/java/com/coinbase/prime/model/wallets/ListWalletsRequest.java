@@ -22,6 +22,7 @@ import com.coinbase.prime.model.common.PaginationParams;
 import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListWalletsRequest {
@@ -45,19 +46,10 @@ public class ListWalletsRequest {
     }
 
     public String getQueryString() {
-        String queryParams = "";
-        if (this.getSymbols() != null) {
-            for (String symbol : this.getSymbols()) {
-                queryParams = appendQueryParams(queryParams, "symbols", symbol);
-            }
-        }
-        if (this.getType() != null) {
-            queryParams = appendQueryParams(queryParams, "type", this.getType().name());
-        }
-        if (this.getPaginationParams() != null) {
-            queryParams = this.getPaginationParams().generateQueryString(queryParams);
-        }
-        return queryParams;
+        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
+        queryString = appendAllQueryParams(this.getSymbols(), "symbols", queryString);
+        queryString = appendQueryParams(queryString, "type", this.getType().name());
+        return queryString;
     }
 
     public String getPortfolioId() {

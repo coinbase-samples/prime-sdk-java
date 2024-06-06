@@ -21,6 +21,7 @@ package com.coinbase.prime.model.transactions;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListPortfolioTransactionsRequest {
@@ -47,23 +48,12 @@ public class ListPortfolioTransactionsRequest {
     }
 
     public String getQueryString() {
-        String queryString = "";
-        if (this.getSymbols() != null) {
-            for (String symbol : this.getSymbols()) {
-                queryString = appendQueryParams(queryString, "symbols", symbol);
-            }
-        }
-        if (this.getTypes() != null) {
-            for (TransactionType type : this.getTypes()) {
-                queryString = appendQueryParams(queryString, "types", type.toString());
-            }
-        }
+        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
+        appendAllQueryParams(this.getSymbols(), "symbols", queryString);
+        appendAllQueryParams(this.getTypes(), "types", queryString);
         queryString = appendQueryParams(queryString, "start_time", this.getStartTime());
         queryString = appendQueryParams(queryString, "end_time", this.getEndTime());
 
-        if (this.getPaginationParams() != null) {
-            queryString = this.getPaginationParams().generateQueryString(queryString);
-        }
         return queryString;
     }
 

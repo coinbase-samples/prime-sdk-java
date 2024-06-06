@@ -19,9 +19,9 @@
 package com.coinbase.prime.model.activities;
 
 import com.coinbase.prime.model.common.PaginationParams;
-import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListActivitiesRequest {
@@ -34,7 +34,7 @@ public class ListActivitiesRequest {
     private String startTime;
     @JsonProperty("end_time")
     private String endTime;
-    private PaginationParams pagination;
+    private PaginationParams paginationParams;
 
     public ListActivitiesRequest() {
     }
@@ -46,36 +46,17 @@ public class ListActivitiesRequest {
         this.statuses = builder.statuses;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
-        this.pagination = builder.pagination;
+        this.paginationParams = builder.paginationParams;
     }
 
     public String getQueryString() {
-        String queryParams = "";
-        if (this.getSymbols() != null) {
-            for (String symbol : this.getSymbols()) {
-                queryParams = appendQueryParams(queryParams, "symbols", symbol);
-            }
-        }
-        if (this.getCategories() != null) {
-            for (String category : this.getCategories()) {
-                queryParams = appendQueryParams(queryParams, "categories", category);
-            }
-        }
-        if (this.getStatuses() != null) {
-            for (String status : this.getStatuses()) {
-                queryParams = appendQueryParams(queryParams, "statuses", status);
-            }
-        }
-        if (this.getStartTime() != null) {
-            queryParams = appendQueryParams(queryParams, "start_time", this.getStartTime());
-        }
-        if (this.getEndTime() != null) {
-            queryParams = appendQueryParams(queryParams, "end_time", this.getEndTime());
-        }
-        if (this.getPagination() != null) {
-            queryParams = this.getPagination().generateQueryString(queryParams);
-        }
-        return queryParams;
+        String queryString = this.paginationParams != null ? this.paginationParams.generateQueryString("") : "";
+        queryString = appendAllQueryParams(this.symbols, "symbols", queryString);
+        queryString = appendAllQueryParams(this.categories, "categories", queryString);
+        queryString = appendAllQueryParams(this.statuses, "statuses", queryString);
+        queryString = appendQueryParams(queryString, "start_time", this.startTime);
+        queryString = appendQueryParams(queryString, "end_time", this.endTime);
+        return queryString;
     }
 
     public String getPortfolioId() {
@@ -126,12 +107,12 @@ public class ListActivitiesRequest {
         this.endTime = endTime;
     }
 
-    public PaginationParams getPagination() {
-        return pagination;
+    public PaginationParams getPaginationParams() {
+        return paginationParams;
     }
 
-    public void setPagination(PaginationParams pagination) {
-        this.pagination = pagination;
+    public void setPaginationParams(PaginationParams paginationParams) {
+        this.paginationParams = paginationParams;
     }
 
     public static class Builder {
@@ -141,7 +122,7 @@ public class ListActivitiesRequest {
         private String[] statuses;
         private String startTime;
         private String endTime;
-        private PaginationParams pagination;
+        private PaginationParams paginationParams;
 
         public Builder() {
         }
@@ -177,7 +158,7 @@ public class ListActivitiesRequest {
         }
 
         public Builder pagination(PaginationParams pagination) {
-            this.pagination = pagination;
+            this.paginationParams = pagination;
             return this;
         }
 

@@ -20,14 +20,11 @@ package com.coinbase.examples;
 
 import com.coinbase.prime.client.CoinbasePrimeHttpClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
-import com.coinbase.prime.model.balances.GetWalletBalanceRequest;
-import com.coinbase.prime.model.balances.GetWalletBalanceResponse;
-import com.coinbase.prime.model.orders.CreateOrderRequest;
-import com.coinbase.prime.model.orders.CreateOrderResponse;
-import com.coinbase.prime.model.orders.OrderSide;
-import com.coinbase.prime.model.orders.OrderType;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
+import com.coinbase.prime.model.transactions.ListPortfolioTransactionsRequest;
+import com.coinbase.prime.model.transactions.ListPortfolioTransactionsResponse;
+import com.coinbase.prime.model.transactions.TransactionType;
 import com.coinbase.prime.model.wallets.ListWalletsRequest;
 import com.coinbase.prime.model.wallets.ListWalletsResponse;
 import com.coinbase.prime.model.wallets.WalletType;
@@ -63,15 +60,13 @@ public class Main {
 
             System.out.println(mapper.writeValueAsString(walletsResponse));
 
-            CreateOrderResponse createOrderResponse = client.createOrder(
-                    new CreateOrderRequest.Builder()
+            ListPortfolioTransactionsResponse listTransactionsResponse = client.listPortfolioTransactions(
+                    new ListPortfolioTransactionsRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())
-                            .baseQuantity("0.00001")
-                            .side(OrderSide.BUY)
-                            .type(OrderType.MARKET)
-                            .productId("ADA-USD")
+                            .symbols(new String[]{"ADA"})
+                            .types(new TransactionType[]{TransactionType.CLAIM_REWARDS})
                             .build());
-            System.out.println(mapper.writeValueAsString(createOrderResponse));
+            System.out.println(mapper.writeValueAsString(listTransactionsResponse));
 
         } catch (Exception e) {
             e.printStackTrace();

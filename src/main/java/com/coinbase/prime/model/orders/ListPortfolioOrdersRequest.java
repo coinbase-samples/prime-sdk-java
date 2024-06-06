@@ -21,6 +21,7 @@ package com.coinbase.prime.model.orders;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListPortfolioOrdersRequest {
@@ -55,38 +56,15 @@ public class ListPortfolioOrdersRequest {
     }
 
     public String getQueryString() {
-        String queryParams = "";
-        if (this.getProductIds() != null) {
-            for (String productId : this.getProductIds()) {
-                queryParams = appendQueryParams(queryParams, "product_ids", productId);
-            }
-        }
-        if (this.getOrderStatuses() != null) {
-            for (OrderStatus orderStatus : this.getOrderStatuses()) {
-                queryParams = appendQueryParams(queryParams, "order_statuses", orderStatus.name());
-            }
-        }
-        if (this.getOrderType() != null) {
-            queryParams = appendQueryParams(queryParams, "order_type", this.getOrderType().name());
-        }
+        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
+        queryString = appendAllQueryParams(this.getProductIds(), "product_ids", queryString);
+        queryString = appendAllQueryParams(this.getOrderStatuses(), "order_statuses", queryString);
+        queryString = appendQueryParams(queryString, "order_type", this.getOrderType().name());
+        queryString = appendQueryParams(queryString, "start_date", this.getStartDate());
+        queryString = appendQueryParams(queryString, "order_side", this.getOrderSide().name());
+        queryString = appendQueryParams(queryString, "end_date", this.getEndDate());
 
-        if (this.getStartDate() != null) {
-            queryParams = appendQueryParams(queryParams, "start_date", this.getStartDate());
-        }
-
-        if (this.getOrderSide() != null) {
-            queryParams = appendQueryParams(queryParams, "order_side", this.getOrderSide().name());
-        }
-
-        if (this.getEndDate() != null) {
-            queryParams = appendQueryParams(queryParams, "end_date", this.getEndDate());
-        }
-
-        if (this.getPaginationParams() != null) {
-            queryParams = this.getPaginationParams().generateQueryString(queryParams);
-        }
-
-        return queryParams;
+        return queryString;
     }
 
     public String getPortfolioId() {

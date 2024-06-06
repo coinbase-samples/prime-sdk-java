@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListOpenOrdersRequest {
@@ -54,32 +55,13 @@ public class ListOpenOrdersRequest {
     }
 
     public String getQueryString() {
-        String queryParams = "";
-        if (this.getProductIds() != null) {
-            for (String productId : this.getProductIds()) {
-                queryParams = appendQueryParams(queryParams, "product_ids", productId);
-            }
-        }
-        if (this.getOrderType() != null) {
-            queryParams = appendQueryParams(queryParams, "order_type", this.getOrderType().name());
-        }
-
-        if (this.getStartDate() != null) {
-            queryParams = appendQueryParams(queryParams, "start_date", this.getStartDate().toString());
-        }
-
-        if (this.getOrderSide() != null) {
-            queryParams = appendQueryParams(queryParams, "order_side", this.getOrderSide().name());
-        }
-
-        if (this.getEndDate() != null) {
-            queryParams = appendQueryParams(queryParams, "end_date", this.getEndDate().toString());
-        }
-
-        if (this.getPaginationParams() != null) {
-            queryParams = this.getPaginationParams().generateQueryString(queryParams);
-        }
-        return queryParams;
+        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
+        queryString = appendAllQueryParams(this.getProductIds(), "product_ids", queryString);
+        queryString = appendQueryParams(queryString, "order_type", this.getOrderType().name());
+        queryString = appendQueryParams(queryString, "start_date", this.getStartDate().toString());
+        queryString = appendQueryParams(queryString, "order_side", this.getOrderSide().name());
+        queryString = appendQueryParams(queryString, "end_date", this.getEndDate().toString());
+        return queryString;
     }
 
     public String getPortfolioId() {

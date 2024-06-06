@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class GetPortfolioAllocationsRequest {
@@ -53,25 +54,13 @@ public class GetPortfolioAllocationsRequest {
     }
 
     public String getQueryString() {
-        String queryParams = "";
-        if (this.getProductIds() != null) {
-            for (String productId : this.getProductIds()) {
-                queryParams = appendQueryParams(queryParams, "product_ids", productId);
-            }
-        }
-        if (this.getOrderSide() != null) {
-            queryParams = appendQueryParams(queryParams, "order_side", this.getOrderSide().toString());
-        }
-        if (this.getStartDate() != null) {
-            queryParams = appendQueryParams(queryParams, "start_date", Utils.formatDate(this.getStartDate()));
-        }
-        if (this.getEndDate() != null) {
-            queryParams = appendQueryParams(queryParams, "start_date", Utils.formatDate(this.getEndDate()));
-        }
-        if (this.getPaginationParams() != null) {
-            queryParams = this.getPaginationParams().generateQueryString(queryParams);
-        }
-        return queryParams;
+        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
+        queryString = appendAllQueryParams(this.getProductIds(), "product_ids", queryString);
+        queryString = appendQueryParams(queryString, "order_side", this.getOrderSide().toString());
+        queryString = appendQueryParams(queryString, "start_date", Utils.formatDate(this.getStartDate()));
+        queryString = appendQueryParams(queryString, "start_date", Utils.formatDate(this.getEndDate()));
+
+        return queryString;
     }
 
     public String getPortfolioId() {

@@ -21,6 +21,7 @@ package com.coinbase.prime.model.invoice;
 import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListInvoicesRequest {
@@ -48,25 +49,12 @@ public class ListInvoicesRequest {
 
 
     public String getQueryString() {
-        String queryParams = "";
-        if (this.getStates() != null) {
-            for (InvoiceState state : this.getStates()) {
-                queryParams = appendQueryParams(queryParams, "states", state.toString());
-            }
-        }
-        if (this.getBillingMonth() != null) {
-            queryParams = appendQueryParams(queryParams, "billing_month", this.getBillingMonth().toString());
-        }
-        if (this.getBillingYear() != null) {
-            queryParams = appendQueryParams(queryParams, "billing_year", this.getBillingYear().toString());
-        }
-        if (this.getCursor() != null) {
-            queryParams = appendQueryParams(queryParams, "cursor", this.getCursor().toString());
-        }
-        if (this.getLimit() != null) {
-            queryParams = appendQueryParams(queryParams, "limit", this.getLimit().toString());
-        }
-        return queryParams;
+        String queryString = appendAllQueryParams(this.getStates(), "states", "");
+        queryString = appendQueryParams(queryString, "billing_month", this.getBillingMonth().toString());
+        queryString = appendQueryParams(queryString, "billing_year", this.getBillingYear().toString());
+        queryString = appendQueryParams(queryString, "cursor", this.getCursor().toString());
+        queryString = appendQueryParams(queryString, "limit", this.getLimit().toString());
+        return queryString;
     }
 
     public String getEntityId() {

@@ -20,6 +20,7 @@ package com.coinbase.prime.model.balances;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class ListPortfolioBalancesRequest {
@@ -39,16 +40,9 @@ public class ListPortfolioBalancesRequest {
     }
 
     public String getQueryString() {
-        String queryParams = "";
-        if (this.getSymbols() != null) {
-            for (String symbol : this.getSymbols()) {
-                queryParams = appendQueryParams(queryParams, "symbols", symbol);
-            }
-        }
-        if (this.getBalanceType() != null) {
-            queryParams = appendQueryParams(queryParams, "balance_type", this.getBalanceType());
-        }
-        return queryParams;
+        String queryString = appendAllQueryParams(this.getSymbols(), "symbols", "");
+        queryString = appendQueryParams(queryString, "balance_type", this.getBalanceType());
+        return queryString;
     }
 
     public String getPortfolioId() {
