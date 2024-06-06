@@ -65,6 +65,11 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     private final String baseUrl;
     HttpClient client;
 
+    public static final String CB_ACCESS_KEY_HEADER = "X-CB-ACCESS-KEY";
+    public static final String CB_ACCESS_PHRASE_HEADER = "X-CB-ACCESS-PASSPHRASE";
+    public static final String CB_ACCESS_SIGNATURE_HEADER = "X-CB-ACCESS-SIGNATURE";
+    public static final String CB_ACCESS_TIMESTAMP_HEADER = "X-CB-ACCESS-TIMESTAMP";
+
     private CoinbasePrimeHttpClient(Builder builder) {
         this.credentials = builder.credentials;
         this.client = builder.client;
@@ -691,24 +696,21 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
         return HttpRequest.newBuilder()
                 .uri(uri)
-                .header("X-CB-ACCESS-KEY", credentials.getAccessKey())
-                .header("X-CB-ACCESS-PASSPHRASE", credentials.getPassphrase())
-                .header("X-CB-ACCESS-SIGNATURE", signature)
-                .header("X-CB-ACCESS-TIMESTAMP", String.valueOf(unixTime));
+                .header(CB_ACCESS_KEY_HEADER, credentials.getAccessKey())
+                .header(CB_ACCESS_PHRASE_HEADER, credentials.getPassphrase())
+                .header(CB_ACCESS_SIGNATURE_HEADER, signature)
+                .header(CB_ACCESS_TIMESTAMP_HEADER, String.valueOf(unixTime));
     }
 
     private String sendRequest(HttpRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         try {
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (resp.statusCode() != 200) {
-                System.out.println("Request failed with status code: " + resp.statusCode());
-                System.out.println("Response body: " + resp.body());
                 throw new CoinbasePrimeException(resp.statusCode(), resp.body());
             }
             return resp.body();
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-            throw new CoinbasePrimeException("Failed to send request", e);
+            throw new CoinbasePrimeClientException("Failed to send request", e);
         }
     }
 
