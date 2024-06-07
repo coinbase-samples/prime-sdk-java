@@ -30,6 +30,7 @@ import com.coinbase.prime.model.wallets.WalletType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.http.HttpClient;
+import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
@@ -74,6 +75,7 @@ public class Main {
                             .side(OrderSide.BUY)
                             .type(OrderType.MARKET)
                             .baseQuantity("0.001")
+                            .clientOrderId(UUID.randomUUID().toString())
                             .build());
             System.out.println(mapper.writeValueAsString(orderResponse));
 

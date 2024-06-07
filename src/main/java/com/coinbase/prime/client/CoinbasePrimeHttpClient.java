@@ -52,7 +52,6 @@ import com.coinbase.prime.model.users.ListUsersResponse;
 import com.coinbase.prime.model.wallets.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.crypto.Mac;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -71,6 +70,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     private final CoinbasePrimeCredentials credentials;
     private final String baseUrl;
     private final HttpClient client;
+    private final ObjectMapper mapper = new ObjectMapper();
 
     private CoinbasePrimeHttpClient(Builder builder) {
         this.credentials = builder.credentials;
@@ -88,7 +88,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = "/allocations";
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CreateAllocationResponse resp = mapper.readValue(response, CreateAllocationResponse.class);
             resp.setRequest(request);
@@ -102,7 +102,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CreateNetAllocationResponse createNetAllocation(CreateAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = "/allocations/net";
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CreateNetAllocationResponse resp = mapper.readValue(response, CreateNetAllocationResponse.class);
             resp.setRequest(request);
@@ -117,7 +117,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/allocations", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetPortfolioAllocationsResponse resp = mapper.readValue(response, GetPortfolioAllocationsResponse.class);
             resp.setRequest(request);
@@ -131,7 +131,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/allocations/%s", request.getPortfolioId(), request.getAllocationId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetAllocationResponse resp = mapper.readValue(response, GetAllocationResponse.class);
             resp.setRequest(request);
@@ -145,7 +145,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetAllocationsByClientNettingIdResponse getNetAllocationsByNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/allocations/net/%s", request.getPortfolioId(), request.getNettingId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetAllocationsByClientNettingIdResponse resp = mapper.readValue(response, GetAllocationsByClientNettingIdResponse.class);
             resp.setRequest(request);
@@ -160,7 +160,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/entities/%s/invoices", request.getEntityId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListInvoicesResponse resp = mapper.readValue(response, ListInvoicesResponse.class);
             resp.setRequest(request);
@@ -174,7 +174,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/entities/%s/assets", request.getEntityId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListAssetsResponse resp = mapper.readValue(response, ListAssetsResponse.class);
             resp.setRequest(request);
@@ -188,7 +188,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public ListEntityPaymentMethodsResponse listEntityPaymentMethods(ListEntityPaymentMethodsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/entities/%s/payment-methods", request.getEntityId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListEntityPaymentMethodsResponse resp = mapper.readValue(response, ListEntityPaymentMethodsResponse.class);
             resp.setRequest(request);
@@ -202,7 +202,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetEntityPaymentMethodResponse getEntityPaymentMethod(GetEntityPaymentMethodRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetEntityPaymentMethodResponse resp = mapper.readValue(response, GetEntityPaymentMethodResponse.class);
             resp.setRequest(request);
@@ -217,7 +217,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getPaginationParams() != null ? request.getPaginationParams().generateQueryString("") : "";
         String path = String.format("/entities/%s/users", request.getEntityId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListUsersResponse resp = mapper.readValue(response, ListUsersResponse.class);
             resp.setRequest(request);
@@ -232,7 +232,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getPaginationParams() != null ? request.getPaginationParams().generateQueryString("") : "";
         String path = String.format("/portfolios/%s/users", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListPortfolioUsersResponse resp = mapper.readValue(response, ListPortfolioUsersResponse.class);
             resp.setRequest(request);
@@ -249,7 +249,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
             return null;
         }
 
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             return mapper.readValue(response, ListPortfoliosResponse.class);
         } catch (IOException e) {
@@ -261,7 +261,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s", request.getPortfolioId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetPortfolioByIdResponse resp = mapper.readValue(response, GetPortfolioByIdResponse.class);
             resp.setRequest(request);
@@ -275,7 +275,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/credit", request.getPortfolioId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetPortfolioCreditInformationResponse resp = mapper.readValue(response, GetPortfolioCreditInformationResponse.class);
             resp.setRequest(request);
@@ -290,7 +290,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/activities", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListActivitiesResponse resp = mapper.readValue(response, ListActivitiesResponse.class);
             resp.setRequest(request);
@@ -304,7 +304,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetActivityByActivityIdResponse resp = mapper.readValue(response, GetActivityByActivityIdResponse.class);
             resp.setRequest(request);
@@ -319,7 +319,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/address_book", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetPortfolioAddressBookResponse resp = mapper.readValue(response, GetPortfolioAddressBookResponse.class);
             resp.setRequest(request);
@@ -333,7 +333,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/address_book", request.getPortfolioId());
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CreateAddressBookEntryResponse resp = mapper.readValue(response, CreateAddressBookEntryResponse.class);
             resp.setRequest(request);
@@ -348,7 +348,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/balances", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListPortfolioBalancesResponse resp = mapper.readValue(response, ListPortfolioBalancesResponse.class);
             resp.setRequest(request);
@@ -362,7 +362,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetWalletBalanceResponse resp = mapper.readValue(response, GetWalletBalanceResponse.class);
             resp.setRequest(request);
@@ -376,7 +376,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public ListWeb3WalletBalancesResponse listWeb3WalletBalances(ListWeb3WalletBalancesRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/wallets/%s/web3_balances", request.getPortfolioId(), request.getWalletId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListWeb3WalletBalancesResponse resp = mapper.readValue(response, ListWeb3WalletBalancesResponse.class);
             resp.setRequest(request);
@@ -390,7 +390,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/commission", request.getPortfolioId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetPortfolioCommissionResponse resp = mapper.readValue(response, GetPortfolioCommissionResponse.class);
             resp.setRequest(request);
@@ -405,7 +405,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/open_orders", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListOpenOrdersResponse resp = mapper.readValue(response, ListOpenOrdersResponse.class);
             resp.setRequest(request);
@@ -419,7 +419,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/order", request.getPortfolioId());
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CreateOrderResponse resp = mapper.readValue(response, CreateOrderResponse.class);
             resp.setRequest(request);
@@ -433,7 +433,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/order_preview", request.getPortfolioId());
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetOrderPreviewResponse resp = mapper.readValue(response, GetOrderPreviewResponse.class);
             resp.setRequest(request);
@@ -450,7 +450,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
             return null;
         }
 
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             return mapper.readValue(response, ListPortfolioOrdersResponse.class);
         } catch (IOException e) {
@@ -462,7 +462,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/orders/%s", request.getPortfolioId(), request.getOrderId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetOrderByOrderIdResponse resp = mapper.readValue(response, GetOrderByOrderIdResponse.class);
             resp.setRequest(request);
@@ -476,7 +476,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/orders/%s/cancel", request.getPortfolioId(), request.getOrderId());
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CancelOrderResponse resp = mapper.readValue(response, CancelOrderResponse.class);
             resp.setRequest(request);
@@ -491,7 +491,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/orders/%s/fills", request.getPortfolioId(), request.getOrderId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListOrderFillsResponse resp = mapper.readValue(response, ListOrderFillsResponse.class);
             resp.setRequest(request);
@@ -506,7 +506,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/products", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListPortfolioProductsResponse resp = mapper.readValue(response, ListPortfolioProductsResponse.class);
             resp.setRequest(request);
@@ -520,7 +520,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetTransactionByTransactionIdResponse getTransactionByTransactionId(GetTransactionByTransactionIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetTransactionByTransactionIdResponse resp = mapper.readValue(response, GetTransactionByTransactionIdResponse.class);
             resp.setRequest(request);
@@ -534,7 +534,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId());
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CreateConversionResponse resp = mapper.readValue(response, CreateConversionResponse.class);
             resp.setRequest(request);
@@ -549,7 +549,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/transactions", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListPortfolioTransactionsResponse resp = mapper.readValue(response, ListPortfolioTransactionsResponse.class);
             resp.setRequest(request);
@@ -564,7 +564,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(), request.getWalletId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListWalletTransactionsResponse resp = mapper.readValue(response, ListWalletTransactionsResponse.class);
             resp.setRequest(request);
@@ -578,7 +578,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CreateTransferResponse createTransfer(CreateTransferRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId());
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CreateTransferResponse resp = mapper.readValue(response, CreateTransferResponse.class);
             resp.setRequest(request);
@@ -592,7 +592,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId());
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CreateWithdrawalResponse resp = mapper.readValue(response, CreateWithdrawalResponse.class);
             resp.setRequest(request);
@@ -607,7 +607,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         String queryParams = request.getQueryString();
         String path = String.format("/portfolios/%s/wallets", request.getPortfolioId());
         String response = get(path, queryParams);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             ListWalletsResponse resp = mapper.readValue(response, ListWalletsResponse.class);
             resp.setRequest(request);
@@ -621,7 +621,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/wallets", request.getPortfolioId());
         String response = post(path, request);
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             CreateWalletResponse resp = mapper.readValue(response, CreateWalletResponse.class);
             resp.setRequest(request);
@@ -635,7 +635,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetWalletByIdResponse getWalletById(GetWalletByIdRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetWalletByIdResponse resp = mapper.readValue(response, GetWalletByIdResponse.class);
             resp.setRequest(request);
@@ -649,7 +649,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
         String path = String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(), request.getWalletId());
         String response = get(path, "");
-        ObjectMapper mapper = new ObjectMapper();
+
         try {
             GetWalletDepositInstructionsResponse resp = mapper.readValue(response, GetWalletDepositInstructionsResponse.class);
             resp.setRequest(request);
@@ -660,7 +660,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     private String get(String path, String query) {
-        HttpRequest.Builder builder = generateHttpRequest(path, query, HTTP_METHOD_GET);
+        HttpRequest.Builder builder = generateHttpRequest(path, query, HTTP_METHOD_GET, "");
 
         HttpRequest httpRequest = builder
                 .GET()
@@ -670,9 +670,13 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     private String post(String path, Object request) throws CoinbasePrimeClientException, CoinbasePrimeException {
-        HttpRequest.Builder builder = generateHttpRequest(path, "", HTTP_METHOD_POST);
+        HttpRequest.Builder builder = generateHttpRequest(
+                path,
+                "",
+                HTTP_METHOD_POST,
+                request != null ? toJsonString(request) : "");
 
-        ObjectMapper mapper = new ObjectMapper();
+
         HttpRequest httpRequest;
         try {
             httpRequest = builder
@@ -685,13 +689,21 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         return sendRequest(httpRequest);
     }
 
-    private HttpRequest.Builder generateHttpRequest(String path, String query, String method) {
+    private String toJsonString(Object obj) {
+        try {
+            return mapper.writeValueAsString(obj);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to serialize object to JSON", e);
+        }
+    }
+
+    private HttpRequest.Builder generateHttpRequest(String path, String query, String method, String body) {
         String callUrl = baseUrl + path + query;
         URI uri = URI.create(callUrl);
         long unixTime = Instant.now().getEpochSecond();
         String signature;
         try {
-            signature = credentials.Sign(unixTime, method, uri.getPath(), "");
+            signature = credentials.Sign(unixTime, method, uri.getPath(), body);
         } catch (Exception e) {
             throw new CoinbasePrimeClientException(e);
         }
@@ -709,7 +721,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (resp.statusCode() != 200) {
                 try {
-                    ObjectMapper mapper = new ObjectMapper();
+
                     CoinbasePrimeErrorMessage errorMsg = mapper.readValue(resp.body(), CoinbasePrimeErrorMessage.class);
                     throw new CoinbasePrimeException(resp.statusCode(), errorMsg.getMessage());
                 } catch (IOException e) {
