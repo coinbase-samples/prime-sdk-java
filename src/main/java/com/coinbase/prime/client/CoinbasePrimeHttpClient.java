@@ -691,7 +691,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     private HttpRequest.Builder generateHttpRequest(String path, String query) {
         String callUrl = baseUrl + path + query;
         URI uri = URI.create(callUrl);
-        long unixTime = Instant.now().toEpochMilli() / 1000L;
+        long unixTime = Instant.EPOCH.getEpochSecond();
         String signature;
         try {
             signature = credentials.Sign(unixTime, "GET", uri.getPath(), "");
