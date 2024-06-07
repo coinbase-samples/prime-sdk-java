@@ -18,6 +18,7 @@ package com.coinbase.prime.client;
 
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.errors.CoinbasePrimeClientException;
+import com.coinbase.prime.errors.CoinbasePrimeErrorMessage;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdResponse;
@@ -707,7 +708,13 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         try {
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (resp.statusCode() != 200) {
-                throw new CoinbasePrimeException(resp.statusCode(), resp.body());
+                try {
+                    ObjectMapper mapper = new ObjectMapper();
+                    CoinbasePrimeErrorMessage errorMsg = mapper.readValue(resp.body(), CoinbasePrimeErrorMessage.class);
+                    throw new CoinbasePrimeException(resp.statusCode(), errorMsg.getMessage());
+                } catch (IOException e) {
+                    throw new CoinbasePrimeException(resp.statusCode(), resp.body());
+                }
             }
             return resp.body();
         } catch (IOException | InterruptedException e) {

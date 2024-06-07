@@ -18,6 +18,7 @@ package com.coinbase.examples;
 
 import com.coinbase.prime.client.CoinbasePrimeHttpClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
+import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
 import com.coinbase.prime.model.transactions.ListPortfolioTransactionsRequest;
@@ -65,6 +66,32 @@ public class Main {
                             .types(new TransactionType[]{TransactionType.CLAIM_REWARDS})
                             .build());
             System.out.println(mapper.writeValueAsString(listTransactionsResponse));
+
+            CreateOrderResponse orderResponse = client.createOrder(
+                    new CreateOrderRequest.Builder()
+                            .portfolioId(portfolioResponse.getPortfolio().getId())
+                            .productId("ADA-USD")
+                            .side(OrderSide.BUY)
+                            .type(OrderType.MARKET)
+                            .baseQuantity("0.001")
+                            .build());
+            System.out.println(mapper.writeValueAsString(orderResponse));
+
+            GetOrderByOrderIdResponse getOrderResponse = client.getOrderByOrderId(
+                    new GetOrderByOrderIdRequest.Builder()
+                            .portfolioId(portfolioResponse.getPortfolio().getId())
+                            .orderId(orderResponse.getOrderId())
+                            .build());
+
+            while (getOrderResponse.getOrder().getStatus() == OrderStatus.OPEN
+                    || getOrderResponse.getOrder().getStatus() == OrderStatus.PENDING) {
+                Thread.sleep(1000);
+                getOrderResponse = client.getOrderByOrderId(
+                        new GetOrderByOrderIdRequest.Builder()
+                                .portfolioId(portfolioResponse.getPortfolio().getId())
+                                .orderId(orderResponse.getOrderId())
+                                .build());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
