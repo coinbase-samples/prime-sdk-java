@@ -16,15 +16,20 @@
 
 package com.coinbase.prime.credentials;
 
-import com.coinbase.prime.errors.CoinbasePrimeClientException;
+import com.coinbase.core.credentials.CoinbaseCredentials;
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-public class CoinbasePrimeCredentials {
+import static com.coinbase.core.utils.Utils.toJsonString;
+
+public class CoinbasePrimeCredentials extends CoinbaseCredentials {
     private static final String HMAC_SHA256 = "HmacSHA256";
     private String accessKey;
     private String passphrase;
@@ -32,17 +37,23 @@ public class CoinbasePrimeCredentials {
     private String portfolioId;
     private String entityId;
     private String svcAccountId;
-    private static final Mac macInstance;
-
-    static {
-        try {
-            macInstance = Mac.getInstance(HMAC_SHA256);
-        } catch (Exception e) {
-            throw new CoinbasePrimeClientException("Failed to initialize HMAC instance", e);
-        }
-    }
 
     public CoinbasePrimeCredentials() {}
+
+    public CoinbasePrimeCredentials(String credentialsJson) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            CoinbasePrimeCredentials credentials = mapper.readValue(credentialsJson, CoinbasePrimeCredentials.class);
+            this.accessKey = credentials.getAccessKey();
+            this.passphrase = credentials.getPassphrase();
+            this.signingKey = credentials.getSigningKey();
+            this.portfolioId = credentials.getPortfolioId();
+            this.entityId = credentials.getEntityId();
+            this.svcAccountId = credentials.getSvcAccountId();
+        } catch (Exception e) {
+            throw new CoinbasePrimeException("Failed to parse credentials", e);
+        }
+    }
 
     public CoinbasePrimeCredentials(Builder builder) {
         this.accessKey = builder.accessKey;
@@ -101,19 +112,28 @@ public class CoinbasePrimeCredentials {
         this.svcAccountId = svcAccountId;
     }
 
-    public String Sign(long timestamp, String method, String path, String body) throws CoinbasePrimeException {
+    public String Sign() throws CoinbasePrimeException {
         try {
             String message = timestamp + method + path + body;
 
-            synchronized (macInstance) {
-                SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), HMAC_SHA256);
-                macInstance.init(secretKeySpec);
-                byte[] signature = macInstance.doFinal(message.getBytes(StandardCharsets.UTF_8));
-                return Base64.getEncoder().encodeToString(signature);
-            }
+            Mac macInstance = Mac.getInstance(HMAC_SHA256);
+            SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), HMAC_SHA256);
+            macInstance.init(secretKeySpec);
+            byte[] signature = macInstance.doFinal(message.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(signature);
+        } catch (NoSuchAlgorithmException e) {
+            throw new CoinbaseClientException(String.format("Algorithm %s is invalid", HMAC_SHA256), e);
         } catch (Exception e) {
             throw new CoinbasePrimeException("Failed to sign request", e);
         }
+    }
+
+    @Override
+    public String generateSigningMessage() {
+        return "";
+    }
+    public String generateSigningMessage(long timestamp, String method, String path, Object requestObject) {
+        return String.format("%s%s%s%s", timestamp, method, path, toJsonString(requestObject));
     }
 
     public static class Builder {

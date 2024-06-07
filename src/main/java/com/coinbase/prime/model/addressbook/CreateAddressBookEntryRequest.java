@@ -19,7 +19,7 @@ package com.coinbase.prime.model.addressbook;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateAddressBookEntryRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     private String address;
     @JsonProperty("currency_symbol")
@@ -80,15 +80,14 @@ public class CreateAddressBookEntryRequest {
     }
 
     public static class Builder {
-        private String portfolioId;
+        private final String portfolioId;
         private String address;
         private String currencySymbol;
         private String name;
         private String accountIdentifier;
 
-        public Builder portfolioId(String portfolioId) {
+        public Builder(String portfolioId) {
             this.portfolioId = portfolioId;
-            return this;
         }
 
         public Builder address(String address) {

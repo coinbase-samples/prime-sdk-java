@@ -16,10 +16,11 @@
 
 package com.coinbase.prime.model.activities;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetActivityByActivityIdRequest {
-    @JsonProperty("portfolio_id")
+public class GetActivityByActivityIdRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     @JsonProperty("activity_id")
     private String activityId;
@@ -30,6 +31,11 @@ public class GetActivityByActivityIdRequest {
     public GetActivityByActivityIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.activityId = builder.activityId;
+    }
+
+    @Override
+    protected String getQueryString() {
+        return "";
     }
 
     public String getPortfolioId() {
@@ -49,12 +55,11 @@ public class GetActivityByActivityIdRequest {
     }
 
     public static class Builder {
-        private String portfolioId;
+        private final String portfolioId;
         private String activityId;
 
-        public Builder portfolioId(String portfolioId) {
+        public Builder(String portfolioId) {
             this.portfolioId = portfolioId;
-            return this;
         }
 
         public Builder activityId(String activityId) {

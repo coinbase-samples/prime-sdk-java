@@ -16,14 +16,15 @@
 
 package com.coinbase.prime.model.activities;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListActivitiesRequest {
-    @JsonProperty("portfolio_id")
+public class ListActivitiesRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     private String[] symbols;
     private String[] categories;
@@ -47,6 +48,7 @@ public class ListActivitiesRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
     public String getQueryString() {
         String queryString = this.paginationParams != null ? this.paginationParams.generateQueryString("") : "";
         queryString = appendAllQueryParams(this.symbols, "symbols", queryString);
@@ -114,7 +116,7 @@ public class ListActivitiesRequest {
     }
 
     public static class Builder {
-        private String portfolioId;
+        private final String portfolioId;
         private String[] symbols;
         private String[] categories;
         private String[] statuses;
@@ -122,12 +124,8 @@ public class ListActivitiesRequest {
         private String endTime;
         private PaginationParams paginationParams;
 
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
+        public Builder(String portfolioId) {
             this.portfolioId = portfolioId;
-            return this;
         }
 
         public Builder symbols(String[] symbols) {

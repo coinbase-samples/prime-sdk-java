@@ -16,12 +16,14 @@
 
 package com.coinbase.prime.model.addressbook;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class GetPortfolioAddressBookRequest {
+public class GetPortfolioAddressBookRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     @JsonProperty("currency_symbol")
     private String currencySymbol;
@@ -38,6 +40,7 @@ public class GetPortfolioAddressBookRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
     public String getQueryString() {
         String queryParams = "";
         if (this.getCurrencySymbol() != null) {
@@ -85,14 +88,13 @@ public class GetPortfolioAddressBookRequest {
     }
 
     public static class Builder {
-        private String portfolioId;
+        private final String portfolioId;
         private String currencySymbol;
         private String search;
         private PaginationParams paginationParams;
 
-        public Builder portfolioId(String portfolioId) {
+        public Builder(String portfolioId) {
             this.portfolioId = portfolioId;
-            return this;
         }
 
         public Builder currencySymbol(String currencySymbol) {

@@ -14,30 +14,18 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.errors;
+package com.coinbase.core.errors;
 
-import com.coinbase.core.errors.CoinbaseException;
-
-public class CoinbasePrimeException extends CoinbaseException {
-    private final int statusCode;
-
-    public CoinbasePrimeException(int statusCode, String message) {
+public class CoinbaseClientException extends CoinbaseException {
+    public CoinbaseClientException(String message) {
         super(message);
-        this.statusCode = statusCode;
     }
 
-    public CoinbasePrimeException(String message, Throwable cause) {
+    public CoinbaseClientException(String message, Throwable cause) {
         super(message, cause);
-        this.statusCode = 500;
     }
 
-    public CoinbasePrimeException(int statusCode, String message, Throwable cause) {
-        super(message, cause);
-        this.statusCode = statusCode;
-    }
-
-    public CoinbasePrimeException(Throwable cause) {
+    public CoinbaseClientException(Throwable cause) {
         super(cause);
-        this.statusCode = 500;
     }
 }

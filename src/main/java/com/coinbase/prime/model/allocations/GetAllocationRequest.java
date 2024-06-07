@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.allocations;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetAllocationRequest {
+public class GetAllocationRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("allocation_id")
@@ -30,6 +31,11 @@ public class GetAllocationRequest {
     public GetAllocationRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.allocationId = builder.allocationId;
+    }
+
+    @Override
+    protected String getQueryString() {
+        return "";
     }
 
     public String getPortfolioId() {

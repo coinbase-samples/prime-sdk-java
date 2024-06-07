@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.allocations;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.orders.OrderSide;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.coinbase.prime.utils.Utils;
@@ -26,7 +27,7 @@ import java.util.Date;
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class GetPortfolioAllocationsRequest {
+public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("product_ids")
@@ -51,6 +52,7 @@ public class GetPortfolioAllocationsRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
     public String getQueryString() {
         String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
         queryString = appendAllQueryParams(this.getProductIds(), "product_ids", queryString);
