@@ -64,7 +64,9 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     private static final String CB_ACCESS_PHRASE_HEADER = "X-CB-ACCESS-PASSPHRASE";
     private static final String CB_ACCESS_SIGNATURE_HEADER = "X-CB-ACCESS-SIGNATURE";
     private static final String CB_ACCESS_TIMESTAMP_HEADER = "X-CB-ACCESS-TIMESTAMP";
-    private static final String CB_PRIME_BASE_URL = "https://api.prime.coinbase.com";
+    private static final String HTTP_METHOD_GET = "GET";
+    private static final String HTTP_METHOD_POST = "POST";
+    private static final String CB_PRIME_BASE_URL = "https://api.prime.coinbase.com/v1";
     private final CoinbasePrimeCredentials credentials;
     private final String baseUrl;
     private final HttpClient client;
@@ -657,10 +659,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     private String get(String path, String query) {
-        HttpRequest.Builder builder = generateHttpRequest(path, query);
-        if (builder == null) {
-            return null;
-        }
+        HttpRequest.Builder builder = generateHttpRequest(path, query, HTTP_METHOD_GET);
 
         HttpRequest httpRequest = builder
                 .GET()
@@ -670,10 +669,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     }
 
     private String post(String path, Object request) throws CoinbasePrimeClientException, CoinbasePrimeException {
-        HttpRequest.Builder builder = generateHttpRequest(path, "");
-        if (builder == null) {
-            throw new CoinbasePrimeClientException("Failed to generate HttpRequest");
-        }
+        HttpRequest.Builder builder = generateHttpRequest(path, "", HTTP_METHOD_POST);
 
         ObjectMapper mapper = new ObjectMapper();
         HttpRequest httpRequest;
@@ -688,13 +684,13 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
         return sendRequest(httpRequest);
     }
 
-    private HttpRequest.Builder generateHttpRequest(String path, String query) {
+    private HttpRequest.Builder generateHttpRequest(String path, String query, String method) {
         String callUrl = baseUrl + path + query;
         URI uri = URI.create(callUrl);
-        long unixTime = Instant.EPOCH.getEpochSecond();
+        long unixTime = Instant.now().getEpochSecond();
         String signature;
         try {
-            signature = credentials.Sign(unixTime, "GET", uri.getPath(), "");
+            signature = credentials.Sign(unixTime, method, uri.getPath(), "");
         } catch (Exception e) {
             throw new CoinbasePrimeClientException(e);
         }

@@ -104,10 +104,10 @@ public class CoinbasePrimeCredentials {
     public String Sign(long timestamp, String method, String path, String body) throws CoinbasePrimeException {
         try {
             String message = timestamp + method + path + body;
-            byte[] hmacKey = Base64.getDecoder().decode(signingKey);
 
             synchronized (macInstance) {
-                macInstance.init(new SecretKeySpec(hmacKey, HMAC_SHA256));
+                SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), HMAC_SHA256);
+                macInstance.init(secretKeySpec);
                 byte[] signature = macInstance.doFinal(message.getBytes(StandardCharsets.UTF_8));
                 return Base64.getEncoder().encodeToString(signature);
             }
