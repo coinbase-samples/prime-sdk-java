@@ -1,6 +1,5 @@
 /*
- *
- *  Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -13,11 +12,11 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 package com.coinbase.prime.credentials;
 
+import com.coinbase.prime.errors.CoinbasePrimeClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 import javax.crypto.Mac;
@@ -26,12 +25,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class CoinbasePrimeCredentials {
+    private static final String HMAC_SHA256 = "HmacSHA256";
     private String accessKey;
     private String passphrase;
     private String signingKey;
     private String portfolioId;
     private String entityId;
     private String svcAccountId;
+    private static final Mac macInstance;
+
+    static {
+        try {
+            macInstance = Mac.getInstance(HMAC_SHA256);
+        } catch (Exception e) {
+            throw new CoinbasePrimeClientException("Failed to initialize HMAC instance", e);
+        }
+    }
 
     public CoinbasePrimeCredentials() {}
 
@@ -94,11 +103,14 @@ public class CoinbasePrimeCredentials {
 
     public String Sign(long timestamp, String method, String path, String body) throws CoinbasePrimeException {
         try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
-            Mac mac = Mac.getInstance("HmacSHA256");
-            mac.init(secretKeySpec);
-            byte[] hash = mac.doFinal((timestamp + method + path + body).getBytes(StandardCharsets.UTF_8));
-            return Base64.getEncoder().encodeToString(hash);
+            String message = timestamp + method + path + body;
+            byte[] hmacKey = Base64.getDecoder().decode(signingKey);
+
+            synchronized (macInstance) {
+                macInstance.init(new SecretKeySpec(hmacKey, HMAC_SHA256));
+                byte[] signature = macInstance.doFinal(message.getBytes(StandardCharsets.UTF_8));
+                return Base64.getEncoder().encodeToString(signature);
+            }
         } catch (Exception e) {
             throw new CoinbasePrimeException("Failed to sign request", e);
         }

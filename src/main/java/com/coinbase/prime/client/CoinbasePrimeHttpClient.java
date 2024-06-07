@@ -1,6 +1,5 @@
 /*
- *
- *  Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -13,7 +12,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 package com.coinbase.prime.client;
@@ -53,6 +51,7 @@ import com.coinbase.prime.model.users.ListUsersResponse;
 import com.coinbase.prime.model.wallets.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.crypto.Mac;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -61,14 +60,14 @@ import java.net.http.HttpResponse;
 import java.time.Instant;
 
 public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
+    private static final String CB_ACCESS_KEY_HEADER = "X-CB-ACCESS-KEY";
+    private static final String CB_ACCESS_PHRASE_HEADER = "X-CB-ACCESS-PASSPHRASE";
+    private static final String CB_ACCESS_SIGNATURE_HEADER = "X-CB-ACCESS-SIGNATURE";
+    private static final String CB_ACCESS_TIMESTAMP_HEADER = "X-CB-ACCESS-TIMESTAMP";
+    private static final String CB_PRIME_BASE_URL = "https://api.prime.coinbase.com";
     private final CoinbasePrimeCredentials credentials;
     private final String baseUrl;
-    HttpClient client;
-
-    public static final String CB_ACCESS_KEY_HEADER = "X-CB-ACCESS-KEY";
-    public static final String CB_ACCESS_PHRASE_HEADER = "X-CB-ACCESS-PASSPHRASE";
-    public static final String CB_ACCESS_SIGNATURE_HEADER = "X-CB-ACCESS-SIGNATURE";
-    public static final String CB_ACCESS_TIMESTAMP_HEADER = "X-CB-ACCESS-TIMESTAMP";
+    private final HttpClient client;
 
     private CoinbasePrimeHttpClient(Builder builder) {
         this.credentials = builder.credentials;
@@ -78,7 +77,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     public CoinbasePrimeHttpClient(CoinbasePrimeCredentials credentials) {
         this.credentials = credentials;
-        this.baseUrl = "https://api.prime.coinbase.com";
+        this.baseUrl = CB_PRIME_BASE_URL;
         this.client = HttpClient.newHttpClient();
     }
 
@@ -212,7 +211,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     @Override
     public ListUsersResponse listUsers(ListUsersRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
-        String queryParams = request.getPaginationParams() != null ? request.getPaginationParams().generateQueryString(""): "";
+        String queryParams = request.getPaginationParams() != null ? request.getPaginationParams().generateQueryString("") : "";
         String path = String.format("/entities/%s/users", request.getEntityId());
         String response = get(path, queryParams);
         ObjectMapper mapper = new ObjectMapper();
@@ -227,7 +226,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
 
     @Override
     public ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbasePrimeClientException, CoinbasePrimeException {
-        String queryParams = request.getPaginationParams() != null ? request.getPaginationParams().generateQueryString(""): "";
+        String queryParams = request.getPaginationParams() != null ? request.getPaginationParams().generateQueryString("") : "";
         String path = String.format("/portfolios/%s/users", request.getPortfolioId());
         String response = get(path, queryParams);
         ObjectMapper mapper = new ObjectMapper();
@@ -723,7 +722,7 @@ public class CoinbasePrimeHttpClient implements CoinbasePrimeApi {
     public static class Builder {
         private final CoinbasePrimeCredentials credentials;
         private HttpClient client = HttpClient.newHttpClient();
-        private String baseUrl = "https://api.prime.coinbase.com/v1";
+        private String baseUrl = CB_PRIME_BASE_URL;
 
         public Builder(CoinbasePrimeCredentials credentials) {
             this.credentials = credentials;
