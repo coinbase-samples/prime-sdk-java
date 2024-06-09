@@ -16,10 +16,11 @@
 
 package com.coinbase.prime.model.users;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListPortfolioUsersRequest {
+public class ListPortfolioUsersRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     private PaginationParams paginationParams;
@@ -30,6 +31,20 @@ public class ListPortfolioUsersRequest {
     public ListPortfolioUsersRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.paginationParams = builder.paginationParams;
+    }
+
+    @Override
+    public String getQueryString() {
+        if (this.getPaginationParams() == null) {
+            return "";
+        }
+
+        return this.getPaginationParams().generateQueryString("");
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/users", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

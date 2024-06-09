@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.wallets;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetWalletDepositInstructionsRequest {
+public class GetWalletDepositInstructionsRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
 

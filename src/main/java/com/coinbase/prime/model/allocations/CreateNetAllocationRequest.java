@@ -19,7 +19,7 @@ package com.coinbase.prime.model.allocations;
 import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateAllocationRequest extends CoinbasePostRequest {
+public class CreateNetAllocationRequest extends CoinbasePostRequest {
     @JsonProperty("allocation_id")
     private String allocationId;
     @JsonProperty("source_portfolio_id")
@@ -37,10 +37,10 @@ public class CreateAllocationRequest extends CoinbasePostRequest {
     @JsonProperty("netting_id")
     private String nettingId;
 
-    public CreateAllocationRequest() {
+    public CreateNetAllocationRequest() {
     }
 
-    public CreateAllocationRequest(Builder builder) {
+    public CreateNetAllocationRequest(CreateNetAllocationRequest.Builder builder) {
         this.allocationId = builder.allocationId;
         this.sourcePortfolioId = builder.sourcePortfolioId;
         this.productId = builder.productId;
@@ -51,10 +51,10 @@ public class CreateAllocationRequest extends CoinbasePostRequest {
         this.nettingId = builder.nettingId;
     }
 
-    @Override
-    public String getPath() {
-        return "/allocations";
-    }
+   @Override
+   public String getPath() {
+       return "/allocations/net";
+   }
 
     public String getAllocationId() {
         return allocationId;
@@ -173,8 +173,8 @@ public class CreateAllocationRequest extends CoinbasePostRequest {
             return this;
         }
 
-        public CreateAllocationRequest build() {
-            return new CreateAllocationRequest(this);
+        public CreateNetAllocationRequest build() {
+            return new CreateNetAllocationRequest(this);
         }
     }
 }

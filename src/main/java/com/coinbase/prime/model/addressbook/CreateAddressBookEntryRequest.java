@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.addressbook;
 
+import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateAddressBookEntryRequest {
+public class CreateAddressBookEntryRequest extends CoinbasePostRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     private String address;
@@ -37,6 +38,11 @@ public class CreateAddressBookEntryRequest {
         this.currencySymbol = builder.currencySymbol;
         this.name = builder.name;
         this.accountIdentifier = builder.accountIdentifier;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/address_book", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

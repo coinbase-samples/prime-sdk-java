@@ -16,14 +16,14 @@
 
 package com.coinbase.prime.model.invoice;
 
-import com.coinbase.prime.utils.Utils;
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListInvoicesRequest {
-    @JsonProperty("entity_id")
+public class ListInvoicesRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "entity_id")
     private String entityId;
     private InvoiceState[] states;
     @JsonProperty("billing_month")
@@ -45,7 +45,7 @@ public class ListInvoicesRequest {
         this.limit = builder.limit;
     }
 
-
+    @Override
     public String getQueryString() {
         String queryString = appendAllQueryParams(this.getStates(), "states", "");
         queryString = appendQueryParams(queryString, "billing_month", this.getBillingMonth().toString());
@@ -53,6 +53,11 @@ public class ListInvoicesRequest {
         queryString = appendQueryParams(queryString, "cursor", this.getCursor().toString());
         queryString = appendQueryParams(queryString, "limit", this.getLimit().toString());
         return queryString;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/entities/%s/invoices", this.getEntityId());
     }
 
     public String getEntityId() {
@@ -104,19 +109,15 @@ public class ListInvoicesRequest {
     }
 
     public static class Builder {
-        private String entityId;
+        private final String entityId;
         private InvoiceState[] states;
         private Integer billingMonth;
         private Integer billingYear;
         private Integer cursor;
         private Integer limit;
 
-        public Builder() {
-        }
-
-        public Builder entityId(String entityId) {
+        public Builder(String entityId) {
             this.entityId = entityId;
-            return this;
         }
 
         public Builder states(InvoiceState[] states) {

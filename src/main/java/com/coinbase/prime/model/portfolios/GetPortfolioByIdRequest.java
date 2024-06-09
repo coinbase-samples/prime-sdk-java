@@ -16,7 +16,11 @@
 
 package com.coinbase.prime.model.portfolios;
 
-public class GetPortfolioByIdRequest {
+import com.coinbase.core.http.CoinbaseGetRequest;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class GetPortfolioByIdRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
 
     public GetPortfolioByIdRequest() {
@@ -28,6 +32,16 @@ public class GetPortfolioByIdRequest {
 
     public GetPortfolioByIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

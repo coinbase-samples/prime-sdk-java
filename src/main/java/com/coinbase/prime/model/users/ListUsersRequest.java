@@ -16,11 +16,12 @@
 
 package com.coinbase.prime.model.users;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListUsersRequest {
-    @JsonProperty("entity_id")
+public class ListUsersRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "entity_id")
     private String entityId;
     private PaginationParams paginationParams;
 
@@ -30,6 +31,20 @@ public class ListUsersRequest {
     public ListUsersRequest(Builder builder) {
         this.entityId = builder.entityId;
         this.paginationParams = builder.pagination;
+    }
+
+    @Override
+    public String getQueryString() {
+        if (this.getPaginationParams() == null) {
+            return "";
+        }
+
+        return this.getPaginationParams().generateQueryString("");
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/entities/%s/users", this.getEntityId());
     }
 
     public String getEntityId() {
@@ -49,12 +64,11 @@ public class ListUsersRequest {
     }
 
     public static class Builder {
-        private String entityId;
+        private final String entityId;
         private PaginationParams pagination;
 
-        public Builder entityId(String entityId) {
+        public Builder(String entityId) {
             this.entityId = entityId;
-            return this;
         }
 
         public Builder pagination(PaginationParams pagination) {

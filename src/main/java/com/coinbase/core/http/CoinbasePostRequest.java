@@ -16,6 +16,5 @@
 
 package com.coinbase.core.http;
 
-public abstract class CoinbaseGetRequest extends CoinbaseHttpRequest {
-    protected abstract String getQueryString();
+public abstract class CoinbasePostRequest extends CoinbaseHttpRequest {
 }

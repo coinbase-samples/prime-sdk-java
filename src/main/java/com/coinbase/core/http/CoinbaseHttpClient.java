@@ -39,11 +39,18 @@ public abstract class CoinbaseHttpClient {
     private String baseUrl;
     private HttpClient client;
 
-    protected Object doGet(CoinbaseGetRequest request, String path, Class<?> responseClass) {
-        String queryParams = request.getQueryString();
-        String response = get(path, queryParams);
+    protected <T> T doGet(CoinbaseGetRequest request, Class<T> responseClass) {
+        String response = get(request.getPath(), request.getQueryString());
 
-        handleResponse(response);
+        try {
+            return mapper.readValue(response, responseClass);
+        } catch (IOException e) {
+            throw new CoinbaseClientException(e);
+        }
+    }
+
+    protected <T> T doPost(CoinbasePostRequest request, Class<T> responseClass) {
+        String response = post(request.getPath(), request);
 
         try {
             return mapper.readValue(response, responseClass);
@@ -97,17 +104,17 @@ public abstract class CoinbaseHttpClient {
         return attachHeaders(HttpRequest.newBuilder().uri(uri), signature, unixTime);
     }
 
+    protected abstract String handleResponse(int statusCode, String response) throws CoinbasePrimeException;
+
     protected abstract HttpRequest.Builder attachHeaders(HttpRequest.Builder builder, String signature, long timestamp);
 
     private String sendRequest(HttpRequest request) throws CoinbaseException {
         try {
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            return handleResponse(resp.body());
+            return handleResponse(resp.statusCode(), resp.body());
         } catch (IOException | InterruptedException e) {
             throw new CoinbaseClientException("Failed to send request", e);
         }
     }
-
-    protected abstract String handleResponse(String responseBody) throws CoinbaseException;
 }

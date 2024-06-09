@@ -16,12 +16,13 @@
 
 package com.coinbase.prime.model.paymentmethods;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetEntityPaymentMethodRequest {
-    @JsonProperty("entity_id")
+public class GetEntityPaymentMethodRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "entity_id")
     private String entityId;
-    @JsonProperty("payment_method_id")
+    @JsonProperty(required = true, value = "payment_method_id")
     private String paymentMethodId;
 
     public GetEntityPaymentMethodRequest() {
@@ -30,6 +31,16 @@ public class GetEntityPaymentMethodRequest {
     public GetEntityPaymentMethodRequest(Builder builder) {
         this.entityId = builder.entityId;
         this.paymentMethodId = builder.paymentMethodId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/entities/%s/payment-methods/%s", this.getEntityId(), this.getPaymentMethodId());
     }
 
     public String getEntityId() {

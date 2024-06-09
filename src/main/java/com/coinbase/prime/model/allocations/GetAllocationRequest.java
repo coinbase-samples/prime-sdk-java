@@ -20,9 +20,9 @@ import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetAllocationRequest extends CoinbaseGetRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
-    @JsonProperty("allocation_id")
+    @JsonProperty(required = true, value = "allocation_id")
     private String allocationId;
 
     public GetAllocationRequest() {
@@ -36,6 +36,11 @@ public class GetAllocationRequest extends CoinbaseGetRequest {
     @Override
     protected String getQueryString() {
         return "";
+    }
+
+    @Override
+    protected String getPath() {
+        return String.format("/portfolios/%s/allocations/%s", this.getPortfolioId(), this.getAllocationId());
     }
 
     public String getPortfolioId() {
@@ -55,20 +60,12 @@ public class GetAllocationRequest extends CoinbaseGetRequest {
     }
 
     public static class Builder {
-        private String portfolioId;
-        private String allocationId;
+        private final String portfolioId;
+        private final String allocationId;
 
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
+        public Builder(String portfolioId, String allocationId) {
             this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder allocationId(String allocationId) {
             this.allocationId = allocationId;
-            return this;
         }
 
         public GetAllocationRequest build() {

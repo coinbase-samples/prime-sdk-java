@@ -55,6 +55,11 @@ public class GetPortfolioAddressBookRequest extends CoinbaseGetRequest {
         return queryParams;
     }
 
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/address_book", this.getPortfolioId());
+    }
+
     public String getPortfolioId() {
         return portfolioId;
     }

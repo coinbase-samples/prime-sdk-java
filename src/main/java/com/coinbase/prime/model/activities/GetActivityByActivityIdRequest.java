@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class GetActivityByActivityIdRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
-    @JsonProperty("activity_id")
+    @JsonProperty(required = true, value = "activity_id")
     private String activityId;
 
     public GetActivityByActivityIdRequest() {
@@ -36,6 +36,11 @@ public class GetActivityByActivityIdRequest extends CoinbaseGetRequest {
     @Override
     protected String getQueryString() {
         return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/activities/%s", this.getPortfolioId(), this.getActivityId());
     }
 
     public String getPortfolioId() {

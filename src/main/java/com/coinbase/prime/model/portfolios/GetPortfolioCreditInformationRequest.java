@@ -16,7 +16,9 @@
 
 package com.coinbase.prime.model.portfolios;
 
-public class GetPortfolioCreditInformationRequest {
+import com.coinbase.core.http.CoinbaseGetRequest;
+
+public class GetPortfolioCreditInformationRequest extends CoinbaseGetRequest {
     private String portfolioId;
 
     public GetPortfolioCreditInformationRequest() {
@@ -28,6 +30,16 @@ public class GetPortfolioCreditInformationRequest {
 
     public GetPortfolioCreditInformationRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/credit", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

@@ -28,7 +28,7 @@ import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
 public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     @JsonProperty("product_ids")
     private String[] productIds;
@@ -61,6 +61,11 @@ public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
         queryString = appendQueryParams(queryString, "start_date", Utils.formatDate(this.getEndDate()));
 
         return queryString;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/allocations", this.getPortfolioId());
     }
 
     public String getPortfolioId() {
@@ -119,7 +124,8 @@ public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
         private Date endDate;
         private PaginationParams paginationParams;
 
-        public Builder() {
+        public Builder(String portfolioId) {
+            this.portfolioId = portfolioId;
         }
 
         public Builder portfolioId(String portfolioId) {

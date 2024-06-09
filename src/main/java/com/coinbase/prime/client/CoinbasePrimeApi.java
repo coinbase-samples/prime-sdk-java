@@ -51,7 +51,7 @@ import com.coinbase.prime.model.wallets.*;
 public interface CoinbasePrimeApi {
     // Allocations
     CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CreateNetAllocationResponse createNetAllocation(CreateAllocationRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
     GetPortfolioAllocationsResponse getPortfolioAllocations(GetPortfolioAllocationsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
     GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
     GetAllocationsByClientNettingIdResponse getNetAllocationsByNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeException, CoinbasePrimeException;

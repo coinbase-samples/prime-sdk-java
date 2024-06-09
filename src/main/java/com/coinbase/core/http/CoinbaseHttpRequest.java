@@ -16,6 +16,6 @@
 
 package com.coinbase.core.http;
 
-public abstract class CoinbaseResponse {
-    private CoinbaseGetRequest request;
+public abstract class CoinbaseHttpRequest {
+    protected abstract String getPath();
 }

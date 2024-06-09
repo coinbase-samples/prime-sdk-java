@@ -14,8 +14,21 @@
  *  limitations under the License.
  */
 
-package com.coinbase.core.http;
+package com.coinbase.prime.model.portfolios;
 
-public abstract class CoinbaseGetRequest extends CoinbaseHttpRequest {
-    protected abstract String getQueryString();
+
+import com.coinbase.core.http.CoinbaseGetRequest;
+
+public class ListPortfoliosRequest extends CoinbaseGetRequest {
+    public ListPortfoliosRequest() {}
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return "/portfolios";
+    }
 }

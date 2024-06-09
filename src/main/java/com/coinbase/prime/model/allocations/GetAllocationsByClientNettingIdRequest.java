@@ -16,12 +16,13 @@
 
 package com.coinbase.prime.model.allocations;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetAllocationsByClientNettingIdRequest {
-    @JsonProperty("portfolio_id")
+public class GetAllocationsByClientNettingIdRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
-    @JsonProperty("netting_id")
+    @JsonProperty(required = true, value = "netting_id")
     private String nettingId;
 
     public GetAllocationsByClientNettingIdRequest() {
@@ -30,6 +31,16 @@ public class GetAllocationsByClientNettingIdRequest {
     public GetAllocationsByClientNettingIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.nettingId = builder.nettingId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/allocations/net/%s", this.getPortfolioId(), this.getNettingId());
     }
 
     public String getPortfolioId() {
@@ -49,20 +60,12 @@ public class GetAllocationsByClientNettingIdRequest {
     }
 
     public static class Builder {
-        private String portfolioId;
-        private String nettingId;
+        private final String portfolioId;
+        private final String nettingId;
 
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
+        public Builder(String portfolioId, String nettingId) {
             this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder nettingId(String nettingId) {
             this.nettingId = nettingId;
-            return this;
         }
 
         public GetAllocationsByClientNettingIdRequest build() {

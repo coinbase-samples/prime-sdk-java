@@ -16,12 +16,13 @@
 
 package com.coinbase.prime.model.balances;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListPortfolioBalancesRequest {
+public class ListPortfolioBalancesRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     private String[] symbols;
@@ -37,10 +38,16 @@ public class ListPortfolioBalancesRequest {
         this.balanceType = builder.balanceType;
     }
 
+    @Override
     public String getQueryString() {
         String queryString = appendAllQueryParams(this.getSymbols(), "symbols", "");
         queryString = appendQueryParams(queryString, "balance_type", this.getBalanceType());
         return queryString;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/balances", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

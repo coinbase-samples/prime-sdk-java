@@ -29,7 +29,7 @@ public class CreateNetAllocationResponse {
     @JsonProperty("failure_reason")
     private String failureReason;
 
-    private CreateAllocationRequest request;
+    private CreateNetAllocationRequest request;
 
     public CreateNetAllocationResponse() {
     }
@@ -83,11 +83,11 @@ public class CreateNetAllocationResponse {
         this.failureReason = failureReason;
     }
 
-    public CreateAllocationRequest getRequest() {
+    public CreateNetAllocationRequest getRequest() {
         return request;
     }
 
-    public void setRequest(CreateAllocationRequest request) {
+    public void setRequest(CreateNetAllocationRequest request) {
         this.request = request;
     }
 
@@ -98,7 +98,7 @@ public class CreateNetAllocationResponse {
         private String sellAllocationId;
         private String failureReason;
 
-        private CreateAllocationRequest request;
+        private CreateNetAllocationRequest request;
 
         public Builder() {
         }
@@ -128,7 +128,7 @@ public class CreateNetAllocationResponse {
             return this;
         }
 
-        public Builder request(CreateAllocationRequest request) {
+        public Builder request(CreateNetAllocationRequest request) {
             this.request = request;
             return this;
         }

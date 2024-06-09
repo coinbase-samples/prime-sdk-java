@@ -16,16 +16,17 @@
 
 package com.coinbase.prime.model.balances;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListWeb3WalletBalancesRequest {
-    @JsonProperty("portfolio_id")
+public class ListWeb3WalletBalancesRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
-    @JsonProperty("wallet_id")
+    @JsonProperty(required = true, value = "wallet_id")
     private String walletId;
     @JsonProperty("visibility_statuses")
     private VisibilityStatus[] visibilityStatuses;
@@ -41,11 +42,17 @@ public class ListWeb3WalletBalancesRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
     public String getQueryString() {
         String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
         queryString = appendAllQueryParams(this.getVisibilityStatuses(), "visibility_statuses", queryString);
 
         return queryString;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/wallets/%s/web3_balances", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {

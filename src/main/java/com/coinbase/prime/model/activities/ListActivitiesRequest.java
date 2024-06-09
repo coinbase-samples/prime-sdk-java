@@ -59,6 +59,11 @@ public class ListActivitiesRequest extends CoinbaseGetRequest {
         return queryString;
     }
 
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/activities", this.getPortfolioId());
+    }
+
     public String getPortfolioId() {
         return portfolioId;
     }

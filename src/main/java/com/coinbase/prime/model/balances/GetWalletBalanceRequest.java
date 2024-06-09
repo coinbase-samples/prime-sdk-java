@@ -16,12 +16,13 @@
 
 package com.coinbase.prime.model.balances;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetWalletBalanceRequest {
-    @JsonProperty("portfolio_id")
+public class GetWalletBalanceRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
-    @JsonProperty("wallet_id")
+    @JsonProperty(required = true, value = "wallet_id")
     private String walletId;
 
     public GetWalletBalanceRequest() {
@@ -30,6 +31,16 @@ public class GetWalletBalanceRequest {
     public GetWalletBalanceRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/wallets/%s/balance", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {
