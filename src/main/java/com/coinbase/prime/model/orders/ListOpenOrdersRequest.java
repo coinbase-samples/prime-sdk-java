@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.orders;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,8 +25,8 @@ import java.util.Date;
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListOpenOrdersRequest {
-    @JsonProperty("portfolio_id")
+public class ListOpenOrdersRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     @JsonProperty("product_ids")
     private String[] productIds;
@@ -52,6 +53,7 @@ public class ListOpenOrdersRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
     public String getQueryString() {
         String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
         queryString = appendAllQueryParams(this.getProductIds(), "product_ids", queryString);
@@ -60,6 +62,11 @@ public class ListOpenOrdersRequest {
         queryString = appendQueryParams(queryString, "order_side", this.getOrderSide().name());
         queryString = appendQueryParams(queryString, "end_date", this.getEndDate().toString());
         return queryString;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/open_orders", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

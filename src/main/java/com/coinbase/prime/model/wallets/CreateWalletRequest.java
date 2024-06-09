@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.wallets;
 
+import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateWalletRequest {
+public class CreateWalletRequest extends CoinbasePostRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
@@ -30,6 +31,18 @@ public class CreateWalletRequest {
     private WalletType type;
 
     public CreateWalletRequest() {}
+
+    public CreateWalletRequest(Builder builder) {
+        this.portfolioId = builder.portfolioId;
+        this.name = builder.name;
+        this.symbol = builder.symbol;
+        this.type = builder.type;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/wallets", this.getPortfolioId());
+    }
 
     public String getPortfolioId() {
         return portfolioId;
@@ -61,5 +74,38 @@ public class CreateWalletRequest {
 
     public void setType(WalletType type) {
         this.type = type;
+    }
+
+    public static class Builder {
+        private String portfolioId;
+        private String name;
+        private String symbol;
+        private WalletType type;
+
+        public Builder() {}
+
+        public Builder portfolioId(String portfolioId) {
+            this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder symbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+
+        public Builder type(WalletType type) {
+            this.type = type;
+            return this;
+        }
+
+        public CreateWalletRequest build() {
+            return new CreateWalletRequest(this);
+        }
     }
 }

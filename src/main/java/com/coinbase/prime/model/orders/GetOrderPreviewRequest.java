@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.orders;
 
+import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetOrderPreviewRequest {
+public class GetOrderPreviewRequest extends CoinbasePostRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("product_id")
@@ -61,6 +62,11 @@ public class GetOrderPreviewRequest {
         this.expiryTime = builder.expiryTime;
         this.isRaiseExact = builder.isRaiseExact;
         this.historicalPov = builder.historicalPov;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/order_preview", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

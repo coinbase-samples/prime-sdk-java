@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetTransactionByTransactionIdRequest {
+public class GetTransactionByTransactionIdRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("transaction_id")
@@ -30,6 +31,16 @@ public class GetTransactionByTransactionIdRequest {
     public GetTransactionByTransactionIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.transactionId = builder.transactionId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/transactions/%s", this.getPortfolioId(), this.getTransactionId());
     }
 
     public String getPortfolioId() {

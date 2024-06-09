@@ -16,10 +16,11 @@
 
 package com.coinbase.prime.model.commission;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetPortfolioCommissionRequest {
-    @JsonProperty("portfolio_id")
+public class GetPortfolioCommissionRequest extends CoinbaseGetRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
 
     public GetPortfolioCommissionRequest() {
@@ -27,6 +28,16 @@ public class GetPortfolioCommissionRequest {
 
     public GetPortfolioCommissionRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/commission", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

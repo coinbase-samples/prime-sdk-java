@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.wallets;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListWalletsRequest {
+public class ListWalletsRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
@@ -43,6 +44,12 @@ public class ListWalletsRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/wallets", this.getPortfolioId());
+    }
+
+    @Override
     public String getQueryString() {
         String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
         queryString = appendAllQueryParams(this.getSymbols(), "symbols", queryString);

@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.wallets;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetWalletByIdRequest {
+public class GetWalletByIdRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
@@ -31,6 +32,16 @@ public class GetWalletByIdRequest {
     public GetWalletByIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/wallets/%s", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {

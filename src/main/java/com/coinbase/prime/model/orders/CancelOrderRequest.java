@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.orders;
 
+import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CancelOrderRequest {
+public class CancelOrderRequest extends CoinbasePostRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("order_id")
@@ -30,6 +31,11 @@ public class CancelOrderRequest {
     public CancelOrderRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.orderId = builder.orderId;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/orders/%s/cancel", this.getPortfolioId(), this.getOrderId());
     }
 
     public String getPortfolioId() {

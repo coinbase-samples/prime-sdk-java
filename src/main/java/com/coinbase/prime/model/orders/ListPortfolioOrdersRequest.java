@@ -16,13 +16,14 @@
 
 package com.coinbase.prime.model.orders;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListPortfolioOrdersRequest {
+public class ListPortfolioOrdersRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("order_statuses")
@@ -53,6 +54,12 @@ public class ListPortfolioOrdersRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/orders", this.getPortfolioId());
+    }
+
+    @Override
     public String getQueryString() {
         String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
         queryString = appendAllQueryParams(this.getProductIds(), "product_ids", queryString);

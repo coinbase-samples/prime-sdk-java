@@ -16,10 +16,11 @@
 
 package com.coinbase.prime.model.products;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListPortfolioProductsRequest {
+public class ListPortfolioProductsRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     private PaginationParams paginationParams;
@@ -32,8 +33,14 @@ public class ListPortfolioProductsRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
     public String getQueryString() {
         return paginationParams != null ? paginationParams.generateQueryString("") : "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/products", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

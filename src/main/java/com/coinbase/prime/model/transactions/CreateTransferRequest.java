@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateTransferRequest {
+public class CreateTransferRequest extends CoinbasePostRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("wallet_id")
@@ -40,6 +41,11 @@ public class CreateTransferRequest {
         this.destination = builder.destination;
         this.idempotencyKey = builder.idempotencyKey;
         this.currencySymbol = builder.currencySymbol;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/wallets/%s/transfers", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {

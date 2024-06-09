@@ -16,13 +16,14 @@
 
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
 import static com.coinbase.prime.utils.Utils.appendQueryParams;
 
-public class ListPortfolioTransactionsRequest {
+public class ListPortfolioTransactionsRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     private String[] symbols;
@@ -45,6 +46,7 @@ public class ListPortfolioTransactionsRequest {
         this.paginationParams = builder.paginationParams;
     }
 
+    @Override
     public String getQueryString() {
         String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
         appendAllQueryParams(this.getSymbols(), "symbols", queryString);
@@ -53,6 +55,11 @@ public class ListPortfolioTransactionsRequest {
         queryString = appendQueryParams(queryString, "end_time", this.getEndTime());
 
         return queryString;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/transactions", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

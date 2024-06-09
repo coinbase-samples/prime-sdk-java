@@ -16,9 +16,10 @@
 
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateWithdrawalRequest {
+public class CreateWithdrawalRequest extends CoinbasePostRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("wallet_id")
@@ -47,6 +48,11 @@ public class CreateWithdrawalRequest {
         this.currencySymbol = builder.currencySymbol;
         this.paymentMethod = builder.paymentMethod;
         this.blockchainAddress = builder.blockchainAddress;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/wallets/%s/withdrawals", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {

@@ -238,266 +238,132 @@ public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements Coinb
 
     @Override
     public GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/commission", request.getPortfolioId());
-        String response = get(path, "");
-
-        try {
-            GetPortfolioCommissionResponse resp = doGet(request, GetPortfolioCommissionResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        GetPortfolioCommissionResponse resp = doGet(request, GetPortfolioCommissionResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbasePrimeException {
-        String queryParams = request.getQueryString();
-        String path = String.format("/portfolios/%s/open_orders", request.getPortfolioId());
-        String response = get(path, queryParams);
-
-        try {
-            ListOpenOrdersResponse resp = doGet(request, ListOpenOrdersResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        ListOpenOrdersResponse resp = doGet(request, ListOpenOrdersResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/order", request.getPortfolioId());
-        String response = post(path, request);
-
-        try {
-            CreateOrderResponse resp = doGet(request, CreateOrderResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        CreateOrderResponse resp = doPost(request, CreateOrderResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/order_preview", request.getPortfolioId());
-        String response = post(path, request);
-
-        try {
-            GetOrderPreviewResponse resp = doGet(request, GetOrderPreviewResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        GetOrderPreviewResponse resp = doPost(request, GetOrderPreviewResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbasePrimeException {
-        String response = get(String.format("/portfolios/%s/orders", request.getPortfolioId()), "");
-        if (response == null) {
-            return null;
-        }
-
-
-        try {
-            return doGet(request, ListPortfolioOrdersResponse.class);
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        ListPortfolioOrdersResponse resp = doGet(request, ListPortfolioOrdersResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/orders/%s", request.getPortfolioId(), request.getOrderId());
-        String response = get(path, "");
-
-        try {
-            GetOrderByOrderIdResponse resp = doGet(request, GetOrderByOrderIdResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        GetOrderByOrderIdResponse resp = doGet(request, GetOrderByOrderIdResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/orders/%s/cancel", request.getPortfolioId(), request.getOrderId());
-        String response = post(path, request);
-
-        try {
-            CancelOrderResponse resp = doGet(request, CancelOrderResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        CancelOrderResponse resp = doPost(request, CancelOrderResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbasePrimeException {
-        String queryParams = request.getQueryString();
-        String path = String.format("/portfolios/%s/orders/%s/fills", request.getPortfolioId(), request.getOrderId());
-        String response = get(path, queryParams);
-
-        try {
-            ListOrderFillsResponse resp = doGet(request, ListOrderFillsResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        ListOrderFillsResponse resp = doGet(request, ListOrderFillsResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException {
-        String queryParams = request.getQueryString();
-        String path = String.format("/portfolios/%s/products", request.getPortfolioId());
-        String response = get(path, queryParams);
-
-        try {
-            ListPortfolioProductsResponse resp = doGet(request, ListPortfolioProductsResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        ListPortfolioProductsResponse resp = doGet(request, ListPortfolioProductsResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public GetTransactionByTransactionIdResponse getTransactionByTransactionId(GetTransactionByTransactionIdRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId());
-        String response = get(path, "");
-
-        try {
-            GetTransactionByTransactionIdResponse resp = doGet(request, GetTransactionByTransactionIdResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        GetTransactionByTransactionIdResponse resp = doGet(request, GetTransactionByTransactionIdResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId());
-        String response = post(path, request);
-
-        try {
-            CreateConversionResponse resp = doGet(request, CreateConversionResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        CreateConversionResponse resp = doPost(request, CreateConversionResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbasePrimeException {
-        String queryParams = request.getQueryString();
-        String path = String.format("/portfolios/%s/transactions", request.getPortfolioId());
-        String response = get(path, queryParams);
-
-        try {
-            ListPortfolioTransactionsResponse resp = doGet(request, ListPortfolioTransactionsResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        ListPortfolioTransactionsResponse resp = doGet(request, ListPortfolioTransactionsResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbasePrimeException {
-        String queryParams = request.getQueryString();
-        String path = String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(), request.getWalletId());
-        String response = get(path, queryParams);
-
-        try {
-            ListWalletTransactionsResponse resp = doGet(request, ListWalletTransactionsResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        ListWalletTransactionsResponse resp = doGet(request, ListWalletTransactionsResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public CreateTransferResponse createTransfer(CreateTransferRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId());
-        String response = post(path, request);
-
-        try {
-            CreateTransferResponse resp = doGet(request, CreateTransferResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        CreateTransferResponse resp = doPost(request, CreateTransferResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId());
-        String response = post(path, request);
-
-        try {
-            CreateWithdrawalResponse resp = doGet(request, CreateWithdrawalResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        CreateWithdrawalResponse resp = doPost(request, CreateWithdrawalResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbasePrimeException {
-        String queryParams = request.getQueryString();
-        String path = String.format("/portfolios/%s/wallets", request.getPortfolioId());
-        String response = get(path, queryParams);
-
-        try {
-            ListWalletsResponse resp = doGet(request, ListWalletsResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        ListWalletsResponse resp = doGet(request, ListWalletsResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/wallets", request.getPortfolioId());
-        String response = post(path, request);
-
-        try {
-            CreateWalletResponse resp = doGet(request, CreateWalletResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        CreateWalletResponse resp = doPost(request, CreateWalletResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public GetWalletByIdResponse getWalletById(GetWalletByIdRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId());
-        String response = get(path, "");
-
-        try {
-            GetWalletByIdResponse resp = doGet(request, GetWalletByIdResponse.class);
-            resp.setRequest(request);
-            return resp;
-        } catch (IOException e) {
-            throw new CoinbaseClientException(e);
-        }
+        GetWalletByIdResponse resp = doGet(request, GetWalletByIdResponse.class);
+        resp.setRequest(request);
+        return resp;
     }
 
     @Override
     public GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(), request.getWalletId());
         GetWalletDepositInstructionsResponse resp = doGet(request, GetWalletDepositInstructionsResponse.class);
         resp.setRequest(request);
         return resp;

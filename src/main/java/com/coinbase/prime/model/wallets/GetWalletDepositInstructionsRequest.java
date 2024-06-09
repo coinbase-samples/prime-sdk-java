@@ -29,9 +29,19 @@ public class GetWalletDepositInstructionsRequest extends CoinbaseGetRequest {
     public GetWalletDepositInstructionsRequest() {
     }
 
-    public GetWalletDepositInstructionsRequest(GetWalletDepositInstructionsRequest.Builder builder) {
+    public GetWalletDepositInstructionsRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/wallets/%s/deposit_instructions", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {
