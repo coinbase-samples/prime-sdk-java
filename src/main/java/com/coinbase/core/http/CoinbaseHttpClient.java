@@ -19,7 +19,6 @@ package com.coinbase.core.http;
 import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.errors.CoinbaseException;
-import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -94,17 +93,12 @@ public abstract class CoinbaseHttpClient {
         String callUrl = baseUrl + path + query;
         URI uri = URI.create(callUrl);
         long unixTime = Instant.now().getEpochSecond();
-        String signature;
-        try {
-            signature = credentials.sign(String.valueOf(unixTime), method, path, body);
-        } catch (Exception e) {
-            throw new CoinbasePrimeException(e);
-        }
+        String signature = credentials.sign(String.valueOf(unixTime), method, path, body);
 
         return attachHeaders(HttpRequest.newBuilder().uri(uri), signature, unixTime);
     }
 
-    protected abstract String handleResponse(int statusCode, String response) throws CoinbasePrimeException;
+    protected abstract String handleResponse(int statusCode, String response) throws CoinbaseException;
 
     protected abstract HttpRequest.Builder attachHeaders(HttpRequest.Builder builder, String signature, long timestamp);
 
