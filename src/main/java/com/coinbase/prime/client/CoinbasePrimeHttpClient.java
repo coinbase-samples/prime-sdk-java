@@ -16,10 +16,9 @@
 
 package com.coinbase.prime.client;
 
+import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.core.http.CoinbaseHttpClient;
-import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.errors.CoinbasePrimeErrorMessage;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.errors.CoinbasePrimeExceptionFactory;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
@@ -65,7 +64,7 @@ public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements Coinb
     private static final String CB_ACCESS_SIGNATURE_HEADER = "X-CB-ACCESS-SIGNATURE";
     private static final String CB_ACCESS_TIMESTAMP_HEADER = "X-CB-ACCESS-TIMESTAMP";
     private static final String CB_PRIME_BASE_URL = "https://api.prime.coinbase.com/v1";
-    private final CoinbasePrimeCredentials credentials;
+    private final CoinbaseCredentials credentials;
     private final String baseUrl;
     private final HttpClient client;
     private final ObjectMapper mapper = new ObjectMapper();
@@ -76,7 +75,7 @@ public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements Coinb
         this.baseUrl = builder.baseUrl;
     }
 
-    public CoinbasePrimeHttpClient(CoinbasePrimeCredentials credentials) {
+    public CoinbasePrimeHttpClient(CoinbaseCredentials credentials) {
         this.credentials = credentials;
         this.baseUrl = CB_PRIME_BASE_URL;
         this.client = HttpClient.newHttpClient();
@@ -379,11 +378,11 @@ public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements Coinb
     }
 
     public static class Builder {
-        private final CoinbasePrimeCredentials credentials;
+        private final CoinbaseCredentials credentials;
         private HttpClient client = HttpClient.newHttpClient();
         private String baseUrl = CB_PRIME_BASE_URL;
 
-        public Builder(CoinbasePrimeCredentials credentials) {
+        public Builder(CoinbaseCredentials credentials) {
             this.credentials = credentials;
         }
 

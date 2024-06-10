@@ -34,7 +34,7 @@ import static com.coinbase.core.utils.Utils.toJsonString;
 public abstract class CoinbaseHttpClient {
     private static final String HTTP_METHOD_GET = "GET";
     private static final String HTTP_METHOD_POST = "POST";
-    private static ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
     private CoinbaseCredentials credentials;
     private String baseUrl;
     private HttpClient client;
@@ -96,7 +96,7 @@ public abstract class CoinbaseHttpClient {
         long unixTime = Instant.now().getEpochSecond();
         String signature;
         try {
-            signature = credentials.sign(method, path, body);
+            signature = credentials.sign(String.valueOf(unixTime), method, path, body);
         } catch (Exception e) {
             throw new CoinbasePrimeException(e);
         }
