@@ -17,7 +17,6 @@
 package com.coinbase.core.credentials;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.crypto.Mac;
@@ -68,7 +67,7 @@ public class CoinbaseCredentials {
         } catch (NoSuchAlgorithmException e) {
             throw new CoinbaseClientException(String.format("Algorithm %s is invalid", HMAC_SHA256), e);
         } catch (Exception e) {
-            throw new CoinbasePrimeException("Failed to sign request", e);
+            throw new CoinbaseClientException("Failed to sign request", e);
         }
     }
 
