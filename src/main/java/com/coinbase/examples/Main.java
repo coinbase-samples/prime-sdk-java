@@ -76,11 +76,13 @@ public class Main {
                             .build());
             System.out.println(mapper.writeValueAsString(orderResponse));
 
+            Thread.sleep(1000);
             GetOrderByOrderIdResponse getOrderResponse = client.getOrderByOrderId(
                     new GetOrderByOrderIdRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())
                             .orderId(orderResponse.getOrderId())
                             .build());
+            System.out.println(mapper.writeValueAsString(getOrderResponse));
 
             while (getOrderResponse.getOrder().getStatus() == OrderStatus.OPEN
                     || getOrderResponse.getOrder().getStatus() == OrderStatus.PENDING) {
