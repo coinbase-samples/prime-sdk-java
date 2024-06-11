@@ -76,6 +76,7 @@ public class Main {
                             .build());
             System.out.println(mapper.writeValueAsString(orderResponse));
 
+            // Wait for the order to be processed by Coinbase Prime
             Thread.sleep(1000);
             GetOrderByOrderIdResponse getOrderResponse = client.getOrderByOrderId(
                     new GetOrderByOrderIdRequest.Builder()
@@ -86,6 +87,7 @@ public class Main {
 
             while (getOrderResponse.getOrder().getStatus() == OrderStatus.OPEN
                     || getOrderResponse.getOrder().getStatus() == OrderStatus.PENDING) {
+                // Wait for additional order fills
                 Thread.sleep(1000);
                 getOrderResponse = client.getOrderByOrderId(
                         new GetOrderByOrderIdRequest.Builder()

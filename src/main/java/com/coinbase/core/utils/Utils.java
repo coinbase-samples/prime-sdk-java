@@ -17,7 +17,6 @@
 package com.coinbase.core.utils;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Utils {
@@ -28,7 +27,7 @@ public class Utils {
 
         try {
             return mapper.writeValueAsString(requestObject);
-        } catch (JsonProcessingException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException("Failed to write request object as String", e);
         }
     }

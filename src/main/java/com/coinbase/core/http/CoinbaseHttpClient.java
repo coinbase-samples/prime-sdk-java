@@ -21,7 +21,6 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.errors.CoinbaseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -36,6 +35,7 @@ public abstract class CoinbaseHttpClient {
     private static final String HTTP_METHOD_PATCH = "PATCH";
     private static final String HTTP_METHOD_PUT = "PUT";
     private static final String HTTP_METHOD_DELETE = "DELETE";
+    private static final String EMPTY_STRING = "";
     private static final ObjectMapper mapper = new ObjectMapper();
     private final CoinbaseCredentials credentials;
     private final String baseUrl;
@@ -70,7 +70,7 @@ public abstract class CoinbaseHttpClient {
 
         try {
             return mapper.readValue(response, responseClass);
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException(e);
         }
     }
@@ -80,7 +80,7 @@ public abstract class CoinbaseHttpClient {
 
         try {
             return mapper.readValue(response, responseClass);
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException(e);
         }
     }
@@ -90,7 +90,7 @@ public abstract class CoinbaseHttpClient {
 
         try {
             return mapper.readValue(response, responseClass);
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException(e);
         }
     }
@@ -100,7 +100,7 @@ public abstract class CoinbaseHttpClient {
 
         try {
             return mapper.readValue(response, responseClass);
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException(e);
         }
     }
@@ -110,7 +110,7 @@ public abstract class CoinbaseHttpClient {
 
         try {
             return mapper.readValue(response, responseClass);
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException(e);
         }
     }
@@ -128,7 +128,7 @@ public abstract class CoinbaseHttpClient {
     protected String post(String path, Object request) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(
                 path,
-                "",
+                EMPTY_STRING,
                 HTTP_METHOD_POST,
                 toJsonString(mapper, request));
 
@@ -138,7 +138,7 @@ public abstract class CoinbaseHttpClient {
             httpRequest = builder
                     .POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(request)))
                     .build();
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException(e);
         }
 
@@ -148,7 +148,7 @@ public abstract class CoinbaseHttpClient {
     private String patch(String path, Object request) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(
                 path,
-                "",
+                EMPTY_STRING,
                 HTTP_METHOD_PATCH,
                 toJsonString(mapper, request));
 
@@ -157,7 +157,7 @@ public abstract class CoinbaseHttpClient {
             httpRequest = builder
                     .method(HTTP_METHOD_PATCH, HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(request)))
                     .build();
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException(e);
         }
         return sendRequest(httpRequest);
@@ -166,7 +166,7 @@ public abstract class CoinbaseHttpClient {
     private String put(String path, Object request) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(
                 path,
-                "",
+                EMPTY_STRING,
                 HTTP_METHOD_PUT,
                 toJsonString(mapper, request));
 
@@ -175,7 +175,7 @@ public abstract class CoinbaseHttpClient {
             httpRequest = builder
                     .PUT(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(request)))
                     .build();
-        } catch (IOException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException(e);
         }
         return sendRequest(httpRequest);
@@ -209,7 +209,7 @@ public abstract class CoinbaseHttpClient {
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             return handleResponse(resp.statusCode(), resp.body());
-        } catch (IOException | InterruptedException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException("Failed to send request", e);
         }
     }
