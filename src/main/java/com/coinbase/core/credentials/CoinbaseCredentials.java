@@ -22,14 +22,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CoinbaseCredentials {
     private static final String HMAC_SHA256 = "HmacSHA256";
     private String accessKey;
     private String passphrase;
     private String signingKey;
+
+    private static final Pattern base64Pattern = Pattern.compile("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$");
 
     public CoinbaseCredentials(String credentialsJson) {
         ObjectMapper mapper = new ObjectMapper();
@@ -59,17 +62,21 @@ public class CoinbaseCredentials {
 
     public String sign(long timestamp, String method, String path, String body) {
         try {
-            String message = String.format("%d%s%s%s", timestamp, method, path, body);
+            String message = String.format("%s%s%s%s", timestamp, method, path, body);
 
-            Mac macInstance = Mac.getInstance(HMAC_SHA256);
-            SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), HMAC_SHA256);
-            macInstance.init(secretKeySpec);
-            byte[] signature = macInstance.doFinal(message.getBytes(StandardCharsets.UTF_8));
+            byte[] hmacKey;
+            if (base64Pattern.matcher(signingKey).matches()) {
+                hmacKey = Base64.getDecoder().decode(signingKey);
+            } else {
+                hmacKey = this.signingKey.getBytes(StandardCharsets.UTF_8);
+            }
+            Mac mac = Mac.getInstance(HMAC_SHA256);
+            mac.init(new SecretKeySpec(hmacKey, HMAC_SHA256));
+
+            byte[] signature = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(signature);
-        } catch (NoSuchAlgorithmException e) {
-            throw new CoinbaseClientException(String.format("Algorithm %s is invalid", HMAC_SHA256), e);
         } catch (Exception e) {
-            throw new CoinbaseClientException("Failed to sign request", e);
+            throw new RuntimeException("Failed to generate signature", e);
         }
     }
 
