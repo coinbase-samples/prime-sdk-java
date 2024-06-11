@@ -18,7 +18,6 @@ package com.coinbase.prime.client;
 
 import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.core.http.CoinbaseHttpClient;
-import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.errors.CoinbasePrimeExceptionFactory;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
@@ -51,12 +50,9 @@ import com.coinbase.prime.model.users.ListPortfolioUsersResponse;
 import com.coinbase.prime.model.users.ListUsersRequest;
 import com.coinbase.prime.model.users.ListUsersResponse;
 import com.coinbase.prime.model.wallets.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.util.Objects;
 
 public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements CoinbasePrimeApi {
     private static final String CB_ACCESS_KEY_HEADER = "X-CB-ACCESS-KEY";
@@ -64,21 +60,33 @@ public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements Coinb
     private static final String CB_ACCESS_SIGNATURE_HEADER = "X-CB-ACCESS-SIGNATURE";
     private static final String CB_ACCESS_TIMESTAMP_HEADER = "X-CB-ACCESS-TIMESTAMP";
     private static final String CB_PRIME_BASE_URL = "https://api.prime.coinbase.com/v1";
-    private final CoinbaseCredentials credentials;
-    private final String baseUrl;
-    private final HttpClient client;
-    private final ObjectMapper mapper = new ObjectMapper();
 
-    private CoinbasePrimeHttpClient(Builder builder) {
-        this.credentials = builder.credentials;
-        this.client = builder.client;
-        this.baseUrl = builder.baseUrl;
+    public CoinbasePrimeHttpClient(String baseUrl, CoinbaseCredentials credentials, HttpClient client) {
+        super(baseUrl, credentials, client);
+    }
+
+    public CoinbasePrimeHttpClient(String baseUrl, String credentialsJson) {
+        super(baseUrl, credentialsJson);
+    }
+
+    public CoinbasePrimeHttpClient(String baseUrl, CoinbaseCredentials credentials) {
+        super(baseUrl, credentials);
     }
 
     public CoinbasePrimeHttpClient(CoinbaseCredentials credentials) {
-        this.credentials = credentials;
-        this.baseUrl = CB_PRIME_BASE_URL;
-        this.client = HttpClient.newHttpClient();
+        super(CB_PRIME_BASE_URL, credentials);
+    }
+
+    public CoinbasePrimeHttpClient(String credentialsJson) {
+        super(CB_PRIME_BASE_URL, credentialsJson);
+    }
+
+    public CoinbasePrimeHttpClient(CoinbaseCredentials credentials, HttpClient client) {
+        super(CB_PRIME_BASE_URL, credentials, client);
+    }
+
+    public CoinbasePrimeHttpClient(String credentialsJson, HttpClient client) {
+        super(CB_PRIME_BASE_URL, credentialsJson, client);
     }
 
     @Override
@@ -88,6 +96,15 @@ public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements Coinb
         }
 
         return response;
+    }
+
+    @Override
+    protected HttpRequest.Builder attachHeaders(HttpRequest.Builder builder, String signature, long timestamp) {
+        return builder
+                .header(CB_ACCESS_KEY_HEADER, super.getCredentials().getAccessKey())
+                .header(CB_ACCESS_PHRASE_HEADER, super.getCredentials().getPassphrase())
+                .header(CB_ACCESS_SIGNATURE_HEADER, signature)
+                .header(CB_ACCESS_TIMESTAMP_HEADER, String.valueOf(timestamp));
     }
 
     @Override
@@ -366,48 +383,5 @@ public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements Coinb
         GetWalletDepositInstructionsResponse resp = doGet(request, GetWalletDepositInstructionsResponse.class);
         resp.setRequest(request);
         return resp;
-    }
-
-    @Override
-    protected HttpRequest.Builder attachHeaders(HttpRequest.Builder builder, String signature, long timestamp) {
-        return builder
-                .header(CB_ACCESS_KEY_HEADER, credentials.getAccessKey())
-                .header(CB_ACCESS_PHRASE_HEADER, credentials.getPassphrase())
-                .header(CB_ACCESS_SIGNATURE_HEADER, signature)
-                .header(CB_ACCESS_TIMESTAMP_HEADER, String.valueOf(timestamp));
-    }
-
-    public static class Builder {
-        private final CoinbaseCredentials credentials;
-        private HttpClient client = HttpClient.newHttpClient();
-        private String baseUrl = CB_PRIME_BASE_URL;
-
-        public Builder(CoinbaseCredentials credentials) {
-            this.credentials = credentials;
-        }
-
-        public Builder withClient(HttpClient client) {
-            this.client = client;
-            return this;
-        }
-
-        public Builder withBaseUrl(String baseUrl) {
-            this.baseUrl = baseUrl;
-            return this;
-        }
-
-        public CoinbasePrimeHttpClient build() throws IllegalStateException {
-            validate();
-            if (client == null) {
-                client = HttpClient.newBuilder().build();
-            }
-            return new CoinbasePrimeHttpClient(this);
-        }
-
-        private void validate() throws CoinbasePrimeException {
-            if (credentials == null) {
-                throw new CoinbaseClientException("CoinbasePrimeHttpClient did not receive valid credentials");
-            }
-        }
     }
 }

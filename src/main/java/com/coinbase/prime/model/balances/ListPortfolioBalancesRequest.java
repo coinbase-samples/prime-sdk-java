@@ -19,8 +19,8 @@ package com.coinbase.prime.model.balances;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
-import static com.coinbase.prime.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.appendAllQueryParams;
+import static com.coinbase.core.utils.Utils.appendQueryParams;
 
 public class ListPortfolioBalancesRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")

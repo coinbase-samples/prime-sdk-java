@@ -18,11 +18,10 @@ package com.coinbase.prime.model.wallets;
 
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
-import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
-import static com.coinbase.prime.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.appendAllQueryParams;
+import static com.coinbase.core.utils.Utils.appendQueryParams;
 
 public class ListWalletsRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")

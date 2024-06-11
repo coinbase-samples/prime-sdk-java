@@ -32,4 +32,20 @@ public class Utils {
             throw new CoinbaseClientException("Failed to write request object as String", e);
         }
     }
+
+    public static String appendQueryParams(String queryParams, String key, String value) {
+        if (value == null || value.isEmpty()) {
+            return queryParams;
+        }
+        return String.format("%s%s%s=%s", queryParams, queryParams.isEmpty() ? "?" : "&", key, value);
+    }
+
+    public static String appendAllQueryParams(Object[] params, String key, String queryString) {
+        if (params != null) {
+            for (Object param : params) {
+                queryString = appendQueryParams(queryString, key, param.toString());
+            }
+        }
+        return queryString;
+    }
 }

@@ -55,7 +55,7 @@ public class CoinbaseCredentials {
         this.signingKey = builder.signingKey;
     }
 
-    public String sign(String timestamp, String method, String path, String body) {
+    public String sign(long timestamp, String method, String path, String body) {
         try {
             String message = String.format("%s%s%s%s", timestamp, method, path, body);
 

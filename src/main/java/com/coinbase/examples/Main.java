@@ -16,9 +16,8 @@
 
 package com.coinbase.examples;
 
+import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.prime.client.CoinbasePrimeHttpClient;
-import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
-import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
 import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
@@ -30,7 +29,6 @@ import com.coinbase.prime.model.wallets.ListWalletsResponse;
 import com.coinbase.prime.model.wallets.WalletType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.net.http.HttpClient;
 import java.util.UUID;
 
 public class Main {
@@ -39,10 +37,8 @@ public class Main {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            CoinbasePrimeCredentials credentials = mapper.readValue(credsStringBlob, CoinbasePrimeCredentials.class);
-            CoinbasePrimeHttpClient client = new CoinbasePrimeHttpClient.Builder(credentials)
-                    .withClient(HttpClient.newHttpClient())
-                    .build();
+            CoinbaseCredentials credentials = new CoinbaseCredentials(credsStringBlob);
+            CoinbasePrimeHttpClient client = new CoinbasePrimeHttpClient(credentials);
 
             String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
             GetPortfolioByIdResponse portfolioResponse = client.getPortfolioById(

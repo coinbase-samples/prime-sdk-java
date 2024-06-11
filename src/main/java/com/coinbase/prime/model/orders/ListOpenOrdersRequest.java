@@ -22,8 +22,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
-import static com.coinbase.prime.utils.Utils.appendAllQueryParams;
-import static com.coinbase.prime.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.appendAllQueryParams;
+import static com.coinbase.core.utils.Utils.appendQueryParams;
 
 public class ListOpenOrdersRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")

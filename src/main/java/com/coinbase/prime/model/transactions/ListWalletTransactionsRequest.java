@@ -20,7 +20,7 @@ import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.prime.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.appendQueryParams;
 
 public class ListWalletTransactionsRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
