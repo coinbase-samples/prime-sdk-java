@@ -92,7 +92,8 @@ public class CoinbasePrimeHttpClient extends CoinbaseHttpClient implements Coinb
     @Override
     protected String handleResponse(int statusCode, String response) throws CoinbasePrimeException {
         if (statusCode != 200 && statusCode != 201 && statusCode != 204) {
-            throw CoinbasePrimeExceptionFactory.create(statusCode, response);
+            CoinbasePrimeException exception = CoinbasePrimeExceptionFactory.create(statusCode, response);
+            throw exception;
         }
 
         return response;

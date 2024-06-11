@@ -27,9 +27,9 @@ import java.util.Base64;
 
 public class CoinbaseCredentials {
     private static final String HMAC_SHA256 = "HmacSHA256";
-    private final String accessKey;
-    private final String passphrase;
-    private final String signingKey;
+    private String accessKey;
+    private String passphrase;
+    private String signingKey;
 
     public CoinbaseCredentials(String credentialsJson) {
         ObjectMapper mapper = new ObjectMapper();
@@ -49,6 +49,8 @@ public class CoinbaseCredentials {
         this.signingKey = signingKey;
     }
 
+    public CoinbaseCredentials() {}
+
     public CoinbaseCredentials(Builder builder) {
         this.accessKey = builder.accessKey;
         this.passphrase = builder.passphrase;
@@ -57,7 +59,7 @@ public class CoinbaseCredentials {
 
     public String sign(long timestamp, String method, String path, String body) {
         try {
-            String message = String.format("%s%s%s%s", timestamp, method, path, body);
+            String message = String.format("%d%s%s%s", timestamp, method, path, body);
 
             Mac macInstance = Mac.getInstance(HMAC_SHA256);
             SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), HMAC_SHA256);
@@ -75,12 +77,24 @@ public class CoinbaseCredentials {
         return accessKey;
     }
 
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
+
     public String getPassphrase() {
         return passphrase;
     }
 
+    public void setPassphrase(String passphrase) {
+        this.passphrase = passphrase;
+    }
+
     protected String getSigningKey() {
         return signingKey;
+    }
+
+    public void setSigningKey(String signingKey) {
+        this.signingKey = signingKey;
     }
 
     public static class Builder {

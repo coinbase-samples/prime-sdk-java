@@ -19,6 +19,8 @@ package com.coinbase.prime.model.common;
 import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.appendQueryParams;
+
 public class PaginationParams {
     private String cursor;
 
@@ -35,18 +37,9 @@ public class PaginationParams {
     }
 
     public String generateQueryString(String queryParams) {
-        if (this.getCursor() != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "cursor", this.getCursor());
-        }
-
-        if (this.getSortDirection() != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "sort_direction", this.getSortDirection());
-        }
-
-        if (this.limit != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "limit", this.getLimit().toString());
-        }
-
+        queryParams = appendQueryParams(queryParams, "cursor", this.getCursor());
+        queryParams = appendQueryParams(queryParams, "sort_direction", this.getSortDirection());
+        queryParams = appendQueryParams(queryParams, "limit", this.getLimit().toString());
         return queryParams;
     }
 

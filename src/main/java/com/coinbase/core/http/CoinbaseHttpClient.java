@@ -37,9 +37,9 @@ public abstract class CoinbaseHttpClient {
     private static final String HTTP_METHOD_PUT = "PUT";
     private static final String HTTP_METHOD_DELETE = "DELETE";
     private static final ObjectMapper mapper = new ObjectMapper();
-    private CoinbaseCredentials credentials;
-    private String baseUrl;
-    private HttpClient client;
+    private final CoinbaseCredentials credentials;
+    private final String baseUrl;
+    private final HttpClient client;
 
     public CoinbaseHttpClient(String baseUrl, CoinbaseCredentials credentials) {
         this.credentials = credentials;
@@ -195,7 +195,7 @@ public abstract class CoinbaseHttpClient {
         String callUrl = baseUrl + path + query;
         URI uri = URI.create(callUrl);
         long unixTime = Instant.now().getEpochSecond();
-        String signature = credentials.sign(unixTime, method, path, body);
+        String signature = credentials.sign(unixTime, method, uri.getPath(), body);
 
         return attachHeaders(HttpRequest.newBuilder().uri(uri), signature, unixTime);
     }
