@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.portfolios;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetPortfolioByIdRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -63,8 +66,15 @@ public class GetPortfolioByIdRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetPortfolioByIdRequest build() {
+        public GetPortfolioByIdRequest build() throws CoinbaseClientException {
+            this.validate();
             return new GetPortfolioByIdRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId cannot be null");
+            }
         }
     }
 }

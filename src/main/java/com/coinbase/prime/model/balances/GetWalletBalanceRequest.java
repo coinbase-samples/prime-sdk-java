@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.balances;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetWalletBalanceRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -76,8 +79,19 @@ public class GetWalletBalanceRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetWalletBalanceRequest build() {
+        public GetWalletBalanceRequest build() throws CoinbaseClientException {
+            this.validate();
             return new GetWalletBalanceRequest(this);
+        }
+
+        public void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+
+            if (isNullOrEmpty(this.walletId)) {
+                throw new CoinbaseClientException("WalletId is required");
+            }
         }
     }
 }

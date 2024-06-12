@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.allocations;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.orders.OrderSide;
 import com.coinbase.prime.model.common.PaginationParams;
@@ -24,8 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
-import static com.coinbase.core.utils.Utils.appendAllQueryParams;
-import static com.coinbase.core.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.*;
 
 public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -158,8 +158,15 @@ public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetPortfolioAllocationsRequest build() {
+        public GetPortfolioAllocationsRequest build() throws CoinbaseClientException {
+            this.validate();
             return new GetPortfolioAllocationsRequest(this);
+        }
+
+        public void validate() {
+            if (isNullOrEmpty(portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.paymentmethods;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class ListEntityPaymentMethodsRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "entity_id")
@@ -55,8 +58,15 @@ public class ListEntityPaymentMethodsRequest extends CoinbaseGetRequest {
             this.entityId = entityId;
         }
 
-        public ListEntityPaymentMethodsRequest build() {
+        public ListEntityPaymentMethodsRequest build() throws CoinbaseClientException {
+            this.validate();
             return new ListEntityPaymentMethodsRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId cannot be null");
+            }
         }
     }
 }

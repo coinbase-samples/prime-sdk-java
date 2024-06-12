@@ -16,11 +16,11 @@
 
 package com.coinbase.prime.model.balances;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.appendAllQueryParams;
-import static com.coinbase.core.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.*;
 
 public class ListPortfolioBalancesRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
@@ -94,8 +94,15 @@ public class ListPortfolioBalancesRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public ListPortfolioBalancesRequest build() {
+        public ListPortfolioBalancesRequest build() throws CoinbaseClientException {
+            this.validate();
             return new ListPortfolioBalancesRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

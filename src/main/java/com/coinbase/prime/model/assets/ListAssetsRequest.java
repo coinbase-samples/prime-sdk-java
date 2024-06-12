@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.assets;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class ListAssetsRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "entity_id")
@@ -55,8 +58,15 @@ public class ListAssetsRequest extends CoinbaseGetRequest {
             this.entityId = entityId;
         }
 
-        public ListAssetsRequest build() {
+        public ListAssetsRequest build() throws CoinbaseClientException {
+            this.validate();
             return new ListAssetsRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("entityId is required");
+            }
         }
     }
 }

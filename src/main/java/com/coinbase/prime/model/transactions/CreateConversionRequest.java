@@ -16,13 +16,16 @@
 
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 public class CreateConversionRequest extends CoinbasePostRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
-    @JsonProperty("wallet_id")
+    @JsonProperty(required = true, value = "wallet_id")
     private String walletId;
     private String amount;
     private String destination;
@@ -154,8 +157,19 @@ public class CreateConversionRequest extends CoinbasePostRequest {
             return this;
         }
 
-        public CreateConversionRequest build() {
+        public CreateConversionRequest build() throws CoinbaseClientException {
+            this.validate();
             return new CreateConversionRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId cannot be null");
+            }
+
+            if (isNullOrEmpty(this.walletId)) {
+                throw new CoinbaseClientException("WalletId cannot be null");
+            }
         }
     }
 }

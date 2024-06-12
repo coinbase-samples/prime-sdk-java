@@ -16,9 +16,12 @@
 
 package com.coinbase.prime.model.orders;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class ListOrderFillsRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio_id")
@@ -93,8 +96,19 @@ public class ListOrderFillsRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public ListOrderFillsRequest build() {
+        public ListOrderFillsRequest build() throws CoinbaseClientException {
+            this.validate();
             return new ListOrderFillsRequest(this);
+        }
+
+        public void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+
+            if (isNullOrEmpty(this.orderId)) {
+                throw new CoinbaseClientException("OrderId is required");
+            }
         }
     }
 }

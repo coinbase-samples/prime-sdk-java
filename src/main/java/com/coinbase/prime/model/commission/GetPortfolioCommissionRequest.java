@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.commission;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetPortfolioCommissionRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -59,8 +62,15 @@ public class GetPortfolioCommissionRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetPortfolioCommissionRequest build() {
+        public GetPortfolioCommissionRequest build() throws CoinbaseClientException {
+            this.validate();
             return new GetPortfolioCommissionRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("Portfolio ID is required");
+            }
         }
     }
 }

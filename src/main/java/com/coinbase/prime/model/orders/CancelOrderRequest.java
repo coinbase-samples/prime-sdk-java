@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.orders;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class CancelOrderRequest extends CoinbasePostRequest {
     @JsonProperty("portfolio_id")
@@ -73,6 +76,16 @@ public class CancelOrderRequest extends CoinbasePostRequest {
 
         public CancelOrderRequest build() {
             return new CancelOrderRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+
+            if (isNullOrEmpty(this.orderId)) {
+                throw new CoinbaseClientException("OrderId is required");
+            }
         }
     }
 }

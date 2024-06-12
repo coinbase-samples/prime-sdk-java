@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.allocations;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetAllocationsByClientNettingIdRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -68,8 +71,19 @@ public class GetAllocationsByClientNettingIdRequest extends CoinbaseGetRequest {
             this.nettingId = nettingId;
         }
 
-        public GetAllocationsByClientNettingIdRequest build() {
+        public GetAllocationsByClientNettingIdRequest build() throws CoinbaseClientException {
+            this.validate();
             return new GetAllocationsByClientNettingIdRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+
+            if (isNullOrEmpty(this.nettingId)) {
+                throw new CoinbaseClientException("NettingId is required");
+            }
         }
     }
 }

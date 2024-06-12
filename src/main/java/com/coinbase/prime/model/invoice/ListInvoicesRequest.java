@@ -16,11 +16,11 @@
 
 package com.coinbase.prime.model.invoice;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.appendAllQueryParams;
-import static com.coinbase.core.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.*;
 
 public class ListInvoicesRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "entity_id")
@@ -145,8 +145,15 @@ public class ListInvoicesRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public ListInvoicesRequest build() {
+        public ListInvoicesRequest build() throws CoinbaseClientException {
+            this.validate();
             return new ListInvoicesRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }
