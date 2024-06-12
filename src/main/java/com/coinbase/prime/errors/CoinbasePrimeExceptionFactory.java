@@ -19,10 +19,10 @@ package com.coinbase.prime.errors;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CoinbasePrimeExceptionFactory {
-    private static final ObjectMapper mapper = new ObjectMapper();
 
     public static CoinbasePrimeException create(int statusCode, String responseBody) {
         try {
+            ObjectMapper mapper = new ObjectMapper();
             CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
             return new CoinbasePrimeException(statusCode, errorMessage.getMessage());
         } catch (Exception e) {
@@ -32,6 +32,7 @@ public class CoinbasePrimeExceptionFactory {
 
     public static CoinbasePrimeException create(String responseBody, Throwable cause) {
         try {
+            ObjectMapper mapper = new ObjectMapper();
             CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
             return new CoinbasePrimeException(errorMessage.getMessage(), cause);
         } catch (Exception e) {
@@ -41,6 +42,7 @@ public class CoinbasePrimeExceptionFactory {
 
     public static CoinbasePrimeException create(int statusCode, String responseBody, Throwable cause) {
         try {
+            ObjectMapper mapper = new ObjectMapper();
             CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
             return new CoinbasePrimeException(statusCode, errorMessage.getMessage(), cause);
         } catch (Exception e) {
