@@ -16,12 +16,12 @@
 
 package com.coinbase.prime.model.activities;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.appendAllQueryParams;
-import static com.coinbase.core.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.*;
 
 public class ListActivitiesRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -163,8 +163,15 @@ public class ListActivitiesRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public ListActivitiesRequest build() {
+        public ListActivitiesRequest build() throws CoinbaseClientException {
+            this.validate();
             return new ListActivitiesRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.addressbook;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.coinbase.prime.model.common.PaginationParams;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -117,8 +118,15 @@ public class GetPortfolioAddressBookRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetPortfolioAddressBookRequest build() {
+        public GetPortfolioAddressBookRequest build() throws CoinbaseClientException {
+            this.validate();
             return new GetPortfolioAddressBookRequest(this);
+        }
+
+        private void validate() {
+            if (this.portfolioId == null) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

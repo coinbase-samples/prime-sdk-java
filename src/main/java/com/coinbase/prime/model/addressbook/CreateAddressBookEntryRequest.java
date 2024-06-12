@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.addressbook;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class CreateAddressBookEntryRequest extends CoinbasePostRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -116,8 +119,15 @@ public class CreateAddressBookEntryRequest extends CoinbasePostRequest {
             return this;
         }
 
-        public CreateAddressBookEntryRequest build() {
+        public CreateAddressBookEntryRequest build() throws CoinbaseClientException {
+            this.validate();
             return new CreateAddressBookEntryRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

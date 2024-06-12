@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.activities;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetActivityByActivityIdRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -60,11 +63,10 @@ public class GetActivityByActivityIdRequest extends CoinbaseGetRequest {
     }
 
     public static class Builder {
-        private final String portfolioId;
+        private String portfolioId;
         private String activityId;
 
-        public Builder(String portfolioId) {
-            this.portfolioId = portfolioId;
+        public Builder() {
         }
 
         public Builder activityId(String activityId) {
@@ -72,8 +74,19 @@ public class GetActivityByActivityIdRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetActivityByActivityIdRequest build() {
+        public GetActivityByActivityIdRequest build() throws CoinbaseClientException {
+            this.validate();
             return new GetActivityByActivityIdRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(activityId)) {
+                throw new CoinbaseClientException("ActivityId is required");
+            }
+
+            if (isNullOrEmpty(portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

@@ -16,8 +16,11 @@
 
 package com.coinbase.prime.model.allocations;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetAllocationRequest extends CoinbaseGetRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -68,8 +71,19 @@ public class GetAllocationRequest extends CoinbaseGetRequest {
             this.allocationId = allocationId;
         }
 
-        public GetAllocationRequest build() {
+        public GetAllocationRequest build() throws CoinbaseClientException {
+            this.validate();
             return new GetAllocationRequest(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+
+            if (isNullOrEmpty(this.allocationId)) {
+                throw new CoinbaseClientException("AllocationId is required");
+            }
         }
     }
 }
