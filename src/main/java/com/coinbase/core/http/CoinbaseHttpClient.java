@@ -27,15 +27,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Instant;
 
+import static com.coinbase.core.utils.Constants.*;
 import static com.coinbase.core.utils.Utils.toJsonString;
 
 public abstract class CoinbaseHttpClient {
-    private static final String HTTP_METHOD_GET = "GET";
-    private static final String HTTP_METHOD_POST = "POST";
-    private static final String HTTP_METHOD_PATCH = "PATCH";
-    private static final String HTTP_METHOD_PUT = "PUT";
-    private static final String HTTP_METHOD_DELETE = "DELETE";
-    private static final String EMPTY_STRING = "";
     private static final ObjectMapper mapper = new ObjectMapper();
     private final CoinbaseCredentials credentials;
     private final String baseUrl;
@@ -65,7 +60,7 @@ public abstract class CoinbaseHttpClient {
         this.client = client;
     }
 
-    protected <T> T doGet(CoinbaseGetRequest request, Class<T> responseClass) {
+    protected <T> T doGet(CoinbaseGetRequest request, Class<T> responseClass) throws CoinbaseException {
         String response = get(request.getPath(), request.getQueryString());
 
         try {
@@ -75,7 +70,7 @@ public abstract class CoinbaseHttpClient {
         }
     }
 
-    protected <T> T doPost(CoinbasePostRequest request, Class<T> responseClass) {
+    protected <T> T doPost(CoinbasePostRequest request, Class<T> responseClass) throws CoinbaseException {
         String response = post(request.getPath(), request);
 
         try {
@@ -85,7 +80,7 @@ public abstract class CoinbaseHttpClient {
         }
     }
 
-    protected <T> T doPatch(CoinbasePatchRequest request, Class<T> responseClass) {
+    protected <T> T doPatch(CoinbasePatchRequest request, Class<T> responseClass) throws CoinbaseException {
         String response = patch(request.getPath(), request);
 
         try {
@@ -95,7 +90,7 @@ public abstract class CoinbaseHttpClient {
         }
     }
 
-    protected <T> T doPut(CoinbasePutRequest request, Class<T> responseClass) {
+    protected <T> T doPut(CoinbasePutRequest request, Class<T> responseClass) throws CoinbaseException {
         String response = put(request.getPath(), request);
 
         try {
@@ -105,7 +100,7 @@ public abstract class CoinbaseHttpClient {
         }
     }
 
-    protected <T> T doDelete(CoinbaseDeleteRequest request, Class<T> responseClass) {
+    protected <T> T doDelete(CoinbaseDeleteRequest request, Class<T> responseClass) throws CoinbaseException {
         String response = delete(request.getPath(), request.getQueryString());
 
         try {
@@ -116,7 +111,7 @@ public abstract class CoinbaseHttpClient {
     }
 
     private String get(String path, String query) {
-        HttpRequest.Builder builder = generateHttpRequest(path, query, HTTP_METHOD_GET, "");
+        HttpRequest.Builder builder = generateHttpRequest(path, query, HTTP_METHOD_GET, EMPTY_STRING);
 
         HttpRequest httpRequest = builder
                 .GET()
@@ -191,8 +186,8 @@ public abstract class CoinbaseHttpClient {
         return sendRequest(httpRequest);
     }
 
-    protected HttpRequest.Builder generateHttpRequest(String path, String query, String method, String body) {
-        String callUrl = baseUrl + path + query;
+    protected HttpRequest.Builder generateHttpRequest(String path, String query, String method, String body) throws CoinbaseException {
+        String callUrl = String.format("%s%s%s", baseUrl, path, query);
         URI uri = URI.create(callUrl);
         long unixTime = Instant.now().getEpochSecond();
         String signature = credentials.sign(unixTime, method, uri.getPath(), body);

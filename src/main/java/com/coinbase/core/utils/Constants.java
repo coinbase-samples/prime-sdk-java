@@ -14,14 +14,17 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.activities;
+package com.coinbase.core.utils;
 
-public enum ActivitySecondaryType {
-    NO_SECONDARY_TYPE,
-    ACTIVITY_SECONDARY_TYPE_BUY,
-    ACTIVITY_SECONDARY_TYPE_SELL,
-    ACTIVITY_SECONDARY_TYPE_INTERNAL_TRANSFER,
-    ACTIVITY_SECONDARY_TYPE_SWEEP_TRANSFER_TYPE,
-    ACTIVITY_SECONDARY_TYPE_WEB3_SIGNER,
-    ACTIVITY_SECONDARY_TYPE_WEB3_WALLET
+import java.util.regex.Pattern;
+
+public class Constants {
+    public static final String HMAC_SHA256 = "HmacSHA256";
+    public static final String HTTP_METHOD_GET = "GET";
+    public static final String HTTP_METHOD_POST = "POST";
+    public static final String HTTP_METHOD_PATCH = "PATCH";
+    public static final String HTTP_METHOD_PUT = "PUT";
+    public static final String HTTP_METHOD_DELETE = "DELETE";
+    public static final String EMPTY_STRING = "";
+    public static final Pattern BASE64_PATTERN = Pattern.compile("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$");
 }

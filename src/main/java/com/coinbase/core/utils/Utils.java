@@ -19,10 +19,12 @@ package com.coinbase.core.utils;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static com.coinbase.core.utils.Constants.EMPTY_STRING;
+
 public class Utils {
-    public static String toJsonString(ObjectMapper mapper, Object requestObject) {
+    public static String toJsonString(ObjectMapper mapper, Object requestObject) throws CoinbaseClientException {
         if (requestObject == null) {
-            return "";
+            return EMPTY_STRING;
         }
 
         try {
@@ -46,5 +48,9 @@ public class Utils {
             }
         }
         return queryString;
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.trim().isEmpty();
     }
 }

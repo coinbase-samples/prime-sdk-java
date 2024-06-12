@@ -24,10 +24,12 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.regex.Pattern;
+
+import static com.coinbase.core.utils.Constants.BASE64_PATTERN;
+import static com.coinbase.core.utils.Constants.HMAC_SHA256;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class CoinbaseCredentials {
-    private static final String HMAC_SHA256 = "HmacSHA256";
     @JsonProperty(required = true)
     private String accessKey;
     @JsonProperty(required = true)
@@ -35,7 +37,6 @@ public class CoinbaseCredentials {
     @JsonProperty(required = true)
     private String signingKey;
 
-    private static final Pattern BASE64_PATTERN = Pattern.compile("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$");
 
     public CoinbaseCredentials(String credentialsJson) {
         ObjectMapper mapper = new ObjectMapper();
@@ -50,17 +51,17 @@ public class CoinbaseCredentials {
     }
 
     public CoinbaseCredentials(String accessKey, String passphrase, String signingKey) {
-        if (accessKey == null) {
+        if (isNullOrEmpty(accessKey)) {
             throw new CoinbaseClientException("Access key is required");
         }
         this.accessKey = accessKey;
 
-        if (passphrase == null) {
+        if (isNullOrEmpty(passphrase)) {
             throw new CoinbaseClientException("Passphrase is required");
         }
         this.passphrase = passphrase;
 
-        if (signingKey == null) {
+        if (isNullOrEmpty(signingKey)) {
             throw new CoinbaseClientException("Signing key is required");
         }
         this.signingKey = signingKey;
