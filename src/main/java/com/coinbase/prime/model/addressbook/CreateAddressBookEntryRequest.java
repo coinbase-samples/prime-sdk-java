@@ -124,7 +124,7 @@ public class CreateAddressBookEntryRequest extends CoinbasePostRequest {
             return new CreateAddressBookEntryRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }

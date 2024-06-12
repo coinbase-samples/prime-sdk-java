@@ -122,7 +122,7 @@ public class ListWeb3WalletBalancesRequest extends CoinbaseGetRequest {
             return new ListWeb3WalletBalancesRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }

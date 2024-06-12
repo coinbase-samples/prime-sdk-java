@@ -85,7 +85,7 @@ public class GetWalletDepositInstructionsRequest extends CoinbaseGetRequest {
             return new GetWalletDepositInstructionsRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId cannot be null");
             }

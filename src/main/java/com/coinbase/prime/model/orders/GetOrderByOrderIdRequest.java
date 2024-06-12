@@ -83,7 +83,7 @@ public class GetOrderByOrderIdRequest extends CoinbaseGetRequest {
             return new GetOrderByOrderIdRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.orderId)) {
                 throw new CoinbaseClientException("OrderId is required");
             }

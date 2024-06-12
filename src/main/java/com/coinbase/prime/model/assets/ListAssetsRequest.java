@@ -63,7 +63,7 @@ public class ListAssetsRequest extends CoinbaseGetRequest {
             return new ListAssetsRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("entityId is required");
             }

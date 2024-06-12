@@ -123,7 +123,7 @@ public class GetPortfolioAddressBookRequest extends CoinbaseGetRequest {
             return new GetPortfolioAddressBookRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (this.portfolioId == null) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }

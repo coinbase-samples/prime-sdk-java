@@ -84,7 +84,7 @@ public class ListUsersRequest extends CoinbaseGetRequest {
             return new ListUsersRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId is required");
             }

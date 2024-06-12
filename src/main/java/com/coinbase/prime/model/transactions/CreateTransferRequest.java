@@ -145,7 +145,7 @@ public class CreateTransferRequest extends CoinbasePostRequest {
             return new CreateTransferRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }

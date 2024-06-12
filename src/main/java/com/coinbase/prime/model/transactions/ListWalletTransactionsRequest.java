@@ -161,7 +161,7 @@ public class ListWalletTransactionsRequest extends CoinbaseGetRequest {
             return new ListWalletTransactionsRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }

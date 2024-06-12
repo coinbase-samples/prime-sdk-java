@@ -332,7 +332,7 @@ public class CreateOrderRequest extends CoinbasePostRequest {
             return new CreateOrderRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }

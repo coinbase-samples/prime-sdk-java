@@ -177,7 +177,7 @@ public class ListOpenOrdersRequest extends CoinbaseGetRequest {
             return new ListOpenOrdersRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }

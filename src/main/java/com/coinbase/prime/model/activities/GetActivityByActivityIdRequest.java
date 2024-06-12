@@ -79,7 +79,7 @@ public class GetActivityByActivityIdRequest extends CoinbaseGetRequest {
             return new GetActivityByActivityIdRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(activityId)) {
                 throw new CoinbaseClientException("ActivityId is required");
             }

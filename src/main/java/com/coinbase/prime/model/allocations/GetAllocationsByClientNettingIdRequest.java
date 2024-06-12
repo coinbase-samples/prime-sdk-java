@@ -76,7 +76,7 @@ public class GetAllocationsByClientNettingIdRequest extends CoinbaseGetRequest {
             return new GetAllocationsByClientNettingIdRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }

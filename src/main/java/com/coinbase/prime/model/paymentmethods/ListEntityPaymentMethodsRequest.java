@@ -63,7 +63,7 @@ public class ListEntityPaymentMethodsRequest extends CoinbaseGetRequest {
             return new ListEntityPaymentMethodsRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("EntityId cannot be null");
             }

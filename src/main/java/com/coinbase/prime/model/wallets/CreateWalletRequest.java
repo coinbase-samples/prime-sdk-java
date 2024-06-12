@@ -112,7 +112,7 @@ public class CreateWalletRequest extends CoinbasePostRequest {
             return new CreateWalletRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("Portfolio ID is required");
             }
