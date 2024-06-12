@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.client;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdResponse;
@@ -50,70 +51,70 @@ import com.coinbase.prime.model.wallets.*;
 
 public interface CoinbasePrimeApi {
     // Allocations
-    CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetPortfolioAllocationsResponse getPortfolioAllocations(GetPortfolioAllocationsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetAllocationsByClientNettingIdResponse getNetAllocationsByNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPortfolioAllocationsResponse getPortfolioAllocations(GetPortfolioAllocationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetAllocationsByClientNettingIdResponse getNetAllocationsByNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Invoice
-    ListInvoicesResponse listInvoices(ListInvoicesRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    ListInvoicesResponse listInvoices(ListInvoicesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Assets
-    ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Payment Methods
     ListEntityPaymentMethodsResponse listEntityPaymentMethods(ListEntityPaymentMethodsRequest entityId);
-    GetEntityPaymentMethodResponse getEntityPaymentMethod(GetEntityPaymentMethodRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    GetEntityPaymentMethodResponse getEntityPaymentMethod(GetEntityPaymentMethodRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Users
-    ListUsersResponse listUsers(ListUsersRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    ListUsersResponse listUsers(ListUsersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Portfolios
     ListPortfoliosResponse listPortfolios();
-    GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Activities
-    ListActivitiesResponse listActivities(ListActivitiesRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    ListActivitiesResponse listActivities(ListActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Address Book
-    GetPortfolioAddressBookResponse getAddressBook(GetPortfolioAddressBookRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    GetPortfolioAddressBookResponse getAddressBook(GetPortfolioAddressBookRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Balances
-    ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    ListWeb3WalletBalancesResponse listWeb3WalletBalances(ListWeb3WalletBalancesRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListWeb3WalletBalancesResponse listWeb3WalletBalances(ListWeb3WalletBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Commission
-    GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Orders
-    ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Products
-    ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Transactions
-    GetTransactionByTransactionIdResponse getTransactionByTransactionId(GetTransactionByTransactionIdRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CreateTransferResponse createTransfer(CreateTransferRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    GetTransactionByTransactionIdResponse getTransactionByTransactionId(GetTransactionByTransactionIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateTransferResponse createTransfer(CreateTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 
     // Wallets
-    ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetWalletByIdResponse getWalletById(GetWalletByIdRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
-    GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) throws CoinbasePrimeException, CoinbasePrimeException;
+    ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetWalletByIdResponse getWalletById(GetWalletByIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }
