@@ -38,7 +38,7 @@ public class CoinbaseCredentials {
     private String signingKey;
 
 
-    public CoinbaseCredentials(String credentialsJson) {
+    public CoinbaseCredentials(String credentialsJson) throws CoinbaseClientException {
         ObjectMapper mapper = new ObjectMapper();
         try {
             CoinbaseCredentials credentials = mapper.readValue(credentialsJson, CoinbaseCredentials.class);
@@ -75,7 +75,7 @@ public class CoinbaseCredentials {
         this.signingKey = builder.signingKey;
     }
 
-    public String sign(long timestamp, String method, String path, String body) {
+    public String sign(long timestamp, String method, String path, String body) throws CoinbaseClientException {
         try {
             String message = String.format("%s%s%s%s", timestamp, method, path, body);
 
@@ -120,18 +120,42 @@ public class CoinbaseCredentials {
     }
 
     public static class Builder {
-        private final String accessKey;
-        private final String passphrase;
-        private final String signingKey;
+        private String accessKey;
+        private String passphrase;
+        private String signingKey;
 
-        public Builder(String accessKey, String passphrase, String signingKey) {
+        public Builder() {}
+
+        public Builder accessKey(String accessKey) {
             this.accessKey = accessKey;
-            this.passphrase = passphrase;
-            this.signingKey = signingKey;
+            return this;
         }
 
-        public CoinbaseCredentials build() {
+        public Builder passphrase(String passphrase) {
+            this.passphrase = passphrase;
+            return this;
+        }
+
+        public Builder signingKey(String signingKey) {
+            this.signingKey = signingKey;
+            return this;
+        }
+
+        public CoinbaseCredentials build() throws CoinbaseClientException {
+            this.validate();
             return new CoinbaseCredentials(this);
+        }
+
+        private void validate() {
+            if (isNullOrEmpty(this.accessKey)) {
+                throw new CoinbaseClientException("Access key is required");
+            }
+            if (isNullOrEmpty(this.passphrase)) {
+                throw new CoinbaseClientException("Passphrase is required");
+            }
+            if (isNullOrEmpty(this.signingKey)) {
+                throw new CoinbaseClientException("Signing key is required");
+            }
         }
     }
 }
