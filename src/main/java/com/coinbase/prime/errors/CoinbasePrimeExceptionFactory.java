@@ -25,7 +25,7 @@ public class CoinbasePrimeExceptionFactory {
             ObjectMapper mapper = new ObjectMapper();
             CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
             return new CoinbasePrimeException(statusCode, errorMessage.getMessage());
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return new CoinbasePrimeException(statusCode, responseBody);
         }
     }
@@ -35,7 +35,7 @@ public class CoinbasePrimeExceptionFactory {
             ObjectMapper mapper = new ObjectMapper();
             CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
             return new CoinbasePrimeException(errorMessage.getMessage(), cause);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return new CoinbasePrimeException(responseBody, cause);
         }
     }
@@ -45,7 +45,7 @@ public class CoinbasePrimeExceptionFactory {
             ObjectMapper mapper = new ObjectMapper();
             CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
             return new CoinbasePrimeException(statusCode, errorMessage.getMessage(), cause);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return new CoinbasePrimeException(statusCode, responseBody, cause);
         }
     }
