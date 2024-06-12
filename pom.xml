@@ -22,7 +22,12 @@
     <artifactId>prime-sdk-java</artifactId>
     <name>Coinbase Prime Java SDK</name>
     <groupId>com.coinbase.prime</groupId>
-    <version>1.0.0</version>
+    <version>0.1.0</version>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+        </license>
+    </licenses>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

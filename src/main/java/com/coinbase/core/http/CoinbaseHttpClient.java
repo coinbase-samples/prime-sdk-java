@@ -110,7 +110,7 @@ public abstract class CoinbaseHttpClient {
         }
     }
 
-    private String get(String path, String query) {
+    private String get(String path, String query) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(path, query, HTTP_METHOD_GET, EMPTY_STRING);
 
         HttpRequest httpRequest = builder
@@ -176,7 +176,7 @@ public abstract class CoinbaseHttpClient {
         return sendRequest(httpRequest);
     }
 
-    private String delete(String path, String query) {
+    private String delete(String path, String query) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(path, query, HTTP_METHOD_DELETE, "");
 
         HttpRequest httpRequest = builder
