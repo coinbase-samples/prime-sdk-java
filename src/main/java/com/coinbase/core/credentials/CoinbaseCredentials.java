@@ -50,7 +50,7 @@ public class CoinbaseCredentials {
         }
     }
 
-    public CoinbaseCredentials(String accessKey, String passphrase, String signingKey) {
+    public CoinbaseCredentials(String accessKey, String passphrase, String signingKey) throws CoinbaseClientException {
         if (isNullOrEmpty(accessKey)) {
             throw new CoinbaseClientException("Access key is required");
         }
@@ -146,7 +146,7 @@ public class CoinbaseCredentials {
             return new CoinbaseCredentials(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.accessKey)) {
                 throw new CoinbaseClientException("Access key is required");
             }
