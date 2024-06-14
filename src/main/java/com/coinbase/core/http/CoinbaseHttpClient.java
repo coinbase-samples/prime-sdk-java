@@ -42,7 +42,7 @@ public abstract class CoinbaseHttpClient {
         this.client = HttpClient.newHttpClient();
     }
 
-    public CoinbaseHttpClient(String baseUrl, String credentialsJson) {
+    public CoinbaseHttpClient(String baseUrl, String credentialsJson) throws CoinbaseClientException {
         this.credentials = new CoinbaseCredentials(credentialsJson);
         this.baseUrl = baseUrl;
         this.client = HttpClient.newHttpClient();
@@ -54,7 +54,7 @@ public abstract class CoinbaseHttpClient {
         this.client = client;
     }
 
-    public CoinbaseHttpClient(String baseUrl, String credentialsJson, HttpClient client) {
+    public CoinbaseHttpClient(String baseUrl, String credentialsJson, HttpClient client) throws CoinbaseClientException {
         this.credentials = new CoinbaseCredentials(credentialsJson);
         this.baseUrl = baseUrl;
         this.client = client;
