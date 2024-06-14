@@ -28,6 +28,7 @@ import java.net.http.HttpResponse;
 import java.time.Instant;
 
 import static com.coinbase.core.utils.Constants.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 import static com.coinbase.core.utils.Utils.toJsonString;
 
 public abstract class CoinbaseHttpClient {
@@ -36,27 +37,58 @@ public abstract class CoinbaseHttpClient {
     private final String baseUrl;
     private final HttpClient client;
 
-    public CoinbaseHttpClient(String baseUrl, CoinbaseCredentials credentials) {
+    public CoinbaseHttpClient(String baseUrl, CoinbaseCredentials credentials) throws CoinbaseClientException {
+        if (credentials == null) {
+            throw new CoinbaseClientException("Credentials are required");
+        }
         this.credentials = credentials;
+
+        if (isNullOrEmpty(baseUrl)) {
+            throw new CoinbaseClientException("Base URL is required");
+        }
         this.baseUrl = baseUrl;
+
         this.client = HttpClient.newHttpClient();
     }
 
     public CoinbaseHttpClient(String baseUrl, String credentialsJson) throws CoinbaseClientException {
         this.credentials = new CoinbaseCredentials(credentialsJson);
+
+        if (isNullOrEmpty(baseUrl)) {
+            throw new CoinbaseClientException("Base URL is required");
+        }
         this.baseUrl = baseUrl;
         this.client = HttpClient.newHttpClient();
     }
 
-    public CoinbaseHttpClient(String baseUrl, CoinbaseCredentials credentials, HttpClient client) {
+    public CoinbaseHttpClient(String baseUrl, CoinbaseCredentials credentials, HttpClient client) throws CoinbaseClientException {
+        if (credentials == null) {
+            throw new CoinbaseClientException("Credentials are required");
+        }
         this.credentials = credentials;
+
+        if (isNullOrEmpty(baseUrl)) {
+            throw new CoinbaseClientException("Base URL is required");
+        }
         this.baseUrl = baseUrl;
+
+        if (client == null) {
+            throw new CoinbaseClientException("HTTP client is required");
+        }
         this.client = client;
     }
 
     public CoinbaseHttpClient(String baseUrl, String credentialsJson, HttpClient client) throws CoinbaseClientException {
         this.credentials = new CoinbaseCredentials(credentialsJson);
+
+        if (isNullOrEmpty(baseUrl)) {
+            throw new CoinbaseClientException("Base URL is required");
+        }
         this.baseUrl = baseUrl;
+
+        if (client == null) {
+            throw new CoinbaseClientException("HTTP client is required");
+        }
         this.client = client;
     }
 
