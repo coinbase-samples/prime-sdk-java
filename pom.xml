@@ -146,7 +146,6 @@
               </configuration>
             </plugin>
 
-
         </plugins>
 		</build>
 
@@ -162,37 +161,43 @@
     </distributionManagement>
 
 		<dependencies>
+
         <dependency>
-            <groupId>com.coinbase.core</groupId>
-            <artifactId>coinbase-core-java</artifactId>
-            <version>${core.version}</version>
+					<groupId>com.coinbase.core</groupId>
+         	<artifactId>coinbase-core-java</artifactId>
+         	<version>${core.version}</version>
         </dependency>
 
         <!-- JSON processing: jackson -->
         <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-base</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
+					<groupId>com.fasterxml.jackson.jaxrs</groupId>
+         	<artifactId>jackson-jaxrs-base</artifactId>
+         	<version>${jackson.version}</version>
+				</dependency>
+
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
+         	<groupId>com.fasterxml.jackson.core</groupId>
+         	<artifactId>jackson-core</artifactId>
+         	<version>${jackson.version}</version>
+				</dependency>
+
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
+         	<groupId>com.fasterxml.jackson.core</groupId>
+         	<artifactId>jackson-annotations</artifactId>
+         	<version>${jackson.version}</version>
+				</dependency>
+
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
+         	<groupId>com.fasterxml.jackson.core</groupId>
+         	<artifactId>jackson-databind</artifactId>
+         	<version>${jackson.version}</version>
+				</dependency>
+
         <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-json-provider</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
+         	<groupId>com.fasterxml.jackson.jaxrs</groupId>
+         	<artifactId>jackson-jaxrs-json-provider</artifactId>
+         	<version>${jackson.version}</version>
+				</dependency>
+
     </dependencies>
 </project>
