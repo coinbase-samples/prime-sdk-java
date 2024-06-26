@@ -50,6 +50,20 @@ For an example of how to use the client, see the [`Main`](src/main/java/com/coin
 
 **Warning**: this does place a market order for a very small amount of ADA. Please ensure that you have the necessary funds in your account before running this code.
 
+## Binaries
+
+Binaries and dependency information for Maven, Gradle, Ivy and others can be found at the [Maven Central Repository](https://central.sonatype.com/search?q=g%3Acom.coinbase.prime+a%3Acoinbase-prime-sdk-java&smo=true)
+
+Maven example:
+
+```xml
+<dependency>
+    <groupId>com.coinbase.prime</groupId>
+    <artifactId>coinbase-prime-sdk-java</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
 ## Build
 
 To build the sample library, ensure that Java Development Kit (JDK) 11+ is installed and then run:
