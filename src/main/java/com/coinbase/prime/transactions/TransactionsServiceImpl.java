@@ -16,10 +16,14 @@
 
 package com.coinbase.prime.transactions;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.transactions.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class TransactionsServiceImpl extends CoinbaseServiceImpl implements TransactionsService {
     public TransactionsServiceImpl(CoinbasePrimeClient client) {
@@ -28,43 +32,61 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
 
     @Override
     public GetTransactionByTransactionIdResponse getTransactionByTransactionId(GetTransactionByTransactionIdRequest request) throws CoinbasePrimeException {
-        GetTransactionByTransactionIdResponse resp = doGet(request, GetTransactionByTransactionIdResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId()),
+                null,
+                List.of(200),
+                new TypeReference<GetTransactionByTransactionIdResponse>() {});
     }
 
     @Override
     public CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbasePrimeException {
-        CreateConversionResponse resp = doPost(request, CreateConversionResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<CreateConversionResponse>() {});
     }
 
     @Override
     public ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbasePrimeException {
-        ListPortfolioTransactionsResponse resp = doGet(request, ListPortfolioTransactionsResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/transactions", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioTransactionsResponse>() {});
     }
 
     @Override
     public ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbasePrimeException {
-        ListWalletTransactionsResponse resp = doGet(request, ListWalletTransactionsResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<ListWalletTransactionsResponse>() {});
     }
 
     @Override
     public CreateTransferResponse createTransfer(CreateTransferRequest request) throws CoinbasePrimeException {
-        CreateTransferResponse resp = doPost(request, CreateTransferResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<CreateTransferResponse>() {});
     }
 
     @Override
     public CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request) throws CoinbasePrimeException {
-        CreateWithdrawalResponse resp = doPost(request, CreateWithdrawalResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<CreateWithdrawalResponse>() {});
     }
 }

@@ -16,11 +16,15 @@
 
 package com.coinbase.prime.products;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.products.ListPortfolioProductsRequest;
 import com.coinbase.prime.model.products.ListPortfolioProductsResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class ProductsServiceImpl extends CoinbaseServiceImpl implements ProductsService {
     public ProductsServiceImpl(CoinbasePrimeClient client) {
@@ -29,8 +33,11 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
 
     @Override
     public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException {
-        ListPortfolioProductsResponse resp = doGet(request, ListPortfolioProductsResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/products", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioProductsResponse>() {});
     }
 }

@@ -17,53 +17,36 @@
 package com.coinbase.prime.model.transactions;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListWalletTransactionsRequest extends CoinbaseGetRequest {
+public class ListWalletTransactionsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
     private TransactionType type;
     @JsonProperty("start_time")
     private String startTime;
     @JsonProperty("end_time")
     private String endTime;
-    private PaginationParams paginationParams;
 
     public ListWalletTransactionsRequest() {
     }
 
     public ListWalletTransactionsRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
         this.type = builder.type;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryString = "";
-
-        queryString = appendQueryParams(queryString, "type", this.getType().name());
-        queryString = appendQueryParams(queryString, "start_time", this.getStartTime());
-        queryString = appendQueryParams(queryString, "end_time", this.getEndTime());
-        if (this.getPaginationParams() != null) {
-            queryString = this.getPaginationParams().generateQueryString(queryString);
-        }
-
-        return queryString;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/wallets/%s/transactions", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {
@@ -106,21 +89,15 @@ public class ListWalletTransactionsRequest extends CoinbaseGetRequest {
         this.endTime = endTime;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private String portfolioId;
         private String walletId;
         private TransactionType type;
         private String startTime;
         private String endTime;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder() {
         }
@@ -150,8 +127,14 @@ public class ListWalletTransactionsRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder paginationParams(PaginationParams paginationParams) {
-            this.paginationParams = paginationParams;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 

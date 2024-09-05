@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.users;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
@@ -23,6 +24,9 @@ import com.coinbase.prime.model.users.ListPortfolioUsersRequest;
 import com.coinbase.prime.model.users.ListPortfolioUsersResponse;
 import com.coinbase.prime.model.users.ListUsersRequest;
 import com.coinbase.prime.model.users.ListUsersResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class UsersServiceImpl extends CoinbaseServiceImpl implements UsersService {
     public UsersServiceImpl(CoinbasePrimeClient client) {
@@ -31,15 +35,21 @@ public class UsersServiceImpl extends CoinbaseServiceImpl implements UsersServic
 
     @Override
     public ListUsersResponse listUsers(ListUsersRequest request) throws CoinbasePrimeException {
-        ListUsersResponse resp = doGet(request, ListUsersResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/users", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListUsersResponse>() {});
     }
 
     @Override
     public ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbasePrimeException {
-        ListPortfolioUsersResponse resp = doGet(request, ListPortfolioUsersResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/users", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioUsersResponse>() {});
     }
 }

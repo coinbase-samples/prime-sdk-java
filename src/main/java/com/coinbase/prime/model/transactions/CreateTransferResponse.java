@@ -34,7 +34,6 @@ public class CreateTransferResponse {
     private String sourceAddress;
     @JsonProperty("transaction_id")
     private String transactionId;
-    private CreateTransferRequest request;
 
     public CreateTransferResponse() {
     }
@@ -49,7 +48,6 @@ public class CreateTransferResponse {
         this.destinationType = builder.destinationType;
         this.sourceAddress = builder.sourceAddress;
         this.transactionId = builder.transactionId;
-        this.request = builder.request;
     }
 
     public String getActivityId() {
@@ -124,14 +122,6 @@ public class CreateTransferResponse {
         this.transactionId = transactionId;
     }
 
-    public CreateTransferRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(CreateTransferRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private String activityId;
         private String approvalUrl;
@@ -142,7 +132,6 @@ public class CreateTransferResponse {
         private String destinationType;
         private String sourceAddress;
         private String transactionId;
-        private CreateTransferRequest request;
 
         public Builder() {
         }
@@ -189,11 +178,6 @@ public class CreateTransferResponse {
 
         public Builder transactionId(String transactionId) {
             this.transactionId = transactionId;
-            return this;
-        }
-
-        public Builder request(CreateTransferRequest request) {
-            this.request = request;
             return this;
         }
 

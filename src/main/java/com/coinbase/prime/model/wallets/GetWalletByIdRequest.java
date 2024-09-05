@@ -17,12 +17,11 @@
 package com.coinbase.prime.model.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetWalletByIdRequest extends CoinbaseGetRequest {
+public class GetWalletByIdRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
 
@@ -35,16 +34,6 @@ public class GetWalletByIdRequest extends CoinbaseGetRequest {
     public GetWalletByIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/wallets/%s", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {

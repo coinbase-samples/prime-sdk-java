@@ -21,7 +21,6 @@ import com.coinbase.prime.model.common.Pagination;
 public class ListPortfolioUsersResponse {
     private User[] users;
     private Pagination pagination;
-    private ListPortfolioUsersRequest request;
 
     public ListPortfolioUsersResponse() {
     }
@@ -29,7 +28,6 @@ public class ListPortfolioUsersResponse {
     public ListPortfolioUsersResponse(Builder builder) {
         this.users = builder.users;
         this.pagination = builder.pagination;
-        this.request = builder.request;
     }
 
     public User[] getUsers() {
@@ -48,18 +46,9 @@ public class ListPortfolioUsersResponse {
         this.pagination = pagination;
     }
 
-    public ListPortfolioUsersRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListPortfolioUsersRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private User[] users;
         private Pagination pagination;
-        private ListPortfolioUsersRequest request;
 
         public Builder() {
         }
@@ -71,11 +60,6 @@ public class ListPortfolioUsersResponse {
 
         public Builder pagination(Pagination pagination) {
             this.pagination = pagination;
-            return this;
-        }
-
-        public Builder request(ListPortfolioUsersRequest request) {
-            this.request = request;
             return this;
         }
 

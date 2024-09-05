@@ -20,7 +20,6 @@ import com.coinbase.prime.model.common.Pagination;
 
 public class ListPortfolioProductsResponse {
     private Product[] products;
-    private ListPortfolioProductsRequest request;
     private Pagination pagination;
 
     public ListPortfolioProductsResponse() {
@@ -28,7 +27,6 @@ public class ListPortfolioProductsResponse {
 
     public ListPortfolioProductsResponse(Builder builder) {
         this.products = builder.products;
-        this.request = builder.request;
         this.pagination = builder.pagination;
     }
 
@@ -38,14 +36,6 @@ public class ListPortfolioProductsResponse {
 
     public void setProducts(Product[] products) {
         this.products = products;
-    }
-
-    public ListPortfolioProductsRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListPortfolioProductsRequest request) {
-        this.request = request;
     }
 
     public Pagination getPagination() {
@@ -58,7 +48,6 @@ public class ListPortfolioProductsResponse {
 
     public static class Builder {
         private Product[] products;
-        private ListPortfolioProductsRequest request;
         private Pagination pagination;
 
         public Builder() {
@@ -66,11 +55,6 @@ public class ListPortfolioProductsResponse {
 
         public Builder products(Product[] products) {
             this.products = products;
-            return this;
-        }
-
-        public Builder request(ListPortfolioProductsRequest request) {
-            this.request = request;
             return this;
         }
 

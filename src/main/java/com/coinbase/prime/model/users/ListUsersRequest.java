@@ -17,36 +17,24 @@
 package com.coinbase.prime.model.users;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListUsersRequest extends CoinbaseGetRequest {
+public class ListUsersRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
-    private PaginationParams paginationParams;
 
     public ListUsersRequest() {
     }
 
     public ListUsersRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.entityId = builder.entityId;
-        this.paginationParams = builder.pagination;
-    }
-
-    @Override
-    public String getQueryString() {
-        if (this.getPaginationParams() == null) {
-            return "";
-        }
-
-        return this.getPaginationParams().generateQueryString("");
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/entities/%s/users", this.getEntityId());
     }
 
     public String getEntityId() {
@@ -57,24 +45,24 @@ public class ListUsersRequest extends CoinbaseGetRequest {
         this.entityId = entityId;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private final String entityId;
-        private PaginationParams pagination;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder(String entityId) {
             this.entityId = entityId;
         }
 
-        public Builder pagination(PaginationParams pagination) {
-            this.pagination = pagination;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 

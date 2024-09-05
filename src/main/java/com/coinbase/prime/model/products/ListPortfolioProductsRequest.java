@@ -17,32 +17,24 @@
 package com.coinbase.prime.model.products;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListPortfolioProductsRequest extends CoinbaseGetRequest {
+public class ListPortfolioProductsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
-    private PaginationParams paginationParams;
 
     public ListPortfolioProductsRequest() {
     }
 
     public ListPortfolioProductsRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getQueryString() {
-        return paginationParams != null ? paginationParams.generateQueryString("") : "";
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/products", this.getPortfolioId());
     }
 
     public String getPortfolioId() {
@@ -53,17 +45,11 @@ public class ListPortfolioProductsRequest extends CoinbaseGetRequest {
         this.portfolioId = portfolioId;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private String portfolioId;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder() {
         }
@@ -73,8 +59,14 @@ public class ListPortfolioProductsRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder paginationParams(PaginationParams paginationParams) {
-            this.paginationParams = paginationParams;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 
