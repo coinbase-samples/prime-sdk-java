@@ -53,6 +53,8 @@ public class Order {
     private String filledValue;
     @JsonProperty("average_filled_price")
     private String averageFilledPrice;
+    @JsonProperty("net_average_filled_price")
+    private String netAverageFilledPrice;
     private String commission;
     @JsonProperty("exchange_fee")
     private String exchangeFee;
@@ -82,6 +84,7 @@ public class Order {
         this.filledQuantity = builder.filledQuantity;
         this.filledValue = builder.filledValue;
         this.averageFilledPrice = builder.averageFilledPrice;
+        this.netAverageFilledPrice = builder.netAverageFilledPrice;
         this.commission = builder.commission;
         this.exchangeFee = builder.exchangeFee;
         this.historicalPov = builder.historicalPov;
@@ -239,6 +242,14 @@ public class Order {
         this.averageFilledPrice = averageFilledPrice;
     }
 
+    public String getNetAverageFilledPrice() {
+        return netAverageFilledPrice;
+    }
+
+    public void setNetAverageFilledPrice(String netAverageFilledPrice) {
+        this.netAverageFilledPrice = netAverageFilledPrice;
+    }
+
     public String getCommission() {
         return commission;
     }
@@ -283,6 +294,7 @@ public class Order {
         private String filledQuantity;
         private String filledValue;
         private String averageFilledPrice;
+        private String netAverageFilledPrice;
         private String commission;
         private String exchangeFee;
         private String historicalPov;
@@ -382,6 +394,11 @@ public class Order {
 
         public Builder averageFilledPrice(String averageFilledPrice) {
             this.averageFilledPrice = averageFilledPrice;
+            return this;
+        }
+
+        public Builder netAverageFilledPrice(String netAverageFilledPrice) {
+            this.netAverageFilledPrice = netAverageFilledPrice;
             return this;
         }
 

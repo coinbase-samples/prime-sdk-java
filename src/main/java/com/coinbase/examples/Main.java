@@ -16,7 +16,8 @@
 
 package com.coinbase.examples;
 
-import com.coinbase.core.credentials.CoinbaseCredentials;
+import com.coinbase.prime.client.CoinbasePrimeClient;
+import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
@@ -26,6 +27,14 @@ import com.coinbase.prime.model.transactions.TransactionType;
 import com.coinbase.prime.model.wallets.ListWalletsRequest;
 import com.coinbase.prime.model.wallets.ListWalletsResponse;
 import com.coinbase.prime.model.wallets.WalletType;
+import com.coinbase.prime.orders.OrdersService;
+import com.coinbase.prime.orders.OrdersServiceImpl;
+import com.coinbase.prime.portfolios.PortfoliosService;
+import com.coinbase.prime.portfolios.PortfoliosServiceImpl;
+import com.coinbase.prime.transactions.TransactionsService;
+import com.coinbase.prime.transactions.TransactionsServiceImpl;
+import com.coinbase.prime.wallets.WalletsService;
+import com.coinbase.prime.wallets.WalletsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
@@ -36,18 +45,21 @@ public class Main {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            CoinbaseCredentials credentials = new CoinbaseCredentials(credsStringBlob);
-            CoinbasePrimeHttpClient client = new CoinbasePrimeHttpClient(credentials);
+            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(credsStringBlob);
+            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
 
             String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-            GetPortfolioByIdResponse portfolioResponse = client.getPortfolioById(
+
+            PortfoliosService portfoliosService = new PortfoliosServiceImpl(client);
+            GetPortfolioByIdResponse portfolioResponse = portfoliosService.getPortfolioById(
                     new GetPortfolioByIdRequest.Builder()
                             .portfolioId(portfolioId)
                             .build());
 
             System.out.println(mapper.writeValueAsString(portfolioResponse));
 
-            ListWalletsResponse walletsResponse = client.listWallets(
+            WalletsService walletsService = new WalletsServiceImpl(client);
+            ListWalletsResponse walletsResponse = walletsService.listWallets(
                     new ListWalletsRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())
                             .type(WalletType.VAULT)
@@ -56,7 +68,8 @@ public class Main {
 
             System.out.println(mapper.writeValueAsString(walletsResponse));
 
-            ListPortfolioTransactionsResponse listTransactionsResponse = client.listPortfolioTransactions(
+            TransactionsService transactionsService = new TransactionsServiceImpl(client);
+            ListPortfolioTransactionsResponse listTransactionsResponse = transactionsService.listPortfolioTransactions(
                     new ListPortfolioTransactionsRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())
                             .symbols(new String[]{"ADA"})
@@ -64,20 +77,21 @@ public class Main {
                             .build());
             System.out.println(mapper.writeValueAsString(listTransactionsResponse));
 
-            CreateOrderResponse orderResponse = client.createOrder(
+            OrdersService ordersService = new OrdersServiceImpl(client);
+            CreateOrderResponse orderResponse = ordersService.createOrder(
                     new CreateOrderRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())
                             .productId("ADA-USD")
                             .side(OrderSide.BUY)
                             .type(OrderType.MARKET)
-                            .baseQuantity("0.001")
+                            .baseQuantity("10.0")
                             .clientOrderId(UUID.randomUUID().toString())
                             .build());
             System.out.println(mapper.writeValueAsString(orderResponse));
 
             // Wait for the order to be processed by Coinbase Prime
             Thread.sleep(1000);
-            GetOrderByOrderIdResponse getOrderResponse = client.getOrderByOrderId(
+            GetOrderByOrderIdResponse getOrderResponse = ordersService.getOrderByOrderId(
                     new GetOrderByOrderIdRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())
                             .orderId(orderResponse.getOrderId())
@@ -88,7 +102,7 @@ public class Main {
                     || getOrderResponse.getOrder().getStatus() == OrderStatus.PENDING) {
                 // Wait for additional order fills
                 Thread.sleep(1000);
-                getOrderResponse = client.getOrderByOrderId(
+                getOrderResponse = ordersService.getOrderByOrderId(
                         new GetOrderByOrderIdRequest.Builder()
                                 .portfolioId(portfolioResponse.getPortfolio().getId())
                                 .orderId(orderResponse.getOrderId())
