@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.paymentmethods;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
@@ -23,6 +24,9 @@ import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
 import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
 import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements PaymentMethodsService {
     public PaymentMethodsServiceImpl(CoinbasePrimeClient client) {
@@ -31,15 +35,21 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements Pa
 
     @Override
     public ListEntityPaymentMethodsResponse listEntityPaymentMethods(ListEntityPaymentMethodsRequest request) throws CoinbasePrimeException {
-        ListEntityPaymentMethodsResponse response = doGet(request, ListEntityPaymentMethodsResponse.class);
-        response.setRequest(request);
-        return response;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/payment-methods", request.getEntityId()),
+                null,
+                List.of(200),
+                new TypeReference<ListEntityPaymentMethodsResponse>() {});
     }
 
     @Override
     public GetEntityPaymentMethodResponse getEntityPaymentMethod(GetEntityPaymentMethodRequest request) throws CoinbasePrimeException {
-        GetEntityPaymentMethodResponse resp = doGet(request, GetEntityPaymentMethodResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
+                null,
+                List.of(200),
+                new TypeReference<GetEntityPaymentMethodResponse>() {});
     }
 }

@@ -17,12 +17,11 @@
 package com.coinbase.prime.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetPortfolioCreditInformationRequest extends CoinbaseGetRequest {
+public class GetPortfolioCreditInformationRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
 
@@ -35,16 +34,6 @@ public class GetPortfolioCreditInformationRequest extends CoinbaseGetRequest {
 
     public GetPortfolioCreditInformationRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/credit", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

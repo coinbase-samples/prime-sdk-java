@@ -17,12 +17,11 @@
 package com.coinbase.prime.model.paymentmethods;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetEntityPaymentMethodRequest extends CoinbaseGetRequest {
+public class GetEntityPaymentMethodRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
     @JsonProperty(required = true, value = "payment_method_id")
@@ -34,16 +33,6 @@ public class GetEntityPaymentMethodRequest extends CoinbaseGetRequest {
     public GetEntityPaymentMethodRequest(Builder builder) {
         this.entityId = builder.entityId;
         this.paymentMethodId = builder.paymentMethodId;
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/entities/%s/payment-methods/%s", this.getEntityId(), this.getPaymentMethodId());
     }
 
     public String getEntityId() {

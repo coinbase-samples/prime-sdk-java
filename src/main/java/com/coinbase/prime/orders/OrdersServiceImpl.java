@@ -36,7 +36,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
                 HttpMethod.GET,
                 String.format("/portfolios/%s/open_orders", request.getPortfolioId()),
                 request,
-                List.of(200);
+                List.of(200),
                 new TypeReference<ListOpenOrdersResponse>() {});
     }
 

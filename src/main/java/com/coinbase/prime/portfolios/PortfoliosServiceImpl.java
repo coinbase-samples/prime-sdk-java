@@ -16,10 +16,14 @@
 
 package com.coinbase.prime.portfolios;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.portfolios.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements PortfoliosService {
     public PortfoliosServiceImpl(CoinbasePrimeClient client) {
@@ -28,20 +32,31 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
 
     @Override
     public ListPortfoliosResponse listPortfolios() throws CoinbasePrimeException {
-        return doGet(new ListPortfoliosRequest(), ListPortfoliosResponse.class);
+        return this.request(
+                HttpMethod.GET,
+                "/portfolios",
+                null,
+                List.of(200),
+                new TypeReference<ListPortfoliosResponse>() {});
     }
 
     @Override
     public GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request) throws CoinbasePrimeException {
-        GetPortfolioByIdResponse resp = doGet(request, GetPortfolioByIdResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s", request.getPortfolioId()),
+                null,
+                List.of(200),
+                new TypeReference<GetPortfolioByIdResponse>() {});
     }
 
     @Override
     public GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbasePrimeException {
-        GetPortfolioCreditInformationResponse resp = doGet(request, GetPortfolioCreditInformationResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/credit", request.getPortfolioId()),
+                null,
+                List.of(200),
+                new TypeReference<GetPortfolioCreditInformationResponse>() {});
     }
 }
