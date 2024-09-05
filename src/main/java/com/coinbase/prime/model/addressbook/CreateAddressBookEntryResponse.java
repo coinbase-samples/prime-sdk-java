@@ -25,7 +25,6 @@ public class CreateAddressBookEntryResponse {
     private Integer numApprovalsRemaining;
     @JsonProperty("activity_id")
     private String activityId;
-    private CreateAddressBookEntryRequest request;
 
     public CreateAddressBookEntryResponse() {
     }
@@ -34,7 +33,6 @@ public class CreateAddressBookEntryResponse {
         this.activityType = builder.activityType;
         this.numApprovalsRemaining = builder.numApprovalsRemaining;
         this.activityId = builder.activityId;
-        this.request = builder.request;
     }
 
     public AddressBookActivityType getActivityType() {
@@ -61,19 +59,10 @@ public class CreateAddressBookEntryResponse {
         this.activityId = activityId;
     }
 
-    public CreateAddressBookEntryRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(CreateAddressBookEntryRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private AddressBookActivityType activityType;
         private Integer numApprovalsRemaining;
         private String activityId;
-        private CreateAddressBookEntryRequest request;
 
         public Builder activityType(AddressBookActivityType activityType) {
             this.activityType = activityType;
@@ -87,11 +76,6 @@ public class CreateAddressBookEntryResponse {
 
         public Builder activityId(String activityId) {
             this.activityId = activityId;
-            return this;
-        }
-
-        public Builder request(CreateAddressBookEntryRequest request) {
-            this.request = request;
             return this;
         }
 

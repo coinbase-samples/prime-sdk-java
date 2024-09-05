@@ -16,10 +16,9 @@
 
 package com.coinbase.prime.model.allocations;
 
-import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateAllocationRequest extends CoinbasePostRequest {
+public class CreateAllocationRequest {
     @JsonProperty("allocation_id")
     private String allocationId;
     @JsonProperty("source_portfolio_id")
@@ -49,11 +48,6 @@ public class CreateAllocationRequest extends CoinbasePostRequest {
         this.sizeType = builder.sizeType;
         this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
         this.nettingId = builder.nettingId;
-    }
-
-    @Override
-    public String getPath() {
-        return "/allocations";
     }
 
     public String getAllocationId() {

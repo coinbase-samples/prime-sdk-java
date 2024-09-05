@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.activities;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
@@ -23,6 +24,9 @@ import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
 import com.coinbase.prime.model.activities.GetActivityByActivityIdResponse;
 import com.coinbase.prime.model.activities.ListActivitiesRequest;
 import com.coinbase.prime.model.activities.ListActivitiesResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements ActivitiesService {
     public ActivitiesServiceImpl(CoinbasePrimeClient client) {
@@ -31,15 +35,21 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
 
     @Override
     public ListActivitiesResponse listActivities(ListActivitiesRequest request) throws CoinbasePrimeException {
-        ListActivitiesResponse resp = doGet(request, ListActivitiesResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/activities", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListActivitiesResponse>() {});
     }
 
     @Override
     public GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request) throws CoinbasePrimeException {
-        GetActivityByActivityIdResponse resp = doGet(request, GetActivityByActivityIdResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
+                null,
+                List.of(200),
+                new TypeReference<GetActivityByActivityIdResponse>() {});
     }
 }

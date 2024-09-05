@@ -16,11 +16,15 @@
 
 package com.coinbase.prime.assets;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.assets.ListAssetsRequest;
 import com.coinbase.prime.model.assets.ListAssetsResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class AssetsServiceImpl extends CoinbaseServiceImpl implements AssetsService {
     public AssetsServiceImpl(CoinbasePrimeClient client) {
@@ -29,8 +33,11 @@ public class AssetsServiceImpl extends CoinbaseServiceImpl implements AssetsServ
 
     @Override
     public ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbasePrimeException {
-        ListAssetsResponse response = doGet(request, ListAssetsResponse.class);
-        response.setRequest(request);
-        return response;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/assets", request.getEntityId()),
+                null,
+                List.of(200),
+                new TypeReference<ListAssetsResponse>() {});
     }
 }

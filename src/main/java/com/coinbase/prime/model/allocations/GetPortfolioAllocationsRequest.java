@@ -17,18 +17,19 @@
 package com.coinbase.prime.model.allocations;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
 import com.coinbase.prime.model.orders.OrderSide;
-import com.coinbase.prime.model.common.PaginationParams;
-import com.coinbase.prime.utils.Utils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
+public class GetPortfolioAllocationsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty("product_ids")
     private String[] productIds;
@@ -38,34 +39,17 @@ public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
     private Date startDate;
     @JsonProperty("end_date")
     private Date endDate;
-    private PaginationParams paginationParams;
 
     public GetPortfolioAllocationsRequest() {
     }
 
     public GetPortfolioAllocationsRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.productIds = builder.productIds;
         this.orderSide = builder.orderSide;
         this.startDate = builder.startDate;
         this.endDate = builder.endDate;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
-        queryString = appendAllQueryParams(this.getProductIds(), "product_ids", queryString);
-        queryString = appendQueryParams(queryString, "order_side", this.getOrderSide().toString());
-        queryString = appendQueryParams(queryString, "start_date", Utils.formatDate(this.getStartDate()));
-        queryString = appendQueryParams(queryString, "start_date", Utils.formatDate(this.getEndDate()));
-
-        return queryString;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/allocations", this.getPortfolioId());
     }
 
     public String getPortfolioId() {
@@ -108,21 +92,15 @@ public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
         this.endDate = endDate;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private String portfolioId;
         private String[] productIds;
         private OrderSide orderSide;
         private Date startDate;
         private Date endDate;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -153,8 +131,14 @@ public class GetPortfolioAllocationsRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder paginationParams(PaginationParams paginationParams) {
-            this.paginationParams = paginationParams;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 

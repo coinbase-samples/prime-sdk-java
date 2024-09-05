@@ -26,7 +26,6 @@ public class CreateAllocationResponse {
     private String failureReason;
     @JsonProperty("netting_id")
     private String nettingId;
-    private CreateAllocationRequest request;
 
     public CreateAllocationResponse() {
     }
@@ -35,7 +34,6 @@ public class CreateAllocationResponse {
         this.success = builder.success;
         this.allocationId = builder.allocationId;
         this.failureReason = builder.failureReason;
-        this.request = builder.request;
     }
 
     public boolean isSuccess() {
@@ -62,19 +60,10 @@ public class CreateAllocationResponse {
         this.failureReason = failureReason;
     }
 
-    public CreateAllocationRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(CreateAllocationRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private boolean success;
         private String allocationId;
         private String failureReason;
-        private CreateAllocationRequest request;
 
         public Builder() {
         }
@@ -91,11 +80,6 @@ public class CreateAllocationResponse {
 
         public Builder failureReason(String failureReason) {
             this.failureReason = failureReason;
-            return this;
-        }
-
-        public Builder request(CreateAllocationRequest request) {
-            this.request = request;
             return this;
         }
 

@@ -17,12 +17,11 @@
 package com.coinbase.prime.model.assets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListAssetsRequest extends CoinbaseGetRequest {
+public class ListAssetsRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
@@ -34,13 +33,8 @@ public class ListAssetsRequest extends CoinbaseGetRequest {
     }
 
     @Override
-    public String getQueryString() {
-        return "";
-    }
-
-    @Override
     public String getPath() {
-        return String.format("/entities/%s/assets", this.getEntityId());
+        return ;
     }
 
     public String getEntityId() {

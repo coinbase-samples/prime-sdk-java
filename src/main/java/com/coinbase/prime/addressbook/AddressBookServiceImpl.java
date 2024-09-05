@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.addressbook;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
@@ -23,6 +24,9 @@ import com.coinbase.prime.model.addressbook.CreateAddressBookEntryRequest;
 import com.coinbase.prime.model.addressbook.CreateAddressBookEntryResponse;
 import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookRequest;
 import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class AddressBookServiceImpl extends CoinbaseServiceImpl implements AddressBookService {
     public AddressBookServiceImpl(CoinbasePrimeClient client) {
@@ -31,15 +35,21 @@ public class AddressBookServiceImpl extends CoinbaseServiceImpl implements Addre
 
     @Override
     public GetPortfolioAddressBookResponse getAddressBook(GetPortfolioAddressBookRequest request) throws CoinbasePrimeException {
-        GetPortfolioAddressBookResponse resp = doGet(request, GetPortfolioAddressBookResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/address_book", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<GetPortfolioAddressBookResponse>() {});
     }
 
     @Override
     public CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbasePrimeException {
-        CreateAddressBookEntryResponse resp = doPost(request, CreateAddressBookEntryResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/address_book", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<CreateAddressBookEntryResponse>() {});
     }
 }
