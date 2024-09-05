@@ -17,7 +17,7 @@
 package com.coinbase.examples;
 
 import com.coinbase.prime.client.CoinbasePrimeClient;
-import com.coinbase.prime.common.PrimeServiceFactory;
+import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
@@ -29,13 +29,9 @@ import com.coinbase.prime.model.wallets.ListWalletsRequest;
 import com.coinbase.prime.model.wallets.ListWalletsResponse;
 import com.coinbase.prime.model.wallets.WalletType;
 import com.coinbase.prime.orders.OrdersService;
-import com.coinbase.prime.orders.OrdersServiceImpl;
 import com.coinbase.prime.portfolios.PortfoliosService;
-import com.coinbase.prime.portfolios.PortfoliosServiceImpl;
 import com.coinbase.prime.transactions.TransactionsService;
-import com.coinbase.prime.transactions.TransactionsServiceImpl;
 import com.coinbase.prime.wallets.WalletsService;
-import com.coinbase.prime.wallets.WalletsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
@@ -51,7 +47,7 @@ public class Main {
 
             String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            PortfoliosService portfoliosService = PrimeServiceFactory.createService(PortfoliosService.class, client);
+            PortfoliosService portfoliosService = PrimeServiceFactory.createPortfoliosService(client);
             GetPortfolioByIdResponse portfolioResponse = portfoliosService.getPortfolioById(
                     new GetPortfolioByIdRequest.Builder()
                             .portfolioId(portfolioId)
@@ -59,7 +55,7 @@ public class Main {
 
             System.out.println(mapper.writeValueAsString(portfolioResponse));
 
-            WalletsService walletsService = PrimeServiceFactory.createService(WalletsService.class, client);
+            WalletsService walletsService = PrimeServiceFactory.createWalletsService(client);
             ListWalletsResponse walletsResponse = walletsService.listWallets(
                     new ListWalletsRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())
@@ -69,7 +65,7 @@ public class Main {
 
             System.out.println(mapper.writeValueAsString(walletsResponse));
 
-            TransactionsService transactionsService = PrimeServiceFactory.createService(TransactionsService.class, client);
+            TransactionsService transactionsService = PrimeServiceFactory.createTransactionsService(client);
             ListPortfolioTransactionsResponse listTransactionsResponse = transactionsService.listPortfolioTransactions(
                     new ListPortfolioTransactionsRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())
@@ -78,7 +74,7 @@ public class Main {
                             .build());
             System.out.println(mapper.writeValueAsString(listTransactionsResponse));
 
-            OrdersService ordersService = PrimeServiceFactory.createService(OrdersService.class, client);
+            OrdersService ordersService = PrimeServiceFactory.createOrdersService(client);
             CreateOrderResponse orderResponse = ordersService.createOrder(
                     new CreateOrderRequest.Builder()
                             .portfolioId(portfolioResponse.getPortfolio().getId())

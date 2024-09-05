@@ -29,7 +29,7 @@ public class Main {
 
             String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            PortfoliosService portfoliosService = PrimeServiceFactory.createService(PortfoliosService.class, client);
+            PortfoliosService portfoliosService = PrimeServiceFactory.createPortfoliosService(client);
             GetPortfolioByIdResponse portfolioResponse = portfoliosService.getPortfolioById(
                     new GetPortfolioByIdRequest.Builder()
                             .portfolioId(portfolioId)

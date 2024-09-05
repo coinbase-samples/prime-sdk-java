@@ -14,9 +14,8 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.common;
+package com.coinbase.prime.factory;
 
-import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.activities.ActivitiesService;
 import com.coinbase.prime.activities.ActivitiesServiceImpl;
 import com.coinbase.prime.addressbook.AddressBookService;
@@ -47,42 +46,60 @@ import com.coinbase.prime.users.UsersServiceImpl;
 import com.coinbase.prime.wallets.WalletsService;
 import com.coinbase.prime.wallets.WalletsServiceImpl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class PrimeServiceFactory {
-    private static final Map<Class<?>, Class<?>> serviceRegistry = new HashMap<>();
-
-    static {
-        // Mapping service interfaces to their respective implementations
-        serviceRegistry.put(ActivitiesService.class, ActivitiesServiceImpl.class);
-        serviceRegistry.put(AddressBookService.class, AddressBookServiceImpl.class);
-        serviceRegistry.put(AllocationsService.class, AllocationsServiceImpl.class);
-        serviceRegistry.put(AssetsService.class, AssetsServiceImpl.class);
-        serviceRegistry.put(BalancesService.class, BalancesServiceImpl.class);
-        serviceRegistry.put(CommissionService.class, CommissionServiceImpl.class);
-        serviceRegistry.put(InvoiceService.class, InvoiceServiceImpl.class);
-        serviceRegistry.put(OrdersService.class, OrdersServiceImpl.class);
-        serviceRegistry.put(PaymentMethodsService.class, PaymentMethodsServiceImpl.class);
-        serviceRegistry.put(PortfoliosService.class, PortfoliosServiceImpl.class);
-        serviceRegistry.put(ProductsService.class, ProductsServiceImpl.class);
-        serviceRegistry.put(TransactionsService.class, TransactionsServiceImpl.class);
-        serviceRegistry.put(UsersService.class, UsersServiceImpl.class);
-        serviceRegistry.put(WalletsService.class, WalletsServiceImpl.class);
+    public static ActivitiesService createActivitiesService(CoinbasePrimeClient client) {
+        return new ActivitiesServiceImpl(client);
     }
 
-    public static <T> T createService(Class<T> serviceInterface, CoinbasePrimeClient client) {
-        try {
-            // Look up the implementation class for the given service interface
-            Class<?> implClass = serviceRegistry.get(serviceInterface);
-            if (implClass != null) {
-                // Return a new instance of the implementation class
-                return (T) implClass.getDeclaredConstructor(CoinbasePrimeClient.class).newInstance(client);
-            } else {
-                throw new CoinbaseClientException("No implementation found for: " + serviceInterface.getName());
-            }
-        } catch (Exception e) {
-            throw new CoinbaseClientException("Failed to create service for: " + serviceInterface.getName(), e);
-        }
+    public static AddressBookService createAddressBookService(CoinbasePrimeClient client) {
+        return new AddressBookServiceImpl(client);
+    }
+
+    public static AllocationsService createAllocationsService(CoinbasePrimeClient client) {
+        return new AllocationsServiceImpl(client);
+    }
+
+    public static AssetsService createAssetsService(CoinbasePrimeClient client) {
+        return new AssetsServiceImpl(client);
+    }
+
+    public static BalancesService createBalancesService(CoinbasePrimeClient client) {
+        return new BalancesServiceImpl(client);
+    }
+
+    public static CommissionService createCommissionService(CoinbasePrimeClient client) {
+        return new CommissionServiceImpl(client);
+    }
+
+    public static InvoiceService createInvoiceService(CoinbasePrimeClient client) {
+        return new InvoiceServiceImpl(client);
+    }
+
+    public static OrdersService createOrdersService(CoinbasePrimeClient client) {
+        return new OrdersServiceImpl(client);
+    }
+
+    public static PaymentMethodsService createPaymentMethodsService(CoinbasePrimeClient client) {
+        return new PaymentMethodsServiceImpl(client);
+    }
+
+    public static PortfoliosService createPortfoliosService(CoinbasePrimeClient client) {
+        return new PortfoliosServiceImpl(client);
+    }
+
+    public static ProductsService createProductsService(CoinbasePrimeClient client) {
+        return new ProductsServiceImpl(client);
+    }
+
+    public static TransactionsService createTransactionsService(CoinbasePrimeClient client) {
+        return new TransactionsServiceImpl(client);
+    }
+
+    public static UsersService createUsersService(CoinbasePrimeClient client) {
+        return new UsersServiceImpl(client);
+    }
+
+    public static WalletsService createWalletsService(CoinbasePrimeClient client) {
+        return new WalletsServiceImpl(client);
     }
 }
