@@ -17,7 +17,6 @@
 package com.coinbase.examples;
 
 import com.coinbase.core.credentials.CoinbaseCredentials;
-import com.coinbase.prime.client.CoinbasePrimeHttpClient;
 import com.coinbase.prime.model.orders.*;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
 import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
