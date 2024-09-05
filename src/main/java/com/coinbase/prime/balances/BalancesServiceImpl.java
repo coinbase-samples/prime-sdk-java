@@ -16,10 +16,14 @@
 
 package com.coinbase.prime.balances;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.balances.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class BalancesServiceImpl extends CoinbaseServiceImpl implements BalancesService {
     public BalancesServiceImpl(CoinbasePrimeClient client) {
@@ -28,22 +32,31 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
 
     @Override
     public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbasePrimeException {
-        ListPortfolioBalancesResponse resp = doGet(request, ListPortfolioBalancesResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/balances", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioBalancesResponse>() {});
     }
 
     @Override
     public GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbasePrimeException {
-        GetWalletBalanceResponse resp = doGet(request, GetWalletBalanceResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId()),
+                null,
+                List.of(200),
+                new TypeReference<GetWalletBalanceResponse>() {});
     }
 
     @Override
     public ListWeb3WalletBalancesResponse listWeb3WalletBalances(ListWeb3WalletBalancesRequest request) throws CoinbasePrimeException {
-        ListWeb3WalletBalancesResponse resp = doGet(request, ListWeb3WalletBalancesResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/wallets/%s/web3_balances", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<ListWeb3WalletBalancesResponse>() {});
     }
 }

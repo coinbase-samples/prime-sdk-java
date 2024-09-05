@@ -35,11 +35,6 @@ public class GetAllocationRequest {
         this.allocationId = builder.allocationId;
     }
 
-    @Override
-    protected String getPath() {
-        return ;
-    }
-
     public String getPortfolioId() {
         return portfolioId;
     }

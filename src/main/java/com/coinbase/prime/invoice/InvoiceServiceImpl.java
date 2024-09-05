@@ -16,11 +16,15 @@
 
 package com.coinbase.prime.invoice;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.invoice.ListInvoicesRequest;
 import com.coinbase.prime.model.invoice.ListInvoicesResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class InvoiceServiceImpl extends CoinbaseServiceImpl implements InvoiceService {
     public InvoiceServiceImpl(CoinbasePrimeClient client) {
@@ -29,8 +33,11 @@ public class InvoiceServiceImpl extends CoinbaseServiceImpl implements InvoiceSe
 
     @Override
     public ListInvoicesResponse listInvoices(ListInvoicesRequest request) throws CoinbasePrimeException {
-        ListInvoicesResponse resp = doGet(request, ListInvoicesResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/invoices", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListInvoicesResponse>() {});
     }
 }

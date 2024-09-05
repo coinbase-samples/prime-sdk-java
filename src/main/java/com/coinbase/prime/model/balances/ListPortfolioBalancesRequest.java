@@ -17,13 +17,14 @@
 package com.coinbase.prime.model.balances;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class ListPortfolioBalancesRequest extends CoinbaseGetRequest {
+public class ListPortfolioBalancesRequest {
     @JsonProperty("portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     private String[] symbols;
     @JsonProperty("balance_type")
@@ -36,18 +37,6 @@ public class ListPortfolioBalancesRequest extends CoinbaseGetRequest {
         this.portfolioId = builder.portfolioId;
         this.symbols = builder.symbols;
         this.balanceType = builder.balanceType;
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryString = appendAllQueryParams(this.getSymbols(), "symbols", "");
-        queryString = appendQueryParams(queryString, "balance_type", this.getBalanceType());
-        return queryString;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/balances", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

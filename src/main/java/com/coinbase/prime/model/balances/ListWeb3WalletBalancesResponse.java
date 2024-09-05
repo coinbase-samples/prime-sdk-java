@@ -21,7 +21,6 @@ import com.coinbase.prime.model.common.Pagination;
 public class ListWeb3WalletBalancesResponse {
     private Web3WalletBalance[] balances;
     private Pagination pagination;
-    private ListWeb3WalletBalancesRequest request;
 
     public ListWeb3WalletBalancesResponse() {
     }
@@ -29,7 +28,6 @@ public class ListWeb3WalletBalancesResponse {
     public ListWeb3WalletBalancesResponse(Builder builder) {
         this.balances = builder.balances;
         this.pagination = builder.pagination;
-        this.request = builder.request;
     }
 
     public Web3WalletBalance[] getBalances() {
@@ -48,18 +46,9 @@ public class ListWeb3WalletBalancesResponse {
         this.pagination = pagination;
     }
 
-    public ListWeb3WalletBalancesRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListWeb3WalletBalancesRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Web3WalletBalance[] balances;
         private Pagination pagination;
-        private ListWeb3WalletBalancesRequest request;
 
         public Builder() {
         }
@@ -71,11 +60,6 @@ public class ListWeb3WalletBalancesResponse {
 
         public Builder pagination(Pagination pagination) {
             this.pagination = pagination;
-            return this;
-        }
-
-        public Builder request(ListWeb3WalletBalancesRequest request) {
-            this.request = request;
             return this;
         }
 

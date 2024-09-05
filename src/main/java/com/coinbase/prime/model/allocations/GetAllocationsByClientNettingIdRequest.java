@@ -35,11 +35,6 @@ public class GetAllocationsByClientNettingIdRequest {
         this.nettingId = builder.nettingId;
     }
 
-    @Override
-    public String getPath() {
-        return ;
-    }
-
     public String getPortfolioId() {
         return portfolioId;
     }

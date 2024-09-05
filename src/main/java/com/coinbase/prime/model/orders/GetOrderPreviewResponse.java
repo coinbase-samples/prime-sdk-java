@@ -47,7 +47,6 @@ public class GetOrderPreviewResponse {
     private String averageFilledPrice;
     @JsonProperty("order_total")
     private String orderTotal;
-    private GetOrderPreviewRequest request;
 
     public GetOrderPreviewResponse() {
     }
@@ -69,7 +68,6 @@ public class GetOrderPreviewResponse {
         this.bestAsk = builder.bestAsk;
         this.averageFilledPrice = builder.averageFilledPrice;
         this.orderTotal = builder.orderTotal;
-        this.request = builder.request;
     }
 
     public String getPortfolioId() {
@@ -200,14 +198,6 @@ public class GetOrderPreviewResponse {
         this.orderTotal = orderTotal;
     }
 
-    public GetOrderPreviewRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetOrderPreviewRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private String portfolioId;
         private String productId;
@@ -225,7 +215,6 @@ public class GetOrderPreviewResponse {
         private String bestAsk;
         private String averageFilledPrice;
         private String orderTotal;
-        private GetOrderPreviewRequest request;
 
         public Builder() {
         }
@@ -307,11 +296,6 @@ public class GetOrderPreviewResponse {
 
         public Builder orderTotal(String orderTotal) {
             this.orderTotal = orderTotal;
-            return this;
-        }
-
-        public Builder request(GetOrderPreviewRequest request) {
-            this.request = request;
             return this;
         }
 

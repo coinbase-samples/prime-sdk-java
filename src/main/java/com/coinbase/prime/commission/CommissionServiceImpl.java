@@ -16,11 +16,15 @@
 
 package com.coinbase.prime.commission;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
 import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class CommissionServiceImpl extends CoinbaseServiceImpl implements CommissionService {
     public CommissionServiceImpl(CoinbasePrimeClient client) {
@@ -29,8 +33,11 @@ public class CommissionServiceImpl extends CoinbaseServiceImpl implements Commis
 
     @Override
     public GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbasePrimeException {
-        GetPortfolioCommissionResponse resp = doGet(request, GetPortfolioCommissionResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/commission", request.getPortfolioId()),
+                null,
+                List.of(200),
+                new TypeReference<GetPortfolioCommissionResponse>() {});
     }
 }

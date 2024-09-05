@@ -21,7 +21,6 @@ import com.coinbase.prime.model.common.Pagination;
 public class ListOpenOrdersResponse {
     private Order[] orders;
     private Pagination pagination;
-    private ListOpenOrdersRequest request;
 
     public ListOpenOrdersResponse() {
     }
@@ -29,7 +28,6 @@ public class ListOpenOrdersResponse {
     public ListOpenOrdersResponse(Builder builder) {
         this.orders = builder.orders;
         this.pagination = builder.pagination;
-        this.request = builder.request;
     }
 
     public Order[] getOrders() {
@@ -48,18 +46,9 @@ public class ListOpenOrdersResponse {
         this.pagination = pagination;
     }
 
-    public ListOpenOrdersRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListOpenOrdersRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Order[] orders;
         private Pagination pagination;
-        private ListOpenOrdersRequest request;
 
         public Builder() {
         }
@@ -71,11 +60,6 @@ public class ListOpenOrdersResponse {
 
         public Builder pagination(Pagination pagination) {
             this.pagination = pagination;
-            return this;
-        }
-
-        public Builder request(ListOpenOrdersRequest request) {
-            this.request = request;
             return this;
         }
 

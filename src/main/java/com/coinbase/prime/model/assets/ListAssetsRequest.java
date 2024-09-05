@@ -32,11 +32,6 @@ public class ListAssetsRequest {
         this.entityId = builder.entityId;
     }
 
-    @Override
-    public String getPath() {
-        return ;
-    }
-
     public String getEntityId() {
         return entityId;
     }

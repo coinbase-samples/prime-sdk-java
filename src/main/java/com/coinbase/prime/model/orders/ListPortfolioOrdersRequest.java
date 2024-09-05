@@ -17,14 +17,16 @@
 package com.coinbase.prime.model.orders;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
-import com.coinbase.prime.model.common.PaginationParams;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class ListPortfolioOrdersRequest extends CoinbaseGetRequest {
+public class ListPortfolioOrdersRequest extends PrimeListRequest {
     @JsonProperty("portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty("order_statuses")
     private OrderStatus[] orderStatuses;
@@ -38,12 +40,12 @@ public class ListPortfolioOrdersRequest extends CoinbaseGetRequest {
     private String startDate;
     @JsonProperty("end_date")
     private String endDate;
-    private PaginationParams paginationParams;
 
     public ListPortfolioOrdersRequest() {
     }
 
     public ListPortfolioOrdersRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.orderStatuses = builder.orderStatuses;
         this.productIds = builder.productIds;
@@ -51,25 +53,6 @@ public class ListPortfolioOrdersRequest extends CoinbaseGetRequest {
         this.orderSide = builder.orderSide;
         this.startDate = builder.startDate;
         this.endDate = builder.endDate;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/orders", this.getPortfolioId());
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
-        queryString = appendAllQueryParams(this.getProductIds(), "product_ids", queryString);
-        queryString = appendAllQueryParams(this.getOrderStatuses(), "order_statuses", queryString);
-        queryString = appendQueryParams(queryString, "order_type", this.getOrderType().name());
-        queryString = appendQueryParams(queryString, "start_date", this.getStartDate());
-        queryString = appendQueryParams(queryString, "order_side", this.getOrderSide().name());
-        queryString = appendQueryParams(queryString, "end_date", this.getEndDate());
-
-        return queryString;
     }
 
     public String getPortfolioId() {
@@ -128,14 +111,6 @@ public class ListPortfolioOrdersRequest extends CoinbaseGetRequest {
         this.endDate = endDate;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private String portfolioId;
         private OrderStatus[] orderStatuses;
@@ -144,7 +119,9 @@ public class ListPortfolioOrdersRequest extends CoinbaseGetRequest {
         private OrderSide orderSide;
         private String startDate;
         private String endDate;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder() {
         }
@@ -184,8 +161,14 @@ public class ListPortfolioOrdersRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder paginationParams(PaginationParams paginationParams) {
-            this.paginationParams = paginationParams;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 

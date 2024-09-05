@@ -16,10 +16,14 @@
 
 package com.coinbase.prime.orders;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.coinbase.prime.model.orders.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersService {
     public OrdersServiceImpl(CoinbasePrimeClient client) {
@@ -28,50 +32,71 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
 
     @Override
     public ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbasePrimeException {
-        ListOpenOrdersResponse resp = doGet(request, ListOpenOrdersResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/open_orders", request.getPortfolioId()),
+                request,
+                List.of(200);
+                new TypeReference<ListOpenOrdersResponse>() {});
     }
 
     @Override
     public CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbasePrimeException {
-        CreateOrderResponse resp = doPost(request, CreateOrderResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/order", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<CreateOrderResponse>() {});
     }
 
     @Override
     public GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbasePrimeException {
-        GetOrderPreviewResponse resp = doPost(request, GetOrderPreviewResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/order_preview", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<GetOrderPreviewResponse>() {});
     }
 
     @Override
     public ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbasePrimeException {
-        ListPortfolioOrdersResponse resp = doGet(request, ListPortfolioOrdersResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/orders", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioOrdersResponse>() {});
     }
 
     @Override
     public GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbasePrimeException {
-        GetOrderByOrderIdResponse resp = doGet(request, GetOrderByOrderIdResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/orders/%s", request.getPortfolioId(), request.getOrderId()),
+                null,
+                List.of(200),
+                new TypeReference<GetOrderByOrderIdResponse>() {});
     }
 
     @Override
     public CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbasePrimeException {
-        CancelOrderResponse resp = doPost(request, CancelOrderResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/orders/%s/cancel", request.getPortfolioId(), request.getOrderId()),
+                null,
+                List.of(200),
+                new TypeReference<CancelOrderResponse>() {});
     }
 
     @Override
     public ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbasePrimeException {
-        ListOrderFillsResponse resp = doGet(request, ListOrderFillsResponse.class);
-        resp.setRequest(request);
-        return resp;
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/orders/%s/fills", request.getPortfolioId(), request.getOrderId()),
+                request,
+                List.of(200),
+                new TypeReference<ListOrderFillsResponse>() {});
     }
 }

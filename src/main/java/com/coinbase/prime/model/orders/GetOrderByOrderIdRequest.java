@@ -17,12 +17,11 @@
 package com.coinbase.prime.model.orders;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetOrderByOrderIdRequest extends CoinbaseGetRequest {
+public class GetOrderByOrderIdRequest {
     @JsonProperty("order_id")
     private String orderId;
     @JsonProperty("portfolio_id")
@@ -34,16 +33,6 @@ public class GetOrderByOrderIdRequest extends CoinbaseGetRequest {
     public GetOrderByOrderIdRequest(Builder builder) {
         this.orderId = builder.orderId;
         this.portfolioId = builder.portfolioId;
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/orders/%s", this.getPortfolioId(), this.getOrderId());
     }
 
     public String getOrderId() {
