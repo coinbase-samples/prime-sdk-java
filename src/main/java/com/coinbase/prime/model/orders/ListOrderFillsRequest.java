@@ -17,36 +17,28 @@
 package com.coinbase.prime.model.orders;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
-import com.coinbase.prime.model.common.PaginationParams;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListOrderFillsRequest extends CoinbaseGetRequest {
+public class ListOrderFillsRequest extends PrimeListRequest {
     @JsonProperty("portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty("order_id")
+    @JsonIgnore
     private String orderId;
-    private PaginationParams paginationParams;
 
     public ListOrderFillsRequest() {
     }
 
     public ListOrderFillsRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.orderId = builder.orderId;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/orders/%s/fills", this.getPortfolioId(), this.getOrderId());
-    }
-
-    @Override
-    public String getQueryString() {
-        return paginationParams != null ? paginationParams.generateQueryString("") : "";
     }
 
     public String getPortfolioId() {
@@ -65,18 +57,12 @@ public class ListOrderFillsRequest extends CoinbaseGetRequest {
         this.orderId = orderId;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private String portfolioId;
         private String orderId;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder() {
         }
@@ -91,8 +77,14 @@ public class ListOrderFillsRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder paginationParams(PaginationParams paginationParams) {
-            this.paginationParams = paginationParams;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 

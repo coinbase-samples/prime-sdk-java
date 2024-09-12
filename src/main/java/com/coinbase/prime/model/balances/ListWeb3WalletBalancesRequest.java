@@ -17,43 +17,31 @@
 package com.coinbase.prime.model.balances;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
-import com.coinbase.prime.model.common.PaginationParams;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.appendAllQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListWeb3WalletBalancesRequest extends CoinbaseGetRequest {
+public class ListWeb3WalletBalancesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
     @JsonProperty("visibility_statuses")
     private VisibilityStatus[] visibilityStatuses;
-    private PaginationParams paginationParams;
 
     public ListWeb3WalletBalancesRequest() {
     }
 
     public ListWeb3WalletBalancesRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
         this.visibilityStatuses = builder.visibilityStatuses;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
-        queryString = appendAllQueryParams(this.getVisibilityStatuses(), "visibility_statuses", queryString);
-
-        return queryString;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/wallets/%s/web3_balances", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {
@@ -80,19 +68,13 @@ public class ListWeb3WalletBalancesRequest extends CoinbaseGetRequest {
         this.visibilityStatuses = visibilityStatuses;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private String portfolioId;
         private String walletId;
         private VisibilityStatus[] visibilityStatuses;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder() {
         }
@@ -112,8 +94,14 @@ public class ListWeb3WalletBalancesRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder paginationParams(PaginationParams paginationParams) {
-            this.paginationParams = paginationParams;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 

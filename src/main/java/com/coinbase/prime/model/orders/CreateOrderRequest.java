@@ -17,13 +17,14 @@
 package com.coinbase.prime.model.orders;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbasePostRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class CreateOrderRequest extends CoinbasePostRequest {
+public class CreateOrderRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty("product_id")
     private String productId;
@@ -77,11 +78,6 @@ public class CreateOrderRequest extends CoinbasePostRequest {
         this.displayBaseSize = builder.displayBaseSize;
         this.isRaiseExact = builder.isRaiseExact;
         this.historicalPov = builder.historicalPov;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/order", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

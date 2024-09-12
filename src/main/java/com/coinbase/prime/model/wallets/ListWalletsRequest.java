@@ -17,43 +17,29 @@
 package com.coinbase.prime.model.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
-import com.coinbase.prime.model.common.PaginationParams;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class ListWalletsRequest extends CoinbaseGetRequest {
+public class ListWalletsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
     private WalletType type;
 
     private String[] symbols;
 
-    @JsonProperty("pagination_params")
-    private PaginationParams paginationParams;
-
     public ListWalletsRequest() {}
 
     public ListWalletsRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.type = builder.type;
         this.symbols = builder.symbols;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/wallets", this.getPortfolioId());
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryString = this.getPaginationParams() != null ? this.getPaginationParams().generateQueryString("") : "";
-        queryString = appendAllQueryParams(this.getSymbols(), "symbols", queryString);
-        queryString = appendQueryParams(queryString, "type", this.getType().name());
-        return queryString;
     }
 
     public String getPortfolioId() {
@@ -80,19 +66,13 @@ public class ListWalletsRequest extends CoinbaseGetRequest {
         this.symbols = symbols;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private String portfolioId;
         private WalletType type;
         private String[] symbols;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder() {}
 
@@ -111,8 +91,14 @@ public class ListWalletsRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder paginationParams(PaginationParams paginationParams) {
-            this.paginationParams = paginationParams;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 

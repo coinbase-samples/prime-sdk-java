@@ -14,21 +14,14 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.portfolios;
+package com.coinbase.prime.utils;
 
-
-import com.coinbase.core.http.CoinbaseGetRequest;
-
-public class ListPortfoliosRequest extends CoinbaseGetRequest {
-    public ListPortfoliosRequest() {}
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
-
-    @Override
-    public String getPath() {
-        return "/portfolios";
-    }
+public class Constants {
+    public static final String CB_ACCESS_KEY_HEADER = "X-CB-ACCESS-KEY";
+    public static final String CB_ACCESS_PHRASE_HEADER = "X-CB-ACCESS-PASSPHRASE";
+    public static final String CB_ACCESS_SIGNATURE_HEADER = "X-CB-ACCESS-SIGNATURE";
+    public static final String CB_ACCESS_TIMESTAMP_HEADER = "X-CB-ACCESS-TIMESTAMP";
+    public static final String CB_USER_AGENT_HEADER = "User-Agent";
+    public static final String CB_PRIME_BASE_URL = "https://api.prime.coinbase.com/v1";
+    public static final String SDK_VERSION = "1.0.0";
 }

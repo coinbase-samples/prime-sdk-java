@@ -17,48 +17,27 @@
 package com.coinbase.prime.model.addressbook;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
-import com.coinbase.prime.model.common.PaginationParams;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.appendQueryParams;
-
-public class GetPortfolioAddressBookRequest extends CoinbaseGetRequest {
+public class GetPortfolioAddressBookRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty("currency_symbol")
     private String currencySymbol;
     private String search;
-    private PaginationParams paginationParams;
 
     public GetPortfolioAddressBookRequest() {
     }
 
     public GetPortfolioAddressBookRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.currencySymbol = builder.currencySymbol;
         this.search = builder.search;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryParams = "";
-        if (this.getCurrencySymbol() != null) {
-            queryParams = appendQueryParams(queryParams, "currency_symbol", this.getCurrencySymbol());
-        }
-        if (this.getSearch() != null) {
-            queryParams = appendQueryParams(queryParams, "search", this.getSearch());
-        }
-        if (this.getPaginationParams() != null) {
-            queryParams = this.getPaginationParams().generateQueryString(queryParams);
-        }
-        return queryParams;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/address_book", this.getPortfolioId());
     }
 
     public String getPortfolioId() {
@@ -85,19 +64,13 @@ public class GetPortfolioAddressBookRequest extends CoinbaseGetRequest {
         this.search = search;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private final String portfolioId;
         private String currencySymbol;
         private String search;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -113,8 +86,14 @@ public class GetPortfolioAddressBookRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder paginationParams(PaginationParams paginationParams) {
-            this.paginationParams = paginationParams;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 

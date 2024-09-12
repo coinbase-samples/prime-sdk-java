@@ -17,13 +17,14 @@
 package com.coinbase.prime.model.invoice;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class ListInvoicesRequest extends CoinbaseGetRequest {
+public class ListInvoicesRequest {
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
     private InvoiceState[] states;
     @JsonProperty("billing_month")
@@ -43,21 +44,6 @@ public class ListInvoicesRequest extends CoinbaseGetRequest {
         this.billingYear = builder.billingYear;
         this.cursor = builder.cursor;
         this.limit = builder.limit;
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryString = appendAllQueryParams(this.getStates(), "states", "");
-        queryString = appendQueryParams(queryString, "billing_month", this.getBillingMonth().toString());
-        queryString = appendQueryParams(queryString, "billing_year", this.getBillingYear().toString());
-        queryString = appendQueryParams(queryString, "cursor", this.getCursor().toString());
-        queryString = appendQueryParams(queryString, "limit", this.getLimit().toString());
-        return queryString;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/entities/%s/invoices", this.getEntityId());
     }
 
     public String getEntityId() {

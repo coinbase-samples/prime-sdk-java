@@ -36,7 +36,6 @@ public class CreateWithdrawalResponse {
     private BlockchainAddress blockchainSource;
     @JsonProperty("transaction_id")
     private String transactionId;
-    private CreateWithdrawalRequest request;
 
     public CreateWithdrawalResponse() {
     }
@@ -52,7 +51,6 @@ public class CreateWithdrawalResponse {
         this.blockchainDestination = builder.blockchainDestination;
         this.blockchainSource = builder.blockchainSource;
         this.transactionId = builder.transactionId;
-        this.request = builder.request;
     }
 
     public String getActivityId() {
@@ -135,14 +133,6 @@ public class CreateWithdrawalResponse {
         this.transactionId = transactionId;
     }
 
-    public CreateWithdrawalRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(CreateWithdrawalRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private String activityId;
         private String approvalUrl;
@@ -154,7 +144,6 @@ public class CreateWithdrawalResponse {
         private BlockchainAddress blockchainDestination;
         private BlockchainAddress blockchainSource;
         private String transactionId;
-        private CreateWithdrawalRequest request;
 
         public Builder() {
         }
@@ -206,11 +195,6 @@ public class CreateWithdrawalResponse {
 
         public Builder transactionId(String transactionId) {
             this.transactionId = transactionId;
-            return this;
-        }
-
-        public Builder request(CreateWithdrawalRequest request) {
-            this.request = request;
             return this;
         }
 

@@ -28,7 +28,6 @@ public class CreateConversionResponse {
     private String amount;
     private String destination;
     private String source;
-    private CreateConversionRequest request;
 
     public CreateConversionResponse() {
     }
@@ -40,7 +39,6 @@ public class CreateConversionResponse {
         this.amount = builder.amount;
         this.destination = builder.destination;
         this.source = builder.source;
-        this.request = builder.request;
     }
 
     public String getActivityId() {
@@ -91,14 +89,6 @@ public class CreateConversionResponse {
         this.source = source;
     }
 
-    public CreateConversionRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(CreateConversionRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private String activityId;
         private String sourceSymbol;
@@ -106,7 +96,6 @@ public class CreateConversionResponse {
         private String amount;
         private String destination;
         private String source;
-        private CreateConversionRequest request;
 
         public Builder() {
         }
@@ -138,11 +127,6 @@ public class CreateConversionResponse {
 
         public Builder source(String source) {
             this.source = source;
-            return this;
-        }
-
-        public Builder request(CreateConversionRequest request) {
-            this.request = request;
             return this;
         }
 

@@ -20,7 +20,6 @@ import com.coinbase.prime.model.common.Pagination;
 
 public class ListWalletsResponse {
     private Wallet[] wallets;
-    private ListWalletsRequest request;
     private Pagination pagination;
 
     public ListWalletsResponse() {}
@@ -31,14 +30,6 @@ public class ListWalletsResponse {
 
     public void setWallets(Wallet[] wallets) {
         this.wallets = wallets;
-    }
-
-    public ListWalletsRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListWalletsRequest request) {
-        this.request = request;
     }
 
     public Pagination getPagination() {

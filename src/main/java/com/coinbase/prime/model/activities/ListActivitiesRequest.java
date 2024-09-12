@@ -17,14 +17,16 @@
 package com.coinbase.prime.model.activities;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
-import com.coinbase.prime.model.common.PaginationParams;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class ListActivitiesRequest extends CoinbaseGetRequest {
+public class ListActivitiesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     private String[] symbols;
     private String[] categories;
@@ -33,35 +35,18 @@ public class ListActivitiesRequest extends CoinbaseGetRequest {
     private String startTime;
     @JsonProperty("end_time")
     private String endTime;
-    private PaginationParams paginationParams;
 
     public ListActivitiesRequest() {
     }
 
     public ListActivitiesRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.symbols = builder.symbols;
         this.categories = builder.categories;
         this.statuses = builder.statuses;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
-        this.paginationParams = builder.paginationParams;
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryString = this.paginationParams != null ? this.paginationParams.generateQueryString("") : "";
-        queryString = appendAllQueryParams(this.symbols, "symbols", queryString);
-        queryString = appendAllQueryParams(this.categories, "categories", queryString);
-        queryString = appendAllQueryParams(this.statuses, "statuses", queryString);
-        queryString = appendQueryParams(queryString, "start_time", this.startTime);
-        queryString = appendQueryParams(queryString, "end_time", this.endTime);
-        return queryString;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/activities", this.getPortfolioId());
     }
 
     public String getPortfolioId() {
@@ -112,14 +97,6 @@ public class ListActivitiesRequest extends CoinbaseGetRequest {
         this.endTime = endTime;
     }
 
-    public PaginationParams getPaginationParams() {
-        return paginationParams;
-    }
-
-    public void setPaginationParams(PaginationParams paginationParams) {
-        this.paginationParams = paginationParams;
-    }
-
     public static class Builder {
         private final String portfolioId;
         private String[] symbols;
@@ -127,7 +104,9 @@ public class ListActivitiesRequest extends CoinbaseGetRequest {
         private String[] statuses;
         private String startTime;
         private String endTime;
-        private PaginationParams paginationParams;
+        private String cursor;
+        private String sortDirection;
+        private Integer limit;
 
         public Builder(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -158,8 +137,14 @@ public class ListActivitiesRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public Builder pagination(PaginationParams pagination) {
-            this.paginationParams = pagination;
+        public Builder limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 

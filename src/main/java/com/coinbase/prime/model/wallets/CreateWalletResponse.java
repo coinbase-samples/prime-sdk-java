@@ -29,8 +29,6 @@ public class CreateWalletResponse {
     @JsonProperty("wallet_type")
     private WalletType type;
 
-    private CreateWalletRequest request;
-
     public CreateWalletResponse() {
     }
 
@@ -64,13 +62,5 @@ public class CreateWalletResponse {
 
     public void setType(WalletType type) {
         this.type = type;
-    }
-
-    public CreateWalletRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(CreateWalletRequest request) {
-        this.request = request;
     }
 }

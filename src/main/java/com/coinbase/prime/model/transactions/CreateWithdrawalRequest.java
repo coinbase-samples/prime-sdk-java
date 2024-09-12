@@ -17,15 +17,17 @@
 package com.coinbase.prime.model.transactions;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbasePostRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class CreateWithdrawalRequest extends CoinbasePostRequest {
+public class CreateWithdrawalRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
     private String amount;
     @JsonProperty("destination_type")
@@ -51,11 +53,6 @@ public class CreateWithdrawalRequest extends CoinbasePostRequest {
         this.currencySymbol = builder.currencySymbol;
         this.paymentMethod = builder.paymentMethod;
         this.blockchainAddress = builder.blockchainAddress;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/wallets/%s/withdrawals", this.getPortfolioId(), this.getWalletId());
     }
 
     public String getPortfolioId() {

@@ -17,12 +17,11 @@
 package com.coinbase.prime.model.transactions;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetTransactionByTransactionIdRequest extends CoinbaseGetRequest {
+public class GetTransactionByTransactionIdRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     @JsonProperty(required = true, value = "transaction_id")
@@ -34,16 +33,6 @@ public class GetTransactionByTransactionIdRequest extends CoinbaseGetRequest {
     public GetTransactionByTransactionIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.transactionId = builder.transactionId;
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/transactions/%s", this.getPortfolioId(), this.getTransactionId());
     }
 
     public String getPortfolioId() {

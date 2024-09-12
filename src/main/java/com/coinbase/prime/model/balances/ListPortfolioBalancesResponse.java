@@ -25,7 +25,6 @@ public class ListPortfolioBalancesResponse {
     private TotalBalance tradingBalances;
     @JsonProperty("vault_balances")
     private TotalBalance vaultBalances;
-    private ListPortfolioBalancesRequest request;
 
     public ListPortfolioBalancesResponse() {
     }
@@ -35,7 +34,6 @@ public class ListPortfolioBalancesResponse {
         this.type = builder.type;
         this.tradingBalances = builder.tradingBalances;
         this.vaultBalances = builder.vaultBalances;
-        this.request = builder.request;
     }
 
     public Balance[] getBalances() {
@@ -70,20 +68,11 @@ public class ListPortfolioBalancesResponse {
         this.vaultBalances = vaultBalances;
     }
 
-    public ListPortfolioBalancesRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListPortfolioBalancesRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Balance[] balances;
         private BalancesType type;
         private TotalBalance tradingBalances;
         private TotalBalance vaultBalances;
-        private ListPortfolioBalancesRequest request;
 
         public Builder balances(Balance[] balances) {
             this.balances = balances;
@@ -102,11 +91,6 @@ public class ListPortfolioBalancesResponse {
 
         public Builder vaultBalances(TotalBalance vaultBalances) {
             this.vaultBalances = vaultBalances;
-            return this;
-        }
-
-        public Builder request(ListPortfolioBalancesRequest request) {
-            this.request = request;
             return this;
         }
 

@@ -17,12 +17,11 @@
 package com.coinbase.prime.model.allocations;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetAllocationsByClientNettingIdRequest extends CoinbaseGetRequest {
+public class GetAllocationsByClientNettingIdRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
     @JsonProperty(required = true, value = "netting_id")
@@ -34,16 +33,6 @@ public class GetAllocationsByClientNettingIdRequest extends CoinbaseGetRequest {
     public GetAllocationsByClientNettingIdRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.nettingId = builder.nettingId;
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/allocations/net/%s", this.getPortfolioId(), this.getNettingId());
     }
 
     public String getPortfolioId() {

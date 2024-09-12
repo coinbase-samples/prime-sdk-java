@@ -16,10 +16,9 @@
 
 package com.coinbase.prime.model.allocations;
 
-import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateNetAllocationRequest extends CoinbasePostRequest {
+public class CreateNetAllocationRequest {
     @JsonProperty("allocation_id")
     private String allocationId;
     @JsonProperty("source_portfolio_id")
@@ -50,11 +49,6 @@ public class CreateNetAllocationRequest extends CoinbasePostRequest {
         this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
         this.nettingId = builder.nettingId;
     }
-
-   @Override
-   public String getPath() {
-       return "/allocations/net";
-   }
 
     public String getAllocationId() {
         return allocationId;

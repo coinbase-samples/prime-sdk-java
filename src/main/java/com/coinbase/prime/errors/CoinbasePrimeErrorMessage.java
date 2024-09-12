@@ -16,8 +16,12 @@
 
 package com.coinbase.prime.errors;
 
-public class CoinbasePrimeErrorMessage {
+import com.coinbase.core.errors.CoinbaseErrorMessage;
+import com.coinbase.core.errors.CoinbaseException;
+
+public class CoinbasePrimeErrorMessage implements CoinbaseErrorMessage {
     private String message;
+    private int statusCode;
 
     public CoinbasePrimeErrorMessage() {
     }
@@ -32,6 +36,19 @@ public class CoinbasePrimeErrorMessage {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    @Override
+    public CoinbaseException createCoinbaseException() {
+       return new CoinbasePrimeException(this.statusCode, this.message);
     }
 
     public static class Builder {
