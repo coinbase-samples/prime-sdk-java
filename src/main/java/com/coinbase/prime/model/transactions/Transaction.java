@@ -53,6 +53,10 @@ public class Transaction {
     @JsonProperty("estimated_asset_changes")
     private AssetChange[] estimatedAssetChanges;
     private TransactionMetadata metadata;
+    @JsonProperty("idempotency_key")
+    private String idempotencyKey;
+    @JsonProperty("onchain_details")
+    private OnchainDetails onchainDetails;
 
     public Transaction() {
     }
@@ -79,6 +83,8 @@ public class Transaction {
         this.estimatedAssetChanges = builder.estimatedAssetChanges;
         this.network = builder.network;
         this.metadata = builder.metadata;
+        this.idempotencyKey = builder.idempotencyKey;
+        this.onchainDetails = builder.onchainDetails;
     }
 
     public String getId() {
@@ -249,6 +255,22 @@ public class Transaction {
         this.estimatedAssetChanges = estimatedAssetChanges;
     }
 
+    public String getIdempotencyKey() {
+        return idempotencyKey;
+    }
+
+    public void setIdempotencyKey(String idempotencyKey) {
+        this.idempotencyKey = idempotencyKey;
+    }
+
+    public OnchainDetails getOnchainDetails() {
+        return onchainDetails;
+    }
+
+    public void setOnchainDetails(OnchainDetails onchainDetails) {
+        this.onchainDetails = onchainDetails;
+    }
+
     public static class Builder {
         private String id;
         private String walletId;
@@ -271,6 +293,8 @@ public class Transaction {
         private AssetChange[] estimatedAssetChanges;
         private String network;
         private TransactionMetadata metadata;
+        private String idempotencyKey;
+        private OnchainDetails onchainDetails;
 
         public Builder() {
         }
@@ -377,6 +401,16 @@ public class Transaction {
 
         public Builder metadata(TransactionMetadata metadata) {
             this.metadata = metadata;
+            return this;
+        }
+
+        public Builder idempotencyKey(String idempotencyKey) {
+            this.idempotencyKey = idempotencyKey;
+            return this;
+        }
+
+        public Builder onchainDetails(OnchainDetails onchainDetails) {
+            this.onchainDetails = onchainDetails;
             return this;
         }
 

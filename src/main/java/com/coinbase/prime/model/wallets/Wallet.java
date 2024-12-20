@@ -26,6 +26,7 @@ public class Wallet {
     private String symbol;
     private WalletType type;
     private String address;
+    private Visibility visibility;
 
     @JsonProperty("created_at")
     private Date createdAt;
@@ -78,5 +79,13 @@ public class Wallet {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Visibility getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(Visibility visibility) {
+        this.visibility = visibility;
     }
 }

@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListWeb3WalletBalancesRequest extends PrimeListRequest {
+public class ListOnchainWalletBalancesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
@@ -34,10 +34,10 @@ public class ListWeb3WalletBalancesRequest extends PrimeListRequest {
     @JsonProperty("visibility_statuses")
     private VisibilityStatus[] visibilityStatuses;
 
-    public ListWeb3WalletBalancesRequest() {
+    public ListOnchainWalletBalancesRequest() {
     }
 
-    public ListWeb3WalletBalancesRequest(Builder builder) {
+    public ListOnchainWalletBalancesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
@@ -105,9 +105,9 @@ public class ListWeb3WalletBalancesRequest extends PrimeListRequest {
             return this;
         }
 
-        public ListWeb3WalletBalancesRequest build() throws CoinbaseClientException {
+        public ListOnchainWalletBalancesRequest build() throws CoinbaseClientException {
             this.validate();
-            return new ListWeb3WalletBalancesRequest(this);
+            return new ListOnchainWalletBalancesRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {

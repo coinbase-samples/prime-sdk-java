@@ -18,13 +18,11 @@ package com.coinbase.prime.activities;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
-import com.coinbase.prime.model.activities.GetActivityByActivityIdResponse;
-import com.coinbase.prime.model.activities.ListActivitiesRequest;
-import com.coinbase.prime.model.activities.ListActivitiesResponse;
+import com.coinbase.prime.model.activities.*;
 
 public interface ActivitiesService {
     // Activities
     ListActivitiesResponse listActivities(ListActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

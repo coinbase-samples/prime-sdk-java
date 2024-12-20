@@ -27,12 +27,9 @@ public class GetActivityByActivityIdRequest {
     @JsonProperty(required = true, value = "activity_id")
     private String activityId;
 
-    public GetActivityByActivityIdRequest() {
-    }
-
-    public GetActivityByActivityIdRequest(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.activityId = builder.activityId;
+    public GetActivityByActivityIdRequest(String portfolioId, String activityId) {
+        this.portfolioId = portfolioId;
+        this.activityId = activityId;
     }
 
     public String getPortfolioId() {
@@ -49,33 +46,5 @@ public class GetActivityByActivityIdRequest {
 
     public void setActivityId(String activityId) {
         this.activityId = activityId;
-    }
-
-    public static class Builder {
-        private String portfolioId;
-        private String activityId;
-
-        public Builder() {
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public GetActivityByActivityIdRequest build() throws CoinbaseClientException {
-            this.validate();
-            return new GetActivityByActivityIdRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(activityId)) {
-                throw new CoinbaseClientException("ActivityId is required");
-            }
-
-            if (isNullOrEmpty(portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
-            }
-        }
     }
 }
