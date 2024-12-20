@@ -51,12 +51,12 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
     }
 
     @Override
-    public ListWeb3WalletBalancesResponse listWeb3WalletBalances(ListWeb3WalletBalancesRequest request) throws CoinbasePrimeException {
+    public ListOnchainWalletBalancesResponse listOnchainWalletBalances(ListOnchainWalletBalancesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/web3_balances", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
-                new TypeReference<ListWeb3WalletBalancesResponse>() {});
+                new TypeReference<ListOnchainWalletBalancesResponse>() {});
     }
 }

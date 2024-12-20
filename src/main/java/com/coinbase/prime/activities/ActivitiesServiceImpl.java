@@ -20,10 +20,7 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.activities.GetActivityByActivityIdRequest;
-import com.coinbase.prime.model.activities.GetActivityByActivityIdResponse;
-import com.coinbase.prime.model.activities.ListActivitiesRequest;
-import com.coinbase.prime.model.activities.ListActivitiesResponse;
+import com.coinbase.prime.model.activities.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -51,5 +48,15 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
                 null,
                 List.of(200),
                 new TypeReference<GetActivityByActivityIdResponse>() {});
+    }
+
+    @Override
+    public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/activities", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListEntityActivitiesResponse>() {});
     }
 }

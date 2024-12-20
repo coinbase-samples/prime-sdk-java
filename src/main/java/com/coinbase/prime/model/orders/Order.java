@@ -60,6 +60,8 @@ public class Order {
     private String exchangeFee;
     @JsonProperty("historical_pov")
     private String historicalPov;
+    @JsonProperty("user_context")
+    private String userContext;
 
     public Order() {
     }
@@ -88,6 +90,7 @@ public class Order {
         this.commission = builder.commission;
         this.exchangeFee = builder.exchangeFee;
         this.historicalPov = builder.historicalPov;
+        this.userContext = builder.userContext;
     }
 
     public String getId() {
@@ -274,6 +277,14 @@ public class Order {
         this.historicalPov = historicalPov;
     }
 
+    public String getUserContext() {
+        return userContext;
+    }
+
+    public void setUserContext(String userContext) {
+        this.userContext = userContext;
+    }
+
     public static class Builder {
         private String id;
         private String userId;
@@ -298,6 +309,7 @@ public class Order {
         private String commission;
         private String exchangeFee;
         private String historicalPov;
+        private String userContext;
 
         public Builder() {
         }
@@ -414,6 +426,11 @@ public class Order {
 
         public Builder historicalPov(String historicalPov) {
             this.historicalPov = historicalPov;
+            return this;
+        }
+
+        public Builder userContext(String userContext) {
+            this.userContext = userContext;
             return this;
         }
 

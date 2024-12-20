@@ -14,28 +14,28 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.balances;
+package com.coinbase.prime.model.activities;
 
 import com.coinbase.prime.model.common.Pagination;
 
-public class ListWeb3WalletBalancesResponse {
-    private Web3WalletBalance[] balances;
+public class ListEntityActivitiesResponse {
+    private Activity[] activities;
     private Pagination pagination;
 
-    public ListWeb3WalletBalancesResponse() {
+    public ListEntityActivitiesResponse() {
     }
 
-    public ListWeb3WalletBalancesResponse(Builder builder) {
-        this.balances = builder.balances;
+    public ListEntityActivitiesResponse(Builder builder) {
+        this.activities = builder.activities;
         this.pagination = builder.pagination;
     }
 
-    public Web3WalletBalance[] getBalances() {
-        return balances;
+    public Activity[] getActivities() {
+        return activities;
     }
 
-    public void setBalances(Web3WalletBalance[] balances) {
-        this.balances = balances;
+    public void setActivities(Activity[] activities) {
+        this.activities = activities;
     }
 
     public Pagination getPagination() {
@@ -47,14 +47,11 @@ public class ListWeb3WalletBalancesResponse {
     }
 
     public static class Builder {
-        private Web3WalletBalance[] balances;
+        private Activity[] activities;
         private Pagination pagination;
 
-        public Builder() {
-        }
-
-        public Builder balances(Web3WalletBalance[] balances) {
-            this.balances = balances;
+        public Builder activities(Activity[] activities) {
+            this.activities = activities;
             return this;
         }
 
@@ -63,8 +60,8 @@ public class ListWeb3WalletBalancesResponse {
             return this;
         }
 
-        public ListWeb3WalletBalancesResponse build() {
-            return new ListWeb3WalletBalancesResponse(this);
+        public ListEntityActivitiesResponse build() {
+            return new ListEntityActivitiesResponse(this);
         }
     }
 }
