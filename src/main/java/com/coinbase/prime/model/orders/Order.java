@@ -137,8 +137,8 @@ public class Order {
         return clientOrderId;
     }
 
-    public void setClient(OrderSide side) {
-        this.side = side;
+    public void setClientOrderId(String clientOrderId) {
+        this.clientOrderId = clientOrderId;
     }
 
     public OrderType getType() {
