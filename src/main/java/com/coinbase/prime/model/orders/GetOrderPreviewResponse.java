@@ -47,6 +47,8 @@ public class GetOrderPreviewResponse {
     private String averageFilledPrice;
     @JsonProperty("order_total")
     private String orderTotal;
+    @JsonProperty("historical_pov")
+    private String historicalPov;
 
     public GetOrderPreviewResponse() {
     }
@@ -68,6 +70,7 @@ public class GetOrderPreviewResponse {
         this.bestAsk = builder.bestAsk;
         this.averageFilledPrice = builder.averageFilledPrice;
         this.orderTotal = builder.orderTotal;
+        this.historicalPov = builder.historicalPov;
     }
 
     public String getPortfolioId() {
@@ -198,6 +201,14 @@ public class GetOrderPreviewResponse {
         this.orderTotal = orderTotal;
     }
 
+    public String getHistoricalPov() {
+        return historicalPov;
+    }
+
+    public void setHistoricalPov(String historicalPov) {
+        this.historicalPov = historicalPov;
+    }
+
     public static class Builder {
         private String portfolioId;
         private String productId;
@@ -215,6 +226,7 @@ public class GetOrderPreviewResponse {
         private String bestAsk;
         private String averageFilledPrice;
         private String orderTotal;
+        private String historicalPov;
 
         public Builder() {
         }
@@ -296,6 +308,11 @@ public class GetOrderPreviewResponse {
 
         public Builder orderTotal(String orderTotal) {
             this.orderTotal = orderTotal;
+            return this;
+        }
+
+        public Builder historicalPov(String historicalPov) {
+            this.historicalPov = historicalPov;
             return this;
         }
 
