@@ -25,4 +25,5 @@ public interface ActivitiesService {
     ListActivitiesResponse listActivities(ListActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetActivityByActivityIdResponse getActivityByActivityId(GetActivityByActivityIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetEntityActivityByActivityIdResponse getEntityActivityByActivityId(GetEntityActivityByActivityIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

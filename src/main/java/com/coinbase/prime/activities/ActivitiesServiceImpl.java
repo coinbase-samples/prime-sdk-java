@@ -51,6 +51,16 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     }
 
     @Override
+    public GetEntityActivityByActivityIdResponse getEntityActivityByActivityId(GetEntityActivityByActivityIdRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/activities/%s", request.getActivityId()),
+                null,
+                List.of(200),
+                new TypeReference<GetEntityActivityByActivityIdResponse>() {});
+    }
+
+    @Override
     public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
