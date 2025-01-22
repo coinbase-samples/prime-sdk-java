@@ -99,4 +99,14 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
                 List.of(200),
                 new TypeReference<ListOrderFillsResponse>() {});
     }
+
+    @Override
+    public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/fills", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioFillsResponse>() {});
+    }
 }
