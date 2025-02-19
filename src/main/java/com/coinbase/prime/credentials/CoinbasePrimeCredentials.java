@@ -41,6 +41,15 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
     @JsonProperty(required = true)
     private String signingKey;
 
+    @JsonProperty(required = false)
+    private String portfolioId;
+
+    @JsonProperty(required = false)
+    private String svcAccountId;
+
+    @JsonProperty(required = false)
+    private String entityId;
+
     public CoinbasePrimeCredentials(String credentialsJson) throws CoinbaseClientException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -49,6 +58,9 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
             this.accessKey = credentials.getAccessKey();
             this.passphrase = credentials.getPassphrase();
             this.signingKey = credentials.getSigningKey();
+            this.portfolioId = credentials.getPortfolioId();
+            this.svcAccountId = credentials.getSvcAccountId();
+            this.entityId = credentials.getEntityId();
         } catch (Throwable e) {
             throw new CoinbaseClientException("Failed to parse credentials", e);
         }
@@ -77,6 +89,9 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         this.accessKey = builder.accessKey;
         this.passphrase = builder.passphrase;
         this.signingKey = builder.signingKey;
+        this.portfolioId = builder.portfolioId;
+        this.svcAccountId = builder.svcAccountId;
+        this.entityId = builder.entityId;
     }
 
     @Override
@@ -133,10 +148,37 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         this.signingKey = signingKey;
     }
 
+    protected String getPortfolioId() {
+        return portfolioId;
+    }
+
+    public void setPortfolioID(String portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+
+    protected String getSvcAccountId() {
+        return svcAccountId;
+    }
+
+    public void setSvcAccountId(String svcAccountId) {
+        this.svcAccountId = svcAccountId;
+    }
+
+    protected String getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
     public static class Builder {
         private String accessKey;
         private String passphrase;
         private String signingKey;
+        private String portfolioId;
+        private String svcAccountId;
+        private String entityId;
 
         public Builder() {}
 
@@ -152,6 +194,21 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
 
         public Builder signingKey(String signingKey) {
             this.signingKey = signingKey;
+            return this;
+        }
+
+        public Builder portfolioId(String portfolioId) {
+            this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder svcAccountId(String svcAccountId) {
+            this.svcAccountId = svcAccountId;
+            return this;
+        }
+
+        public Builder entityId(String entityId) {
+            this.entityId = entityId;
             return this;
         }
 
