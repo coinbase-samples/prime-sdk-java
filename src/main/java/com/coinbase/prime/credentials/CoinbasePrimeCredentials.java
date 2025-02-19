@@ -66,6 +66,9 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         }
     }
 
+		/**
+		 * Constructor for the standard REST API.
+		 */
     public CoinbasePrimeCredentials(String accessKey, String passphrase, String signingKey) throws CoinbaseClientException {
         if (isNullOrEmpty(accessKey)) {
             throw new CoinbaseClientException("Access key is required");
@@ -82,6 +85,32 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         }
         this.signingKey = signingKey;
     }
+
+		/**
+		 * Constructor for the standard REST API and WebSocket support.
+		 */
+    public CoinbasePrimeCredentials(String accessKey, String passphrase, String signingKey, String svcAccountId) throws CoinbaseClientException {
+        if (isNullOrEmpty(accessKey)) {
+            throw new CoinbaseClientException("Access key is required");
+        }
+        this.accessKey = accessKey;
+
+        if (isNullOrEmpty(passphrase)) {
+            throw new CoinbaseClientException("Passphrase is required");
+        }
+        this.passphrase = passphrase;
+
+        if (isNullOrEmpty(signingKey)) {
+            throw new CoinbaseClientException("Signing key is required");
+        }
+        this.signingKey = signingKey;
+
+        if (isNullOrEmpty(svcAccountId)) {
+            throw new CoinbaseClientException("Service account id is required if you want to use WebSockets");
+        }
+        this.svcAccountId = svcAccountId;
+    }
+
 
     public CoinbasePrimeCredentials() {}
 
