@@ -42,9 +42,6 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
     private String signingKey;
 
     @JsonProperty(required = false)
-    private String portfolioId;
-
-    @JsonProperty(required = false)
     private String svcAccountId;
 
     @JsonProperty(required = false)
@@ -58,7 +55,6 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
             this.accessKey = credentials.getAccessKey();
             this.passphrase = credentials.getPassphrase();
             this.signingKey = credentials.getSigningKey();
-            this.portfolioId = credentials.getPortfolioId();
             this.svcAccountId = credentials.getSvcAccountId();
             this.entityId = credentials.getEntityId();
         } catch (Throwable e) {
@@ -118,7 +114,6 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         this.accessKey = builder.accessKey;
         this.passphrase = builder.passphrase;
         this.signingKey = builder.signingKey;
-        this.portfolioId = builder.portfolioId;
         this.svcAccountId = builder.svcAccountId;
         this.entityId = builder.entityId;
     }
@@ -177,14 +172,6 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         this.signingKey = signingKey;
     }
 
-    protected String getPortfolioId() {
-        return portfolioId;
-    }
-
-    public void setPortfolioID(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
     protected String getSvcAccountId() {
         return svcAccountId;
     }
@@ -205,7 +192,6 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         private String accessKey;
         private String passphrase;
         private String signingKey;
-        private String portfolioId;
         private String svcAccountId;
         private String entityId;
 
@@ -223,11 +209,6 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
 
         public Builder signingKey(String signingKey) {
             this.signingKey = signingKey;
-            return this;
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
             return this;
         }
 
