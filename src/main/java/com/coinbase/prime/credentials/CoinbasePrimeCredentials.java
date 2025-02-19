@@ -88,7 +88,7 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
 
     /**
      * Constructor for the standard REST API and WebSocket support.
-                                             */
+     */
     public CoinbasePrimeCredentials(String accessKey, String passphrase, String signingKey, String svcAccountId) throws CoinbaseClientException {
         if (isNullOrEmpty(accessKey)) {
             throw new CoinbaseClientException("Access key is required");
