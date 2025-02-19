@@ -22,6 +22,7 @@ import com.coinbase.prime.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -31,12 +32,13 @@ import java.util.Map;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class CoinbasePrimeCredentials implements CoinbaseCredentials {
     @JsonProperty(required = true)
     private String accessKey;
+
     @JsonProperty(required = true)
     private String passphrase;
+
     @JsonProperty(required = true)
     private String signingKey;
 
