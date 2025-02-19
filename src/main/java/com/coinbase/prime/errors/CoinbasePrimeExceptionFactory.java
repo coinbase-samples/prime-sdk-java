@@ -24,7 +24,7 @@ public class CoinbasePrimeExceptionFactory {
     public static CoinbasePrimeException create(int statusCode, String responseBody) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-						mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
             CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
             return new CoinbasePrimeException(statusCode, errorMessage.getMessage());
@@ -36,7 +36,7 @@ public class CoinbasePrimeExceptionFactory {
     public static CoinbasePrimeException create(String responseBody, Throwable cause) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-						mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
             CoinbasePrimeErrorMessage errorMessage = mapper.readValue(responseBody, CoinbasePrimeErrorMessage.class);
             return new CoinbasePrimeException(errorMessage.getMessage(), cause);

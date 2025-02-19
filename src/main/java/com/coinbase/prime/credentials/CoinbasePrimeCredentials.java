@@ -44,7 +44,7 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
 
     public CoinbasePrimeCredentials(String credentialsJson) throws CoinbaseClientException {
         ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             CoinbasePrimeCredentials credentials = mapper.readValue(credentialsJson, CoinbasePrimeCredentials.class);
             this.accessKey = credentials.getAccessKey();
