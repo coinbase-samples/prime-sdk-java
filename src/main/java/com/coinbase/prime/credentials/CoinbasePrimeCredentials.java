@@ -13,7 +13,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
 package com.coinbase.prime.credentials;
 
 import com.coinbase.core.credentials.CoinbaseCredentials;
@@ -21,6 +20,8 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -33,23 +34,33 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 public class CoinbasePrimeCredentials implements CoinbaseCredentials {
     @JsonProperty(required = true)
     private String accessKey;
+
     @JsonProperty(required = true)
     private String passphrase;
+
     @JsonProperty(required = true)
     private String signingKey;
 
+    @JsonProperty(required = false)
+    private String svcAccountId;
+
     public CoinbasePrimeCredentials(String credentialsJson) throws CoinbaseClientException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
             CoinbasePrimeCredentials credentials = mapper.readValue(credentialsJson, CoinbasePrimeCredentials.class);
             this.accessKey = credentials.getAccessKey();
             this.passphrase = credentials.getPassphrase();
             this.signingKey = credentials.getSigningKey();
+            this.svcAccountId = credentials.getSvcAccountId();
         } catch (Throwable e) {
             throw new CoinbaseClientException("Failed to parse credentials", e);
         }
     }
 
+    /**
+     * Constructor for the standard REST API.
+     */
     public CoinbasePrimeCredentials(String accessKey, String passphrase, String signingKey) throws CoinbaseClientException {
         if (isNullOrEmpty(accessKey)) {
             throw new CoinbaseClientException("Access key is required");
@@ -67,12 +78,39 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         this.signingKey = signingKey;
     }
 
+    /**
+     * Constructor for the standard REST API and WebSocket support.
+     */
+    public CoinbasePrimeCredentials(String accessKey, String passphrase, String signingKey, String svcAccountId) throws CoinbaseClientException {
+        if (isNullOrEmpty(accessKey)) {
+            throw new CoinbaseClientException("Access key is required");
+        }
+        this.accessKey = accessKey;
+
+        if (isNullOrEmpty(passphrase)) {
+            throw new CoinbaseClientException("Passphrase is required");
+        }
+        this.passphrase = passphrase;
+
+        if (isNullOrEmpty(signingKey)) {
+            throw new CoinbaseClientException("Signing key is required");
+        }
+        this.signingKey = signingKey;
+
+        if (isNullOrEmpty(svcAccountId)) {
+            throw new CoinbaseClientException("Service account id is required if you want to use WebSockets");
+        }
+        this.svcAccountId = svcAccountId;
+    }
+
+
     public CoinbasePrimeCredentials() {}
 
     public CoinbasePrimeCredentials(Builder builder) {
         this.accessKey = builder.accessKey;
         this.passphrase = builder.passphrase;
         this.signingKey = builder.signingKey;
+        this.svcAccountId = builder.svcAccountId;
     }
 
     @Override
@@ -129,10 +167,19 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
         this.signingKey = signingKey;
     }
 
+    protected String getSvcAccountId() {
+        return svcAccountId;
+    }
+
+    public void setSvcAccountId(String svcAccountId) {
+        this.svcAccountId = svcAccountId;
+    }
+
     public static class Builder {
         private String accessKey;
         private String passphrase;
         private String signingKey;
+        private String svcAccountId;
 
         public Builder() {}
 
@@ -148,6 +195,11 @@ public class CoinbasePrimeCredentials implements CoinbaseCredentials {
 
         public Builder signingKey(String signingKey) {
             this.signingKey = signingKey;
+            return this;
+        }
+
+        public Builder svcAccountId(String svcAccountId) {
+            this.svcAccountId = svcAccountId;
             return this;
         }
 
