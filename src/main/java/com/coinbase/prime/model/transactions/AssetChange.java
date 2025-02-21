@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.prime.model.enums.AssetChangeType;
+
 public class AssetChange {
     private AssetChangeType type;
     private String symbol;

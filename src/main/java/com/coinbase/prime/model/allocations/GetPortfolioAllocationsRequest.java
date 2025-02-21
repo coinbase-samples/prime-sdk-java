@@ -19,7 +19,7 @@ package com.coinbase.prime.model.allocations;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.common.Pagination;
-import com.coinbase.prime.model.orders.OrderSide;
+import com.coinbase.prime.model.enums.OrderSide;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

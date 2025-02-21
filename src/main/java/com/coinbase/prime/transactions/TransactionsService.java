@@ -28,4 +28,5 @@ public interface TransactionsService {
     ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     CreateTransferResponse createTransfer(CreateTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateOnchainTransactionResponse createOnchainTransaction(CreateOnchainTransactionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

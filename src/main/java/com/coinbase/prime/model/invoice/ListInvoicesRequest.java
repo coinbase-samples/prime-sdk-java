@@ -17,6 +17,7 @@
 package com.coinbase.prime.model.invoice;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.enums.InvoiceState;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

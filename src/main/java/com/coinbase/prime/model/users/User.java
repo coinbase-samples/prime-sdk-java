@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.users;
 
+import com.coinbase.prime.model.enums.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {

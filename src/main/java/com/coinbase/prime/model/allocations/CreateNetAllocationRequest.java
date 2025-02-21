@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.allocations;
 
+import com.coinbase.prime.model.enums.SizeType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateNetAllocationRequest {

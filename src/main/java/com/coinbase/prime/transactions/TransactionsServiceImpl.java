@@ -89,4 +89,14 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
                 List.of(200),
                 new TypeReference<CreateWithdrawalResponse>() {});
     }
+
+    @Override
+    public CreateOnchainTransactionResponse createOnchainTransaction(CreateOnchainTransactionRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<CreateOnchainTransactionResponse>() {});
+    }
 }

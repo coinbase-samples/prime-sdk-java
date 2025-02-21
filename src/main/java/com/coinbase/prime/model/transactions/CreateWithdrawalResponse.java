@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.prime.model.enums.DestinationType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateWithdrawalResponse {

@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.balances;
 
+import com.coinbase.prime.model.enums.BalancesType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListPortfolioBalancesResponse {

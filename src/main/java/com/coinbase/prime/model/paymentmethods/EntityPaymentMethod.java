@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.paymentmethods;
 
+import com.coinbase.prime.model.enums.PaymentMethodType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EntityPaymentMethod {

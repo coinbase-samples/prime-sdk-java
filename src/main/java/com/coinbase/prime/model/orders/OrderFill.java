@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.orders;
 
+import com.coinbase.prime.model.enums.OrderSide;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OrderFill {

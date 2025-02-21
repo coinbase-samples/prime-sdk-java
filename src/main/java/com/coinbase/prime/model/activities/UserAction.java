@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.activities;
 
+import com.coinbase.prime.model.enums.UserActionType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserAction {

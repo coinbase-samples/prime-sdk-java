@@ -17,6 +17,7 @@
 package com.coinbase.prime.model.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
