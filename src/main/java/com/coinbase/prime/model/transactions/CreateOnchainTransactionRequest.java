@@ -34,7 +34,7 @@ public class CreateOnchainTransactionRequest {
     private Rpc rpc;
 
     @JsonProperty("evm_params")
-    private EVMParams evmParams;
+    private EvmParams evmParams;
 
     public CreateOnchainTransactionRequest() {
     }
@@ -79,11 +79,11 @@ public class CreateOnchainTransactionRequest {
         this.rpc = rpc;
     }
 
-    public EVMParams getEvmParams() {
+    public EvmParams getEvmParams() {
         return evmParams;
     }
 
-    public void setEvmParams(EVMParams evmParams) {
+    public void setEvmParams(EvmParams evmParams) {
         this.evmParams = evmParams;
     }
 
@@ -92,7 +92,7 @@ public class CreateOnchainTransactionRequest {
         private String walletId;
         private String rawUnsignedTxn;
         private Rpc rpc;
-        private EVMParams evmParams;
+        private EvmParams evmParams;
 
         public Builder() {
         }
@@ -117,7 +117,7 @@ public class CreateOnchainTransactionRequest {
             return this;
         }
 
-        public Builder evmParams(EVMParams evmParams) {
+        public Builder evmParams(EvmParams evmParams) {
             this.evmParams = evmParams;
             return this;
         }

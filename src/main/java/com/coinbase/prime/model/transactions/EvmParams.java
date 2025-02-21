@@ -18,7 +18,7 @@ package com.coinbase.prime.model.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EVMParams {
+public class EvmParams {
     @JsonProperty("disable_dynamic_gas")
     private boolean disableDynamicGas;
 
@@ -28,10 +28,10 @@ public class EVMParams {
     @JsonProperty("chain_id")
     private String chainId;
 
-    public EVMParams() {
+    public EvmParams() {
     }
 
-    public EVMParams(Builder builder) {
+    public EvmParams(Builder builder) {
         this.disableDynamicGas = builder.disableDynamicGas;
         this.replacedTransactionId = builder.replacedTransactionId;
         this.chainId = builder.chainId;
@@ -84,8 +84,8 @@ public class EVMParams {
             return this;
         }
 
-        public EVMParams build() {
-            return new EVMParams(this);
+        public EvmParams build() {
+            return new EvmParams(this);
         }
     }
 }
