@@ -14,10 +14,12 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.addressbook;
+package com.coinbase.prime.model.enums;
 
-public enum AddressBookType {
-    ADDRESS_BOOK_TYPE_UNSPECIFIED,
-    ADDRESS_BOOK_TYPE_ADDRESS,
-    ADDRESS_BOOK_TYPE_COUNTERPARTY_ID
+public enum DepositType {
+    CRYPTO,
+    WIRE,
+    SEN,
+    SWIFT,
+    UNKNOWN_WALLET_DEPOSIT_TYPE
 }

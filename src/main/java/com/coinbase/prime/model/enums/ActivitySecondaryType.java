@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.activities;
+package com.coinbase.prime.model.enums;
 
 public enum ActivitySecondaryType {
     NO_SECONDARY_TYPE,

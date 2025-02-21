@@ -14,12 +14,10 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.wallets;
+package com.coinbase.prime.model.enums;
 
-public enum DepositType {
-    CRYPTO,
-    WIRE,
-    SEN,
-    SWIFT,
-    UNKNOWN_WALLET_DEPOSIT_TYPE
+public enum BalancesType {
+    TRADING_BALANCES,
+    VAULT_BALANCES,
+    TOTAL_BALANCES
 }

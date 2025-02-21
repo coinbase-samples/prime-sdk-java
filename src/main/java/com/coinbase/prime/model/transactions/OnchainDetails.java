@@ -1,5 +1,6 @@
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.prime.model.enums.SigningStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OnchainDetails {

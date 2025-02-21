@@ -14,16 +14,12 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.users;
+package com.coinbase.prime.model.enums;
 
-public enum Role {
-    AUDITOR,
-    SIGNATORY,
-    ADMIN,
-    INITIATOR,
-    REVIEWER,
-    TRADER,
-    FULL_TRADER,
-    TEAM_MANAGER,
-    APPROVER
+public enum TimeInForce {
+    FILL_OR_KILL,
+    GOOD_UNTIL_DATE_TIME,
+    GOOD_UNTIL_CANCELLED,
+    IMMEDIATE_OR_CANCEL,
+    UNKNOWN_TIME_IN_FORCE
 }

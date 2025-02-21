@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.model.wallets;
 
+import com.coinbase.prime.model.enums.Visibility;
+import com.coinbase.prime.model.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;

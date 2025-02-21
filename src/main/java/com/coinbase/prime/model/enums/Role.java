@@ -14,13 +14,16 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.orders;
+package com.coinbase.prime.model.enums;
 
-public enum OrderType {
-    MARKET,
-    LIMIT,
-    TWAP,
-    BLOCK,
-    VWAP,
-    STOP_LIMIT
+public enum Role {
+    AUDITOR,
+    SIGNATORY,
+    ADMIN,
+    INITIATOR,
+    REVIEWER,
+    TRADER,
+    FULL_TRADER,
+    TEAM_MANAGER,
+    APPROVER
 }

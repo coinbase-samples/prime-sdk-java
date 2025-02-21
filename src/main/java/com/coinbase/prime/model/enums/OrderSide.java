@@ -14,9 +14,9 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.transactions;
+package com.coinbase.prime.model.enums;
 
-public enum DestinationType {
-    DESTINATION_PAYMENT_METHOD,
-    DESTINATION_BLOCKCHAIN
+public enum OrderSide {
+    BUY,
+    SELL
 }

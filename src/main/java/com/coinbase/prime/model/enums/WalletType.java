@@ -14,13 +14,11 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.activities;
+package com.coinbase.prime.model.enums;
 
-public enum ActivityCategory {
-    OTHER_ACTIVITY_CATEGORY,
-    ACTIVITY_CATEGORY_ORDER,
-    ACTIVITY_CATEGORY_TRANSACTION,
-    ACTIVITY_CATEGORY_ACCOUNT,
-    ACTIVITY_CATEGORY_ADMIN,
-    ACTIVITY_CATEGORY_ALLOCATION
+public enum WalletType {
+    VAULT,
+    TRADING,
+    WALLET_TYPE_OTHER,
+    WEB3
 }

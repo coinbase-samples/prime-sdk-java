@@ -14,12 +14,13 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.activities;
+package com.coinbase.prime.model.enums;
 
-public enum UserActionType {
-    OTHER_ACTION,
-    ACTION_APPROVE,
-    ACTION_REJECT,
-    ACTION_INITIATE,
-    ACTION_CANCEL
+public enum OrderType {
+    MARKET,
+    LIMIT,
+    TWAP,
+    BLOCK,
+    VWAP,
+    STOP_LIMIT
 }

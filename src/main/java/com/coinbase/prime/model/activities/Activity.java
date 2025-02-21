@@ -16,6 +16,10 @@
 
 package com.coinbase.prime.model.activities;
 
+import com.coinbase.prime.model.enums.ActivityCategory;
+import com.coinbase.prime.model.enums.ActivitySecondaryType;
+import com.coinbase.prime.model.enums.ActivityStatus;
+import com.coinbase.prime.model.enums.ActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Activity {

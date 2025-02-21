@@ -14,11 +14,12 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.paymentmethods;
+package com.coinbase.prime.model.enums;
 
-public enum PaymentMethodType {
-    UNKNOWN_PAYMENT_METHOD_TYPE,
-    METHOD_WIRE,
-    METHOD_SEN,
-    METHOD_SWIFT
+public enum AssetChangeType {
+    BALANCE_TRANSFER,
+    BALANCE_APPROVAL,
+    ITEM_TRANSFER,
+    ITEM_APPROVAL,
+    ITEM_APPROVAL_ALL
 }

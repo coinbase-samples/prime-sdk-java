@@ -14,12 +14,13 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.transactions;
+package com.coinbase.prime.model.enums;
 
-public enum AssetChangeType {
-    BALANCE_TRANSFER,
-    BALANCE_APPROVAL,
-    ITEM_TRANSFER,
-    ITEM_APPROVAL,
-    ITEM_APPROVAL_ALL
+public enum InvoiceType {
+    INVOICE_TYPE_UNSPECIFIED,
+    INVOICE_TYPE_AUC_FEE,
+    INVOICE_TYPE_MINIMUM_FEE,
+    INVOICE_TYPE_WITHDRAWAL_FEE,
+    INVOICE_TYPE_NEW_WALLET_FEE,
+    INVOICE_TYPE_STAKING_FEE
 }

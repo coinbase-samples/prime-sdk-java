@@ -14,15 +14,13 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.transactions;
+package com.coinbase.prime.model.enums;
 
-/**
- * Possible values: [PAYMENT_METHOD, WALLET, ADDRESS, OTHER, MULTIPLE_ADDRESSES]
- */
-public enum TransferLocationType {
-    PAYMENT_METHOD,
-    WALLET,
-    ADDRESS,
-    OTHER,
-    MULTIPLE_ADDRESSES
+public enum ActivityCategory {
+    OTHER_ACTIVITY_CATEGORY,
+    ACTIVITY_CATEGORY_ORDER,
+    ACTIVITY_CATEGORY_TRANSACTION,
+    ACTIVITY_CATEGORY_ACCOUNT,
+    ACTIVITY_CATEGORY_ADMIN,
+    ACTIVITY_CATEGORY_ALLOCATION
 }

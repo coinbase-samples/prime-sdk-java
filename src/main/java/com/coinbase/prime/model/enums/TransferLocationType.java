@@ -14,21 +14,15 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.transactions;
+package com.coinbase.prime.model.enums;
 
-public enum TransactionStatus {
-    TRANSACTION_CREATED,
-    TRANSACTION_REQUESTED,
-    TRANSACTION_APPROVED,
-    TRANSACTION_PROCESSING,
-    TRANSACTION_DONE,
-    TRANSACTION_IMPORT_PENDING,
-    TRANSACTION_IMPORTED,
-    TRANSACTION_CANCELLED,
-    TRANSACTION_REJECTED,
-    TRANSACTION_DELAYED,
-    TRANSACTION_RETRIED,
-    TRANSACTION_FAILED,
-    TRANSACTION_EXPIRED,
-    OTHER_TRANSACTION_STATUS
+/**
+ * Possible values: [PAYMENT_METHOD, WALLET, ADDRESS, OTHER, MULTIPLE_ADDRESSES]
+ */
+public enum TransferLocationType {
+    PAYMENT_METHOD,
+    WALLET,
+    ADDRESS,
+    OTHER,
+    MULTIPLE_ADDRESSES
 }

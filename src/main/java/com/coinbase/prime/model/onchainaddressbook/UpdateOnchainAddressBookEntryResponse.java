@@ -16,12 +16,12 @@
 
 package com.coinbase.prime.model.onchainaddressbook;
 
-import com.coinbase.prime.model.addressbook.AddressBookActivityType;
+import com.coinbase.prime.model.enums.CustodyActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UpdateOnchainAddressBookEntryResponse {
     @JsonProperty("activity_type")
-    private AddressBookActivityType activityType;
+    private CustodyActivityType activityType;
 
     @JsonProperty("num_approvals_remaining")
     private int numApprovalsRemaining;
@@ -38,11 +38,11 @@ public class UpdateOnchainAddressBookEntryResponse {
         this.activityId = builder.activityId;
     }
 
-    public AddressBookActivityType getActivityType() {
+    public CustodyActivityType getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(AddressBookActivityType activityType) {
+    public void setActivityType(CustodyActivityType activityType) {
         this.activityType = activityType;
     }
 
@@ -63,14 +63,14 @@ public class UpdateOnchainAddressBookEntryResponse {
     }
 
     public static class Builder {
-        private AddressBookActivityType activityType;
+        private CustodyActivityType activityType;
         private int numApprovalsRemaining;
         private String activityId;
 
         public Builder() {
         }
 
-        public UpdateOnchainAddressBookEntryResponse.Builder activityType(AddressBookActivityType activityType) {
+        public UpdateOnchainAddressBookEntryResponse.Builder activityType(CustodyActivityType activityType) {
             this.activityType = activityType;
             return this;
         }

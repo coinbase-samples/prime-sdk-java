@@ -14,13 +14,14 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.orders;
+package com.coinbase.prime.model.enums;
 
-public enum OrderStatus {
-    OPEN,
-    FILLED,
-    CANCELLED,
-    EXPIRED,
-    FAILED,
-    PENDING
+public enum ActivityStatus {
+    OTHER_ACTIVITY_STATUS,
+    ACTIVITY_STATUS_CANCELLED,
+    ACTIVITY_STATUS_PROCESSING,
+    ACTIVITY_STATUS_COMPLETED,
+    ACTIVITY_STATUS_EXPIRED,
+    ACTIVITY_STATUS_REJECTED,
+    ACTIVITY_STATUS_FAILED
 }

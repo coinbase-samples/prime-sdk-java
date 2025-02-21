@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,10 +14,12 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.common;
+package com.coinbase.prime.model.enums;
 
-public enum NetworkType {
-    NETWORK_TYPE_UNSPECIFIED,
-    NETWORK_TYPE_EVM,
-    NETWORK_TYPE_SOLANA
+public enum UserActionType {
+    OTHER_ACTION,
+    ACTION_APPROVE,
+    ACTION_REJECT,
+    ACTION_INITIATE,
+    ACTION_CANCEL
 }

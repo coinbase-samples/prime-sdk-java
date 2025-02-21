@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.addressbook;
 
+import com.coinbase.prime.model.enums.AddressBookType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AddressBookEntry {

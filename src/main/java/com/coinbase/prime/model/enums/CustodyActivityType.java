@@ -14,9 +14,9 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.addressbook;
+package com.coinbase.prime.model.enums;
 
-public enum AddressBookActivityType {
+public enum CustodyActivityType {
     ACTIVITY_TYPE_UNKNOWN,
     ACTIVITY_TYPE_GOVERNANCE_VOTE,
     ACTIVITY_TYPE_INVITATION,

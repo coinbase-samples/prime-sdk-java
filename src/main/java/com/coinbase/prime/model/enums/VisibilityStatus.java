@@ -14,9 +14,11 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.orders;
+package com.coinbase.prime.model.enums;
 
-public enum OrderSide {
-    BUY,
-    SELL
+public enum VisibilityStatus {
+    UNKNOWN_VISIBILITY_STATUS,
+    VISIBLE,
+    HIDDEN,
+    SPAM
 }

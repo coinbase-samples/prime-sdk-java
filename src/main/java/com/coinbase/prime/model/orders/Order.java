@@ -16,6 +16,10 @@
 
 package com.coinbase.prime.model.orders;
 
+import com.coinbase.prime.model.enums.OrderSide;
+import com.coinbase.prime.model.enums.OrderStatus;
+import com.coinbase.prime.model.enums.OrderType;
+import com.coinbase.prime.model.enums.TimeInForce;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Order {

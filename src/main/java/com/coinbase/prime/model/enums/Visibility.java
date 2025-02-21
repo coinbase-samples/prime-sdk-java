@@ -1,4 +1,4 @@
-package com.coinbase.prime.model.wallets;
+package com.coinbase.prime.model.enums;
 
 public enum Visibility {
     WALLET_VISIBILITY_UNSPECIFIED,

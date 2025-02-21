@@ -19,6 +19,7 @@ package com.coinbase.prime.model.balances;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.common.Pagination;
+import com.coinbase.prime.model.enums.VisibilityStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

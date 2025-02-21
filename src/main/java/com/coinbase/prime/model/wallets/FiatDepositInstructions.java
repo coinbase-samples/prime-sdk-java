@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.wallets;
 
+import com.coinbase.prime.model.enums.DepositType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FiatDepositInstructions {

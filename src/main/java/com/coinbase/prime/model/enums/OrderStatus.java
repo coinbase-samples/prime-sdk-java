@@ -14,11 +14,13 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.balances;
+package com.coinbase.prime.model.enums;
 
-public enum VisibilityStatus {
-    UNKNOWN_VISIBILITY_STATUS,
-    VISIBLE,
-    HIDDEN,
-    SPAM
+public enum OrderStatus {
+    OPEN,
+    FILLED,
+    CANCELLED,
+    EXPIRED,
+    FAILED,
+    PENDING
 }

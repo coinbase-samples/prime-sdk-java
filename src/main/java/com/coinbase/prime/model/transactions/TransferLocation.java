@@ -16,6 +16,8 @@
 
 package com.coinbase.prime.model.transactions;
 
+import com.coinbase.prime.model.enums.TransferLocationType;
+
 public class TransferLocation {
     private TransferLocationType type;
     private String value;

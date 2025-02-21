@@ -14,13 +14,12 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.invoice;
+package com.coinbase.prime.model.enums;
 
-public enum InvoiceType {
-    INVOICE_TYPE_UNSPECIFIED,
-    INVOICE_TYPE_AUC_FEE,
-    INVOICE_TYPE_MINIMUM_FEE,
-    INVOICE_TYPE_WITHDRAWAL_FEE,
-    INVOICE_TYPE_NEW_WALLET_FEE,
-    INVOICE_TYPE_STAKING_FEE
+public enum InvoiceState {
+    INVOICE_STATE_UNSPECIFIED,
+    INVOICE_STATE_IMPORTED,
+    INVOICE_STATE_BILLED,
+    INVOICE_STATE_PARTIALLY_PAID,
+    INVOICE_STATE_PAID
 }

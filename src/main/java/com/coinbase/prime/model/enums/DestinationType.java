@@ -14,12 +14,9 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.allocations;
+package com.coinbase.prime.model.enums;
 
-public enum AllocationStatus {
-    ALLOCATION_STATUS_UNSPECIFIED,
-    ALLOCATION_STATUS_ALLOCATION_PENDING,
-    ALLOCATION_STATUS_ALLOCATION_ACCEPTED,
-    ALLOCATION_STATUS_ALLOCATION_REJECTED,
-    ALLOCATION_STATUS_ALLOCATION_ALLOCATED
+public enum DestinationType {
+    DESTINATION_PAYMENT_METHOD,
+    DESTINATION_BLOCKCHAIN
 }
