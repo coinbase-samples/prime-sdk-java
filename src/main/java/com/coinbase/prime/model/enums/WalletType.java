@@ -17,8 +17,10 @@
 package com.coinbase.prime.model.enums;
 
 public enum WalletType {
+    UNKNOWN_WALLET_TYPE,
     VAULT,
     TRADING,
     WALLET_TYPE_OTHER,
-    WEB3
+    ONCHAIN,
+    QC
 }
