@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public class CreateOnchainTransactionRequest {
     @JsonProperty("raw_unsigned_txn")
     private String rawUnsignedTxn;
 
-    private RPC rpc;
+    private Rpc rpc;
 
     @JsonProperty("evm_params")
     private EVMParams evmParams;
@@ -71,11 +71,11 @@ public class CreateOnchainTransactionRequest {
         this.rawUnsignedTxn = rawUnsignedTxn;
     }
 
-    public RPC getRpc() {
+    public Rpc getRpc() {
         return rpc;
     }
 
-    public void setRpc(RPC rpc) {
+    public void setRpc(Rpc rpc) {
         this.rpc = rpc;
     }
 
@@ -91,7 +91,7 @@ public class CreateOnchainTransactionRequest {
         private String portfolioId;
         private String walletId;
         private String rawUnsignedTxn;
-        private RPC rpc;
+        private Rpc rpc;
         private EVMParams evmParams;
 
         public Builder() {
@@ -112,7 +112,7 @@ public class CreateOnchainTransactionRequest {
             return this;
         }
 
-        public Builder rpc(RPC rpc) {
+        public Builder rpc(Rpc rpc) {
             this.rpc = rpc;
             return this;
         }

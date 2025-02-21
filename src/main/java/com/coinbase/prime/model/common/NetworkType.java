@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.onchainaddressbook;
+package com.coinbase.prime.model.common;
 
 public enum NetworkType {
     NETWORK_TYPE_UNSPECIFIED,

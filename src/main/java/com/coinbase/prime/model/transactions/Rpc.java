@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@ package com.coinbase.prime.model.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RPC {
+public class Rpc {
     @JsonProperty("skip_broadcast")
     private boolean skipBroadcast;
 
     private String url;
 
-    public RPC() {
+    public Rpc() {
     }
 
-    public RPC(Builder builder) {
+    public Rpc(Builder builder) {
         this.skipBroadcast = builder.skipBroadcast;
         this.url = builder.url;
     }
@@ -65,8 +65,8 @@ public class RPC {
             return this;
         }
 
-        public RPC build() {
-            return new RPC(this);
+        public Rpc build() {
+            return new Rpc(this);
         }
     }
 }

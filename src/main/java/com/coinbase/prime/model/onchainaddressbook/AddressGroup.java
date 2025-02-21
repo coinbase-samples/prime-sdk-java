@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model.onchainaddressbook;
 
+import com.coinbase.prime.model.common.NetworkType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AddressGroup {
