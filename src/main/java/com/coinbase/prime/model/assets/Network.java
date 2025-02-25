@@ -7,6 +7,7 @@ public class Network {
     private String name;
     @JsonProperty("max_decimals")
     private String maxDecimals;
+    @JsonProperty("default")
     private boolean isDefault;
     @JsonProperty("trading_supported")
     private boolean tradingSupported;
