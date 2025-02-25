@@ -17,6 +17,7 @@
 package com.coinbase.prime.model.assets;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 public class Asset {
     private String name;
@@ -27,6 +28,8 @@ public class Asset {
     private boolean tradingSupported;
     @JsonProperty("explorer_url")
     private String explorerUrl;
+    @JsonProperty("networks")
+    private List<Network> networks;
 
     public Asset() {}
 
@@ -36,6 +39,7 @@ public class Asset {
         this.decimalPrecision = builder.decimalPrecision;
         this.tradingSupported = builder.tradingSupported;
         this.explorerUrl = builder.explorerUrl;
+        this.networks = builder.networks;
     }
 
     public String getName() {
@@ -78,12 +82,21 @@ public class Asset {
         this.explorerUrl = explorerUrl;
     }
 
+    public List<Network> getNetworks() {
+        return networks;
+    }
+
+    public void setNetworks(List<Network> networks) {
+        this.networks = networks;
+    }
+
     public static class Builder {
         private String name;
         private String symbol;
         private String decimalPrecision;
         private boolean tradingSupported;
         private String explorerUrl;
+        private List<Network> networks;
 
         public Builder() {}
 
@@ -109,6 +122,11 @@ public class Asset {
 
         public Builder explorerUrl(String explorerUrl) {
             this.explorerUrl = explorerUrl;
+            return this;
+        }
+
+        public Builder networks(List<Network> networks) {
+            this.networks = networks;
             return this;
         }
 
