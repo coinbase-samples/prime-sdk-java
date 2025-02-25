@@ -28,7 +28,6 @@ public class Asset {
     private boolean tradingSupported;
     @JsonProperty("explorer_url")
     private String explorerUrl;
-    @JsonProperty("networks")
     private List<Network> networks;
 
     public Asset() {}

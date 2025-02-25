@@ -3,7 +3,6 @@ package com.coinbase.prime.model.assets;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Network {
-    @JsonProperty("network")
     private NetworkDetails network;
     private String name;
     @JsonProperty("max_decimals")
