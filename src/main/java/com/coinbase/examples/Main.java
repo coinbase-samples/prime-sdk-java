@@ -108,6 +108,28 @@ public class Main {
                                 .build());
             }
 
+            // Create and Accept RFQ
+            CreateQuoteResponse quoteResponse = ordersService.createQuote(
+                    new CreateQuoteRequest.Builder()
+                            .portfolioId(portfolioId)
+                            .productId("ETH-USD")
+                            .side(OrderSide.BUY)
+                            .baseQuantity("0.007")
+                            .limitPrice("3000.00")
+                            .clientQuoteId(UUID.randomUUID().toString())
+                            .build());
+            System.out.println(mapper.writeValueAsString(quoteResponse));
+
+            AcceptQuoteResponse acceptQuoteResponse = ordersService.acceptQuote(
+                    new AcceptQuoteRequest.Builder()
+                            .portfolioId(portfolioId)
+                            .quoteId(quoteResponse.getQuoteId())
+                            .productId("ETH-USD")
+                            .side(OrderSide.BUY)
+                            .clientOrderId(UUID.randomUUID().toString())
+                            .build());
+            System.out.println(mapper.writeValueAsString(acceptQuoteResponse));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

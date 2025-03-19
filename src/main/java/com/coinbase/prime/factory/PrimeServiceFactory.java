@@ -31,6 +31,8 @@ import com.coinbase.prime.commission.CommissionService;
 import com.coinbase.prime.commission.CommissionServiceImpl;
 import com.coinbase.prime.financing.FinancingService;
 import com.coinbase.prime.financing.FinancingServiceImpl;
+import com.coinbase.prime.futures.FuturesService;
+import com.coinbase.prime.futures.FuturesServiceImpl;
 import com.coinbase.prime.invoice.InvoiceService;
 import com.coinbase.prime.invoice.InvoiceServiceImpl;
 import com.coinbase.prime.orders.OrdersService;
@@ -73,6 +75,10 @@ public class PrimeServiceFactory {
 
     public static CommissionService createCommissionService(CoinbasePrimeClient client) {
         return new CommissionServiceImpl(client);
+    }
+
+    public static FuturesService createFuturesService(CoinbasePrimeClient client) {
+        return new FuturesServiceImpl(client);
     }
 
     public static InvoiceService createInvoiceService(CoinbasePrimeClient client) {
