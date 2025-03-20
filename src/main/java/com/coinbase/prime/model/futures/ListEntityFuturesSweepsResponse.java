@@ -14,11 +14,15 @@
  *  limitations under the License.
  */
 
- package com.coinbase.prime.model.futures;
+package com.coinbase.prime.model.futures;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListEntityFuturesSweepsResponse {
     private Sweep[] sweeps;
-    private Boolean autoSweep;
+
+    @JsonProperty("auto_sweep")
+    private boolean autoSweep;
 
     public ListEntityFuturesSweepsResponse() {
     }
@@ -36,17 +40,17 @@ public class ListEntityFuturesSweepsResponse {
         this.sweeps = sweeps;
     }
 
-    public Boolean getAutoSweep() {
+    public boolean getAutoSweep() {
         return autoSweep;
     }
 
-    public void setAutoSweep(Boolean autoSweep) {
+    public void setAutoSweep(boolean autoSweep) {
         this.autoSweep = autoSweep;
     }
 
     public static class Builder {
         private Sweep[] sweeps;
-        private Boolean autoSweep;
+        private boolean autoSweep;
 
         public Builder() {
         }
@@ -56,7 +60,7 @@ public class ListEntityFuturesSweepsResponse {
             return this;
         }
 
-        public Builder autoSweep(Boolean autoSweep) {
+        public Builder autoSweep(boolean autoSweep) {
             this.autoSweep = autoSweep;
             return this;
         }

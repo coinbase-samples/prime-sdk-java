@@ -25,10 +25,9 @@ public class ScheduleEntityFuturesSweepRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
-    @JsonProperty("amount")
     private String amount;
 
-    @JsonProperty(required = true, value = "currency")
+    @JsonProperty(required = true)
     private String currency;
 
     public ScheduleEntityFuturesSweepRequest() {

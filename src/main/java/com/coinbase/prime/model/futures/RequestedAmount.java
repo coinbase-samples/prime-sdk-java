@@ -16,13 +16,9 @@
 
 package com.coinbase.prime.model.futures;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class RequestedAmount {
-    @JsonProperty("currency")
     private String currency;
 
-    @JsonProperty("amount")
     private String amount;
 
     public RequestedAmount() {

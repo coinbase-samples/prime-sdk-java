@@ -177,7 +177,9 @@ public class CreateQuoteRequest {
             if (isNullOrEmpty(this.limitPrice)) {
                 throw new CoinbaseClientException("LimitPrice is required");
             }
-            
+            if (isNullOrEmpty(this.baseQuantity) && isNullOrEmpty(this.quoteValue)) {
+                throw new CoinbaseClientException("BaseQuantity or QuoteValue is required");
+            }
         }
     }
 }

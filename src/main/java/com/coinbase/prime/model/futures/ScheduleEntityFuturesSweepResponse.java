@@ -16,8 +16,12 @@
 
 package com.coinbase.prime.model.futures;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ScheduleEntityFuturesSweepResponse {
-    private Boolean success;
+    private boolean success;
+
+    @JsonProperty("request_id")
     private String requestId;
 
     public ScheduleEntityFuturesSweepResponse() {
@@ -28,11 +32,11 @@ public class ScheduleEntityFuturesSweepResponse {
         this.requestId = builder.requestId;
     }
 
-    public Boolean getSuccess() {
+    public boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(boolean success) {
         this.success = success;
     }
 
@@ -45,13 +49,13 @@ public class ScheduleEntityFuturesSweepResponse {
     }
 
     public static class Builder {
-        private Boolean success;
+        private boolean success;
         private String requestId;
 
         public Builder() {
         }
 
-        public Builder success(Boolean success) {
+        public Builder success(boolean success) {
             this.success = success;
             return this;
         }

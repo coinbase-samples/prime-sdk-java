@@ -23,7 +23,6 @@ public class Position {
     @JsonProperty("product_id")
     private String productId;
 
-    @JsonProperty("side")
     private String side;
 
     @JsonProperty("number_of_contracts")

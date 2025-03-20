@@ -24,7 +24,6 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 public class ListEntityFuturesSweepsRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
-    
 
     public ListEntityFuturesSweepsRequest() {
     }

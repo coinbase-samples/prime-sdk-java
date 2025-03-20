@@ -19,16 +19,14 @@ package com.coinbase.prime.model.futures;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Sweep {
-    @JsonProperty("id")
     private String id;
 
     @JsonProperty("request_amount")
     private RequestedAmount requestedAmount;
 
     @JsonProperty("should_sweep_all")
-    private Boolean shouldSweepAll;
+    private boolean shouldSweepAll;
 
-    @JsonProperty("status")
     private String status;
 
     @JsonProperty("scheduled_time")
@@ -61,11 +59,11 @@ public class Sweep {
         this.requestedAmount = requestedAmount;
     }
 
-    public Boolean getShouldSweepAll() {
+    public boolean getShouldSweepAll() {
         return shouldSweepAll;
     }
 
-    public void setShouldSweepAll(Boolean shouldSweepAll) {
+    public void setShouldSweepAll(boolean shouldSweepAll) {
         this.shouldSweepAll = shouldSweepAll;
     }
 
@@ -88,7 +86,7 @@ public class Sweep {
     public static class Builder {
         private String id;
         private RequestedAmount requestedAmount;
-        private Boolean shouldSweepAll;
+        private boolean shouldSweepAll;
         private String status;
         private String scheduledTime;
 
@@ -105,7 +103,7 @@ public class Sweep {
             return this;
         }
 
-        public Builder shouldSweepAll(Boolean shouldSweepAll) {
+        public Builder shouldSweepAll(boolean shouldSweepAll) {
             this.shouldSweepAll = shouldSweepAll;
             return this;
         }

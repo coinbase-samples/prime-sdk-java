@@ -17,7 +17,7 @@
 package com.coinbase.prime.model.futures;
 
 public class SetAutoSweepResponse {
-    private Boolean success;
+    private boolean success;
 
     public SetAutoSweepResponse() {
     }
@@ -26,21 +26,21 @@ public class SetAutoSweepResponse {
         this.success = builder.success;
     }
 
-    public Boolean getSuccess() {
+    public boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(boolean success) {
         this.success = success;
     }
 
     public static class Builder {
-        private Boolean success;
+        private boolean success;
 
         public Builder() {
         }
 
-        public Builder success(Boolean success) {
+        public Builder success(boolean success) {
             this.success = success;
             return this;
         }

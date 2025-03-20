@@ -16,8 +16,12 @@
 
 package com.coinbase.prime.model.futures;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class GetEntityPositionsResponse {
     private Position[] positions;
+
+    @JsonProperty("clearing_account_id")
     private String clearingAccountId;
 
     public GetEntityPositionsResponse() {

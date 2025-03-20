@@ -26,7 +26,7 @@ public class SetAutoSweepRequest {
     private String entityId;
 
     @JsonProperty("auto_sweep")
-    private Boolean autoSweep;
+    private boolean autoSweep;
 
     public SetAutoSweepRequest() {
     }
@@ -44,17 +44,17 @@ public class SetAutoSweepRequest {
         this.entityId = entityId;
     }
 
-    public Boolean getAutoSweep() {
+    public boolean getAutoSweep() {
         return autoSweep;
     }
 
-    public void setAutoSweep(Boolean autoSweep) {
+    public void setAutoSweep(boolean autoSweep) {
         this.autoSweep = autoSweep;
     }
 
     public static class Builder {
         private String entityId;
-        private Boolean autoSweep;
+        private boolean autoSweep;
 
         public Builder() {
         }
@@ -64,7 +64,7 @@ public class SetAutoSweepRequest {
             return this;
         }
 
-        public Builder autoSweep(Boolean autoSweep) {
+        public Builder autoSweep(boolean autoSweep) {
             this.autoSweep = autoSweep;
             return this;
         }

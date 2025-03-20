@@ -27,7 +27,6 @@ public class GetEntityPositionsRequest {
 
     @JsonProperty("product_id")
     private String productId;
-    
 
     public GetEntityPositionsRequest() {
     }
@@ -48,8 +47,6 @@ public class GetEntityPositionsRequest {
     public String getProductId() {
         return productId;
     }
-    
-    
 
     public static class Builder {
         private String entityId;
