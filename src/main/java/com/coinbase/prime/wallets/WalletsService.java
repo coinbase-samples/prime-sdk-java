@@ -18,7 +18,6 @@ package com.coinbase.prime.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.wallets.*;
 
 public interface WalletsService {
     // Wallets

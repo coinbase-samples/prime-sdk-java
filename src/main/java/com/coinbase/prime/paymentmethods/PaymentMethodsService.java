@@ -18,10 +18,6 @@ package com.coinbase.prime.paymentmethods;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
-import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
-import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
-import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsResponse;
 
 public interface PaymentMethodsService {
     // Payment Methods

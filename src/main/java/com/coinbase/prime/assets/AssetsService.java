@@ -18,8 +18,8 @@ package com.coinbase.prime.assets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.assets.ListAssetsRequest;
-import com.coinbase.prime.model.assets.ListAssetsResponse;
+import com.coinbase.prime.model.ListAssetsRequest;
+import com.coinbase.prime.model.ListAssetsResponse;
 
 public interface AssetsService {
     // Assets

@@ -19,7 +19,8 @@ package com.coinbase.prime.onchainaddressbook;
 import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
-import com.coinbase.prime.model.onchainaddressbook.*;
+import com.coinbase.prime.orders.UpdateOnchainAddressBookEntryRequest;
+import com.coinbase.prime.orders.UpdateOnchainAddressBookEntryResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;

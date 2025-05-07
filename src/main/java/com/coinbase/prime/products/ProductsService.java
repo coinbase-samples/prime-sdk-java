@@ -18,8 +18,6 @@ package com.coinbase.prime.products;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.products.ListPortfolioProductsRequest;
-import com.coinbase.prime.model.products.ListPortfolioProductsResponse;
 
 public interface ProductsService {
     // Products

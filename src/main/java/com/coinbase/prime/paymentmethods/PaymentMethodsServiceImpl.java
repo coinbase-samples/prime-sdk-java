@@ -20,10 +20,6 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodRequest;
-import com.coinbase.prime.model.paymentmethods.GetEntityPaymentMethodResponse;
-import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsRequest;
-import com.coinbase.prime.model.paymentmethods.ListEntityPaymentMethodsResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;

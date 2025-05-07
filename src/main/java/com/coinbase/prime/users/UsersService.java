@@ -18,10 +18,6 @@ package com.coinbase.prime.users;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.users.ListPortfolioUsersRequest;
-import com.coinbase.prime.model.users.ListPortfolioUsersResponse;
-import com.coinbase.prime.model.users.ListUsersRequest;
-import com.coinbase.prime.model.users.ListUsersResponse;
 
 public interface UsersService {
     // Users

@@ -20,10 +20,6 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.users.ListPortfolioUsersRequest;
-import com.coinbase.prime.model.users.ListPortfolioUsersResponse;
-import com.coinbase.prime.model.users.ListUsersRequest;
-import com.coinbase.prime.model.users.ListUsersResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
