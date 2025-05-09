@@ -29,6 +29,8 @@ import com.coinbase.prime.balances.BalancesServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.commission.CommissionService;
 import com.coinbase.prime.commission.CommissionServiceImpl;
+import com.coinbase.prime.financing.FinancingService;
+import com.coinbase.prime.financing.FinancingServiceImpl;
 import com.coinbase.prime.invoice.InvoiceService;
 import com.coinbase.prime.invoice.InvoiceServiceImpl;
 import com.coinbase.prime.orders.OrdersService;
@@ -39,6 +41,8 @@ import com.coinbase.prime.portfolios.PortfoliosService;
 import com.coinbase.prime.portfolios.PortfoliosServiceImpl;
 import com.coinbase.prime.products.ProductsService;
 import com.coinbase.prime.products.ProductsServiceImpl;
+import com.coinbase.prime.staking.StakingService;
+import com.coinbase.prime.staking.StakingServiceImpl;
 import com.coinbase.prime.transactions.TransactionsService;
 import com.coinbase.prime.transactions.TransactionsServiceImpl;
 import com.coinbase.prime.users.UsersService;
@@ -101,5 +105,13 @@ public class PrimeServiceFactory {
 
     public static WalletsService createWalletsService(CoinbasePrimeClient client) {
         return new WalletsServiceImpl(client);
+    }
+
+    public static FinancingService createFinancingService(CoinbasePrimeClient client) {
+        return new FinancingServiceImpl(client);
+    }
+
+    public static StakingService createStakingService(CoinbasePrimeClient client) {
+        return new StakingServiceImpl(client);
     }
 }
