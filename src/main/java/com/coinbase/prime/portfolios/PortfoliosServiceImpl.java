@@ -20,6 +20,8 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
+import com.coinbase.prime.financing.GetPortfolioCreditInformationRequest;
+import com.coinbase.prime.financing.GetPortfolioCreditInformationResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -49,13 +51,4 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
                 new TypeReference<GetPortfolioByIdResponse>() {});
     }
 
-    @Override
-    public GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/credit", request.getPortfolioId()),
-                null,
-                List.of(200),
-                new TypeReference<GetPortfolioCreditInformationResponse>() {});
-    }
 }

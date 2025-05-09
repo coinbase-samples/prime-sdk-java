@@ -34,7 +34,7 @@ public class CreateNewLocatesRequest {
   public CreateNewLocatesRequest() {
   }
 
-  public CreateNewLocatesRequest(CreateNewLocatesRequest.Builder builder) {
+  public CreateNewLocatesRequest(Builder builder) {
     this.portfolioId = builder.portfolioId;
     this.symbol = builder.symbol;
     this.amount = builder.amount;

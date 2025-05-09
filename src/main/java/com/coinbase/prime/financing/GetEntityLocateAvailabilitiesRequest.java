@@ -33,7 +33,7 @@ public class GetEntityLocateAvailabilitiesRequest {
     public GetEntityLocateAvailabilitiesRequest() {
     }
 
-    public GetEntityLocateAvailabilitiesRequest(GetEntityLocateAvailabilitiesRequest.Builder builder) {
+    public GetEntityLocateAvailabilitiesRequest(Builder builder) {
         this.entityId = builder.entityId;
         this.conversionDate = builder.conversionDate;
         this.locateDate = builder.locateDate;
@@ -71,17 +71,17 @@ public class GetEntityLocateAvailabilitiesRequest {
         public Builder() {
         }
 
-        public GetEntityLocateAvailabilitiesRequest.Builder withEntityId(String entityId) {
+        public Builder entityId(String entityId) {
             this.entityId = entityId;
             return this;
         }
 
-        public GetEntityLocateAvailabilitiesRequest.Builder withConversionDate(String conversionDate) {
+        public Builder conversionDate(String conversionDate) {
             this.conversionDate = conversionDate;
             return this;
         }
 
-        public GetEntityLocateAvailabilitiesRequest.Builder withLocateDate(String locateDate) {
+        public Builder locateDate(String locateDate) {
             this.locateDate = locateDate;
             return this;
         }

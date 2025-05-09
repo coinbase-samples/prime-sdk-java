@@ -21,5 +21,15 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface FinancingService {
     CreateNewLocatesResponse createNewLocates(CreateNewLocatesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListInterestAcrrualsResponse listInterestAccruals(ListInterestAccrualsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetEntityLocateAvailabilitiesResponse getEntityLocateAvailabilities(GetEntityLocateAvailabilitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetMarginInformationResponse getMarginInformation(GetMarginInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPortfolioBuyingPowerResponse getPortfolioBuyingPower(GetPortfolioBuyingPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPortfolioWithdrawalPowerResponse getPortfolioWithdrawalPower(GetPortfolioWithdrawalPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetTradeFinanceTieredPricingFeesResponse getTradeFinanceTieredPricingFees(GetTradeFinanceTieredPricingFeesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListExistingLocatesResponse listExistingLocates(ListExistingLocatesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListInterestAccrualsResponse listInterestAccruals(ListInterestAccrualsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListInterestAccrualsForPortfolioResponse listInterestAccrualsForPortfolio(ListInterestAccrualsForPortfolioRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListMarginCallSummariesResponse listMarginCallSummaries(ListMarginCallSummariesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListMarginConversionsResponse listMarginConversions(ListMarginConversionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

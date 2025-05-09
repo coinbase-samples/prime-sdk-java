@@ -24,7 +24,7 @@ public class GetEntityLocateAvailabilitiesResponse {
     public GetEntityLocateAvailabilitiesResponse() {
     }
 
-    public GetEntityLocateAvailabilitiesResponse(GetEntityLocateAvailabilitiesResponse.Builder builder) {
+    public GetEntityLocateAvailabilitiesResponse(Builder builder) {
         this.locates = builder.locates;
     }
 
@@ -42,7 +42,7 @@ public class GetEntityLocateAvailabilitiesResponse {
         public Builder() {
         }
 
-        public GetEntityLocateAvailabilitiesResponse.Builder withLocates(Locate[] locates) {
+        public Builder locates(Locate[] locates) {
             this.locates = locates;
             return this;
         }

@@ -23,5 +23,4 @@ public interface PortfoliosService {
     // Portfolios
     ListPortfoliosResponse listPortfolios();
     GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

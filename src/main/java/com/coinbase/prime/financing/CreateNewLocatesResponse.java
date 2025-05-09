@@ -25,7 +25,7 @@ public class CreateNewLocatesResponse {
   public CreateNewLocatesResponse() {
   }
 
-  public CreateNewLocatesResponse(CreateNewLocatesResponse.Builder builder) {
+  public CreateNewLocatesResponse(Builder builder) {
     this.locateId = builder.locateId;
   }
 
@@ -43,7 +43,7 @@ public class CreateNewLocatesResponse {
     public Builder() {
     }
 
-    public CreateNewLocatesResponse.Builder withLocateId(String locateId) {
+    public Builder locateId(String locateId) {
       this.locateId = locateId;
       return this;
     }

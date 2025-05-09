@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.portfolios;
+package com.coinbase.prime.financing;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonProperty;

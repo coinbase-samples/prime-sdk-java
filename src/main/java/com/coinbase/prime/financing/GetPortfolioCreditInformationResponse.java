@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.portfolios;
+package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.PostTradeCreditInformation;
 
