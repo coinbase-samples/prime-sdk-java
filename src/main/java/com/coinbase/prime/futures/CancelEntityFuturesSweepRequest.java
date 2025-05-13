@@ -14,21 +14,21 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.futures;
+package com.coinbase.prime.futures;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListEntityFuturesSweepsRequest {
+public class CancelEntityFuturesSweepRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
-    public ListEntityFuturesSweepsRequest() {
+    public CancelEntityFuturesSweepRequest() {
     }
 
-    public ListEntityFuturesSweepsRequest(Builder builder) {
+    public CancelEntityFuturesSweepRequest(Builder builder) {
         this.entityId = builder.entityId;
     }
 
@@ -38,10 +38,11 @@ public class ListEntityFuturesSweepsRequest {
 
     public void setEntityId(String entityId) {
         this.entityId = entityId;
-    }    
+    }
 
     public static class Builder {
         private String entityId;
+
         public Builder() {
         }
 
@@ -50,9 +51,9 @@ public class ListEntityFuturesSweepsRequest {
             return this;
         }
 
-        public ListEntityFuturesSweepsRequest build() throws CoinbaseClientException {
+        public CancelEntityFuturesSweepRequest build() throws CoinbaseClientException {
             this.validate();
-            return new ListEntityFuturesSweepsRequest(this);
+            return new CancelEntityFuturesSweepRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {

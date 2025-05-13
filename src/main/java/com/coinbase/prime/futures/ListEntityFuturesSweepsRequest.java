@@ -14,29 +14,22 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.futures;
+package com.coinbase.prime.futures;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ScheduleEntityFuturesSweepRequest {
+public class ListEntityFuturesSweepsRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
-    private String amount;
-
-    @JsonProperty(required = true)
-    private String currency;
-
-    public ScheduleEntityFuturesSweepRequest() {
+    public ListEntityFuturesSweepsRequest() {
     }
 
-    public ScheduleEntityFuturesSweepRequest(Builder builder) {
+    public ListEntityFuturesSweepsRequest(Builder builder) {
         this.entityId = builder.entityId;
-        this.amount = builder.amount;
-        this.currency = builder.currency;
     }
 
     public String getEntityId() {
@@ -45,29 +38,10 @@ public class ScheduleEntityFuturesSweepRequest {
 
     public void setEntityId(String entityId) {
         this.entityId = entityId;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
+    }    
 
     public static class Builder {
         private String entityId;
-        private String amount;
-        private String currency;
-
         public Builder() {
         }
 
@@ -76,17 +50,14 @@ public class ScheduleEntityFuturesSweepRequest {
             return this;
         }
 
-        public ScheduleEntityFuturesSweepRequest build() throws CoinbaseClientException {
+        public ListEntityFuturesSweepsRequest build() throws CoinbaseClientException {
             this.validate();
-            return new ScheduleEntityFuturesSweepRequest(this);
+            return new ListEntityFuturesSweepsRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("Entity ID is required");
-            }
-            if (isNullOrEmpty(this.currency)) {
-                throw new CoinbaseClientException("Currency is required");
             }
         }
     }

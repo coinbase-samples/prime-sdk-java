@@ -14,8 +14,9 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.futures;
+package com.coinbase.prime.futures;
 
+import com.coinbase.prime.model.Sweep;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListEntityFuturesSweepsResponse {

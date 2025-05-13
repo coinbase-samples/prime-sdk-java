@@ -14,20 +14,20 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.futures;
+package com.coinbase.prime.futures;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CancelEntityFuturesSweepResponse {
+public class ScheduleEntityFuturesSweepResponse {
     private boolean success;
 
     @JsonProperty("request_id")
     private String requestId;
 
-    public CancelEntityFuturesSweepResponse() {
+    public ScheduleEntityFuturesSweepResponse() {
     }
 
-    public CancelEntityFuturesSweepResponse(Builder builder) {
+    public ScheduleEntityFuturesSweepResponse(Builder builder) {
         this.success = builder.success;
         this.requestId = builder.requestId;
     }
@@ -60,8 +60,8 @@ public class CancelEntityFuturesSweepResponse {
             return this;
         }
 
-        public CancelEntityFuturesSweepResponse build() {
-            return new CancelEntityFuturesSweepResponse(this);
+        public ScheduleEntityFuturesSweepResponse build() {
+            return new ScheduleEntityFuturesSweepResponse(this);
         }
     }
 }

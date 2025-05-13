@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,39 +14,41 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.futures;
+package com.coinbase.prime.assets;
 
-public class SetAutoSweepResponse {
-    private boolean success;
+import com.coinbase.prime.model.Asset;
 
-    public SetAutoSweepResponse() {
+public class ListAssetsResponse {
+    private Asset[] assets;
+
+    public ListAssetsResponse() {
     }
 
-    public SetAutoSweepResponse(Builder builder) {
-        this.success = builder.success;
+    public ListAssetsResponse(Builder builder) {
+        this.assets = builder.assets;
     }
 
-    public boolean getSuccess() {
-        return success;
+    public Asset[] getAssets() {
+        return assets;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setAssets(Asset[] assets) {
+        this.assets = assets;
     }
 
     public static class Builder {
-        private boolean success;
+        private Asset[] assets;
 
         public Builder() {
         }
 
-        public Builder success(boolean success) {
-            this.success = success;
+        public Builder assets(Asset[] assets) {
+            this.assets = assets;
             return this;
         }
 
-        public SetAutoSweepResponse build() {
-            return new SetAutoSweepResponse(this);
+        public ListAssetsResponse build() {
+            return new ListAssetsResponse(this);
         }
     }
 }

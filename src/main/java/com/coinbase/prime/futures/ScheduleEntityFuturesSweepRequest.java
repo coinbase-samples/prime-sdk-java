@@ -14,26 +14,29 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.futures;
+package com.coinbase.prime.futures;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class SetAutoSweepRequest {
+public class ScheduleEntityFuturesSweepRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
-    @JsonProperty("auto_sweep")
-    private boolean autoSweep;
+    private String amount;
 
-    public SetAutoSweepRequest() {
+    @JsonProperty(required = true)
+    private String currency;
+
+    public ScheduleEntityFuturesSweepRequest() {
     }
 
-    public SetAutoSweepRequest(Builder builder) {
+    public ScheduleEntityFuturesSweepRequest(Builder builder) {
         this.entityId = builder.entityId;
-        this.autoSweep = builder.autoSweep;
+        this.amount = builder.amount;
+        this.currency = builder.currency;
     }
 
     public String getEntityId() {
@@ -44,17 +47,26 @@ public class SetAutoSweepRequest {
         this.entityId = entityId;
     }
 
-    public boolean getAutoSweep() {
-        return autoSweep;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setAutoSweep(boolean autoSweep) {
-        this.autoSweep = autoSweep;
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public static class Builder {
         private String entityId;
-        private boolean autoSweep;
+        private String amount;
+        private String currency;
 
         public Builder() {
         }
@@ -64,19 +76,17 @@ public class SetAutoSweepRequest {
             return this;
         }
 
-        public Builder autoSweep(boolean autoSweep) {
-            this.autoSweep = autoSweep;
-            return this;
-        }
-
-        public SetAutoSweepRequest build() throws CoinbaseClientException {
+        public ScheduleEntityFuturesSweepRequest build() throws CoinbaseClientException {
             this.validate();
-            return new SetAutoSweepRequest(this);
+            return new ScheduleEntityFuturesSweepRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("Entity ID is required");
+            }
+            if (isNullOrEmpty(this.currency)) {
+                throw new CoinbaseClientException("Currency is required");
             }
         }
     }

@@ -18,7 +18,6 @@ package com.coinbase.prime.futures;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.futures.*;
 
 public interface FuturesService {
     // Futures

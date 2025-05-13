@@ -14,26 +14,26 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.futures;
+package com.coinbase.prime.futures;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetEntityPositionsRequest {
+public class SetAutoSweepRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
-    @JsonProperty("product_id")
-    private String productId;
+    @JsonProperty("auto_sweep")
+    private boolean autoSweep;
 
-    public GetEntityPositionsRequest() {
+    public SetAutoSweepRequest() {
     }
 
-    public GetEntityPositionsRequest(Builder builder) {
+    public SetAutoSweepRequest(Builder builder) {
         this.entityId = builder.entityId;
-        this.productId = builder.productId;
+        this.autoSweep = builder.autoSweep;
     }
 
     public String getEntityId() {
@@ -44,13 +44,18 @@ public class GetEntityPositionsRequest {
         this.entityId = entityId;
     }
 
-    public String getProductId() {
-        return productId;
+    public boolean getAutoSweep() {
+        return autoSweep;
+    }
+
+    public void setAutoSweep(boolean autoSweep) {
+        this.autoSweep = autoSweep;
     }
 
     public static class Builder {
         private String entityId;
-        private String productId;
+        private boolean autoSweep;
+
         public Builder() {
         }
 
@@ -59,14 +64,14 @@ public class GetEntityPositionsRequest {
             return this;
         }
 
-        public Builder productId(String productId) {
-            this.productId = productId;
+        public Builder autoSweep(boolean autoSweep) {
+            this.autoSweep = autoSweep;
             return this;
         }
 
-        public GetEntityPositionsRequest build() throws CoinbaseClientException {
+        public SetAutoSweepRequest build() throws CoinbaseClientException {
             this.validate();
-            return new GetEntityPositionsRequest(this);
+            return new SetAutoSweepRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {

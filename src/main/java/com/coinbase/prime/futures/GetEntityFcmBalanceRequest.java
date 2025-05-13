@@ -14,21 +14,21 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.futures;
+package com.coinbase.prime.futures;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class CancelEntityFuturesSweepRequest {
+public class GetEntityFcmBalanceRequest {
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
-    public CancelEntityFuturesSweepRequest() {
+    public GetEntityFcmBalanceRequest() {
     }
 
-    public CancelEntityFuturesSweepRequest(Builder builder) {
+    public GetEntityFcmBalanceRequest(Builder builder) {
         this.entityId = builder.entityId;
     }
 
@@ -51,9 +51,9 @@ public class CancelEntityFuturesSweepRequest {
             return this;
         }
 
-        public CancelEntityFuturesSweepRequest build() throws CoinbaseClientException {
+        public GetEntityFcmBalanceRequest build() throws CoinbaseClientException {
             this.validate();
-            return new CancelEntityFuturesSweepRequest(this);
+            return new GetEntityFcmBalanceRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
