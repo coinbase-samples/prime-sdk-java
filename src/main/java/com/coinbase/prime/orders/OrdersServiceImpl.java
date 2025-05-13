@@ -108,4 +108,24 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
                 List.of(200),
                 new TypeReference<ListPortfolioFillsResponse>() {});
     }
+
+    @Override
+    public CreateQuoteResponse createQuote(CreateQuoteRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/rfq", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<CreateQuoteResponse>() {});
+    }
+
+    @Override
+    public AcceptQuoteResponse acceptQuote(AcceptQuoteRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/accept_quote", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<AcceptQuoteResponse>() {});
+    }
 }

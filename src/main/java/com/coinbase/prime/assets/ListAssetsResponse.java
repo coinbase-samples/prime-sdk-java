@@ -14,7 +14,9 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model;
+package com.coinbase.prime.assets;
+
+import com.coinbase.prime.model.Asset;
 
 public class ListAssetsResponse {
     private Asset[] assets;

@@ -3,3 +3,6 @@
 .env*
 target/
 *.swp
+.classpath
+.project
+.settings
