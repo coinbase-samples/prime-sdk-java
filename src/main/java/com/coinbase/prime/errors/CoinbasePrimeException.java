@@ -40,4 +40,8 @@ public class CoinbasePrimeException extends CoinbaseException {
         super(cause);
         this.statusCode = 500;
     }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
 }

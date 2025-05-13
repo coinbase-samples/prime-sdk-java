@@ -20,10 +20,6 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.addressbook.CreateAddressBookEntryRequest;
-import com.coinbase.prime.model.addressbook.CreateAddressBookEntryResponse;
-import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookRequest;
-import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;

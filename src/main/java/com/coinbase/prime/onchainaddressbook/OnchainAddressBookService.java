@@ -18,7 +18,8 @@ package com.coinbase.prime.onchainaddressbook;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.onchainaddressbook.*;
+import com.coinbase.prime.orders.UpdateOnchainAddressBookEntryRequest;
+import com.coinbase.prime.orders.UpdateOnchainAddressBookEntryResponse;
 
 public interface OnchainAddressBookService {
     CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(CreateOnchainAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;

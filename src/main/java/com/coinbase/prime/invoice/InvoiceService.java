@@ -18,8 +18,6 @@ package com.coinbase.prime.invoice;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.invoice.ListInvoicesRequest;
-import com.coinbase.prime.model.invoice.ListInvoicesResponse;
 
 public interface InvoiceService {
     // Invoice

@@ -18,7 +18,6 @@ package com.coinbase.prime.activities;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.activities.*;
 
 public interface ActivitiesService {
     // Activities

@@ -18,10 +18,6 @@ package com.coinbase.prime.addressbook;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.addressbook.CreateAddressBookEntryRequest;
-import com.coinbase.prime.model.addressbook.CreateAddressBookEntryResponse;
-import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookRequest;
-import com.coinbase.prime.model.addressbook.GetPortfolioAddressBookResponse;
 
 public interface AddressBookService {
     // Address Book

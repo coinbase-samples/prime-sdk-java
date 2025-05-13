@@ -18,8 +18,6 @@ package com.coinbase.prime.commission;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.model.commission.GetPortfolioCommissionRequest;
-import com.coinbase.prime.model.commission.GetPortfolioCommissionResponse;
 
 public interface CommissionService {
     // Commission
