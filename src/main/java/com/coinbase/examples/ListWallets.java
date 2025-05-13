@@ -20,30 +20,30 @@ import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.WalletType;
-import com.coinbase.prime.model.wallets.ListWalletsRequest;
-import com.coinbase.prime.model.wallets.ListWalletsResponse;
+import com.coinbase.prime.wallets.ListWalletsRequest;
+import com.coinbase.prime.wallets.ListWalletsResponse;
 import com.coinbase.prime.wallets.WalletsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ListWallets {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
 
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            WalletsService walletsService = PrimeServiceFactory.createWalletsService(client);
-            ListWalletsResponse response = walletsService.listWallets(
-                    new ListWalletsRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .type(WalletType.VAULT)
-                            .symbols(new String[]{"ADA"})
-                            .build());
+      WalletsService walletsService = PrimeServiceFactory.createWalletsService(client);
+      ListWalletsResponse response = walletsService.listWallets(
+          new ListWalletsRequest.Builder()
+              .portfolioId(portfolioId)
+              .type(WalletType.VAULT)
+              .symbols(new String[] { "ADA" })
+              .build());
 
-            System.out.println(new ObjectMapper().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(new ObjectMapper().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

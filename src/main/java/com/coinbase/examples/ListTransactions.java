@@ -20,30 +20,30 @@ import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.TransactionType;
-import com.coinbase.prime.model.transactions.ListPortfolioTransactionsRequest;
-import com.coinbase.prime.model.transactions.ListPortfolioTransactionsResponse;
+import com.coinbase.prime.transactions.ListPortfolioTransactionsRequest;
+import com.coinbase.prime.transactions.ListPortfolioTransactionsResponse;
 import com.coinbase.prime.transactions.TransactionsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ListTransactions {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
 
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            TransactionsService transactionsService = PrimeServiceFactory.createTransactionsService(client);
-            ListPortfolioTransactionsResponse response = transactionsService.listPortfolioTransactions(
-                    new ListPortfolioTransactionsRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .symbols(new String[]{"ADA"})
-                            .types(new TransactionType[]{TransactionType.CLAIM_REWARDS})
-                            .build());
+      TransactionsService transactionsService = PrimeServiceFactory.createTransactionsService(client);
+      ListPortfolioTransactionsResponse response = transactionsService.listPortfolioTransactions(
+          new ListPortfolioTransactionsRequest.Builder()
+              .portfolioId(portfolioId)
+              .symbols(new String[] { "ADA" })
+              .types(new TransactionType[] { TransactionType.CLAIM_REWARDS })
+              .build());
 
-            System.out.println(new ObjectMapper().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(new ObjectMapper().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

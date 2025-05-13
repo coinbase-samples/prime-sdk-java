@@ -14,107 +14,107 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.orders;
+package com.coinbase.prime.orders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateQuoteResponse {
-    @JsonProperty("quote_id")
+  @JsonProperty("quote_id")
+  private String quoteId;
+
+  @JsonProperty("expiration_time")
+  private String expirationTime;
+
+  @JsonProperty("best_price")
+  private String bestPrice;
+
+  @JsonProperty("order_total")
+  private String orderTotal;
+
+  @JsonProperty("price_inclusive_of_fees")
+  private String priceInclusiveOfFees;
+
+  public CreateQuoteResponse() {
+  }
+
+  public CreateQuoteResponse(Builder builder) {
+    this.quoteId = builder.quoteId;
+    this.expirationTime = builder.expirationTime;
+    this.bestPrice = builder.bestPrice;
+    this.orderTotal = builder.orderTotal;
+    this.priceInclusiveOfFees = builder.priceInclusiveOfFees;
+  }
+
+  public String getQuoteId() {
+    return quoteId;
+  }
+
+  public void setQuoteId(String quoteId) {
+    this.quoteId = quoteId;
+  }
+
+  public String getExpirationTime() {
+    return expirationTime;
+  }
+
+  public void setExpirationTime(String expirationTime) {
+    this.expirationTime = expirationTime;
+  }
+
+  public String getBestPrice() {
+    return bestPrice;
+  }
+
+  public void setBestPrice(String bestPrice) {
+    this.bestPrice = bestPrice;
+  }
+
+  public String getOrderTotal() {
+    return orderTotal;
+  }
+
+  public void setOrderTotal(String orderTotal) {
+    this.orderTotal = orderTotal;
+  }
+
+  public String getPriceInclusiveOfFees() {
+    return priceInclusiveOfFees;
+  }
+
+  public static class Builder {
     private String quoteId;
-
-    @JsonProperty("expiration_time")
     private String expirationTime;
-
-    @JsonProperty("best_price")
     private String bestPrice;
-
-    @JsonProperty("order_total")
     private String orderTotal;
+    private String priceInclusiveOfFees;
 
-    @JsonProperty("price_inclusive_of_fees")
-    private String priceInclusiveOfFees;    
-
-    public CreateQuoteResponse() {
+    public Builder quoteId(String quoteId) {
+      this.quoteId = quoteId;
+      return this;
     }
 
-    public CreateQuoteResponse(Builder builder) {
-        this.quoteId = builder.quoteId;
-        this.expirationTime = builder.expirationTime;
-        this.bestPrice = builder.bestPrice;
-        this.orderTotal = builder.orderTotal;
-        this.priceInclusiveOfFees = builder.priceInclusiveOfFees;
+    public Builder expirationTime(String expirationTime) {
+      this.expirationTime = expirationTime;
+      return this;
     }
 
-    public String getQuoteId() {
-        return quoteId;
+    public Builder bestPrice(String bestPrice) {
+      this.bestPrice = bestPrice;
+      return this;
     }
 
-    public void setQuoteId(String quoteId) {
-        this.quoteId = quoteId;
+    public Builder orderTotal(String orderTotal) {
+      this.orderTotal = orderTotal;
+      return this;
     }
 
-    public String getExpirationTime() {
-        return expirationTime;
+    public Builder priceInclusiveOfFees(String priceInclusiveOfFees) {
+      this.priceInclusiveOfFees = priceInclusiveOfFees;
+      return this;
     }
 
-    public void setExpirationTime(String expirationTime) {
-        this.expirationTime = expirationTime;
+    public CreateQuoteResponse build() {
+      return new CreateQuoteResponse(this);
     }
-
-    public String getBestPrice() {
-        return bestPrice;
-    }
-
-    public void setBestPrice(String bestPrice) {
-        this.bestPrice = bestPrice;
-    }       
-
-    public String getOrderTotal() {
-        return orderTotal;
-    }
-
-    public void setOrderTotal(String orderTotal) {
-        this.orderTotal = orderTotal;
-    }
-
-    public String getPriceInclusiveOfFees() {
-        return priceInclusiveOfFees;
-    }    
-
-    public static class Builder {
-        private String quoteId;
-        private String expirationTime;
-        private String bestPrice;
-        private String orderTotal;
-        private String priceInclusiveOfFees;
-
-        public Builder quoteId(String quoteId) {
-            this.quoteId = quoteId;
-            return this;
-        }
-        
-        public Builder expirationTime(String expirationTime) {
-            this.expirationTime = expirationTime;
-            return this;
-        }
-
-        public Builder bestPrice(String bestPrice) {
-            this.bestPrice = bestPrice;
-            return this;
-        }
-        
-        public Builder orderTotal(String orderTotal) {
-            this.orderTotal = orderTotal;
-            return this;
-        }
-
-        public Builder priceInclusiveOfFees(String priceInclusiveOfFees) {
-            this.priceInclusiveOfFees = priceInclusiveOfFees;
-            return this;
-        }
-
-        public CreateQuoteResponse build() {
-            return new CreateQuoteResponse(this);
-        }
-    }
+  }
 }

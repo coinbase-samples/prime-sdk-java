@@ -19,28 +19,28 @@ package com.coinbase.examples;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.model.portfolios.GetPortfolioByIdRequest;
-import com.coinbase.prime.model.portfolios.GetPortfolioByIdResponse;
+import com.coinbase.prime.portfolios.GetPortfolioByIdRequest;
+import com.coinbase.prime.portfolios.GetPortfolioByIdResponse;
 import com.coinbase.prime.portfolios.PortfoliosService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GetPortfolio {
-    public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+  public static void main(String[] args) {
+    try {
+      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
+      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
 
-            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-            PortfoliosService portfoliosService = PrimeServiceFactory.createPortfoliosService(client);
-            GetPortfolioByIdResponse response = portfoliosService.getPortfolioById(
-                    new GetPortfolioByIdRequest.Builder()
-                            .portfolioId(portfolioId)
-                            .build());
+      PortfoliosService portfoliosService = PrimeServiceFactory.createPortfoliosService(client);
+      GetPortfolioByIdResponse response = portfoliosService.getPortfolioById(
+          new GetPortfolioByIdRequest.Builder()
+              .portfolioId(portfolioId)
+              .build());
 
-            System.out.println(new ObjectMapper().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      System.out.println(new ObjectMapper().writeValueAsString(response));
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

@@ -14,35 +14,35 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.orders;
+package com.coinbase.prime.orders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AcceptQuoteResponse {
-    @JsonProperty("order_id")
+  @JsonProperty("order_id")
+  private String orderId;
+
+  public AcceptQuoteResponse() {
+  }
+
+  public AcceptQuoteResponse(Builder builder) {
+    this.orderId = builder.orderId;
+  }
+
+  public String getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
+
+  public static class Builder {
     private String orderId;
 
-    public AcceptQuoteResponse() {
+    public Builder orderId(String orderId) {
+      this.orderId = orderId;
+      return this;
     }
-
-    public AcceptQuoteResponse(Builder builder) {
-        this.orderId = builder.orderId;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public static class Builder {
-        private String orderId;
-
-        public Builder orderId(String orderId) {
-            this.orderId = orderId;
-            return this;
-        }
-    }
+  }
 }
