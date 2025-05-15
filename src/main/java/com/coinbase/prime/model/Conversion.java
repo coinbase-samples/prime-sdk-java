@@ -23,7 +23,7 @@ public class Conversion {
     private ConversionDetails conversionDetails;
 
     @JsonProperty("short_collateral")
-    private String shortCollateral;
+    private ShortCollateral shortCollateral;
 
     @JsonProperty("conversion_datetime")
     private String conversionDatetime;
@@ -49,11 +49,11 @@ public class Conversion {
         this.conversionDetails = conversionDetails;
     }
 
-    public String getShortCollateral() {
+    public ShortCollateral getShortCollateral() {
         return shortCollateral;
     }
 
-    public void setShortCollateral(String shortCollateral) {
+    public void setShortCollateral(ShortCollateral shortCollateral) {
         this.shortCollateral = shortCollateral;
     }
 
@@ -75,7 +75,7 @@ public class Conversion {
 
     public static class Builder {
         private ConversionDetails conversionDetails;
-        private String shortCollateral;
+        private ShortCollateral shortCollateral;
         private String conversionDatetime;
         private String portfolioId;
 
@@ -87,7 +87,7 @@ public class Conversion {
             return this;
         }
 
-        public Builder shortCollateral(String shortCollateral) {
+        public Builder shortCollateral(ShortCollateral shortCollateral) {
             this.shortCollateral = shortCollateral;
             return this;
         }
