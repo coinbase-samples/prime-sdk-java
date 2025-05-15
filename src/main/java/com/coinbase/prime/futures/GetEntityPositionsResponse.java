@@ -16,11 +16,11 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.prime.model.Position;
+import com.coinbase.prime.model.FcmPosition;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetEntityPositionsResponse {
-    private Position[] positions;
+    private FcmPosition[] positions;
 
     @JsonProperty("clearing_account_id")
     private String clearingAccountId;
@@ -33,11 +33,11 @@ public class GetEntityPositionsResponse {
         this.clearingAccountId = builder.clearingAccountId;
     }
 
-    public Position[] getPositions() {
+    public FcmPosition[] getPositions() {
         return positions;
     }
 
-    public void setPositions(Position[] positions) {
+    public void setPositions(FcmPosition[] positions) {
         this.positions = positions;
     }
 
@@ -50,12 +50,12 @@ public class GetEntityPositionsResponse {
     }
 
     public static class Builder {
-        private Position[] positions;
+        private FcmPosition[] positions;
         private String clearingAccountId;
         public Builder() {
         }
 
-        public Builder positions(Position[] positions) {
+        public Builder positions(FcmPosition[] positions) {
             this.positions = positions;
             return this;
         }

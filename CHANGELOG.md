@@ -1,9 +1,13 @@
 # Changelog
 
-## [1.3.0] - 2025-MAY-09
+## [1.3.0] - 2025-MAY-15
 
 ### Added
 
+- Entity Endpoints
+  - ListEntityBalances
+  - ListAggregateEntityPositions
+  - ListEntityPositions
 - Futures Endpoints
   - cancelEntityFuturesSweep
   - getEntityFcmBalance
