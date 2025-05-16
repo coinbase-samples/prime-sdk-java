@@ -18,12 +18,12 @@ package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.Balance;
 import com.coinbase.prime.model.TotalBalance;
-import com.coinbase.prime.model.enums.BalancesType;
+import com.coinbase.prime.model.enums.BalanceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListPortfolioBalancesResponse {
     private Balance[] balances;
-    private BalancesType type;
+    private BalanceType type;
     @JsonProperty("trading_balances")
     private TotalBalance tradingBalances;
     @JsonProperty("vault_balances")
@@ -47,11 +47,11 @@ public class ListPortfolioBalancesResponse {
         this.balances = balances;
     }
 
-    public BalancesType getType() {
+    public BalanceType getType() {
         return type;
     }
 
-    public void setType(BalancesType type) {
+    public void setType(BalanceType type) {
         this.type = type;
     }
 
@@ -73,7 +73,7 @@ public class ListPortfolioBalancesResponse {
 
     public static class Builder {
         private Balance[] balances;
-        private BalancesType type;
+        private BalanceType type;
         private TotalBalance tradingBalances;
         private TotalBalance vaultBalances;
 
@@ -82,7 +82,7 @@ public class ListPortfolioBalancesResponse {
             return this;
         }
 
-        public Builder type(BalancesType type) {
+        public Builder type(BalanceType type) {
             this.type = type;
             return this;
         }

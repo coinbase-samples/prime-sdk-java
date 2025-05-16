@@ -1,176 +1,84 @@
-/*
- * Copyright 2025-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
 package com.coinbase.prime.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Date;
 
 public class Position {
-    @JsonProperty("product_id")
-    private String productId;
+    private String symbol;
 
-    private String side;
+    @JsonProperty("long")
+    private String _long;
 
-    @JsonProperty("number_of_contracts")
-    private String numberOfContracts;
+    @JsonProperty("short")
+    private String _short;
 
-    @JsonProperty("daily_realized_pnl")
-    private String dailyRealizedPnl;
-
-    @JsonProperty("unrealized_pnl")
-    private String unrealizedPnl;
-
-    @JsonProperty("current_price")
-    private String currentPrice;
-
-    @JsonProperty("avg_entry_price")
-    private String avgEntryPrice;
-
-    @JsonProperty("expiration_time")
-    private Date expirationTime;
+    @JsonProperty("position_reference")
+    private PositionReference positionReference;
 
     public Position() {
     }
 
     public Position(Builder builder) {
-        this.productId = builder.productId;
-        this.side = builder.side;
-        this.numberOfContracts = builder.numberOfContracts;
-        this.dailyRealizedPnl = builder.dailyRealizedPnl;
-        this.unrealizedPnl = builder.unrealizedPnl;
-        this.currentPrice = builder.currentPrice;
-        this.avgEntryPrice = builder.avgEntryPrice;
-        this.expirationTime = builder.expirationTime;
+        this.symbol = builder.symbol;
+        this._long = builder._long;
+        this._short = builder._short;
+        this.positionReference = builder.positionReference;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    public String getSide() {
-        return side;
+    public String getLong() {
+        return _long;
     }
 
-    public void setSide(String side) {
-        this.side = side;
+    public void setLong(String _long) {
+        this._long = _long;
     }
 
-    public String getNumberOfContracts() {
-        return numberOfContracts;
+    public String getShort() {
+        return _short;
     }
 
-    public void setNumberOfContracts(String numberOfContracts) {
-        this.numberOfContracts = numberOfContracts;
+    public void setShort(String _short) {
+        this._short = _short;
     }
 
-    public String getDailyRealizedPnl() {
-        return dailyRealizedPnl;
+    public PositionReference getPositionReference() {
+        return positionReference;
     }
 
-    public void setDailyRealizedPnl(String dailyRealizedPnl) {
-        this.dailyRealizedPnl = dailyRealizedPnl;
-    }
-
-    public String getUnrealizedPnl() {
-        return unrealizedPnl;
-    }
-
-    public void setUnrealizedPnl(String unrealizedPnl) {
-        this.unrealizedPnl = unrealizedPnl;
-    }
-
-    public String getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(String currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
-    public String getAvgEntryPrice() {
-        return avgEntryPrice;
-    }
-
-    public void setAvgEntryPrice(String avgEntryPrice) {
-        this.avgEntryPrice = avgEntryPrice;
-    }
-
-    public Date getExpirationTime() {
-        return expirationTime;
-    }
-
-    public void setExpirationTime(Date expirationTime) {
-        this.expirationTime = expirationTime;
+    public void setPositionReference(PositionReference positionReference) {
+        this.positionReference = positionReference;
     }
 
     public static class Builder {
-        private String productId;
-        private String side;
-        private String numberOfContracts;
-        private String dailyRealizedPnl;
-        private String unrealizedPnl;
-        private String currentPrice;
-        private String avgEntryPrice;
-        private Date expirationTime;
+        private String symbol;
+        private String _long;
+        private String _short;
+        private PositionReference positionReference;
 
-        public Builder() {
-        }
-
-        public Builder productId(String productId) {
-            this.productId = productId;
+        public Builder symbol(String symbol) {
+            this.symbol = symbol;
             return this;
         }
 
-        public Builder side(String side) {
-            this.side = side;
+        public Builder longPosition(String _long) {
+            this._long = _long;
             return this;
         }
 
-        public Builder numberOfContracts(String numberOfContracts) {
-            this.numberOfContracts = numberOfContracts;
+        public Builder shortPosition(String _short) {
+            this._short = _short;
             return this;
         }
 
-        public Builder dailyRealizedPnl(String dailyRealizedPnl) {
-            this.dailyRealizedPnl = dailyRealizedPnl;
-            return this;
-        }
-
-        public Builder unrealizedPnl(String unrealizedPnl) {
-            this.unrealizedPnl = unrealizedPnl;
-            return this;
-        }
-
-        public Builder currentPrice(String currentPrice) {
-            this.currentPrice = currentPrice;
-            return this;
-        }
-
-        public Builder avgEntryPrice(String avgEntryPrice) {
-            this.avgEntryPrice = avgEntryPrice;
-            return this;
-        }
-
-        public Builder expirationTime(Date expirationTime) {
-            this.expirationTime = expirationTime;
+        public Builder positionReference(PositionReference positionReference) {
+            this.positionReference = positionReference;
             return this;
         }
 

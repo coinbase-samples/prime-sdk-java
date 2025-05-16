@@ -39,8 +39,11 @@ import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.orders.OrdersServiceImpl;
 import com.coinbase.prime.paymentmethods.PaymentMethodsService;
 import com.coinbase.prime.paymentmethods.PaymentMethodsServiceImpl;
+import com.coinbase.prime.portfolios.ListPortfoliosResponse;
 import com.coinbase.prime.portfolios.PortfoliosService;
 import com.coinbase.prime.portfolios.PortfoliosServiceImpl;
+import com.coinbase.prime.positions.PositionsService;
+import com.coinbase.prime.positions.PositionsServiceImpl;
 import com.coinbase.prime.products.ProductsService;
 import com.coinbase.prime.products.ProductsServiceImpl;
 import com.coinbase.prime.staking.StakingService;
@@ -77,6 +80,10 @@ public class PrimeServiceFactory {
         return new CommissionServiceImpl(client);
     }
 
+    public static FinancingService createFinancingService(CoinbasePrimeClient client) {
+        return new FinancingServiceImpl(client);
+    }
+
     public static FuturesService createFuturesService(CoinbasePrimeClient client) {
         return new FuturesServiceImpl(client);
     }
@@ -97,8 +104,16 @@ public class PrimeServiceFactory {
         return new PortfoliosServiceImpl(client);
     }
 
+    public static PositionsService createPositionsService(CoinbasePrimeClient client) {
+        return new PositionsServiceImpl(client);
+    }
+
     public static ProductsService createProductsService(CoinbasePrimeClient client) {
         return new ProductsServiceImpl(client);
+    }
+
+    public static StakingService createStakingService(CoinbasePrimeClient client) {
+        return new StakingServiceImpl(client);
     }
 
     public static TransactionsService createTransactionsService(CoinbasePrimeClient client) {
@@ -111,13 +126,5 @@ public class PrimeServiceFactory {
 
     public static WalletsService createWalletsService(CoinbasePrimeClient client) {
         return new WalletsServiceImpl(client);
-    }
-
-    public static FinancingService createFinancingService(CoinbasePrimeClient client) {
-        return new FinancingServiceImpl(client);
-    }
-
-    public static StakingService createStakingService(CoinbasePrimeClient client) {
-        return new StakingServiceImpl(client);
     }
 }

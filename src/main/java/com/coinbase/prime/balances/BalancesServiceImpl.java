@@ -30,6 +30,16 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
     }
 
     @Override
+    public ListEntityBalancesResponse listEntityBalances(ListEntityBalancesRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/balances", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListEntityBalancesResponse>() {});
+    }
+
+    @Override
     public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
