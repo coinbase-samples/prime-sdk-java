@@ -55,43 +55,27 @@ Working examples available in `src/main/java/com/coinbase/examples/` including:
 - CreateOrder.java - Market order creation and status polling
 - Other API operation examples
 
-## Code Generation and API Analysis
-
-### AI-Metadata Tooling
-This repository includes comprehensive analysis tooling for automated analysis and code generation:
-
-**Location**: `tools/code-generation/`
-- `prime_sdk_analyzer.py`: Consolidated analysis tool with multiple modes and output formats
-
-**Usage**:
-```bash
-# Basic gap analysis (default)
-python tools/code-generation/prime_sdk_analyzer.py
-
-# All analyses combined
-python tools/code-generation/prime_sdk_analyzer.py --mode all
-
-# Specific analysis modes
-python tools/code-generation/prime_sdk_analyzer.py --mode naming
-python tools/code-generation/prime_sdk_analyzer.py --mode coverage
-python tools/code-generation/prime_sdk_analyzer.py --mode endpoints
-
-# JSON output for automation
-python tools/code-generation/prime_sdk_analyzer.py --mode all --output json
-```
+## OpenAPI Specification and Development
 
 ### OpenAPI Specification
-- **Primary spec**: `apiSpec/prime-public-spec.yaml` (7,353 lines, 77 endpoints, 20 domains)
+- **Primary spec**: `apiSpec/prime-public-spec.yaml` - The authoritative source for all endpoint definitions
 - **Backup spec**: `openapi/prime-public-api-spec.json`
-- **Coverage**: Analysis shows 130% implementation coverage (some packages implement more than spec requires)
 
-### Code Generation Workflow
-When implementing new endpoints:
-1. **Analyze gaps**: Run `complete_endpoint_analysis.py` to identify missing endpoints
-2. **Review OpenAPI spec**: Check `apiSpec/prime-public-spec.yaml` for endpoint details
+### Development Workflow
+When implementing new endpoints, pull endpoint definitions directly from the OpenAPI specification:
+
+1. **Reference OpenAPI spec**: Use `apiSpec/prime-public-spec.yaml` as the source of truth for all endpoint definitions
+2. **Extract by tags**: Organize endpoints by their OpenAPI tags to determine package structure
 3. **Follow Java patterns**: Use existing service implementations as templates
 4. **Generate classes**: Create Request/Response classes using Builder patterns
 5. **Update factory**: Add new services to `PrimeServiceFactory`
+
+### Endpoint Discovery
+To identify available endpoints:
+- Parse `apiSpec/prime-public-spec.yaml` directly
+- Group endpoints by their OpenAPI `tags` field
+- Each tag corresponds to a Java package (e.g., `orders`, `portfolios`, `wallets`)
+- Extract operation IDs, paths, and schemas for implementation
 
 ### Java Naming Conventions from OpenAPI
 

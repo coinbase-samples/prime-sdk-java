@@ -50,35 +50,19 @@ This is the **Coinbase Prime Java SDK** - a sample library for interacting with 
 - HMAC-SHA256 signatures generated for each request
 - Headers: CB-ACCESS-KEY, CB-ACCESS-SIGNATURE, CB-ACCESS-TIMESTAMP, CB-ACCESS-PHRASE
 
-## Code Generation and API Analysis
-
-### AI-Metadata Tooling
-This repository includes tooling for automated analysis and code generation:
-
-**Location**: `tools/code-generation/`
-- `prime_sdk_analyzer.py`: Consolidated analysis tool with multiple modes and output formats
-
-**Usage**:
-```bash
-# Basic gap analysis (default)
-python tools/code-generation/prime_sdk_analyzer.py
-
-# All analyses combined
-python tools/code-generation/prime_sdk_analyzer.py --mode all
-
-# Specific analysis modes
-python tools/code-generation/prime_sdk_analyzer.py --mode naming
-python tools/code-generation/prime_sdk_analyzer.py --mode coverage
-python tools/code-generation/prime_sdk_analyzer.py --mode endpoints
-
-# JSON output for automation
-python tools/code-generation/prime_sdk_analyzer.py --mode all --output json
-```
+## OpenAPI Specification and Development
 
 ### OpenAPI Specification
-- **Primary spec**: `apiSpec/prime-public-spec.yaml` (7,353 lines, 77 endpoints, 20 domains)
+- **Primary spec**: `apiSpec/prime-public-spec.yaml` - The authoritative source for all endpoint definitions
 - **Backup spec**: `openapi/prime-public-api-spec.json`
-- **Coverage**: Analysis shows 130% implementation coverage (some packages implement more than spec requires)
+
+### Endpoint Discovery and Development
+When implementing new endpoints, pull definitions directly from the OpenAPI specification:
+
+1. **Reference OpenAPI spec**: Use `apiSpec/prime-public-spec.yaml` as the source of truth
+2. **Extract by tags**: Parse endpoints by their OpenAPI `tags` field to determine package structure
+3. **Group by domain**: Each tag corresponds to a Java package (e.g., `orders`, `portfolios`, `wallets`)
+4. **Extract schemas**: Use OpenAPI schemas for Request/Response class generation
 
 ### Java Naming Conventions from OpenAPI
 
@@ -136,10 +120,10 @@ Follow these established patterns:
 ### Code Generation Workflow
 When implementing new endpoints:
 
-1. **Analyze gaps**: Run `complete_endpoint_analysis.py` to identify missing endpoints
-2. **Review OpenAPI spec**: Check `apiSpec/prime-public-spec.yaml` for endpoint details
+1. **Parse OpenAPI spec**: Extract endpoint definitions directly from `apiSpec/prime-public-spec.yaml`
+2. **Organize by tags**: Group endpoints by their OpenAPI tags to determine package structure
 3. **Follow Java patterns**: Use existing service implementations as templates
-4. **Generate classes**: Create Request/Response classes using Builder patterns
+4. **Generate classes**: Create Request/Response classes using Builder patterns from OpenAPI schemas
 5. **Update factory**: Add new services to `PrimeServiceFactory`
 
 ### Service Interface Pattern
