@@ -58,19 +58,26 @@ Working examples available in `src/main/java/com/coinbase/examples/` including:
 ## Code Generation and API Analysis
 
 ### AI-Metadata Tooling
-This repository includes tooling inspired by the .NET SDK's ai-metadata approach for automated analysis and code generation:
+This repository includes comprehensive analysis tooling for automated analysis and code generation:
 
 **Location**: `tools/code-generation/`
-- `extract_endpoints_v2.py`: Extracts and catalogs all OpenAPI endpoints with Java-specific naming
-- `complete_endpoint_analysis.py`: Performs gap analysis between OpenAPI spec and current implementation
+- `prime_sdk_analyzer.py`: Consolidated analysis tool with multiple modes and output formats
 
 **Usage**:
 ```bash
-# Analyze all endpoints
-python tools/code-generation/extract_endpoints_v2.py
+# Basic gap analysis (default)
+python tools/code-generation/prime_sdk_analyzer.py
 
-# Generate implementation gap analysis  
-python tools/code-generation/complete_endpoint_analysis.py
+# All analyses combined
+python tools/code-generation/prime_sdk_analyzer.py --mode all
+
+# Specific analysis modes
+python tools/code-generation/prime_sdk_analyzer.py --mode naming
+python tools/code-generation/prime_sdk_analyzer.py --mode coverage
+python tools/code-generation/prime_sdk_analyzer.py --mode endpoints
+
+# JSON output for automation
+python tools/code-generation/prime_sdk_analyzer.py --mode all --output json
 ```
 
 ### OpenAPI Specification

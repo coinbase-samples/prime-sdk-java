@@ -4,26 +4,37 @@ This directory contains tools and utilities for developing and maintaining the C
 
 ## Code Generation Tools
 
-The `code-generation/` directory contains Python scripts that help analyze and generate code from the OpenAPI specification:
+The `code-generation/` directory contains a comprehensive analysis tool for the OpenAPI specification and Java SDK implementation:
 
-- `extract_endpoints_v2.py`: Extracts and catalogs all endpoints from the OpenAPI spec
-- `complete_endpoint_analysis.py`: Performs gap analysis between the OpenAPI spec and current Java SDK implementation
+- **`prime_sdk_analyzer.py`**: Consolidated analysis tool with multiple modes
+  - Gap analysis: Compare OpenAPI spec with Java implementation
+  - Naming analysis: Check naming conventions and suggest standardizations  
+  - Coverage reporting: Detailed implementation status
+  - Endpoint extraction: Parse and catalog OpenAPI endpoints
 
 ## Workflow for Contributors
 
 1. **Start with the OpenAPI Spec**: Review `apiSpec/prime-public-spec.yaml` for any changes
-2. **Analyze Endpoints**: Use the tools to understand the API surface and identify gaps
+2. **Analyze Endpoints**: Use the analyzer to understand the API surface and identify gaps
 3. **Compare Implementation**: Review existing Java services against the OpenAPI specification
 4. **Follow Java Patterns**: Use existing service implementations as templates for new endpoints
 
 ## Usage
 
 ```bash
-# Analyze all endpoints
-python tools/code-generation/extract_endpoints_v2.py
+# Basic gap analysis (default)
+python tools/code-generation/prime_sdk_analyzer.py
 
-# Generate implementation gap analysis
-python tools/code-generation/complete_endpoint_analysis.py
+# All analyses combined
+python tools/code-generation/prime_sdk_analyzer.py --mode all
+
+# Specific analysis modes
+python tools/code-generation/prime_sdk_analyzer.py --mode naming
+python tools/code-generation/prime_sdk_analyzer.py --mode coverage
+python tools/code-generation/prime_sdk_analyzer.py --mode endpoints
+
+# JSON output for automation
+python tools/code-generation/prime_sdk_analyzer.py --mode all --output json
 ```
 
 ## Update Process
