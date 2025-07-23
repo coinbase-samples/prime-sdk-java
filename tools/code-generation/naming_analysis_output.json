@@ -1,0 +1,631 @@
+{
+  "renames_needed": [
+    {
+      "package": "addressbook",
+      "current": "GetPortfolioAddressBook",
+      "new": "ListPortfolioAddressBook",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/address_book",
+        "operation_id": "PrimeRESTAPI_GetPortfolioAddressBook",
+        "standardized_name": "ListPortfolioAddressBook",
+        "actual_name": "GetPortfolioAddressBook",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Address Book"
+      }
+    },
+    {
+      "package": "allocations",
+      "current": "GetPortfolioAllocations",
+      "new": "ListPortfolioAllocations",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/allocations",
+        "operation_id": "PrimeRESTAPI_GetPortfolioAllocations",
+        "standardized_name": "ListPortfolioAllocations",
+        "actual_name": "GetPortfolioAllocations",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Portfolio Allocations"
+      }
+    },
+    {
+      "package": "allocations",
+      "current": "GetAllocation",
+      "new": "ListAllocation",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/allocations/{allocation_id}",
+        "operation_id": "PrimeRESTAPI_GetAllocation",
+        "standardized_name": "ListAllocation",
+        "actual_name": "GetAllocation",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Allocation by ID"
+      }
+    },
+    {
+      "package": "balances",
+      "current": "GetWalletBalance",
+      "new": "ListWalletBalance",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/balance",
+        "operation_id": "PrimeRESTAPI_GetWalletBalance",
+        "standardized_name": "ListWalletBalance",
+        "actual_name": "GetWalletBalance",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Wallet Balance"
+      }
+    },
+    {
+      "package": "commission",
+      "current": "GetPortfolioCommission",
+      "new": "ListPortfolioCommission",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/commission",
+        "operation_id": "PrimeRESTAPI_GetPortfolioCommission",
+        "standardized_name": "ListPortfolioCommission",
+        "actual_name": "GetPortfolioCommission",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Portfolio Commission"
+      }
+    },
+    {
+      "package": "financing",
+      "current": "GetMarginInformation",
+      "new": "ListMarginInformation",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/margin",
+        "operation_id": "PrimeRESTAPI_GetMarginInformation",
+        "standardized_name": "ListMarginInformation",
+        "actual_name": "GetMarginInformation",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Margin Information"
+      }
+    },
+    {
+      "package": "onchainaddressbook",
+      "current": "DeleteOnchainAddressGroup",
+      "new": "UpdateOnchainAddressGroup",
+      "operation": {
+        "method": "PUT",
+        "path": "/v1/portfolios/{portfolio_id}/onchain_address_group",
+        "operation_id": "PrimeRESTAPI_UpdateOnchainAddressGroup",
+        "standardized_name": "UpdateOnchainAddressGroup",
+        "actual_name": "DeleteOnchainAddressGroup",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Update Onchain Address Book Entry"
+      }
+    },
+    {
+      "package": "onchainaddressbook",
+      "current": "DeleteOnchainAddressGroup",
+      "new": "CreateOnchainAddressGroup",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/onchain_address_group",
+        "operation_id": "PrimeRESTAPI_CreateOnchainAddressGroup",
+        "standardized_name": "CreateOnchainAddressGroup",
+        "actual_name": "DeleteOnchainAddressGroup",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Create Onchain Address Book Entry"
+      }
+    },
+    {
+      "package": "orders",
+      "current": "GetOrderPreview",
+      "new": "CreateOrderPreview",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/order_preview",
+        "operation_id": "PrimeRESTAPI_OrderPreview",
+        "standardized_name": "CreateOrderPreview",
+        "actual_name": "GetOrderPreview",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Order Preview"
+      }
+    },
+    {
+      "package": "orders",
+      "current": "CreateOrder",
+      "new": "GetOrder",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/orders/{order_id}",
+        "operation_id": "PrimeRESTAPI_GetOrder",
+        "standardized_name": "GetOrder",
+        "actual_name": "CreateOrder",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Order by Order ID"
+      }
+    },
+    {
+      "package": "wallets",
+      "current": "CreateWallet",
+      "new": "GetWallet",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}",
+        "operation_id": "PrimeRESTAPI_GetWallet",
+        "standardized_name": "GetWallet",
+        "actual_name": "CreateWallet",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Wallet by Wallet ID"
+      }
+    },
+    {
+      "package": "wallets",
+      "current": "GetWalletDepositInstructions",
+      "new": "ListWalletDepositInstructions",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/deposit_instructions",
+        "operation_id": "PrimeRESTAPI_GetWalletDepositInstructions",
+        "standardized_name": "ListWalletDepositInstructions",
+        "actual_name": "GetWalletDepositInstructions",
+        "exists": true,
+        "needs_rename": true,
+        "summary": "Get Wallet Deposit Instructions"
+      }
+    }
+  ],
+  "missing_operations": [
+    {
+      "package": "activities",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/activities/{activity_id}",
+        "operation_id": "PrimeRESTAPI_GetActivity",
+        "standardized_name": "GetActivity",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Activity by Activity ID"
+      }
+    },
+    {
+      "package": "activities",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/activities/{activity_id}",
+        "operation_id": "PrimeRESTAPI_GetPortfolioActivity",
+        "standardized_name": "GetPortfolioActivity",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Portfolio Activity by Activity ID"
+      }
+    },
+    {
+      "package": "addressbook",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/address_book",
+        "operation_id": "PrimeRESTAPI_CreatePortfolioAddressBookEntry",
+        "standardized_name": "CreatePortfolioAddressBookEntry",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Create Address Book Entry"
+      }
+    },
+    {
+      "package": "allocations",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/allocations/net/{netting_id}",
+        "operation_id": "PrimeRESTAPI_GetAllocationsByClientNettingId",
+        "standardized_name": "ListAllocationsByClientNetting",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Net Allocations by Netting ID"
+      }
+    },
+    {
+      "package": "assets",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/assets",
+        "operation_id": "PrimeRESTAPI_GetEntityAssets",
+        "standardized_name": "ListEntityAssets",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Assets"
+      }
+    },
+    {
+      "package": "balances",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/web3_balances",
+        "operation_id": "PrimeRESTAPI_ListWeb3WalletBalances",
+        "standardized_name": "ListWebWalletBalances",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Onchain Wallet Balances"
+      }
+    },
+    {
+      "package": "financing",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/locates_availability",
+        "operation_id": "PrimeRESTAPI_GetLocateAvailabilities",
+        "standardized_name": "ListLocateAvailabilities",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Entity Locate Availabilities"
+      }
+    },
+    {
+      "package": "financing",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/margin_summaries",
+        "operation_id": "PrimeRESTAPI_GetMarginSummaries",
+        "standardized_name": "ListMarginSummaries",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Margin Call Summaries"
+      }
+    },
+    {
+      "package": "financing",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/tf_tiered_fees",
+        "operation_id": "PrimeRESTAPI_GetTFTieredPricingFees",
+        "standardized_name": "ListTFTieredPricingFees",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Trade Finance Tiered Pricing Fees"
+      }
+    },
+    {
+      "package": "financing",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/accruals",
+        "operation_id": "PrimeRESTAPI_GetPortfolioInterestAccruals",
+        "standardized_name": "ListPortfolioInterestAccruals",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Interest Accruals For Portfolio"
+      }
+    },
+    {
+      "package": "financing",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/buying_power",
+        "operation_id": "PrimeRESTAPI_GetBuyingPower",
+        "standardized_name": "ListBuyingPower",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Portfolio Buying Power"
+      }
+    },
+    {
+      "package": "financing",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/credit",
+        "operation_id": "PrimeRESTAPI_GetPostTradeCredit",
+        "standardized_name": "ListPostTradeCredit",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Portfolio Credit Information"
+      }
+    },
+    {
+      "package": "financing",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/withdrawal_power",
+        "operation_id": "PrimeRESTAPI_GetWithdrawalPower",
+        "standardized_name": "ListWithdrawalPower",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Portfolio Withdrawal Power"
+      }
+    },
+    {
+      "package": "futures",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/futures/balance_summary",
+        "operation_id": "PrimeRESTAPI_GetFcmBalance",
+        "standardized_name": "ListFcmBalance",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Entity FCM Balance"
+      }
+    },
+    {
+      "package": "futures",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/futures/margin_call_details",
+        "operation_id": "PrimeRESTAPI_GetFcmMarginCallDetails",
+        "standardized_name": "ListFcmMarginCall",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get FCM Margin Call Details"
+      }
+    },
+    {
+      "package": "futures",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/futures/positions",
+        "operation_id": "PrimeRESTAPI_GetPositions",
+        "standardized_name": "ListPositions",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Entity Positions"
+      }
+    },
+    {
+      "package": "futures",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/futures/risk_limits",
+        "operation_id": "PrimeRESTAPI_GetFcmRiskLimits",
+        "standardized_name": "ListFcmRiskLimits",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get FCM Risk Limits"
+      }
+    },
+    {
+      "package": "futures",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/futures/sweeps",
+        "operation_id": "PrimeRESTAPI_GetFuturesSweeps",
+        "standardized_name": "ListFuturesSweeps",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Entity Futures Sweeps"
+      }
+    },
+    {
+      "package": "futures",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/entities/{entity_id}/futures/sweeps",
+        "operation_id": "PrimeRESTAPI_ScheduleFuturesSweep",
+        "standardized_name": "CreateScheduleFuturesSweep",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Schedule Entity Futures Sweep"
+      }
+    },
+    {
+      "package": "futures",
+      "operation": {
+        "method": "DELETE",
+        "path": "/v1/entities/{entity_id}/futures/sweeps",
+        "operation_id": "PrimeRESTAPI_CancelFuturesSweep",
+        "standardized_name": "CancelFuturesSweep",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Cancel Entity Futures Sweep"
+      }
+    },
+    {
+      "package": "onchainaddressgroups",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/onchain_address_groups",
+        "operation_id": "PrimeRESTAPI_ListOnchainAddressGroups",
+        "standardized_name": "ListOnchainAddressGroups",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Onchain Address Groups"
+      }
+    },
+    {
+      "package": "orders",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/orders",
+        "operation_id": "PrimeRESTAPI_GetOrders",
+        "standardized_name": "ListOrders",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Portfolio Orders"
+      }
+    },
+    {
+      "package": "orders",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/orders/{order_id}/edit_history",
+        "operation_id": "PrimeRESTAPI_GetOrderEditHistory",
+        "standardized_name": "ListOrderEditHistory",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Order Edit History"
+      }
+    },
+    {
+      "package": "orders",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/rfq",
+        "operation_id": "PrimeRESTAPI_CreateQuoteRequest",
+        "standardized_name": "CreateQuoteRequest",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Create Quote Request"
+      }
+    },
+    {
+      "package": "portfolios",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios",
+        "operation_id": "PrimeRESTAPI_GetPortfolios",
+        "standardized_name": "ListPortfolios",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Portfolios"
+      }
+    },
+    {
+      "package": "portfolios",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}",
+        "operation_id": "PrimeRESTAPI_GetPortfolio",
+        "standardized_name": "GetPortfolio",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Portfolio by Portfolio ID"
+      }
+    },
+    {
+      "package": "staking",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/staking/initiate",
+        "operation_id": "PrimeRESTAPI_StakingInitiate",
+        "standardized_name": "CreateStakingInitiate",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Request to stake or delegate a wallet"
+      }
+    },
+    {
+      "package": "staking",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/staking/unstake",
+        "operation_id": "PrimeRESTAPI_StakingUnstake",
+        "standardized_name": "CreateStakingUnstake",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Request to unstake a wallet"
+      }
+    },
+    {
+      "package": "transactions",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/transactions/{transaction_id}",
+        "operation_id": "PrimeRESTAPI_GetTransaction",
+        "standardized_name": "GetTransaction",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Get Transaction by Transaction ID"
+      }
+    },
+    {
+      "package": "transactions",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/transfers",
+        "operation_id": "PrimeRESTAPI_CreateWalletTransfer",
+        "standardized_name": "CreateWalletTransfer",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Create Transfer"
+      }
+    },
+    {
+      "package": "transactions",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/withdrawals",
+        "operation_id": "PrimeRESTAPI_CreateWalletWithdrawal",
+        "standardized_name": "CreateWalletWithdrawal",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Create Withdrawal"
+      }
+    },
+    {
+      "package": "users",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/users",
+        "operation_id": "PrimeRESTAPI_GetEntityUsers",
+        "standardized_name": "ListEntityUsers",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Users"
+      }
+    },
+    {
+      "package": "wallets",
+      "operation": {
+        "method": "GET",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/addresses",
+        "operation_id": "PrimeRESTAPI_ListWalletAddresses",
+        "standardized_name": "ListWalletAddresses",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "List Wallet Addresses"
+      }
+    },
+    {
+      "package": "wallets",
+      "operation": {
+        "method": "POST",
+        "path": "/v1/portfolios/{portfolio_id}/wallets/{wallet_id}/addresses",
+        "operation_id": "PrimeRESTAPI_CreateWalletDepositAddress",
+        "standardized_name": "CreateWalletDepositAddress",
+        "actual_name": null,
+        "exists": false,
+        "needs_rename": false,
+        "summary": "Create Wallet Deposit Address"
+      }
+    }
+  ],
+  "missing_packages": [
+    "onchainaddressgroups"
+  ]
+}
