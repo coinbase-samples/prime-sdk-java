@@ -1,0 +1,7 @@
+---
+description: Core rules for Prime SDK Repos
+globs: 
+alwaysApply: false
+---
+
+@include CLAUDE.md
