@@ -16,7 +16,12 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.errors.CoinbasePrimeException;
+
 public interface StakingService {
-    CreateStakeResponse createStake(CreateStakeRequest request);
-    CreateUnstakeResponse createUnstake(CreateUnstakeRequest request);
+    CreateStakeResponse createStake(CreateStakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateUnstakeResponse createUnstake(CreateUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -19,6 +19,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.ActivityCategory;
 import com.coinbase.prime.model.enums.ActivitySecondaryType;
 import com.coinbase.prime.model.enums.ActivityStatus;
+import com.coinbase.prime.model.enums.HierarchyType;
 import com.coinbase.prime.model.enums.PrimeActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -38,16 +39,18 @@ public class Activity {
     @JsonProperty("user_actions")
     private UserAction[] userActions;
     @JsonProperty("transactions_metadata")
-    private TransactionsMetadata transactionsMetadata;
+    private ActivityMetadataTransactions transactionsMetadata;
     @JsonProperty("account_metadata")
-    private AccountMetadata accountMetadata;
+    private ActivityMetadataAccount accountMetadata;
     @JsonProperty("orders_metadata")
-    private OrdersMetadata ordersMetadata;
+    private ActivityMetadataOrders ordersMetadata;
     private String[] symbols;
     @JsonProperty("created_at")
     private String createdAt;
     @JsonProperty("updated_at")
     private String updatedAt;
+    @JsonProperty("hierarchy_type")
+    private HierarchyType hierarchyType;
 
     public Activity() {
     }
@@ -69,6 +72,7 @@ public class Activity {
         this.symbols = builder.symbols;
         this.createdAt = builder.createdAt;
         this.updatedAt = builder.updatedAt;
+        this.hierarchyType = builder.hierarchyType;
     }
 
     public String getId() {
@@ -151,27 +155,27 @@ public class Activity {
         this.userActions = userActions;
     }
 
-    public TransactionsMetadata getTransactionsMetadata() {
+    public ActivityMetadataTransactions getTransactionsMetadata() {
         return transactionsMetadata;
     }
 
-    public void setTransactionsMetadata(TransactionsMetadata transactionsMetadata) {
+    public void setTransactionsMetadata(ActivityMetadataTransactions transactionsMetadata) {
         this.transactionsMetadata = transactionsMetadata;
     }
 
-    public AccountMetadata getAccountMetadata() {
+    public ActivityMetadataAccount getAccountMetadata() {
         return accountMetadata;
     }
 
-    public void setAccountMetadata(AccountMetadata accountMetadata) {
+    public void setAccountMetadata(ActivityMetadataAccount accountMetadata) {
         this.accountMetadata = accountMetadata;
     }
 
-    public OrdersMetadata getOrdersMetadata() {
+    public ActivityMetadataOrders getOrdersMetadata() {
         return ordersMetadata;
     }
 
-    public void setOrdersMetadata(OrdersMetadata ordersMetadata) {
+    public void setOrdersMetadata(ActivityMetadataOrders ordersMetadata) {
         this.ordersMetadata = ordersMetadata;
     }
 
@@ -199,6 +203,14 @@ public class Activity {
         this.updatedAt = updatedAt;
     }
 
+    public HierarchyType getHierarchyType() {
+        return hierarchyType;
+    }
+
+    public void setHierarchyType(HierarchyType hierarchyType) {
+        this.hierarchyType = hierarchyType;
+    }
+
     public static class Builder {
         private String id;
         private String referenceId;
@@ -210,12 +222,13 @@ public class Activity {
         private String title;
         private String description;
         private UserAction[] userActions;
-        private TransactionsMetadata transactionsMetadata;
-        private AccountMetadata accountMetadata;
-        private OrdersMetadata ordersMetadata;
+        private ActivityMetadataTransactions transactionsMetadata;
+        private ActivityMetadataAccount accountMetadata;
+        private ActivityMetadataOrders ordersMetadata;
         private String[] symbols;
         private String createdAt;
         private String updatedAt;
+        private HierarchyType hierarchyType;
 
         public Builder id(String id) {
             this.id = id;
@@ -267,17 +280,17 @@ public class Activity {
             return this;
         }
 
-        public Builder transactionsMetadata(TransactionsMetadata transactionsMetadata) {
+        public Builder transactionsMetadata(ActivityMetadataTransactions transactionsMetadata) {
             this.transactionsMetadata = transactionsMetadata;
             return this;
         }
 
-        public Builder accountMetadata(AccountMetadata accountMetadata) {
+        public Builder accountMetadata(ActivityMetadataAccount accountMetadata) {
             this.accountMetadata = accountMetadata;
             return this;
         }
 
-        public Builder ordersMetadata(OrdersMetadata ordersMetadata) {
+        public Builder ordersMetadata(ActivityMetadataOrders ordersMetadata) {
             this.ordersMetadata = ordersMetadata;
             return this;
         }
@@ -294,6 +307,11 @@ public class Activity {
 
         public Builder updatedAt(String updatedAt) {
             this.updatedAt = updatedAt;
+            return this;
+        }
+
+        public Builder hierarchyType(HierarchyType hierarchyType) {
+            this.hierarchyType = hierarchyType;
             return this;
         }
 

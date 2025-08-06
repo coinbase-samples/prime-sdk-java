@@ -22,5 +22,6 @@ public enum OrderType {
     TWAP,
     BLOCK,
     VWAP,
-    STOP_LIMIT
+    STOP_LIMIT,
+    RFQ
 }

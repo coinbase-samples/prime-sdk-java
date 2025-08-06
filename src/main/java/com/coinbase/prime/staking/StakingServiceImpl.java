@@ -47,4 +47,24 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
                 List.of(200),
                 new TypeReference<CreateUnstakeResponse>() {});
     }
+
+    @Override
+    public PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/initiate", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<PortfolioStakingInitiateResponse>() {});
+    }
+
+    @Override
+    public PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/unstake", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<PortfolioStakingUnstakeResponse>() {});
+    }
 }

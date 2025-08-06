@@ -68,4 +68,14 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
                 List.of(200),
                 new TypeReference<ListEntityActivitiesResponse>() {});
     }
+
+    @Override
+    public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                request.getPath(),
+                null,
+                List.of(200),
+                new TypeReference<GetPortfolioActivityResponse>() {});
+    }
 }

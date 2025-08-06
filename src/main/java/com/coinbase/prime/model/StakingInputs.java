@@ -16,14 +16,21 @@
 
 package com.coinbase.prime.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class StakingInputs {
+    @JsonProperty("amount")
     private String amount;
+    
+    @JsonProperty("validator_address")
+    private String validatorAddress;
 
     public StakingInputs() {
     }
 
     public StakingInputs(Builder builder) {
         this.amount = builder.amount;
+        this.validatorAddress = builder.validatorAddress;
     }
 
     public String getAmount() {
@@ -34,14 +41,28 @@ public class StakingInputs {
         this.amount = amount;
     }
 
+    public String getValidatorAddress() {
+        return validatorAddress;
+    }
+
+    public void setValidatorAddress(String validatorAddress) {
+        this.validatorAddress = validatorAddress;
+    }
+
     public static class Builder {
         private String amount;
+        private String validatorAddress;
 
         public Builder() {
         }
 
         public Builder amount(String amount) {
             this.amount = amount;
+            return this;
+        }
+
+        public Builder validatorAddress(String validatorAddress) {
+            this.validatorAddress = validatorAddress;
             return this;
         }
 

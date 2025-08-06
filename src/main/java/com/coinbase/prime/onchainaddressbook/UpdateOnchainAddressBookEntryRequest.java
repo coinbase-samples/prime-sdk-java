@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.orders;
+package com.coinbase.prime.onchainaddressbook;
 
 import com.coinbase.prime.model.AddressGroup;
 import com.fasterxml.jackson.annotation.JsonIgnore;

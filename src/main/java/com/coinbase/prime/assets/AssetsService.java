@@ -22,4 +22,5 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 public interface AssetsService {
     // Assets
     ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListEntityAssetsResponse listEntityAssets(ListEntityAssetsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

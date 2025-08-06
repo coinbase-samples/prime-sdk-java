@@ -35,6 +35,10 @@ import com.coinbase.prime.futures.FuturesService;
 import com.coinbase.prime.futures.FuturesServiceImpl;
 import com.coinbase.prime.invoice.InvoiceService;
 import com.coinbase.prime.invoice.InvoiceServiceImpl;
+import com.coinbase.prime.onchainaddressbook.OnchainAddressBookService;
+import com.coinbase.prime.onchainaddressbook.OnchainAddressBookServiceImpl;
+import com.coinbase.prime.onchainaddressgroups.OnchainAddressGroupsService;
+import com.coinbase.prime.onchainaddressgroups.OnchainAddressGroupsServiceImpl;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.orders.OrdersServiceImpl;
 import com.coinbase.prime.paymentmethods.PaymentMethodsService;
@@ -90,6 +94,14 @@ public class PrimeServiceFactory {
 
     public static InvoiceService createInvoiceService(CoinbasePrimeClient client) {
         return new InvoiceServiceImpl(client);
+    }
+
+    public static OnchainAddressBookService createOnchainAddressBookService(CoinbasePrimeClient client) {
+        return new OnchainAddressBookServiceImpl(client);
+    }
+
+    public static OnchainAddressGroupsService createOnchainAddressGroupsService(CoinbasePrimeClient client) {
+        return new OnchainAddressGroupsServiceImpl(client);
     }
 
     public static OrdersService createOrdersService(CoinbasePrimeClient client) {

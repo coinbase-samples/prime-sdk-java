@@ -14,43 +14,46 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.orders;
+package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.CustodyActivityType;
+import com.coinbase.prime.model.enums.ActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UpdateOnchainAddressBookEntryResponse {
+/**
+ * Response for activity creation operations.
+ */
+public class ActivityCreationResponse {
     @JsonProperty("activity_type")
-    private CustodyActivityType activityType;
-
+    private ActivityType activityType;
+    
     @JsonProperty("num_approvals_remaining")
-    private int numApprovalsRemaining;
-
+    private Integer numApprovalsRemaining;
+    
     @JsonProperty("activity_id")
     private String activityId;
 
-    public UpdateOnchainAddressBookEntryResponse() {
+    public ActivityCreationResponse() {
     }
 
-    public UpdateOnchainAddressBookEntryResponse(UpdateOnchainAddressBookEntryResponse.Builder builder) {
+    public ActivityCreationResponse(Builder builder) {
         this.activityType = builder.activityType;
         this.numApprovalsRemaining = builder.numApprovalsRemaining;
         this.activityId = builder.activityId;
     }
 
-    public CustodyActivityType getActivityType() {
+    public ActivityType getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(CustodyActivityType activityType) {
+    public void setActivityType(ActivityType activityType) {
         this.activityType = activityType;
     }
 
-    public int getNumApprovalsRemaining() {
+    public Integer getNumApprovalsRemaining() {
         return numApprovalsRemaining;
     }
 
-    public void setNumApprovalsRemaining(int numApprovalsRemaining) {
+    public void setNumApprovalsRemaining(Integer numApprovalsRemaining) {
         this.numApprovalsRemaining = numApprovalsRemaining;
     }
 
@@ -63,30 +66,30 @@ public class UpdateOnchainAddressBookEntryResponse {
     }
 
     public static class Builder {
-        private CustodyActivityType activityType;
-        private int numApprovalsRemaining;
+        private ActivityType activityType;
+        private Integer numApprovalsRemaining;
         private String activityId;
 
         public Builder() {
         }
 
-        public UpdateOnchainAddressBookEntryResponse.Builder activityType(CustodyActivityType activityType) {
+        public Builder activityType(ActivityType activityType) {
             this.activityType = activityType;
             return this;
         }
 
-        public UpdateOnchainAddressBookEntryResponse.Builder numApprovalsRemaining(int numApprovalsRemaining) {
+        public Builder numApprovalsRemaining(Integer numApprovalsRemaining) {
             this.numApprovalsRemaining = numApprovalsRemaining;
             return this;
         }
 
-        public UpdateOnchainAddressBookEntryResponse.Builder activityId(String activityId) {
+        public Builder activityId(String activityId) {
             this.activityId = activityId;
             return this;
         }
 
-        public UpdateOnchainAddressBookEntryResponse build() {
-            return new UpdateOnchainAddressBookEntryResponse(this);
+        public ActivityCreationResponse build() {
+            return new ActivityCreationResponse(this);
         }
     }
 }

@@ -25,4 +25,6 @@ public interface WalletsService {
     CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetWalletByIdResponse getWalletById(GetWalletByIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListWalletAddressesResponse listWalletAddresses(ListWalletAddressesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateWalletDepositAddressResponse createWalletDepositAddress(CreateWalletDepositAddressRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

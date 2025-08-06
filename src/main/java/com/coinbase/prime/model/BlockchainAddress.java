@@ -22,6 +22,7 @@ public class BlockchainAddress {
     private String address;
     @JsonProperty("account_identifier")
     private String accountIdentifier;
+    private Network network;
 
     public BlockchainAddress() {
     }
@@ -29,6 +30,7 @@ public class BlockchainAddress {
     public BlockchainAddress(Builder builder) {
         this.address = builder.address;
         this.accountIdentifier = builder.accountIdentifier;
+        this.network = builder.network;
     }
 
     public String getAddress() {
@@ -47,9 +49,18 @@ public class BlockchainAddress {
         this.accountIdentifier = accountIdentifier;
     }
 
+    public Network getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(Network network) {
+        this.network = network;
+    }
+
     public static class Builder {
         private String address;
         private String accountIdentifier;
+        private Network network;
 
         public Builder() {
         }
@@ -61,6 +72,11 @@ public class BlockchainAddress {
 
         public Builder accountIdentifier(String accountIdentifier) {
             this.accountIdentifier = accountIdentifier;
+            return this;
+        }
+
+        public Builder network(Network network) {
+            this.network = network;
             return this;
         }
 

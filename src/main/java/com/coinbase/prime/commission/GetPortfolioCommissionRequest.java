@@ -24,12 +24,16 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 public class GetPortfolioCommissionRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
+    
+    @JsonProperty("product_id")
+    private String productId;
 
     public GetPortfolioCommissionRequest() {
     }
 
     public GetPortfolioCommissionRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
+        this.productId = builder.productId;
     }
 
     public String getPortfolioId() {
@@ -40,14 +44,28 @@ public class GetPortfolioCommissionRequest {
         this.portfolioId = portfolioId;
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     public static class Builder {
         private String portfolioId;
+        private String productId;
 
         public Builder() {
         }
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder productId(String productId) {
+            this.productId = productId;
             return this;
         }
 

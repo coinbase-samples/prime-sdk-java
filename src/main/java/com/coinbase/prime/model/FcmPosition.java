@@ -16,14 +16,15 @@
 
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.enums.FcmPositionSide;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Date;
+import java.time.Instant;
 
 public class FcmPosition {
     @JsonProperty("product_id")
     private String productId;
 
-    private String side;
+    private FcmPositionSide side;
 
     @JsonProperty("number_of_contracts")
     private String numberOfContracts;
@@ -41,7 +42,7 @@ public class FcmPosition {
     private String avgEntryPrice;
 
     @JsonProperty("expiration_time")
-    private Date expirationTime;
+    private Instant expirationTime;
 
     public FcmPosition() {
     }
@@ -65,11 +66,11 @@ public class FcmPosition {
         this.productId = productId;
     }
 
-    public String getSide() {
+    public FcmPositionSide getSide() {
         return side;
     }
 
-    public void setSide(String side) {
+    public void setSide(FcmPositionSide side) {
         this.side = side;
     }
 
@@ -113,23 +114,23 @@ public class FcmPosition {
         this.avgEntryPrice = avgEntryPrice;
     }
 
-    public Date getExpirationTime() {
+    public Instant getExpirationTime() {
         return expirationTime;
     }
 
-    public void setExpirationTime(Date expirationTime) {
+    public void setExpirationTime(Instant expirationTime) {
         this.expirationTime = expirationTime;
     }
 
     public static class Builder {
         private String productId;
-        private String side;
+        private FcmPositionSide side;
         private String numberOfContracts;
         private String dailyRealizedPnl;
         private String unrealizedPnl;
         private String currentPrice;
         private String avgEntryPrice;
-        private Date expirationTime;
+        private Instant expirationTime;
 
         public Builder() {
         }
@@ -139,7 +140,7 @@ public class FcmPosition {
             return this;
         }
 
-        public Builder side(String side) {
+        public Builder side(FcmPositionSide side) {
             this.side = side;
             return this;
         }
@@ -169,7 +170,7 @@ public class FcmPosition {
             return this;
         }
 
-        public Builder expirationTime(Date expirationTime) {
+        public Builder expirationTime(Instant expirationTime) {
             this.expirationTime = expirationTime;
             return this;
         }

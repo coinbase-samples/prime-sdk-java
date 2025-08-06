@@ -28,6 +28,8 @@ public class EntityPaymentMethod {
     private String bankName;
     @JsonProperty("account_number")
     private String accountNumber;
+    @JsonProperty("bank_name_2")
+    private String bankName2;
 
     public EntityPaymentMethod() {
     }
@@ -38,6 +40,7 @@ public class EntityPaymentMethod {
         this.paymentMethodType = builder.paymentMethodType;
         this.bankName = builder.bankName;
         this.accountNumber = builder.accountNumber;
+        this.bankName2 = builder.bankName2;
     }
 
     public String getId() {
@@ -80,12 +83,21 @@ public class EntityPaymentMethod {
         this.accountNumber = accountNumber;
     }
 
+    public String getBankName2() {
+        return bankName2;
+    }
+
+    public void setBankName2(String bankName2) {
+        this.bankName2 = bankName2;
+    }
+
     public static class Builder {
         private String id;
         private String symbol;
         private PaymentMethodType paymentMethodType;
         private String bankName;
         private String accountNumber;
+        private String bankName2;
 
         public Builder id(String id) {
             this.id = id;
@@ -109,6 +121,11 @@ public class EntityPaymentMethod {
 
         public Builder accountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
+            return this;
+        }
+
+        public Builder bankName2(String bankName2) {
+            this.bankName2 = bankName2;
             return this;
         }
 

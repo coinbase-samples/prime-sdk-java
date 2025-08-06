@@ -16,161 +16,34 @@
 
 package com.coinbase.prime.futures;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.prime.model.FcmBalance;
 
 public class GetEntityFcmBalanceResponse {
-    @JsonProperty("portfolio_id")
-    private String portfolioId;
-
-    @JsonProperty("cfm_usd_balance")
-    private String cfmUsdBalance;
-
-    @JsonProperty("unrealized_pnl")
-    private String unrealizedPnl;
-
-    @JsonProperty("excess_liquidity")
-    private String excessLiquidity;
-
-    @JsonProperty("futures_buying_power")
-    private String futuresBuyingPower;
-
-    @JsonProperty("initial_margin")
-    private String initialMargin;
-
-    @JsonProperty("maintenance_margin")
-    private String maintenanceMargin;
-
-    @JsonProperty("clearing_account_id")
-    private String clearingAccountId;
+    private FcmBalance fcmBalance;
 
     public GetEntityFcmBalanceResponse() {
     }
 
     public GetEntityFcmBalanceResponse(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.cfmUsdBalance = builder.cfmUsdBalance;
-        this.unrealizedPnl = builder.unrealizedPnl;
-        this.excessLiquidity = builder.excessLiquidity;
-        this.futuresBuyingPower = builder.futuresBuyingPower;
-        this.initialMargin = builder.initialMargin;
-        this.maintenanceMargin = builder.maintenanceMargin;
-        this.clearingAccountId = builder.clearingAccountId;
+        this.fcmBalance = builder.fcmBalance;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
+    public FcmBalance getFcmBalance() {
+        return fcmBalance;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
-    public String getCfmUsdBalance() {
-        return cfmUsdBalance;
-    }
-
-    public void setCfmUsdBalance(String cfmUsdBalance) {
-        this.cfmUsdBalance = cfmUsdBalance;
-    }
-
-    public String getUnrealizedPnl() {
-        return unrealizedPnl;
-    }
-
-    public void setUnrealizedPnl(String unrealizedPnl) {
-        this.unrealizedPnl = unrealizedPnl;
-    }
-
-    public String getExcessLiquidity() {
-        return excessLiquidity;
-    }
-
-    public void setExcessLiquidity(String excessLiquidity) {
-        this.excessLiquidity = excessLiquidity;
-    }
-
-    public String getFuturesBuyingPower() {
-        return futuresBuyingPower;
-    }
-
-    public void setFuturesBuyingPower(String futuresBuyingPower) {
-        this.futuresBuyingPower = futuresBuyingPower;
-    }
-
-    public String getInitialMargin() {
-        return initialMargin;
-    }
-
-    public void setInitialMargin(String initialMargin) {
-        this.initialMargin = initialMargin;
-    }
-
-    public String getMaintenanceMargin() {
-        return maintenanceMargin;
-    }
-
-    public void setMaintenanceMargin(String maintenanceMargin) {
-        this.maintenanceMargin = maintenanceMargin;
-    }
-
-    public String getClearingAccountId() {
-        return clearingAccountId;
-    }
-
-    public void setClearingAccountId(String clearingAccountId) {
-        this.clearingAccountId = clearingAccountId;
+    public void setFcmBalance(FcmBalance fcmBalance) {
+        this.fcmBalance = fcmBalance;
     }
 
     public static class Builder {
-        private String portfolioId;
-        private String cfmUsdBalance;
-        private String unrealizedPnl;
-        private String excessLiquidity;
-        private String futuresBuyingPower;
-        private String initialMargin;
-        private String maintenanceMargin;
-        private String clearingAccountId;
+        private FcmBalance fcmBalance;
 
         public Builder() {
         }
 
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder cfmUsdBalance(String cfmUsdBalance) {
-            this.cfmUsdBalance = cfmUsdBalance;
-            return this;
-        }
-
-        public Builder unrealizedPnl(String unrealizedPnl) {
-            this.unrealizedPnl = unrealizedPnl;
-            return this;
-        }
-
-        public Builder excessLiquidity(String excessLiquidity) {
-            this.excessLiquidity = excessLiquidity;
-            return this;
-        }
-
-        public Builder futuresBuyingPower(String futuresBuyingPower) {
-            this.futuresBuyingPower = futuresBuyingPower;
-            return this;
-        }
-
-        public Builder initialMargin(String initialMargin) {
-            this.initialMargin = initialMargin;
-            return this;
-        }
-
-        public Builder maintenanceMargin(String maintenanceMargin) {
-            this.maintenanceMargin = maintenanceMargin;
-            return this;
-        }
-
-        public Builder clearingAccountId(String clearingAccountId) {
-            this.clearingAccountId = clearingAccountId;
+        public Builder fcmBalance(FcmBalance fcmBalance) {
+            this.fcmBalance = fcmBalance;
             return this;
         }
 

@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.enums.ProductPermissions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Product {
@@ -34,7 +35,9 @@ public class Product {
     private String baseMaxSize;
     @JsonProperty("quote_max_size")
     private String quoteMaxSize;
-    private String[] permissions;
+    private ProductPermissions[] permissions;
+    @JsonProperty("rfq_product_details")
+    private RfqProductDetails rfqProductDetails;
 
     public Product() {
     }
@@ -49,6 +52,7 @@ public class Product {
         this.baseMaxSize = builder.baseMaxSize;
         this.quoteMaxSize = builder.quoteMaxSize;
         this.permissions = builder.permissions;
+        this.rfqProductDetails = builder.rfqProductDetails;
     }
 
     public String getId() {
@@ -115,12 +119,20 @@ public class Product {
         this.quoteMaxSize = quoteMaxSize;
     }
 
-    public String[] getPermissions() {
+    public ProductPermissions[] getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(String[] permissions) {
+    public void setPermissions(ProductPermissions[] permissions) {
         this.permissions = permissions;
+    }
+
+    public RfqProductDetails getRfqProductDetails() {
+        return rfqProductDetails;
+    }
+
+    public void setRfqProductDetails(RfqProductDetails rfqProductDetails) {
+        this.rfqProductDetails = rfqProductDetails;
     }
 
     public static class Builder {
@@ -132,7 +144,8 @@ public class Product {
         private String quoteMinSize;
         private String baseMaxSize;
         private String quoteMaxSize;
-        private String[] permissions;
+        private ProductPermissions[] permissions;
+        private RfqProductDetails rfqProductDetails;
 
         public Builder() {
         }
@@ -177,8 +190,13 @@ public class Product {
             return this;
         }
 
-        public Builder permissions(String[] permissions) {
+        public Builder permissions(ProductPermissions[] permissions) {
             this.permissions = permissions;
+            return this;
+        }
+
+        public Builder rfqProductDetails(RfqProductDetails rfqProductDetails) {
+            this.rfqProductDetails = rfqProductDetails;
             return this;
         }
 

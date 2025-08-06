@@ -22,5 +22,6 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 public interface UsersService {
     // Users
     ListUsersResponse listUsers(ListUsersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListEntityUsersResponse listEntityUsers(ListEntityUsersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

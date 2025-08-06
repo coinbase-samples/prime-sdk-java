@@ -16,12 +16,12 @@
 
 package com.coinbase.prime.paymentmethods;
 
-import com.coinbase.prime.model.EntityPaymentMethod;
+import com.coinbase.prime.model.PaymentMethodSummary;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListEntityPaymentMethodsResponse {
     @JsonProperty("payment_methods")
-    private EntityPaymentMethod[] paymentMethods;
+    private PaymentMethodSummary[] paymentMethods;
 
     public ListEntityPaymentMethodsResponse() {
     }
@@ -30,21 +30,21 @@ public class ListEntityPaymentMethodsResponse {
         this.paymentMethods = builder.paymentMethods;
     }
 
-    public EntityPaymentMethod[] getPaymentMethods() {
+    public PaymentMethodSummary[] getPaymentMethods() {
         return paymentMethods;
     }
 
-    public void setPaymentMethods(EntityPaymentMethod[] paymentMethods) {
+    public void setPaymentMethods(PaymentMethodSummary[] paymentMethods) {
         this.paymentMethods = paymentMethods;
     }
 
     public static class Builder {
-        private EntityPaymentMethod[] paymentMethods;
+        private PaymentMethodSummary[] paymentMethods;
 
         public Builder() {
         }
 
-        public Builder paymentMethods(EntityPaymentMethod[] paymentMethods) {
+        public Builder paymentMethods(PaymentMethodSummary[] paymentMethods) {
             this.paymentMethods = paymentMethods;
             return this;
         }
