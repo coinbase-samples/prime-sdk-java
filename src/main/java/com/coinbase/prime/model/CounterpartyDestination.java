@@ -19,6 +19,7 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CounterpartyDestination {
+    private String type;
     @JsonProperty("counterparty_id")
     private String counterpartyId;
 
@@ -26,7 +27,16 @@ public class CounterpartyDestination {
     }
 
     public CounterpartyDestination(Builder builder) {
+        this.type = builder.type;
         this.counterpartyId = builder.counterpartyId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCounterpartyId() {
@@ -38,9 +48,15 @@ public class CounterpartyDestination {
     }
 
     public static class Builder {
+        private String type;
         private String counterpartyId;
 
         public Builder() {
+        }
+
+        public Builder type(String type) {
+            this.type = type;
+            return this;
         }
 
         public Builder counterpartyId(String counterpartyId) {

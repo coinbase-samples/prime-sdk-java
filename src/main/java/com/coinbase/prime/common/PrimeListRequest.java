@@ -16,16 +16,17 @@
 
 package com.coinbase.prime.common;
 
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class PrimeListRequest {
     private String cursor;
 
     @JsonProperty("sort_direction")
-    private String sortDirection;
+    private SortDirection sortDirection;
     private Integer limit;
 
-    public PrimeListRequest(String cursor, String sortDirection, Integer limit) {
+    public PrimeListRequest(String cursor, SortDirection sortDirection, Integer limit) {
         this.cursor = cursor;
         this.sortDirection = sortDirection;
         this.limit = limit;
@@ -42,11 +43,11 @@ public abstract class PrimeListRequest {
         this.cursor = cursor;
     }
 
-    public String getSortDirection() {
+    public SortDirection getSortDirection() {
         return sortDirection;
     }
 
-    public void setSortDirection(String direction) {
+    public void setSortDirection(SortDirection direction) {
         this.sortDirection = direction;
     }
 

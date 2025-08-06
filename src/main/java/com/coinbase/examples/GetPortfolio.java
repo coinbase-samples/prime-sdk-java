@@ -19,8 +19,8 @@ package com.coinbase.examples;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.portfolios.GetPortfolioByIdRequest;
-import com.coinbase.prime.portfolios.GetPortfolioByIdResponse;
+import com.coinbase.prime.portfolios.GetPortfolioRequest;
+import com.coinbase.prime.portfolios.GetPortfolioResponse;
 import com.coinbase.prime.portfolios.PortfoliosService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,9 +33,8 @@ public class GetPortfolio {
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
       PortfoliosService portfoliosService = PrimeServiceFactory.createPortfoliosService(client);
-      GetPortfolioByIdResponse response = portfoliosService.getPortfolioById(
-          new GetPortfolioByIdRequest.Builder()
-              .portfolioId(portfolioId)
+      GetPortfolioResponse response = portfoliosService.getPortfolio(
+          new GetPortfolioRequest.Builder(portfolioId)
               .build());
 
       System.out.println(new ObjectMapper().writeValueAsString(response));

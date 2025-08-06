@@ -30,16 +30,6 @@ public class UsersServiceImpl extends CoinbaseServiceImpl implements UsersServic
     }
 
     @Override
-    public ListUsersResponse listUsers(ListUsersRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/users", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListUsersResponse>() {});
-    }
-
-    @Override
     public ListEntityUsersResponse listEntityUsers(ListEntityUsersRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,

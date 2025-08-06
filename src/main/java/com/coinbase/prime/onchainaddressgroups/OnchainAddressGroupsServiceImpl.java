@@ -27,37 +27,4 @@ public class OnchainAddressGroupsServiceImpl extends CoinbaseServiceImpl impleme
                 List.of(200),
                 new TypeReference<ListOnchainAddressGroupsResponse>() {});
     }
-
-    @Override
-    public CreateOnchainAddressGroupResponse createOnchainAddressGroup(CreateOnchainAddressGroupRequest request) 
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                request.getPath(),
-                request,
-                List.of(200),
-                new TypeReference<CreateOnchainAddressGroupResponse>() {});
-    }
-
-    @Override
-    public UpdateOnchainAddressGroupResponse updateOnchainAddressGroup(UpdateOnchainAddressGroupRequest request) 
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.PUT,
-                request.getPath(),
-                request,
-                List.of(200),
-                new TypeReference<UpdateOnchainAddressGroupResponse>() {});
-    }
-
-    @Override
-    public DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(DeleteOnchainAddressGroupRequest request) 
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.DELETE,
-                request.getPath(),
-                request,
-                List.of(200),
-                new TypeReference<DeleteOnchainAddressGroupResponse>() {});
-    }
 }

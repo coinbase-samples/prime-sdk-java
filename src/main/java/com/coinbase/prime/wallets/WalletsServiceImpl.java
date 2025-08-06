@@ -50,13 +50,13 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
     }
 
     @Override
-    public GetWalletByIdResponse getWalletById(GetWalletByIdRequest request) throws CoinbasePrimeException {
+    public GetWalletResponse getWallet(GetWalletRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId()),
                 null,
                 List.of(200),
-                new TypeReference<GetWalletByIdResponse>() {});
+                new TypeReference<GetWalletResponse>() {});
     }
 
     @Override

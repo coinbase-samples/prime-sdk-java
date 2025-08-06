@@ -20,6 +20,7 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.Pagination;
 import com.coinbase.prime.model.enums.OrderSide;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -44,7 +45,7 @@ public class GetPortfolioAllocationsRequest extends PrimeListRequest {
     }
 
     public GetPortfolioAllocationsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
+        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.productIds = builder.productIds;
         this.orderSide = builder.orderSide;

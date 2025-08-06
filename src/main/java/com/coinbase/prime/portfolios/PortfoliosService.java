@@ -20,7 +20,7 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface PortfoliosService {
-    // Portfolios
+    // Portfolios - OpenAPI spec compliance
     ListPortfoliosResponse listPortfolios();
-    GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -54,13 +54,4 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
                 List.of(200),
                 new TypeReference<DeleteOnchainAddressGroupResponse>() {});
     }
-
-    public ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request) {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/onchain_address_groups", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListOnchainAddressGroupsResponse>() {});
-    }
 }

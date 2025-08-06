@@ -16,34 +16,24 @@
 
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.PaymentMethodType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Payment method summary information.
  */
 public class PaymentMethodSummary {
     private String id;
-    private String symbol;
-    @JsonProperty("payment_method_type")
-    private PaymentMethodType paymentMethodType;
-    @JsonProperty("bank_name")
-    private String bankName;
-    @JsonProperty("account_number")
-    private String accountNumber;
-    @JsonProperty("bank_name_2")
-    private String bankName2;
+    private String name;
+    private String type;
+    private Boolean verified;
 
     public PaymentMethodSummary() {
     }
 
     public PaymentMethodSummary(Builder builder) {
         this.id = builder.id;
-        this.symbol = builder.symbol;
-        this.paymentMethodType = builder.paymentMethodType;
-        this.bankName = builder.bankName;
-        this.accountNumber = builder.accountNumber;
-        this.bankName2 = builder.bankName2;
+        this.name = builder.name;
+        this.type = builder.type;
+        this.verified = builder.verified;
     }
 
     public String getId() {
@@ -54,53 +44,35 @@ public class PaymentMethodSummary {
         this.id = id;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public String getName() {
+        return name;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public PaymentMethodType getPaymentMethodType() {
-        return paymentMethodType;
+    public String getType() {
+        return type;
     }
 
-    public void setPaymentMethodType(PaymentMethodType paymentMethodType) {
-        this.paymentMethodType = paymentMethodType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getBankName() {
-        return bankName;
+    public Boolean getVerified() {
+        return verified;
     }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getBankName2() {
-        return bankName2;
-    }
-
-    public void setBankName2(String bankName2) {
-        this.bankName2 = bankName2;
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 
     public static class Builder {
         private String id;
-        private String symbol;
-        private PaymentMethodType paymentMethodType;
-        private String bankName;
-        private String accountNumber;
-        private String bankName2;
+        private String name;
+        private String type;
+        private Boolean verified;
 
         public Builder() {
         }
@@ -110,28 +82,18 @@ public class PaymentMethodSummary {
             return this;
         }
 
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
+        public Builder name(String name) {
+            this.name = name;
             return this;
         }
 
-        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
-            this.paymentMethodType = paymentMethodType;
+        public Builder type(String type) {
+            this.type = type;
             return this;
         }
 
-        public Builder bankName(String bankName) {
-            this.bankName = bankName;
-            return this;
-        }
-
-        public Builder accountNumber(String accountNumber) {
-            this.accountNumber = accountNumber;
-            return this;
-        }
-
-        public Builder bankName2(String bankName2) {
-            this.bankName2 = bankName2;
+        public Builder verified(Boolean verified) {
+            this.verified = verified;
             return this;
         }
 

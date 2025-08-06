@@ -1,25 +1,13 @@
 openapi: 3.0.1
 info:
   title: REST API
-  description: |-
-    # Welcome to Coinbase Prime API
-    ## Introduction
-    The Prime APIs allow for programmatic management of trading, custody, real-time market data, and account management. The following API pages detail the various REST API endpoints we offer.
-    ## Getting Started
-    To get started, please visit one of the following pages:
-    - [Authentication](/prime/docs/rest-authentication)
-    - [Pagination](/prime/docs/rest-pagination)
-    - [Rate Limits](/prime/docs/rest-rate-limits)
-    - [Quickstart](/prime/docs/quickstart)
-    ## FIX API
-    - [FIX API reference](/prime/docs/fix-connectivity)
-    ## WebSocket API
-    - [WebSocket API reference](/prime/docs/websocket-feed)
-  version: '0.1'
-tags:
-  - name: PrimeRESTAPI
+  description: "The Coinbase Prime REST API provides programmatic access to trading,\
+    \ custody, staking, market data, and account management functionality."
+  version: "0.1"
 servers:
 - url: https://api.prime.coinbase.com/
+tags:
+- name: PrimeRESTAPI
 paths:
   /v1/activities/{activity_id}:
     get:
@@ -1895,6 +1883,11 @@ paths:
                   type: string
                 display_quote_size:
                   type: string
+                  description: Optionally specify a display size. This is the maximum
+                    order size that will show up on venue order books. Specifying
+                    a value here effectively makes a LIMIT order into an "iceberg"
+                    style order. This property only applies to LIMIT orders and will
+                    be ignored for other order types.
                 display_base_size:
                   type: string
                 is_raise_exact:
@@ -1998,10 +1991,18 @@ paths:
                   type: string
                 postOnly:
                   type: boolean
-                  description: |-
-                    Specifies whether the order is treated as a post only order.
-
-                    next: 16
+                  description: Specifies whether the order is treated as a post only
+                    order.
+                display_quote_size:
+                  type: string
+                  description: The maximum order size that will show up on venue order
+                    books (in quote currency).
+                  example: "100.50"
+                display_base_size:
+                  type: string
+                  description: The maximum order size that will show up on venue order
+                    books (in base currency).
+                  example: "10.5"
         required: true
       responses:
         "200":
@@ -2377,6 +2378,102 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.QuoteResponse'
+      x-codegen-request-body-name: body
+  /v1/portfolios/{portfolio_id}/staking/initiate:
+    post:
+      tags:
+      - Staking
+      summary: Request to stake currency in a portfolio
+      description: "Creates an execution request to stake funds across a portfolio.\
+        \  This will stake funds in one or more wallets in the portfolio, with a total\
+        \ bondable balance up to the requested stake amount."
+      operationId: PrimeRESTAPI_PortfolioStakingInitiate
+      parameters:
+      - name: portfolio_id
+        in: path
+        description: The portfolio ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - amount
+              - currency_symbol
+              - idempotency_key
+              type: object
+              properties:
+                idempotency_key:
+                  type: string
+                  description: The client generated idempotency key (uuid required)
+                    for requested execution. Subsequent requests using the same key
+                    will not create new transactions.
+                currency_symbol:
+                  type: string
+                  description: The currency symbol to stake
+                amount:
+                  type: string
+                  description: The quantity of the chosen currency to stake
+                metadata:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.PortfolioStakingMetadata'
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.PortfolioStakingInitiateResponse'
+      x-codegen-request-body-name: body
+  /v1/portfolios/{portfolio_id}/staking/unstake:
+    post:
+      tags:
+      - Staking
+      summary: Request to unstake currency across a portfolio
+      description: "Creates an execution request to unstake funds across a portfolio.\
+        \  This will unstake funds in one or more wallets in the portfolio, with a\
+        \ total bonded balance up to the requested unstake amount."
+      operationId: PrimeRESTAPI_PortfolioStakingUnstake
+      parameters:
+      - name: portfolio_id
+        in: path
+        description: The portfolio ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - amount
+              - currency_symbol
+              - idempotency_key
+              type: object
+              properties:
+                idempotency_key:
+                  type: string
+                  description: The client generated idempotency key (uuid required)
+                    for requested execution. Subsequent requests using the same key
+                    will not create new transactions.
+                currency_symbol:
+                  type: string
+                  description: The currency symbol to unstake
+                amount:
+                  type: string
+                  description: The quantity of the chosen currency to unstake
+                metadata:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.PortfolioStakingMetadata'
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.PortfolioStakingUnstakeResponse'
       x-codegen-request-body-name: body
   /v1/portfolios/{portfolio_id}/transactions:
     get:
@@ -3472,6 +3569,9 @@ components:
           title: Time when the edit was accepted
           type: string
           format: date-time
+        client_order_id:
+          title: Client order id of the order being replaced
+          type: string
     coinbase.custody.api.ActivityType:
       title: "- ACTIVITY_TYPE_WITHDRAWAL: PrimeActivityService Custody ActivityTypes\
         \ that will replace the above"
@@ -4967,14 +5067,26 @@ components:
     coinbase.public_rest_api.GetFcmRiskLimitsResponse:
       type: object
       properties:
-        margin_limit:
+        cfm_risk_limit:
           type: string
-          description: Margin limit
+          description: Risk Limit set for a client
           example: "10000.00"
-        margin_limit_utilization:
+        cfm_risk_limit_utilization:
           type: string
-          description: Margin limit utilization
+          description: Limit utilization calculated based on total margin and PnLs
           example: "10000.00"
+        cfm_total_margin:
+          type: string
+          description: The total margin required for both positions and open orders
+          example: "1000.00"
+        cfm_delta_ote:
+          type: string
+          description: Open Trade Equity accrued during the current trading session
+          example: "100.00"
+        cfm_unsettled_accrued_funding_pnl:
+          type: string
+          description: Unsettled accrued funding PNL from the last settlement
+          example: "10.12"
     coinbase.public_rest_api.GetFuturesSweepsResponse:
       type: object
       properties:
@@ -5979,6 +6091,16 @@ components:
             client_order_id: "123"
           items:
             $ref: '#/components/schemas/coinbase.public_rest_api.OrderEdit'
+        display_quote_size:
+          type: string
+          description: The maximum order size that will show up on venue order books
+            (in quote currency).
+          example: "100.50"
+        display_base_size:
+          type: string
+          description: The maximum order size that will show up on venue order books
+            (in base currency).
+          example: "10.5"
     coinbase.public_rest_api.OrderEdit:
       type: object
       properties:
@@ -6220,6 +6342,31 @@ components:
       - TOTAL_BALANCES
       - PRIME_CUSTODY_BALANCES
       - UNIFIED_TOTAL_BALANCES
+    coinbase.public_rest_api.PortfolioStakingInitiateResponse:
+      type: object
+      properties:
+        activity_id:
+          type: string
+          description: The ID for the created activity
+        transaction_id:
+          type: string
+          description: The ID for the created transaction
+    coinbase.public_rest_api.PortfolioStakingMetadata:
+      type: object
+      properties:
+        external_id:
+          type: string
+          description: An optional custom identifier (up to 255 characters) to attach
+            to the transaction.  This is not a searchable transaction field.
+    coinbase.public_rest_api.PortfolioStakingUnstakeResponse:
+      type: object
+      properties:
+        activity_id:
+          type: string
+          description: The ID for the created activity
+        transaction_id:
+          type: string
+          description: The ID for the created transaction
     coinbase.public_rest_api.PortfolioUser:
       type: object
       properties:
@@ -6364,6 +6511,16 @@ components:
         display_size:
           type: string
           description: The maximum order size that will show up on venue order books.
+          example: "10.5"
+        display_quote_size:
+          type: string
+          description: The maximum order size that will show up on venue order books
+            (in quote currency).
+          example: "100.50"
+        display_base_size:
+          type: string
+          description: The maximum order size that will show up on venue order books
+            (in base currency).
           example: "10.5"
     coinbase.public_rest_api.PostTradeCreditInformation:
       type: object
@@ -6619,6 +6776,10 @@ components:
           type: string
           description: "Optional amount to stake or unstake. If omitted, the wallet\
             \ will stake or unstake the maximum amount available"
+        validator_address:
+          type: string
+          description: "Optional validator address, defaults to Coinbase validator.\
+            \ For SOL, must be the vote account address. Ignored for ETH."
     coinbase.public_rest_api.StakingUnstakeResponse:
       required:
       - activity_id

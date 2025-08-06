@@ -17,10 +17,10 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.Pagination;
-import com.coinbase.prime.model.Web3WalletBalance;
+import com.coinbase.prime.model.OnchainWalletBalance;
 
 public class ListOnchainWalletBalancesResponse {
-    private Web3WalletBalance[] balances;
+    private OnchainWalletBalance[] balances;
     private Pagination pagination;
 
     public ListOnchainWalletBalancesResponse() {
@@ -31,11 +31,11 @@ public class ListOnchainWalletBalancesResponse {
         this.pagination = builder.pagination;
     }
 
-    public Web3WalletBalance[] getBalances() {
+    public OnchainWalletBalance[] getBalances() {
         return balances;
     }
 
-    public void setBalances(Web3WalletBalance[] balances) {
+    public void setBalances(OnchainWalletBalance[] balances) {
         this.balances = balances;
     }
 
@@ -48,13 +48,13 @@ public class ListOnchainWalletBalancesResponse {
     }
 
     public static class Builder {
-        private Web3WalletBalance[] balances;
+        private OnchainWalletBalance[] balances;
         private Pagination pagination;
 
         public Builder() {
         }
 
-        public Builder balances(Web3WalletBalance[] balances) {
+        public Builder balances(OnchainWalletBalance[] balances) {
             this.balances = balances;
             return this;
         }

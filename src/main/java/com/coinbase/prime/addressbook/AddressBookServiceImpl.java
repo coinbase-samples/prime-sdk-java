@@ -30,82 +30,22 @@ public class AddressBookServiceImpl extends CoinbaseServiceImpl implements Addre
     }
 
     @Override
-    public GetPortfolioAddressBookResponse getAddressBook(GetPortfolioAddressBookRequest request) throws CoinbasePrimeException {
+    public ListPortfolioAddressBookResponse listPortfolioAddressBook(ListPortfolioAddressBookRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/address_book", request.getPortfolioId()),
                 request,
                 List.of(200),
-                new TypeReference<GetPortfolioAddressBookResponse>() {});
+                new TypeReference<ListPortfolioAddressBookResponse>() {});
     }
 
     @Override
-    public CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbasePrimeException {
+    public CreatePortfolioAddressBookEntryResponse createPortfolioAddressBookEntry(CreatePortfolioAddressBookEntryRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/address_book", request.getPortfolioId()),
                 request,
                 List.of(200),
-                new TypeReference<CreateAddressBookEntryResponse>() {});
-    }
-
-    @Override
-    public GetAddressBookEntryResponse getAddressBookEntry(GetAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/address_book/%s", request.getPortfolioId(), request.getAddressId()),
-                request,
-                List.of(200),
-                new TypeReference<GetAddressBookEntryResponse>() {});
-    }
-
-    @Override
-    public UpdateAddressBookEntryResponse updateAddressBookEntry(UpdateAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.PUT,
-                String.format("/portfolios/%s/address_book/%s", request.getPortfolioId(), request.getAddressId()),
-                request,
-                List.of(200),
-                new TypeReference<UpdateAddressBookEntryResponse>() {});
-    }
-
-    @Override
-    public DeleteAddressBookEntryResponse deleteAddressBookEntry(DeleteAddressBookEntryRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.DELETE,
-                String.format("/portfolios/%s/address_book/%s", request.getPortfolioId(), request.getAddressId()),
-                request,
-                List.of(200),
-                new TypeReference<DeleteAddressBookEntryResponse>() {});
-    }
-
-    @Override
-    public ValidateAddressResponse validateAddress(ValidateAddressRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/address_book/validate", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ValidateAddressResponse>() {});
-    }
-
-    @Override
-    public ListTrustedAddressesResponse listTrustedAddresses(ListTrustedAddressesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/address_book/trusted", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListTrustedAddressesResponse>() {});
-    }
-
-    @Override
-    public GetAddressBookConfigurationResponse getAddressBookConfiguration(GetAddressBookConfigurationRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/address_book/configuration", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<GetAddressBookConfigurationResponse>() {});
+                new TypeReference<CreatePortfolioAddressBookEntryResponse>() {});
     }
 }

@@ -17,6 +17,9 @@
 package com.coinbase.prime.model.enums;
 
 public enum Action {
-    BUY,
-    SELL
+    ACTION_APPROVE,
+    ACTION_CANCEL,
+    ACTION_INITIATE,
+    ACTION_REJECT,
+    OTHER_ACTION
 }

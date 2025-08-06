@@ -1,6 +1,7 @@
 package com.coinbase.prime.onchainaddressgroups;
 
 import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.enums.SortDirection;
 
 /**
  * Request for listing onchain address groups for a portfolio.
@@ -12,7 +13,7 @@ public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
     }
 
     private ListOnchainAddressGroupsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
+        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
         this.portfolioId = builder.portfolioId;
     }
 

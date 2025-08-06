@@ -49,15 +49,6 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
                 new TypeReference<GetEntityFcmBalanceResponse>() {});
     }
 
-    @Override
-    public GetEntityPositionsResponse getEntityPositions(GetEntityPositionsRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/futures/positions", request.getEntityId()),
-                null,
-                List.of(200),
-                new TypeReference<GetEntityPositionsResponse>() {});
-    }
 
     @Override
     public ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbasePrimeException {

@@ -30,13 +30,13 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     }
 
     @Override
-    public GetTransactionByTransactionIdResponse getTransactionByTransactionId(GetTransactionByTransactionIdRequest request) throws CoinbasePrimeException {
+    public GetTransactionResponse getTransaction(GetTransactionRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId()),
                 null,
                 List.of(200),
-                new TypeReference<GetTransactionByTransactionIdResponse>() {});
+                new TypeReference<GetTransactionResponse>() {});
     }
 
     @Override
@@ -70,23 +70,23 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     }
 
     @Override
-    public CreateTransferResponse createTransfer(CreateTransferRequest request) throws CoinbasePrimeException {
+    public CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
-                new TypeReference<CreateTransferResponse>() {});
+                new TypeReference<CreateWalletTransferResponse>() {});
     }
 
     @Override
-    public CreateWithdrawalResponse createWithdrawal(CreateWithdrawalRequest request) throws CoinbasePrimeException {
+    public CreateWalletWithdrawalResponse createWalletWithdrawal(CreateWalletWithdrawalRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
-                new TypeReference<CreateWithdrawalResponse>() {});
+                new TypeReference<CreateWalletWithdrawalResponse>() {});
     }
 
     @Override

@@ -42,13 +42,13 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
     }
 
     @Override
-    public GetPortfolioByIdResponse getPortfolioById(GetPortfolioByIdRequest request) throws CoinbasePrimeException {
+    public GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s", request.getPortfolioId()),
                 null,
                 List.of(200),
-                new TypeReference<GetPortfolioByIdResponse>() {});
+                new TypeReference<GetPortfolioResponse>() {});
     }
 
 }

@@ -19,6 +19,7 @@ package com.coinbase.prime.orders;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -61,7 +62,7 @@ public class ListOrderFillsRequest extends PrimeListRequest {
         private String portfolioId;
         private String orderId;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder() {
@@ -79,7 +80,7 @@ public class ListOrderFillsRequest extends PrimeListRequest {
 
         public Builder pagination(Pagination pagination) {
             this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+            this.sortDirection = pagination.getSortDirection() != null ? SortDirection.valueOf(pagination.getSortDirection()) : null;
             return this;
         }
 

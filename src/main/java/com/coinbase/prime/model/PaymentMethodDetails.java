@@ -16,65 +16,29 @@
 
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.PaymentMethodType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Detailed payment method information.
  */
 public class PaymentMethodDetails {
-    private String id;
-    private String symbol;
-    @JsonProperty("payment_method_type")
-    private PaymentMethodType paymentMethodType;
-    private String name;
     @JsonProperty("account_number")
     private String accountNumber;
-    @JsonProperty("bank_code")
-    private String bankCode;
+    @JsonProperty("routing_number")
+    private String routingNumber;
+    @JsonProperty("bank_name")
+    private String bankName;
+    @JsonProperty("account_name")
+    private String accountName;
 
     public PaymentMethodDetails() {
     }
 
     public PaymentMethodDetails(Builder builder) {
-        this.id = builder.id;
-        this.symbol = builder.symbol;
-        this.paymentMethodType = builder.paymentMethodType;
-        this.name = builder.name;
         this.accountNumber = builder.accountNumber;
-        this.bankCode = builder.bankCode;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public PaymentMethodType getPaymentMethodType() {
-        return paymentMethodType;
-    }
-
-    public void setPaymentMethodType(PaymentMethodType paymentMethodType) {
-        this.paymentMethodType = paymentMethodType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.routingNumber = builder.routingNumber;
+        this.bankName = builder.bankName;
+        this.accountName = builder.accountName;
     }
 
     public String getAccountNumber() {
@@ -85,43 +49,37 @@ public class PaymentMethodDetails {
         this.accountNumber = accountNumber;
     }
 
-    public String getBankCode() {
-        return bankCode;
+    public String getRoutingNumber() {
+        return routingNumber;
     }
 
-    public void setBankCode(String bankCode) {
-        this.bankCode = bankCode;
+    public void setRoutingNumber(String routingNumber) {
+        this.routingNumber = routingNumber;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     public static class Builder {
-        private String id;
-        private String symbol;
-        private PaymentMethodType paymentMethodType;
-        private String name;
         private String accountNumber;
-        private String bankCode;
+        private String routingNumber;
+        private String bankName;
+        private String accountName;
 
         public Builder() {
-        }
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
-            this.paymentMethodType = paymentMethodType;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
         }
 
         public Builder accountNumber(String accountNumber) {
@@ -129,8 +87,18 @@ public class PaymentMethodDetails {
             return this;
         }
 
-        public Builder bankCode(String bankCode) {
-            this.bankCode = bankCode;
+        public Builder routingNumber(String routingNumber) {
+            this.routingNumber = routingNumber;
+            return this;
+        }
+
+        public Builder bankName(String bankName) {
+            this.bankName = bankName;
+            return this;
+        }
+
+        public Builder accountName(String accountName) {
+            this.accountName = accountName;
             return this;
         }
 

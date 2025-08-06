@@ -19,6 +19,7 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PaymentMethodDestination {
+    private String type;
     @JsonProperty("payment_method_id")
     private String paymentMethodId;
 
@@ -26,7 +27,16 @@ public class PaymentMethodDestination {
     }
 
     public PaymentMethodDestination(Builder builder) {
+        this.type = builder.type;
         this.paymentMethodId = builder.paymentMethodId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getPaymentMethodId() {
@@ -38,9 +48,15 @@ public class PaymentMethodDestination {
     }
 
     public static class Builder {
+        private String type;
         private String paymentMethodId;
 
         public Builder() {
+        }
+
+        public Builder type(String type) {
+            this.type = type;
+            return this;
         }
 
         public Builder paymentMethodId(String paymentMethodId) {

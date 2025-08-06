@@ -20,6 +20,7 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.Pagination;
 import com.coinbase.prime.model.enums.WalletType;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -37,7 +38,7 @@ public class ListWalletsRequest extends PrimeListRequest {
     public ListWalletsRequest() {}
 
     public ListWalletsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
+        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.type = builder.type;
         this.symbols = builder.symbols;
