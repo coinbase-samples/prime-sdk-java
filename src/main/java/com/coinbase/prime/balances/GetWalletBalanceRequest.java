@@ -17,14 +17,17 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetWalletBalanceRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
 
     public GetWalletBalanceRequest() {

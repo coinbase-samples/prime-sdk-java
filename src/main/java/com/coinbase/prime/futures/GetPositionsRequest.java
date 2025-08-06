@@ -17,6 +17,7 @@
 package com.coinbase.prime.futures;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
@@ -26,6 +27,7 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
  */
 public class GetPositionsRequest {
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
     @JsonProperty("product_id")
     private String productId;

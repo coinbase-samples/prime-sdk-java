@@ -17,14 +17,17 @@
 package com.coinbase.prime.allocations;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetAllocationRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty(required = true, value = "allocation_id")
+    @JsonIgnore
     private String allocationId;
 
     public GetAllocationRequest() {

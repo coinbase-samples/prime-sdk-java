@@ -17,14 +17,17 @@
 package com.coinbase.prime.orders;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetOrderByOrderIdRequest {
     @JsonProperty("order_id")
+    @JsonIgnore
     private String orderId;
     @JsonProperty("portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
     public GetOrderByOrderIdRequest() {

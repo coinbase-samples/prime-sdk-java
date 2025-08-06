@@ -17,12 +17,14 @@
 package com.coinbase.prime.assets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class ListAssetsRequest {
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
 
     public ListAssetsRequest() {

@@ -1,9 +1,11 @@
 package com.coinbase.prime.positions;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListAggregateEntityPositionsRequest {
     @JsonProperty("entity_id")
+    @JsonIgnore
     private String entityId;
 
     private String cursor;

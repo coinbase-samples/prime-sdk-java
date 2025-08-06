@@ -1,16 +1,21 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.enums.BalanceType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListEntityBalancesRequest {
     @JsonProperty("entity_id")
+    @JsonIgnore
     private String entityId;
 
+    @JsonProperty("symbols")
     private String symbols;
 
+    @JsonProperty("cursor")
     private String cursor;
 
+    @JsonProperty("limit")
     private int limit;
 
     @JsonProperty("aggregation_type")

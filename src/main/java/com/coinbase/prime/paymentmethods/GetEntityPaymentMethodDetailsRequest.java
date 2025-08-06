@@ -17,14 +17,17 @@
 package com.coinbase.prime.paymentmethods;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetEntityPaymentMethodDetailsRequest {
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
     @JsonProperty(required = true, value = "payment_method_id")
+    @JsonIgnore
     private String paymentMethodId;
 
     public GetEntityPaymentMethodDetailsRequest() {
