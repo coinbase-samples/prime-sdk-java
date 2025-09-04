@@ -131,7 +131,7 @@ Task 9: Generate Service B
 **Template Locations:**
 - Request template: `activities/ListActivitiesRequest.java` 
 - Response template: `activities/ListActivitiesResponse.java`
-- Single object response: `activities/GetActivityByActivityIdResponse.java`
+- Single object response: `activities/GetActivityResponse.java`
 - Service interface: `activities/ActivitiesService.java`
 - Service implementation: `activities/ActivitiesServiceImpl.java`
 
