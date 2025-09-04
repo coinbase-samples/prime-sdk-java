@@ -18,13 +18,13 @@ package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
 
-public class GetActivityByActivityIdResponse {
+public class GetActivityResponse {
     private Activity activity;
 
-    public GetActivityByActivityIdResponse() {
+    public GetActivityResponse() {
     }
 
-    public GetActivityByActivityIdResponse(Builder builder) {
+    public GetActivityResponse(Builder builder) {
         this.activity = builder.activity;
     }
 
@@ -44,8 +44,8 @@ public class GetActivityByActivityIdResponse {
             return this;
         }
 
-        public GetActivityByActivityIdResponse build() {
-            return new GetActivityByActivityIdResponse(this);
+        public GetActivityResponse build() {
+            return new GetActivityResponse(this);
         }
     }
 }

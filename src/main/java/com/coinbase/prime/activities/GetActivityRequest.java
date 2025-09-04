@@ -19,26 +19,15 @@ package com.coinbase.prime.activities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetActivityByActivityIdRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
-    private String portfolioId;
+public class GetActivityRequest {
     @JsonProperty(required = true, value = "activity_id")
     @JsonIgnore
     private String activityId;
 
-    public GetActivityByActivityIdRequest(String portfolioId, String activityId) {
-        this.portfolioId = portfolioId;
+    public GetActivityRequest(String activityId) {
         this.activityId = activityId;
     }
 
-    public String getPortfolioId() {
-        return portfolioId;
-    }
-
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
 
     public String getActivityId() {
         return activityId;
