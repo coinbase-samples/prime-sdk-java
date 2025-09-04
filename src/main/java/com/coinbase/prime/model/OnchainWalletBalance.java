@@ -20,7 +20,7 @@ import com.coinbase.prime.model.enums.VisibilityStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OnchainWalletBalance {
-    private OnchainWalletAsset asset;
+    private OnchainAsset asset;
     private String amount;
     @JsonProperty("visibility_status")
     private VisibilityStatus visibilityStatus;
@@ -34,11 +34,11 @@ public class OnchainWalletBalance {
         this.visibilityStatus = builder.visibilityStatus;
     }
 
-    public OnchainWalletAsset getAsset() {
+    public OnchainAsset getAsset() {
         return asset;
     }
 
-    public void setAsset(OnchainWalletAsset asset) {
+    public void setAsset(OnchainAsset asset) {
         this.asset = asset;
     }
 
@@ -59,14 +59,14 @@ public class OnchainWalletBalance {
     }
 
     public static class Builder {
-        private OnchainWalletAsset asset;
+        private OnchainAsset asset;
         private String amount;
         private VisibilityStatus visibilityStatus;
 
         public Builder() {
         }
 
-        public Builder asset(OnchainWalletAsset asset) {
+        public Builder asset(OnchainAsset asset) {
             this.asset = asset;
             return this;
         }

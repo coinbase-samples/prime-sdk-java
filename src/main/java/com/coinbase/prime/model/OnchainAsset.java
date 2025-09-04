@@ -18,22 +18,28 @@ package com.coinbase.prime.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class OnchainWalletAsset {
+public class OnchainAsset {
     private String network;
+    
     @JsonProperty("contract_address")
     private String contractAddress;
+    
     private String symbol;
+    
     @JsonProperty("token_id")
     private String tokenId;
+    
+    private String name;
 
-    public OnchainWalletAsset() {
+    public OnchainAsset() {
     }
 
-    public OnchainWalletAsset(Builder builder) {
+    public OnchainAsset(Builder builder) {
         this.network = builder.network;
         this.contractAddress = builder.contractAddress;
         this.symbol = builder.symbol;
         this.tokenId = builder.tokenId;
+        this.name = builder.name;
     }
 
     public String getNetwork() {
@@ -68,11 +74,20 @@ public class OnchainWalletAsset {
         this.tokenId = tokenId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public static class Builder {
         private String network;
         private String contractAddress;
         private String symbol;
         private String tokenId;
+        private String name;
 
         public Builder() {
         }
@@ -97,8 +112,13 @@ public class OnchainWalletAsset {
             return this;
         }
 
-        public OnchainWalletAsset build() {
-            return new OnchainWalletAsset(this);
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public OnchainAsset build() {
+            return new OnchainAsset(this);
         }
     }
 }

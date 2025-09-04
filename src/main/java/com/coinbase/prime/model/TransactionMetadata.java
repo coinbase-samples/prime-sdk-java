@@ -22,6 +22,9 @@ public class TransactionMetadata {
     @JsonProperty("match_metadata")
     private MatchMetadata matchMetadata;
 
+    @JsonProperty("web3_transaction_metadata")
+    private OnchainTransactionMetadata onchainTransactionMetadata;
+
     public TransactionMetadata() {
     }
 
@@ -29,8 +32,14 @@ public class TransactionMetadata {
         this.matchMetadata = matchMetadata;
     }
 
+    public TransactionMetadata(MatchMetadata matchMetadata, OnchainTransactionMetadata onchainTransactionMetadata) {
+        this.matchMetadata = matchMetadata;
+        this.onchainTransactionMetadata = onchainTransactionMetadata;
+    }
+
     public TransactionMetadata(Builder builder) {
         this.matchMetadata = builder.matchMetadata;
+        this.onchainTransactionMetadata = builder.onchainTransactionMetadata;
     }
 
     public MatchMetadata getMatchMetadata() {
@@ -41,14 +50,28 @@ public class TransactionMetadata {
         this.matchMetadata = matchMetadata;
     }
 
+    public OnchainTransactionMetadata getOnchainTransactionMetadata() {
+        return onchainTransactionMetadata;
+    }
+
+    public void setOnchainTransactionMetadata(OnchainTransactionMetadata onchainTransactionMetadata) {
+        this.onchainTransactionMetadata = onchainTransactionMetadata;
+    }
+
     public static class Builder {
         private MatchMetadata matchMetadata;
+        private OnchainTransactionMetadata onchainTransactionMetadata;
 
         public Builder() {
         }
 
         public Builder matchMetadata(MatchMetadata matchMetadata) {
             this.matchMetadata = matchMetadata;
+            return this;
+        }
+
+        public Builder onchainTransactionMetadata(OnchainTransactionMetadata onchainTransactionMetadata) {
+            this.onchainTransactionMetadata = onchainTransactionMetadata;
             return this;
         }
 
