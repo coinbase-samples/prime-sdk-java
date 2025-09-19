@@ -17,12 +17,14 @@
 package com.coinbase.prime.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListWalletAddressesRequest {
+public class ListWalletAddressesRequest extends PrimeListRequest {
     @JsonProperty("portfolio_id")
     @JsonIgnore
     private String portfolioId;
@@ -31,18 +33,15 @@ public class ListWalletAddressesRequest {
     private String walletId;
     @JsonProperty("network_id")
     private String networkId;
-    private String cursor;
-    private Integer limit;
 
     public ListWalletAddressesRequest() {
     }
 
     public ListWalletAddressesRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
         this.networkId = builder.networkId;
-        this.cursor = builder.cursor;
-        this.limit = builder.limit;
     }
 
     public String getPortfolioId() {
@@ -69,21 +68,6 @@ public class ListWalletAddressesRequest {
         this.networkId = networkId;
     }
 
-    public String getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
 
     public static class Builder {
         private String portfolioId;
@@ -91,6 +75,7 @@ public class ListWalletAddressesRequest {
         private String networkId;
         private String cursor;
         private Integer limit;
+        private SortDirection sortDirection;
 
         public Builder() {
         }
@@ -110,13 +95,14 @@ public class ListWalletAddressesRequest {
             return this;
         }
 
+
         public Builder cursor(String cursor) {
             this.cursor = cursor;
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
+        public Builder sortDirection(SortDirection sortDirection) {
+            this.sortDirection = sortDirection;
             return this;
         }
 

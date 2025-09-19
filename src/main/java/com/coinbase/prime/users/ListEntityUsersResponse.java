@@ -19,8 +19,13 @@ package com.coinbase.prime.users;
 import com.coinbase.prime.model.EntityUser;
 import com.coinbase.prime.model.Pagination;
 
+/**
+ * Response object for listing all users associated with a specific entity.
+ */
 public class ListEntityUsersResponse {
+    /** Array of entity user information */
     private EntityUser[] users;
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListEntityUsersResponse() {

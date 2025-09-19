@@ -18,19 +18,30 @@ package com.coinbase.prime.orders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for creating a quote request.
+ * 
+ * A Quote Request is the start of the RFQ process. Coinbase Prime sends a Quote Request to
+ * Liquidity Providers (LPs) on behalf of a customer looking to participate in an RFQ trade.
+ */
 public class CreateQuoteResponse {
+  /** Unique identifier for the quote */
   @JsonProperty("quote_id")
   private String quoteId;
 
+  /** Time when the quote expires */
   @JsonProperty("expiration_time")
   private String expirationTime;
 
+  /** Best available price for the quote */
   @JsonProperty("best_price")
   private String bestPrice;
 
+  /** Total quote amount for previewing */
   @JsonProperty("order_total")
   private String orderTotal;
 
+  /** Price inclusive of all fees */
   @JsonProperty("price_inclusive_of_fees")
   private String priceInclusiveOfFees;
 

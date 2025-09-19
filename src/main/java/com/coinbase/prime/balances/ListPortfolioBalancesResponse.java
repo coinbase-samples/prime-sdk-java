@@ -21,11 +21,18 @@ import com.coinbase.prime.model.TotalBalance;
 import com.coinbase.prime.model.enums.BalanceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for listing all balances for a specific portfolio.
+ */
 public class ListPortfolioBalancesResponse {
+    /** Array of portfolio balance information */
     private Balance[] balances;
+    /** The type of portfolio balance */
     private BalanceType type;
+    /** Trading-specific balance summary */
     @JsonProperty("trading_balances")
     private TotalBalance tradingBalances;
+    /** Vault-specific balance summary */
     @JsonProperty("vault_balances")
     private TotalBalance vaultBalances;
 

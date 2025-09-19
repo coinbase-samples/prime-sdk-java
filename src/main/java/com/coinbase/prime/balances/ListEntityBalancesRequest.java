@@ -16,11 +16,13 @@
 
 package com.coinbase.prime.balances;
 
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.BalanceType;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListEntityBalancesRequest {
+public class ListEntityBalancesRequest extends PrimeListRequest {
     @JsonProperty("entity_id")
     @JsonIgnore
     private String entityId;
@@ -28,11 +30,6 @@ public class ListEntityBalancesRequest {
     @JsonProperty("symbols")
     private String symbols;
 
-    @JsonProperty("cursor")
-    private String cursor;
-
-    @JsonProperty("limit")
-    private int limit;
 
     @JsonProperty("aggregation_type")
     private BalanceType aggregationType;
@@ -41,10 +38,9 @@ public class ListEntityBalancesRequest {
     }
 
     public ListEntityBalancesRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.entityId = builder.entityId;
         this.symbols = builder.symbols;
-        this.cursor = builder.cursor;
-        this.limit = builder.limit;
         this.aggregationType = builder.aggregationType;
     }
 
@@ -64,21 +60,6 @@ public class ListEntityBalancesRequest {
         this.symbols = symbols;
     }
 
-    public String getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
-
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
 
     public BalanceType getAggregationType() {
         return aggregationType;
@@ -92,7 +73,8 @@ public class ListEntityBalancesRequest {
         private String entityId;
         private String symbols;
         private String cursor;
-        private int limit;
+        private Integer limit;
+        private SortDirection sortDirection;
         private BalanceType aggregationType;
 
         public Builder() {
@@ -113,8 +95,13 @@ public class ListEntityBalancesRequest {
             return this;
         }
 
-        public Builder limit(int limit) {
+        public Builder limit(Integer limit) {
             this.limit = limit;
+            return this;
+        }
+
+        public Builder sortDirection(SortDirection sortDirection) {
+            this.sortDirection = sortDirection;
             return this;
         }
 

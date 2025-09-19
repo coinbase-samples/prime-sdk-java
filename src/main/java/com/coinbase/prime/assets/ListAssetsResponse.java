@@ -18,7 +18,11 @@ package com.coinbase.prime.assets;
 
 import com.coinbase.prime.model.Asset;
 
+/**
+ * Response object for listing all available assets.
+ */
 public class ListAssetsResponse {
+    /** Array of available asset information */
     private Asset[] assets;
 
     public ListAssetsResponse() {

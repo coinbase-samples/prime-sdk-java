@@ -19,8 +19,15 @@ package com.coinbase.prime.wallets;
 import com.coinbase.prime.model.Pagination;
 import com.coinbase.prime.model.Wallet;
 
+/**
+ * Response object for listing all wallets associated with a portfolio.
+ * 
+ * Contains an array of wallets and pagination information for the wallet listing.
+ */
 public class ListWalletsResponse {
+    /** Array of wallets associated with the portfolio */
     private Wallet[] wallets;
+    /** Pagination information for the wallet listing */
     private Pagination pagination;
 
     public ListWalletsResponse() {}

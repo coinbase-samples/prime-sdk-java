@@ -19,8 +19,16 @@ package com.coinbase.prime.transactions;
 import com.coinbase.prime.model.Pagination;
 import com.coinbase.prime.model.Transaction;
 
+/**
+ * Response object for listing transactions for a given portfolio.
+ * 
+ * Contains an array of transactions and pagination information. Only transactions 
+ * that affect balances are accessible.
+ */
 public class ListPortfolioTransactionsResponse {
+    /** Array of transactions for the portfolio */
     private Transaction[] transactions;
+    /** Pagination information for the transaction listing */
     private Pagination pagination;
 
     public ListPortfolioTransactionsResponse() {
@@ -48,7 +56,9 @@ public class ListPortfolioTransactionsResponse {
     }
 
     public static class Builder {
+        /** The transactions array */
         private Transaction[] transactions;
+        /** The pagination information */
         private Pagination pagination;
 
         public Builder() {

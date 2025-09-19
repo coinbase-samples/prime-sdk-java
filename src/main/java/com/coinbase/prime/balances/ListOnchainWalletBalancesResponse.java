@@ -19,8 +19,13 @@ package com.coinbase.prime.balances;
 import com.coinbase.prime.model.Pagination;
 import com.coinbase.prime.model.OnchainWalletBalance;
 
+/**
+ * Response object for listing on-chain wallet balances by entity.
+ */
 public class ListOnchainWalletBalancesResponse {
+    /** Array of on-chain wallet balance information */
     private OnchainWalletBalance[] balances;
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListOnchainWalletBalancesResponse() {

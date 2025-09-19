@@ -67,4 +67,14 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
                 List.of(200),
                 new TypeReference<PortfolioStakingUnstakeResponse>() {});
     }
+
+    @Override
+    public ClaimRewardsResponse claimRewards(ClaimRewardsRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/staking/claim_rewards", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<ClaimRewardsResponse>() {});
+    }
 }

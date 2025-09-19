@@ -32,4 +32,5 @@ public interface OrdersService {
     ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     CreateQuoteResponse createQuote(CreateQuoteRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    EditOrderResponse editOrder(EditOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

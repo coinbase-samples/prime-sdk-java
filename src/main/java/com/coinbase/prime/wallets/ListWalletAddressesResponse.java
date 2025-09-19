@@ -21,9 +21,16 @@ import com.coinbase.prime.model.Pagination;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
+/**
+ * Response object for listing all deposit addresses associated with a wallet.
+ * 
+ * Returns all deposit addresses for the specified wallet along with pagination information.
+ */
 public class ListWalletAddressesResponse {
+    /** List of deposit addresses associated with the wallet */
     @JsonProperty("addresses")
     private List<BlockchainAddress> addresses;
+    /** Pagination information for the address listing */
     private Pagination pagination;
 
     public ListWalletAddressesResponse() {

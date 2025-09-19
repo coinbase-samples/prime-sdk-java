@@ -19,8 +19,16 @@ package com.coinbase.prime.wallets;
 import com.coinbase.prime.model.CryptoDepositInstructions;
 import com.coinbase.prime.model.FiatDepositInstructions;
 
+/**
+ * Response object for retrieving wallet deposit instructions.
+ * 
+ * Contains both crypto and fiat deposit instructions for the specified wallet,
+ * providing the necessary information for users to deposit funds.
+ */
 public class GetWalletDepositInstructionsResponse {
+    /** Cryptocurrency deposit instructions for the wallet */
     CryptoDepositInstructions cryptoDepositInstructions;
+    /** Fiat currency deposit instructions for the wallet */
     FiatDepositInstructions fiatDepositInstructions;
 
     public GetWalletDepositInstructionsResponse() {
@@ -48,7 +56,9 @@ public class GetWalletDepositInstructionsResponse {
     }
 
     public static class Builder {
+        /** Crypto deposit instructions */
         private CryptoDepositInstructions cryptoDepositInstructions;
+        /** Fiat deposit instructions */
         private FiatDepositInstructions fiatDepositInstructions;
 
         public Builder() {

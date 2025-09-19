@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,21 +18,18 @@ package com.coinbase.prime.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
+/**
+ * Metadata for on-chain transactions including asset changes.
+ */
 public class OnchainTransactionMetadata {
-    @JsonProperty("label")
+    /** The transaction type label of the confirmed transaction post settlement */
     private String label;
-
+    
+    /** The confirmed asset changes (onchain) */
     @JsonProperty("confirmed_asset_changes")
-    private List<AssetChange> confirmedAssetChanges;
+    private AssetChange[] confirmedAssetChanges;
 
     public OnchainTransactionMetadata() {
-    }
-
-    public OnchainTransactionMetadata(String label, List<AssetChange> confirmedAssetChanges) {
-        this.label = label;
-        this.confirmedAssetChanges = confirmedAssetChanges;
     }
 
     public OnchainTransactionMetadata(Builder builder) {
@@ -48,27 +45,24 @@ public class OnchainTransactionMetadata {
         this.label = label;
     }
 
-    public List<AssetChange> getConfirmedAssetChanges() {
+    public AssetChange[] getConfirmedAssetChanges() {
         return confirmedAssetChanges;
     }
 
-    public void setConfirmedAssetChanges(List<AssetChange> confirmedAssetChanges) {
+    public void setConfirmedAssetChanges(AssetChange[] confirmedAssetChanges) {
         this.confirmedAssetChanges = confirmedAssetChanges;
     }
 
     public static class Builder {
         private String label;
-        private List<AssetChange> confirmedAssetChanges;
-
-        public Builder() {
-        }
+        private AssetChange[] confirmedAssetChanges;
 
         public Builder label(String label) {
             this.label = label;
             return this;
         }
 
-        public Builder confirmedAssetChanges(List<AssetChange> confirmedAssetChanges) {
+        public Builder confirmedAssetChanges(AssetChange[] confirmedAssetChanges) {
             this.confirmedAssetChanges = confirmedAssetChanges;
             return this;
         }

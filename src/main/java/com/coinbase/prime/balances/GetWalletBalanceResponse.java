@@ -18,7 +18,11 @@ package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.Balance;
 
+/**
+ * Response object for querying balance for a specific wallet.
+ */
 public class GetWalletBalanceResponse {
+    /** The wallet balance information */
     private Balance balance;
 
     public GetWalletBalanceResponse() {

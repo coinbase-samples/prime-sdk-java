@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,17 +19,22 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EntityBalance {
+    /** The display symbol for the asset */
     private String symbol;
-
+    
+    /** The long balance */
     @JsonProperty("long_amount")
     private String longAmount;
-
+    
+    /** The long balance in notional value */
     @JsonProperty("long_notional")
     private String longNotional;
-
+    
+    /** The short balance */
     @JsonProperty("short_amount")
     private String shortAmount;
-
+    
+    /** The short balance in notional value */
     @JsonProperty("short_notional")
     private String shortNotional;
 

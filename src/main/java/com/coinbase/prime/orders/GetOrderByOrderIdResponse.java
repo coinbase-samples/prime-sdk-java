@@ -18,7 +18,13 @@ package com.coinbase.prime.orders;
 
 import com.coinbase.prime.model.Order;
 
+/**
+ * Response object for retrieving an order by order ID.
+ * 
+ * Retrieve an order by order ID.
+ */
 public class GetOrderByOrderIdResponse {
+    /** The order details */
     private Order order;
 
     public GetOrderByOrderIdResponse() {

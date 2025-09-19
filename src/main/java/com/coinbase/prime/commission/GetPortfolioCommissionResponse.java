@@ -18,7 +18,11 @@ package com.coinbase.prime.commission;
 
 import com.coinbase.prime.model.Commission;
 
+/**
+ * Response object for retrieving commission information for a specific portfolio.
+ */
 public class GetPortfolioCommissionResponse {
+    /** The commission information for the portfolio */
     private Commission commission;
 
     public GetPortfolioCommissionResponse() {

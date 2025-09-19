@@ -19,8 +19,16 @@ package com.coinbase.prime.activities;
 import com.coinbase.prime.model.Activity;
 import com.coinbase.prime.model.Pagination;
 
+/**
+ * Response object for listing all activities associated with a given entity.
+ * 
+ * Supports filtering by activity level (portfolio, entity, or all) and various criteria.
+ */
 public class ListEntityActivitiesResponse {
+    /** List of activities associated with the entity */
     private Activity[] activities;
+    
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListEntityActivitiesResponse() {
@@ -48,7 +56,10 @@ public class ListEntityActivitiesResponse {
     }
 
     public static class Builder {
+        /** List of activities */
         private Activity[] activities;
+        
+        /** Pagination information */
         private Pagination pagination;
 
         public Builder activities(Activity[] activities) {

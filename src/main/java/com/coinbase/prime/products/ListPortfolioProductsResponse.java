@@ -19,8 +19,15 @@ package com.coinbase.prime.products;
 import com.coinbase.prime.model.Pagination;
 import com.coinbase.prime.model.Product;
 
+/**
+ * Response object for listing tradable products for a given portfolio.
+ * 
+ * List tradable products for a given portfolio.
+ */
 public class ListPortfolioProductsResponse {
+    /** Array of tradable products for the portfolio */
     private Product[] products;
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListPortfolioProductsResponse() {

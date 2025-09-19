@@ -19,8 +19,16 @@ package com.coinbase.prime.activities;
 import com.coinbase.prime.model.Activity;
 import com.coinbase.prime.model.Pagination;
 
+/**
+ * Response object for listing all activities associated with a given portfolio.
+ * 
+ * Supports filtering by currencies, activity categories, activity statuses, and date ranges.
+ */
 public class ListPortfolioActivitiesResponse {
+    /** List of activities associated with the portfolio */
     private Activity[] activities;
+    
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListPortfolioActivitiesResponse() {
@@ -48,7 +56,10 @@ public class ListPortfolioActivitiesResponse {
     }
 
     public static class Builder {
+        /** List of activities */
         private Activity[] activities;
+        
+        /** Pagination information */
         private Pagination pagination;
 
         public Builder activities(Activity[] activities) {

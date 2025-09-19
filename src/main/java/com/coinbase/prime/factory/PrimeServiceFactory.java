@@ -43,7 +43,6 @@ import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.orders.OrdersServiceImpl;
 import com.coinbase.prime.paymentmethods.PaymentMethodsService;
 import com.coinbase.prime.paymentmethods.PaymentMethodsServiceImpl;
-import com.coinbase.prime.portfolios.ListPortfoliosResponse;
 import com.coinbase.prime.portfolios.PortfoliosService;
 import com.coinbase.prime.portfolios.PortfoliosServiceImpl;
 import com.coinbase.prime.positions.PositionsService;

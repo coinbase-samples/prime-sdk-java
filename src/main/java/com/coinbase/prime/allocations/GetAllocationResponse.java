@@ -18,7 +18,13 @@ package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
 
+/**
+ * Response object for retrieving an allocation by allocation ID.
+ * 
+ * Returns the allocation details for the specified allocation ID within a portfolio.
+ */
 public class GetAllocationResponse {
+    /** The allocation details */
     private Allocation allocation;
 
     public GetAllocationResponse() {
@@ -37,6 +43,7 @@ public class GetAllocationResponse {
     }
 
     public static class Builder {
+        /** The allocation details */
         private Allocation allocation;
 
         public Builder() {

@@ -18,7 +18,14 @@ package com.coinbase.prime.transactions;
 
 import com.coinbase.prime.model.Transaction;
 
+/**
+ * Response object for retrieving a specific transaction by transaction ID.
+ * 
+ * Contains the transaction information for the requested transaction ID.
+ * Only transactions that affect balances are accessible.
+ */
 public class GetTransactionResponse {
+    /** The transaction information */
     private Transaction transaction;
 
     public GetTransactionResponse() {
@@ -37,6 +44,7 @@ public class GetTransactionResponse {
     }
 
     public static class Builder {
+        /** The transaction information */
         private Transaction transaction;
 
         public Builder transaction(Transaction transaction) {

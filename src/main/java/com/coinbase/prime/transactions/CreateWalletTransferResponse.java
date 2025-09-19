@@ -18,22 +18,38 @@ package com.coinbase.prime.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for creating a wallet transfer.
+ * 
+ * Contains the details of the transfer request including activity ID, approval URL,
+ * transfer amounts, addresses, and transaction information.
+ */
 public class CreateWalletTransferResponse {
+    /** The activity ID for the transfer */
     @JsonProperty("activity_id")
     private String activityId;
+    /** A URL to the activity associated with this transfer for approval */
     @JsonProperty("approval_url")
     private String approvalUrl;
+    /** The symbol of the transferred asset */
     private String symbol;
+    /** The amount being transferred */
     private String amount;
+    /** The fee associated with the transfer */
     private String fee;
+    /** The destination address for the transfer */
     @JsonProperty("destination_address")
     private String destinationAddress;
+    /** The type of the destination (e.g., WALLET, EXCHANGE) */
     @JsonProperty("destination_type")
     private String destinationType;
+    /** The source address for the transfer */
     @JsonProperty("source_address")
     private String sourceAddress;
+    /** The type of the source (e.g., WALLET, EXCHANGE) */
     @JsonProperty("source_type")
     private String sourceType;
+    /** The unique identifier for the transfer transaction */
     @JsonProperty("transaction_id")
     private String transactionId;
 

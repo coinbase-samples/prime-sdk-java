@@ -18,17 +18,32 @@ package com.coinbase.prime.allocations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for creating a net allocation for a given portfolio.
+ * 
+ * Contains result information for net allocation creation, including success status and allocation identifiers.
+ */
 public class CreateNetAllocationResponse {
+    /** Indicates whether the net allocation creation was successful */
     private boolean success;
+    
+    /** The netting identifier for the net allocation */
     @JsonProperty("netting_id")
     private String nettingId;
+    
+    /** The allocation identifier for the buy side of the net allocation */
     @JsonProperty("buy_allocation_id")
     private String buyAllocationId;
+    
+    /** The allocation identifier for the sell side of the net allocation */
     @JsonProperty("sell_allocation_id")
     private String sellAllocationId;
+    
+    /** The reason for net allocation creation failure, if applicable */
     @JsonProperty("failure_reason")
     private String failureReason;
 
+    /** The original request that generated this response */
     private CreateNetAllocationRequest request;
 
     public CreateNetAllocationResponse() {
@@ -92,12 +107,22 @@ public class CreateNetAllocationResponse {
     }
 
     public static class Builder {
+        /** Success status */
         private boolean success;
+        
+        /** Netting identifier */
         private String nettingId;
+        
+        /** Buy allocation identifier */
         private String buyAllocationId;
+        
+        /** Sell allocation identifier */
         private String sellAllocationId;
+        
+        /** Failure reason */
         private String failureReason;
 
+        /** Original request */
         private CreateNetAllocationRequest request;
 
         public Builder() {

@@ -19,10 +19,19 @@ package com.coinbase.prime.allocations;
 import com.coinbase.prime.model.Allocation;
 import com.coinbase.prime.model.Pagination;
 
+/**
+ * Response object for listing historical allocations for a given portfolio.
+ * 
+ * Returns paginated list of allocations with optional filtering by products and allocation IDs.
+ */
 public class GetPortfolioAllocationsResponse {
+    /** List of allocations for the portfolio */
     private Allocation[] allocations;
+    
+    /** Pagination information for the response */
     private Pagination pagination;
 
+    /** The original request that generated this response */
     private GetPortfolioAllocationsRequest request;
 
     public GetPortfolioAllocationsResponse() {
@@ -59,9 +68,13 @@ public class GetPortfolioAllocationsResponse {
     }
 
     public static class Builder {
+        /** List of allocations */
         private Allocation[] allocations;
+        
+        /** Pagination information */
         private Pagination pagination;
 
+        /** Original request */
         private GetPortfolioAllocationsRequest request;
 
         public Builder() {

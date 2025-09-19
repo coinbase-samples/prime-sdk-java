@@ -19,9 +19,14 @@ package com.coinbase.prime.positions;
 import com.coinbase.prime.model.Pagination;
 import com.coinbase.prime.model.Position;
 
+/**
+ * Response object for listing positions for a specific entity.
+ */
 public class ListEntityPositionsResponse {
+    /** Array of position information for the entity */
     private Position[] positions;
 
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListEntityPositionsResponse() {

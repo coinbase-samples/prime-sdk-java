@@ -19,16 +19,21 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OnchainAsset {
+    /** Network this asset is on (ie "ethereum-mainnet") */
     private String network;
     
+    /** Contract Address of this asset (empty for native assets) */
     @JsonProperty("contract_address")
     private String contractAddress;
     
+    /** Symbol of this asset */
     private String symbol;
     
+    /** Token ID of this asset (empty for non NFT assets) */
     @JsonProperty("token_id")
     private String tokenId;
     
+    /** Name of this asset, either the name of the crypto token or the NFT collection name */
     private String name;
 
     public OnchainAsset() {
@@ -88,9 +93,6 @@ public class OnchainAsset {
         private String symbol;
         private String tokenId;
         private String name;
-
-        public Builder() {
-        }
 
         public Builder network(String network) {
             this.network = network;

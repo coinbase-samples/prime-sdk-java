@@ -19,7 +19,11 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.MarginInformation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for retrieving margin information for a portfolio.
+ */
 public class GetMarginInformationResponse {
+    /** The margin information for the portfolio */
     @JsonProperty("margin_information")
     private MarginInformation marginInformation;
 

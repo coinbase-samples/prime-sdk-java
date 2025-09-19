@@ -19,9 +19,14 @@ package com.coinbase.prime.balances;
 import com.coinbase.prime.model.EntityBalance;
 import com.coinbase.prime.model.Pagination;
 
+/**
+ * Response object for listing all balances for a specific entity.
+ */
 public class ListEntityBalancesResponse {
+    /** Array of entity balance information */
     private EntityBalance[] balances;
 
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListEntityBalancesResponse() {

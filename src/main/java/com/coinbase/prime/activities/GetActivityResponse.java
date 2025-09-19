@@ -18,7 +18,13 @@ package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
 
+/**
+ * Response object for retrieving an activity by its activity ID.
+ * 
+ * This endpoint can retrieve both portfolio and entity activities when passed the appropriate API key.
+ */
 public class GetActivityResponse {
+    /** The activity details */
     private Activity activity;
 
     public GetActivityResponse() {
@@ -37,6 +43,7 @@ public class GetActivityResponse {
     }
 
     public static class Builder {
+        /** The activity details */
         private Activity activity;
 
         public Builder activity(Activity activity) {

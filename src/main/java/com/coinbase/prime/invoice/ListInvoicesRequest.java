@@ -17,13 +17,15 @@
 package com.coinbase.prime.invoice;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.InvoiceState;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class ListInvoicesRequest {
+public class ListInvoicesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
@@ -32,19 +34,16 @@ public class ListInvoicesRequest {
     private Integer billingMonth;
     @JsonProperty("billing_year")
     private Integer billingYear;
-    private Integer cursor;
-    private Integer limit;
 
     public ListInvoicesRequest() {
     }
 
     public ListInvoicesRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.entityId = builder.entityId;
         this.states = builder.states;
         this.billingMonth = builder.billingMonth;
         this.billingYear = builder.billingYear;
-        this.cursor = builder.cursor;
-        this.limit = builder.limit;
     }
 
     public String getEntityId() {
@@ -79,20 +78,24 @@ public class ListInvoicesRequest {
         this.billingYear = billingYear;
     }
 
-    public Integer getCursor() {
-        return cursor;
+    @Override
+    public String getCursor() {
+        return super.getCursor();
     }
 
-    public void setCursor(Integer cursor) {
-        this.cursor = cursor;
+    @Override
+    public void setCursor(String cursor) {
+        super.setCursor(cursor);
     }
 
+    @Override
     public Integer getLimit() {
-        return limit;
+        return super.getLimit();
     }
 
+    @Override
     public void setLimit(Integer limit) {
-        this.limit = limit;
+        super.setLimit(limit);
     }
 
     public static class Builder {
@@ -100,8 +103,9 @@ public class ListInvoicesRequest {
         private InvoiceState[] states;
         private Integer billingMonth;
         private Integer billingYear;
-        private Integer cursor;
+        private String cursor;
         private Integer limit;
+        private SortDirection sortDirection;
 
         public Builder(String entityId) {
             this.entityId = entityId;
@@ -122,13 +126,18 @@ public class ListInvoicesRequest {
             return this;
         }
 
-        public Builder cursor(Integer cursor) {
+        public Builder cursor(String cursor) {
             this.cursor = cursor;
             return this;
         }
 
         public Builder limit(Integer limit) {
             this.limit = limit;
+            return this;
+        }
+
+        public Builder sortDirection(SortDirection sortDirection) {
+            this.sortDirection = sortDirection;
             return this;
         }
 

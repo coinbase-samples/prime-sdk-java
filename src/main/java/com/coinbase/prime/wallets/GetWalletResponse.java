@@ -18,7 +18,13 @@ package com.coinbase.prime.wallets;
 
 import com.coinbase.prime.model.Wallet;
 
+/**
+ * Response object for retrieving a specific wallet by Wallet ID.
+ * 
+ * Contains the wallet information for the requested wallet.
+ */
 public class GetWalletResponse {
+    /** The wallet information */
     private Wallet wallet;
 
     public GetWalletResponse() {
@@ -37,6 +43,7 @@ public class GetWalletResponse {
     }
 
     public static class Builder {
+        /** The wallet information */
         private Wallet wallet;
 
         public Builder wallet(Wallet wallet) {

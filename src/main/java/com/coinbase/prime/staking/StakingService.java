@@ -24,4 +24,5 @@ public interface StakingService {
     CreateUnstakeResponse createUnstake(CreateUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ClaimRewardsResponse claimRewards(ClaimRewardsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

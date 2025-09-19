@@ -19,8 +19,17 @@ package com.coinbase.prime.orders;
 import com.coinbase.prime.model.Order;
 import com.coinbase.prime.model.Pagination;
 
+/**
+ * Response object for listing all open orders.
+ * 
+ * List all open orders.
+ * Caution: The maximum number of orders returned is 1000. If a client has more than 1000 open orders,
+ * an error is returned prompting the user to use Websocket API, or FIX API to stream open orders.
+ */
 public class ListOpenOrdersResponse {
+    /** Array of open orders */
     private Order[] orders;
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListOpenOrdersResponse() {

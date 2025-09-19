@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,38 +19,43 @@ package com.coinbase.prime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class StakingBalance {
-    @JsonProperty("symbol")
+    /** The display symbol for the asset */
     private String symbol;
     
-    @JsonProperty("staked_amount")
-    private String stakedAmount;
+    /** The total amount in whole units with full precision */
+    private String amount;
     
-    @JsonProperty("unstaking_amount")
-    private String unstakingAmount;
+    /** Amount that is currently locked due to bonding/staking, potentially subject to an unbonding period, in whole units */
+    @JsonProperty("bonded_amount")
+    private String bondedAmount;
     
-    @JsonProperty("claimable_amount")
-    private String claimableAmount;
+    /** Amount that is currently unbonding and subject to an unbonding period */
+    @JsonProperty("unbonding_amount")
+    private String unbondingAmount;
     
-    @JsonProperty("pending_rewards")
-    private String pendingRewards;
+    /** Amount of pending staking rewards */
+    @JsonProperty("pending_rewards_amount")
+    private String pendingRewardsAmount;
     
-    @JsonProperty("earned_rewards")
-    private String earnedRewards;
+    /** Amount of past staking rewards that have been earned */
+    @JsonProperty("past_rewards_amount")
+    private String pastRewardsAmount;
     
-    @JsonProperty("validator_address")
-    private String validatorAddress;
+    /** Amount available for bonding/staking */
+    @JsonProperty("bondable_amount")
+    private String bondableAmount;
 
     public StakingBalance() {
     }
 
     public StakingBalance(Builder builder) {
         this.symbol = builder.symbol;
-        this.stakedAmount = builder.stakedAmount;
-        this.unstakingAmount = builder.unstakingAmount;
-        this.claimableAmount = builder.claimableAmount;
-        this.pendingRewards = builder.pendingRewards;
-        this.earnedRewards = builder.earnedRewards;
-        this.validatorAddress = builder.validatorAddress;
+        this.amount = builder.amount;
+        this.bondedAmount = builder.bondedAmount;
+        this.unbondingAmount = builder.unbondingAmount;
+        this.pendingRewardsAmount = builder.pendingRewardsAmount;
+        this.pastRewardsAmount = builder.pastRewardsAmount;
+        this.bondableAmount = builder.bondableAmount;
     }
 
     public String getSymbol() {
@@ -61,98 +66,95 @@ public class StakingBalance {
         this.symbol = symbol;
     }
 
-    public String getStakedAmount() {
-        return stakedAmount;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setStakedAmount(String stakedAmount) {
-        this.stakedAmount = stakedAmount;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
-    public String getUnstakingAmount() {
-        return unstakingAmount;
+    public String getBondedAmount() {
+        return bondedAmount;
     }
 
-    public void setUnstakingAmount(String unstakingAmount) {
-        this.unstakingAmount = unstakingAmount;
+    public void setBondedAmount(String bondedAmount) {
+        this.bondedAmount = bondedAmount;
     }
 
-    public String getClaimableAmount() {
-        return claimableAmount;
+    public String getUnbondingAmount() {
+        return unbondingAmount;
     }
 
-    public void setClaimableAmount(String claimableAmount) {
-        this.claimableAmount = claimableAmount;
+    public void setUnbondingAmount(String unbondingAmount) {
+        this.unbondingAmount = unbondingAmount;
     }
 
-    public String getPendingRewards() {
-        return pendingRewards;
+    public String getPendingRewardsAmount() {
+        return pendingRewardsAmount;
     }
 
-    public void setPendingRewards(String pendingRewards) {
-        this.pendingRewards = pendingRewards;
+    public void setPendingRewardsAmount(String pendingRewardsAmount) {
+        this.pendingRewardsAmount = pendingRewardsAmount;
     }
 
-    public String getEarnedRewards() {
-        return earnedRewards;
+    public String getPastRewardsAmount() {
+        return pastRewardsAmount;
     }
 
-    public void setEarnedRewards(String earnedRewards) {
-        this.earnedRewards = earnedRewards;
+    public void setPastRewardsAmount(String pastRewardsAmount) {
+        this.pastRewardsAmount = pastRewardsAmount;
     }
 
-    public String getValidatorAddress() {
-        return validatorAddress;
+    public String getBondableAmount() {
+        return bondableAmount;
     }
 
-    public void setValidatorAddress(String validatorAddress) {
-        this.validatorAddress = validatorAddress;
+    public void setBondableAmount(String bondableAmount) {
+        this.bondableAmount = bondableAmount;
     }
 
     public static class Builder {
         private String symbol;
-        private String stakedAmount;
-        private String unstakingAmount;
-        private String claimableAmount;
-        private String pendingRewards;
-        private String earnedRewards;
-        private String validatorAddress;
-
-        public Builder() {
-        }
+        private String amount;
+        private String bondedAmount;
+        private String unbondingAmount;
+        private String pendingRewardsAmount;
+        private String pastRewardsAmount;
+        private String bondableAmount;
 
         public Builder symbol(String symbol) {
             this.symbol = symbol;
             return this;
         }
 
-        public Builder stakedAmount(String stakedAmount) {
-            this.stakedAmount = stakedAmount;
+        public Builder amount(String amount) {
+            this.amount = amount;
             return this;
         }
 
-        public Builder unstakingAmount(String unstakingAmount) {
-            this.unstakingAmount = unstakingAmount;
+        public Builder bondedAmount(String bondedAmount) {
+            this.bondedAmount = bondedAmount;
             return this;
         }
 
-        public Builder claimableAmount(String claimableAmount) {
-            this.claimableAmount = claimableAmount;
+        public Builder unbondingAmount(String unbondingAmount) {
+            this.unbondingAmount = unbondingAmount;
             return this;
         }
 
-        public Builder pendingRewards(String pendingRewards) {
-            this.pendingRewards = pendingRewards;
+        public Builder pendingRewardsAmount(String pendingRewardsAmount) {
+            this.pendingRewardsAmount = pendingRewardsAmount;
             return this;
         }
 
-        public Builder earnedRewards(String earnedRewards) {
-            this.earnedRewards = earnedRewards;
+        public Builder pastRewardsAmount(String pastRewardsAmount) {
+            this.pastRewardsAmount = pastRewardsAmount;
             return this;
         }
 
-        public Builder validatorAddress(String validatorAddress) {
-            this.validatorAddress = validatorAddress;
+        public Builder bondableAmount(String bondableAmount) {
+            this.bondableAmount = bondableAmount;
             return this;
         }
 

@@ -146,7 +146,7 @@ paths:
       - name: categories
         in: query
         description: "Filter by list of activity categories [order, transaction, account,\
-          \ admin, allocation]"
+          \ allocation, lending]"
         style: form
         explode: true
         schema:
@@ -158,7 +158,6 @@ paths:
             - ACTIVITY_CATEGORY_ORDER
             - ACTIVITY_CATEGORY_TRANSACTION
             - ACTIVITY_CATEGORY_ACCOUNT
-            - ACTIVITY_CATEGORY_ADMIN
             - ACTIVITY_CATEGORY_ALLOCATION
             - ACTIVITY_CATEGORY_LENDING
       - name: statuses
@@ -180,12 +179,12 @@ paths:
             - ACTIVITY_STATUS_FAILED
       - name: start_time
         in: query
-        description: Filter created time by start date
+        description: Filter created time by start date (RFC3339 format)
         schema:
           type: string
       - name: end_time
         in: query
-        description: Filter created time by end date
+        description: Filter created time by end date (RFC3339 format)
         schema:
           type: string
       - name: cursor
@@ -971,7 +970,7 @@ paths:
       - name: categories
         in: query
         description: "Filter by list of activity categories [order, transaction, account,\
-          \ admin, allocation]"
+          \ allocation, lending]"
         style: form
         explode: true
         schema:
@@ -983,7 +982,6 @@ paths:
             - ACTIVITY_CATEGORY_ORDER
             - ACTIVITY_CATEGORY_TRANSACTION
             - ACTIVITY_CATEGORY_ACCOUNT
-            - ACTIVITY_CATEGORY_ADMIN
             - ACTIVITY_CATEGORY_ALLOCATION
             - ACTIVITY_CATEGORY_LENDING
       - name: statuses
@@ -1005,12 +1003,12 @@ paths:
             - ACTIVITY_STATUS_FAILED
       - name: start_time
         in: query
-        description: Filter created time by start date
+        description: Filter created time by start date (RFC3339 format)
         schema:
           type: string
       - name: end_time
         in: query
-        description: Filter created time by end date
+        description: Filter created time by end date (RFC3339 format)
         schema:
           type: string
       - name: cursor
@@ -1401,6 +1399,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.GetPortfolioCommissionResponse'
+  /v1/portfolios/{portfolio_id}/counterparty:
+    get:
+      tags:
+      - Portfolios
+      summary: Get Portfolio Counterparty ID
+      description: Retrieve the counterparty ID for a given portfolio.
+      operationId: PrimeRESTAPI_GetPortfolioCounterpartyID
+      parameters:
+      - name: portfolio_id
+        in: path
+        description: The portfolio ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetPortfolioCounterpartyIDResponse'
   /v1/portfolios/{portfolio_id}/credit:
     get:
       tags:
@@ -2194,6 +2213,89 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.CancelOrderResponse'
+  /v1/portfolios/{portfolio_id}/orders/{order_id}/edit:
+    put:
+      tags:
+      - Orders
+      summary: Edit Order (Beta)
+      description: Edit an open order. This feature is in beta please reach out to
+        your Coinbase Prime account manager for more information.
+      operationId: PrimeRESTAPI_EditOrder
+      parameters:
+      - name: portfolio_id
+        in: path
+        description: The ID of the portfolio that owns the order
+        required: true
+        schema:
+          type: string
+      - name: order_id
+        in: path
+        description: The ID of the order being edited
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - client_order_id
+              - orig_client_order_id
+              type: object
+              properties:
+                product_id:
+                  type: string
+                  description: "Deprecated: The product ID of the order being edited"
+                orig_client_order_id:
+                  type: string
+                  description: The client order ID of the order being edited
+                client_order_id:
+                  type: string
+                  description: The updated version of the client order ID
+                base_quantity:
+                  type: string
+                  description: Order size in base asset units (either `base_quantity`
+                    or `quote_value` is required)
+                quote_value:
+                  type: string
+                  description: "Order size in quote asset units, i.e. the amount the\
+                    \ user wants to spend (when buying) or receive (when selling);\
+                    \ the quantity in base units will be determined based on the market\
+                    \ liquidity and indicated `quote_value` (either `base_quantity`\
+                    \ or `quote_value` is required)"
+                limit_price:
+                  type: string
+                  description: "The limit price (required for TWAP, VWAP, LIMIT, and\
+                    \ STOP_LIMIT orders)"
+                expiry_time:
+                  type: string
+                  description: "The expiry time of the order in UTC (TWAP, VWAP, LIMIT,\
+                    \ and STOP_LIMIT GTD only)"
+                  format: date-time
+                display_quote_size:
+                  type: string
+                  description: The maximum order size that will show up on venue order
+                    books. Specifying a value here effectively makes a LIMIT order
+                    into an "iceberg" style order.
+                display_base_size:
+                  type: string
+                  description: The maximum order size that will show up on venue order
+                    books. Specifying a value here effectively makes a LIMIT order
+                    into an "iceberg" style order.
+                stop_price:
+                  type: string
+                  description: Specifies the stop price at which the order activates.
+                    The order is activated if the last trade price on Coinbase Exchange
+                    crosses the stop price specified on the order
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.EditOrderResponse'
+      x-codegen-request-body-name: body
   /v1/portfolios/{portfolio_id}/orders/{order_id}/edit_history:
     get:
       tags:
@@ -3115,6 +3217,51 @@ paths:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.CreateOnchainTransactionResponse'
       x-codegen-request-body-name: body
+  /v1/portfolios/{portfolio_id}/wallets/{wallet_id}/staking/claim_rewards:
+    post:
+      tags:
+      - Staking
+      summary: Request to claim rewards for a staked wallet
+      description: Creates a request to claim the pending staking rewards from the
+        specified wallet
+      operationId: PrimeRESTAPI_StakingClaimRewards
+      parameters:
+      - name: portfolio_id
+        in: path
+        description: The portfolio ID
+        required: true
+        schema:
+          type: string
+      - name: wallet_id
+        in: path
+        description: The wallet ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - idempotency_key
+              type: object
+              properties:
+                idempotency_key:
+                  type: string
+                  description: The client generated idempotency key for requested
+                    execution. Any subsequent requests with the same key will return
+                    the original response
+                inputs:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.WalletClaimRewardsInputs'
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.StakingClaimRewardsResponse'
+      x-codegen-request-body-name: body
   /v1/portfolios/{portfolio_id}/wallets/{wallet_id}/staking/initiate:
     post:
       tags:
@@ -3148,7 +3295,9 @@ paths:
                   description: The client generated idempotency key for requested
                     execution. Subsequent requests using the same key will fail
                 inputs:
-                  $ref: '#/components/schemas/coinbase.public_rest_api.StakingInputs'
+                  $ref: '#/components/schemas/coinbase.public_rest_api.WalletStakeInputs'
+              description: StakingInitiateRequest represents a request to initiate
+                a staking operation.
         required: true
       responses:
         "200":
@@ -3192,7 +3341,9 @@ paths:
                   description: The client generated idempotency key for requested
                     execution. Subsequent requests using the same key will fail
                 inputs:
-                  $ref: '#/components/schemas/coinbase.public_rest_api.StakingInputs'
+                  $ref: '#/components/schemas/coinbase.public_rest_api.WalletUnstakeInputs'
+              description: StakingUnstakeRequest represents a request to initiate
+                an unstaking operation.
         required: true
       responses:
         "200":
@@ -3815,7 +3966,6 @@ components:
       - ACTIVITY_CATEGORY_ORDER
       - ACTIVITY_CATEGORY_TRANSACTION
       - ACTIVITY_CATEGORY_ACCOUNT
-      - ACTIVITY_CATEGORY_ADMIN
       - ACTIVITY_CATEGORY_ALLOCATION
       - ACTIVITY_CATEGORY_LENDING
     coinbase.public_rest_api.ActivityCreationResponse:
@@ -4341,6 +4491,13 @@ components:
           type: string
           description: Conversion rate
           example: "0.1"
+    coinbase.public_rest_api.Counterparty:
+      type: object
+      properties:
+        counterparty_id:
+          type: string
+          description: The unique counterparty ID for the portfolio
+          example: CB12345678
     coinbase.public_rest_api.CounterpartyDestination:
       title: Represents a destination for a counterparty payment
       type: object
@@ -4659,6 +4816,12 @@ components:
       - DESTINATION_BLOCKCHAIN
       - DESTINATION_WALLET
       - DESTINATION_COUNTERPARTY
+    coinbase.public_rest_api.EditOrderResponse:
+      type: object
+      properties:
+        order_id:
+          type: string
+          description: The ID of the order being edited
     coinbase.public_rest_api.EntityBalance:
       type: object
       properties:
@@ -5083,6 +5246,10 @@ components:
           type: string
           description: Open Trade Equity accrued during the current trading session
           example: "100.00"
+        cfm_unsettled_realized_pnl:
+          type: string
+          description: Unsettled realized PNL for positions closed intraday
+          example: "10.12"
         cfm_unsettled_accrued_funding_pnl:
           type: string
           description: Unsettled accrued funding PNL from the last settlement
@@ -5269,6 +5436,11 @@ components:
       properties:
         commission:
           $ref: '#/components/schemas/coinbase.public_rest_api.Commission'
+    coinbase.public_rest_api.GetPortfolioCounterpartyIDResponse:
+      type: object
+      properties:
+        counterparty:
+          $ref: '#/components/schemas/coinbase.public_rest_api.Counterparty'
     coinbase.public_rest_api.GetPortfolioFillsResponse:
       type: object
       properties:
@@ -5587,6 +5759,7 @@ components:
       - PORTFOLIO_MARGIN
       - SHORT_COLLATERAL_LOAN
       - SHORT_COLLATERAL
+      - CROSS_MARGIN
     coinbase.public_rest_api.Locate:
       type: object
       properties:
@@ -6646,26 +6819,26 @@ components:
       type: object
       properties:
         tradable:
-          title: Whether the product is tradable via RFQ
           type: boolean
+          description: Whether the product is tradable via RFQ
         min_notional_size:
-          title: Minimum notional size for RFQ
           type: string
+          description: "Deprecated: Value will be an empty string"
         max_notional_size:
-          title: Maximum notional size for RFQ
           type: string
+          description: "Deprecated: Value will be an empty string"
         min_base_size:
-          title: Minimum base size for RFQ
           type: string
+          description: Minimum base size for RFQ
         max_base_size:
-          title: Maximum base size for RFQ
           type: string
+          description: Maximum base size for RFQ
         min_quote_size:
-          title: Minimum quote size for RFQ
           type: string
+          description: Minimum quote size for RFQ
         max_quote_size:
-          title: Maximum quote size for RFQ
           type: string
+          description: Maximum quote size for RFQ
     coinbase.public_rest_api.RateType:
       type: string
       default: RATE_TYPE_UNSET
@@ -6752,6 +6925,23 @@ components:
       enum:
       - DESC
       - ASC
+    coinbase.public_rest_api.StakingClaimRewardsResponse:
+      required:
+      - activity_id
+      - transaction_id
+      - wallet_id
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The wallet ID
+        transaction_id:
+          type: string
+          description: "ID of the newly created transaction, can be used to fetch\
+            \ details of the current state of execution"
+        activity_id:
+          type: string
+          description: The ID for the activity generated for this request
     coinbase.public_rest_api.StakingInitiateResponse:
       required:
       - activity_id
@@ -6769,17 +6959,8 @@ components:
         activity_id:
           type: string
           description: The ID for the activity generated for this request
-    coinbase.public_rest_api.StakingInputs:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: "Optional amount to stake or unstake. If omitted, the wallet\
-            \ will stake or unstake the maximum amount available"
-        validator_address:
-          type: string
-          description: "Optional validator address, defaults to Coinbase validator.\
-            \ For SOL, must be the vote account address. Ignored for ETH."
+      description: StakingInitiateResponse contains the response data from initiating
+        a staking operation.
     coinbase.public_rest_api.StakingUnstakeResponse:
       required:
       - activity_id
@@ -6797,6 +6978,8 @@ components:
         activity_id:
           type: string
           description: The ID for the activity generated for this request
+      description: StakingUnstakeResponse contains the response data from initiating
+        an unstaking operation.
     coinbase.public_rest_api.TieredPricingFee:
       type: object
       properties:
@@ -7170,6 +7353,16 @@ components:
           $ref: '#/components/schemas/coinbase.public_rest_api.WalletVisibility'
         network:
           $ref: '#/components/schemas/coinbase.public_rest_api.Network'
+    coinbase.public_rest_api.WalletClaimRewardsInputs:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: "Optional amount to claim rewards (ETH only). If omitted, the\
+            \ wallet will claim the maximum amount available"
+      description: |-
+        WalletClaimRewardsInputs contains the custom inputs for claim rewards operations on a wallet.
+        Requirements and supported fields vary by asset type.
     coinbase.public_rest_api.WalletCryptoDepositInstructions:
       type: object
       properties:
@@ -7236,6 +7429,20 @@ components:
         reference_code:
           title: Reference code to be used as a memo/description
           type: string
+    coinbase.public_rest_api.WalletStakeInputs:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: "Optional amount to stake (ETH only). If omitted, the wallet\
+            \ will stake the maximum amount available"
+        validator_address:
+          type: string
+          description: "Optional validator address, defaults to Coinbase validator.\
+            \ For SOL, must be the vote account address. Ignored for ETH."
+      description: |-
+        WalletStakeInputs contains the custom inputs for staking operations on a wallet.
+        Requirements and supported fields vary by asset type.
     coinbase.public_rest_api.WalletType:
       title: Indicates the wallet type
       type: string
@@ -7251,6 +7458,16 @@ components:
       - WALLET_TYPE_OTHER
       - QC
       - ONCHAIN
+    coinbase.public_rest_api.WalletUnstakeInputs:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: "Optional amount to unstake (ETH only). If omitted, the wallet\
+            \ will unstake the maximum amount available"
+      description: |-
+        WalletUnstakeInputs contains the custom inputs for unstaking operations on a wallet.
+        Requirements and supported fields vary by asset type.
     coinbase.public_rest_api.WalletVisibility:
       type: string
       default: WALLET_VISIBILITY_UNSPECIFIED
