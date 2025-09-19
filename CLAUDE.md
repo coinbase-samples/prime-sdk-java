@@ -274,10 +274,23 @@ Each OpenAPI operation should generate:
 - **Enums**: `src/main/java/com/coinbase/prime/model/enums/{EnumName}.java`
 - **Requests/Responses**: Co-located with service in domain package (`src/main/java/com/coinbase/prime/{domain}/`)
 
+## Changelog Management
+
+### Format Requirements
+- Use only **Added**, **Changed**, and **Fixed** sections
+- Consolidate unreleased versions into single entries
+- Be specific: list actual endpoint names, model names, and enum names
+- Avoid subjective language or marketing terms
+
+### Version Consolidation
+- Combine unreleased versions (e.g., 1.4.0 + 1.5.0 → 1.4.0)
+- Use most recent planned release date
+- Maintain all changes from consolidated versions
+
 ### Maven Distribution
 - **Maven Central**: Available at coordinates `com.coinbase.prime:coinbase-prime-sdk-java`
 - **Repository**: Uses Sonatype OSSRH for staging and releases
-- **Versioning**: Current version 1.3.0 (check pom.xml for latest)
+- **Versioning**: Current version 1.4.0 (check pom.xml for latest)
 - **Signing**: Artifacts are GPG-signed for security
 
 ### Project Metadata
