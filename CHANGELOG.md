@@ -1,58 +1,43 @@
 # Changelog
 
-## [1.4.0] - 2025-08-06
+## [1.4.0] - 2025-09-20
 
 ### Added
 - Complete OpenAPI specification compliance with 100% endpoint coverage
-- Updated OpenAPI specification file `apiSpec/prime-public-spec.yaml` 
-- New service domains and comprehensive endpoint support:
-  - **Futures Trading (FCM)**: Full FCM operations, margin calls, risk limits, positions, and sweeps
-  - **Staking Services**: Portfolio staking initiation, unstaking, rewards, and yield tracking
-  - **Advanced Transaction Management**: Wallet transfers, withdrawals, and enhanced transaction tracking
-  - **User Management**: Entity and portfolio user listing and management
-  - **Payment Methods**: Complete payment method management with detailed information
-  - **On-chain Address Management**: Separate services for address book and address groups
-  - **Enhanced Asset Management**: Entity-level asset listing and management
-  - **Order Edit History**: Complete order modification tracking and history
-  - **Enhanced Activities**: Portfolio-level activity tracking with detailed metadata
-
-### Enhanced
-- **Model Coverage**: Added 50+ new domain models including:
-  - FCM-specific models: `FcmBalance`, `FcmMarginCall`, `FcmPosition`, `FcmRiskLimits`
-  - Staking models: `StakingBalance`, `StakingPosition`, `StakingReward`, `StakingYield`
-  - Advanced trading: `OrderEdit`, `LimitOrderEdit`, `Fill`, `QuoteResponse`
-  - Payment infrastructure: `PaymentMethodDetails`, `EntityPaymentMethod`
-  - On-chain operations: `OnchainWalletBalance`, `BlockchainAddress`
-
-- **Enum Coverage**: Added 30+ new enums for comprehensive type safety:
-  - FCM enums: `FcmPositionSide`, `FcmMarginCallState`, `FcmMarginCallType`
-  - Staking enums: `StakingStatus`, `StakingRewardType`, `UnbondingStatus`
-  - Trading enums: `PositionSide`, `PositionStatus`, `PositionType`
-  - Infrastructure enums: `NetworkFamily`, `WalletVisibility`, `ProductPermissions`
-
-- **Service Architecture**: Implemented consistent service patterns across all domains
-  - Standardized request/response patterns with Builder design
-  - Comprehensive error handling and validation
-  - Factory-based service instantiation
+- Updated OpenAPI specification file `apiSpec/prime-public-spec.yaml` to latest version
+- New endpoints:
+  - `GetActivity` (renamed from `GetActivityById`) and `GetPortfolioActivity` in activities service
+  - `ListEntityAssets` in assets service  
+  - `ListOnchainAddressGroups` in onchain address groups service
+  - `CreateWalletDepositAddress` and `ListWalletAddresses` in wallets service
+  - `GetPortfolioCounterpartyId` in portfolios service
+  - `ListEntityUsers` in users service
+  - `CreateWalletTransfer`, `CreateWalletWithdrawal`, and `GetTransaction` in transactions service
+  - `ClaimRewards` in staking service
+  - `EditOrder` and `ListOrderEditHistory` in orders service
+  - `GetEntityPaymentMethodDetails` in payment methods service
+- New service domains:
+  - Futures Trading (FCM): Full FCM operations, margin calls, risk limits, positions, and sweeps
+  - Staking Services: Portfolio staking initiation, unstaking, rewards, and yield tracking
+  - Advanced Transaction Management: Wallet transfers, withdrawals, and enhanced transaction tracking
+  - User Management: Entity and portfolio user listing and management
+  - Payment Methods: Complete payment method management with detailed information
+  - On-chain Address Management: Separate services for address book and address groups
+  - Enhanced Asset Management: Entity-level asset listing and management
+  - Order Edit History: Complete order modification tracking and history
+- New domain models: `ActivityCreationResponse`, `ActivityMetadataAccount`, `ActivityMetadataConsensus`, `ActivityMetadataOrders`, `ActivityMetadataTransactions`, `AddressBookCategory`, `AddressBookConfiguration`, `AddressBookMetadata`, `AddressBookState`, `AddressBookSummary`, `AddressEntry`, `AllocationRule`, `AllocationStrategy`, `CreateAllocationResponseBody`, `CreateNetAllocationResponseBody`, `DestinationAlloc`, `CommissionCalculation`, `CommissionRate`, `FcmMarginCallDetail`, `FcmRiskLimit`, `FcmRiskLimits`, `Fill`, `LimitOrderEdit`, `OrderEdit`, `QuoteResponse`, `RfqProductDetails`, `PaymentMethodDestination`, `PaymentMethodDetails`, `PaymentMethodSummary`, `ConversionDetail`, `MarginConversion`, `OnchainTransactionMetadata`, `TradeFinanceFee`, `TransactionMetadata`, `CreateStakeInputs`, `CreateUnstakeInputs`, `RewardsSummary`, `StakingBalance`, `StakingInitiateResponse`, `StakingPosition`, `StakingReward`, `StakingSummary`, `StakingUnstakeResponse`, `StakingYield`, `UnbondingEntry`, `ValidatorInfo`, `WalletClaimRewardsInputs`, `AggregatedFiatBalance`, `Counterparty`, `CounterpartyDestination`, `DefiBalance`, `OnchainBalance`, `PaginationCursor`, `PortfolioBalanceType`, `PortfolioStakingMetadata`, `PortfolioUser`, `RequestAmount`, `RpcConfig`, `TrustedAddressConfiguration`, `VolumeDiscount`, `WalletBalance`
+- New enums: `Action`, `ActivityLevel`, `ActivityType`, `AddressBookCategory`, `AddressBookState`, `AddressValidationStatus`, `AllocationSizeType`, `Benchmark`, `CommissionCategory`, `CommissionType`, `FcmFuturesSweepStatus`, `FcmMarginCallState`, `FcmMarginCallType`, `FcmPositionSide`, `FeeModel`, `HierarchyType`, `NetworkFamily`, `PortfolioBalanceType`, `PositionSide`, `PositionStatus`, `PositionType`, `ProductPermissions`, `RateType`, `SigningStatus`, `SortDirection`, `StakingRewardType`, `StakingStatus`, `TimeInForceType`, `TrustedAddressLevel`, `UnbondingStatus`, `UserRole`, `ValidatorStatus`, `Visibility`, `WalletDepositInstructionType`, `WalletVisibility`
+- Standardized request/response patterns with Builder design
+- Comprehensive error handling and validation
+- Factory-based service instantiation
 
 ### Changed
-- **Naming Conventions**: Standardized "Onchain" terminology (replacing "Web3" in Java code)
-- **Service Methods**: Improved method naming consistency (List vs Get operations)
-- **Request/Response Models**: Enhanced Builder patterns for all API operations
-- **Package Structure**: Organized services by domain with clear separation of concerns
-
-### Technical Improvements
-- **OpenAPI Alignment**: Achieved 100% coverage of all endpoints in the OpenAPI specification
-- **Code Generation**: Implemented AI-assisted code generation workflow for rapid SDK updates
-- **Documentation**: Enhanced CLAUDE.md with comprehensive development guidelines
-- **Build Process**: Maintained Maven compatibility and release processes
-
-### Breaking Changes
-- Service method names updated for consistency (e.g., `GetPortfolios` → `ListPortfolios`)
+- Naming conventions: Standardized "Onchain" terminology (replacing "Web3" in Java code)
+- Service method naming for consistency (e.g., `GetPortfolios` → `ListPortfolios`, `GetActivityById` → `GetActivity`)
+- Request/response models with enhanced Builder patterns for all API operations
+- Package structure: Organized services by domain with clear separation of concerns
 - Package restructuring for on-chain address management (separate `onchainaddressbook` and `onchainaddressgroups`)
 - Model property naming aligned with OpenAPI specification
-
-This release represents a major milestone in SDK completeness, providing full coverage of the Coinbase Prime API surface area with modern Java patterns and comprehensive type safety.
 
 ## [1.3.0] - 2025-MAY-15
 
