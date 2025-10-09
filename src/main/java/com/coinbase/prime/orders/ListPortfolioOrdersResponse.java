@@ -26,11 +26,6 @@ public class ListPortfolioOrdersResponse {
     public ListPortfolioOrdersResponse() {
     }
 
-    public ListPortfolioOrdersResponse(Builder builder) {
-        this.orders = builder.orders;
-        this.pagination = builder.pagination;
-    }
-
     public Order[] getOrders() {
         return orders;
     }
@@ -47,25 +42,4 @@ public class ListPortfolioOrdersResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Order[] orders;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder orders(Order[] orders) {
-            this.orders = orders;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioOrdersResponse build() {
-            return new ListPortfolioOrdersResponse(this);
-        }
-    }
 }

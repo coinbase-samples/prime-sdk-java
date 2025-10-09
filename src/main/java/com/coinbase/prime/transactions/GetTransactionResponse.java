@@ -31,10 +31,6 @@ public class GetTransactionResponse {
     public GetTransactionResponse() {
     }
 
-    public GetTransactionResponse(Builder builder) {
-        this.transaction = builder.transaction;
-    }
-
     public Transaction getTransaction() {
         return transaction;
     }
@@ -43,17 +39,4 @@ public class GetTransactionResponse {
         this.transaction = transaction;
     }
 
-    public static class Builder {
-        /** The transaction information */
-        private Transaction transaction;
-
-        public Builder transaction(Transaction transaction) {
-            this.transaction = transaction;
-            return this;
-        }
-
-        public GetTransactionResponse build() {
-            return new GetTransactionResponse(this);
-        }
-    }
 }

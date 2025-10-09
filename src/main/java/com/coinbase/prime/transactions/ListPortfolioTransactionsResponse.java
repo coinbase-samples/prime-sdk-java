@@ -34,11 +34,6 @@ public class ListPortfolioTransactionsResponse {
     public ListPortfolioTransactionsResponse() {
     }
 
-    public ListPortfolioTransactionsResponse(Builder builder) {
-        this.transactions = builder.transactions;
-        this.pagination = builder.pagination;
-    }
-
     public Transaction[] getTransactions() {
         return transactions;
     }
@@ -55,27 +50,4 @@ public class ListPortfolioTransactionsResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        /** The transactions array */
-        private Transaction[] transactions;
-        /** The pagination information */
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder transactions(Transaction[] transactions) {
-            this.transactions = transactions;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioTransactionsResponse build() {
-            return new ListPortfolioTransactionsResponse(this);
-        }
-    }
 }

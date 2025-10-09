@@ -30,10 +30,6 @@ public class GetMarginInformationResponse {
     public GetMarginInformationResponse() {
     }
 
-    public GetMarginInformationResponse(Builder builder) {
-        this.marginInformation = builder.marginInformation;
-    }
-
     public MarginInformation getMarginInformation() {
         return marginInformation;
     }
@@ -42,19 +38,4 @@ public class GetMarginInformationResponse {
         this.marginInformation = marginInformation;
     }
 
-    public static class Builder {
-        private MarginInformation marginInformation;
-
-        public Builder() {
-        }
-
-        public Builder marginInformation(MarginInformation marginInformation) {
-            this.marginInformation = marginInformation;
-            return this;
-        }
-
-        public GetMarginInformationResponse build() {
-            return new GetMarginInformationResponse(this);
-        }
-    }
 }

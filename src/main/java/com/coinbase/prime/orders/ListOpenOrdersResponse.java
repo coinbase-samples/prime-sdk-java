@@ -35,11 +35,6 @@ public class ListOpenOrdersResponse {
     public ListOpenOrdersResponse() {
     }
 
-    public ListOpenOrdersResponse(Builder builder) {
-        this.orders = builder.orders;
-        this.pagination = builder.pagination;
-    }
-
     public Order[] getOrders() {
         return orders;
     }
@@ -56,25 +51,4 @@ public class ListOpenOrdersResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Order[] orders;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder orders(Order[] orders) {
-            this.orders = orders;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListOpenOrdersResponse build() {
-            return new ListOpenOrdersResponse(this);
-        }
-    }
 }

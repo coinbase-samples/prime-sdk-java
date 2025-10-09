@@ -35,12 +35,6 @@ public class ActivityCreationResponse {
     public ActivityCreationResponse() {
     }
 
-    public ActivityCreationResponse(Builder builder) {
-        this.activityType = builder.activityType;
-        this.numApprovalsRemaining = builder.numApprovalsRemaining;
-        this.activityId = builder.activityId;
-    }
-
     public ActivityType getActivityType() {
         return activityType;
     }
@@ -65,31 +59,4 @@ public class ActivityCreationResponse {
         this.activityId = activityId;
     }
 
-    public static class Builder {
-        private ActivityType activityType;
-        private Integer numApprovalsRemaining;
-        private String activityId;
-
-        public Builder() {
-        }
-
-        public Builder activityType(ActivityType activityType) {
-            this.activityType = activityType;
-            return this;
-        }
-
-        public Builder numApprovalsRemaining(Integer numApprovalsRemaining) {
-            this.numApprovalsRemaining = numApprovalsRemaining;
-            return this;
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public ActivityCreationResponse build() {
-            return new ActivityCreationResponse(this);
-        }
-    }
 }

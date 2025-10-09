@@ -28,11 +28,6 @@ public class PortfolioStakingUnstakeResponse {
     public PortfolioStakingUnstakeResponse() {
     }
 
-    public PortfolioStakingUnstakeResponse(Builder builder) {
-        this.activityId = builder.activityId;
-        this.transactionId = builder.transactionId;
-    }
-
     public String getActivityId() {
         return activityId;
     }
@@ -49,25 +44,4 @@ public class PortfolioStakingUnstakeResponse {
         this.transactionId = transactionId;
     }
 
-    public static class Builder {
-        private String activityId;
-        private String transactionId;
-
-        public Builder() {
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public PortfolioStakingUnstakeResponse build() {
-            return new PortfolioStakingUnstakeResponse(this);
-        }
-    }
 }

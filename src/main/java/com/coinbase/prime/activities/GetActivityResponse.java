@@ -30,10 +30,6 @@ public class GetActivityResponse {
     public GetActivityResponse() {
     }
 
-    public GetActivityResponse(Builder builder) {
-        this.activity = builder.activity;
-    }
-
     public Activity getActivity() {
         return activity;
     }
@@ -42,17 +38,4 @@ public class GetActivityResponse {
         this.activity = activity;
     }
 
-    public static class Builder {
-        /** The activity details */
-        private Activity activity;
-
-        public Builder activity(Activity activity) {
-            this.activity = activity;
-            return this;
-        }
-
-        public GetActivityResponse build() {
-            return new GetActivityResponse(this);
-        }
-    }
 }

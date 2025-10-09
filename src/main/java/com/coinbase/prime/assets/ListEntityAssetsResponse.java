@@ -24,10 +24,6 @@ public class ListEntityAssetsResponse {
     public ListEntityAssetsResponse() {
     }
 
-    public ListEntityAssetsResponse(Builder builder) {
-        this.assets = builder.assets;
-    }
-
     public Asset[] getAssets() {
         return assets;
     }
@@ -36,19 +32,4 @@ public class ListEntityAssetsResponse {
         this.assets = assets;
     }
 
-    public static class Builder {
-        private Asset[] assets;
-
-        public Builder() {
-        }
-
-        public Builder assets(Asset[] assets) {
-            this.assets = assets;
-            return this;
-        }
-
-        public ListEntityAssetsResponse build() {
-            return new ListEntityAssetsResponse(this);
-        }
-    }
 }

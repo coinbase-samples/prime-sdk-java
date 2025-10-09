@@ -26,11 +26,6 @@ public class ListPortfolioFillsResponse {
     public ListPortfolioFillsResponse() {
     }
 
-    public ListPortfolioFillsResponse(Builder builder) {
-        this.fills = builder.fills;
-        this.pagination = builder.pagination;
-    }
-
     public OrderFill[] getFills() {
         return fills;
     }
@@ -47,25 +42,4 @@ public class ListPortfolioFillsResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private OrderFill[] fills;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder fills(OrderFill[] fills) {
-            this.fills = fills;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioFillsResponse build() {
-            return new ListPortfolioFillsResponse(this);
-        }
-    }
 }

@@ -33,11 +33,6 @@ public class ListPortfolioProductsResponse {
     public ListPortfolioProductsResponse() {
     }
 
-    public ListPortfolioProductsResponse(Builder builder) {
-        this.products = builder.products;
-        this.pagination = builder.pagination;
-    }
-
     public Product[] getProducts() {
         return products;
     }
@@ -54,25 +49,4 @@ public class ListPortfolioProductsResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Product[] products;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder products(Product[] products) {
-            this.products = products;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioProductsResponse build() {
-            return new ListPortfolioProductsResponse(this);
-        }
-    }
 }

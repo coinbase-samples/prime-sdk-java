@@ -32,12 +32,6 @@ public class CreateOnchainAddressBookEntryResponse {
     public CreateOnchainAddressBookEntryResponse() {
     }
 
-    public CreateOnchainAddressBookEntryResponse(Builder builder) {
-        this.activityType = builder.activityType;
-        this.numApprovalsRemaining = builder.numApprovalsRemaining;
-        this.activityId = builder.activityId;
-    }
-
     public CustodyActivityType getActivityType() {
         return activityType;
     }
@@ -62,31 +56,4 @@ public class CreateOnchainAddressBookEntryResponse {
         this.activityId = activityId;
     }
 
-    public static class Builder {
-        private CustodyActivityType activityType;
-        private int numApprovalsRemaining;
-        private String activityId;
-
-        public Builder() {
-        }
-
-        public Builder activityType(CustodyActivityType activityType) {
-            this.activityType = activityType;
-            return this;
-        }
-
-        public Builder numApprovalsRemaining(int numApprovalsRemaining) {
-            this.numApprovalsRemaining = numApprovalsRemaining;
-            return this;
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public CreateOnchainAddressBookEntryResponse build() {
-            return new CreateOnchainAddressBookEntryResponse(this);
-        }
-    }
 }

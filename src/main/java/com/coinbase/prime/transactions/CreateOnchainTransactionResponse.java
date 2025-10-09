@@ -31,10 +31,6 @@ public class CreateOnchainTransactionResponse {
     public CreateOnchainTransactionResponse() {
     }
 
-    public CreateOnchainTransactionResponse(Builder builder) {
-        this.transactionId = builder.transactionId;
-    }
-
     public String getTransactionId() {
         return transactionId;
     }
@@ -43,20 +39,4 @@ public class CreateOnchainTransactionResponse {
         this.transactionId = transactionId;
     }
 
-    public static class Builder {
-        /** The transaction ID */
-        private String transactionId;
-
-        public Builder() {
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public CreateOnchainTransactionResponse build() {
-            return new CreateOnchainTransactionResponse(this);
-        }
-    }
 }

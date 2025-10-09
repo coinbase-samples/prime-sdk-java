@@ -33,14 +33,6 @@ public class QuoteResponse {
     public QuoteResponse() {
     }
 
-    public QuoteResponse(Builder builder) {
-        this.quoteId = builder.quoteId;
-        this.expirationTime = builder.expirationTime;
-        this.bestPrice = builder.bestPrice;
-        this.orderTotal = builder.orderTotal;
-        this.priceInclusiveOfFees = builder.priceInclusiveOfFees;
-    }
-
     public String getQuoteId() {
         return quoteId;
     }
@@ -81,43 +73,4 @@ public class QuoteResponse {
         this.priceInclusiveOfFees = priceInclusiveOfFees;
     }
 
-    public static class Builder {
-        private String quoteId;
-        private String expirationTime;
-        private String bestPrice;
-        private String orderTotal;
-        private String priceInclusiveOfFees;
-
-        public Builder() {
-        }
-
-        public Builder quoteId(String quoteId) {
-            this.quoteId = quoteId;
-            return this;
-        }
-
-        public Builder expirationTime(String expirationTime) {
-            this.expirationTime = expirationTime;
-            return this;
-        }
-
-        public Builder bestPrice(String bestPrice) {
-            this.bestPrice = bestPrice;
-            return this;
-        }
-
-        public Builder orderTotal(String orderTotal) {
-            this.orderTotal = orderTotal;
-            return this;
-        }
-
-        public Builder priceInclusiveOfFees(String priceInclusiveOfFees) {
-            this.priceInclusiveOfFees = priceInclusiveOfFees;
-            return this;
-        }
-
-        public QuoteResponse build() {
-            return new QuoteResponse(this);
-        }
-    }
 }

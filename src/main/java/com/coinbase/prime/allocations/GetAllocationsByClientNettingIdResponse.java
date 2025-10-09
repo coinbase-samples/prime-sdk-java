@@ -30,10 +30,6 @@ public class GetAllocationsByClientNettingIdResponse {
     public GetAllocationsByClientNettingIdResponse() {
     }
 
-    public GetAllocationsByClientNettingIdResponse(Builder builder) {
-        this.allocations = builder.allocations;
-    }
-
     public Allocation[] getAllocations() {
         return allocations;
     }
@@ -42,20 +38,4 @@ public class GetAllocationsByClientNettingIdResponse {
         this.allocations = allocations;
     }
 
-    public static class Builder {
-        /** Array of allocations */
-        private Allocation[] allocations;
-
-        public Builder() {
-        }
-
-        public Builder allocations(Allocation[] allocations) {
-            this.allocations = allocations;
-            return this;
-        }
-
-        public GetAllocationsByClientNettingIdResponse build() {
-            return new GetAllocationsByClientNettingIdResponse(this);
-        }
-    }
 }

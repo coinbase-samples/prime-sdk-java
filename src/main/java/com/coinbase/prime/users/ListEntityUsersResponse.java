@@ -31,11 +31,6 @@ public class ListEntityUsersResponse {
     public ListEntityUsersResponse() {
     }
 
-    public ListEntityUsersResponse(Builder builder) {
-        this.users = builder.users;
-        this.pagination = builder.pagination;
-    }
-
     public EntityUser[] getUsers() {
         return users;
     }
@@ -52,25 +47,4 @@ public class ListEntityUsersResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private EntityUser[] users;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder users(EntityUser[] users) {
-            this.users = users;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListEntityUsersResponse build() {
-            return new ListEntityUsersResponse(this);
-        }
-    }
 }

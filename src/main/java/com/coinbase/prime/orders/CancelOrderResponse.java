@@ -31,10 +31,6 @@ public class CancelOrderResponse {
     public CancelOrderResponse() {
     }
 
-    public CancelOrderResponse(Builder builder) {
-        this.id = builder.id;
-    }
-
     public String getId() {
         return id;
     }
@@ -43,19 +39,4 @@ public class CancelOrderResponse {
         this.id = id;
     }
 
-    public static class Builder {
-        private String id;
-
-        public Builder() {
-        }
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public CancelOrderResponse build() {
-            return new CancelOrderResponse(this);
-        }
-    }
 }

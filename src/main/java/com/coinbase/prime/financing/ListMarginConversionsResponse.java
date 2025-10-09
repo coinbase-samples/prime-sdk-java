@@ -24,10 +24,6 @@ public class ListMarginConversionsResponse {
     public ListMarginConversionsResponse() {
     }
 
-    public ListMarginConversionsResponse(Builder builder) {
-        this.conversions = builder.conversions;
-    }
-
     public Conversion[] getConversions() {
         return conversions;
     }
@@ -36,19 +32,4 @@ public class ListMarginConversionsResponse {
         this.conversions = conversions;
     }
 
-    public static class Builder {
-        private Conversion[] conversions;
-
-        public Builder() {
-        }
-
-        public Builder conversions(Conversion[] conversions) {
-            this.conversions = conversions;
-            return this;
-        }
-
-        public ListMarginConversionsResponse build() {
-            return new ListMarginConversionsResponse(this);
-        }
-    }
 }

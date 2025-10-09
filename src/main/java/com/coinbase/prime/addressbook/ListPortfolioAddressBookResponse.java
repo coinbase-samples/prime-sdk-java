@@ -26,11 +26,6 @@ public class ListPortfolioAddressBookResponse {
     public ListPortfolioAddressBookResponse() {
     }
 
-    public ListPortfolioAddressBookResponse(Builder builder) {
-        this.addresses = builder.addresses;
-        this.pagination = builder.pagination;
-    }
-
     public AddressBookEntry[] getAddresses() {
         return addresses;
     }
@@ -47,22 +42,4 @@ public class ListPortfolioAddressBookResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private AddressBookEntry[] addresses;
-        private Pagination pagination;
-
-        public Builder addresses(AddressBookEntry[] addresses) {
-            this.addresses = addresses;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioAddressBookResponse build() {
-            return new ListPortfolioAddressBookResponse(this);
-        }
-    }
 }

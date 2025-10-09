@@ -25,29 +25,6 @@ public class CreateNewLocatesResponse {
   public CreateNewLocatesResponse() {
   }
 
-  public CreateNewLocatesResponse(Builder builder) {
-    this.locateId = builder.locateId;
-  }
-
-  public String getLocateId() {
-    return locateId;
-  }
-
-  public void setLocateId(String locateId) {
-    this.locateId = locateId;
-  }
-
-  public static class Builder {
-    private String locateId;
-
-    public Builder() {
-    }
-
-    public Builder locateId(String locateId) {
-      this.locateId = locateId;
-      return this;
-    }
-
     public CreateNewLocatesResponse build() {
       return new CreateNewLocatesResponse(this);
     }

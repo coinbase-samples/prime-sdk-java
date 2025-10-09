@@ -24,10 +24,6 @@ public class ListInvoicesResponse {
     public ListInvoicesResponse() {
     }
 
-    public ListInvoicesResponse(Builder builder) {
-        this.invoices = builder.invoices;
-    }
-
     public Invoice[] getInvoices() {
         return invoices;
     }
@@ -36,16 +32,4 @@ public class ListInvoicesResponse {
         this.invoices = invoices;
     }
 
-    public static class Builder {
-        private Invoice[] invoices;
-
-        public Builder invoices(Invoice[] invoices) {
-            this.invoices = invoices;
-            return this;
-        }
-
-        public ListInvoicesResponse build() {
-            return new ListInvoicesResponse(this);
-        }
-    }
 }

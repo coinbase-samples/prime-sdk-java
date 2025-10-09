@@ -26,10 +26,6 @@ public class GetEntityPaymentMethodDetailsResponse {
     public GetEntityPaymentMethodDetailsResponse() {
     }
 
-    public GetEntityPaymentMethodDetailsResponse(Builder builder) {
-        this.details = builder.details;
-    }
-
     public PaymentMethodDetails getDetails() {
         return details;
     }
@@ -38,19 +34,4 @@ public class GetEntityPaymentMethodDetailsResponse {
         this.details = details;
     }
 
-    public static class Builder {
-        private PaymentMethodDetails details;
-
-        public Builder() {
-        }
-
-        public Builder details(PaymentMethodDetails details) {
-            this.details = details;
-            return this;
-        }
-
-        public GetEntityPaymentMethodDetailsResponse build() {
-            return new GetEntityPaymentMethodDetailsResponse(this);
-        }
-    }
 }

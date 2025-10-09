@@ -27,11 +27,6 @@ public class ScheduleEntityFuturesSweepResponse {
     public ScheduleEntityFuturesSweepResponse() {
     }
 
-    public ScheduleEntityFuturesSweepResponse(Builder builder) {
-        this.success = builder.success;
-        this.requestId = builder.requestId;
-    }
-
     public boolean getSuccess() {
         return success;
     }
@@ -48,20 +43,4 @@ public class ScheduleEntityFuturesSweepResponse {
         this.requestId = requestId;
     }
 
-    public static class Builder {
-        private boolean success;
-        private String requestId;
-
-        public Builder() {
-        }
-
-        public Builder success(boolean success) {
-            this.success = success;
-            return this;
-        }
-
-        public ScheduleEntityFuturesSweepResponse build() {
-            return new ScheduleEntityFuturesSweepResponse(this);
-        }
-    }
 }

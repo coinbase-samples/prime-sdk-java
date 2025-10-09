@@ -27,10 +27,6 @@ public class GetPortfolioCounterpartyIdResponse {
     public GetPortfolioCounterpartyIdResponse() {
     }
 
-    public GetPortfolioCounterpartyIdResponse(Builder builder) {
-        this.counterparty = builder.counterparty;
-    }
-
     public Counterparty getCounterparty() {
         return counterparty;
     }
@@ -39,19 +35,4 @@ public class GetPortfolioCounterpartyIdResponse {
         this.counterparty = counterparty;
     }
 
-    public static class Builder {
-        private Counterparty counterparty;
-
-        public Builder() {
-        }
-
-        public Builder counterparty(Counterparty counterparty) {
-            this.counterparty = counterparty;
-            return this;
-        }
-
-        public GetPortfolioCounterpartyIdResponse build() {
-            return new GetPortfolioCounterpartyIdResponse(this);
-        }
-    }
 }

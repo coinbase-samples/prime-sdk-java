@@ -32,15 +32,6 @@ public class CreateConversionResponse {
     public CreateConversionResponse() {
     }
 
-    public CreateConversionResponse(Builder builder) {
-        this.activityId = builder.activityId;
-        this.sourceSymbol = builder.sourceSymbol;
-        this.destinationSymbol = builder.destinationSymbol;
-        this.amount = builder.amount;
-        this.destination = builder.destination;
-        this.source = builder.source;
-    }
-
     public String getActivityId() {
         return activityId;
     }
@@ -89,49 +80,4 @@ public class CreateConversionResponse {
         this.source = source;
     }
 
-    public static class Builder {
-        private String activityId;
-        private String sourceSymbol;
-        private String destinationSymbol;
-        private String amount;
-        private String destination;
-        private String source;
-
-        public Builder() {
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public Builder sourceSymbol(String sourceSymbol) {
-            this.sourceSymbol = sourceSymbol;
-            return this;
-        }
-
-        public Builder destinationSymbol(String destinationSymbol) {
-            this.destinationSymbol = destinationSymbol;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder destination(String destination) {
-            this.destination = destination;
-            return this;
-        }
-
-        public Builder source(String source) {
-            this.source = source;
-            return this;
-        }
-
-        public CreateConversionResponse build() {
-            return new CreateConversionResponse(this);
-        }
-    }
 }

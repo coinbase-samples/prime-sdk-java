@@ -28,10 +28,6 @@ public class GetWalletBalanceResponse {
     public GetWalletBalanceResponse() {
     }
 
-    public GetWalletBalanceResponse(Builder builder) {
-        this.balance = builder.balance;
-    }
-
     public Balance getBalance() {
         return balance;
     }
@@ -40,19 +36,4 @@ public class GetWalletBalanceResponse {
         this.balance = balance;
     }
 
-    public static class Builder {
-        private Balance balance;
-
-        public Builder() {
-        }
-
-        public Builder balance(Balance balance) {
-            this.balance = balance;
-            return this;
-        }
-
-        public GetWalletBalanceResponse build() {
-            return new GetWalletBalanceResponse(this);
-        }
-    }
 }

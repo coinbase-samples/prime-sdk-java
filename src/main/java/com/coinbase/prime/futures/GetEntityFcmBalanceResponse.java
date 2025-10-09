@@ -24,10 +24,6 @@ public class GetEntityFcmBalanceResponse {
     public GetEntityFcmBalanceResponse() {
     }
 
-    public GetEntityFcmBalanceResponse(Builder builder) {
-        this.fcmBalance = builder.fcmBalance;
-    }
-
     public FcmBalance getFcmBalance() {
         return fcmBalance;
     }
@@ -36,19 +32,4 @@ public class GetEntityFcmBalanceResponse {
         this.fcmBalance = fcmBalance;
     }
 
-    public static class Builder {
-        private FcmBalance fcmBalance;
-
-        public Builder() {
-        }
-
-        public Builder fcmBalance(FcmBalance fcmBalance) {
-            this.fcmBalance = fcmBalance;
-            return this;
-        }
-
-        public GetEntityFcmBalanceResponse build() {
-            return new GetEntityFcmBalanceResponse(this);
-        }
-    }
 }

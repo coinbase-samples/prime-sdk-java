@@ -31,11 +31,6 @@ public class GetPositionsResponse {
     public GetPositionsResponse() {
     }
 
-    public GetPositionsResponse(Builder builder) {
-        this.positions = builder.positions;
-        this.clearingAccountId = builder.clearingAccountId;
-    }
-
     public FcmPosition[] getPositions() {
         return positions;
     }
@@ -52,25 +47,4 @@ public class GetPositionsResponse {
         this.clearingAccountId = clearingAccountId;
     }
 
-    public static class Builder {
-        private FcmPosition[] positions;
-        private String clearingAccountId;
-
-        public Builder() {
-        }
-
-        public Builder positions(FcmPosition[] positions) {
-            this.positions = positions;
-            return this;
-        }
-
-        public Builder clearingAccountId(String clearingAccountId) {
-            this.clearingAccountId = clearingAccountId;
-            return this;
-        }
-
-        public GetPositionsResponse build() {
-            return new GetPositionsResponse(this);
-        }
-    }
 }

@@ -49,15 +49,6 @@ public class CreateNetAllocationResponse {
     public CreateNetAllocationResponse() {
     }
 
-    public CreateNetAllocationResponse(Builder builder) {
-        this.success = builder.success;
-        this.nettingId = builder.nettingId;
-        this.buyAllocationId = builder.buyAllocationId;
-        this.sellAllocationId = builder.sellAllocationId;
-        this.failureReason = builder.failureReason;
-        this.request = builder.request;
-    }
-
     public boolean isSuccess() {
         return success;
     }
@@ -106,60 +97,4 @@ public class CreateNetAllocationResponse {
         this.request = request;
     }
 
-    public static class Builder {
-        /** Success status */
-        private boolean success;
-        
-        /** Netting identifier */
-        private String nettingId;
-        
-        /** Buy allocation identifier */
-        private String buyAllocationId;
-        
-        /** Sell allocation identifier */
-        private String sellAllocationId;
-        
-        /** Failure reason */
-        private String failureReason;
-
-        /** Original request */
-        private CreateNetAllocationRequest request;
-
-        public Builder() {
-        }
-
-        public Builder success(boolean success) {
-            this.success = success;
-            return this;
-        }
-
-        public Builder nettingId(String nettingId) {
-            this.nettingId = nettingId;
-            return this;
-        }
-
-        public Builder buyAllocationId(String buyAllocationId) {
-            this.buyAllocationId = buyAllocationId;
-            return this;
-        }
-
-        public Builder sellAllocationId(String sellAllocationId) {
-            this.sellAllocationId = sellAllocationId;
-            return this;
-        }
-
-        public Builder failureReason(String failureReason) {
-            this.failureReason = failureReason;
-            return this;
-        }
-
-        public Builder request(CreateNetAllocationRequest request) {
-            this.request = request;
-            return this;
-        }
-
-        public CreateNetAllocationResponse build() {
-            return new CreateNetAllocationResponse(this);
-        }
-    }
 }

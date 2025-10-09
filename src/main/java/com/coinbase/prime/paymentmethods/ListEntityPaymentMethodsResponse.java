@@ -26,10 +26,6 @@ public class ListEntityPaymentMethodsResponse {
     public ListEntityPaymentMethodsResponse() {
     }
 
-    public ListEntityPaymentMethodsResponse(Builder builder) {
-        this.paymentMethods = builder.paymentMethods;
-    }
-
     public PaymentMethodSummary[] getPaymentMethods() {
         return paymentMethods;
     }
@@ -38,19 +34,4 @@ public class ListEntityPaymentMethodsResponse {
         this.paymentMethods = paymentMethods;
     }
 
-    public static class Builder {
-        private PaymentMethodSummary[] paymentMethods;
-
-        public Builder() {
-        }
-
-        public Builder paymentMethods(PaymentMethodSummary[] paymentMethods) {
-            this.paymentMethods = paymentMethods;
-            return this;
-        }
-
-        public ListEntityPaymentMethodsResponse build() {
-            return new ListEntityPaymentMethodsResponse(this);
-        }
-    }
 }

@@ -37,12 +37,6 @@ public class GetPortfolioAllocationsResponse {
     public GetPortfolioAllocationsResponse() {
     }
 
-    public GetPortfolioAllocationsResponse(Builder builder) {
-        this.allocations = builder.allocations;
-        this.pagination = builder.pagination;
-        this.request = builder.request;
-    }
-
     public Allocation[] getAllocations() {
         return allocations;
     }
@@ -67,36 +61,4 @@ public class GetPortfolioAllocationsResponse {
         this.request = request;
     }
 
-    public static class Builder {
-        /** List of allocations */
-        private Allocation[] allocations;
-        
-        /** Pagination information */
-        private Pagination pagination;
-
-        /** Original request */
-        private GetPortfolioAllocationsRequest request;
-
-        public Builder() {
-        }
-
-        public Builder allocations(Allocation[] allocations) {
-            this.allocations = allocations;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public Builder request(GetPortfolioAllocationsRequest request) {
-            this.request = request;
-            return this;
-        }
-
-        public GetPortfolioAllocationsResponse build() {
-            return new GetPortfolioAllocationsResponse(this);
-        }
-    }
 }

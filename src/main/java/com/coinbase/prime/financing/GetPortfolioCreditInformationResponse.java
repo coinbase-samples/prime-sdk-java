@@ -24,10 +24,6 @@ public class GetPortfolioCreditInformationResponse {
     public GetPortfolioCreditInformationResponse() {
     }
 
-    public GetPortfolioCreditInformationResponse(Builder builder) {
-        this.postTradeCredit = builder.postTradeCredit;
-    }
-
     public PostTradeCreditInformation getPostTradeCredit() {
         return postTradeCredit;
     }
@@ -36,19 +32,4 @@ public class GetPortfolioCreditInformationResponse {
         this.postTradeCredit = postTradeCredit;
     }
 
-    public static class Builder {
-        private PostTradeCreditInformation postTradeCredit;
-
-        public Builder() {
-        }
-
-        public Builder postTradeCredit(PostTradeCreditInformation postTradeCredit) {
-            this.postTradeCredit = postTradeCredit;
-            return this;
-        }
-
-        public GetPortfolioCreditInformationResponse build() {
-            return new GetPortfolioCreditInformationResponse(this);
-        }
-    }
 }

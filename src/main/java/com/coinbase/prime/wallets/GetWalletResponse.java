@@ -30,10 +30,6 @@ public class GetWalletResponse {
     public GetWalletResponse() {
     }
 
-    public GetWalletResponse(Builder builder) {
-        this.wallet = builder.wallet;
-    }
-
     public Wallet getWallet() {
         return wallet;
     }
@@ -42,17 +38,4 @@ public class GetWalletResponse {
         this.wallet = wallet;
     }
 
-    public static class Builder {
-        /** The wallet information */
-        private Wallet wallet;
-
-        public Builder wallet(Wallet wallet) {
-            this.wallet = wallet;
-            return this;
-        }
-
-        public GetWalletResponse build() {
-            return new GetWalletResponse(this);
-        }
-    }
 }

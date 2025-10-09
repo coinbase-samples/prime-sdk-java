@@ -34,11 +34,6 @@ public class GetWalletDepositInstructionsResponse {
     public GetWalletDepositInstructionsResponse() {
     }
 
-    public GetWalletDepositInstructionsResponse(Builder builder) {
-        this.cryptoDepositInstructions = builder.cryptoDepositInstructions;
-        this.fiatDepositInstructions = builder.fiatDepositInstructions;
-    }
-
     public CryptoDepositInstructions getCryptoDepositInstructions() {
         return cryptoDepositInstructions;
     }
@@ -55,27 +50,4 @@ public class GetWalletDepositInstructionsResponse {
         this.fiatDepositInstructions = fiatDepositInstructions;
     }
 
-    public static class Builder {
-        /** Crypto deposit instructions */
-        private CryptoDepositInstructions cryptoDepositInstructions;
-        /** Fiat deposit instructions */
-        private FiatDepositInstructions fiatDepositInstructions;
-
-        public Builder() {
-        }
-
-        public Builder cryptoDepositInstructions(CryptoDepositInstructions cryptoDepositInstructions) {
-            this.cryptoDepositInstructions = cryptoDepositInstructions;
-            return this;
-        }
-
-        public Builder fiatDepositInstructions(FiatDepositInstructions fiatDepositInstructions) {
-            this.fiatDepositInstructions = fiatDepositInstructions;
-            return this;
-        }
-
-        public GetWalletDepositInstructionsResponse build() {
-            return new GetWalletDepositInstructionsResponse(this);
-        }
-    }
 }

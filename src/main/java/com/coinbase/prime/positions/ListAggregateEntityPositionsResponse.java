@@ -32,11 +32,6 @@ public class ListAggregateEntityPositionsResponse {
         this.pagination = pagination;
     }
 
-    public ListAggregateEntityPositionsResponse(Builder builder) {
-        this.positions = builder.positions;
-        this.pagination = builder.pagination;
-    }
-
     public Position[] getPositions() {
         return positions;
     }
@@ -53,25 +48,4 @@ public class ListAggregateEntityPositionsResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Position[] positions;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder withPositions(Position[] positions) {
-            this.positions = positions;
-            return this;
-        }
-
-        public Builder withPagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListAggregateEntityPositionsResponse build() {
-            return new ListAggregateEntityPositionsResponse(this);
-        }
-    }
 }

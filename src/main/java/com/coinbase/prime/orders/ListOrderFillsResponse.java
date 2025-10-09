@@ -26,11 +26,6 @@ public class ListOrderFillsResponse {
     public ListOrderFillsResponse() {
     }
 
-    public ListOrderFillsResponse(Builder builder) {
-        this.fills = builder.fills;
-        this.pagination = builder.pagination;
-    }
-
     public OrderFill[] getFills() {
         return fills;
     }
@@ -47,25 +42,4 @@ public class ListOrderFillsResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private OrderFill[] fills;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder fills(OrderFill[] fills) {
-            this.fills = fills;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListOrderFillsResponse build() {
-            return new ListOrderFillsResponse(this);
-        }
-    }
 }

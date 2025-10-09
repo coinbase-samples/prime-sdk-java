@@ -44,20 +44,6 @@ public class CreateWalletWithdrawalResponse {
     public CreateWalletWithdrawalResponse() {
     }
 
-    public CreateWalletWithdrawalResponse(Builder builder) {
-        this.activityId = builder.activityId;
-        this.approvalUrl = builder.approvalUrl;
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.fee = builder.fee;
-        this.destinationType = builder.destinationType;
-        this.sourceType = builder.sourceType;
-        this.blockchainDestination = builder.blockchainDestination;
-        this.counterpartyDestination = builder.counterpartyDestination;
-        this.blockchainSource = builder.blockchainSource;
-        this.transactionId = builder.transactionId;
-    }
-
     public String getActivityId() {
         return activityId;
     }
@@ -146,76 +132,4 @@ public class CreateWalletWithdrawalResponse {
         this.transactionId = transactionId;
     }
 
-    public static class Builder {
-        private String activityId;
-        private String approvalUrl;
-        private String symbol;
-        private String amount;
-        private String fee;
-        private String destinationType;
-        private String sourceType;
-        private BlockchainAddress blockchainDestination;
-        private CounterpartyDestination counterpartyDestination;
-        private BlockchainAddress blockchainSource;
-        private String transactionId;
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public Builder approvalUrl(String approvalUrl) {
-            this.approvalUrl = approvalUrl;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder fee(String fee) {
-            this.fee = fee;
-            return this;
-        }
-
-        public Builder destinationType(String destinationType) {
-            this.destinationType = destinationType;
-            return this;
-        }
-
-        public Builder sourceType(String sourceType) {
-            this.sourceType = sourceType;
-            return this;
-        }
-
-        public Builder blockchainDestination(BlockchainAddress blockchainDestination) {
-            this.blockchainDestination = blockchainDestination;
-            return this;
-        }
-
-        public Builder counterpartyDestination(CounterpartyDestination counterpartyDestination) {
-            this.counterpartyDestination = counterpartyDestination;
-            return this;
-        }
-
-        public Builder blockchainSource(BlockchainAddress blockchainSource) {
-            this.blockchainSource = blockchainSource;
-            return this;
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public CreateWalletWithdrawalResponse build() {
-            return new CreateWalletWithdrawalResponse(this);
-        }
-    }
 }

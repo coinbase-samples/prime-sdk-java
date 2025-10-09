@@ -30,10 +30,6 @@ public class GetAllocationResponse {
     public GetAllocationResponse() {
     }
 
-    public GetAllocationResponse(Builder builder) {
-        this.allocation = builder.allocation;
-    }
-
     public Allocation getAllocation() {
         return allocation;
     }
@@ -42,20 +38,4 @@ public class GetAllocationResponse {
         this.allocation = allocation;
     }
 
-    public static class Builder {
-        /** The allocation details */
-        private Allocation allocation;
-
-        public Builder() {
-        }
-
-        public Builder allocation(Allocation allocation) {
-            this.allocation = allocation;
-            return this;
-        }
-
-        public GetAllocationResponse build() {
-            return new GetAllocationResponse(this);
-        }
-    }
 }

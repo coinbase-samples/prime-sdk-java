@@ -62,31 +62,4 @@ public class DeleteOnchainAddressGroupResponse {
         this.activityId = activityId;
     }
 
-    public static class Builder {
-        private CustodyActivityType activityType;
-        private int numApprovalsRemaining;
-        private String activityId;
-
-        public Builder() {
-        }
-
-        public DeleteOnchainAddressGroupResponse.Builder activityType(CustodyActivityType activityType) {
-            this.activityType = activityType;
-            return this;
-        }
-
-        public DeleteOnchainAddressGroupResponse.Builder numApprovalsRemaining(int numApprovalsRemaining) {
-            this.numApprovalsRemaining = numApprovalsRemaining;
-            return this;
-        }
-
-        public DeleteOnchainAddressGroupResponse.Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public DeleteOnchainAddressGroupResponse build() {
-            return new DeleteOnchainAddressGroupResponse(this);
-        }
-    }
 }

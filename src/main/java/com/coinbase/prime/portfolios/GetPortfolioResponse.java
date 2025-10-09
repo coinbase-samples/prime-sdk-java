@@ -24,10 +24,6 @@ public class GetPortfolioResponse {
     public GetPortfolioResponse() {
     }
 
-    public GetPortfolioResponse(Builder builder) {
-        this.portfolio = builder.portfolio;
-    }
-
     public Portfolio getPortfolio() {
         return portfolio;
     }
@@ -36,16 +32,4 @@ public class GetPortfolioResponse {
         this.portfolio = portfolio;
     }
 
-    public static class Builder {
-        private Portfolio portfolio;
-
-        public Builder portfolio(Portfolio portfolio) {
-            this.portfolio = portfolio;
-            return this;
-        }
-
-        public GetPortfolioResponse build() {
-            return new GetPortfolioResponse(this);
-        }
-    }
 }

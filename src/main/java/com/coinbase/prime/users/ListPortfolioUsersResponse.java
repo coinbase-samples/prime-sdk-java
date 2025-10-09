@@ -26,11 +26,6 @@ public class ListPortfolioUsersResponse {
     public ListPortfolioUsersResponse() {
     }
 
-    public ListPortfolioUsersResponse(Builder builder) {
-        this.users = builder.users;
-        this.pagination = builder.pagination;
-    }
-
     public EntityUser[] getUsers() {
         return users;
     }
@@ -47,25 +42,4 @@ public class ListPortfolioUsersResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private EntityUser[] users;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder users(EntityUser[] users) {
-            this.users = users;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioUsersResponse build() {
-            return new ListPortfolioUsersResponse(this);
-        }
-    }
 }

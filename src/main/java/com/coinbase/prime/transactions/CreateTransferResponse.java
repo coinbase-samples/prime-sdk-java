@@ -38,18 +38,6 @@ public class CreateTransferResponse {
     public CreateTransferResponse() {
     }
 
-    public CreateTransferResponse(Builder builder) {
-        this.activityId = builder.activityId;
-        this.approvalUrl = builder.approvalUrl;
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.fee = builder.fee;
-        this.destinationAddress = builder.destinationAddress;
-        this.destinationType = builder.destinationType;
-        this.sourceAddress = builder.sourceAddress;
-        this.transactionId = builder.transactionId;
-    }
-
     public String getActivityId() {
         return activityId;
     }
@@ -122,67 +110,4 @@ public class CreateTransferResponse {
         this.transactionId = transactionId;
     }
 
-    public static class Builder {
-        private String activityId;
-        private String approvalUrl;
-        private String symbol;
-        private String amount;
-        private String fee;
-        private String destinationAddress;
-        private String destinationType;
-        private String sourceAddress;
-        private String transactionId;
-
-        public Builder() {
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public Builder approvalUrl(String approvalUrl) {
-            this.approvalUrl = approvalUrl;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder fee(String fee) {
-            this.fee = fee;
-            return this;
-        }
-
-        public Builder destinationAddress(String destinationAddress) {
-            this.destinationAddress = destinationAddress;
-            return this;
-        }
-
-        public Builder destinationType(String destinationType) {
-            this.destinationType = destinationType;
-            return this;
-        }
-
-        public Builder sourceAddress(String sourceAddress) {
-            this.sourceAddress = sourceAddress;
-            return this;
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public CreateTransferResponse build() {
-            return new CreateTransferResponse(this);
-        }
-    }
 }

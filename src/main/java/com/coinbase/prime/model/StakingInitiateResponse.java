@@ -31,12 +31,6 @@ public class StakingInitiateResponse {
     public StakingInitiateResponse() {
     }
 
-    public StakingInitiateResponse(Builder builder) {
-        this.walletId = builder.walletId;
-        this.transactionId = builder.transactionId;
-        this.activityId = builder.activityId;
-    }
-
     public String getWalletId() {
         return walletId;
     }
@@ -61,31 +55,4 @@ public class StakingInitiateResponse {
         this.activityId = activityId;
     }
 
-    public static class Builder {
-        private String walletId;
-        private String transactionId;
-        private String activityId;
-
-        public Builder() {
-        }
-
-        public Builder walletId(String walletId) {
-            this.walletId = walletId;
-            return this;
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public StakingInitiateResponse build() {
-            return new StakingInitiateResponse(this);
-        }
-    }
 }

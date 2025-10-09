@@ -32,28 +32,5 @@ public class AcceptQuoteResponse {
   public AcceptQuoteResponse() {
   }
 
-  public AcceptQuoteResponse(Builder builder) {
-    this.orderId = builder.orderId;
-  }
-
-  public String getOrderId() {
-    return orderId;
-  }
-
-  public void setOrderId(String orderId) {
-    this.orderId = orderId;
-  }
-
-  public static class Builder {
-    private String orderId;
-
-    public Builder orderId(String orderId) {
-      this.orderId = orderId;
-      return this;
-    }
-
-    public AcceptQuoteResponse build() {
-      return new AcceptQuoteResponse(this);
-    }
   }
 }

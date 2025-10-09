@@ -31,11 +31,6 @@ public class ListOnchainWalletBalancesResponse {
     public ListOnchainWalletBalancesResponse() {
     }
 
-    public ListOnchainWalletBalancesResponse(Builder builder) {
-        this.balances = builder.balances;
-        this.pagination = builder.pagination;
-    }
-
     public OnchainWalletBalance[] getBalances() {
         return balances;
     }
@@ -52,25 +47,4 @@ public class ListOnchainWalletBalancesResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private OnchainWalletBalance[] balances;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder balances(OnchainWalletBalance[] balances) {
-            this.balances = balances;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListOnchainWalletBalancesResponse build() {
-            return new ListOnchainWalletBalancesResponse(this);
-        }
-    }
 }

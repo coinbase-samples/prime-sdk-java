@@ -30,10 +30,6 @@ public class GetOrderByOrderIdResponse {
     public GetOrderByOrderIdResponse() {
     }
 
-    public GetOrderByOrderIdResponse(Builder builder) {
-        this.order = builder.order;
-    }
-
     public Order getOrder() {
         return order;
     }
@@ -42,19 +38,4 @@ public class GetOrderByOrderIdResponse {
         this.order = order;
     }
 
-    public static class Builder {
-        private Order order;
-
-        public Builder() {
-        }
-
-        public Builder order(Order order) {
-            this.order = order;
-            return this;
-        }
-
-        public GetOrderByOrderIdResponse build() {
-            return new GetOrderByOrderIdResponse(this);
-        }
-    }
 }

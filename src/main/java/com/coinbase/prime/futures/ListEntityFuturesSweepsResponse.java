@@ -28,11 +28,6 @@ public class ListEntityFuturesSweepsResponse {
     public ListEntityFuturesSweepsResponse() {
     }
 
-    public ListEntityFuturesSweepsResponse(Builder builder) {
-        this.sweeps = builder.sweeps;
-        this.autoSweep = builder.autoSweep;
-    }
-
     public Sweep[] getSweeps() {
         return sweeps;
     }
@@ -49,25 +44,3 @@ public class ListEntityFuturesSweepsResponse {
         this.autoSweep = autoSweep;
     }
 
-    public static class Builder {
-        private Sweep[] sweeps;
-        private boolean autoSweep;
-
-        public Builder() {
-        }
-
-        public Builder sweeps(Sweep[] sweeps) {
-            this.sweeps = sweeps;
-            return this;
-        }
-
-        public Builder autoSweep(boolean autoSweep) {
-            this.autoSweep = autoSweep;
-            return this;
-        }
-
-        public ListEntityFuturesSweepsResponse build() {
-            return new ListEntityFuturesSweepsResponse(this);
-        }        
-    }   
-}

@@ -31,10 +31,6 @@ public class CreateOrderResponse {
     public CreateOrderResponse() {
     }
 
-    public CreateOrderResponse(Builder builder) {
-        this.orderId = builder.orderId;
-    }
-
     public String getOrderId() {
         return orderId;
     }
@@ -43,19 +39,4 @@ public class CreateOrderResponse {
         this.orderId = orderId;
     }
 
-    public static class Builder {
-        private String orderId;
-
-        public Builder() {
-        }
-
-        public Builder orderId(String orderId) {
-            this.orderId = orderId;
-            return this;
-        }
-
-        public CreateOrderResponse build() {
-            return new CreateOrderResponse(this);
-        }
-    }
 }

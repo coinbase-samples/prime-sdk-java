@@ -24,10 +24,6 @@ public class GetEntityLocateAvailabilitiesResponse {
     public GetEntityLocateAvailabilitiesResponse() {
     }
 
-    public GetEntityLocateAvailabilitiesResponse(Builder builder) {
-        this.locates = builder.locates;
-    }
-
     public Locate[] getLocates() {
         return locates;
     }
@@ -36,19 +32,4 @@ public class GetEntityLocateAvailabilitiesResponse {
         this.locates = locates;
     }
 
-    public static class Builder {
-        private Locate[] locates;
-
-        public Builder() {
-        }
-
-        public Builder locates(Locate[] locates) {
-            this.locates = locates;
-            return this;
-        }
-
-        public GetEntityLocateAvailabilitiesResponse build() {
-            return new GetEntityLocateAvailabilitiesResponse(this);
-        }
-    }
 }

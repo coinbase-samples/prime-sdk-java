@@ -28,10 +28,6 @@ public class GetPortfolioCommissionResponse {
     public GetPortfolioCommissionResponse() {
     }
 
-    public GetPortfolioCommissionResponse(Builder builder) {
-        this.commission = builder.commission;
-    }
-
     public Commission getCommission() {
         return commission;
     }
@@ -40,19 +36,4 @@ public class GetPortfolioCommissionResponse {
         this.commission = commission;
     }
 
-    public static class Builder {
-        private Commission commission;
-
-        public Builder() {
-        }
-
-        public Builder commission(Commission commission) {
-            this.commission = commission;
-            return this;
-        }
-
-        public GetPortfolioCommissionResponse build() {
-            return new GetPortfolioCommissionResponse(this);
-        }
-    }
 }

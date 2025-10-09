@@ -38,19 +38,4 @@ public class GetPortfolioWithdrawalPowerResponse {
         this.withdrawalPower = withdrawalPower;
     }
 
-    public static class Builder {
-        private WithdrawalPower withdrawalPower;
-
-        public Builder() {
-        }
-
-        public GetPortfolioWithdrawalPowerResponse.Builder withWithdrawalPower(WithdrawalPower withdrawalPower) {
-            this.withdrawalPower = withdrawalPower;
-            return this;
-        }
-
-        public GetPortfolioWithdrawalPowerResponse build() {
-            return new GetPortfolioWithdrawalPowerResponse(this);
-        }
-    }
 }

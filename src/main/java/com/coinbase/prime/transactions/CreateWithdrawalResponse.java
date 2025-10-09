@@ -42,19 +42,6 @@ public class CreateWithdrawalResponse {
     public CreateWithdrawalResponse() {
     }
 
-    public CreateWithdrawalResponse(Builder builder) {
-        this.activityId = builder.activityId;
-        this.approvalUrl = builder.approvalUrl;
-        this.symbol = builder.symbol;
-        this.amount = builder.amount;
-        this.fee = builder.fee;
-        this.destinationType = builder.destinationType;
-        this.sourceType = builder.sourceType;
-        this.blockchainDestination = builder.blockchainDestination;
-        this.blockchainSource = builder.blockchainSource;
-        this.transactionId = builder.transactionId;
-    }
-
     public String getActivityId() {
         return activityId;
     }
@@ -135,73 +122,4 @@ public class CreateWithdrawalResponse {
         this.transactionId = transactionId;
     }
 
-    public static class Builder {
-        private String activityId;
-        private String approvalUrl;
-        private String symbol;
-        private String amount;
-        private String fee;
-        private DestinationType destinationType;
-        private String sourceType;
-        private BlockchainAddress blockchainDestination;
-        private BlockchainAddress blockchainSource;
-        private String transactionId;
-
-        public Builder() {
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public Builder approvalUrl(String approvalUrl) {
-            this.approvalUrl = approvalUrl;
-            return this;
-        }
-
-        public Builder symbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder fee(String fee) {
-            this.fee = fee;
-            return this;
-        }
-
-        public Builder destinationType(DestinationType destinationType) {
-            this.destinationType = destinationType;
-            return this;
-        }
-
-        public Builder sourceType(String sourceType) {
-            this.sourceType = sourceType;
-            return this;
-        }
-
-        public Builder blockchainDestination(BlockchainAddress blockchainDestination) {
-            this.blockchainDestination = blockchainDestination;
-            return this;
-        }
-
-        public Builder blockchainSource(BlockchainAddress blockchainSource) {
-            this.blockchainSource = blockchainSource;
-            return this;
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public CreateWithdrawalResponse build() {
-            return new CreateWithdrawalResponse(this);
-        }
-    }
 }

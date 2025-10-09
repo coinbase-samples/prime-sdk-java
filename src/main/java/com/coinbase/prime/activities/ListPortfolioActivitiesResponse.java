@@ -34,11 +34,6 @@ public class ListPortfolioActivitiesResponse {
     public ListPortfolioActivitiesResponse() {
     }
 
-    public ListPortfolioActivitiesResponse(Builder builder) {
-        this.activities = builder.activities;
-        this.pagination = builder.pagination;
-    }
-
     public Activity[] getActivities() {
         return activities;
     }
@@ -55,25 +50,4 @@ public class ListPortfolioActivitiesResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        /** List of activities */
-        private Activity[] activities;
-        
-        /** Pagination information */
-        private Pagination pagination;
-
-        public Builder activities(Activity[] activities) {
-            this.activities = activities;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioActivitiesResponse build() {
-            return new ListPortfolioActivitiesResponse(this);
-        }
-    }
 }

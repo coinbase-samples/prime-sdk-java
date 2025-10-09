@@ -28,11 +28,6 @@ public class PortfolioStakingInitiateResponse {
     public PortfolioStakingInitiateResponse() {
     }
 
-    public PortfolioStakingInitiateResponse(Builder builder) {
-        this.activityId = builder.activityId;
-        this.transactionId = builder.transactionId;
-    }
-
     public String getActivityId() {
         return activityId;
     }
@@ -49,25 +44,4 @@ public class PortfolioStakingInitiateResponse {
         this.transactionId = transactionId;
     }
 
-    public static class Builder {
-        private String activityId;
-        private String transactionId;
-
-        public Builder() {
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public PortfolioStakingInitiateResponse build() {
-            return new PortfolioStakingInitiateResponse(this);
-        }
-    }
 }

@@ -62,31 +62,4 @@ public class UpdateOnchainAddressBookEntryResponse {
         this.activityId = activityId;
     }
 
-    public static class Builder {
-        private CustodyActivityType activityType;
-        private int numApprovalsRemaining;
-        private String activityId;
-
-        public Builder() {
-        }
-
-        public UpdateOnchainAddressBookEntryResponse.Builder activityType(CustodyActivityType activityType) {
-            this.activityType = activityType;
-            return this;
-        }
-
-        public UpdateOnchainAddressBookEntryResponse.Builder numApprovalsRemaining(int numApprovalsRemaining) {
-            this.numApprovalsRemaining = numApprovalsRemaining;
-            return this;
-        }
-
-        public UpdateOnchainAddressBookEntryResponse.Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public UpdateOnchainAddressBookEntryResponse build() {
-            return new UpdateOnchainAddressBookEntryResponse(this);
-        }
-    }
 }

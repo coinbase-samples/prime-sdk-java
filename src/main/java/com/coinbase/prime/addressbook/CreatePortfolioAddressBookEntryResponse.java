@@ -29,12 +29,6 @@ public class CreatePortfolioAddressBookEntryResponse {
     public CreatePortfolioAddressBookEntryResponse() {
     }
 
-    public CreatePortfolioAddressBookEntryResponse(Builder builder) {
-        this.activityType = builder.activityType;
-        this.numApprovalsRemaining = builder.numApprovalsRemaining;
-        this.activityId = builder.activityId;
-    }
-
     public String getActivityType() {
         return activityType;
     }
@@ -59,28 +53,4 @@ public class CreatePortfolioAddressBookEntryResponse {
         this.activityId = activityId;
     }
 
-    public static class Builder {
-        private String activityType;
-        private Integer numApprovalsRemaining;
-        private String activityId;
-
-        public Builder activityType(String activityType) {
-            this.activityType = activityType;
-            return this;
-        }
-
-        public Builder numApprovalsRemaining(Integer numApprovalsRemaining) {
-            this.numApprovalsRemaining = numApprovalsRemaining;
-            return this;
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public CreatePortfolioAddressBookEntryResponse build() {
-            return new CreatePortfolioAddressBookEntryResponse(this);
-        }
-    }
 }

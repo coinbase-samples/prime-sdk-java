@@ -42,12 +42,6 @@ public class CreateAllocationResponse {
     public CreateAllocationResponse() {
     }
 
-    public CreateAllocationResponse(Builder builder) {
-        this.success = builder.success;
-        this.allocationId = builder.allocationId;
-        this.failureReason = builder.failureReason;
-    }
-
     public boolean isSuccess() {
         return success;
     }
@@ -72,36 +66,4 @@ public class CreateAllocationResponse {
         this.failureReason = failureReason;
     }
 
-    public static class Builder {
-        /** Success status */
-        private boolean success;
-        
-        /** Allocation identifier */
-        private String allocationId;
-        
-        /** Failure reason */
-        private String failureReason;
-
-        public Builder() {
-        }
-
-        public Builder success(boolean success) {
-            this.success = success;
-            return this;
-        }
-
-        public Builder allocationId(String allocationId) {
-            this.allocationId = allocationId;
-            return this;
-        }
-
-        public Builder failureReason(String failureReason) {
-            this.failureReason = failureReason;
-            return this;
-        }
-
-        public CreateAllocationResponse build() {
-            return new CreateAllocationResponse(this);
-        }
-    }
 }
