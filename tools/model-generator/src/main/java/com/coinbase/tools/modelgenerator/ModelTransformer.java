@@ -33,7 +33,7 @@ public class ModelTransformer {
     
     private static final String LICENSE_HEADER = 
         "/*\n" +
-        " * Copyright 2024-present Coinbase Global, Inc.\n" +
+        " * Copyright 2025-present Coinbase Global, Inc.\n" +
         " *\n" +
         " *  Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
         " *  you may not use this file except in compliance with the License.\n" +
@@ -189,7 +189,7 @@ public class ModelTransformer {
         
         // Generate the Java file
         JavaFile javaFile = JavaFile.builder(info.packageName, classBuilder.build())
-                .addFileComment("Copyright 2024-present Coinbase Global, Inc.\n\n" +
+                .addFileComment("Copyright 2025-present Coinbase Global, Inc.\n\n" +
                         " Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
                         " you may not use this file except in compliance with the License.\n" +
                         " You may obtain a copy of the License at\n\n" +
