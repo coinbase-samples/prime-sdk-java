@@ -21,10 +21,12 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface FuturesService {
     // Futures
-    SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetEntityPositionsResponse getEntityPositions(GetEntityPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;  
     ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(ScheduleEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -17,6 +17,10 @@
 package com.coinbase.prime.staking;
 
 public interface StakingService {
+    ClaimStakingRewardsResponse claimStakingRewards(ClaimStakingRewardsRequest request);
     CreateStakeResponse createStake(CreateStakeRequest request);
     CreateUnstakeResponse createUnstake(CreateUnstakeRequest request);
+    ListTransactionValidatorsResponse listTransactionValidators(ListTransactionValidatorsRequest request);
+    RequestToStakeResponse requestToStake(RequestToStakeRequest request);
+    RequestToUnstakeResponse requestToUnstake(RequestToUnstakeRequest request);
 }

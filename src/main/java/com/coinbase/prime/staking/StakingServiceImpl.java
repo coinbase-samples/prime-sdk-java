@@ -29,6 +29,16 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
     }
 
     @Override
+    public ClaimStakingRewardsResponse claimStakingRewards(ClaimStakingRewardsRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/staking/claim_rewards", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<ClaimStakingRewardsResponse>() {});
+    }
+
+    @Override
     public CreateStakeResponse createStake(CreateStakeRequest request) {
         return this.request(
                 HttpMethod.POST,
@@ -46,5 +56,35 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
                 request,
                 List.of(200),
                 new TypeReference<CreateUnstakeResponse>() {});
+    }
+
+    @Override
+    public ListTransactionValidatorsResponse listTransactionValidators(ListTransactionValidatorsRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/transaction-validators/query", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListTransactionValidatorsResponse>() {});
+    }
+
+    @Override
+    public RequestToStakeResponse requestToStake(RequestToStakeRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/initiate", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<RequestToStakeResponse>() {});
+    }
+
+    @Override
+    public RequestToUnstakeResponse requestToUnstake(RequestToUnstakeRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/unstake", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<RequestToUnstakeResponse>() {});
     }
 }

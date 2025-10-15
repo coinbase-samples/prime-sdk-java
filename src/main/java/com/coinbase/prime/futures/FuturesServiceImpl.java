@@ -60,6 +60,26 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     }
 
     @Override
+    public GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/futures/margin_call_details", request.getEntityId()),
+                null,
+                List.of(200),
+                new TypeReference<GetFcmMarginCallDetailsResponse>() {});
+    }
+
+    @Override
+    public GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/futures/risk_limits", request.getEntityId()),
+                null,
+                List.of(200),
+                new TypeReference<GetFcmRiskLimitsResponse>() {});
+    }
+
+    @Override
     public ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,

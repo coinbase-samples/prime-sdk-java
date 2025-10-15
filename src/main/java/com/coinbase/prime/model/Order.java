@@ -22,6 +22,8 @@ import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.model.enums.TimeInForce;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class Order {
     private String id;
     @JsonProperty("user_id")
@@ -66,6 +68,23 @@ public class Order {
     private String historicalPov;
     @JsonProperty("user_context")
     private String userContext;
+    @JsonProperty("client_product_id")
+    private String clientProductId;
+    @JsonProperty("post_only")
+    private Boolean postOnly;
+    @JsonProperty("order_edit_history")
+    @Deprecated
+    private List<DeprecatedOrderEditHistoryItem> orderEditHistory;
+    @JsonProperty("is_raise_exact")
+    private Boolean isRaiseExact;
+    @JsonProperty("display_size")
+    private String displaySize;
+    @JsonProperty("edit_history")
+    private List<OrderEditHistoryItem> editHistory;
+    @JsonProperty("display_quote_size")
+    private String displayQuoteSize;
+    @JsonProperty("display_base_size")
+    private String displayBaseSize;
 
     public Order() {
     }
@@ -95,6 +114,14 @@ public class Order {
         this.exchangeFee = builder.exchangeFee;
         this.historicalPov = builder.historicalPov;
         this.userContext = builder.userContext;
+        this.clientProductId = builder.clientProductId;
+        this.postOnly = builder.postOnly;
+        this.orderEditHistory = builder.orderEditHistory;
+        this.isRaiseExact = builder.isRaiseExact;
+        this.displaySize = builder.displaySize;
+        this.editHistory = builder.editHistory;
+        this.displayQuoteSize = builder.displayQuoteSize;
+        this.displayBaseSize = builder.displayBaseSize;
     }
 
     public String getId() {
@@ -289,6 +316,72 @@ public class Order {
         this.userContext = userContext;
     }
 
+    public String getClientProductId() {
+        return clientProductId;
+    }
+
+    public void setClientProductId(String clientProductId) {
+        this.clientProductId = clientProductId;
+    }
+
+    public Boolean getPostOnly() {
+        return postOnly;
+    }
+
+    public void setPostOnly(Boolean postOnly) {
+        this.postOnly = postOnly;
+    }
+
+    @Deprecated
+    public List<DeprecatedOrderEditHistoryItem> getOrderEditHistory() {
+        return orderEditHistory;
+    }
+
+    @Deprecated
+    public void setOrderEditHistory(List<DeprecatedOrderEditHistoryItem> orderEditHistory) {
+        this.orderEditHistory = orderEditHistory;
+    }
+
+    public Boolean getIsRaiseExact() {
+        return isRaiseExact;
+    }
+
+    public void setIsRaiseExact(Boolean isRaiseExact) {
+        this.isRaiseExact = isRaiseExact;
+    }
+
+    public String getDisplaySize() {
+        return displaySize;
+    }
+
+    public void setDisplaySize(String displaySize) {
+        this.displaySize = displaySize;
+    }
+
+    public List<OrderEditHistoryItem> getEditHistory() {
+        return editHistory;
+    }
+
+    public void setEditHistory(List<OrderEditHistoryItem> editHistory) {
+        this.editHistory = editHistory;
+    }
+
+    public String getDisplayQuoteSize() {
+        return displayQuoteSize;
+    }
+
+    public void setDisplayQuoteSize(String displayQuoteSize) {
+        this.displayQuoteSize = displayQuoteSize;
+    }
+
+    public String getDisplayBaseSize() {
+        return displayBaseSize;
+    }
+
+    public void setDisplayBaseSize(String displayBaseSize) {
+        this.displayBaseSize = displayBaseSize;
+    }
+
     public static class Builder {
         private String id;
         private String userId;
@@ -314,6 +407,14 @@ public class Order {
         private String exchangeFee;
         private String historicalPov;
         private String userContext;
+        private String clientProductId;
+        private Boolean postOnly;
+        private List<DeprecatedOrderEditHistoryItem> orderEditHistory;
+        private Boolean isRaiseExact;
+        private String displaySize;
+        private List<OrderEditHistoryItem> editHistory;
+        private String displayQuoteSize;
+        private String displayBaseSize;
 
         public Builder() {
         }
@@ -435,6 +536,47 @@ public class Order {
 
         public Builder userContext(String userContext) {
             this.userContext = userContext;
+            return this;
+        }
+
+        public Builder clientProductId(String clientProductId) {
+            this.clientProductId = clientProductId;
+            return this;
+        }
+
+        public Builder postOnly(Boolean postOnly) {
+            this.postOnly = postOnly;
+            return this;
+        }
+
+        @Deprecated
+        public Builder orderEditHistory(List<DeprecatedOrderEditHistoryItem> orderEditHistory) {
+            this.orderEditHistory = orderEditHistory;
+            return this;
+        }
+
+        public Builder isRaiseExact(Boolean isRaiseExact) {
+            this.isRaiseExact = isRaiseExact;
+            return this;
+        }
+
+        public Builder displaySize(String displaySize) {
+            this.displaySize = displaySize;
+            return this;
+        }
+
+        public Builder editHistory(List<OrderEditHistoryItem> editHistory) {
+            this.editHistory = editHistory;
+            return this;
+        }
+
+        public Builder displayQuoteSize(String displayQuoteSize) {
+            this.displayQuoteSize = displayQuoteSize;
+            return this;
+        }
+
+        public Builder displayBaseSize(String displayBaseSize) {
+            this.displayBaseSize = displayBaseSize;
             return this;
         }
 

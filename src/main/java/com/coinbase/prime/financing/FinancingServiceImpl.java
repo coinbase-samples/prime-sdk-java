@@ -40,6 +40,16 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
     }
 
     @Override
+    public GetCrossMarginOverviewResponse getCrossMarginOverview(GetCrossMarginOverviewRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/cross_margin", request.getEntityId()),
+                null,
+                List.of(200),
+                new TypeReference<GetCrossMarginOverviewResponse>() {});
+    }
+
+    @Override
     public GetEntityLocateAvailabilitiesResponse getEntityLocateAvailabilities(GetEntityLocateAvailabilitiesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,

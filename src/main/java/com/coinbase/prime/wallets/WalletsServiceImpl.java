@@ -64,8 +64,18 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(), request.getWalletId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetWalletDepositInstructionsResponse>() {});
+    }
+
+    @Override
+    public CreateWalletDepositAddressResponse createWalletDepositAddress(CreateWalletDepositAddressRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<CreateWalletDepositAddressResponse>() {});
     }
 }

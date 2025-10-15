@@ -110,6 +110,16 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     }
 
     @Override
+    public EditOrderResponse editOrder(EditOrderRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.PUT,
+                String.format("/portfolios/%s/orders/%s/edit", request.getPortfolioId(), request.getOrderId()),
+                request,
+                List.of(200),
+                new TypeReference<EditOrderResponse>() {});
+    }
+
+    @Override
     public CreateQuoteResponse createQuote(CreateQuoteRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,

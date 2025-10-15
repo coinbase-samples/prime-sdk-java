@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,13 +14,22 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.products;
+package com.coinbase.prime.model;
 
-import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.errors.CoinbasePrimeException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public interface ProductsService {
-    // Products
-    GetPublicProductCandlesResponse getPublicProductCandles(GetPublicProductCandlesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+public class Counterparty {
+    @JsonProperty("counterparty_id")
+    private String counterpartyId;
+
+    public Counterparty() {
+    }
+
+    public String getCounterpartyId() {
+        return counterpartyId;
+    }
+
+    public void setCounterpartyId(String counterpartyId) {
+        this.counterpartyId = counterpartyId;
+    }
 }
