@@ -159,17 +159,13 @@ public class PostProcessor {
         String content = Files.readString(file);
         String className = extractClassName(content);
         
-        // Strip prefixes from class name
+        // Strip prefixes from class name (matching prime-sdk-ts logic)
         String originalClassName = className;
-        if (className.startsWith("CoinbaseBrokerageProxyEventsMaterializedApi")) {
-            className = className.substring("CoinbaseBrokerageProxyEventsMaterializedApi".length());
+        className = stripCommonPrefixes(className);
+        
+        if (!className.equals(originalClassName)) {
             content = content.replace("enum " + originalClassName, "enum " + className);
-            content = content.replaceAll("\\bCoinbaseBrokerageProxyEventsMaterializedApi(\\w+)", "$1");
-            logger.info("Transformed enum name: {} -> {}", originalClassName, className);
-        } else if (className.startsWith("CoinbasePublicRestApi")) {
-            className = className.substring("CoinbasePublicRestApi".length());
-            content = content.replace("enum " + originalClassName, "enum " + className);
-            content = content.replaceAll("\\bCoinbasePublicRestApi(\\w+)", "$1");
+            content = replaceAllPrefixReferences(content, originalClassName, className);
             logger.info("Transformed enum name: {} -> {}", originalClassName, className);
         }
         
@@ -209,19 +205,14 @@ public class PostProcessor {
             return;
         }
         
-        // Strip prefixes from class name
+        // Strip prefixes from class name (matching prime-sdk-ts logic)
         String originalClassName = className;
-        if (className.startsWith("CoinbaseBrokerageProxyEventsMaterializedApi")) {
-            className = className.substring("CoinbaseBrokerageProxyEventsMaterializedApi".length());
+        className = stripCommonPrefixes(className);
+        
+        if (!className.equals(originalClassName)) {
             content = content.replace("class " + originalClassName, "class " + className);
             content = content.replace("enum " + originalClassName, "enum " + className);
-            content = content.replaceAll("\\bCoinbaseBrokerageProxyEventsMaterializedApi(\\w+)", "$1");
-            logger.info("Transformed class name: {} -> {}", originalClassName, className);
-        } else if (className.startsWith("CoinbasePublicRestApi")) {
-            className = className.substring("CoinbasePublicRestApi".length());
-            content = content.replace("class " + originalClassName, "class " + className);
-            content = content.replace("enum " + originalClassName, "enum " + className);
-            content = content.replaceAll("\\bCoinbasePublicRestApi(\\w+)", "$1");
+            content = replaceAllPrefixReferences(content, originalClassName, className);
             logger.info("Transformed class name: {} -> {}", originalClassName, className);
         }
         
@@ -287,18 +278,62 @@ public class PostProcessor {
         return "";
     }
     
+    /**
+     * Strip common prefixes from class names to match prime-sdk-ts behavior.
+     * This ensures consistency across SDKs.
+     */
+    private String stripCommonPrefixes(String className) {
+        // Handle special cases first (matching prime-sdk-ts logic)
+        // coinbaseCustodyApiActivityType → CustodyActivityType
+        // coinbasePublicRestApiActivityType → PrimeActivityType
+        if (className.equals("CoinbaseCustodyApiActivityType")) {
+            return "CustodyActivityType";
+        }
+        if (className.equals("CoinbasePublicRestApiActivityType")) {
+            return "PrimeActivityType";
+        }
+        
+        // Order matters - check longer prefixes first to avoid partial matches
+        String[] prefixesToStrip = {
+            "CoinbaseBrokerageProxyEventsMaterializedApi",
+            "CoinbasePublicRestApi",
+            "CoinbaseCustodyApi",
+            "PrimeRESTAPI",
+            "PublicRestApi"
+        };
+        
+        for (String prefix : prefixesToStrip) {
+            if (className.startsWith(prefix)) {
+                return className.substring(prefix.length());
+            }
+        }
+        
+        return className;
+    }
+    
+    /**
+     * Replace all references to the old prefixed class name with the new stripped name.
+     */
+    private String replaceAllPrefixReferences(String content, String originalClassName, String newClassName) {
+        // Replace the prefix in all type references throughout the content
+        String[] prefixesToStrip = {
+            "CoinbaseBrokerageProxyEventsMaterializedApi",
+            "CoinbasePublicRestApi",
+            "CoinbaseCustodyApi",
+            "PrimeRESTAPI",
+            "PublicRestApi"
+        };
+        
+        for (String prefix : prefixesToStrip) {
+            content = content.replaceAll("\\b" + prefix + "(\\w+)", "$1");
+        }
+        
+        return content;
+    }
+    
     private boolean shouldSkipFile(String className) {
         // Strip common prefixes for checking
-        String cleanName = className;
-        if (cleanName.startsWith("CoinbaseBrokerageProxyEventsMaterializedApi")) {
-            cleanName = cleanName.substring("CoinbaseBrokerageProxyEventsMaterializedApi".length());
-        } else if (cleanName.startsWith("CoinbasePublicRestApi")) {
-            cleanName = cleanName.substring("CoinbasePublicRestApi".length());
-        } else if (cleanName.startsWith("PrimeRESTAPI")) {
-            cleanName = cleanName.substring("PrimeRESTAPI".length());
-        } else if (cleanName.startsWith("PublicRestApi")) {
-            cleanName = cleanName.substring("PublicRestApi".length());
-        }
+        String cleanName = stripCommonPrefixes(className);
         
         // Skip Request/Response models (service-specific)
         if (cleanName.endsWith("Request") || cleanName.endsWith("Response")) {
