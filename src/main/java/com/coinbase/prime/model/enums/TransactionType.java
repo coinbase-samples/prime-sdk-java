@@ -17,7 +17,6 @@
 package com.coinbase.prime.model.enums;
 
 public enum TransactionType {
-    TRANSACTION_TYPE_UNKNOWN,
     DEPOSIT,
     WITHDRAWAL,
     INTERNAL_DEPOSIT,

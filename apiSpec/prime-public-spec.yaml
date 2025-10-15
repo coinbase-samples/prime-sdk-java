@@ -323,6 +323,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.ListEntityBalancesResponse'
+  /v1/entities/{entity_id}/cross_margin:
+    get:
+      tags:
+      - Financing
+      summary: Get Cross Margin Overview
+      description: Gets live data for Cross Margin (XM) for a specific XM customer
+      operationId: PrimeRESTAPI_GetCrossMarginOverview
+      parameters:
+      - name: entity_id
+        in: path
+        description: XM customer Prime Entity ID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetCrossMarginOverviewResponse'
   /v1/entities/{entity_id}/futures/auto_sweep:
     post:
       tags:
@@ -1374,6 +1395,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.GetBuyingPowerResponse'
+  /v1/portfolios/{portfolio_id}/candles:
+    get:
+      tags:
+      - Products
+      summary: Get Public Product Candles (Beta)
+      description: "Get rates for a single product by product ID, grouped in buckets.\
+        \ This feature is in beta please reach out to your Coinbase Prime account\
+        \ manager for more information."
+      operationId: PrimeRESTAPI_GetCandles
+      parameters:
+      - name: portfolio_id
+        in: path
+        description: The portfolio id requesting market data.
+        required: true
+        schema:
+          type: string
+      - name: product_id
+        in: query
+        description: The trading pair.
+        required: true
+        schema:
+          type: string
+      - name: start_time
+        in: query
+        description: Timestamp for starting range of aggregations
+        schema:
+          type: string
+          format: date-time
+      - name: end_time
+        in: query
+        description: Timestamp for ending range of aggregations
+        schema:
+          type: string
+          format: date-time
+      - name: granularity
+        in: query
+        description: The timeframe each candle represents.
+        required: true
+        schema:
+          type: string
+          enum:
+          - ONE_MINUTE
+          - FIVE_MINUTES
+          - FIFTEEN_MINUTES
+          - ONE_HOUR
+          - SIX_HOURS
+          - ONE_DAY
+          - THIRTY_MINUTE
+          - TWO_HOUR
+          - FOUR_HOUR
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.GetCandlesResponse'
   /v1/portfolios/{portfolio_id}/commission:
     get:
       tags:
@@ -1712,7 +1790,7 @@ paths:
   /v1/portfolios/{portfolio_id}/onchain_address_groups:
     get:
       tags:
-      - Onchain Address Groups
+      - Onchain Address Book
       summary: List Onchain Address Groups
       description: Lists all onchain address groups for a given portfolio ID
       operationId: PrimeRESTAPI_ListOnchainAddressGroups
@@ -2529,6 +2607,56 @@ paths:
               schema:
                 $ref: '#/components/schemas/coinbase.public_rest_api.PortfolioStakingInitiateResponse'
       x-codegen-request-body-name: body
+  /v1/portfolios/{portfolio_id}/staking/transaction-validators/query:
+    post:
+      tags:
+      - Staking
+      summary: List Transaction Validators
+      description: "List ETH 0x02 validators associated with wallet-level stake transactions\
+        \ for a given portfolio. It will not return data for unstake transactions,\
+        \ portfolio stake transactions, transactions which staked different currencies,\
+        \ or which staked to Ethereum 0x01 validators."
+      operationId: PrimeRESTAPI_ListTransactionValidators
+      parameters:
+      - name: portfolio_id
+        in: path
+        description: The portfolio ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - transaction_ids
+              type: object
+              properties:
+                transaction_ids:
+                  type: array
+                  description: List of transaction IDs to filter validators by. Maximum
+                    of 100 transaction IDs allowed per request.
+                  items:
+                    type: string
+                cursor:
+                  type: string
+                  description: Cursor for pagination
+                limit:
+                  type: integer
+                  description: "Maximum number of transaction-validator associations\
+                    \ to return per page. Default is 100, maximum is 1000."
+                  format: int32
+                sort_direction:
+                  $ref: '#/components/schemas/coinbase.public_rest_api.SortDirection'
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coinbase.public_rest_api.ListTransactionValidatorsResponse'
+      x-codegen-request-body-name: body
   /v1/portfolios/{portfolio_id}/staking/unstake:
     post:
       tags:
@@ -3221,9 +3349,9 @@ paths:
     post:
       tags:
       - Staking
-      summary: Request to claim rewards for a staked wallet
-      description: Creates a request to claim the pending staking rewards from the
-        specified wallet
+      summary: Claim Wallet Staking Rewards (Alpha)
+      description: Request to claim staking rewards. This feature is in alpha. Please
+        reach out to your Coinbase Prime account manager for more information
       operationId: PrimeRESTAPI_StakingClaimRewards
       parameters:
       - name: portfolio_id
@@ -4429,6 +4557,52 @@ components:
           type: string
           description: The unique UUID for the order
           example: 82c879c1-84e1-44ed-a8c2-1ac239cf09ad
+    coinbase.public_rest_api.Candle:
+      title: Represents a single candle data point
+      type: object
+      properties:
+        timestamp:
+          title: Timestamp for the start of the candle period
+          type: string
+          format: date-time
+        open:
+          title: Opening price for the period
+          type: string
+          description: Opening price for the period
+          example: "50000.00"
+        high:
+          title: Highest price during the period
+          type: string
+          description: Highest price during the period
+          example: "51000.00"
+        low:
+          title: Lowest price during the period
+          type: string
+          description: Lowest price during the period
+          example: "49500.00"
+        close:
+          title: Closing price for the period
+          type: string
+          description: Closing price for the period
+          example: "50500.00"
+        volume:
+          title: Volume traded during the period
+          type: string
+          description: Volume traded during the period
+          example: "1234.56"
+    coinbase.public_rest_api.CandlesGranularity:
+      title: Enum for candle granularity (time intervals)
+      type: string
+      enum:
+      - ONE_MINUTE
+      - FIVE_MINUTES
+      - FIFTEEN_MINUTES
+      - ONE_HOUR
+      - SIX_HOURS
+      - ONE_DAY
+      - THIRTY_MINUTE
+      - TWO_HOUR
+      - FOUR_HOUR
     coinbase.public_rest_api.Commission:
       type: object
       properties:
@@ -4769,6 +4943,27 @@ components:
         transaction_id:
           type: string
           description: The id of the just created transaction
+    coinbase.public_rest_api.CrossMarginOverview:
+      type: object
+      properties:
+        control_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMControlStatus'
+        call_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMEntityCallStatus'
+        margin_level:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMMarginLevel'
+        margin_summary:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMSummary'
+        active_margin_calls:
+          type: array
+          description: List of active XM margin calls
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.XMMarginCall'
+        active_loans:
+          type: array
+          description: List of active XM loans
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.XMLoan'
     coinbase.public_rest_api.DefiBalance:
       type: object
       properties:
@@ -5127,6 +5322,21 @@ components:
       properties:
         buying_power:
           $ref: '#/components/schemas/coinbase.public_rest_api.BuyingPower'
+    coinbase.public_rest_api.GetCandlesResponse:
+      title: Candle response structure
+      type: object
+      properties:
+        candles:
+          type: array
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.Candle'
+        pagination:
+          $ref: '#/components/schemas/coinbase.public_rest_api.PaginatedResponse'
+    coinbase.public_rest_api.GetCrossMarginOverviewResponse:
+      type: object
+      properties:
+        overview:
+          $ref: '#/components/schemas/coinbase.public_rest_api.CrossMarginOverview'
     coinbase.public_rest_api.GetEntityActivitiesResponse:
       required:
       - activities
@@ -5697,6 +5907,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/coinbase.public_rest_api.AddressGroup'
+    coinbase.public_rest_api.ListTransactionValidatorsResponse:
+      required:
+      - pagination
+      - transaction_validators
+      type: object
+      properties:
+        transaction_validators:
+          type: array
+          description: List of transaction-to-validator associations. Each entry represents
+            one transaction staking to one validator.
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.TransactionValidator'
+        pagination:
+          $ref: '#/components/schemas/coinbase.public_rest_api.PaginatedResponse'
     coinbase.public_rest_api.ListWalletAddressesResponse:
       required:
       - addresses
@@ -7246,6 +7470,21 @@ components:
       - VOTE_AUTHORIZE
       - WEB3_TRANSACTION
       - ONCHAIN_TRANSACTION
+    coinbase.public_rest_api.TransactionValidator:
+      required:
+      - transaction_id
+      - validator_address
+      - validator_status
+      type: object
+      properties:
+        transaction_id:
+          type: string
+          description: The ID of the transaction which staked to this validator
+        validator_address:
+          type: string
+          description: The address (public key) of the validator
+        validator_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.ValidatorStatus'
     coinbase.public_rest_api.TransferLocation:
       type: object
       properties:
@@ -7317,6 +7556,16 @@ components:
       - FULL_TRADER
       - TEAM_MANAGER
       - APPROVER
+    coinbase.public_rest_api.ValidatorStatus:
+      type: string
+      default: VALIDATOR_STATUS_UNSPECIFIED
+      enum:
+      - VALIDATOR_STATUS_UNSPECIFIED
+      - VALIDATOR_STATUS_PENDING
+      - VALIDATOR_STATUS_ACTIVE
+      - VALIDATOR_STATUS_EXITING
+      - VALIDATOR_STATUS_EXITED
+      - VALIDATOR_STATUS_WITHDRAWN
     coinbase.public_rest_api.VisibilityStatus:
       title: |-
         - UNKNOWN_VISIBILITY_STATUS: nil
@@ -7528,6 +7777,360 @@ components:
           type: string
           description: Withdrawal power
           example: "2.84882377"
+    coinbase.public_rest_api.XMCallStatus:
+      title: XMControlStatus is the current status of the margin call
+      type: string
+      description: |-
+        - CALL_STATUS_OPEN: Margin call is open and not expired
+         - CALL_STATUS_AGED: Margin call is open and it is expired
+         - CALL_STATUS_SETTLED: Margin call is fully settled
+         - CALL_STATUS_CANCELED: Margin call was canceled by Credit Risk
+      default: XM_CALL_STATUS_UNSPECIFIED
+      enum:
+      - XM_CALL_STATUS_UNSPECIFIED
+      - CALL_STATUS_OPEN
+      - CALL_STATUS_AGED
+      - CALL_STATUS_SETTLED
+      - CALL_STATUS_CANCELED
+    coinbase.public_rest_api.XMCallType:
+      title: XMCallType is the type of margin call
+      type: string
+      description: |-
+        - CALL_TYPE_STANDARD: Evaluated at standard margin call evaluation time
+         - CALL_TYPE_URGENT: Evaluated in realtime
+      default: XM_CALL_TYPE_UNSPECIFIED
+      enum:
+      - XM_CALL_TYPE_UNSPECIFIED
+      - CALL_TYPE_STANDARD
+      - CALL_TYPE_URGENT
+    coinbase.public_rest_api.XMControlStatus:
+      title: XMControlStatus is a summarization of XM customer controls for trades
+        and withdrawals
+      type: string
+      description: |-
+        - TRADES_AND_WITHDRAWALS: Allowed to trade and withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
+         - TRADES_ONLY: Allowed to trade but not withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
+         - SESSION_LOCKED: Not allowed to trade or withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
+      default: XM_CONTROL_STATUS_UNSPECIFIED
+      enum:
+      - XM_CONTROL_STATUS_UNSPECIFIED
+      - TRADES_AND_WITHDRAWALS
+      - TRADES_ONLY
+      - SESSION_LOCKED
+    coinbase.public_rest_api.XMEntityCallStatus:
+      title: XMEntityCallStatus is a summarization of active XM margin calls (MCs)
+      type: string
+      description: |-
+        - ENTITY_NO_CALL: There are no margin calls
+         - ENTITY_OPEN_STANDARD_CALL: There is a standard margin call. There are no urgent margin calls, and no expired margin calls.
+         - ENTITY_OPEN_URGENT_CALL: There is an urgent margin call. It is possible that there could also be a standard margin call, but there are no expired margin calls.
+         - ENTITY_AGED_CALL: At least one open margin call is aged (standard or urgent). This may trigger the SESSION_LOCKED control status.
+      default: XM_ENTITY_CALL_STATUS_UNSPECIFIED
+      enum:
+      - XM_ENTITY_CALL_STATUS_UNSPECIFIED
+      - ENTITY_NO_CALL
+      - ENTITY_OPEN_STANDARD_CALL
+      - ENTITY_OPEN_URGENT_CALL
+      - ENTITY_AGED_CALL
+    coinbase.public_rest_api.XMLoan:
+      title: XMLoan contains details about a Cross Margin loan
+      type: object
+      properties:
+        loan_id:
+          type: string
+          description: Financing loan UUID
+          example: b91a0ed6-eeec-4496-a04e-98b72b33c2b4
+        loan_party:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMParty'
+        principal_currency:
+          type: string
+          description: Loan principal currency
+          example: BTC
+        principal_currency_market_price:
+          type: string
+          description: Loan principal currency market price
+          example: "114531.73"
+        initial_principal_amount:
+          type: string
+          description: Principal amount (nominal) as of loan initiation
+          example: "0.2"
+        outstanding_principal_amount:
+          type: string
+          description: Current outstanding amount (nominal)
+          example: "0.2"
+        created_at:
+          type: string
+          description: Timestamp when the loan was created / initiated
+          format: date-time
+        updated_at:
+          type: string
+          description: Timestamp when the loan was last updated
+          format: date-time
+    coinbase.public_rest_api.XMMarginCall:
+      title: XMMarginCall contains details about a margin call in Cross Margin
+      type: object
+      properties:
+        margin_call_id:
+          type: string
+          description: Financing margin call UUID
+          example: 63a2577a-930d-413b-81e4-9e77765da8f9
+        currency:
+          type: string
+          description: Margin call currency
+          example: USD
+        initial_notional_amount:
+          type: string
+          description: Call amount (notional) as of the margin call creation
+          example: "32083.26"
+        outstanding_notional_amount:
+          type: string
+          description: Current outstanding call amount (notional)
+          example: "32083.26"
+        margin_call_type:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMCallType'
+        margin_call_status:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMCallStatus'
+        called_with_margin_level:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMMarginLevel'
+        called_with_margin_summary:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMSummary'
+        due_at:
+          type: string
+          description: Timestamp when the margin call settlement is due
+          format: date-time
+        created_at:
+          type: string
+          description: Timestamp when the margin call was created
+          format: date-time
+        updated_at:
+          type: string
+          description: Timestamp when the margin call was last updated
+          format: date-time
+    coinbase.public_rest_api.XMMarginLevel:
+      title: XMMarginLevel is the realtime state of EQ/MR and MR-EQ monitored against
+        XM thresholds as defined in the methodology
+      type: string
+      description: |-
+        - HEALTHY_THRESHOLD: Margin level is healthy
+         - DEFICIT_THRESHOLD: Margin level is breaching the deficit threshold (DT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call time (as defined in the margin methodology)
+         - WARNING_THRESHOLD: Margin level is breaching the warning threshold (WT) which will result in the issuance of a Margin Call if this is still the case by the scheduled next Margin Call (as defined in the margin methodology). WT is differentiated from DT in that it means margin health is approaching the UMCT
+         - URGENT_MARGIN_CALL_THRESHOLD: Margin level is breaching the UMCT and, as defined in the margin methodology, this will trigger an urgent margin call
+         - LIQUIDATION_THRESHOLD: Margin level is breaching the liquidation threshold (LT) and, as defined in the margin methodology, this will trigger the SESSION_LOCKED control status and liquidation may commence.
+      default: XM_MARGIN_LEVEL_UNSPECIFIED
+      enum:
+      - XM_MARGIN_LEVEL_UNSPECIFIED
+      - HEALTHY_THRESHOLD
+      - DEFICIT_THRESHOLD
+      - WARNING_THRESHOLD
+      - URGENT_MARGIN_CALL_THRESHOLD
+      - LIQUIDATION_THRESHOLD
+    coinbase.public_rest_api.XMParty:
+      title: XMParty is a specific Cross Margin trading venue
+      type: string
+      description: |-
+        - CBE: Coinbase Exchange, trading venue that can receive the XM loan
+         - FCM: Coinbase’s Futures Commission Merchant, trading venue that can receive the XM loan
+      default: XM_PARTY_UNSPECIFIED
+      enum:
+      - XM_PARTY_UNSPECIFIED
+      - CBE
+      - FCM
+    coinbase.public_rest_api.XMPosition:
+      title: XMPosition
+      type: object
+      properties:
+        currency:
+          type: string
+          description: Position currency
+          example: BTC
+        market_price:
+          type: string
+          description: Current market price
+          example: "114531.73"
+        margin_eligible:
+          type: boolean
+          description: "True if margin eligible, false otherwise"
+          example: true
+        market_cap:
+          type: string
+          description: Total market capitalization
+          example: "770000000000.00"
+        adv30_days:
+          type: string
+          description: Average daily volume calculated over a 30-day period
+          example: "1166623585.534257"
+        hist5d_vol:
+          type: string
+          description: Historic volatility calculated over a 5-day period
+          example: "0.010996074377389616"
+        hist30d_vol:
+          type: string
+          description: Historic volatility calculated over a 30-day period
+          example: "0.013617999336643158"
+        hist90d_vol:
+          type: string
+          description: Historic volatility calculated over a 90-day period
+          example: "0.015196480084775355"
+        margin_requirement:
+          type: string
+          description: Base margin requirement for the specific asset
+          example: "0.015"
+        spot_balance:
+          type: string
+          description: XM spot balance nominal
+          example: "-0.19652944"
+        spot_balance_notional:
+          type: string
+          description: XM spot balance notional
+          example: "-22508.85"
+        spot_total_position_margin:
+          type: string
+          description: Pre-netted spot total position margin
+        futures_balance:
+          type: string
+          description: XM futures balance nominal
+          example: "-0.19652944"
+        futures_balance_notional:
+          type: string
+          description: XM futures balance notional
+          example: "-22508.85"
+        futures_total_position_margin:
+          type: string
+          description: Pre-netted futures total position margin
+        gmv_basis:
+          type: string
+          description: Basis GMV = |futures| + |spot| - |unnetted position|
+        base_requirement:
+          type: string
+          description: Base margin requirement notional
+        liq_shorts_add_on:
+          type: string
+          description: Effective liquidity add-on for the short positions
+        liq_longs_add_on:
+          type: string
+          description: Effective liquidity add-on for the long positions
+        vol_shorts_add_on:
+          type: string
+          description: Effective volatility add-on for the short positions
+        vol_longs_add_on:
+          type: string
+          description: Effective volatility add-on for the long positions
+        vol5days_add_on:
+          type: string
+          description: 5-day volatility add-on
+        vol30days_add_on:
+          type: string
+          description: 30-day volatility add-on
+        vol90days_add_on:
+          type: string
+          description: 90-day volatility add-on
+        total_position_margin:
+          type: string
+          description: Total margin required
+    coinbase.public_rest_api.XMRiskNettingInfo:
+      type: object
+      properties:
+        nodal_margin_requirement:
+          type: string
+          description: "Nodal Margin Requirement (NMR) is the margin requirement for\
+            \ all futures positions, derived from the Nodal model"
+          example: "9243.25"
+        portfolio_margin_requirement:
+          type: string
+          description: "Portfolio Margin Requirement (PMR) is the margin requirement\
+            \ for all spot positions, derived from the XM model"
+          example: "9003.67"
+        integrated_portfolio_margin_requirement:
+          type: string
+          description: "Integrated Portfolio Margin Requirement (IPMR) is the margin\
+            \ requirement for all spot positions + futures positions with underlying\
+            \ assets eligible in Portfolio Margin, via the XM model with one-leg netting"
+          example: "10154.67"
+        ineligible_futures_margin_requirement:
+          type: string
+          description: Ineligible Futures Margin Requirement (IFMR) is the margin
+            requirement for IPMR-ineligible futures contracts
+          example: "194.36"
+        position_margin_requirement:
+          type: string
+          description: Position margin requirement for all spot positions
+          example: "3376.45"
+        portfolio_margin_addon:
+          type: string
+          description: Portfolio margin addon for all spot positions
+          example: "5627.21"
+        integrated_position_margin_requirement:
+          type: string
+          description: Position margin requirement for spot + futures positions
+          example: "3376.45"
+        integrated_portfolio_margin_addon:
+          type: string
+          description: Portfolio margin addon for spot + futures positions
+          example: "6778.21"
+        netted_futures_notional:
+          type: string
+          description: Post-netting USD notional for all futures positions
+          example: "11510.00"
+        total_gmv_basis:
+          type: string
+          description: Total basis gross market value of all XM-eligible positions
+            (i.e. crypto underliers)
+        ipm_cash_balance:
+          type: string
+          description: Integrated Portfolio Margin cash balance
+          example: "1002.94"
+        integrated_scenario_addon:
+          $ref: '#/components/schemas/coinbase.public_rest_api.MarginAddOn'
+        all_integrated_scenario_addons:
+          type: array
+          description: All integrated scenario add-ons
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.MarginAddOn'
+        xm_positions:
+          type: array
+          description: Netted positions used in the model calculation
+          items:
+            $ref: '#/components/schemas/coinbase.public_rest_api.XMPosition'
+    coinbase.public_rest_api.XMSummary:
+      title: "XMSummary is the realtime evaluated XM margin model, containing positions\
+        \ and netting info"
+      type: object
+      properties:
+        margin_requirement:
+          type: string
+          description: Cross Margin Margin Requirement (XMMR) notional
+          example: "10362.72"
+        account_equity:
+          type: string
+          description: Equity notional
+          example: "-21542.63"
+        margin_excess_shortfall:
+          type: string
+          description: Equity - XMMR (margin excess is > 0)
+          example: "-31891.67"
+        consumed_credit:
+          type: string
+          description: Credit consumed from Cross Margin Credit Limit (XMCL)
+          example: "22906.34"
+        xm_credit_limit:
+          type: string
+          description: XM Credit Limit (XMCL) is the maximum notional USD of total
+            fiat and digital asset loans
+          example: "1222322.00"
+        xm_margin_limit:
+          type: string
+          description: XM Margin Limit (XMML) is the maximum notional USD deficit
+          example: "22123.00"
+        spot_equity:
+          type: string
+          description: Equity attributed by spot
+          example: "-21505.91"
+        futures_equity:
+          type: string
+          description: Equity attributed by futures
+          example: "-36.71"
+        risk_netting_info:
+          $ref: '#/components/schemas/coinbase.public_rest_api.XMRiskNettingInfo'
     google.protobuf.Any:
       type: object
       properties:

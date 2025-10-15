@@ -16,26 +16,8 @@
 
 package com.coinbase.prime.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum FcmMarginCallType {
-    FCM_MARGIN_CALL_TYPE_UNSPECIFIED("FCM_MARGIN_CALL_TYPE_UNSPECIFIED"),
-    FCM_MARGIN_CALL_TYPE_URGENT("FCM_MARGIN_CALL_TYPE_URGENT"),
-    FCM_MARGIN_CALL_TYPE_REGULAR("FCM_MARGIN_CALL_TYPE_REGULAR");
-
-    private final String value;
-
-    FcmMarginCallType(String value) {
-        this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return value;
-    }
+    FCM_MARGIN_CALL_TYPE_UNSPECIFIED,
+    FCM_MARGIN_CALL_TYPE_URGENT,
+    FCM_MARGIN_CALL_TYPE_REGULAR
 }

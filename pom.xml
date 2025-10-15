@@ -139,6 +139,37 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>generate-models</id>
+      <build>
+        <defaultGoal>generate-sources</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>run-model-generator</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>mvn</executable>
+                  <workingDirectory>${project.basedir}/tools/model-generator</workingDirectory>
+                  <arguments>
+                    <argument>-Pgenerate</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>

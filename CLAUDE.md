@@ -2,6 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## AI Documentation
+
+The `ai-docs/` directory contains detailed analysis and coverage reports maintained by AI agents:
+- **MODEL_GENERATION_ANALYSIS.md**: Investigation of model generation tool behavior and missing models
+- **ACCURATE_COVERAGE_SUMMARY.md**: Human-readable API coverage summary (~98% functional coverage)
+- **API_COVERAGE_REPORT.md**: Technical coverage analysis with detailed breakdowns
+- **README.md**: Guide to using these documents
+
+Refer to these documents when working on endpoint implementation or troubleshooting model generation.
+
 ## Build Commands
 
 This is a Maven-based Java project (Java 11+). Common development commands:
@@ -97,16 +107,37 @@ Working examples available in `src/main/java/com/coinbase/examples/` including:
 
 ### AI Agent Code Generation
 
-#### Speed Optimization for Object Generation
+#### Model Generation - IMPORTANT
+**DO NOT create domain models or enums by hand!** 
+
+Use the model generator from the repository root:
+```bash
+cd tools/model-generator
+mvn -Pgenerate
+```
+
+This tool:
+- Generates models and enums from the OpenAPI spec
+- Maintains SDK conventions (Builder pattern, proper annotations)
+- Prevents drift between spec and implementation
+- Only creates new models by default (incremental mode)
+- See `tools/model-generator/README.md` for full documentation
+
+**Manual model creation is prohibited.** All domain models in `com.coinbase.prime.model` and enums in `com.coinbase.prime.model.enums` must be generated from the OpenAPI specification.
+
+**Exception**: Request/Response classes in service packages (e.g., `orders/GetOrderRequest.java`) are hand-crafted and co-located with their service.
+
+#### Speed Optimization for Service Generation
 **PRIORITY: Execute quickly, validate afterwards**
 
 **Parallelized Fast Generation Strategy:**
-1. **Analyze entire OpenAPI spec** first to identify all missing components
-2. **Plan batches by domain** - group related models/services together (e.g., FCM, Staking, Orders)
-3. **Execute multiple Task agents in parallel** - generate 5-10 models simultaneously across domains
-4. **NO premature validation** - generate ALL files first, validate once at the end
-5. **Template-based rapid creation** - copy existing files and modify rather than create from scratch
-6. **Single build validation** - run `mvn compile` only after all generation is complete
+1. **Analyze entire OpenAPI spec** first to identify all missing endpoints
+2. **Run model generator first** - `cd tools/model-generator && mvn -Pgenerate`
+3. **Plan batches by domain** - group related services together (e.g., FCM, Staking, Orders)
+4. **Execute multiple Task agents in parallel** - generate 5-10 services simultaneously across domains
+5. **NO premature validation** - generate ALL files first, validate once at the end
+6. **Template-based rapid creation** - copy existing files and modify rather than create from scratch
+7. **Single build validation** - run `mvn compile` only after all generation is complete
 
 **Parallelization Implementation:**
 ```

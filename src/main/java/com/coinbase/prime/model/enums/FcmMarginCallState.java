@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,28 +16,10 @@
 
 package com.coinbase.prime.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum FcmMarginCallState {
-    FCM_MARGIN_CALL_STATE_UNSPECIFIED("FCM_MARGIN_CALL_STATE_UNSPECIFIED"),
-    FCM_MARGIN_CALL_STATE_CLOSED("FCM_MARGIN_CALL_STATE_CLOSED"),
-    FCM_MARGIN_CALL_STATE_ROLLED_OVER("FCM_MARGIN_CALL_STATE_ROLLED_OVER"),
-    FCM_MARGIN_CALL_STATE_DEFAULT("FCM_MARGIN_CALL_STATE_DEFAULT"),
-    FCM_MARGIN_CALL_STATE_OFFICIAL("FCM_MARGIN_CALL_STATE_OFFICIAL");
-
-    private final String value;
-
-    FcmMarginCallState(String value) {
-        this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return value;
-    }
+    FCM_MARGIN_CALL_STATE_UNSPECIFIED,
+    FCM_MARGIN_CALL_STATE_CLOSED,
+    FCM_MARGIN_CALL_STATE_ROLLED_OVER,
+    FCM_MARGIN_CALL_STATE_DEFAULT,
+    FCM_MARGIN_CALL_STATE_OFFICIAL
 }

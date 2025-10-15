@@ -16,14 +16,11 @@
 
 package com.coinbase.prime.model.enums;
 
-/**
- * Possible values: [PAYMENT_METHOD, WALLET, ADDRESS, OTHER, MULTIPLE_ADDRESSES, COUNTERPARTY_ID]
- */
 public enum TransferLocationType {
-    ADDRESS,
-    COUNTERPARTY_ID,
-    MULTIPLE_ADDRESSES,
-    OTHER,
     PAYMENT_METHOD,
-    WALLET
+    WALLET,
+    ADDRESS,
+    OTHER,
+    MULTIPLE_ADDRESSES,
+    COUNTERPARTY_ID
 }

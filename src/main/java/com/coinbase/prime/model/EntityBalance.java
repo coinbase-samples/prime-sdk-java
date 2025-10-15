@@ -1,41 +1,27 @@
-/*
- * Copyright 2024-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class EntityBalance {
-    /** The display symbol for the asset */
     private String symbol;
-    
-    /** The long balance */
-    @JsonProperty("long_amount")
+
     private String longAmount;
-    
-    /** The long balance in notional value */
-    @JsonProperty("long_notional")
+
     private String longNotional;
-    
-    /** The short balance */
-    @JsonProperty("short_amount")
+
     private String shortAmount;
-    
-    /** The short balance in notional value */
-    @JsonProperty("short_notional")
+
     private String shortNotional;
 
     public EntityBalance() {
@@ -53,36 +39,36 @@ public class EntityBalance {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
     public String getLongAmount() {
         return longAmount;
-    }
-
-    public void setLongAmount(String longAmount) {
-        this.longAmount = longAmount;
     }
 
     public String getLongNotional() {
         return longNotional;
     }
 
-    public void setLongNotional(String longNotional) {
-        this.longNotional = longNotional;
-    }
-
     public String getShortAmount() {
         return shortAmount;
     }
 
-    public void setShortAmount(String shortAmount) {
-        this.shortAmount = shortAmount;
-    }
-
     public String getShortNotional() {
         return shortNotional;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setLongAmount(String longAmount) {
+        this.longAmount = longAmount;
+    }
+
+    public void setLongNotional(String longNotional) {
+        this.longNotional = longNotional;
+    }
+
+    public void setShortAmount(String shortAmount) {
+        this.shortAmount = shortAmount;
     }
 
     public void setShortNotional(String shortNotional) {
@@ -91,9 +77,13 @@ public class EntityBalance {
 
     public static class Builder {
         private String symbol;
+
         private String longAmount;
+
         private String longNotional;
+
         private String shortAmount;
+
         private String shortNotional;
 
         public Builder symbol(String symbol) {

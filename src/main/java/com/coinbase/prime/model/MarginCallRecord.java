@@ -1,37 +1,27 @@
-/*
- * Copyright 2025-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class MarginCallRecord {
-    @JsonProperty("margin_call_id")
     private String marginCallId;
 
-    @JsonProperty("initial_notional_amount")
     private String initialNotionalAmount;
 
-    @JsonProperty("outstanding_notional_amount")
     private String outstandingNotionalAmount;
 
-    @JsonProperty("created_at")
     private String createdAt;
 
-    @JsonProperty("due_at")
     private String dueAt;
 
     public MarginCallRecord() {
@@ -49,36 +39,36 @@ public class MarginCallRecord {
         return marginCallId;
     }
 
-    public void setMarginCallId(String marginCallId) {
-        this.marginCallId = marginCallId;
-    }
-
     public String getInitialNotionalAmount() {
         return initialNotionalAmount;
-    }
-
-    public void setInitialNotionalAmount(String initialNotionalAmount) {
-        this.initialNotionalAmount = initialNotionalAmount;
     }
 
     public String getOutstandingNotionalAmount() {
         return outstandingNotionalAmount;
     }
 
-    public void setOutstandingNotionalAmount(String outstandingNotionalAmount) {
-        this.outstandingNotionalAmount = outstandingNotionalAmount;
-    }
-
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public String getDueAt() {
         return dueAt;
+    }
+
+    public void setMarginCallId(String marginCallId) {
+        this.marginCallId = marginCallId;
+    }
+
+    public void setInitialNotionalAmount(String initialNotionalAmount) {
+        this.initialNotionalAmount = initialNotionalAmount;
+    }
+
+    public void setOutstandingNotionalAmount(String outstandingNotionalAmount) {
+        this.outstandingNotionalAmount = outstandingNotionalAmount;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public void setDueAt(String dueAt) {
@@ -87,13 +77,14 @@ public class MarginCallRecord {
 
     public static class Builder {
         private String marginCallId;
-        private String initialNotionalAmount;
-        private String outstandingNotionalAmount;
-        private String createdAt;
-        private String dueAt;
 
-        public Builder() {
-        }
+        private String initialNotionalAmount;
+
+        private String outstandingNotionalAmount;
+
+        private String createdAt;
+
+        private String dueAt;
 
         public Builder marginCallId(String marginCallId) {
             this.marginCallId = marginCallId;

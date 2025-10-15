@@ -1,71 +1,84 @@
-/*
- * Copyright 2024-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderStatus;
 import com.coinbase.prime.model.enums.OrderType;
-import com.coinbase.prime.model.enums.TimeInForce;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.prime.model.enums.TimeInForceType;
+import java.time.OffsetDateTime;
 
 public class Order {
     private String id;
-    @JsonProperty("user_id")
+
     private String userId;
-    @JsonProperty("portfolio_id")
+
     private String portfolioId;
-    @JsonProperty("product_id")
+
     private String productId;
+
     private OrderSide side;
-    @JsonProperty("client_order_id")
+
     private String clientOrderId;
+
     private OrderType type;
-    @JsonProperty("base_quantity")
+
     private String baseQuantity;
-    @JsonProperty("quote_value")
+
     private String quoteValue;
-    @JsonProperty("limit_price")
+
     private String limitPrice;
-    @JsonProperty("stop_price")
-    private String stopPrice;
-    @JsonProperty("start_time")
-    private String startTime;
-    @JsonProperty("expiry_time")
-    private String expiryTime;
+
+    private OffsetDateTime startTime;
+
+    private OffsetDateTime expiryTime;
+
     private OrderStatus status;
-    @JsonProperty("time_in_force")
-    private TimeInForce timeInForce;
-    @JsonProperty("created_at")
-    private String createdAt;
-    @JsonProperty("filled_quantity")
+
+    private TimeInForceType timeInForce;
+
+    private OffsetDateTime createdAt;
+
     private String filledQuantity;
-    @JsonProperty("filled_value")
+
     private String filledValue;
-    @JsonProperty("average_filled_price")
+
     private String averageFilledPrice;
-    @JsonProperty("net_average_filled_price")
-    private String netAverageFilledPrice;
+
     private String commission;
-    @JsonProperty("exchange_fee")
+
     private String exchangeFee;
-    @JsonProperty("historical_pov")
+
     private String historicalPov;
-    @JsonProperty("user_context")
+
+    private String stopPrice;
+
+    private String netAverageFilledPrice;
+
     private String userContext;
+
+    private String clientProductId;
+
+    private Boolean postOnly;
+
+    private Boolean isRaiseExact;
+
+    private String displaySize;
+
+    private String displayQuoteSize;
+
+    private String displayBaseSize;
 
     public Order() {
     }
@@ -81,7 +94,6 @@ public class Order {
         this.baseQuantity = builder.baseQuantity;
         this.quoteValue = builder.quoteValue;
         this.limitPrice = builder.limitPrice;
-        this.stopPrice = builder.stopPrice;
         this.startTime = builder.startTime;
         this.expiryTime = builder.expiryTime;
         this.status = builder.status;
@@ -90,233 +102,320 @@ public class Order {
         this.filledQuantity = builder.filledQuantity;
         this.filledValue = builder.filledValue;
         this.averageFilledPrice = builder.averageFilledPrice;
-        this.netAverageFilledPrice = builder.netAverageFilledPrice;
         this.commission = builder.commission;
         this.exchangeFee = builder.exchangeFee;
         this.historicalPov = builder.historicalPov;
+        this.stopPrice = builder.stopPrice;
+        this.netAverageFilledPrice = builder.netAverageFilledPrice;
         this.userContext = builder.userContext;
+        this.clientProductId = builder.clientProductId;
+        this.postOnly = builder.postOnly;
+        this.isRaiseExact = builder.isRaiseExact;
+        this.displaySize = builder.displaySize;
+        this.displayQuoteSize = builder.displayQuoteSize;
+        this.displayBaseSize = builder.displayBaseSize;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getUserId() {
         return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getPortfolioId() {
         return portfolioId;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
     public String getProductId() {
         return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 
     public OrderSide getSide() {
         return side;
     }
 
-    public void setSide(OrderSide side) {
-        this.side = side;
-    }
-
     public String getClientOrderId() {
         return clientOrderId;
-    }
-
-    public void setClientOrderId(String clientOrderId) {
-        this.clientOrderId = clientOrderId;
     }
 
     public OrderType getType() {
         return type;
     }
 
-    public void setType(OrderType type) {
-        this.type = type;
-    }
-
     public String getBaseQuantity() {
         return baseQuantity;
-    }
-
-    public void setBaseQuantity(String baseQuantity) {
-        this.baseQuantity = baseQuantity;
     }
 
     public String getQuoteValue() {
         return quoteValue;
     }
 
-    public void setQuoteValue(String quoteValue) {
-        this.quoteValue = quoteValue;
-    }
-
     public String getLimitPrice() {
         return limitPrice;
     }
 
-    public void setLimitPrice(String limitPrice) {
-        this.limitPrice = limitPrice;
-    }
-
-    public String getStopPrice() {
-        return stopPrice;
-    }
-
-    public void setStopPrice(String stopPrice) {
-        this.stopPrice = stopPrice;
-    }
-
-    public String getStartTime() {
+    public OffsetDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getExpiryTime() {
+    public OffsetDateTime getExpiryTime() {
         return expiryTime;
-    }
-
-    public void setExpiryTime(String expiryTime) {
-        this.expiryTime = expiryTime;
     }
 
     public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
-
-    public TimeInForce getTimeInForce() {
+    public TimeInForceType getTimeInForce() {
         return timeInForce;
     }
 
-    public void setTimeInForce(TimeInForce timeInForce) {
-        this.timeInForce = timeInForce;
-    }
-
-    public String getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getFilledQuantity() {
         return filledQuantity;
     }
 
-    public void setFilledQuantity(String filledQuantity) {
-        this.filledQuantity = filledQuantity;
-    }
-
     public String getFilledValue() {
         return filledValue;
-    }
-
-    public void setFilledValue(String filledValue) {
-        this.filledValue = filledValue;
     }
 
     public String getAverageFilledPrice() {
         return averageFilledPrice;
     }
 
-    public void setAverageFilledPrice(String averageFilledPrice) {
-        this.averageFilledPrice = averageFilledPrice;
-    }
-
-    public String getNetAverageFilledPrice() {
-        return netAverageFilledPrice;
-    }
-
-    public void setNetAverageFilledPrice(String netAverageFilledPrice) {
-        this.netAverageFilledPrice = netAverageFilledPrice;
-    }
-
     public String getCommission() {
         return commission;
-    }
-
-    public void setCommission(String commission) {
-        this.commission = commission;
     }
 
     public String getExchangeFee() {
         return exchangeFee;
     }
 
-    public void setExchangeFee(String exchangeFee) {
-        this.exchangeFee = exchangeFee;
-    }
-
     public String getHistoricalPov() {
         return historicalPov;
     }
 
-    public void setHistoricalPov(String historicalPov) {
-        this.historicalPov = historicalPov;
+    public String getStopPrice() {
+        return stopPrice;
+    }
+
+    public String getNetAverageFilledPrice() {
+        return netAverageFilledPrice;
     }
 
     public String getUserContext() {
         return userContext;
     }
 
+    public String getClientProductId() {
+        return clientProductId;
+    }
+
+    public Boolean isPostOnly() {
+        return postOnly;
+    }
+
+    public Boolean isIsRaiseExact() {
+        return isRaiseExact;
+    }
+
+    public String getDisplaySize() {
+        return displaySize;
+    }
+
+    public String getDisplayQuoteSize() {
+        return displayQuoteSize;
+    }
+
+    public String getDisplayBaseSize() {
+        return displayBaseSize;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public void setSide(OrderSide side) {
+        this.side = side;
+    }
+
+    public void setClientOrderId(String clientOrderId) {
+        this.clientOrderId = clientOrderId;
+    }
+
+    public void setType(OrderType type) {
+        this.type = type;
+    }
+
+    public void setBaseQuantity(String baseQuantity) {
+        this.baseQuantity = baseQuantity;
+    }
+
+    public void setQuoteValue(String quoteValue) {
+        this.quoteValue = quoteValue;
+    }
+
+    public void setLimitPrice(String limitPrice) {
+        this.limitPrice = limitPrice;
+    }
+
+    public void setStartTime(OffsetDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setExpiryTime(OffsetDateTime expiryTime) {
+        this.expiryTime = expiryTime;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public void setTimeInForce(TimeInForceType timeInForce) {
+        this.timeInForce = timeInForce;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setFilledQuantity(String filledQuantity) {
+        this.filledQuantity = filledQuantity;
+    }
+
+    public void setFilledValue(String filledValue) {
+        this.filledValue = filledValue;
+    }
+
+    public void setAverageFilledPrice(String averageFilledPrice) {
+        this.averageFilledPrice = averageFilledPrice;
+    }
+
+    public void setCommission(String commission) {
+        this.commission = commission;
+    }
+
+    public void setExchangeFee(String exchangeFee) {
+        this.exchangeFee = exchangeFee;
+    }
+
+    public void setHistoricalPov(String historicalPov) {
+        this.historicalPov = historicalPov;
+    }
+
+    public void setStopPrice(String stopPrice) {
+        this.stopPrice = stopPrice;
+    }
+
+    public void setNetAverageFilledPrice(String netAverageFilledPrice) {
+        this.netAverageFilledPrice = netAverageFilledPrice;
+    }
+
     public void setUserContext(String userContext) {
         this.userContext = userContext;
     }
 
+    public void setClientProductId(String clientProductId) {
+        this.clientProductId = clientProductId;
+    }
+
+    public void setPostOnly(Boolean postOnly) {
+        this.postOnly = postOnly;
+    }
+
+    public void setIsRaiseExact(Boolean isRaiseExact) {
+        this.isRaiseExact = isRaiseExact;
+    }
+
+    public void setDisplaySize(String displaySize) {
+        this.displaySize = displaySize;
+    }
+
+    public void setDisplayQuoteSize(String displayQuoteSize) {
+        this.displayQuoteSize = displayQuoteSize;
+    }
+
+    public void setDisplayBaseSize(String displayBaseSize) {
+        this.displayBaseSize = displayBaseSize;
+    }
+
     public static class Builder {
         private String id;
+
         private String userId;
+
         private String portfolioId;
+
         private String productId;
+
         private OrderSide side;
+
         private String clientOrderId;
+
         private OrderType type;
+
         private String baseQuantity;
+
         private String quoteValue;
+
         private String limitPrice;
-        private String stopPrice;
-        private String startTime;
-        private String expiryTime;
+
+        private OffsetDateTime startTime;
+
+        private OffsetDateTime expiryTime;
+
         private OrderStatus status;
-        private TimeInForce timeInForce;
-        private String createdAt;
+
+        private TimeInForceType timeInForce;
+
+        private OffsetDateTime createdAt;
+
         private String filledQuantity;
+
         private String filledValue;
+
         private String averageFilledPrice;
-        private String netAverageFilledPrice;
+
         private String commission;
+
         private String exchangeFee;
+
         private String historicalPov;
+
+        private String stopPrice;
+
+        private String netAverageFilledPrice;
+
         private String userContext;
 
-        public Builder() {
-        }
+        private String clientProductId;
+
+        private Boolean postOnly;
+
+        private Boolean isRaiseExact;
+
+        private String displaySize;
+
+        private String displayQuoteSize;
+
+        private String displayBaseSize;
 
         public Builder id(String id) {
             this.id = id;
@@ -368,17 +467,12 @@ public class Order {
             return this;
         }
 
-        public Builder stopPrice(String stopPrice) {
-            this.stopPrice = stopPrice;
-            return this;
-        }
-
-        public Builder startTime(String startTime) {
+        public Builder startTime(OffsetDateTime startTime) {
             this.startTime = startTime;
             return this;
         }
 
-        public Builder expiryTime(String expiryTime) {
+        public Builder expiryTime(OffsetDateTime expiryTime) {
             this.expiryTime = expiryTime;
             return this;
         }
@@ -388,12 +482,12 @@ public class Order {
             return this;
         }
 
-        public Builder timeInForce(TimeInForce timeInForce) {
+        public Builder timeInForce(TimeInForceType timeInForce) {
             this.timeInForce = timeInForce;
             return this;
         }
 
-        public Builder createdAt(String createdAt) {
+        public Builder createdAt(OffsetDateTime createdAt) {
             this.createdAt = createdAt;
             return this;
         }
@@ -413,11 +507,6 @@ public class Order {
             return this;
         }
 
-        public Builder netAverageFilledPrice(String netAverageFilledPrice) {
-            this.netAverageFilledPrice = netAverageFilledPrice;
-            return this;
-        }
-
         public Builder commission(String commission) {
             this.commission = commission;
             return this;
@@ -433,8 +522,48 @@ public class Order {
             return this;
         }
 
+        public Builder stopPrice(String stopPrice) {
+            this.stopPrice = stopPrice;
+            return this;
+        }
+
+        public Builder netAverageFilledPrice(String netAverageFilledPrice) {
+            this.netAverageFilledPrice = netAverageFilledPrice;
+            return this;
+        }
+
         public Builder userContext(String userContext) {
             this.userContext = userContext;
+            return this;
+        }
+
+        public Builder clientProductId(String clientProductId) {
+            this.clientProductId = clientProductId;
+            return this;
+        }
+
+        public Builder postOnly(Boolean postOnly) {
+            this.postOnly = postOnly;
+            return this;
+        }
+
+        public Builder isRaiseExact(Boolean isRaiseExact) {
+            this.isRaiseExact = isRaiseExact;
+            return this;
+        }
+
+        public Builder displaySize(String displaySize) {
+            this.displaySize = displaySize;
+            return this;
+        }
+
+        public Builder displayQuoteSize(String displayQuoteSize) {
+            this.displayQuoteSize = displayQuoteSize;
+            return this;
+        }
+
+        public Builder displayBaseSize(String displayBaseSize) {
+            this.displayBaseSize = displayBaseSize;
             return this;
         }
 

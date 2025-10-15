@@ -1,39 +1,26 @@
-/*
- * Copyright 2025-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
-
-import com.coinbase.prime.model.enums.PositionReferenceType;
 
 public class PositionReference {
     private String id;
 
-    private PositionReferenceType type;
-
     public PositionReference() {
-    }
-
-    public PositionReference(String id, PositionReferenceType type) {
-        this.id = id;
-        this.type = type;
     }
 
     public PositionReference(Builder builder) {
         this.id = builder.id;
-        this.type = builder.type;
     }
 
     public String getId() {
@@ -44,28 +31,11 @@ public class PositionReference {
         this.id = id;
     }
 
-    public PositionReferenceType getType() {
-        return type;
-    }
-
-    public void setType(PositionReferenceType type) {
-        this.type = type;
-    }
-
     public static class Builder {
         private String id;
-        private PositionReferenceType type;
 
-        public Builder() {
-        }
-
-        public Builder withId(String id) {
+        public Builder id(String id) {
             this.id = id;
-            return this;
-        }
-
-        public Builder withType(PositionReferenceType type) {
-            this.type = type;
             return this;
         }
 

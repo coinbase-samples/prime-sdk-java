@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,28 +16,8 @@
 
 package com.coinbase.prime.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
-/**
- * Enum representing the different product permissions available in the Prime API.
- */
 public enum ProductPermissions {
     PRODUCT_PERMISSION_READ,
     PRODUCT_PERMISSION_TRADE,
-    PRODUCT_PERMISSION_LENDING;
-
-    @JsonCreator
-    public static ProductPermissions fromString(String value) {
-        for (ProductPermissions permission : ProductPermissions.values()) {
-            if (permission.name().equals(value)) {
-                return permission;
-            }
-        }
-        throw new IllegalArgumentException("Unknown ProductPermissions: " + value);
-    }
-
-    @Override
-    public String toString() {
-        return this.name();
-    }
+    PRODUCT_PERMISSION_LENDING
 }

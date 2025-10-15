@@ -136,9 +136,10 @@ public class PostProcessor {
             Files.walkFileTree(modelPath, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                    String fileName = file.getFileName().toString();
                     if (file.toString().endsWith(".java") && 
-                        !file.getFileName().toString().contains("Test") &&
-                        !file.getFileName().toString().contains("Api")) {
+                        !fileName.contains("Test") &&
+                        !fileName.matches(".*Api\\.java$")) { // Only skip files ending with "Api.java", not containing "Api"
                         files.add(file);
                     }
                     return FileVisitResult.CONTINUE;
@@ -155,8 +156,24 @@ public class PostProcessor {
     }
     
     private void processEnumFile(Path file) throws IOException {
-        String fileName = file.getFileName().toString();
-        String className = fileName.replace(".java", "");
+        String content = Files.readString(file);
+        String className = extractClassName(content);
+        
+        // Strip prefixes from class name
+        String originalClassName = className;
+        if (className.startsWith("CoinbaseBrokerageProxyEventsMaterializedApi")) {
+            className = className.substring("CoinbaseBrokerageProxyEventsMaterializedApi".length());
+            content = content.replace("enum " + originalClassName, "enum " + className);
+            content = content.replaceAll("\\bCoinbaseBrokerageProxyEventsMaterializedApi(\\w+)", "$1");
+            logger.info("Transformed enum name: {} -> {}", originalClassName, className);
+        } else if (className.startsWith("CoinbasePublicRestApi")) {
+            className = className.substring("CoinbasePublicRestApi".length());
+            content = content.replace("enum " + originalClassName, "enum " + className);
+            content = content.replaceAll("\\bCoinbasePublicRestApi(\\w+)", "$1");
+            logger.info("Transformed enum name: {} -> {}", originalClassName, className);
+        }
+        
+        String fileName = className + ".java";
         Path outputPath = enumsDir.resolve(fileName);
         
         boolean existsBefore = Files.exists(outputPath);
@@ -168,7 +185,6 @@ public class PostProcessor {
             return;
         }
         
-        String content = Files.readString(file);
         String transformedContent = transformer.transformEnum(content);
         
         Files.writeString(outputPath, transformedContent);
@@ -193,10 +209,26 @@ public class PostProcessor {
             return;
         }
         
+        // Strip prefixes from class name
+        String originalClassName = className;
+        if (className.startsWith("CoinbaseBrokerageProxyEventsMaterializedApi")) {
+            className = className.substring("CoinbaseBrokerageProxyEventsMaterializedApi".length());
+            content = content.replace("class " + originalClassName, "class " + className);
+            content = content.replace("enum " + originalClassName, "enum " + className);
+            content = content.replaceAll("\\bCoinbaseBrokerageProxyEventsMaterializedApi(\\w+)", "$1");
+            logger.info("Transformed class name: {} -> {}", originalClassName, className);
+        } else if (className.startsWith("CoinbasePublicRestApi")) {
+            className = className.substring("CoinbasePublicRestApi".length());
+            content = content.replace("class " + originalClassName, "class " + className);
+            content = content.replace("enum " + originalClassName, "enum " + className);
+            content = content.replaceAll("\\bCoinbasePublicRestApi(\\w+)", "$1");
+            logger.info("Transformed class name: {} -> {}", originalClassName, className);
+        }
+        
         // Apply Web3 to Onchain transformation
         content = applyWeb3ToOnchainTransformation(content, className);
         
-        String fileName = file.getFileName().toString();
+        String fileName = className + ".java";
         
         // Apply Web3 to Onchain transformation to filename
         if (fileName.contains("Web3")) {
@@ -256,8 +288,20 @@ public class PostProcessor {
     }
     
     private boolean shouldSkipFile(String className) {
+        // Strip common prefixes for checking
+        String cleanName = className;
+        if (cleanName.startsWith("CoinbaseBrokerageProxyEventsMaterializedApi")) {
+            cleanName = cleanName.substring("CoinbaseBrokerageProxyEventsMaterializedApi".length());
+        } else if (cleanName.startsWith("CoinbasePublicRestApi")) {
+            cleanName = cleanName.substring("CoinbasePublicRestApi".length());
+        } else if (cleanName.startsWith("PrimeRESTAPI")) {
+            cleanName = cleanName.substring("PrimeRESTAPI".length());
+        } else if (cleanName.startsWith("PublicRestApi")) {
+            cleanName = cleanName.substring("PublicRestApi".length());
+        }
+        
         // Skip Request/Response models (service-specific)
-        if (className.endsWith("Request") || className.endsWith("Response")) {
+        if (cleanName.endsWith("Request") || cleanName.endsWith("Response")) {
             logger.info("Skipping Request/Response model: {}", className);
             return true;
         }
@@ -269,7 +313,7 @@ public class PostProcessor {
         }
         
         // Skip inline schemas
-        if (className.equals("RFQ")) {
+        if (cleanName.equals("RFQ")) {
             logger.info("Skipping inline schema: {}", className);
             return true;
         }
@@ -293,7 +337,7 @@ public class PostProcessor {
             "AbstractOpenApiSchema"
         );
         
-        boolean shouldSkip = skipPatterns.stream().anyMatch(className::contains);
+        boolean shouldSkip = skipPatterns.stream().anyMatch(cleanName::contains);
         if (shouldSkip) {
             logger.info("Skipping OpenAPI artifact: {}", className);
         }

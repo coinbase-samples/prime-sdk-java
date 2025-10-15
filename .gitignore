@@ -2,8 +2,15 @@
 *.iml
 .env*
 target/
+dependency-reduced-pom.xml
 *.swp
 .classpath
 .project
 .settings
 .claude/settings.local.json
+
+.DS_Store
+
+tmp/
+
+ai-docs/

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,40 +16,11 @@
 
 package com.coinbase.prime.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum ValidatorStatus {
-    VALIDATOR_STATUS_UNKNOWN("VALIDATOR_STATUS_UNKNOWN"),
-    VALIDATOR_STATUS_ACTIVE("VALIDATOR_STATUS_ACTIVE"),
-    VALIDATOR_STATUS_INACTIVE("VALIDATOR_STATUS_INACTIVE"),
-    VALIDATOR_STATUS_JAILED("VALIDATOR_STATUS_JAILED"),
-    VALIDATOR_STATUS_TOMBSTONED("VALIDATOR_STATUS_TOMBSTONED"),
-    VALIDATOR_STATUS_DELINQUENT("VALIDATOR_STATUS_DELINQUENT");
-
-    private final String value;
-
-    ValidatorStatus(String value) {
-        this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static ValidatorStatus fromValue(String value) {
-        for (ValidatorStatus status : ValidatorStatus.values()) {
-            if (status.value.equals(value)) {
-                return status;
-            }
-        }
-        throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
+    VALIDATOR_STATUS_UNSPECIFIED,
+    VALIDATOR_STATUS_PENDING,
+    VALIDATOR_STATUS_ACTIVE,
+    VALIDATOR_STATUS_EXITING,
+    VALIDATOR_STATUS_EXITED,
+    VALIDATOR_STATUS_WITHDRAWN
 }

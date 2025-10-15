@@ -1,33 +1,25 @@
-/*
- * Copyright 2025-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Position {
     private String symbol;
 
-    @JsonProperty("long")
     private String _long;
 
-    @JsonProperty("short")
     private String _short;
 
-    @JsonProperty("position_reference")
     private PositionReference positionReference;
 
     public Position() {
@@ -44,28 +36,28 @@ public class Position {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getLong() {
+    public String get_long() {
         return _long;
     }
 
-    public void setLong(String _long) {
-        this._long = _long;
-    }
-
-    public String getShort() {
+    public String get_short() {
         return _short;
-    }
-
-    public void setShort(String _short) {
-        this._short = _short;
     }
 
     public PositionReference getPositionReference() {
         return positionReference;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public void set_long(String _long) {
+        this._long = _long;
+    }
+
+    public void set_short(String _short) {
+        this._short = _short;
     }
 
     public void setPositionReference(PositionReference positionReference) {
@@ -74,8 +66,11 @@ public class Position {
 
     public static class Builder {
         private String symbol;
+
         private String _long;
+
         private String _short;
+
         private PositionReference positionReference;
 
         public Builder symbol(String symbol) {
@@ -83,12 +78,12 @@ public class Position {
             return this;
         }
 
-        public Builder longPosition(String _long) {
+        public Builder _long(String _long) {
             this._long = _long;
             return this;
         }
 
-        public Builder shortPosition(String _short) {
+        public Builder _short(String _short) {
             this._short = _short;
             return this;
         }

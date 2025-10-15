@@ -1,39 +1,27 @@
-/*
- * Copyright 2024-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class OnchainAsset {
-    /** Network this asset is on (ie "ethereum-mainnet") */
     private String network;
-    
-    /** Contract Address of this asset (empty for native assets) */
-    @JsonProperty("contract_address")
+
     private String contractAddress;
-    
-    /** Symbol of this asset */
+
     private String symbol;
-    
-    /** Token ID of this asset (empty for non NFT assets) */
-    @JsonProperty("token_id")
+
     private String tokenId;
-    
-    /** Name of this asset, either the name of the crypto token or the NFT collection name */
+
     private String name;
 
     public OnchainAsset() {
@@ -51,36 +39,36 @@ public class OnchainAsset {
         return network;
     }
 
-    public void setNetwork(String network) {
-        this.network = network;
-    }
-
     public String getContractAddress() {
         return contractAddress;
-    }
-
-    public void setContractAddress(String contractAddress) {
-        this.contractAddress = contractAddress;
     }
 
     public String getSymbol() {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
     public String getTokenId() {
         return tokenId;
     }
 
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
+    public void setContractAddress(String contractAddress) {
+        this.contractAddress = contractAddress;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 
     public void setName(String name) {
@@ -89,9 +77,13 @@ public class OnchainAsset {
 
     public static class Builder {
         private String network;
+
         private String contractAddress;
+
         private String symbol;
+
         private String tokenId;
+
         private String name;
 
         public Builder network(String network) {

@@ -1,85 +1,124 @@
-/*
- * Copyright 2024-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.prime.model.enums.PaymentMethodType;
 
-/**
- * Detailed payment method information.
- */
 public class PaymentMethodDetails {
-    @JsonProperty("account_number")
+    private String id;
+
+    private String symbol;
+
+    private PaymentMethodType paymentMethodType;
+
+    private String name;
+
     private String accountNumber;
-    @JsonProperty("routing_number")
-    private String routingNumber;
-    @JsonProperty("bank_name")
-    private String bankName;
-    @JsonProperty("account_name")
-    private String accountName;
+
+    private String bankCode;
 
     public PaymentMethodDetails() {
     }
 
     public PaymentMethodDetails(Builder builder) {
+        this.id = builder.id;
+        this.symbol = builder.symbol;
+        this.paymentMethodType = builder.paymentMethodType;
+        this.name = builder.name;
         this.accountNumber = builder.accountNumber;
-        this.routingNumber = builder.routingNumber;
-        this.bankName = builder.bankName;
-        this.accountName = builder.accountName;
+        this.bankCode = builder.bankCode;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public PaymentMethodType getPaymentMethodType() {
+        return paymentMethodType;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getAccountNumber() {
         return accountNumber;
     }
 
+    public String getBankCode() {
+        return bankCode;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setPaymentMethodType(PaymentMethodType paymentMethodType) {
+        this.paymentMethodType = paymentMethodType;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
-    public String getRoutingNumber() {
-        return routingNumber;
-    }
-
-    public void setRoutingNumber(String routingNumber) {
-        this.routingNumber = routingNumber;
-    }
-
-    public String getBankName() {
-        return bankName;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-
-    public String getAccountName() {
-        return accountName;
-    }
-
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
     }
 
     public static class Builder {
-        private String accountNumber;
-        private String routingNumber;
-        private String bankName;
-        private String accountName;
+        private String id;
 
-        public Builder() {
+        private String symbol;
+
+        private PaymentMethodType paymentMethodType;
+
+        private String name;
+
+        private String accountNumber;
+
+        private String bankCode;
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder symbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+
+        public Builder paymentMethodType(PaymentMethodType paymentMethodType) {
+            this.paymentMethodType = paymentMethodType;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
         }
 
         public Builder accountNumber(String accountNumber) {
@@ -87,18 +126,8 @@ public class PaymentMethodDetails {
             return this;
         }
 
-        public Builder routingNumber(String routingNumber) {
-            this.routingNumber = routingNumber;
-            return this;
-        }
-
-        public Builder bankName(String bankName) {
-            this.bankName = bankName;
-            return this;
-        }
-
-        public Builder accountName(String accountName) {
-            this.accountName = accountName;
+        public Builder bankCode(String bankCode) {
+            this.bankCode = bankCode;
             return this;
         }
 

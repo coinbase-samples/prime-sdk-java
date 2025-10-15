@@ -1,53 +1,39 @@
-/*
- * Copyright 2025-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class ExistingLocate {
-    @JsonProperty("locate_id")
     private String locateId;
 
-    @JsonProperty("entity_id")
     private String entityId;
 
-    @JsonProperty("portfolio_id")
     private String portfolioId;
 
     private String symbol;
 
-    @JsonProperty("requested_amount")
     private String requestedAmount;
 
-    @JsonProperty("interest_rate")
     private String interestRate;
 
     private String status;
 
-    @JsonProperty("approved_amount")
     private String approvedAmount;
 
-    @JsonProperty("conversion_date")
     private String conversionDate;
 
-    @JsonProperty("created_at")
     private String createdAt;
 
-    @JsonProperty("locate_date")
     private String locateDate;
 
     public ExistingLocate() {
@@ -71,84 +57,84 @@ public class ExistingLocate {
         return locateId;
     }
 
-    public void setLocateId(String locateId) {
-        this.locateId = locateId;
-    }
-
     public String getEntityId() {
         return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
     }
 
     public String getPortfolioId() {
         return portfolioId;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
     public String getSymbol() {
         return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
     }
 
     public String getRequestedAmount() {
         return requestedAmount;
     }
 
-    public void setRequestedAmount(String requestedAmount) {
-        this.requestedAmount = requestedAmount;
-    }
-
     public String getInterestRate() {
         return interestRate;
-    }
-
-    public void setInterestRate(String interestRate) {
-        this.interestRate = interestRate;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getApprovedAmount() {
         return approvedAmount;
-    }
-
-    public void setApprovedAmount(String approvedAmount) {
-        this.approvedAmount = approvedAmount;
     }
 
     public String getConversionDate() {
         return conversionDate;
     }
 
-    public void setConversionDate(String conversionDate) {
-        this.conversionDate = conversionDate;
-    }
-
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public String getLocateDate() {
         return locateDate;
+    }
+
+    public void setLocateId(String locateId) {
+        this.locateId = locateId;
+    }
+
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
+    }
+
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setRequestedAmount(String requestedAmount) {
+        this.requestedAmount = requestedAmount;
+    }
+
+    public void setInterestRate(String interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setApprovedAmount(String approvedAmount) {
+        this.approvedAmount = approvedAmount;
+    }
+
+    public void setConversionDate(String conversionDate) {
+        this.conversionDate = conversionDate;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public void setLocateDate(String locateDate) {
@@ -157,19 +143,26 @@ public class ExistingLocate {
 
     public static class Builder {
         private String locateId;
-        private String entityId;
-        private String portfolioId;
-        private String symbol;
-        private String requestedAmount;
-        private String interestRate;
-        private String status;
-        private String approvedAmount;
-        private String conversionDate;
-        private String createdAt;
-        private String locateDate;
 
-        public Builder() {
-        }
+        private String entityId;
+
+        private String portfolioId;
+
+        private String symbol;
+
+        private String requestedAmount;
+
+        private String interestRate;
+
+        private String status;
+
+        private String approvedAmount;
+
+        private String conversionDate;
+
+        private String createdAt;
+
+        private String locateDate;
 
         public Builder locateId(String locateId) {
             this.locateId = locateId;

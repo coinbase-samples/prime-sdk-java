@@ -52,11 +52,78 @@ public class ModelTransformer {
         // Remove any existing license headers
         content = removeLicenseHeader(content);
         
+        // Simplify enum by removing unnecessary value fields and boilerplate
+        content = simplifyEnum(content);
+        
         // Transform enum values to uppercase with underscores
         content = transformEnumValues(content);
         
         // Add proper license header
         return LICENSE_HEADER + "\n\n" + content.trim();
+    }
+    
+    /**
+     * Simplifies enum by removing unnecessary value fields, constructors,
+     * and Jackson annotations. Creates a clean enum with just constants.
+     */
+    private String simplifyEnum(String content) {
+        // Enums should always be in the enums package
+        String packageDeclaration = "package com.coinbase.prime.model.enums;";
+        
+        // Extract enum name
+        String enumName = "";
+        Pattern enumNamePattern = Pattern.compile("public\\s+enum\\s+(\\w+)");
+        Matcher enumNameMatcher = enumNamePattern.matcher(content);
+        if (enumNameMatcher.find()) {
+            enumName = enumNameMatcher.group(1);
+        }
+        
+        // Extract enum constants (looking for the pattern: CONSTANT_NAME("value"))
+        List<String> enumConstants = new ArrayList<>();
+        Pattern enumConstantPattern = Pattern.compile("([A-Z][A-Z0-9_]*)\\s*\\(\\s*\"[^\"]*\"\\s*\\)");
+        Matcher enumConstantMatcher = enumConstantPattern.matcher(content);
+        while (enumConstantMatcher.find()) {
+            enumConstants.add(enumConstantMatcher.group(1));
+        }
+        
+        // If no constants found with values, try simple pattern (just constant names)
+        if (enumConstants.isEmpty()) {
+            Pattern simpleConstantPattern = Pattern.compile("^\\s*([A-Z][A-Z0-9_]*)\\s*[,;]?\\s*$", Pattern.MULTILINE);
+            Matcher simpleConstantMatcher = simpleConstantPattern.matcher(content);
+            while (simpleConstantMatcher.find()) {
+                String constant = simpleConstantMatcher.group(1).trim();
+                // Filter out keywords and common method names
+                if (!constant.isEmpty() && 
+                    !constant.equals("STRING") && 
+                    !constant.equals("VALUE") &&
+                    !content.contains("public static " + constant)) {
+                    enumConstants.add(constant);
+                }
+            }
+        }
+        
+        if (enumConstants.isEmpty() || enumName.isEmpty()) {
+            // If we can't parse it, return as-is
+            logger.warn("Could not parse enum for simplification, returning original");
+            return content;
+        }
+        
+        // Build simplified enum
+        StringBuilder result = new StringBuilder();
+        result.append(packageDeclaration).append("\n\n");
+        result.append("public enum ").append(enumName).append(" {\n");
+        
+        for (int i = 0; i < enumConstants.size(); i++) {
+            result.append("    ").append(enumConstants.get(i));
+            if (i < enumConstants.size() - 1) {
+                result.append(",");
+            }
+            result.append("\n");
+        }
+        
+        result.append("}\n");
+        
+        return result.toString();
     }
     
     public String transformModel(String content, JsonNode schema) {

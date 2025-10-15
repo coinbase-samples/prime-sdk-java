@@ -16,9 +16,6 @@
 
 package com.coinbase.prime.model.enums;
 
-/**
- * Activity level to retrieve activities for.
- */
 public enum ActivityLevel {
     ACTIVITY_LEVEL_ALL,
     ACTIVITY_LEVEL_PORTFOLIO,

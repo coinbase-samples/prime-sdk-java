@@ -16,26 +16,8 @@
 
 package com.coinbase.prime.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum FcmPositionSide {
-    FCM_POSITION_SIDE_UNSPECIFIED("FCM_POSITION_SIDE_UNSPECIFIED"),
-    LONG("LONG"),
-    SHORT("SHORT");
-
-    private final String value;
-
-    FcmPositionSide(String value) {
-        this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return value;
-    }
+    FCM_POSITION_SIDE_UNSPECIFIED,
+    LONG,
+    SHORT
 }

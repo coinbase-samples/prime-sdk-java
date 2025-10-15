@@ -1,43 +1,32 @@
-/*
- * Copyright 2024-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.prime.model.enums.UserRole;
 
 public class PortfolioUser {
-    /** The unique ID of the user */
     private String id;
-    
-    /** The name of the user */
+
     private String name;
-    
-    /** The email of the user */
+
     private String email;
-    
-    /** The portfolio to which this user and associated permissions are identified */
-    @JsonProperty("portfolio_id")
+
     private String portfolioId;
-    
-    /** The entity to which this user and associated permissions are identified */
-    @JsonProperty("entity_id")
+
     private String entityId;
-    
-    /** The role of the user */
-    private String role;
+
+    private UserRole role;
 
     public PortfolioUser() {
     }
@@ -55,57 +44,62 @@ public class PortfolioUser {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPortfolioId() {
         return portfolioId;
-    }
-
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
     }
 
     public String getEntityId() {
         return entityId;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+
     public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
     public static class Builder {
         private String id;
+
         private String name;
+
         private String email;
+
         private String portfolioId;
+
         private String entityId;
-        private String role;
+
+        private UserRole role;
 
         public Builder id(String id) {
             this.id = id;
@@ -132,7 +126,7 @@ public class PortfolioUser {
             return this;
         }
 
-        public Builder role(String role) {
+        public Builder role(UserRole role) {
             this.role = role;
             return this;
         }

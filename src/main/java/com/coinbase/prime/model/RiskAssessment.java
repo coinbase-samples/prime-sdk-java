@@ -1,27 +1,64 @@
-/*
- * Copyright 2024-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class RiskAssessment {
-    @JsonProperty("compliance_risk_detected")
-    private boolean complianceRiskDetected;
+    private Boolean complianceRiskDetected;
 
-    @JsonProperty("security_risk_detected")
-    private boolean securityRiskDetected;
+    private Boolean securityRiskDetected;
+
+    public RiskAssessment() {
+    }
+
+    public RiskAssessment(Builder builder) {
+        this.complianceRiskDetected = builder.complianceRiskDetected;
+        this.securityRiskDetected = builder.securityRiskDetected;
+    }
+
+    public Boolean isComplianceRiskDetected() {
+        return complianceRiskDetected;
+    }
+
+    public Boolean isSecurityRiskDetected() {
+        return securityRiskDetected;
+    }
+
+    public void setComplianceRiskDetected(Boolean complianceRiskDetected) {
+        this.complianceRiskDetected = complianceRiskDetected;
+    }
+
+    public void setSecurityRiskDetected(Boolean securityRiskDetected) {
+        this.securityRiskDetected = securityRiskDetected;
+    }
+
+    public static class Builder {
+        private Boolean complianceRiskDetected;
+
+        private Boolean securityRiskDetected;
+
+        public Builder complianceRiskDetected(Boolean complianceRiskDetected) {
+            this.complianceRiskDetected = complianceRiskDetected;
+            return this;
+        }
+
+        public Builder securityRiskDetected(Boolean securityRiskDetected) {
+            this.securityRiskDetected = securityRiskDetected;
+            return this;
+        }
+
+        public RiskAssessment build() {
+            return new RiskAssessment(this);
+        }
+    }
 }

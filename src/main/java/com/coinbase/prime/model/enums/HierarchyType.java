@@ -16,9 +16,6 @@
 
 package com.coinbase.prime.model.enums;
 
-/**
- * HierarchyType are the enums for various hierarchies within Prime, ex Entity, Organization, Portfolio.
- */
 public enum HierarchyType {
     HIERARCHY_TYPE_UNSPECIFIED,
     HIERARCHY_TYPE_PORTFOLIO,

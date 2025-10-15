@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,28 +16,10 @@
 
 package com.coinbase.prime.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum FcmFuturesSweepStatus {
-    FCM_FUTURES_SWEEP_STATUS_UNSPECIFIED("FCM_FUTURES_SWEEP_STATUS_UNSPECIFIED"),
-    FCM_FUTURES_SWEEP_STATUS_PENDING("FCM_FUTURES_SWEEP_STATUS_PENDING"),
-    FCM_FUTURES_SWEEP_STATUS_CLOSED("FCM_FUTURES_SWEEP_STATUS_CLOSED"),
-    FCM_FUTURES_SWEEP_STATUS_CANCELED("FCM_FUTURES_SWEEP_STATUS_CANCELED"),
-    FCM_FUTURES_SWEEP_STATUS_PROCESSING("FCM_FUTURES_SWEEP_STATUS_PROCESSING");
-
-    private final String value;
-
-    FcmFuturesSweepStatus(String value) {
-        this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return value;
-    }
+    FCM_FUTURES_SWEEP_STATUS_UNSPECIFIED,
+    FCM_FUTURES_SWEEP_STATUS_PENDING,
+    FCM_FUTURES_SWEEP_STATUS_CLOSED,
+    FCM_FUTURES_SWEEP_STATUS_CANCELED,
+    FCM_FUTURES_SWEEP_STATUS_PROCESSING
 }

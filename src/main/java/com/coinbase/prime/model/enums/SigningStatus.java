@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.coinbase.prime.model.enums;
 
 public enum SigningStatus {
-    SIGNING_STATUS_UNKNOWN,
     SIGNED,
     UNSIGNED
 }

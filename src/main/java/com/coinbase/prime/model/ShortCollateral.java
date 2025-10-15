@@ -1,37 +1,29 @@
-/*
- * Copyright 2025-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class ShortCollateral {
-    @JsonProperty("old_balance")
     private String oldBalance;
 
-    @JsonProperty("new_balance")
     private String newBalance;
 
-    @JsonProperty("loan_interest_rate")
     private String loanInterestRate;
 
-    @JsonProperty("collateral_interest_rate")
     private String collateralInterestRate;
 
-    public ShortCollateral() {}
+    public ShortCollateral() {
+    }
 
     public ShortCollateral(Builder builder) {
         this.oldBalance = builder.oldBalance;
@@ -44,28 +36,28 @@ public class ShortCollateral {
         return oldBalance;
     }
 
-    public void setOldBalance(String oldBalance) {
-        this.oldBalance = oldBalance;
-    }
-
     public String getNewBalance() {
         return newBalance;
-    }
-
-    public void setNewBalance(String newBalance) {
-        this.newBalance = newBalance;
     }
 
     public String getLoanInterestRate() {
         return loanInterestRate;
     }
 
-    public void setLoanInterestRate(String loanInterestRate) {
-        this.loanInterestRate = loanInterestRate;
-    }
-
     public String getCollateralInterestRate() {
         return collateralInterestRate;
+    }
+
+    public void setOldBalance(String oldBalance) {
+        this.oldBalance = oldBalance;
+    }
+
+    public void setNewBalance(String newBalance) {
+        this.newBalance = newBalance;
+    }
+
+    public void setLoanInterestRate(String loanInterestRate) {
+        this.loanInterestRate = loanInterestRate;
     }
 
     public void setCollateralInterestRate(String collateralInterestRate) {
@@ -74,11 +66,12 @@ public class ShortCollateral {
 
     public static class Builder {
         private String oldBalance;
-        private String newBalance;
-        private String loanInterestRate;
-        private String collateralInterestRate;
 
-        public Builder() {}
+        private String newBalance;
+
+        private String loanInterestRate;
+
+        private String collateralInterestRate;
 
         public Builder oldBalance(String oldBalance) {
             this.oldBalance = oldBalance;

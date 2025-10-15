@@ -1,39 +1,31 @@
-/*
- * Copyright 2024-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/**
- * Destination allocation leg representing amount allocated to a specific portfolio
- */
 public class DestinationAlloc {
-    @JsonProperty("leg_id")
     private String legId;
-    @JsonProperty("portfolio_id")
+
     private String portfolioId;
-    @JsonProperty("allocation_base")
+
     private String allocationBase;
-    @JsonProperty("allocation_quote")
+
     private String allocationQuote;
-    @JsonProperty("fees_allocated_leg")
+
     private String feesAllocatedLeg;
 
-    public DestinationAlloc() {}
+    public DestinationAlloc() {
+    }
 
     public DestinationAlloc(Builder builder) {
         this.legId = builder.legId;
@@ -47,36 +39,36 @@ public class DestinationAlloc {
         return legId;
     }
 
-    public void setLegId(String legId) {
-        this.legId = legId;
-    }
-
     public String getPortfolioId() {
         return portfolioId;
-    }
-
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
     }
 
     public String getAllocationBase() {
         return allocationBase;
     }
 
-    public void setAllocationBase(String allocationBase) {
-        this.allocationBase = allocationBase;
-    }
-
     public String getAllocationQuote() {
         return allocationQuote;
     }
 
-    public void setAllocationQuote(String allocationQuote) {
-        this.allocationQuote = allocationQuote;
-    }
-
     public String getFeesAllocatedLeg() {
         return feesAllocatedLeg;
+    }
+
+    public void setLegId(String legId) {
+        this.legId = legId;
+    }
+
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+
+    public void setAllocationBase(String allocationBase) {
+        this.allocationBase = allocationBase;
+    }
+
+    public void setAllocationQuote(String allocationQuote) {
+        this.allocationQuote = allocationQuote;
     }
 
     public void setFeesAllocatedLeg(String feesAllocatedLeg) {
@@ -85,12 +77,14 @@ public class DestinationAlloc {
 
     public static class Builder {
         private String legId;
-        private String portfolioId;
-        private String allocationBase;
-        private String allocationQuote;
-        private String feesAllocatedLeg;
 
-        public Builder() {}
+        private String portfolioId;
+
+        private String allocationBase;
+
+        private String allocationQuote;
+
+        private String feesAllocatedLeg;
 
         public Builder legId(String legId) {
             this.legId = legId;

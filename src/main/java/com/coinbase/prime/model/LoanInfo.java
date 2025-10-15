@@ -1,38 +1,30 @@
-/*
- * Copyright 2024-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2024-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class LoanInfo {
-    @JsonProperty("portfolio_id")
     private String portfolioId;
 
     private String symbol;
 
     private String amount;
 
-    @JsonProperty("notional_amount")
     private String notionalAmount;
 
-    @JsonProperty("due_date")
     private String dueDate;
 
-    public LoanInfo()  {
+    public LoanInfo() {
     }
 
     public LoanInfo(Builder builder) {
@@ -47,36 +39,36 @@ public class LoanInfo {
         return portfolioId;
     }
 
-    public void setPortfolioId(String portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
     public String getSymbol() {
         return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
     }
 
     public String getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
     public String getNotionalAmount() {
         return notionalAmount;
     }
 
-    public void setNotionalAmount(String notionalAmount) {
-        this.notionalAmount = notionalAmount;
-    }
-
     public String getDueDate() {
         return dueDate;
+    }
+
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public void setNotionalAmount(String notionalAmount) {
+        this.notionalAmount = notionalAmount;
     }
 
     public void setDueDate(String dueDate) {
@@ -85,13 +77,14 @@ public class LoanInfo {
 
     public static class Builder {
         private String portfolioId;
-        private String symbol;
-        private String amount;
-        private String notionalAmount;
-        private String dueDate;
 
-        public Builder() {
-        }
+        private String symbol;
+
+        private String amount;
+
+        private String notionalAmount;
+
+        private String dueDate;
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
