@@ -7,11 +7,6 @@
 #### OpenAPI Specification
 - Updated `apiSpec/prime-public-spec.yaml` to latest version
 - Reached 100% OpenAPI specification coverage (79/79 operations)
-
-#### Code Generation Tooling
-- `apiSpec/scripts/parse_openapi.py` - OpenAPI spec parser
-- `apiSpec/scripts/generate_service.py` - Service code generator
-- `apiSpec/scripts/cleanup_unused.sh` - Unused class cleanup utility
 - `tools/model-generator/` - OpenAPI Generator integration for model generation
 
 #### New Endpoints
