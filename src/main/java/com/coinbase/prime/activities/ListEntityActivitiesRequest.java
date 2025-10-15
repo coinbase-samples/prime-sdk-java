@@ -29,6 +29,8 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
+    @JsonProperty("activity_level")
+    private String activityLevel;
     private String[] symbols;
     private String[] categories;
     private String[] statuses;
@@ -44,6 +46,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
     public ListEntityActivitiesRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
         this.entityId = builder.entityId;
+        this.activityLevel = builder.activityLevel;
         this.symbols = builder.symbols;
         this.categories = builder.categories;
         this.statuses = builder.statuses;
@@ -57,6 +60,14 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
 
     public void setEntityId(String entityId) {
         this.entityId = entityId;
+    }
+
+    public String getActivityLevel() {
+        return this.activityLevel;
+    }
+
+    public void setActivityLevel(String activityLevel) {
+        this.activityLevel = activityLevel;
     }
 
     public String[] getSymbols() {
@@ -101,6 +112,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
 
     public static class Builder {
         private final String entityId;
+        private String activityLevel;
         private String[] symbols;
         private String[] categories;
         private String[] statuses;
@@ -112,6 +124,11 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
 
         public Builder(String entityId) {
             this.entityId = entityId;
+        }
+
+        public ListEntityActivitiesRequest.Builder activityLevel(String activityLevel) {
+            this.activityLevel = activityLevel;
+            return this;
         }
 
         public ListEntityActivitiesRequest.Builder symbols(String[] symbols) {

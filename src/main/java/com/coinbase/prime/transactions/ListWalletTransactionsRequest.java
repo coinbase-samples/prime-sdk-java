@@ -33,7 +33,7 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
-    private TransactionType type;
+    private TransactionType[] types;
     @JsonProperty("start_time")
     private String startTime;
     @JsonProperty("end_time")
@@ -46,7 +46,7 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
         super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
-        this.type = builder.type;
+        this.types = builder.types;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
     }
@@ -67,12 +67,12 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
         this.walletId = walletId;
     }
 
-    public TransactionType getType() {
-        return type;
+    public TransactionType[] getTypes() {
+        return types;
     }
 
-    public void setType(TransactionType type) {
-        this.type = type;
+    public void setTypes(TransactionType[] types) {
+        this.types = types;
     }
 
     public String getStartTime() {
@@ -94,7 +94,7 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
     public static class Builder {
         private String portfolioId;
         private String walletId;
-        private TransactionType type;
+        private TransactionType[] types;
         private String startTime;
         private String endTime;
         private String cursor;
@@ -114,8 +114,8 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder type(TransactionType type) {
-            this.type = type;
+        public Builder types(TransactionType[] types) {
+            this.types = types;
             return this;
         }
 
