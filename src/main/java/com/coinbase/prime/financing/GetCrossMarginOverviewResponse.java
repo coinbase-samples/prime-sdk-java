@@ -14,28 +14,27 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.onchainaddressgroups;
+package com.coinbase.prime.financing;
 
-import com.coinbase.prime.model.AddressGroup;
+import com.coinbase.prime.model.CrossMarginOverview;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
 /**
- * Response for listing onchain address groups.
+ * Response object for retrieving cross margin overview for an entity.
  */
-public class ListOnchainAddressGroupsResponse {
-    @JsonProperty("address_groups")
-    private List<AddressGroup> addressGroups;
+public class GetCrossMarginOverviewResponse {
+    @JsonProperty("cross_margin_overview")
+    private CrossMarginOverview crossMarginOverview;
 
-    public ListOnchainAddressGroupsResponse() {
+    public GetCrossMarginOverviewResponse() {
     }
 
-    public List<AddressGroup> getAddressGroups() {
-        return addressGroups;
+    public CrossMarginOverview getCrossMarginOverview() {
+        return crossMarginOverview;
     }
 
-    public void setAddressGroups(List<AddressGroup> addressGroups) {
-        this.addressGroups = addressGroups;
+    public void setCrossMarginOverview(CrossMarginOverview crossMarginOverview) {
+        this.crossMarginOverview = crossMarginOverview;
     }
 }
+

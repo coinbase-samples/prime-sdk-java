@@ -17,7 +17,6 @@
 package com.coinbase.prime.futures;
 
 import com.coinbase.prime.model.FcmRiskLimits;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetFcmRiskLimitsResponse {
     private FcmRiskLimits riskLimits;

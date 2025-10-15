@@ -23,7 +23,7 @@ public interface AllocationsService {
     // Allocations
     CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetPortfolioAllocationsResponse getPortfolioAllocations(GetPortfolioAllocationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetAllocationsByClientNettingIdResponse getNetAllocationsByNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetAllocationsByClientNettingIdResponse getAllocationsByClientNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPortfolioAllocationsResponse getPortfolioAllocations(GetPortfolioAllocationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

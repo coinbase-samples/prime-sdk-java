@@ -16,8 +16,8 @@
 
 package com.coinbase.prime.wallets;
 
-import com.coinbase.prime.model.CryptoDepositInstructions;
-import com.coinbase.prime.model.FiatDepositInstructions;
+import com.coinbase.prime.model.WalletCryptoDepositInstructions;
+import com.coinbase.prime.model.WalletFiatDepositInstructions;
 
 /**
  * Response object for retrieving wallet deposit instructions.
@@ -27,26 +27,26 @@ import com.coinbase.prime.model.FiatDepositInstructions;
  */
 public class GetWalletDepositInstructionsResponse {
     /** Cryptocurrency deposit instructions for the wallet */
-    CryptoDepositInstructions cryptoDepositInstructions;
+    WalletCryptoDepositInstructions cryptoDepositInstructions;
     /** Fiat currency deposit instructions for the wallet */
-    FiatDepositInstructions fiatDepositInstructions;
+    WalletFiatDepositInstructions fiatDepositInstructions;
 
     public GetWalletDepositInstructionsResponse() {
     }
 
-    public CryptoDepositInstructions getCryptoDepositInstructions() {
+    public WalletCryptoDepositInstructions getCryptoDepositInstructions() {
         return cryptoDepositInstructions;
     }
 
-    public void setCryptoDepositInstructions(CryptoDepositInstructions cryptoDepositInstructions) {
+    public void setCryptoDepositInstructions(WalletCryptoDepositInstructions cryptoDepositInstructions) {
         this.cryptoDepositInstructions = cryptoDepositInstructions;
     }
 
-    public FiatDepositInstructions getFiatDepositInstructions() {
+    public WalletFiatDepositInstructions getFiatDepositInstructions() {
         return fiatDepositInstructions;
     }
 
-    public void setFiatDepositInstructions(FiatDepositInstructions fiatDepositInstructions) {
+    public void setFiatDepositInstructions(WalletFiatDepositInstructions fiatDepositInstructions) {
         this.fiatDepositInstructions = fiatDepositInstructions;
     }
 

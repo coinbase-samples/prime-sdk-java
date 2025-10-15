@@ -21,6 +21,7 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface FinancingService {
     CreateNewLocatesResponse createNewLocates(CreateNewLocatesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetCrossMarginOverviewResponse getCrossMarginOverview(GetCrossMarginOverviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetEntityLocateAvailabilitiesResponse getEntityLocateAvailabilities(GetEntityLocateAvailabilitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetMarginInformationResponse getMarginInformation(GetMarginInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetPortfolioBuyingPowerResponse getPortfolioBuyingPower(GetPortfolioBuyingPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,10 +14,28 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model.enums;
+package com.coinbase.prime.products;
 
-public enum CoinbaseCustodyApiAddressBookType {
-    ADDRESS_BOOK_TYPE_UNSPECIFIED,
-    ADDRESS_BOOK_TYPE_ADDRESS,
-    ADDRESS_BOOK_TYPE_COUNTERPARTY_ID
+import com.coinbase.prime.model.Candle;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+
+/**
+ * Response object for listing public product candles.
+ */
+public class ListCandlesResponse {
+    @JsonProperty("candles")
+    private List<Candle> candles;
+
+    public ListCandlesResponse() {
+    }
+
+    public List<Candle> getCandles() {
+        return candles;
+    }
+
+    public void setCandles(List<Candle> candles) {
+        this.candles = candles;
+    }
 }
+

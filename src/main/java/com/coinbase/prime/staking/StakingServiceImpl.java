@@ -49,6 +49,16 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
     }
 
     @Override
+    public ListTransactionValidatorsResponse listTransactionValidators(ListTransactionValidatorsRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/transaction-validators/query", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListTransactionValidatorsResponse>() {});
+    }
+
+    @Override
     public PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) {
         return this.request(
                 HttpMethod.POST,

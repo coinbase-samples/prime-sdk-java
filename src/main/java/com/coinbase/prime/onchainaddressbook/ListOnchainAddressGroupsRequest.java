@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.onchainaddressgroups;
+package com.coinbase.prime.onchainaddressbook;
 
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
@@ -76,3 +76,4 @@ public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
         }
     }
 }
+
