@@ -26,8 +26,8 @@ public class GetPortfolioWithdrawalPowerResponse {
     public GetPortfolioWithdrawalPowerResponse() {
     }
 
-    public GetPortfolioWithdrawalPowerResponse(GetPortfolioWithdrawalPowerResponse.Builder builder) {
-        this.withdrawalPower = builder.withdrawalPower;
+    public GetPortfolioWithdrawalPowerResponse(WithdrawalPower withdrawalPower) {
+        this.withdrawalPower = withdrawalPower;
     }
 
     public WithdrawalPower getWithdrawalPower() {
@@ -37,5 +37,4 @@ public class GetPortfolioWithdrawalPowerResponse {
     public void setWithdrawalPower(WithdrawalPower withdrawalPower) {
         this.withdrawalPower = withdrawalPower;
     }
-
 }

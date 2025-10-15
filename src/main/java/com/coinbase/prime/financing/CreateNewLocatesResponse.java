@@ -25,8 +25,11 @@ public class CreateNewLocatesResponse {
   public CreateNewLocatesResponse() {
   }
 
-    public CreateNewLocatesResponse build() {
-      return new CreateNewLocatesResponse(this);
-    }
+  public String getLocateId() {
+    return locateId;
+  }
+
+  public void setLocateId(String locateId) {
+    this.locateId = locateId;
   }
 }

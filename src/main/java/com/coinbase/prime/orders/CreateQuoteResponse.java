@@ -48,23 +48,43 @@ public class CreateQuoteResponse {
   public CreateQuoteResponse() {
   }
 
-    public Builder bestPrice(String bestPrice) {
-      this.bestPrice = bestPrice;
-      return this;
-    }
+  public String getQuoteId() {
+    return quoteId;
+  }
 
-    public Builder orderTotal(String orderTotal) {
-      this.orderTotal = orderTotal;
-      return this;
-    }
+  public void setQuoteId(String quoteId) {
+    this.quoteId = quoteId;
+  }
 
-    public Builder priceInclusiveOfFees(String priceInclusiveOfFees) {
-      this.priceInclusiveOfFees = priceInclusiveOfFees;
-      return this;
-    }
+  public String getExpirationTime() {
+    return expirationTime;
+  }
 
-    public CreateQuoteResponse build() {
-      return new CreateQuoteResponse(this);
-    }
+  public void setExpirationTime(String expirationTime) {
+    this.expirationTime = expirationTime;
+  }
+
+  public String getBestPrice() {
+    return bestPrice;
+  }
+
+  public void setBestPrice(String bestPrice) {
+    this.bestPrice = bestPrice;
+  }
+
+  public String getOrderTotal() {
+    return orderTotal;
+  }
+
+  public void setOrderTotal(String orderTotal) {
+    this.orderTotal = orderTotal;
+  }
+
+  public String getPriceInclusiveOfFees() {
+    return priceInclusiveOfFees;
+  }
+
+  public void setPriceInclusiveOfFees(String priceInclusiveOfFees) {
+    this.priceInclusiveOfFees = priceInclusiveOfFees;
   }
 }

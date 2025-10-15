@@ -32,12 +32,6 @@ public class UpdateOnchainAddressBookEntryResponse {
     public UpdateOnchainAddressBookEntryResponse() {
     }
 
-    public UpdateOnchainAddressBookEntryResponse(UpdateOnchainAddressBookEntryResponse.Builder builder) {
-        this.activityType = builder.activityType;
-        this.numApprovalsRemaining = builder.numApprovalsRemaining;
-        this.activityId = builder.activityId;
-    }
-
     public CustodyActivityType getActivityType() {
         return activityType;
     }

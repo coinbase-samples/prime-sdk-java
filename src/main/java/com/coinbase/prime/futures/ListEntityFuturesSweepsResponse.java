@@ -43,4 +43,4 @@ public class ListEntityFuturesSweepsResponse {
     public void setAutoSweep(boolean autoSweep) {
         this.autoSweep = autoSweep;
     }
-
+}
