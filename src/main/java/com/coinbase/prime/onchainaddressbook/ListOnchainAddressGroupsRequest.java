@@ -29,7 +29,7 @@ public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
     }
 
     private ListOnchainAddressGroupsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
     }
 
@@ -48,7 +48,7 @@ public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
     public static class Builder {
         private String portfolioId;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder portfolioId(String portfolioId) {
@@ -61,7 +61,7 @@ public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder sortDirection(String sortDirection) {
+        public Builder sortDirection(SortDirection sortDirection) {
             this.sortDirection = sortDirection;
             return this;
         }

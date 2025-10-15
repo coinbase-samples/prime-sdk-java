@@ -34,7 +34,7 @@ public class ListEntityUsersRequest extends PrimeListRequest {
     }
 
     public ListEntityUsersRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.entityId = builder.entityId;
     }
 
@@ -49,7 +49,7 @@ public class ListEntityUsersRequest extends PrimeListRequest {
     public static class Builder {
         private final String entityId;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder(String entityId) {

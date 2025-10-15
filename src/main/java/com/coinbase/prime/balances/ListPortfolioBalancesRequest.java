@@ -17,6 +17,7 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.enums.BalanceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,7 +29,7 @@ public class ListPortfolioBalancesRequest {
     private String portfolioId;
     private String[] symbols;
     @JsonProperty("balance_type")
-    private String balanceType;
+    private BalanceType balanceType;
 
     public ListPortfolioBalancesRequest() {
     }
@@ -55,18 +56,18 @@ public class ListPortfolioBalancesRequest {
         this.symbols = symbols;
     }
 
-    public String getBalanceType() {
+    public BalanceType getBalanceType() {
         return balanceType;
     }
 
-    public void setBalanceType(String balanceType) {
+    public void setBalanceType(BalanceType balanceType) {
         this.balanceType = balanceType;
     }
 
     public static class Builder {
         private String portfolioId;
         private String[] symbols;
-        private String balanceType;
+        private BalanceType balanceType;
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -78,7 +79,7 @@ public class ListPortfolioBalancesRequest {
             return this;
         }
 
-        public Builder balanceType(String balanceType) {
+        public Builder balanceType(BalanceType balanceType) {
             this.balanceType = balanceType;
             return this;
         }

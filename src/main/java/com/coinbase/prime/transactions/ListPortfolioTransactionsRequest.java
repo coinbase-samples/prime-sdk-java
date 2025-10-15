@@ -41,7 +41,7 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
     }
 
     public ListPortfolioTransactionsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.symbols = builder.symbols;
         this.types = builder.types;
@@ -96,7 +96,7 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         private String startTime;
         private String endTime;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder() {

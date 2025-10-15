@@ -151,7 +151,7 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
 
         public Builder pagination(Pagination pagination) {
             this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection() != null ? SortDirection.valueOf(pagination.getSortDirection()) : null;
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 

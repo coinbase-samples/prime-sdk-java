@@ -34,7 +34,7 @@ public class ListPortfolioUsersRequest extends PrimeListRequest {
     }
 
     public ListPortfolioUsersRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
     }
 
@@ -49,7 +49,7 @@ public class ListPortfolioUsersRequest extends PrimeListRequest {
     public static class Builder {
         private String portfolioId;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder portfolioId(String portfolioId) {

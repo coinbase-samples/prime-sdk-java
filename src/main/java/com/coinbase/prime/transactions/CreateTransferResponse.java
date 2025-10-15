@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.transactions;
 
+import com.coinbase.prime.model.enums.DestinationType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateTransferResponse {
@@ -29,7 +30,7 @@ public class CreateTransferResponse {
     @JsonProperty("destination_address")
     private String destinationAddress;
     @JsonProperty("destination_type")
-    private String destinationType;
+    private DestinationType destinationType;
     @JsonProperty("source_address")
     private String sourceAddress;
     @JsonProperty("transaction_id")
@@ -86,11 +87,11 @@ public class CreateTransferResponse {
         this.destinationAddress = destinationAddress;
     }
 
-    public String getDestinationType() {
+    public DestinationType getDestinationType() {
         return destinationType;
     }
 
-    public void setDestinationType(String destinationType) {
+    public void setDestinationType(DestinationType destinationType) {
         this.destinationType = destinationType;
     }
 

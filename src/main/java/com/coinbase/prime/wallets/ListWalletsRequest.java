@@ -38,7 +38,7 @@ public class ListWalletsRequest extends PrimeListRequest {
     public ListWalletsRequest() {}
 
     public ListWalletsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.type = builder.type;
         this.symbols = builder.symbols;
@@ -73,7 +73,7 @@ public class ListWalletsRequest extends PrimeListRequest {
         private WalletType type;
         private String[] symbols;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder() {}

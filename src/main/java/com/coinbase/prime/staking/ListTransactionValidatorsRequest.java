@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ListTransactionValidatorsRequest {
     private Integer limit;
 
     @JsonProperty("sort_direction")
-    private String sortDirection;
+    private SortDirection sortDirection;
 
     public ListTransactionValidatorsRequest() {
     }
@@ -83,11 +84,11 @@ public class ListTransactionValidatorsRequest {
         this.limit = limit;
     }
 
-    public String getSortDirection() {
+    public SortDirection getSortDirection() {
         return sortDirection;
     }
 
-    public void setSortDirection(String sortDirection) {
+    public void setSortDirection(SortDirection sortDirection) {
         this.sortDirection = sortDirection;
     }
 
@@ -96,7 +97,7 @@ public class ListTransactionValidatorsRequest {
         private List<String> transactionIds;
         private String cursor;
         private Integer limit;
-        private String sortDirection;
+        private SortDirection sortDirection;
 
         public Builder() {
         }
@@ -121,7 +122,7 @@ public class ListTransactionValidatorsRequest {
             return this;
         }
 
-        public Builder sortDirection(String sortDirection) {
+        public Builder sortDirection(SortDirection sortDirection) {
             this.sortDirection = sortDirection;
             return this;
         }

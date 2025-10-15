@@ -45,7 +45,7 @@ public class GetPortfolioAllocationsRequest extends PrimeListRequest {
     }
 
     public GetPortfolioAllocationsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.productIds = builder.productIds;
         this.orderSide = builder.orderSide;
@@ -100,7 +100,7 @@ public class GetPortfolioAllocationsRequest extends PrimeListRequest {
         private Date startDate;
         private Date endDate;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder(String portfolioId) {

@@ -44,7 +44,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
     }
 
     public ListEntityActivitiesRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection != null ? SortDirection.valueOf(builder.sortDirection) : null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.entityId = builder.entityId;
         this.activityLevel = builder.activityLevel;
         this.symbols = builder.symbols;
@@ -119,7 +119,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         private String startTime;
         private String endTime;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder(String entityId) {

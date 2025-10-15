@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Pagination {
@@ -23,7 +24,7 @@ public class Pagination {
     private String nextCursor;
 
     @JsonProperty("sort_direction")
-    private String sortDirection;
+    private SortDirection sortDirection;
 
     @JsonProperty("has_next")
     private boolean hasNext;
@@ -45,11 +46,11 @@ public class Pagination {
         this.nextCursor = nextCursor;
     }
 
-    public String getSortDirection() {
+    public SortDirection getSortDirection() {
         return sortDirection;
     }
 
-    public void setSortDirection(String sortDirection) {
+    public void setSortDirection(SortDirection sortDirection) {
         this.sortDirection = sortDirection;
     }
 
@@ -63,7 +64,7 @@ public class Pagination {
 
     public static class Builder {
         private String nextCursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private boolean hasNext;
 
         public Builder() {}
@@ -73,7 +74,7 @@ public class Pagination {
             return this;
         }
 
-        public Builder sortDirection(String sortDirection) {
+        public Builder sortDirection(SortDirection sortDirection) {
             this.sortDirection = sortDirection;
             return this;
         }

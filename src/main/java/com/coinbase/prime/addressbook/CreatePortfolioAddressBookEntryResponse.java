@@ -16,11 +16,12 @@
 
 package com.coinbase.prime.addressbook;
 
+import com.coinbase.prime.model.enums.ActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreatePortfolioAddressBookEntryResponse {
     @JsonProperty("activity_type")
-    private String activityType;
+    private ActivityType activityType;
     @JsonProperty("num_approvals_remaining")
     private Integer numApprovalsRemaining;
     @JsonProperty("activity_id")
@@ -29,11 +30,11 @@ public class CreatePortfolioAddressBookEntryResponse {
     public CreatePortfolioAddressBookEntryResponse() {
     }
 
-    public String getActivityType() {
+    public ActivityType getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(String activityType) {
+    public void setActivityType(ActivityType activityType) {
         this.activityType = activityType;
     }
 
