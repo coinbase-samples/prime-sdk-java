@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.enums.FcmFuturesSweepStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Sweep {
@@ -27,7 +28,7 @@ public class Sweep {
     @JsonProperty("should_sweep_all")
     private boolean shouldSweepAll;
 
-    private String status;
+    private FcmFuturesSweepStatus status;
 
     @JsonProperty("scheduled_time")
     private String scheduledTime;
@@ -67,11 +68,11 @@ public class Sweep {
         this.shouldSweepAll = shouldSweepAll;
     }
 
-    public String getStatus() {
+    public FcmFuturesSweepStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(FcmFuturesSweepStatus status) {
         this.status = status;
     }
 
@@ -87,7 +88,7 @@ public class Sweep {
         private String id;
         private RequestedAmount requestedAmount;
         private boolean shouldSweepAll;
-        private String status;
+        private FcmFuturesSweepStatus status;
         private String scheduledTime;
 
         public Builder() {
@@ -108,7 +109,7 @@ public class Sweep {
             return this;
         }
 
-        public Builder status(String status) {
+        public Builder status(FcmFuturesSweepStatus status) {
             this.status = status;
             return this;
         }

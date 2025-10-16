@@ -13,10 +13,12 @@
 //  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.enums.NetworkType;
+
 public class Network {
     private String id;
 
-    private String type;
+    private NetworkType type;
 
     public Network() {
     }
@@ -30,7 +32,7 @@ public class Network {
         return id;
     }
 
-    public String getType() {
+    public NetworkType getType() {
         return type;
     }
 
@@ -38,21 +40,21 @@ public class Network {
         this.id = id;
     }
 
-    public void setType(String type) {
+    public void setType(NetworkType type) {
         this.type = type;
     }
 
     public static class Builder {
         private String id;
 
-        private String type;
+        private NetworkType type;
 
         public Builder id(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder type(NetworkType type) {
             this.type = type;
             return this;
         }
