@@ -19,6 +19,9 @@ package com.coinbase.prime.activities;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.model.enums.ActivityCategory;
+import com.coinbase.prime.model.enums.ActivityLevel;
+import com.coinbase.prime.model.enums.ActivityStatus;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,10 +33,10 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
     @JsonIgnore
     private String entityId;
     @JsonProperty("activity_level")
-    private String activityLevel;
+    private ActivityLevel activityLevel;
     private String[] symbols;
-    private String[] categories;
-    private String[] statuses;
+    private ActivityCategory[] categories;
+    private ActivityStatus[] statuses;
     @JsonProperty("start_time")
     private String startTime;
     @JsonProperty("end_time")
@@ -62,11 +65,11 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         this.entityId = entityId;
     }
 
-    public String getActivityLevel() {
+    public ActivityLevel getActivityLevel() {
         return this.activityLevel;
     }
 
-    public void setActivityLevel(String activityLevel) {
+    public void setActivityLevel(ActivityLevel activityLevel) {
         this.activityLevel = activityLevel;
     }
 
@@ -78,19 +81,19 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         this.symbols = symbols;
     }
 
-    public String[] getCategories() {
+    public ActivityCategory[] getCategories() {
         return this.categories;
     }
 
-    public void setCategories(String[] categories) {
+    public void setCategories(ActivityCategory[] categories) {
         this.categories = categories;
     }
 
-    public String[] getStatuses() {
+    public ActivityStatus[] getStatuses() {
         return this.statuses;
     }
 
-    public void setStatuses(String[] statuses) {
+    public void setStatuses(ActivityStatus[] statuses) {
         this.statuses = statuses;
     }
 
@@ -112,10 +115,10 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
 
     public static class Builder {
         private final String entityId;
-        private String activityLevel;
+        private ActivityLevel activityLevel;
         private String[] symbols;
-        private String[] categories;
-        private String[] statuses;
+        private ActivityCategory[] categories;
+        private ActivityStatus[] statuses;
         private String startTime;
         private String endTime;
         private String cursor;
@@ -126,7 +129,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
             this.entityId = entityId;
         }
 
-        public ListEntityActivitiesRequest.Builder activityLevel(String activityLevel) {
+        public ListEntityActivitiesRequest.Builder activityLevel(ActivityLevel activityLevel) {
             this.activityLevel = activityLevel;
             return this;
         }
@@ -136,12 +139,12 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
             return this;
         }
 
-        public ListEntityActivitiesRequest.Builder categories(String[] categories) {
+        public ListEntityActivitiesRequest.Builder categories(ActivityCategory[] categories) {
             this.categories = categories;
             return this;
         }
 
-        public ListEntityActivitiesRequest.Builder statuses(String[] statuses) {
+        public ListEntityActivitiesRequest.Builder statuses(ActivityStatus[] statuses) {
             this.statuses = statuses;
             return this;
         }
