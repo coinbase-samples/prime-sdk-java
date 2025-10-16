@@ -20,7 +20,7 @@ The generator implements a three-stage pipeline:
 
 - Java 11+
 - Maven 3.6+
-- OpenAPI spec at `apiSpec/prime-public-spec.yaml`
+- Network access to fetch the OpenAPI spec from `https://api.prime.coinbase.com/v1/openapi.yaml`
 
 ### Build
 
@@ -63,7 +63,7 @@ Enums use `UPPERCASE_WITH_UNDERSCORES` naming convention.
 ## Configuration
 
 ### Input
-- OpenAPI spec: `apiSpec/prime-public-spec.yaml`
+- OpenAPI spec: Fetched automatically from `https://api.prime.coinbase.com/v1/openapi.yaml` during generation
 
 ### Output
 - Models: `src/main/java/com/coinbase/prime/model/`
@@ -105,8 +105,7 @@ The post-processor applies:
 
 ## Workflow
 
-1. Update `apiSpec/prime-public-spec.yaml`
-2. Run generator in incremental mode
-3. Review generated files
-4. Compile and test: `mvn clean install`
-5. Commit spec and generated models together
+1. Run generator in incremental mode (automatically fetches the latest OpenAPI spec)
+2. Review generated files
+3. Compile and test: `mvn clean install`
+4. Commit generated models (spec is gitignored and not committed)

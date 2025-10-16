@@ -81,7 +81,9 @@ mvn clean install
 
 ## Model Generation
 
-The SDK includes an automated model generator that creates Java domain models and enums from the OpenAPI specification (`apiSpec/prime-public-spec.yaml`). This ensures the SDK stays in sync with the Prime API specification.
+The SDK includes an automated model generator that creates Java domain models and enums from the OpenAPI specification. This ensures the SDK stays in sync with the Prime API specification.
+
+The OpenAPI spec is fetched automatically from the live API (`https://api.prime.coinbase.com/v1/openapi.yaml`) during model generation and is not committed to source control.
 
 ### Generate Models from Root Directory
 

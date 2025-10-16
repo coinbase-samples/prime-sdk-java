@@ -1,6 +1,5 @@
 .idea/*
 *.iml
-.env*
 target/
 dependency-reduced-pom.xml
 *.swp
@@ -9,8 +8,17 @@ dependency-reduced-pom.xml
 .settings
 .claude/settings.local.json
 
+.envrc
+.env
+.env.local
+.env.development
+.env.production
+
 .DS_Store
 
 tmp/
 
 ai-docs/
+
+# OpenAPI spec - fetch dynamically instead of committing
+apiSpec/*.yaml

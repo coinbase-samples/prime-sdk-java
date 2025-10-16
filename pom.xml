@@ -151,6 +151,20 @@
             <version>3.1.0</version>
             <executions>
               <execution>
+                <id>fetch-openapi-spec</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>bash</executable>
+                  <arguments>
+                    <argument>-c</argument>
+                    <argument>mkdir -p apiSpec &amp;&amp; curl -o apiSpec/prime-public-spec.yaml https://api.prime.coinbase.com/v1/openapi.yaml</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+              <execution>
                 <id>run-model-generator</id>
                 <phase>generate-sources</phase>
                 <goals>
