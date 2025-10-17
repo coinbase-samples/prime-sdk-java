@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.enums.AddressBookState;
 import com.coinbase.prime.model.enums.AddressBookType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -29,7 +30,7 @@ public class AddressBookEntry {
     private String accountIdentifier;
     @JsonProperty("account_identifier_name")
     private String accountIdentifierName;
-    private String state;
+    private AddressBookState state;
     @JsonProperty("explorer_link")
     private String explorerLink;
     @JsonProperty("last_used_at")
@@ -109,11 +110,11 @@ public class AddressBookEntry {
         this.accountIdentifierName = accountIdentifierName;
     }
 
-    public String getState() {
+    public AddressBookState getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(AddressBookState state) {
         this.state = state;
     }
 
@@ -172,7 +173,7 @@ public class AddressBookEntry {
         private String address;
         private String accountIdentifier;
         private String accountIdentifierName;
-        private String state;
+        private AddressBookState state;
         private String explorerLink;
         private String lastUsedAt;
         private String addedAt;
@@ -210,7 +211,7 @@ public class AddressBookEntry {
             return this;
         }
 
-        public Builder state(String state) {
+        public Builder state(AddressBookState state) {
             this.state = state;
             return this;
         }
