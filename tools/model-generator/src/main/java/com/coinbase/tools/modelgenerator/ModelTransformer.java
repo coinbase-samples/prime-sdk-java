@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.lang.model.element.Modifier;
 import java.io.IOException;
+import java.nio.file.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +31,15 @@ import java.util.stream.Collectors;
 
 public class ModelTransformer {
     private static final Logger logger = LoggerFactory.getLogger(ModelTransformer.class);
+    
+    // Cache of available enum types from the enums directory
+    private static Map<String, String> availableEnums = null;
+    
+    // Common field name patterns that typically use enums
+    private static final Set<String> ENUM_FIELD_NAMES = new HashSet<>(Arrays.asList(
+        "type", "status", "side", "state", "category", "visibility", 
+        "level", "action", "role", "permission"
+    ));
     
     private static final String LICENSE_HEADER = 
         "/*\n" +
@@ -396,8 +406,11 @@ public class ModelTransformer {
             if (fieldMatcher.find()) {
                 FieldInfo field = new FieldInfo();
                 String typeString = fieldMatcher.group(1).trim();
-                field.type = parseType(typeString);
-                field.name = fieldMatcher.group(2);
+                String fieldName = fieldMatcher.group(2);
+                
+                // Use intelligent type resolution to potentially replace String with enum
+                field.type = intelligentTypeResolution(typeString, fieldName);
+                field.name = fieldName;
                 field.jsonProperty = pendingJsonProperty;
                 
                 info.fields.add(field);
@@ -468,6 +481,10 @@ public class ModelTransformer {
             case "Map": return ClassName.get(Map.class);
             case "Set": return ClassName.get(Set.class);
             default:
+                // Check if it's an available enum
+                if (getAvailableEnums().containsKey(name)) {
+                    return ClassName.get("com.coinbase.prime.model.enums", name);
+                }
                 // Assume it's in the model package or enums package
                 if (name.matches("^[A-Z_]+$")) {
                     // Likely an enum
@@ -476,6 +493,123 @@ public class ModelTransformer {
                     return ClassName.get("com.coinbase.prime.model", name);
                 }
         }
+    }
+    
+    /**
+     * Loads and caches available enum types from the enums directory.
+     * Returns a map of enum simple name to full class name.
+     */
+    private static Map<String, String> getAvailableEnums() {
+        if (availableEnums != null) {
+            return availableEnums;
+        }
+        
+        availableEnums = new HashMap<>();
+        
+        try {
+            // Find the enums directory
+            Path projectRoot = findProjectRootForEnums();
+            if (projectRoot == null) {
+                logger.warn("Could not find project root for enum detection");
+                return availableEnums;
+            }
+            
+            Path enumsDir = projectRoot.resolve("src/main/java/com/coinbase/prime/model/enums");
+            if (!Files.exists(enumsDir)) {
+                logger.warn("Enums directory not found: {}", enumsDir);
+                return availableEnums;
+            }
+            
+            // Scan for all enum files
+            Files.list(enumsDir)
+                .filter(p -> p.toString().endsWith(".java"))
+                .forEach(p -> {
+                    String fileName = p.getFileName().toString();
+                    String enumName = fileName.substring(0, fileName.length() - 5); // Remove .java
+                    availableEnums.put(enumName, "com.coinbase.prime.model.enums." + enumName);
+                    logger.debug("Registered enum: {}", enumName);
+                });
+            
+            logger.info("Loaded {} available enum types for field matching", availableEnums.size());
+        } catch (IOException e) {
+            logger.warn("Error loading available enums: {}", e.getMessage());
+        }
+        
+        return availableEnums;
+    }
+    
+    /**
+     * Attempts to intelligently determine if a String field should use an enum type
+     * based on the field name and available enums.
+     */
+    private TypeName intelligentTypeResolution(String typeString, String fieldName) {
+        // If it's not a String, use normal parsing
+        if (!typeString.equals("String")) {
+            return parseType(typeString);
+        }
+        
+        // Check if this field name suggests it should be an enum
+        String lowerFieldName = fieldName.toLowerCase();
+        
+        // Try exact field name match with available enums
+        Map<String, String> enums = getAvailableEnums();
+        
+        // Pattern 1: Direct match (e.g., "status" -> "Status" enum, but only if there's a generic Status enum)
+        // We skip this as it's too generic
+        
+        // Pattern 2: Field name is a common enum field (type, status, side, etc.)
+        // Look for an enum that matches the pattern
+        if (ENUM_FIELD_NAMES.contains(lowerFieldName)) {
+            // Look for a matching enum
+            // e.g., "type" could be OrderType, TransactionType, etc.
+            // "status" could be OrderStatus, TransactionStatus, etc.
+            // We'll look for *Type or *Status patterns
+            
+            String capitalizedFieldName = capitalize(fieldName);
+            
+            // Check for compound names in the enum list
+            for (String enumName : enums.keySet()) {
+                if (enumName.endsWith(capitalizedFieldName)) {
+                    // Found a match! But we need context to know which one...
+                    // For now, we'll let it stay as String and rely on manual fixes
+                    // This is because we don't have enough context in the field alone
+                    logger.debug("Field '{}' could use enum {}, but needs context - keeping as String", 
+                        fieldName, enumName);
+                }
+            }
+        }
+        
+        // Pattern 3: Field name already contains a type suffix (e.g., transactionType, orderStatus)
+        // Convert camelCase to separate words and check
+        String[] words = fieldName.split("(?=[A-Z])");
+        if (words.length >= 2) {
+            // Build potential enum name (e.g., transactionType -> TransactionType)
+            StringBuilder enumNameBuilder = new StringBuilder();
+            for (String word : words) {
+                enumNameBuilder.append(capitalize(word));
+            }
+            String potentialEnumName = enumNameBuilder.toString();
+            
+            if (enums.containsKey(potentialEnumName)) {
+                logger.info("Converting field '{}' from String to enum {}", fieldName, potentialEnumName);
+                return ClassName.get("com.coinbase.prime.model.enums", potentialEnumName);
+            }
+        }
+        
+        // Default: keep as String
+        return ClassName.get(String.class);
+    }
+    
+    private static Path findProjectRootForEnums() {
+        Path current = Paths.get(System.getProperty("user.dir"));
+        while (current != null) {
+            if (Files.exists(current.resolve("pom.xml")) &&
+                Files.exists(current.resolve("apiSpec"))) {
+                return current;
+            }
+            current = current.getParent();
+        }
+        return null;
     }
     
     private MethodSpec generateBuilderConstructor(ModelInfo modelInfo) {
