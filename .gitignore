@@ -3,6 +3,7 @@
 target/
 dependency-reduced-pom.xml
 *.swp
+*.class
 .classpath
 .project
 .settings
