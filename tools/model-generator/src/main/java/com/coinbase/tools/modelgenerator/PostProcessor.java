@@ -16,34 +16,41 @@
 
 package com.coinbase.tools.modelgenerator;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.palantir.javapoet.*;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.lang.model.element.Modifier;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class PostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(PostProcessor.class);
-    
+
+    // Common prefixes to strip from generated class names (order matters - longest first)
+    private static final String[] PREFIXES_TO_STRIP = {
+        "CoinbaseBrokerageProxyEventsMaterializedApi",
+        "CoinbasePublicRestApi",
+        "CoinbaseCustodyApi",
+        "PrimeRESTAPI",
+        "PublicRestApi"
+    };
+
+    // Special case enum renames: stripped name -> final enum name
+    // This handles cases where enums need custom naming beyond simple prefix stripping
+    private static final Map<String, String> ENUM_NAME_MAPPINGS = new HashMap<String, String>() {{
+        put("ActivityType", "PrimeActivityType");  // CoinbasePublicRestApiActivityType -> PrimeActivityType
+        // CoinbaseCustodyApiActivityType is handled by stripCommonPrefixes special case
+    }};
+
     private final Path tempDir;
     private final Path outputDir;
     private final Path enumsDir;
     private final boolean updateAll;
-    private final Map<String, JsonNode> schemas = new HashMap<>();
-    private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
-    
+
     private int newModelsCount = 0;
     private int skippedModelsCount = 0;
     private int updatedModelsCount = 0;
@@ -60,9 +67,6 @@ public class PostProcessor {
     }
     
     public void processModels() throws IOException {
-        logger.info("Loading OpenAPI schema information...");
-        loadSchemas();
-
         logger.info("Finding generated model files...");
         List<Path> modelFiles = findGeneratedModelFiles();
         logger.info("Found {} model files to process", modelFiles.size());
@@ -126,31 +130,6 @@ public class PostProcessor {
         logger.info("==========================================");
     }
     
-    private void loadSchemas() throws IOException {
-        Path projectRoot = findProjectRoot();
-        Path specPath = projectRoot.resolve("apiSpec/prime-public-spec.yaml");
-        
-        if (!Files.exists(specPath)) {
-            logger.warn("OpenAPI spec not found, proceeding without schema info");
-            return;
-        }
-        
-        try {
-            JsonNode spec = yamlMapper.readTree(specPath.toFile());
-            JsonNode components = spec.get("components");
-            if (components != null && components.has("schemas")) {
-                JsonNode schemasNode = components.get("schemas");
-                schemasNode.fieldNames().forEachRemaining(name -> 
-                    schemas.put(name, schemasNode.get(name))
-                );
-            }
-            logger.info("Loaded {} schema definitions from OpenAPI spec", schemas.size());
-        } catch (Exception e) {
-            logger.warn("Could not parse OpenAPI spec for schema info: {}", e.getMessage());
-            logger.info("Proceeding without schema info - basic transformations will still be applied");
-        }
-    }
-    
     private List<Path> findGeneratedModelFiles() throws IOException {
         List<Path> files = new ArrayList<>();
         Path modelPath = tempDir.resolve("raw");
@@ -179,25 +158,43 @@ public class PostProcessor {
     }
     
     /**
-     * Fixes enum imports to use the enums package.
-     * Only moves types that exist in the enums directory.
+     * Fixes enum imports to use the enums package and applies special case enum name mappings.
+     * Handles both import statements and type references throughout the content.
      */
     private String fixEnumImports(String content) {
-        // Get list of all enum names from enums directory
-        java.util.Set<String> enumNames = new java.util.HashSet<>();
+        // Get list of all actual enum names from enums directory
+        Set<String> actualEnumNames = new HashSet<>();
         try {
-            java.nio.file.Files.walk(enumsDir, 1)
+            Files.walk(enumsDir, 1)
                 .filter(p -> p.toString().endsWith(".java"))
                 .forEach(p -> {
                     String fileName = p.getFileName().toString();
-                    enumNames.add(fileName.replace(".java", ""));
+                    actualEnumNames.add(fileName.replace(".java", ""));
                 });
         } catch (Exception e) {
             logger.warn("Could not read enums directory: {}", e.getMessage());
         }
 
-        // Only replace imports for types that are actual enums
-        for (String enumName : enumNames) {
+        // First, apply special case enum name mappings (e.g., ActivityType -> PrimeActivityType)
+        // This must happen BEFORE fixing import paths
+        for (Map.Entry<String, String> mapping : ENUM_NAME_MAPPINGS.entrySet()) {
+            String strippedName = mapping.getKey();
+            String actualEnumName = mapping.getValue();
+
+            // Only apply mapping if the actual enum exists
+            if (actualEnumNames.contains(actualEnumName)) {
+                // Replace type references (but not in @JsonProperty annotations)
+                // Pattern: word boundary + strippedName + word boundary (not followed by quotes)
+                content = content.replaceAll(
+                    "\\b" + strippedName + "\\b(?![^@]*@JsonProperty)",
+                    actualEnumName
+                );
+                logger.debug("Applied enum mapping: {} -> {}", strippedName, actualEnumName);
+            }
+        }
+
+        // Then, fix import paths for all enums (move from model to model.enums package)
+        for (String enumName : actualEnumNames) {
             content = content.replace(
                 "import com.coinbase.prime.model." + enumName + ";",
                 "import com.coinbase.prime.model.enums." + enumName + ";"
@@ -260,11 +257,7 @@ public class PostProcessor {
         // Strip prefixes from class name (matching prime-sdk-ts logic)
         String originalClassName = className;
         className = stripCommonPrefixes(className);
-        
-        // Look up the schema using the original class name before prefix stripping
-        // The schema map uses the fully qualified names from the OpenAPI spec
-        JsonNode schema = findSchemaForClassName(originalClassName);
-        
+
         if (!className.equals(originalClassName)) {
             content = content.replace("class " + originalClassName, "class " + className);
             content = content.replace("enum " + originalClassName, "enum " + className);
@@ -347,17 +340,9 @@ public class PostProcessor {
         if (className.equals("CoinbasePublicRestApiActivityType")) {
             return "PrimeActivityType";
         }
-        
-        // Order matters - check longer prefixes first to avoid partial matches
-        String[] prefixesToStrip = {
-            "CoinbaseBrokerageProxyEventsMaterializedApi",
-            "CoinbasePublicRestApi",
-            "CoinbaseCustodyApi",
-            "PrimeRESTAPI",
-            "PublicRestApi"
-        };
-        
-        for (String prefix : prefixesToStrip) {
+
+        // Apply standard prefix stripping
+        for (String prefix : PREFIXES_TO_STRIP) {
             if (className.startsWith(prefix)) {
                 return className.substring(prefix.length());
             }
@@ -367,22 +352,13 @@ public class PostProcessor {
     }
     
     /**
-     * Replace all references to the old prefixed class name with the new stripped name.
+     * Replace all references to prefixed class names with their stripped versions.
+     * Applies to all type references throughout the content.
      */
     private String replaceAllPrefixReferences(String content, String originalClassName, String newClassName) {
-        // Replace the prefix in all type references throughout the content
-        String[] prefixesToStrip = {
-            "CoinbaseBrokerageProxyEventsMaterializedApi",
-            "CoinbasePublicRestApi",
-            "CoinbaseCustodyApi",
-            "PrimeRESTAPI",
-            "PublicRestApi"
-        };
-        
-        for (String prefix : prefixesToStrip) {
+        for (String prefix : PREFIXES_TO_STRIP) {
             content = content.replaceAll("\\b" + prefix + "(\\w+)", "$1");
         }
-        
         return content;
     }
     
@@ -408,59 +384,22 @@ public class PostProcessor {
             return true;
         }
         
-        // Skip malformed class names
-        List<String> malformedNames = Arrays.asList(
-            "ChangeOnchainAddressGroupRequestIsARequestToCreateOrUpdateANewOnchainAddressGroup",
-            "CreateATransferBetweenTwoWallets"
-        );
-        if (malformedNames.contains(className)) {
+        // Skip malformed class names (generated incorrectly by OpenAPI Generator)
+        if (className.contains("RequestIsARequestTo") || className.contains("CreateATransferBetween")) {
             logger.info("Skipping malformed class name: {}", className);
             return true;
         }
-        
+
         // Skip OpenAPI composition artifacts
-        List<String> skipPatterns = Arrays.asList(
-            "AllOf",
-            "OneOf",
-            "AnyOf",
-            "ModelApiResponse",
-            "AbstractOpenApiSchema"
-        );
-        
-        boolean shouldSkip = skipPatterns.stream().anyMatch(cleanName::contains);
-        if (shouldSkip) {
-            logger.info("Skipping OpenAPI artifact: {}", className);
-        }
-        
-        return shouldSkip;
-    }
-    
-    /**
-     * Find the schema for a given class name by searching the schemas map.
-     * The class name might be PascalCase but the schema key might be in dot notation.
-     * For example: CoinbasePublicRestApiActivity -> coinbase.public_rest_api.Activity
-     */
-    private JsonNode findSchemaForClassName(String className) {
-        // First try direct match
-        if (schemas.containsKey(className)) {
-            return schemas.get(className);
-        }
-        
-        // Try case-insensitive match on the simple name (last part after dots)
-        for (Map.Entry<String, JsonNode> entry : schemas.entrySet()) {
-            String schemaKey = entry.getKey();
-            // Extract simple name from schema key (e.g., "coinbase.public_rest_api.Activity" -> "Activity")
-            String simpleName = schemaKey.substring(schemaKey.lastIndexOf('.') + 1);
-            
-            // Check if the class name ends with this simple name
-            if (className.endsWith(simpleName)) {
-                logger.debug("Matched schema '{}' for class '{}'", schemaKey, className);
-                return entry.getValue();
+        String[] skipPatterns = {"AllOf", "OneOf", "AnyOf", "ModelApiResponse", "AbstractOpenApiSchema"};
+        for (String pattern : skipPatterns) {
+            if (cleanName.contains(pattern)) {
+                logger.info("Skipping OpenAPI artifact: {}", className);
+                return true;
             }
         }
-        
-        logger.debug("No schema found for class: {}", className);
-        return null;
+
+        return false;
     }
     
     private Path findProjectRoot() {
