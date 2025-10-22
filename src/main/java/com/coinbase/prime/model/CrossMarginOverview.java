@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.XMControlStatus;
 import com.coinbase.prime.model.enums.XMEntityCallStatus;
 import com.coinbase.prime.model.XMLoan;

@@ -32,7 +32,7 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
 
 
     @JsonProperty("aggregation_type")
-    private BalanceType aggregationType;
+    private PortfolioBalanceType aggregationType;
 
     public ListEntityBalancesRequest() {
     }
@@ -61,11 +61,11 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
     }
 
 
-    public BalanceType getAggregationType() {
+    public PortfolioBalanceType getAggregationType() {
         return aggregationType;
     }
 
-    public void setAggregationType(BalanceType aggregationType) {
+    public void setAggregationType(PortfolioBalanceType aggregationType) {
         this.aggregationType = aggregationType;
     }
 
@@ -75,7 +75,7 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
         private String cursor;
         private Integer limit;
         private SortDirection sortDirection;
-        private BalanceType aggregationType;
+        private PortfolioBalanceType aggregationType;
 
         public Builder() {
         }
@@ -105,7 +105,7 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder aggregationType(BalanceType aggregationType) {
+        public Builder aggregationType(PortfolioBalanceType aggregationType) {
             this.aggregationType = aggregationType;
             return this;
         }

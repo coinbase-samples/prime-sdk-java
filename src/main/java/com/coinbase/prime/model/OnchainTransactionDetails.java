@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.RiskAssessment;
 import com.coinbase.prime.model.enums.SigningStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;

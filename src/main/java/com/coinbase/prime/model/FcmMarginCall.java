@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.FcmMarginCallState;
 import com.coinbase.prime.model.enums.FcmMarginCallType;
 import com.fasterxml.jackson.annotation.JsonInclude;

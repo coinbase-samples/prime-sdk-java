@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.AssetBalance;
 import com.coinbase.prime.model.LoanInfo;
 import com.coinbase.prime.model.MarginAddOn;

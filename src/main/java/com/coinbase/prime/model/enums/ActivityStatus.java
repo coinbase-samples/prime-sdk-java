@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum ActivityStatus {
   OTHER_ACTIVITY_STATUS,
   ACTIVITY_STATUS_CANCELLED,

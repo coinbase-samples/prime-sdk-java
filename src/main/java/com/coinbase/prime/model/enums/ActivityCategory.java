@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum ActivityCategory {
   OTHER_ACTIVITY_CATEGORY,
   ACTIVITY_CATEGORY_ORDER,

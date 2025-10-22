@@ -32,7 +32,7 @@ public class CreateAllocationRequest {
     @JsonProperty("allocation_legs")
     private AllocationLeg[] allocationLegs;
     @JsonProperty("size_type")
-    private SizeType sizeType;
+    private AllocationSizeType sizeType;
     @JsonProperty("remainder_destination_portfolio")
     private String remainderDestinationPortfolio;
     @JsonProperty("netting_id")
@@ -92,11 +92,11 @@ public class CreateAllocationRequest {
         this.allocationLegs = allocationLegs;
     }
 
-    public SizeType getSizeType() {
+    public AllocationSizeType getSizeType() {
         return sizeType;
     }
 
-    public void setSizeType(SizeType sizeType) {
+    public void setSizeType(AllocationSizeType sizeType) {
         this.sizeType = sizeType;
     }
 
@@ -122,7 +122,7 @@ public class CreateAllocationRequest {
         private String productId;
         private String[] orderIds;
         private AllocationLeg[] allocationLegs;
-        private SizeType sizeType;
+        private AllocationSizeType sizeType;
         private String remainderDestinationPortfolio;
         private String nettingId;
 
@@ -154,7 +154,7 @@ public class CreateAllocationRequest {
             return this;
         }
 
-        public Builder sizeType(SizeType sizeType) {
+        public Builder sizeType(AllocationSizeType sizeType) {
             this.sizeType = sizeType;
             return this;
         }

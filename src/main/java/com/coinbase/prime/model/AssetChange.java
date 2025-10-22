@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.AssetChangeType;
 import com.coinbase.prime.model.NFTCollection;
 import com.coinbase.prime.model.NFTItem;

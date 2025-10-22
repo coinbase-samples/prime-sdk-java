@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum XMCallStatus {
   XM_CALL_STATUS_UNSPECIFIED,
   CALL_STATUS_OPEN,

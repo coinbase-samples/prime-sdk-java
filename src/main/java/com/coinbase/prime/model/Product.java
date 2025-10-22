@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.ProductPermissions;
 import com.coinbase.prime.model.RFQProductDetails;
 import com.fasterxml.jackson.annotation.JsonInclude;

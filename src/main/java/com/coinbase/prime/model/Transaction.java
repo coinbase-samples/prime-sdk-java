@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.AssetChange;
 import com.coinbase.prime.model.EstimatedNetworkFees;
 import com.coinbase.prime.model.Network;

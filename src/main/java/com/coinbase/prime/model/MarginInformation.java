@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.MarginCallRecord;
 import com.coinbase.prime.model.MarginSummary;
 import com.fasterxml.jackson.annotation.JsonInclude;

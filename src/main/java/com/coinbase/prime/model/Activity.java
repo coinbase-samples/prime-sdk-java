@@ -19,14 +19,13 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.ActivityCategory;
 import com.coinbase.prime.model.ActivityMetadataAccount;
 import com.coinbase.prime.model.ActivityMetadataTransactions;
 import com.coinbase.prime.model.enums.ActivitySecondaryType;
 import com.coinbase.prime.model.enums.ActivityStatus;
-import com.coinbase.prime.model.ActivityType;
 import com.coinbase.prime.model.enums.HierarchyType;
+import com.coinbase.prime.model.enums.PrimeActivityType;
 import com.coinbase.prime.model.UserAction;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -50,7 +49,7 @@ public class Activity {
 
     private ActivityCategory category;
 
-    private ActivityType type;
+    private PrimeActivityType type;
 
     private ActivitySecondaryType secondaryType;
 
@@ -142,11 +141,11 @@ public class Activity {
     public void setCategory(ActivityCategory category) {
         this.category = category;
     }
-    public ActivityType getType() {
+    public PrimeActivityType getType() {
         return type;
     }
 
-    public void setType(ActivityType type) {
+    public void setType(PrimeActivityType type) {
         this.type = type;
     }
     public ActivitySecondaryType getSecondaryType() {
@@ -247,7 +246,7 @@ public class Activity {
 
         private ActivityCategory category;
 
-        private ActivityType type;
+        private PrimeActivityType type;
 
         private ActivitySecondaryType secondaryType;
 
@@ -290,7 +289,7 @@ public class Activity {
             return this;
         }
 
-        public Builder type(ActivityType type) {
+        public Builder type(PrimeActivityType type) {
             this.type = type;
             return this;
         }

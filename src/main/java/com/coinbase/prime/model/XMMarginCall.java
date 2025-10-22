@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.XMCallStatus;
 import com.coinbase.prime.model.enums.XMCallType;
 import com.coinbase.prime.model.enums.XMMarginLevel;

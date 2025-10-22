@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.LimitOrderEdit;
 import com.coinbase.prime.model.OrderEdit;
 import com.coinbase.prime.model.enums.OrderSide;

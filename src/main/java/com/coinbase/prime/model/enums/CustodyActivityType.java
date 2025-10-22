@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum CustodyActivityType {
   ACTIVITY_TYPE_GOVERNANCE_VOTE,
   ACTIVITY_TYPE_INVITATION,

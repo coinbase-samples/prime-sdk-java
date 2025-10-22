@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.ConversionDetail;
 import com.coinbase.prime.model.ShortCollateral;
 import com.fasterxml.jackson.annotation.JsonInclude;

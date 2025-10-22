@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.MatchMetadata;
 import com.coinbase.prime.model.OnchainTransactionMetadata;
 import com.fasterxml.jackson.annotation.JsonInclude;

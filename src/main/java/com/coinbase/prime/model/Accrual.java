@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.Benchmark;
 import com.coinbase.prime.model.enums.LoanType;
 import com.coinbase.prime.model.enums.RateType;

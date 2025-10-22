@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.InvoiceItem;
 import com.coinbase.prime.model.enums.InvoiceState;
 import com.fasterxml.jackson.annotation.JsonInclude;

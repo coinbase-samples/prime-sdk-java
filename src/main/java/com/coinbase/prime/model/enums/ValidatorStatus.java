@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum ValidatorStatus {
   VALIDATOR_STATUS_UNSPECIFIED,
   VALIDATOR_STATUS_PENDING,

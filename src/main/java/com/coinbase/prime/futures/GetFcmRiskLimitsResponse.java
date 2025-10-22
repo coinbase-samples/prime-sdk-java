@@ -16,19 +16,33 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.prime.model.FcmRiskLimits;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetFcmRiskLimitsResponse {
-    private FcmRiskLimits riskLimits;
+    /** Risk Limit set for a client */
+    @JsonProperty("cfm_risk_limit")
+    private String cfmRiskLimit;
+
+    /** Limit utilization calculated based on total margin and PnLs */
+    @JsonProperty("cfm_risk_limit_utilization")
+    private String cfmRiskLimitUtilization;
 
     public GetFcmRiskLimitsResponse() {
     }
 
-    public FcmRiskLimits getRiskLimits() {
-        return riskLimits;
+    public String getCfmRiskLimit() {
+        return cfmRiskLimit;
     }
 
-    public void setRiskLimits(FcmRiskLimits riskLimits) {
-        this.riskLimits = riskLimits;
+    public void setCfmRiskLimit(String cfmRiskLimit) {
+        this.cfmRiskLimit = cfmRiskLimit;
+    }
+
+    public String getCfmRiskLimitUtilization() {
+        return cfmRiskLimitUtilization;
+    }
+
+    public void setCfmRiskLimitUtilization(String cfmRiskLimitUtilization) {
+        this.cfmRiskLimitUtilization = cfmRiskLimitUtilization;
     }
 }

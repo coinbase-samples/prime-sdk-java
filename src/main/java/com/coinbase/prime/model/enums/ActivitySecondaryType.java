@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum ActivitySecondaryType {
   NO_SECONDARY_TYPE,
   ACTIVITY_SECONDARY_TYPE_BUY,

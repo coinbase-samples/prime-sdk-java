@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.AllocationStatus;
 import com.coinbase.prime.model.DestinationAlloc;
 import com.coinbase.prime.model.enums.OrderSide;

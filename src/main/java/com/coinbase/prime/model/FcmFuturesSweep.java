@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.FcmFuturesSweepRequestAmount;
 import com.coinbase.prime.model.enums.FcmFuturesSweepStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -29,7 +29,7 @@ public class ListPortfolioBalancesRequest {
     private String portfolioId;
     private String[] symbols;
     @JsonProperty("balance_type")
-    private BalanceType balanceType;
+    private PortfolioBalanceType balanceType;
 
     public ListPortfolioBalancesRequest() {
     }
@@ -56,18 +56,18 @@ public class ListPortfolioBalancesRequest {
         this.symbols = symbols;
     }
 
-    public BalanceType getBalanceType() {
+    public PortfolioBalanceType getBalanceType() {
         return balanceType;
     }
 
-    public void setBalanceType(BalanceType balanceType) {
+    public void setBalanceType(PortfolioBalanceType balanceType) {
         this.balanceType = balanceType;
     }
 
     public static class Builder {
         private String portfolioId;
         private String[] symbols;
-        private BalanceType balanceType;
+        private PortfolioBalanceType balanceType;
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -79,7 +79,7 @@ public class ListPortfolioBalancesRequest {
             return this;
         }
 
-        public Builder balanceType(BalanceType balanceType) {
+        public Builder balanceType(PortfolioBalanceType balanceType) {
             this.balanceType = balanceType;
             return this;
         }

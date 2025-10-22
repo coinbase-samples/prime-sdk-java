@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.enums.VisibilityStatus;
 import com.coinbase.prime.model.OnchainAsset;
 import com.fasterxml.jackson.annotation.JsonInclude;

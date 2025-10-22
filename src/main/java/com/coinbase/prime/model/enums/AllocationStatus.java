@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum AllocationStatus {
   ALLOCATION_STATUS_UNSPECIFIED,
   ALLOCATION_STATUS_ALLOCATION_PENDING,

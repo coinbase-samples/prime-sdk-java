@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.MarginAddOn;
 import com.coinbase.prime.model.XMPosition;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -16,8 +16,8 @@
 
 package com.coinbase.prime.transactions;
 
-import com.coinbase.prime.model.EvmParams;
-import com.coinbase.prime.model.Rpc;
+import com.coinbase.prime.model.CreateOnchainTransactionRequestEvmParams;
+import com.coinbase.prime.model.RpcConfig;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -33,10 +33,10 @@ public class CreateOnchainTransactionRequest {
     @JsonProperty("raw_unsigned_txn")
     private String rawUnsignedTxn;
 
-    private Rpc rpc;
+    private RpcConfig rpc;
 
     @JsonProperty("evm_params")
-    private EvmParams evmParams;
+    private CreateOnchainTransactionRequestEvmParams evmParams;
 
     public CreateOnchainTransactionRequest() {
     }
@@ -73,19 +73,19 @@ public class CreateOnchainTransactionRequest {
         this.rawUnsignedTxn = rawUnsignedTxn;
     }
 
-    public Rpc getRpc() {
+    public RpcConfig getRpc() {
         return rpc;
     }
 
-    public void setRpc(Rpc rpc) {
+    public void setRpc(RpcConfig rpc) {
         this.rpc = rpc;
     }
 
-    public EvmParams getEvmParams() {
+    public CreateOnchainTransactionRequestEvmParams getEvmParams() {
         return evmParams;
     }
 
-    public void setEvmParams(EvmParams evmParams) {
+    public void setEvmParams(CreateOnchainTransactionRequestEvmParams evmParams) {
         this.evmParams = evmParams;
     }
 
@@ -93,8 +93,8 @@ public class CreateOnchainTransactionRequest {
         private String portfolioId;
         private String walletId;
         private String rawUnsignedTxn;
-        private Rpc rpc;
-        private EvmParams evmParams;
+        private RpcConfig rpc;
+        private CreateOnchainTransactionRequestEvmParams evmParams;
 
         public Builder() {
         }
@@ -114,12 +114,12 @@ public class CreateOnchainTransactionRequest {
             return this;
         }
 
-        public Builder rpc(Rpc rpc) {
+        public Builder rpc(RpcConfig rpc) {
             this.rpc = rpc;
             return this;
         }
 
-        public Builder evmParams(EvmParams evmParams) {
+        public Builder evmParams(CreateOnchainTransactionRequestEvmParams evmParams) {
             this.evmParams = evmParams;
             return this;
         }

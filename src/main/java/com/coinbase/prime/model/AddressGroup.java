@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.AddressEntry;
 import com.coinbase.prime.model.enums.NetworkType;
 import com.fasterxml.jackson.annotation.JsonInclude;

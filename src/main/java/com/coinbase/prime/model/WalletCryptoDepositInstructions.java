@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-
 import com.coinbase.prime.model.Network;
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
 import com.fasterxml.jackson.annotation.JsonInclude;

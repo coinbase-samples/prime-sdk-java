@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum PrimeActivityType {
   OTHER_ACTIVITY_TYPE,
   ACTIVITY_TYPE_LIMIT_ORDER,

@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum InvoiceType {
   INVOICE_TYPE_UNSPECIFIED,
   INVOICE_TYPE_AUC_FEE,

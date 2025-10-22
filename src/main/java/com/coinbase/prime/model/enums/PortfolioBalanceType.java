@@ -20,7 +20,6 @@
 
 package com.coinbase.prime.model.enums;
 
-
 public enum PortfolioBalanceType {
   TRADING_BALANCES,
   VAULT_BALANCES,
