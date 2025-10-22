@@ -16,8 +16,14 @@ package com.coinbase.prime.model;
 import java.time.OffsetDateTime;
 
 public class AmountDue {
+    /**
+     * The currency this loan is due in
+     */
     private String currency;
 
+    /**
+     * The amount due
+     */
     private String amount;
 
     private OffsetDateTime dueDate;

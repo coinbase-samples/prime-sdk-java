@@ -14,8 +14,14 @@
 package com.coinbase.prime.model;
 
 public class FcmFuturesSweepRequestAmount {
+    /**
+     * Currency
+     */
     private String currency;
 
+    /**
+     * Amount
+     */
     private String amount;
 
     public FcmFuturesSweepRequestAmount() {

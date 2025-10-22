@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class Position {
+    /**
+     * Asset symbol
+     */
     private String symbol;
 
     private String _long;

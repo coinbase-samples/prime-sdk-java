@@ -14,8 +14,14 @@
 package com.coinbase.prime.model;
 
 public class DefiBalance {
+    /**
+     * Network this asset is on (ie "ethereum-mainnet")
+     */
     private String network;
 
+    /**
+     * a set of rules and standards that define how data is exchanged (ie "Aave V4 ")
+     */
     private String protocol;
 
     private String netUsdValue;

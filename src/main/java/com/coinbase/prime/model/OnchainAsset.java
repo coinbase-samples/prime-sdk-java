@@ -14,14 +14,23 @@
 package com.coinbase.prime.model;
 
 public class OnchainAsset {
+    /**
+     * Network this asset is on (ie "ethereum-mainnet")
+     */
     private String network;
 
     private String contractAddress;
 
+    /**
+     * Symbol of this asset.
+     */
     private String symbol;
 
     private String tokenId;
 
+    /**
+     * Name of this asset, either the name of the crypto token or the NFT collection name.
+     */
     private String name;
 
     public OnchainAsset() {

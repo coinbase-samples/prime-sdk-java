@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class Product {
+    /**
+     * The product ID, written as `BASE-QUOTE`
+     */
     private String id;
 
     private String baseIncrement;

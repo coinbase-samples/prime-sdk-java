@@ -14,8 +14,14 @@
 package com.coinbase.prime.model;
 
 public class Portfolio {
+    /**
+     * The unique ID of the portfolio
+     */
     private String id;
 
+    /**
+     * The name of the portfolio
+     */
     private String name;
 
     private String entityId;

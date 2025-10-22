@@ -14,8 +14,14 @@
 package com.coinbase.prime.model;
 
 public class MarketRate {
+    /**
+     * The currency symbol
+     */
     private String symbol;
 
+    /**
+     * The current market rate of currency
+     */
     private String rate;
 
     public MarketRate() {

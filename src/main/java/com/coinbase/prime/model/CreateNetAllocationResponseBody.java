@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class CreateNetAllocationResponseBody {
+    /**
+     * The success boolean for the post net allocation
+     */
     private Boolean success;
 
     private String nettingId;

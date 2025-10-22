@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class MarginAddOn {
+    /**
+     * margin add on amount
+     */
     private String amount;
 
     public MarginAddOn() {

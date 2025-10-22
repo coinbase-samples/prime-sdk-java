@@ -14,8 +14,14 @@
 package com.coinbase.prime.model;
 
 public class Asset {
+    /**
+     * The name of the asset
+     */
     private String name;
 
+    /**
+     * The mutable series of letters used to identify the asset
+     */
     private String symbol;
 
     private String decimalPrecision;

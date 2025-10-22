@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class CreateAllocationResponseBody {
+    /**
+     * The success boolean for the post allocation
+     */
     private Boolean success;
 
     private String allocationId;

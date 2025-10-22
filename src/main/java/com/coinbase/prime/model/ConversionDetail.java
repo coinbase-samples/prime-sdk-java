@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class ConversionDetail {
+    /**
+     * The currency symbol
+     */
     private String symbol;
 
     private String tfBalance;

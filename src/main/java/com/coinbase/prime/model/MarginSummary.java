@@ -36,6 +36,9 @@ public class MarginSummary {
 
     private String tfAdjustedEquity;
 
+    /**
+     * Whether or not a entity is frozen due to balance outstanding or other reason
+     */
     private Boolean frozen;
 
     private String frozenReason;

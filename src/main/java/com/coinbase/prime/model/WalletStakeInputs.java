@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class WalletStakeInputs {
+    /**
+     * Optional amount to stake (ETH only). If omitted, the wallet will stake the maximum amount available
+     */
     private String amount;
 
     private String validatorAddress;

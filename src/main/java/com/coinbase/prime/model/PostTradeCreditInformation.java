@@ -16,18 +16,36 @@ package com.coinbase.prime.model;
 public class PostTradeCreditInformation {
     private String portfolioId;
 
+    /**
+     * The currency symbol credit is denoted in
+     */
     private String currency;
 
+    /**
+     * The maximum credit limit
+     */
     private String limit;
 
+    /**
+     * The amount of credit used
+     */
     private String utilized;
 
+    /**
+     * The amount of credit available
+     */
     private String available;
 
+    /**
+     * Whether or not a portfolio is frozen due to balance outstanding or other reason
+     */
     private Boolean frozen;
 
     private String frozenReason;
 
+    /**
+     * Whether the portfolio has credit enabled
+     */
     private Boolean enabled;
 
     private String adjustedCreditUtilized;

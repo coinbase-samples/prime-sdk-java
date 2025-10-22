@@ -16,10 +16,19 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.UserRole;
 
 public class PortfolioUser {
+    /**
+     * The unique ID of the user.
+     */
     private String id;
 
+    /**
+     * The name of the user.
+     */
     private String name;
 
+    /**
+     * The email of the user.
+     */
     private String email;
 
     private String portfolioId;

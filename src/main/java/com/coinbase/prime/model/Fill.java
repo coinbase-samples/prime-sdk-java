@@ -13,10 +13,13 @@
 //  limitations under the License.
 package com.coinbase.prime.model;
 
-import java.time.OffsetDateTime;
 import com.coinbase.prime.model.enums.OrderSide;
+import java.time.OffsetDateTime;
 
 public class Fill {
+    /**
+     * The unique ID of the fill
+     */
     private String id;
 
     private String orderId;
@@ -31,12 +34,24 @@ public class Fill {
 
     private String filledValue;
 
+    /**
+     * The price of the fill
+     */
     private String price;
 
+    /**
+     * The date and time of the fill
+     */
     private OffsetDateTime time;
 
+    /**
+     * The commission incurred for the fill
+     */
     private String commission;
 
+    /**
+     * The name of the venue
+     */
     private String venue;
 
     private String venueFees;

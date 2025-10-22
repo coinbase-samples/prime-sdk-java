@@ -16,10 +16,16 @@ package com.coinbase.prime.model;
 public class Accrual {
     private String accrualId;
 
+    /**
+     * The date of accrual in UTC
+     */
     private String date;
 
     private String portfolioId;
 
+    /**
+     * The currency symbol
+     */
     private String symbol;
 
     private String interestRate;
@@ -34,6 +40,9 @@ public class Accrual {
 
     private String benchmarkRate;
 
+    /**
+     * Daily spread offset from the benchmark rate
+     */
     private String spread;
 
     private String loanAmountNotional;

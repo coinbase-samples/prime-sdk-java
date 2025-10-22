@@ -22,6 +22,9 @@ public class OnchainTransactionDetails {
 
     private String chainId;
 
+    /**
+     * The transaction nonce. Only present for EVM-based blockchain transactions.
+     */
     private String nonce;
 
     private String replacedTransactionId;

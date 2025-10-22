@@ -18,8 +18,14 @@ import com.coinbase.prime.model.enums.TransferLocationType;
 public class TransferLocation {
     private TransferLocationType type;
 
+    /**
+     * The value of the transfer location: payment method ID, wallet ID or crypto address
+     */
     private String value;
 
+    /**
+     * The crypto address of the transfer location
+     */
     private String address;
 
     private String accountIdentifier;

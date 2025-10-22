@@ -16,6 +16,9 @@ package com.coinbase.prime.model;
 public class RpcConfig {
     private Boolean skipBroadcast;
 
+    /**
+     * Custom blockchain node RPC URL. (EVM-only)
+     */
     private String url;
 
     public RpcConfig() {

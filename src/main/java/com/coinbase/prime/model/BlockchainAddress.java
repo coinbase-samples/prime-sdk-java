@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class BlockchainAddress {
+    /**
+     * The address on the network
+     */
     private String address;
 
     private String accountIdentifier;

@@ -16,6 +16,9 @@ package com.coinbase.prime.model;
 public class NetworkDetails {
     private Network network;
 
+    /**
+     * The name of the network
+     */
     private String name;
 
     private String maxDecimals;

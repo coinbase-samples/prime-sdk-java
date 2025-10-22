@@ -18,6 +18,9 @@ public class AllocationLeg {
 
     private String destinationPortfolioId;
 
+    /**
+     * The amount size for the allocation leg
+     */
     private String amount;
 
     public AllocationLeg() {

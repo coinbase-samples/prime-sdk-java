@@ -18,6 +18,9 @@ import com.coinbase.prime.model.enums.TransactionType;
 import java.time.OffsetDateTime;
 
 public class Transaction {
+    /**
+     * The ID of the transaction
+     */
     private String id;
 
     private String walletId;
@@ -28,12 +31,18 @@ public class Transaction {
 
     private TransactionStatus status;
 
+    /**
+     * The asset symbol
+     */
     private String symbol;
 
     private OffsetDateTime createdAt;
 
     private OffsetDateTime completedAt;
 
+    /**
+     * The transaction amount in whole units
+     */
     private String amount;
 
     private TransferLocation transferFrom;
@@ -42,6 +51,9 @@ public class Transaction {
 
     private String networkFees;
 
+    /**
+     * The fees that the customer paid for the transaction (in whole units)
+     */
     private String fees;
 
     private String feeSymbol;
@@ -52,6 +64,9 @@ public class Transaction {
 
     private EstimatedNetworkFees estimatedNetworkFees;
 
+    /**
+     * The network name specific to web3/onchain wallet transactions
+     */
     private String network;
 
     private TransactionMetadata metadata;

@@ -17,16 +17,28 @@ import com.coinbase.prime.model.enums.WalletType;
 import java.time.OffsetDateTime;
 
 public class Wallet {
+    /**
+     * The unique UUID for the wallet
+     */
     private String id;
 
+    /**
+     * The name of the wallet
+     */
     private String name;
 
+    /**
+     * The asset stored in the wallet
+     */
     private String symbol;
 
     private WalletType type;
 
     private OffsetDateTime createdAt;
 
+    /**
+     * The active address of the wallet
+     */
     private String address;
 
     private Network network;

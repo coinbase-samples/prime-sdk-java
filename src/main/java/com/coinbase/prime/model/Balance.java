@@ -14,10 +14,19 @@
 package com.coinbase.prime.model;
 
 public class Balance {
+    /**
+     * The display symbol for the asset
+     */
     private String symbol;
 
+    /**
+     * The total amount in whole units with full precision. Includes the `holds` amount.
+     */
     private String amount;
 
+    /**
+     * Amount that is currently held in obligation to an open order's position or a pending withdrawal
+     */
     private String holds;
 
     private String bondedAmount;

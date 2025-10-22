@@ -14,10 +14,19 @@
 package com.coinbase.prime.model;
 
 public class PMAssetInfo {
+    /**
+     * The currency symbol
+     */
     private String symbol;
 
+    /**
+     * Nominal amount of the currency
+     */
     private String amount;
 
+    /**
+     * Spot price for the currency
+     */
     private String price;
 
     private String notionalAmount;

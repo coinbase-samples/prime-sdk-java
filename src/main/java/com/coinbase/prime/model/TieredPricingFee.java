@@ -14,8 +14,14 @@
 package com.coinbase.prime.model;
 
 public class TieredPricingFee {
+    /**
+     * Asset symbol
+     */
     private String symbol;
 
+    /**
+     * The fee in bps
+     */
     private String fee;
 
     public TieredPricingFee() {

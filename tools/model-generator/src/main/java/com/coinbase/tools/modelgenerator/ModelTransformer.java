@@ -138,7 +138,7 @@ public class ModelTransformer {
     
     public String transformModel(String content, JsonNode schema) {
         try {
-            return transformModelWithJavaPoet(content);
+            return transformModelWithJavaPoet(content, schema);
         } catch (Exception e) {
             logger.error("Error transforming model with JavaPoet, falling back to basic transform", e);
             return basicTransform(content);
@@ -148,9 +148,9 @@ public class ModelTransformer {
     /**
      * Transform model using JavaPoet for proper code generation
      */
-    private String transformModelWithJavaPoet(String content) throws IOException {
+    private String transformModelWithJavaPoet(String content, JsonNode schema) throws IOException {
         // Parse the model information from OpenAPI-generated content
-        ModelInfo info = parseModelInfo(content);
+        ModelInfo info = parseModelInfo(content, schema);
         
         if (info.className == null || info.className.isEmpty()) {
             throw new IOException("Could not extract class name from content");
@@ -163,6 +163,11 @@ public class ModelTransformer {
         // Add fields with annotations
         for (FieldInfo field : info.fields) {
             FieldSpec.Builder fieldBuilder = FieldSpec.builder(field.type, field.name, Modifier.PRIVATE);
+            
+            // Add Javadoc comment if description is available
+            if (field.description != null && !field.description.isEmpty()) {
+                fieldBuilder.addJavadoc(field.description + "\n");
+            }
             
             // Add @JsonProperty annotation if needed
             if (field.jsonProperty != null && !field.jsonProperty.equals(field.name)) {
@@ -366,7 +371,7 @@ public class ModelTransformer {
         return result.toString();
     }
     
-    private ModelInfo parseModelInfo(String content) {
+    private ModelInfo parseModelInfo(String content, JsonNode schema) {
         ModelInfo info = new ModelInfo();
         
         // Extract package name
@@ -381,6 +386,27 @@ public class ModelTransformer {
         Matcher classMatcher = classPattern.matcher(content);
         if (classMatcher.find()) {
             info.className = classMatcher.group(1);
+        }
+        
+        // Build a map of field descriptions from the schema
+        Map<String, String> fieldDescriptions = new HashMap<>();
+        if (schema != null && schema.has("properties")) {
+            JsonNode properties = schema.get("properties");
+            properties.fieldNames().forEachRemaining(fieldName -> {
+                JsonNode property = properties.get(fieldName);
+                String description = null;
+                
+                // Check for 'description' first, then 'title'
+                if (property.has("description")) {
+                    description = property.get("description").asText();
+                } else if (property.has("title")) {
+                    description = property.get("title").asText();
+                }
+                
+                if (description != null && !description.isEmpty()) {
+                    fieldDescriptions.put(fieldName, description);
+                }
+            });
         }
         
         // Extract fields with better annotation detection
@@ -412,6 +438,11 @@ public class ModelTransformer {
                 field.type = intelligentTypeResolution(typeString, fieldName);
                 field.name = fieldName;
                 field.jsonProperty = pendingJsonProperty;
+                
+                // Look up description from schema using the JSON property name if available,
+                // otherwise use the field name
+                String lookupKey = pendingJsonProperty != null ? pendingJsonProperty : fieldName;
+                field.description = fieldDescriptions.get(lookupKey);
                 
                 info.fields.add(field);
                 pendingJsonProperty = null; // Reset after use
@@ -480,6 +511,13 @@ public class ModelTransformer {
             case "List": return ClassName.get(List.class);
             case "Map": return ClassName.get(Map.class);
             case "Set": return ClassName.get(Set.class);
+            // Java time types
+            case "OffsetDateTime": return ClassName.get("java.time", "OffsetDateTime");
+            case "LocalDate": return ClassName.get("java.time", "LocalDate");
+            case "LocalDateTime": return ClassName.get("java.time", "LocalDateTime");
+            case "LocalTime": return ClassName.get("java.time", "LocalTime");
+            case "Instant": return ClassName.get("java.time", "Instant");
+            case "ZonedDateTime": return ClassName.get("java.time", "ZonedDateTime");
             default:
                 // Check if it's an available enum
                 if (getAvailableEnums().containsKey(name)) {
@@ -790,5 +828,6 @@ public class ModelTransformer {
         TypeName type;
         String name;
         String jsonProperty;
+        String description;  // Field description/title from OpenAPI spec
     }
 }

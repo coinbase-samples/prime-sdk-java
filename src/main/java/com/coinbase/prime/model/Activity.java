@@ -14,14 +14,23 @@
 package com.coinbase.prime.model;
 
 public class Activity {
+    /**
+     * A unique id for the account activity
+     */
     private String id;
 
     private String referenceId;
 
     private String createdBy;
 
+    /**
+     * Title of the activity
+     */
     private String title;
 
+    /**
+     * Description detail of the activity
+     */
     private String description;
 
     private ActivityMetadataTransactions transactionsMetadata;

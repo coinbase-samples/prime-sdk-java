@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class EntityBalance {
+    /**
+     * The display symbol for the asset
+     */
     private String symbol;
 
     private String longAmount;

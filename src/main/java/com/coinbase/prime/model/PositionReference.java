@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class PositionReference {
+    /**
+     * Reference ID
+     */
     private String id;
 
     public PositionReference() {

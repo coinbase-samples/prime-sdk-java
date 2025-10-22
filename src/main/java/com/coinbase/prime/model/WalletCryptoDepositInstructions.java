@@ -16,12 +16,21 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
 
 public class WalletCryptoDepositInstructions {
+    /**
+     * The ID of the wallet
+     */
     private String id;
 
+    /**
+     * The name of the wallet
+     */
     private String name;
 
     private WalletDepositInstructionType type;
 
+    /**
+     * The address of the wallet
+     */
     private String address;
 
     private String accountIdentifier;

@@ -37,6 +37,9 @@ public class Allocation {
 
     private String feesAllocated;
 
+    /**
+     * Portfolio ID of the source portfolio.
+     */
     private String source;
 
     private String nettingId;

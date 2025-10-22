@@ -16,16 +16,34 @@ package com.coinbase.prime.model;
 import java.time.OffsetDateTime;
 
 public class Candle {
+    /**
+     * Timestamp for the start of the candle period
+     */
     private OffsetDateTime timestamp;
 
+    /**
+     * Opening price for the period
+     */
     private String open;
 
+    /**
+     * Highest price during the period
+     */
     private String high;
 
+    /**
+     * Lowest price during the period
+     */
     private String low;
 
+    /**
+     * Closing price for the period
+     */
     private String close;
 
+    /**
+     * Volume traded during the period
+     */
     private String volume;
 
     public Candle() {

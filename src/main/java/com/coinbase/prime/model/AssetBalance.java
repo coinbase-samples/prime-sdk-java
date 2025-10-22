@@ -16,8 +16,14 @@ package com.coinbase.prime.model;
 public class AssetBalance {
     private String portfolioId;
 
+    /**
+     * The currency symbol
+     */
     private String symbol;
 
+    /**
+     * Balance amount
+     */
     private String amount;
 
     private String notionalAmount;

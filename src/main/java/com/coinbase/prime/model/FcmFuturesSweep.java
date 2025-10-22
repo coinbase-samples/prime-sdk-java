@@ -16,6 +16,9 @@ package com.coinbase.prime.model;
 import java.time.OffsetDateTime;
 
 public class FcmFuturesSweep {
+    /**
+     * Sweep ID
+     */
     private String id;
 
     private FcmFuturesSweepRequestAmount requestedAmount;

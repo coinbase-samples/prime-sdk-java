@@ -18,6 +18,9 @@ import java.time.OffsetDateTime;
 public class XMMarginCall {
     private String marginCallId;
 
+    /**
+     * Margin call currency
+     */
     private String currency;
 
     private String initialNotionalAmount;

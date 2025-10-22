@@ -20,6 +20,9 @@ public class ExistingLocate {
 
     private String portfolioId;
 
+    /**
+     * The currency symbol
+     */
     private String symbol;
 
     private String requestedAmount;

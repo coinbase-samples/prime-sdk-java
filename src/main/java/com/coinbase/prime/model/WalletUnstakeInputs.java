@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class WalletUnstakeInputs {
+    /**
+     * Optional amount to unstake (ETH only). If omitted, the wallet will unstake the maximum amount available
+     */
     private String amount;
 
     public WalletUnstakeInputs() {

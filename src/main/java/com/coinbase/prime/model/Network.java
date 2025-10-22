@@ -13,12 +13,16 @@
 //  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.NetworkType;
-
 public class Network {
+    /**
+     * The network id: base, bitcoin, ethereum, solana etc
+     */
     private String id;
 
-    private NetworkType type;
+    /**
+     * The network type: mainnet, testnet, etc
+     */
+    private String type;
 
     public Network() {
     }
@@ -32,7 +36,7 @@ public class Network {
         return id;
     }
 
-    public NetworkType getType() {
+    public String getType() {
         return type;
     }
 
@@ -40,21 +44,21 @@ public class Network {
         this.id = id;
     }
 
-    public void setType(NetworkType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
     public static class Builder {
         private String id;
 
-        private NetworkType type;
+        private String type;
 
         public Builder id(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder type(NetworkType type) {
+        public Builder type(String type) {
             this.type = type;
             return this;
         }

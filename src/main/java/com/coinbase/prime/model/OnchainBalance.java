@@ -18,6 +18,9 @@ import com.coinbase.prime.model.enums.VisibilityStatus;
 public class OnchainBalance {
     private OnchainAsset asset;
 
+    /**
+     * The total amount in whole units with full precision.
+     */
     private String amount;
 
     private VisibilityStatus visibilityStatus;

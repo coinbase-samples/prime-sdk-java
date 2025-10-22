@@ -14,8 +14,14 @@
 package com.coinbase.prime.model;
 
 public class WithdrawalPower {
+    /**
+     * The currency symbol
+     */
     private String symbol;
 
+    /**
+     * Withdrawal power
+     */
     private String amount;
 
     public WithdrawalPower() {

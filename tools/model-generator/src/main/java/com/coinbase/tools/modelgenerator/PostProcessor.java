@@ -209,6 +209,10 @@ public class PostProcessor {
         String originalClassName = className;
         className = stripCommonPrefixes(className);
         
+        // Look up the schema using the original class name before prefix stripping
+        // The schema map uses the fully qualified names from the OpenAPI spec
+        JsonNode schema = findSchemaForClassName(originalClassName);
+        
         if (!className.equals(originalClassName)) {
             content = content.replace("class " + originalClassName, "class " + className);
             content = content.replace("enum " + originalClassName, "enum " + className);
@@ -238,7 +242,7 @@ public class PostProcessor {
         }
         
         // Transform the model content
-        String transformedContent = transformer.transformModel(content, schemas.get(className));
+        String transformedContent = transformer.transformModel(content, schema);
         
         Files.writeString(outputPath, transformedContent);
         
@@ -378,6 +382,34 @@ public class PostProcessor {
         }
         
         return shouldSkip;
+    }
+    
+    /**
+     * Find the schema for a given class name by searching the schemas map.
+     * The class name might be PascalCase but the schema key might be in dot notation.
+     * For example: CoinbasePublicRestApiActivity -> coinbase.public_rest_api.Activity
+     */
+    private JsonNode findSchemaForClassName(String className) {
+        // First try direct match
+        if (schemas.containsKey(className)) {
+            return schemas.get(className);
+        }
+        
+        // Try case-insensitive match on the simple name (last part after dots)
+        for (Map.Entry<String, JsonNode> entry : schemas.entrySet()) {
+            String schemaKey = entry.getKey();
+            // Extract simple name from schema key (e.g., "coinbase.public_rest_api.Activity" -> "Activity")
+            String simpleName = schemaKey.substring(schemaKey.lastIndexOf('.') + 1);
+            
+            // Check if the class name ends with this simple name
+            if (className.endsWith(simpleName)) {
+                logger.debug("Matched schema '{}' for class '{}'", schemaKey, className);
+                return entry.getValue();
+            }
+        }
+        
+        logger.debug("No schema found for class: {}", className);
+        return null;
     }
     
     private Path findProjectRoot() {

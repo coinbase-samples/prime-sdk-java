@@ -18,8 +18,14 @@ import com.coinbase.prime.model.enums.AssetChangeType;
 public class AssetChange {
     private AssetChangeType type;
 
+    /**
+     * The currency symbol associated with the balance operation
+     */
     private String symbol;
 
+    /**
+     * The amount in whole units being transferred or approved
+     */
     private String amount;
 
     private NFTCollection collection;

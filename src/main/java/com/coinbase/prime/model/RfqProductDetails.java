@@ -14,6 +14,9 @@
 package com.coinbase.prime.model;
 
 public class RFQProductDetails {
+    /**
+     * Whether the product is tradable via RFQ
+     */
     private Boolean tradable;
 
     private String minNotionalSize;

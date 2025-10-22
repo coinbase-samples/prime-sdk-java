@@ -16,6 +16,9 @@ package com.coinbase.prime.model;
 import java.time.OffsetDateTime;
 
 public class OrderEdit {
+    /**
+     * New price for the edited order
+     */
     private String price;
 
     private String baseQuantity;

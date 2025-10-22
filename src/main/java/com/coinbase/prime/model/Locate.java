@@ -14,10 +14,19 @@
 package com.coinbase.prime.model;
 
 public class Locate {
+    /**
+     * The currency symbol
+     */
     private String symbol;
 
+    /**
+     * The available quantity located
+     */
     private String quantity;
 
+    /**
+     * The interest rate for located symbol
+     */
     private String rate;
 
     public Locate() {

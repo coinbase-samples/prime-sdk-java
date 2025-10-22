@@ -1,46 +1,55 @@
-/*
- * Copyright 2025-present Coinbase Global, Inc.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
+// Copyright 2025-present Coinbase Global, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.AddressBookState;
-import com.coinbase.prime.model.enums.AddressBookType;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 
 public class AddressBookEntry {
+    /**
+     * UUID identifying this address book entry
+     */
     private String id;
-    @JsonProperty("currency_symbol")
+
     private String currencySymbol;
+
+    /**
+     * Name for this address book entry
+     */
     private String name;
+
+    /**
+     * Cryptocurrency address
+     */
     private String address;
-    @JsonProperty("account_identifier")
+
     private String accountIdentifier;
-    @JsonProperty("account_identifier_name")
+
     private String accountIdentifierName;
-    private AddressBookState state;
-    @JsonProperty("explorer_link")
+
+    /**
+     * State of this address book entry
+     */
+    private String state;
+
     private String explorerLink;
-    @JsonProperty("last_used_at")
-    private String lastUsedAt;
-    @JsonProperty("added_at")
-    private String addedAt;
-    @JsonProperty("added_by")
+
+    private OffsetDateTime lastUsedAt;
+
+    private OffsetDateTime addedAt;
+
     private DisplayUser addedBy;
-    private AddressBookType type;
-    @JsonProperty("counterparty_id")
+
     private String counterpartyId;
 
     public AddressBookEntry() {
@@ -58,7 +67,6 @@ public class AddressBookEntry {
         this.lastUsedAt = builder.lastUsedAt;
         this.addedAt = builder.addedAt;
         this.addedBy = builder.addedBy;
-        this.type = builder.type;
         this.counterpartyId = builder.counterpartyId;
     }
 
@@ -66,100 +74,92 @@ public class AddressBookEntry {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getCurrencySymbol() {
         return currencySymbol;
-    }
-
-    public void setCurrencySymbol(String currencySymbol) {
-        this.currencySymbol = currencySymbol;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getAccountIdentifier() {
         return accountIdentifier;
     }
 
-    public void setAccountIdentifier(String accountIdentifier) {
-        this.accountIdentifier = accountIdentifier;
-    }
-
     public String getAccountIdentifierName() {
         return accountIdentifierName;
     }
 
-    public void setAccountIdentifierName(String accountIdentifierName) {
-        this.accountIdentifierName = accountIdentifierName;
-    }
-
-    public AddressBookState getState() {
+    public String getState() {
         return state;
-    }
-
-    public void setState(AddressBookState state) {
-        this.state = state;
     }
 
     public String getExplorerLink() {
         return explorerLink;
     }
 
-    public void setExplorerLink(String explorerLink) {
-        this.explorerLink = explorerLink;
-    }
-
-    public String getLastUsedAt() {
+    public OffsetDateTime getLastUsedAt() {
         return lastUsedAt;
     }
 
-    public void setLastUsedAt(String lastUsedAt) {
-        this.lastUsedAt = lastUsedAt;
-    }
-
-    public String getAddedAt() {
+    public OffsetDateTime getAddedAt() {
         return addedAt;
-    }
-
-    public void setAddedAt(String addedAt) {
-        this.addedAt = addedAt;
     }
 
     public DisplayUser getAddedBy() {
         return addedBy;
     }
 
-    public void setAddedBy(DisplayUser addedBy) {
-        this.addedBy = addedBy;
-    }
-
-    public AddressBookType getType() {
-        return type;
-    }
-
-    public void setType(AddressBookType type) {
-        this.type = type;
-    }
-
     public String getCounterpartyId() {
         return counterpartyId;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setCurrencySymbol(String currencySymbol) {
+        this.currencySymbol = currencySymbol;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setAccountIdentifier(String accountIdentifier) {
+        this.accountIdentifier = accountIdentifier;
+    }
+
+    public void setAccountIdentifierName(String accountIdentifierName) {
+        this.accountIdentifierName = accountIdentifierName;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setExplorerLink(String explorerLink) {
+        this.explorerLink = explorerLink;
+    }
+
+    public void setLastUsedAt(OffsetDateTime lastUsedAt) {
+        this.lastUsedAt = lastUsedAt;
+    }
+
+    public void setAddedAt(OffsetDateTime addedAt) {
+        this.addedAt = addedAt;
+    }
+
+    public void setAddedBy(DisplayUser addedBy) {
+        this.addedBy = addedBy;
     }
 
     public void setCounterpartyId(String counterpartyId) {
@@ -168,17 +168,27 @@ public class AddressBookEntry {
 
     public static class Builder {
         private String id;
+
         private String currencySymbol;
+
         private String name;
+
         private String address;
+
         private String accountIdentifier;
+
         private String accountIdentifierName;
-        private AddressBookState state;
+
+        private String state;
+
         private String explorerLink;
-        private String lastUsedAt;
-        private String addedAt;
+
+        private OffsetDateTime lastUsedAt;
+
+        private OffsetDateTime addedAt;
+
         private DisplayUser addedBy;
-        private AddressBookType type;
+
         private String counterpartyId;
 
         public Builder id(String id) {
@@ -211,7 +221,7 @@ public class AddressBookEntry {
             return this;
         }
 
-        public Builder state(AddressBookState state) {
+        public Builder state(String state) {
             this.state = state;
             return this;
         }
@@ -221,23 +231,18 @@ public class AddressBookEntry {
             return this;
         }
 
-        public Builder lastUsedAt(String lastUsedAt) {
+        public Builder lastUsedAt(OffsetDateTime lastUsedAt) {
             this.lastUsedAt = lastUsedAt;
             return this;
         }
 
-        public Builder addedAt(String addedAt) {
+        public Builder addedAt(OffsetDateTime addedAt) {
             this.addedAt = addedAt;
             return this;
         }
 
         public Builder addedBy(DisplayUser addedBy) {
             this.addedBy = addedBy;
-            return this;
-        }
-
-        public Builder type(AddressBookType type) {
-            this.type = type;
             return this;
         }
 

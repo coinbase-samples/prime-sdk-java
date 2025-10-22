@@ -13,11 +13,15 @@
 //  limitations under the License.
 package com.coinbase.prime.model;
 
-import com.coinbase.prime.model.enums.CommissionType;
-
 public class Commission {
-    private CommissionType type;
+    /**
+     * Fee model (all_in or cost_plus)
+     */
+    private String type;
 
+    /**
+     * Commission rate (in whole percentage. Commission of 15bps is "0.0015")
+     */
     private String rate;
 
     private String tradingVolume;
@@ -31,7 +35,7 @@ public class Commission {
         this.tradingVolume = builder.tradingVolume;
     }
 
-    public CommissionType getType() {
+    public String getType() {
         return type;
     }
 
@@ -43,7 +47,7 @@ public class Commission {
         return tradingVolume;
     }
 
-    public void setType(CommissionType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -56,13 +60,13 @@ public class Commission {
     }
 
     public static class Builder {
-        private CommissionType type;
+        private String type;
 
         private String rate;
 
         private String tradingVolume;
 
-        public Builder type(CommissionType type) {
+        public Builder type(String type) {
             this.type = type;
             return this;
         }
