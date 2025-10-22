@@ -1,23 +1,26 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+
 public class ExistingLocate {
+    /**
+     * The locate ID
+     */
     private String locateId;
 
+    /**
+     * The unique ID of the entity
+     */
     private String entityId;
 
+    /**
+     * The unique ID of the portfolio
+     */
     private String portfolioId;
 
     /**
@@ -25,18 +28,39 @@ public class ExistingLocate {
      */
     private String symbol;
 
+    /**
+     * The requested locate amount
+     */
     private String requestedAmount;
 
+    /**
+     * The interest rate of PM loan
+     */
     private String interestRate;
 
+    /**
+     * The locate status
+     */
     private String status;
 
+    /**
+     * The approved locate amount
+     */
     private String approvedAmount;
 
+    /**
+     * Deprecated: Use locate_date instead
+     */
     private String conversionDate;
 
+    /**
+     * The date when the locate was submitted in RFC3339 format
+     */
     private String createdAt;
 
+    /**
+     * The locate date from the CreateNewLocatesRequest in RFC3339 format
+     */
     private String locateDate;
 
     public ExistingLocate() {
@@ -55,95 +79,83 @@ public class ExistingLocate {
         this.createdAt = builder.createdAt;
         this.locateDate = builder.locateDate;
     }
-
     public String getLocateId() {
         return locateId;
-    }
-
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public String getPortfolioId() {
-        return portfolioId;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public String getRequestedAmount() {
-        return requestedAmount;
-    }
-
-    public String getInterestRate() {
-        return interestRate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getApprovedAmount() {
-        return approvedAmount;
-    }
-
-    public String getConversionDate() {
-        return conversionDate;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public String getLocateDate() {
-        return locateDate;
     }
 
     public void setLocateId(String locateId) {
         this.locateId = locateId;
     }
+    public String getEntityId() {
+        return entityId;
+    }
 
     public void setEntityId(String entityId) {
         this.entityId = entityId;
+    }
+    public String getPortfolioId() {
+        return portfolioId;
     }
 
     public void setPortfolioId(String portfolioId) {
         this.portfolioId = portfolioId;
     }
+    public String getSymbol() {
+        return symbol;
+    }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+    public String getRequestedAmount() {
+        return requestedAmount;
     }
 
     public void setRequestedAmount(String requestedAmount) {
         this.requestedAmount = requestedAmount;
     }
+    public String getInterestRate() {
+        return interestRate;
+    }
 
     public void setInterestRate(String interestRate) {
         this.interestRate = interestRate;
+    }
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
+    public String getApprovedAmount() {
+        return approvedAmount;
+    }
 
     public void setApprovedAmount(String approvedAmount) {
         this.approvedAmount = approvedAmount;
+    }
+    public String getConversionDate() {
+        return conversionDate;
     }
 
     public void setConversionDate(String conversionDate) {
         this.conversionDate = conversionDate;
     }
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+    public String getLocateDate() {
+        return locateDate;
     }
 
     public void setLocateDate(String locateDate) {
         this.locateDate = locateDate;
     }
-
     public static class Builder {
         private String locateId;
 
@@ -227,3 +239,4 @@ public class ExistingLocate {
         }
     }
 }
+

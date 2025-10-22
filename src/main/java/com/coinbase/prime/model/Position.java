@@ -1,17 +1,12 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
+
+import com.coinbase.prime.model.PositionReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
 
 public class Position {
     /**
@@ -19,8 +14,14 @@ public class Position {
      */
     private String symbol;
 
+    /**
+     * The long position based on &#39;reference&#39; value
+     */
     private String _long;
 
+    /**
+     * The short position based on &#39;reference&#39; value
+     */
     private String _short;
 
     private PositionReference positionReference;
@@ -34,39 +35,34 @@ public class Position {
         this._short = builder._short;
         this.positionReference = builder.positionReference;
     }
-
     public String getSymbol() {
         return symbol;
-    }
-
-    public String get_long() {
-        return _long;
-    }
-
-    public String get_short() {
-        return _short;
-    }
-
-    public PositionReference getPositionReference() {
-        return positionReference;
     }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
-
-    public void set_long(String _long) {
-        this._long = _long;
+    public String getLong() {
+        return _long;
     }
 
-    public void set_short(String _short) {
+    public void setLong(String _long) {
+        this._long = _long;
+    }
+    public String getShort() {
+        return _short;
+    }
+
+    public void setShort(String _short) {
         this._short = _short;
+    }
+    public PositionReference getPositionReference() {
+        return positionReference;
     }
 
     public void setPositionReference(PositionReference positionReference) {
         this.positionReference = positionReference;
     }
-
     public static class Builder {
         private String symbol;
 
@@ -101,3 +97,4 @@ public class Position {
         }
     }
 }
+

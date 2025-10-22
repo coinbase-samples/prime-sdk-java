@@ -63,28 +63,52 @@ public class PostProcessor {
     public void processModels() throws IOException {
         logger.info("Loading OpenAPI schema information...");
         loadSchemas();
-        
+
         logger.info("Finding generated model files...");
         List<Path> modelFiles = findGeneratedModelFiles();
         logger.info("Found {} model files to process", modelFiles.size());
-        
+
         // Create output directories
         Files.createDirectories(outputDir);
         Files.createDirectories(enumsDir);
-        
-        // Process each model file
+
+        // Separate enum files from model files
+        List<Path> enumFiles = new ArrayList<>();
+        List<Path> nonEnumFiles = new ArrayList<>();
+
         for (Path file : modelFiles) {
+            if (isEnumFile(file)) {
+                enumFiles.add(file);
+            } else {
+                nonEnumFiles.add(file);
+            }
+        }
+
+        logger.info("Found {} enum files and {} model files", enumFiles.size(), nonEnumFiles.size());
+
+        // Process enums FIRST so they're available for import fixing
+        logger.info("Processing enums first...");
+        for (Path file : enumFiles) {
             String fileName = file.getFileName().toString();
-            logger.info("Processing: {}", fileName);
-            
+            logger.info("Processing enum: {}", fileName);
+
             try {
-                if (isEnumFile(file)) {
-                    processEnumFile(file);
-                } else {
-                    processModelFile(file);
-                }
+                processEnumFile(file);
             } catch (Exception e) {
-                logger.error("Error processing file: " + fileName, e);
+                logger.error("Error processing enum file: " + fileName, e);
+            }
+        }
+
+        // Then process models with fixed enum imports
+        logger.info("Processing models...");
+        for (Path file : nonEnumFiles) {
+            String fileName = file.getFileName().toString();
+            logger.info("Processing model: {}", fileName);
+
+            try {
+                processModelFile(file);
+            } catch (Exception e) {
+                logger.error("Error processing model file: " + fileName, e);
             }
         }
         
@@ -155,6 +179,35 @@ public class PostProcessor {
         return content.contains("public enum ");
     }
     
+    /**
+     * Fixes enum imports to use the enums package.
+     * Only moves types that exist in the enums directory.
+     */
+    private String fixEnumImports(String content) {
+        // Get list of all enum names from enums directory
+        java.util.Set<String> enumNames = new java.util.HashSet<>();
+        try {
+            java.nio.file.Files.walk(enumsDir, 1)
+                .filter(p -> p.toString().endsWith(".java"))
+                .forEach(p -> {
+                    String fileName = p.getFileName().toString();
+                    enumNames.add(fileName.replace(".java", ""));
+                });
+        } catch (Exception e) {
+            logger.warn("Could not read enums directory: {}", e.getMessage());
+        }
+
+        // Only replace imports for types that are actual enums
+        for (String enumName : enumNames) {
+            content = content.replace(
+                "import com.coinbase.prime.model." + enumName + ";",
+                "import com.coinbase.prime.model.enums." + enumName + ";"
+            );
+        }
+
+        return content;
+    }
+
     private void processEnumFile(Path file) throws IOException {
         String content = Files.readString(file);
         String className = extractClassName(content);
@@ -181,9 +234,9 @@ public class PostProcessor {
             return;
         }
         
-        String transformedContent = transformer.transformEnum(content);
-        
-        Files.writeString(outputPath, transformedContent);
+        // Custom templates already produce correct output - just fix package
+        content = content.replace("package com.coinbase.prime.model;", "package com.coinbase.prime.model.enums;");
+        Files.writeString(outputPath, content);
         
         if (!existsBefore) {
             logger.info("Generated new enum: {}", className);
@@ -241,10 +294,9 @@ public class PostProcessor {
             return;
         }
         
-        // Transform the model content
-        String transformedContent = transformer.transformModel(content, schema);
-        
-        Files.writeString(outputPath, transformedContent);
+        // Custom templates already produce correct output - just fix enum imports
+        content = fixEnumImports(content);
+        Files.writeString(outputPath, content);
         
         if (!existsBefore) {
             logger.info("Generated new model: {}", className);

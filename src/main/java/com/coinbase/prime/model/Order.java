@@ -1,23 +1,20 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.LimitOrderEdit;
+import com.coinbase.prime.model.OrderEdit;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderStatus;
 import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.model.enums.TimeInForceType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Order {
     /**
@@ -25,38 +22,77 @@ public class Order {
      */
     private String id;
 
+    /**
+     * The ID of the user that created the order
+     */
     private String userId;
 
+    /**
+     * The ID of the portfolio that owns the order
+     */
     private String portfolioId;
 
+    /**
+     * The ID of the product being traded by the order
+     */
     private String productId;
 
     private OrderSide side;
 
+    /**
+     * A client-generated order ID used for reference purposes (note: order will be rejected if this ID is not unique among all currently active orders)
+     */
     private String clientOrderId;
 
     private OrderType type;
 
+    /**
+     * Order size in base asset units (either &#x60;base_quantity&#x60; or &#x60;quote_value&#x60; is required)
+     */
     private String baseQuantity;
 
+    /**
+     * Order size in quote asset units, i.e. the amount the user wants to spend (when buying) or receive (when selling); the quantity in base units will be determined based on the market liquidity and indicated &#x60;quote_value&#x60;. Either &#x60;base_quantity&#x60; or &#x60;quote_value&#x60; is required
+     */
     private String quoteValue;
 
+    /**
+     * The limit price (required for TWAP, VWAP, LIMIT and STOP_LIMIT orders)
+     */
     private String limitPrice;
 
+    /**
+     * The start time of the order in UTC (only applies to TWAP, VWAP orders.)
+     */
     private OffsetDateTime startTime;
 
+    /**
+     * The expiry time of the order in UTC (applies to TWAP, VWAP, LIMIT, and STOP_LIMIT orders with &#x60;time_in_force&#x60; set to &#x60;GTD&#x60;)
+     */
     private OffsetDateTime expiryTime;
 
     private OrderStatus status;
 
     private TimeInForceType timeInForce;
 
+    /**
+     * The order creation time as a UTC timestamp
+     */
     private OffsetDateTime createdAt;
 
+    /**
+     * Size filled (in base asset units)
+     */
     private String filledQuantity;
 
+    /**
+     * Market value filled (in quote asset units)
+     */
     private String filledValue;
 
+    /**
+     * Indicates the average &#x60;filled_price&#x60;
+     */
     private String averageFilledPrice;
 
     /**
@@ -64,26 +100,69 @@ public class Order {
      */
     private String commission;
 
+    /**
+     * Fee charged by the exchange for Cost Plus commission configurations. Exchange fee will be 0 for All In commission configurations.
+     */
     private String exchangeFee;
 
+    /**
+     * historical pov for the order
+     */
     private String historicalPov;
 
+    /**
+     * Specifies the stop price at which the order activates. The order is activated if the last trade price on Coinbase Exchange crosses the stop price specified on the order
+     */
     private String stopPrice;
 
+    /**
+     * Indicates the average &#x60;filled_price&#x60; net of commissions and fees
+     */
     private String netAverageFilledPrice;
 
+    /**
+     * Indicates a user friendly message for regarding various aspects of the order such as cancellation or rejection reasons
+     */
     private String userContext;
 
+    /**
+     * The client product ID of the fill indictating the settlment currency
+     */
     private String clientProductId;
 
+    /**
+     * Post-only flag - indicates whether the order was placed as post-only
+     */
     private Boolean postOnly;
 
+    /**
+     * The history of order edits (deprecated: use edit_history instead)
+     */
+    private List<LimitOrderEdit> orderEditHistory;
+
+    /**
+     * Indicates if this was a raise exact order (size inclusive of fees for sell orders in quote)
+     */
     private Boolean isRaiseExact;
 
+    /**
+     * Display size for the order
+     */
     private String displaySize;
 
+    /**
+     * The history of order edits
+     */
+    private List<OrderEdit> editHistory;
+
+    /**
+     * The maximum order size that will show up on venue order books (in quote currency).
+     */
     private String displayQuoteSize;
 
+    /**
+     * The maximum order size that will show up on venue order books (in base currency).
+     */
     private String displayBaseSize;
 
     public Order() {
@@ -116,252 +195,237 @@ public class Order {
         this.userContext = builder.userContext;
         this.clientProductId = builder.clientProductId;
         this.postOnly = builder.postOnly;
+        this.orderEditHistory = builder.orderEditHistory;
         this.isRaiseExact = builder.isRaiseExact;
         this.displaySize = builder.displaySize;
+        this.editHistory = builder.editHistory;
         this.displayQuoteSize = builder.displayQuoteSize;
         this.displayBaseSize = builder.displayBaseSize;
     }
-
     public String getId() {
         return id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getPortfolioId() {
-        return portfolioId;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public OrderSide getSide() {
-        return side;
-    }
-
-    public String getClientOrderId() {
-        return clientOrderId;
-    }
-
-    public OrderType getType() {
-        return type;
-    }
-
-    public String getBaseQuantity() {
-        return baseQuantity;
-    }
-
-    public String getQuoteValue() {
-        return quoteValue;
-    }
-
-    public String getLimitPrice() {
-        return limitPrice;
-    }
-
-    public OffsetDateTime getStartTime() {
-        return startTime;
-    }
-
-    public OffsetDateTime getExpiryTime() {
-        return expiryTime;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public TimeInForceType getTimeInForce() {
-        return timeInForce;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public String getFilledQuantity() {
-        return filledQuantity;
-    }
-
-    public String getFilledValue() {
-        return filledValue;
-    }
-
-    public String getAverageFilledPrice() {
-        return averageFilledPrice;
-    }
-
-    public String getCommission() {
-        return commission;
-    }
-
-    public String getExchangeFee() {
-        return exchangeFee;
-    }
-
-    public String getHistoricalPov() {
-        return historicalPov;
-    }
-
-    public String getStopPrice() {
-        return stopPrice;
-    }
-
-    public String getNetAverageFilledPrice() {
-        return netAverageFilledPrice;
-    }
-
-    public String getUserContext() {
-        return userContext;
-    }
-
-    public String getClientProductId() {
-        return clientProductId;
-    }
-
-    public Boolean isPostOnly() {
-        return postOnly;
-    }
-
-    public Boolean isIsRaiseExact() {
-        return isRaiseExact;
-    }
-
-    public String getDisplaySize() {
-        return displaySize;
-    }
-
-    public String getDisplayQuoteSize() {
-        return displayQuoteSize;
-    }
-
-    public String getDisplayBaseSize() {
-        return displayBaseSize;
     }
 
     public void setId(String id) {
         this.id = id;
     }
+    public String getUserId() {
+        return userId;
+    }
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+    public String getPortfolioId() {
+        return portfolioId;
     }
 
     public void setPortfolioId(String portfolioId) {
         this.portfolioId = portfolioId;
     }
+    public String getProductId() {
+        return productId;
+    }
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+    public OrderSide getSide() {
+        return side;
     }
 
     public void setSide(OrderSide side) {
         this.side = side;
     }
+    public String getClientOrderId() {
+        return clientOrderId;
+    }
 
     public void setClientOrderId(String clientOrderId) {
         this.clientOrderId = clientOrderId;
+    }
+    public OrderType getType() {
+        return type;
     }
 
     public void setType(OrderType type) {
         this.type = type;
     }
+    public String getBaseQuantity() {
+        return baseQuantity;
+    }
 
     public void setBaseQuantity(String baseQuantity) {
         this.baseQuantity = baseQuantity;
+    }
+    public String getQuoteValue() {
+        return quoteValue;
     }
 
     public void setQuoteValue(String quoteValue) {
         this.quoteValue = quoteValue;
     }
+    public String getLimitPrice() {
+        return limitPrice;
+    }
 
     public void setLimitPrice(String limitPrice) {
         this.limitPrice = limitPrice;
+    }
+    public OffsetDateTime getStartTime() {
+        return startTime;
     }
 
     public void setStartTime(OffsetDateTime startTime) {
         this.startTime = startTime;
     }
+    public OffsetDateTime getExpiryTime() {
+        return expiryTime;
+    }
 
     public void setExpiryTime(OffsetDateTime expiryTime) {
         this.expiryTime = expiryTime;
+    }
+    public OrderStatus getStatus() {
+        return status;
     }
 
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+    public TimeInForceType getTimeInForce() {
+        return timeInForce;
+    }
 
     public void setTimeInForce(TimeInForceType timeInForce) {
         this.timeInForce = timeInForce;
+    }
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    public String getFilledQuantity() {
+        return filledQuantity;
+    }
 
     public void setFilledQuantity(String filledQuantity) {
         this.filledQuantity = filledQuantity;
+    }
+    public String getFilledValue() {
+        return filledValue;
     }
 
     public void setFilledValue(String filledValue) {
         this.filledValue = filledValue;
     }
+    public String getAverageFilledPrice() {
+        return averageFilledPrice;
+    }
 
     public void setAverageFilledPrice(String averageFilledPrice) {
         this.averageFilledPrice = averageFilledPrice;
+    }
+    public String getCommission() {
+        return commission;
     }
 
     public void setCommission(String commission) {
         this.commission = commission;
     }
+    public String getExchangeFee() {
+        return exchangeFee;
+    }
 
     public void setExchangeFee(String exchangeFee) {
         this.exchangeFee = exchangeFee;
+    }
+    public String getHistoricalPov() {
+        return historicalPov;
     }
 
     public void setHistoricalPov(String historicalPov) {
         this.historicalPov = historicalPov;
     }
+    public String getStopPrice() {
+        return stopPrice;
+    }
 
     public void setStopPrice(String stopPrice) {
         this.stopPrice = stopPrice;
+    }
+    public String getNetAverageFilledPrice() {
+        return netAverageFilledPrice;
     }
 
     public void setNetAverageFilledPrice(String netAverageFilledPrice) {
         this.netAverageFilledPrice = netAverageFilledPrice;
     }
+    public String getUserContext() {
+        return userContext;
+    }
 
     public void setUserContext(String userContext) {
         this.userContext = userContext;
+    }
+    public String getClientProductId() {
+        return clientProductId;
     }
 
     public void setClientProductId(String clientProductId) {
         this.clientProductId = clientProductId;
     }
+    public Boolean getPostOnly() {
+        return postOnly;
+    }
 
     public void setPostOnly(Boolean postOnly) {
         this.postOnly = postOnly;
+    }
+    public List<LimitOrderEdit> getOrderEditHistory() {
+        return orderEditHistory;
+    }
+
+    public void setOrderEditHistory(List<LimitOrderEdit> orderEditHistory) {
+        this.orderEditHistory = orderEditHistory;
+    }
+    public Boolean getIsRaiseExact() {
+        return isRaiseExact;
     }
 
     public void setIsRaiseExact(Boolean isRaiseExact) {
         this.isRaiseExact = isRaiseExact;
     }
+    public String getDisplaySize() {
+        return displaySize;
+    }
 
     public void setDisplaySize(String displaySize) {
         this.displaySize = displaySize;
+    }
+    public List<OrderEdit> getEditHistory() {
+        return editHistory;
+    }
+
+    public void setEditHistory(List<OrderEdit> editHistory) {
+        this.editHistory = editHistory;
+    }
+    public String getDisplayQuoteSize() {
+        return displayQuoteSize;
     }
 
     public void setDisplayQuoteSize(String displayQuoteSize) {
         this.displayQuoteSize = displayQuoteSize;
     }
+    public String getDisplayBaseSize() {
+        return displayBaseSize;
+    }
 
     public void setDisplayBaseSize(String displayBaseSize) {
         this.displayBaseSize = displayBaseSize;
     }
-
     public static class Builder {
         private String id;
 
@@ -415,9 +479,13 @@ public class Order {
 
         private Boolean postOnly;
 
+        private List<LimitOrderEdit> orderEditHistory;
+
         private Boolean isRaiseExact;
 
         private String displaySize;
+
+        private List<OrderEdit> editHistory;
 
         private String displayQuoteSize;
 
@@ -553,6 +621,11 @@ public class Order {
             return this;
         }
 
+        public Builder orderEditHistory(List<LimitOrderEdit> orderEditHistory) {
+            this.orderEditHistory = orderEditHistory;
+            return this;
+        }
+
         public Builder isRaiseExact(Boolean isRaiseExact) {
             this.isRaiseExact = isRaiseExact;
             return this;
@@ -560,6 +633,11 @@ public class Order {
 
         public Builder displaySize(String displaySize) {
             this.displaySize = displaySize;
+            return this;
+        }
+
+        public Builder editHistory(List<OrderEdit> editHistory) {
+            this.editHistory = editHistory;
             return this;
         }
 
@@ -578,3 +656,4 @@ public class Order {
         }
     }
 }
+

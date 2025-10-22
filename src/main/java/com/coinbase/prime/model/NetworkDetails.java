@@ -1,17 +1,12 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
+
+import com.coinbase.prime.model.Network;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
 
 public class NetworkDetails {
     private Network network;
@@ -21,18 +16,39 @@ public class NetworkDetails {
      */
     private String name;
 
+    /**
+     * The maximum number of decimals supported for this network
+     */
     private String maxDecimals;
 
+    /**
+     * Indicates whether this network is the default network for the asset
+     */
     private Boolean _default;
 
+    /**
+     * Indicates whether this network supports trading
+     */
     private Boolean tradingSupported;
 
+    /**
+     * Indicates whether this network supports vault
+     */
     private Boolean vaultSupported;
 
+    /**
+     * Indicates whether this network supports prime custody
+     */
     private Boolean primeCustodySupported;
 
+    /**
+     * Indicates whether this network requires a destination tag
+     */
     private Boolean destinationTagRequired;
 
+    /**
+     * Base URL to our recommended block explorer (crypto only)
+     */
     private String networkLink;
 
     public NetworkDetails() {
@@ -49,79 +65,69 @@ public class NetworkDetails {
         this.destinationTagRequired = builder.destinationTagRequired;
         this.networkLink = builder.networkLink;
     }
-
     public Network getNetwork() {
         return network;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getMaxDecimals() {
-        return maxDecimals;
-    }
-
-    public Boolean is_default() {
-        return _default;
-    }
-
-    public Boolean isTradingSupported() {
-        return tradingSupported;
-    }
-
-    public Boolean isVaultSupported() {
-        return vaultSupported;
-    }
-
-    public Boolean isPrimeCustodySupported() {
-        return primeCustodySupported;
-    }
-
-    public Boolean isDestinationTagRequired() {
-        return destinationTagRequired;
-    }
-
-    public String getNetworkLink() {
-        return networkLink;
     }
 
     public void setNetwork(Network network) {
         this.network = network;
     }
+    public String getName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
+    }
+    public String getMaxDecimals() {
+        return maxDecimals;
     }
 
     public void setMaxDecimals(String maxDecimals) {
         this.maxDecimals = maxDecimals;
     }
+    public Boolean getDefault() {
+        return _default;
+    }
 
-    public void set_default(Boolean _default) {
+    public void setDefault(Boolean _default) {
         this._default = _default;
+    }
+    public Boolean getTradingSupported() {
+        return tradingSupported;
     }
 
     public void setTradingSupported(Boolean tradingSupported) {
         this.tradingSupported = tradingSupported;
     }
+    public Boolean getVaultSupported() {
+        return vaultSupported;
+    }
 
     public void setVaultSupported(Boolean vaultSupported) {
         this.vaultSupported = vaultSupported;
+    }
+    public Boolean getPrimeCustodySupported() {
+        return primeCustodySupported;
     }
 
     public void setPrimeCustodySupported(Boolean primeCustodySupported) {
         this.primeCustodySupported = primeCustodySupported;
     }
+    public Boolean getDestinationTagRequired() {
+        return destinationTagRequired;
+    }
 
     public void setDestinationTagRequired(Boolean destinationTagRequired) {
         this.destinationTagRequired = destinationTagRequired;
+    }
+    public String getNetworkLink() {
+        return networkLink;
     }
 
     public void setNetworkLink(String networkLink) {
         this.networkLink = networkLink;
     }
-
     public static class Builder {
         private Network network;
 
@@ -191,3 +197,4 @@ public class NetworkDetails {
         }
     }
 }
+

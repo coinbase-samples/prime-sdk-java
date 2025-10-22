@@ -18,7 +18,7 @@ package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.Balance;
 import com.coinbase.prime.model.TotalBalance;
-import com.coinbase.prime.model.enums.BalanceType;
+import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

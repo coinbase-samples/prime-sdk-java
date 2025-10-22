@@ -18,7 +18,7 @@ package com.coinbase.prime.activities;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.ActivityCategory;
 import com.coinbase.prime.model.enums.ActivityLevel;
 import com.coinbase.prime.model.enums.ActivityStatus;

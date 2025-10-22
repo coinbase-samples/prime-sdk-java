@@ -17,7 +17,7 @@
 package com.coinbase.prime.users;
 
 import com.coinbase.prime.model.EntityUser;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
 public class ListPortfolioUsersResponse {
     private EntityUser[] users;

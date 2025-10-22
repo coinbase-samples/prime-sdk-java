@@ -1,27 +1,36 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+
 public class DestinationAlloc {
+    /**
+     * The ID unique to each leg of an allocation.
+     */
     private String legId;
 
+    /**
+     * Portfolio ID of the source portfolio.
+     */
     private String portfolioId;
 
+    /**
+     * Amount allocated in base asset units.
+     */
     private String allocationBase;
 
+    /**
+     * Amount allocated in quote asset units.
+     */
     private String allocationQuote;
 
+    /**
+     * Pro rata fees for each leg. Adding up the fees for each leg will sum up to equal the total allocation level fees.
+     */
     private String feesAllocatedLeg;
 
     public DestinationAlloc() {
@@ -34,47 +43,41 @@ public class DestinationAlloc {
         this.allocationQuote = builder.allocationQuote;
         this.feesAllocatedLeg = builder.feesAllocatedLeg;
     }
-
     public String getLegId() {
         return legId;
-    }
-
-    public String getPortfolioId() {
-        return portfolioId;
-    }
-
-    public String getAllocationBase() {
-        return allocationBase;
-    }
-
-    public String getAllocationQuote() {
-        return allocationQuote;
-    }
-
-    public String getFeesAllocatedLeg() {
-        return feesAllocatedLeg;
     }
 
     public void setLegId(String legId) {
         this.legId = legId;
     }
+    public String getPortfolioId() {
+        return portfolioId;
+    }
 
     public void setPortfolioId(String portfolioId) {
         this.portfolioId = portfolioId;
+    }
+    public String getAllocationBase() {
+        return allocationBase;
     }
 
     public void setAllocationBase(String allocationBase) {
         this.allocationBase = allocationBase;
     }
+    public String getAllocationQuote() {
+        return allocationQuote;
+    }
 
     public void setAllocationQuote(String allocationQuote) {
         this.allocationQuote = allocationQuote;
+    }
+    public String getFeesAllocatedLeg() {
+        return feesAllocatedLeg;
     }
 
     public void setFeesAllocatedLeg(String feesAllocatedLeg) {
         this.feesAllocatedLeg = feesAllocatedLeg;
     }
-
     public static class Builder {
         private String legId;
 
@@ -116,3 +119,4 @@ public class DestinationAlloc {
         }
     }
 }
+

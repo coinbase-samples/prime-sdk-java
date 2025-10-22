@@ -1,0 +1,37 @@
+public class {{classname}} {
+{{#vars}}{{#description}}    /**
+     * {{.}}
+     */
+{{/description}}{{#jsonProperty}}    @JsonProperty("{{baseName}}")
+{{/jsonProperty}}    private {{{datatype}}} {{name}};
+
+{{/vars}}
+    public {{classname}}() {
+    }
+
+    public {{classname}}(Builder builder) {
+{{#vars}}        this.{{name}} = builder.{{name}};
+{{/vars}}    }
+{{#vars}}
+    public {{{datatype}}} {{getter}}() {
+        return {{name}};
+    }
+
+    public void {{setter}}({{{datatype}}} {{name}}) {
+        this.{{name}} = {{name}};
+    }
+{{/vars}}
+    public static class Builder {
+{{#vars}}        private {{{datatype}}} {{name}};
+
+{{/vars}}
+{{#vars}}        public Builder {{name}}({{{datatype}}} {{name}}) {
+            this.{{name}} = {{name}};
+            return this;
+        }
+
+{{/vars}}        public {{classname}} build() {
+            return new {{classname}}(this);
+        }
+    }
+}

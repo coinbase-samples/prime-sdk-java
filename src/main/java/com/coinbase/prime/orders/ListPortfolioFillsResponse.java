@@ -16,21 +16,21 @@
 
 package com.coinbase.prime.orders;
 
-import com.coinbase.prime.model.OrderFill;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.model.Fill;
+import com.coinbase.prime.common.Pagination;
 
 public class ListPortfolioFillsResponse {
-    private OrderFill[] fills;
+    private Fill[] fills;
     private Pagination pagination;
 
     public ListPortfolioFillsResponse() {
     }
 
-    public OrderFill[] getFills() {
+    public Fill[] getFills() {
         return fills;
     }
 
-    public void setFills(OrderFill[] fills) {
+    public void setFills(Fill[] fills) {
         this.fills = fills;
     }
 

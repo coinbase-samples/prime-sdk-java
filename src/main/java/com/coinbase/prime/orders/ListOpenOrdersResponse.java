@@ -17,7 +17,7 @@
 package com.coinbase.prime.orders;
 
 import com.coinbase.prime.model.Order;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
 /**
  * Response object for listing all open orders.

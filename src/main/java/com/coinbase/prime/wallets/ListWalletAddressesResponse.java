@@ -17,7 +17,7 @@
 package com.coinbase.prime.wallets;
 
 import com.coinbase.prime.model.BlockchainAddress;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 

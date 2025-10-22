@@ -16,7 +16,7 @@
 
 package com.coinbase.prime.positions;
 
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Position;
 
 public class ListAggregateEntityPositionsResponse {

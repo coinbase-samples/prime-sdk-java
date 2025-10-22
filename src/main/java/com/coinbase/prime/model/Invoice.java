@@ -1,17 +1,15 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
+
+import com.coinbase.prime.model.InvoiceItem;
+import com.coinbase.prime.model.enums.InvoiceState;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Invoice {
     private String id;
@@ -24,9 +22,13 @@ public class Invoice {
 
     private String invoiceNumber;
 
+    private InvoiceState state;
+
     private Double usdAmountPaid;
 
     private Double usdAmountOwed;
+
+    private List<InvoiceItem> invoiceItems;
 
     public Invoice() {
     }
@@ -37,66 +39,74 @@ public class Invoice {
         this.billingYear = builder.billingYear;
         this.dueDate = builder.dueDate;
         this.invoiceNumber = builder.invoiceNumber;
+        this.state = builder.state;
         this.usdAmountPaid = builder.usdAmountPaid;
         this.usdAmountOwed = builder.usdAmountOwed;
+        this.invoiceItems = builder.invoiceItems;
     }
-
     public String getId() {
         return id;
-    }
-
-    public Integer getBillingMonth() {
-        return billingMonth;
-    }
-
-    public Integer getBillingYear() {
-        return billingYear;
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public Double getUsdAmountPaid() {
-        return usdAmountPaid;
-    }
-
-    public Double getUsdAmountOwed() {
-        return usdAmountOwed;
     }
 
     public void setId(String id) {
         this.id = id;
     }
+    public Integer getBillingMonth() {
+        return billingMonth;
+    }
 
     public void setBillingMonth(Integer billingMonth) {
         this.billingMonth = billingMonth;
+    }
+    public Integer getBillingYear() {
+        return billingYear;
     }
 
     public void setBillingYear(Integer billingYear) {
         this.billingYear = billingYear;
     }
+    public String getDueDate() {
+        return dueDate;
+    }
 
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
+    }
+    public String getInvoiceNumber() {
+        return invoiceNumber;
     }
 
     public void setInvoiceNumber(String invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
     }
+    public InvoiceState getState() {
+        return state;
+    }
+
+    public void setState(InvoiceState state) {
+        this.state = state;
+    }
+    public Double getUsdAmountPaid() {
+        return usdAmountPaid;
+    }
 
     public void setUsdAmountPaid(Double usdAmountPaid) {
         this.usdAmountPaid = usdAmountPaid;
+    }
+    public Double getUsdAmountOwed() {
+        return usdAmountOwed;
     }
 
     public void setUsdAmountOwed(Double usdAmountOwed) {
         this.usdAmountOwed = usdAmountOwed;
     }
+    public List<InvoiceItem> getInvoiceItems() {
+        return invoiceItems;
+    }
 
+    public void setInvoiceItems(List<InvoiceItem> invoiceItems) {
+        this.invoiceItems = invoiceItems;
+    }
     public static class Builder {
         private String id;
 
@@ -108,9 +118,13 @@ public class Invoice {
 
         private String invoiceNumber;
 
+        private InvoiceState state;
+
         private Double usdAmountPaid;
 
         private Double usdAmountOwed;
+
+        private List<InvoiceItem> invoiceItems;
 
         public Builder id(String id) {
             this.id = id;
@@ -137,6 +151,11 @@ public class Invoice {
             return this;
         }
 
+        public Builder state(InvoiceState state) {
+            this.state = state;
+            return this;
+        }
+
         public Builder usdAmountPaid(Double usdAmountPaid) {
             this.usdAmountPaid = usdAmountPaid;
             return this;
@@ -147,8 +166,14 @@ public class Invoice {
             return this;
         }
 
+        public Builder invoiceItems(List<InvoiceItem> invoiceItems) {
+            this.invoiceItems = invoiceItems;
+            return this;
+        }
+
         public Invoice build() {
             return new Invoice(this);
         }
     }
 }
+

@@ -17,7 +17,7 @@
 package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
 /**
  * Response object for listing historical allocations for a given portfolio.

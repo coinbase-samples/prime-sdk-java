@@ -1,27 +1,36 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+
 public class CreateOnchainTransactionRequestEvmParams {
+    /**
+     * Option to disable dynamic gas price adjustment for EVM transactions prior to signing and broadcast. Defaults to false.
+     */
     private Boolean disableDynamicGas;
 
+    /**
+     * Option to disable dynamic nonce when creating a transaction. Defaults to false.
+     */
     private Boolean disableDynamicNonce;
 
+    /**
+     * Transaction ID to replace (for speed-up/cancel operations). Common use cases: 1) Gas Price Adjustments: When a transaction is stuck due to low gas price, a new transaction with the same nonce but higher gas price can be submitted to replace it. 2) Transaction Cancellation: A user might want to cancel a pending transaction by replacing it with a new transaction (often a 0-value transfer to themselves with higher gas price). Note: When using this field, the disable_dynamic_nonce option must be set to false because the nonce would be automatically managed by the system.
+     */
     private String replacedTransactionId;
 
+    /**
+     * Chain ID for EVM transactions. (EVM-only)
+     */
     private String chainId;
 
+    /**
+     * Network name for EVM transactions. (EVM-only)
+     */
     private String networkName;
 
     public CreateOnchainTransactionRequestEvmParams() {
@@ -34,47 +43,41 @@ public class CreateOnchainTransactionRequestEvmParams {
         this.chainId = builder.chainId;
         this.networkName = builder.networkName;
     }
-
-    public Boolean isDisableDynamicGas() {
+    public Boolean getDisableDynamicGas() {
         return disableDynamicGas;
-    }
-
-    public Boolean isDisableDynamicNonce() {
-        return disableDynamicNonce;
-    }
-
-    public String getReplacedTransactionId() {
-        return replacedTransactionId;
-    }
-
-    public String getChainId() {
-        return chainId;
-    }
-
-    public String getNetworkName() {
-        return networkName;
     }
 
     public void setDisableDynamicGas(Boolean disableDynamicGas) {
         this.disableDynamicGas = disableDynamicGas;
     }
+    public Boolean getDisableDynamicNonce() {
+        return disableDynamicNonce;
+    }
 
     public void setDisableDynamicNonce(Boolean disableDynamicNonce) {
         this.disableDynamicNonce = disableDynamicNonce;
+    }
+    public String getReplacedTransactionId() {
+        return replacedTransactionId;
     }
 
     public void setReplacedTransactionId(String replacedTransactionId) {
         this.replacedTransactionId = replacedTransactionId;
     }
+    public String getChainId() {
+        return chainId;
+    }
 
     public void setChainId(String chainId) {
         this.chainId = chainId;
+    }
+    public String getNetworkName() {
+        return networkName;
     }
 
     public void setNetworkName(String networkName) {
         this.networkName = networkName;
     }
-
     public static class Builder {
         private Boolean disableDynamicGas;
 
@@ -116,3 +119,4 @@ public class CreateOnchainTransactionRequestEvmParams {
         }
     }
 }
+

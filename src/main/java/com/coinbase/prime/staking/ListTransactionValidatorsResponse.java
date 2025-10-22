@@ -16,7 +16,7 @@
 
 package com.coinbase.prime.staking;
 
-import com.coinbase.prime.model.PaginationCursor;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.TransactionValidator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ListTransactionValidatorsResponse {
     private List<TransactionValidator> transactionValidators;
 
     @JsonProperty("pagination")
-    private PaginationCursor pagination;
+    private Pagination pagination;
 
     public ListTransactionValidatorsResponse() {
     }
@@ -42,11 +42,11 @@ public class ListTransactionValidatorsResponse {
         this.transactionValidators = transactionValidators;
     }
 
-    public PaginationCursor getPagination() {
+    public Pagination getPagination() {
         return pagination;
     }
 
-    public void setPagination(PaginationCursor pagination) {
+    public void setPagination(Pagination pagination) {
         this.pagination = pagination;
     }
 }

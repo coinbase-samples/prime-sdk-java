@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.model;
+package com.coinbase.prime.common;
 
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,7 +36,6 @@ public class Pagination {
         this.sortDirection = builder.sortDirection;
         this.hasNext = builder.hasNext;
     }
-
 
     public String getNextCursor() {
         return nextCursor;

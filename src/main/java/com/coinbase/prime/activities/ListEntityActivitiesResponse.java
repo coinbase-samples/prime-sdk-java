@@ -17,7 +17,7 @@
 package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
 /**
  * Response object for listing all activities associated with a given entity.

@@ -1,17 +1,11 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
 
 public class Balance {
     /**
@@ -20,33 +14,63 @@ public class Balance {
     private String symbol;
 
     /**
-     * The total amount in whole units with full precision. Includes the `holds` amount.
+     * The total amount in whole units with full precision. Includes the &#x60;holds&#x60; amount.
      */
     private String amount;
 
     /**
-     * Amount that is currently held in obligation to an open order's position or a pending withdrawal
+     * Amount that is currently held in obligation to an open order&#39;s position or a pending withdrawal
      */
     private String holds;
 
+    /**
+     * Amount that is currently locked due to bonding/staking, potentially subject to an unbonding period, in whole units
+     */
     private String bondedAmount;
 
+    /**
+     * Amount that must remain in the wallet due to the protocol, in whole units
+     */
     private String reservedAmount;
 
+    /**
+     * Amount that is in the process of unbonding, in whole units
+     */
     private String unbondingAmount;
 
+    /**
+     * Unrealized amount subject to a vesting schedule, in whole units
+     */
     private String unvestedAmount;
 
+    /**
+     * Pending bonding/staking rewards that have not yet been realized, in whole units
+     */
     private String pendingRewardsAmount;
 
+    /**
+     * Previously realized bonding/staking rewards, in whole units
+     */
     private String pastRewardsAmount;
 
+    /**
+     * Amount available for bonding/staking, in whole units
+     */
     private String bondableAmount;
 
+    /**
+     * Amount available to withdraw, in whole units
+     */
     private String withdrawableAmount;
 
+    /**
+     * The total amount in fiat unit
+     */
     private String fiatAmount;
 
+    /**
+     * Amount available for unbonding/unstaking, in whole units
+     */
     private String unbondableAmount;
 
     public Balance() {
@@ -67,111 +91,97 @@ public class Balance {
         this.fiatAmount = builder.fiatAmount;
         this.unbondableAmount = builder.unbondableAmount;
     }
-
     public String getSymbol() {
         return symbol;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public String getHolds() {
-        return holds;
-    }
-
-    public String getBondedAmount() {
-        return bondedAmount;
-    }
-
-    public String getReservedAmount() {
-        return reservedAmount;
-    }
-
-    public String getUnbondingAmount() {
-        return unbondingAmount;
-    }
-
-    public String getUnvestedAmount() {
-        return unvestedAmount;
-    }
-
-    public String getPendingRewardsAmount() {
-        return pendingRewardsAmount;
-    }
-
-    public String getPastRewardsAmount() {
-        return pastRewardsAmount;
-    }
-
-    public String getBondableAmount() {
-        return bondableAmount;
-    }
-
-    public String getWithdrawableAmount() {
-        return withdrawableAmount;
-    }
-
-    public String getFiatAmount() {
-        return fiatAmount;
-    }
-
-    public String getUnbondableAmount() {
-        return unbondableAmount;
     }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+    public String getAmount() {
+        return amount;
+    }
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+    public String getHolds() {
+        return holds;
     }
 
     public void setHolds(String holds) {
         this.holds = holds;
     }
+    public String getBondedAmount() {
+        return bondedAmount;
+    }
 
     public void setBondedAmount(String bondedAmount) {
         this.bondedAmount = bondedAmount;
+    }
+    public String getReservedAmount() {
+        return reservedAmount;
     }
 
     public void setReservedAmount(String reservedAmount) {
         this.reservedAmount = reservedAmount;
     }
+    public String getUnbondingAmount() {
+        return unbondingAmount;
+    }
 
     public void setUnbondingAmount(String unbondingAmount) {
         this.unbondingAmount = unbondingAmount;
+    }
+    public String getUnvestedAmount() {
+        return unvestedAmount;
     }
 
     public void setUnvestedAmount(String unvestedAmount) {
         this.unvestedAmount = unvestedAmount;
     }
+    public String getPendingRewardsAmount() {
+        return pendingRewardsAmount;
+    }
 
     public void setPendingRewardsAmount(String pendingRewardsAmount) {
         this.pendingRewardsAmount = pendingRewardsAmount;
+    }
+    public String getPastRewardsAmount() {
+        return pastRewardsAmount;
     }
 
     public void setPastRewardsAmount(String pastRewardsAmount) {
         this.pastRewardsAmount = pastRewardsAmount;
     }
+    public String getBondableAmount() {
+        return bondableAmount;
+    }
 
     public void setBondableAmount(String bondableAmount) {
         this.bondableAmount = bondableAmount;
+    }
+    public String getWithdrawableAmount() {
+        return withdrawableAmount;
     }
 
     public void setWithdrawableAmount(String withdrawableAmount) {
         this.withdrawableAmount = withdrawableAmount;
     }
+    public String getFiatAmount() {
+        return fiatAmount;
+    }
 
     public void setFiatAmount(String fiatAmount) {
         this.fiatAmount = fiatAmount;
+    }
+    public String getUnbondableAmount() {
+        return unbondableAmount;
     }
 
     public void setUnbondableAmount(String unbondableAmount) {
         this.unbondableAmount = unbondableAmount;
     }
-
     public static class Builder {
         private String symbol;
 
@@ -269,3 +279,4 @@ public class Balance {
         }
     }
 }
+

@@ -1,19 +1,19 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.AmountDue;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PostTradeCreditInformation {
+    /**
+     * The unique ID of the portfolio
+     */
     private String portfolioId;
 
     /**
@@ -41,15 +41,26 @@ public class PostTradeCreditInformation {
      */
     private Boolean frozen;
 
+    /**
+     * The reason why the portfolio is frozen
+     */
     private String frozenReason;
+
+    private List<AmountDue> amountsDue;
 
     /**
      * Whether the portfolio has credit enabled
      */
     private Boolean enabled;
 
+    /**
+     * The amount of adjusted credit used
+     */
     private String adjustedCreditUtilized;
 
+    /**
+     * The amount of adjusted portfolio equity
+     */
     private String adjustedPortfolioEquity;
 
     public PostTradeCreditInformation() {
@@ -63,91 +74,88 @@ public class PostTradeCreditInformation {
         this.available = builder.available;
         this.frozen = builder.frozen;
         this.frozenReason = builder.frozenReason;
+        this.amountsDue = builder.amountsDue;
         this.enabled = builder.enabled;
         this.adjustedCreditUtilized = builder.adjustedCreditUtilized;
         this.adjustedPortfolioEquity = builder.adjustedPortfolioEquity;
     }
-
     public String getPortfolioId() {
         return portfolioId;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public String getLimit() {
-        return limit;
-    }
-
-    public String getUtilized() {
-        return utilized;
-    }
-
-    public String getAvailable() {
-        return available;
-    }
-
-    public Boolean isFrozen() {
-        return frozen;
-    }
-
-    public String getFrozenReason() {
-        return frozenReason;
-    }
-
-    public Boolean isEnabled() {
-        return enabled;
-    }
-
-    public String getAdjustedCreditUtilized() {
-        return adjustedCreditUtilized;
-    }
-
-    public String getAdjustedPortfolioEquity() {
-        return adjustedPortfolioEquity;
     }
 
     public void setPortfolioId(String portfolioId) {
         this.portfolioId = portfolioId;
     }
+    public String getCurrency() {
+        return currency;
+    }
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+    public String getLimit() {
+        return limit;
     }
 
     public void setLimit(String limit) {
         this.limit = limit;
     }
+    public String getUtilized() {
+        return utilized;
+    }
 
     public void setUtilized(String utilized) {
         this.utilized = utilized;
+    }
+    public String getAvailable() {
+        return available;
     }
 
     public void setAvailable(String available) {
         this.available = available;
     }
+    public Boolean getFrozen() {
+        return frozen;
+    }
 
     public void setFrozen(Boolean frozen) {
         this.frozen = frozen;
+    }
+    public String getFrozenReason() {
+        return frozenReason;
     }
 
     public void setFrozenReason(String frozenReason) {
         this.frozenReason = frozenReason;
     }
+    public List<AmountDue> getAmountsDue() {
+        return amountsDue;
+    }
+
+    public void setAmountsDue(List<AmountDue> amountsDue) {
+        this.amountsDue = amountsDue;
+    }
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+    public String getAdjustedCreditUtilized() {
+        return adjustedCreditUtilized;
     }
 
     public void setAdjustedCreditUtilized(String adjustedCreditUtilized) {
         this.adjustedCreditUtilized = adjustedCreditUtilized;
     }
+    public String getAdjustedPortfolioEquity() {
+        return adjustedPortfolioEquity;
+    }
 
     public void setAdjustedPortfolioEquity(String adjustedPortfolioEquity) {
         this.adjustedPortfolioEquity = adjustedPortfolioEquity;
     }
-
     public static class Builder {
         private String portfolioId;
 
@@ -162,6 +170,8 @@ public class PostTradeCreditInformation {
         private Boolean frozen;
 
         private String frozenReason;
+
+        private List<AmountDue> amountsDue;
 
         private Boolean enabled;
 
@@ -204,6 +214,11 @@ public class PostTradeCreditInformation {
             return this;
         }
 
+        public Builder amountsDue(List<AmountDue> amountsDue) {
+            this.amountsDue = amountsDue;
+            return this;
+        }
+
         public Builder enabled(Boolean enabled) {
             this.enabled = enabled;
             return this;
@@ -224,3 +239,4 @@ public class PostTradeCreditInformation {
         }
     }
 }
+

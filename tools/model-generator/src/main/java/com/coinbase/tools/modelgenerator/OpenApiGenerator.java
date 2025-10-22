@@ -43,13 +43,13 @@ public class OpenApiGenerator {
     
     public void generateModels() throws IOException {
         Path rawOutputDir = outputDir.resolve("raw");
-        
+
         // Clean and create output directory
         if (rawOutputDir.toFile().exists()) {
             FileUtils.deleteDirectory(rawOutputDir.toFile());
         }
         rawOutputDir.toFile().mkdirs();
-        
+
         // Copy .openapi-generator-ignore file to output directory
         Path ignoreFile = findProjectRoot().resolve("tools/model-generator/.openapi-generator-ignore");
         if (ignoreFile.toFile().exists()) {
@@ -57,16 +57,26 @@ public class OpenApiGenerator {
             FileUtils.copyFile(ignoreFile.toFile(), targetIgnoreFile.toFile());
             logger.info("Copied .openapi-generator-ignore to output directory");
         }
-        
+
         // Configure OpenAPI Generator
         CodegenConfigurator configurator = new CodegenConfigurator();
         configurator.setGeneratorName("java");
         configurator.setInputSpec(specPath.toString());
         configurator.setOutputDir(rawOutputDir.toString());
-        
+
+        // Configure custom templates
+        Path templatesDir = findProjectRoot().resolve("tools/model-generator/templates");
+        if (templatesDir.toFile().exists()) {
+            configurator.setTemplateDir(templatesDir.toString());
+            logger.info("Using custom templates from: {}", templatesDir);
+        } else {
+            logger.warn("Custom templates directory not found: {}, using defaults", templatesDir);
+        }
+
         // Configure generation options for Java
         Map<String, Object> additionalProperties = new HashMap<>();
         additionalProperties.put("modelPackage", "com.coinbase.prime.model");
+        additionalProperties.put("enumPackage", "com.coinbase.prime.model.enums");  // Separate enum package
         additionalProperties.put("apiPackage", "com.coinbase.prime.api");
         additionalProperties.put("invokerPackage", "com.coinbase.prime.client");
         additionalProperties.put("groupId", "com.coinbase.prime");
@@ -87,25 +97,25 @@ public class OpenApiGenerator {
         additionalProperties.put("generateBuilders", "false"); // We'll add our own builders
         additionalProperties.put("openApiNullable", "false");
         additionalProperties.put("enumPropertyNaming", "MACRO_CASE"); // This generates UPPERCASE_WITH_UNDERSCORES style
-        
+
         configurator.setAdditionalProperties(additionalProperties);
-        
+
         // Generate only models (not APIs)
         configurator.setGenerateAliasAsModel(true);
-        
+
         // Set global properties to control what gets generated
         Map<String, String> globalProperties = new HashMap<>();
         globalProperties.put("models", "");  // Generate models
         globalProperties.put("apis", "false");  // Don't generate APIs
         globalProperties.put("supportingFiles", "false");  // Don't generate supporting files
         configurator.setGlobalProperties(globalProperties);
-        
+
         // Run the generator
-        logger.info("Running OpenAPI Generator...");
+        logger.info("Running OpenAPI Generator with custom templates...");
         final ClientOptInput input = configurator.toClientOptInput();
         DefaultGenerator generator = new DefaultGenerator();
         generator.opts(input).generate();
-        
+
         logger.info("Raw models generated in: {}", rawOutputDir);
     }
     

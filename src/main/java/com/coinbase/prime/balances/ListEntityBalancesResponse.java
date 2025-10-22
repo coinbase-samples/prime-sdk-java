@@ -17,7 +17,7 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.EntityBalance;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
 /**
  * Response object for listing all balances for a specific entity.

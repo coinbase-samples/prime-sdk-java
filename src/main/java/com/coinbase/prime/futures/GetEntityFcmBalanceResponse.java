@@ -16,20 +16,119 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.prime.model.FcmBalance;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetEntityFcmBalanceResponse {
-    private FcmBalance fcmBalance;
+    @JsonProperty("portfolio_id")
+    private String portfolioId;
+
+    @JsonProperty("cfm_usd_balance")
+    private String cfmUsdBalance;
+
+    @JsonProperty("unrealized_pnl")
+    private String unrealizedPnl;
+
+    @JsonProperty("daily_realized_pnl")
+    private String dailyRealizedPnl;
+
+    @JsonProperty("excess_liquidity")
+    private String excessLiquidity;
+
+    @JsonProperty("futures_buying_power")
+    private String futuresBuyingPower;
+
+    @JsonProperty("initial_margin")
+    private String initialMargin;
+
+    @JsonProperty("maintenance_margin")
+    private String maintenanceMargin;
+
+    @JsonProperty("clearing_account_id")
+    private String clearingAccountId;
+
+    @JsonProperty("cfm_unsettled_accrued_funding_pnl")
+    private String cfmUnsettledAccruedFundingPnl;
 
     public GetEntityFcmBalanceResponse() {
     }
 
-    public FcmBalance getFcmBalance() {
-        return fcmBalance;
+    public String getPortfolioId() {
+        return portfolioId;
     }
 
-    public void setFcmBalance(FcmBalance fcmBalance) {
-        this.fcmBalance = fcmBalance;
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
     }
 
+    public String getCfmUsdBalance() {
+        return cfmUsdBalance;
+    }
+
+    public void setCfmUsdBalance(String cfmUsdBalance) {
+        this.cfmUsdBalance = cfmUsdBalance;
+    }
+
+    public String getUnrealizedPnl() {
+        return unrealizedPnl;
+    }
+
+    public void setUnrealizedPnl(String unrealizedPnl) {
+        this.unrealizedPnl = unrealizedPnl;
+    }
+
+    public String getDailyRealizedPnl() {
+        return dailyRealizedPnl;
+    }
+
+    public void setDailyRealizedPnl(String dailyRealizedPnl) {
+        this.dailyRealizedPnl = dailyRealizedPnl;
+    }
+
+    public String getExcessLiquidity() {
+        return excessLiquidity;
+    }
+
+    public void setExcessLiquidity(String excessLiquidity) {
+        this.excessLiquidity = excessLiquidity;
+    }
+
+    public String getFuturesBuyingPower() {
+        return futuresBuyingPower;
+    }
+
+    public void setFuturesBuyingPower(String futuresBuyingPower) {
+        this.futuresBuyingPower = futuresBuyingPower;
+    }
+
+    public String getInitialMargin() {
+        return initialMargin;
+    }
+
+    public void setInitialMargin(String initialMargin) {
+        this.initialMargin = initialMargin;
+    }
+
+    public String getMaintenanceMargin() {
+        return maintenanceMargin;
+    }
+
+    public void setMaintenanceMargin(String maintenanceMargin) {
+        this.maintenanceMargin = maintenanceMargin;
+    }
+
+    public String getClearingAccountId() {
+        return clearingAccountId;
+    }
+
+    public void setClearingAccountId(String clearingAccountId) {
+        this.clearingAccountId = clearingAccountId;
+    }
+
+    public String getCfmUnsettledAccruedFundingPnl() {
+        return cfmUnsettledAccruedFundingPnl;
+    }
+
+    public void setCfmUnsettledAccruedFundingPnl(String cfmUnsettledAccruedFundingPnl) {
+        this.cfmUnsettledAccruedFundingPnl = cfmUnsettledAccruedFundingPnl;
+    }
 }

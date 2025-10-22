@@ -1,24 +1,18 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+
 public class OnchainAsset {
-    /**
-     * Network this asset is on (ie "ethereum-mainnet")
-     */
     private String network;
 
+    /**
+     * Contract Address of this asset (empty for native assets).
+     */
     private String contractAddress;
 
     /**
@@ -26,6 +20,9 @@ public class OnchainAsset {
      */
     private String symbol;
 
+    /**
+     * Token ID of this asset (empty for non  NFT assets).
+     */
     private String tokenId;
 
     /**
@@ -43,47 +40,41 @@ public class OnchainAsset {
         this.tokenId = builder.tokenId;
         this.name = builder.name;
     }
-
     public String getNetwork() {
         return network;
-    }
-
-    public String getContractAddress() {
-        return contractAddress;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public String getTokenId() {
-        return tokenId;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setNetwork(String network) {
         this.network = network;
     }
+    public String getContractAddress() {
+        return contractAddress;
+    }
 
     public void setContractAddress(String contractAddress) {
         this.contractAddress = contractAddress;
+    }
+    public String getSymbol() {
+        return symbol;
     }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+    public String getTokenId() {
+        return tokenId;
+    }
 
     public void setTokenId(String tokenId) {
         this.tokenId = tokenId;
+    }
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
     public static class Builder {
         private String network;
 
@@ -125,3 +116,4 @@ public class OnchainAsset {
         }
     }
 }
+

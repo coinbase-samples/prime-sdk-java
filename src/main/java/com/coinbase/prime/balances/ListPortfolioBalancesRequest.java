@@ -17,7 +17,7 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.prime.model.enums.BalanceType;
+import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

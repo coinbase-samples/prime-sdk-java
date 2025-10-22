@@ -1,19 +1,14 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
 import com.coinbase.prime.model.enums.AssetChangeType;
+import com.coinbase.prime.model.NFTCollection;
+import com.coinbase.prime.model.NFTItem;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
 
 public class AssetChange {
     private AssetChangeType type;
@@ -42,47 +37,41 @@ public class AssetChange {
         this.collection = builder.collection;
         this.item = builder.item;
     }
-
     public AssetChangeType getType() {
         return type;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public NFTCollection getCollection() {
-        return collection;
-    }
-
-    public NFTItem getItem() {
-        return item;
     }
 
     public void setType(AssetChangeType type) {
         this.type = type;
     }
+    public String getSymbol() {
+        return symbol;
+    }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+    public String getAmount() {
+        return amount;
     }
 
     public void setAmount(String amount) {
         this.amount = amount;
     }
+    public NFTCollection getCollection() {
+        return collection;
+    }
 
     public void setCollection(NFTCollection collection) {
         this.collection = collection;
+    }
+    public NFTItem getItem() {
+        return item;
     }
 
     public void setItem(NFTItem item) {
         this.item = item;
     }
-
     public static class Builder {
         private AssetChangeType type;
 
@@ -124,3 +113,4 @@ public class AssetChange {
         }
     }
 }
+

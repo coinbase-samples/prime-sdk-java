@@ -1,20 +1,13 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
 import com.coinbase.prime.model.enums.OrderSide;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 
 public class Fill {
     /**
@@ -22,16 +15,31 @@ public class Fill {
      */
     private String id;
 
+    /**
+     * The order ID of the fill
+     */
     private String orderId;
 
+    /**
+     * The product ID of the fill
+     */
     private String productId;
 
+    /**
+     * The client product ID of the fill indictating the settlment currency
+     */
     private String clientProductId;
 
     private OrderSide side;
 
+    /**
+     * Filled size (in base asset units)
+     */
     private String filledQuantity;
 
+    /**
+     * Filled value (in quote asset units)
+     */
     private String filledValue;
 
     /**
@@ -54,8 +62,14 @@ public class Fill {
      */
     private String venue;
 
+    /**
+     * The venue fees incurred for the fill
+     */
     private String venueFees;
 
+    /**
+     * The CES commission incurred for the fill
+     */
     private String cesCommission;
 
     public Fill() {
@@ -76,111 +90,97 @@ public class Fill {
         this.venueFees = builder.venueFees;
         this.cesCommission = builder.cesCommission;
     }
-
     public String getId() {
         return id;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public String getClientProductId() {
-        return clientProductId;
-    }
-
-    public OrderSide getSide() {
-        return side;
-    }
-
-    public String getFilledQuantity() {
-        return filledQuantity;
-    }
-
-    public String getFilledValue() {
-        return filledValue;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public OffsetDateTime getTime() {
-        return time;
-    }
-
-    public String getCommission() {
-        return commission;
-    }
-
-    public String getVenue() {
-        return venue;
-    }
-
-    public String getVenueFees() {
-        return venueFees;
-    }
-
-    public String getCesCommission() {
-        return cesCommission;
     }
 
     public void setId(String id) {
         this.id = id;
     }
+    public String getOrderId() {
+        return orderId;
+    }
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+    public String getProductId() {
+        return productId;
     }
 
     public void setProductId(String productId) {
         this.productId = productId;
     }
+    public String getClientProductId() {
+        return clientProductId;
+    }
 
     public void setClientProductId(String clientProductId) {
         this.clientProductId = clientProductId;
+    }
+    public OrderSide getSide() {
+        return side;
     }
 
     public void setSide(OrderSide side) {
         this.side = side;
     }
+    public String getFilledQuantity() {
+        return filledQuantity;
+    }
 
     public void setFilledQuantity(String filledQuantity) {
         this.filledQuantity = filledQuantity;
+    }
+    public String getFilledValue() {
+        return filledValue;
     }
 
     public void setFilledValue(String filledValue) {
         this.filledValue = filledValue;
     }
+    public String getPrice() {
+        return price;
+    }
 
     public void setPrice(String price) {
         this.price = price;
+    }
+    public OffsetDateTime getTime() {
+        return time;
     }
 
     public void setTime(OffsetDateTime time) {
         this.time = time;
     }
+    public String getCommission() {
+        return commission;
+    }
 
     public void setCommission(String commission) {
         this.commission = commission;
+    }
+    public String getVenue() {
+        return venue;
     }
 
     public void setVenue(String venue) {
         this.venue = venue;
     }
+    public String getVenueFees() {
+        return venueFees;
+    }
 
     public void setVenueFees(String venueFees) {
         this.venueFees = venueFees;
+    }
+    public String getCesCommission() {
+        return cesCommission;
     }
 
     public void setCesCommission(String cesCommission) {
         this.cesCommission = cesCommission;
     }
-
     public static class Builder {
         private String id;
 
@@ -278,3 +278,4 @@ public class Fill {
         }
     }
 }
+

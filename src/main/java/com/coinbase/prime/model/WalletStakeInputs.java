@@ -1,17 +1,11 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
 
 public class WalletStakeInputs {
     /**
@@ -19,6 +13,9 @@ public class WalletStakeInputs {
      */
     private String amount;
 
+    /**
+     * Optional validator address, defaults to Coinbase validator. For SOL, must be the vote account address. Ignored for ETH.
+     */
     private String validatorAddress;
 
     public WalletStakeInputs() {
@@ -28,23 +25,20 @@ public class WalletStakeInputs {
         this.amount = builder.amount;
         this.validatorAddress = builder.validatorAddress;
     }
-
     public String getAmount() {
         return amount;
-    }
-
-    public String getValidatorAddress() {
-        return validatorAddress;
     }
 
     public void setAmount(String amount) {
         this.amount = amount;
     }
+    public String getValidatorAddress() {
+        return validatorAddress;
+    }
 
     public void setValidatorAddress(String validatorAddress) {
         this.validatorAddress = validatorAddress;
     }
-
     public static class Builder {
         private String amount;
 
@@ -65,3 +59,4 @@ public class WalletStakeInputs {
         }
     }
 }
+

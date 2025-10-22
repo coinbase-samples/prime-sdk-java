@@ -17,7 +17,7 @@
 package com.coinbase.prime.addressbook;
 
 import com.coinbase.prime.model.AddressBookEntry;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
 public class ListPortfolioAddressBookResponse {
     private AddressBookEntry[] addresses;

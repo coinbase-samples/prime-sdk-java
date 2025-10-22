@@ -16,7 +16,7 @@
 
 package com.coinbase.prime.staking;
 
-import com.coinbase.prime.model.StakingInputs;
+import com.coinbase.prime.model.WalletStakeInputs;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,7 +32,7 @@ public class CreateStakeRequest {
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
-    private StakingInputs inputs;
+    private WalletStakeInputs inputs;
 
     public CreateStakeRequest() {
     }
@@ -68,11 +68,11 @@ public class CreateStakeRequest {
         this.idempotencyKey = idempotencyKey;
     }
 
-    public StakingInputs getInputs() {
+    public WalletStakeInputs getInputs() {
         return inputs;
     }
 
-    public void setInputs(StakingInputs inputs) {
+    public void setInputs(WalletStakeInputs inputs) {
         this.inputs = inputs;
     }
 
@@ -80,7 +80,7 @@ public class CreateStakeRequest {
         private String portfolioId;
         private String walletId;
         private String idempotencyKey;
-        private StakingInputs inputs;
+        private WalletStakeInputs inputs;
 
         public Builder() {
         }
@@ -100,7 +100,7 @@ public class CreateStakeRequest {
             return this;
         }
 
-        public Builder inputs(StakingInputs inputs) {
+        public Builder inputs(WalletStakeInputs inputs) {
             this.inputs = inputs;
             return this;
         }

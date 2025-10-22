@@ -16,11 +16,11 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.prime.model.Sweep;
+import com.coinbase.prime.model.FcmFuturesSweep;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListEntityFuturesSweepsResponse {
-    private Sweep[] sweeps;
+    private FcmFuturesSweep[] sweeps;
 
     @JsonProperty("auto_sweep")
     private boolean autoSweep;
@@ -28,11 +28,11 @@ public class ListEntityFuturesSweepsResponse {
     public ListEntityFuturesSweepsResponse() {
     }
 
-    public Sweep[] getSweeps() {
+    public FcmFuturesSweep[] getSweeps() {
         return sweeps;
     }
 
-    public void setSweeps(Sweep[] sweeps) {
+    public void setSweeps(FcmFuturesSweep[] sweeps) {
         this.sweeps = sweeps;
     }
 

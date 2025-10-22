@@ -1,17 +1,11 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
 
 public class ConversionDetail {
     /**
@@ -19,16 +13,34 @@ public class ConversionDetail {
      */
     private String symbol;
 
+    /**
+     * Trade finance balance after the conversion
+     */
     private String tfBalance;
 
+    /**
+     * Notional trade finance balance after the conversion
+     */
     private String notionalTfBalance;
 
+    /**
+     * Converted balance
+     */
     private String convertedBalance;
 
+    /**
+     * Notional converted balance
+     */
     private String notionalConvertedBalance;
 
+    /**
+     * Interest rate
+     */
     private String interestRate;
 
+    /**
+     * Conversion rate
+     */
     private String conversionRate;
 
     public ConversionDetail() {
@@ -43,63 +55,55 @@ public class ConversionDetail {
         this.interestRate = builder.interestRate;
         this.conversionRate = builder.conversionRate;
     }
-
     public String getSymbol() {
         return symbol;
-    }
-
-    public String getTfBalance() {
-        return tfBalance;
-    }
-
-    public String getNotionalTfBalance() {
-        return notionalTfBalance;
-    }
-
-    public String getConvertedBalance() {
-        return convertedBalance;
-    }
-
-    public String getNotionalConvertedBalance() {
-        return notionalConvertedBalance;
-    }
-
-    public String getInterestRate() {
-        return interestRate;
-    }
-
-    public String getConversionRate() {
-        return conversionRate;
     }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+    public String getTfBalance() {
+        return tfBalance;
+    }
 
     public void setTfBalance(String tfBalance) {
         this.tfBalance = tfBalance;
+    }
+    public String getNotionalTfBalance() {
+        return notionalTfBalance;
     }
 
     public void setNotionalTfBalance(String notionalTfBalance) {
         this.notionalTfBalance = notionalTfBalance;
     }
+    public String getConvertedBalance() {
+        return convertedBalance;
+    }
 
     public void setConvertedBalance(String convertedBalance) {
         this.convertedBalance = convertedBalance;
+    }
+    public String getNotionalConvertedBalance() {
+        return notionalConvertedBalance;
     }
 
     public void setNotionalConvertedBalance(String notionalConvertedBalance) {
         this.notionalConvertedBalance = notionalConvertedBalance;
     }
+    public String getInterestRate() {
+        return interestRate;
+    }
 
     public void setInterestRate(String interestRate) {
         this.interestRate = interestRate;
+    }
+    public String getConversionRate() {
+        return conversionRate;
     }
 
     public void setConversionRate(String conversionRate) {
         this.conversionRate = conversionRate;
     }
-
     public static class Builder {
         private String symbol;
 
@@ -155,3 +159,4 @@ public class ConversionDetail {
         }
     }
 }
+

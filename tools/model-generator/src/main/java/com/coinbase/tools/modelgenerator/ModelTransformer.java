@@ -151,24 +151,24 @@ public class ModelTransformer {
     private String transformModelWithJavaPoet(String content, JsonNode schema) throws IOException {
         // Parse the model information from OpenAPI-generated content
         ModelInfo info = parseModelInfo(content, schema);
-        
+
         if (info.className == null || info.className.isEmpty()) {
             throw new IOException("Could not extract class name from content");
         }
-        
+
         // Build the complete class using JavaPoet
         TypeSpec.Builder classBuilder = TypeSpec.classBuilder(info.className)
                 .addModifiers(Modifier.PUBLIC);
-        
+
         // Add fields with annotations
         for (FieldInfo field : info.fields) {
             FieldSpec.Builder fieldBuilder = FieldSpec.builder(field.type, field.name, Modifier.PRIVATE);
-            
+
             // Add Javadoc comment if description is available
             if (field.description != null && !field.description.isEmpty()) {
                 fieldBuilder.addJavadoc(field.description + "\n");
             }
-            
+
             // Add @JsonProperty annotation if needed
             if (field.jsonProperty != null && !field.jsonProperty.equals(field.name)) {
                 fieldBuilder.addAnnotation(
@@ -177,31 +177,31 @@ public class ModelTransformer {
                         .build()
                 );
             }
-            
+
             classBuilder.addField(fieldBuilder.build());
         }
-        
+
         // Add no-arg constructor
         classBuilder.addMethod(MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PUBLIC)
                 .build());
-        
+
         // Add Builder constructor
         classBuilder.addMethod(generateBuilderConstructor(info));
-        
+
         // Add getters
         for (FieldInfo field : info.fields) {
             classBuilder.addMethod(generateGetter(field));
         }
-        
+
         // Add setters
         for (FieldInfo field : info.fields) {
             classBuilder.addMethod(generateSetter(field));
         }
-        
+
         // Add Builder inner class
         classBuilder.addType(generateBuilderClass(info));
-        
+
         // Generate the Java file
         JavaFile javaFile = JavaFile.builder(info.packageName, classBuilder.build())
                 .addFileComment("Copyright 2025-present Coinbase Global, Inc.\n\n" +
@@ -217,13 +217,13 @@ public class ModelTransformer {
                 .indent("    ")
                 .skipJavaLangImports(true)
                 .build();
-        
+
         // Convert to string and fix the license header format
         String generated = javaFile.toString();
-        
+
         // Replace JavaPoet's comment format with proper license header
         generated = generated.replaceFirst("/\\*\\n \\* Copyright", "/*\n * Copyright");
-        
+
         return generated;
     }
     

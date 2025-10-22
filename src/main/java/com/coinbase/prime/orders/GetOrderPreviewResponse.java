@@ -18,7 +18,7 @@ package com.coinbase.prime.orders;
 
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
-import com.coinbase.prime.model.enums.TimeInForce;
+import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetOrderPreviewResponse {
@@ -39,7 +39,7 @@ public class GetOrderPreviewResponse {
     @JsonProperty("expiry_time")
     private String expiryTime;
     @JsonProperty("time_in_force")
-    private TimeInForce timeInForce;
+    private TimeInForceType timeInForce;
     private String commission;
     private String slippage;
     @JsonProperty("best_bid")
@@ -128,11 +128,11 @@ public class GetOrderPreviewResponse {
         this.expiryTime = expiryTime;
     }
 
-    public TimeInForce getTimeInForce() {
+    public TimeInForceType getTimeInForce() {
         return timeInForce;
     }
 
-    public void setTimeInForce(TimeInForce timeInForce) {
+    public void setTimeInForce(TimeInForceType timeInForce) {
         this.timeInForce = timeInForce;
     }
 

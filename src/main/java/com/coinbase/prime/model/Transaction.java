@@ -1,21 +1,22 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.AssetChange;
+import com.coinbase.prime.model.EstimatedNetworkFees;
+import com.coinbase.prime.model.Network;
+import com.coinbase.prime.model.OnchainTransactionDetails;
+import com.coinbase.prime.model.TransactionMetadata;
 import com.coinbase.prime.model.enums.TransactionStatus;
 import com.coinbase.prime.model.enums.TransactionType;
+import com.coinbase.prime.model.TransferLocation;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Transaction {
     /**
@@ -23,8 +24,14 @@ public class Transaction {
      */
     private String id;
 
+    /**
+     * The wallet ID of the transaction
+     */
     private String walletId;
 
+    /**
+     * The portfolio ID of the transaction
+     */
     private String portfolioId;
 
     private TransactionType type;
@@ -36,8 +43,14 @@ public class Transaction {
      */
     private String symbol;
 
+    /**
+     * The transaction creation time (as a UTC timestamp)
+     */
     private OffsetDateTime createdAt;
 
+    /**
+     * The transaction completion time (as a UTC timestamp)
+     */
     private OffsetDateTime completedAt;
 
     /**
@@ -49,6 +62,9 @@ public class Transaction {
 
     private TransferLocation transferTo;
 
+    /**
+     * The blockchain network fees (in whole units) required in order to broadcast the transaction
+     */
     private String networkFees;
 
     /**
@@ -56,21 +72,43 @@ public class Transaction {
      */
     private String fees;
 
+    /**
+     * The asset in which fees will be paid
+     */
     private String feeSymbol;
 
+    /**
+     * The cryptocurrency network transaction hashes/IDs generated upon broadcast
+     */
+    private List<String> blockchainIds;
+
+    /**
+     * The 8 character alphanumeric short form id for the transaction
+     */
     private String transactionId;
 
+    /**
+     * The destination asset symbol
+     */
     private String destinationSymbol;
 
     private EstimatedNetworkFees estimatedNetworkFees;
 
     /**
-     * The network name specific to web3/onchain wallet transactions
+     * The network name specific to onchain/onchain wallet transactions
      */
     private String network;
 
+    /**
+     * The estimated asset changes (onchain)
+     */
+    private List<AssetChange> estimatedAssetChanges;
+
     private TransactionMetadata metadata;
 
+    /**
+     * The idempotency key associated with the transaction creation request
+     */
     private String idempotencyKey;
 
     private OnchainTransactionDetails onchainDetails;
@@ -95,192 +133,185 @@ public class Transaction {
         this.networkFees = builder.networkFees;
         this.fees = builder.fees;
         this.feeSymbol = builder.feeSymbol;
+        this.blockchainIds = builder.blockchainIds;
         this.transactionId = builder.transactionId;
         this.destinationSymbol = builder.destinationSymbol;
         this.estimatedNetworkFees = builder.estimatedNetworkFees;
         this.network = builder.network;
+        this.estimatedAssetChanges = builder.estimatedAssetChanges;
         this.metadata = builder.metadata;
         this.idempotencyKey = builder.idempotencyKey;
         this.onchainDetails = builder.onchainDetails;
         this.networkInfo = builder.networkInfo;
     }
-
     public String getId() {
         return id;
-    }
-
-    public String getWalletId() {
-        return walletId;
-    }
-
-    public String getPortfolioId() {
-        return portfolioId;
-    }
-
-    public TransactionType getType() {
-        return type;
-    }
-
-    public TransactionStatus getStatus() {
-        return status;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public OffsetDateTime getCompletedAt() {
-        return completedAt;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public TransferLocation getTransferFrom() {
-        return transferFrom;
-    }
-
-    public TransferLocation getTransferTo() {
-        return transferTo;
-    }
-
-    public String getNetworkFees() {
-        return networkFees;
-    }
-
-    public String getFees() {
-        return fees;
-    }
-
-    public String getFeeSymbol() {
-        return feeSymbol;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public String getDestinationSymbol() {
-        return destinationSymbol;
-    }
-
-    public EstimatedNetworkFees getEstimatedNetworkFees() {
-        return estimatedNetworkFees;
-    }
-
-    public String getNetwork() {
-        return network;
-    }
-
-    public TransactionMetadata getMetadata() {
-        return metadata;
-    }
-
-    public String getIdempotencyKey() {
-        return idempotencyKey;
-    }
-
-    public OnchainTransactionDetails getOnchainDetails() {
-        return onchainDetails;
-    }
-
-    public Network getNetworkInfo() {
-        return networkInfo;
     }
 
     public void setId(String id) {
         this.id = id;
     }
+    public String getWalletId() {
+        return walletId;
+    }
 
     public void setWalletId(String walletId) {
         this.walletId = walletId;
+    }
+    public String getPortfolioId() {
+        return portfolioId;
     }
 
     public void setPortfolioId(String portfolioId) {
         this.portfolioId = portfolioId;
     }
+    public TransactionType getType() {
+        return type;
+    }
 
     public void setType(TransactionType type) {
         this.type = type;
+    }
+    public TransactionStatus getStatus() {
+        return status;
     }
 
     public void setStatus(TransactionStatus status) {
         this.status = status;
     }
+    public String getSymbol() {
+        return symbol;
+    }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    public OffsetDateTime getCompletedAt() {
+        return completedAt;
+    }
 
     public void setCompletedAt(OffsetDateTime completedAt) {
         this.completedAt = completedAt;
+    }
+    public String getAmount() {
+        return amount;
     }
 
     public void setAmount(String amount) {
         this.amount = amount;
     }
+    public TransferLocation getTransferFrom() {
+        return transferFrom;
+    }
 
     public void setTransferFrom(TransferLocation transferFrom) {
         this.transferFrom = transferFrom;
+    }
+    public TransferLocation getTransferTo() {
+        return transferTo;
     }
 
     public void setTransferTo(TransferLocation transferTo) {
         this.transferTo = transferTo;
     }
+    public String getNetworkFees() {
+        return networkFees;
+    }
 
     public void setNetworkFees(String networkFees) {
         this.networkFees = networkFees;
+    }
+    public String getFees() {
+        return fees;
     }
 
     public void setFees(String fees) {
         this.fees = fees;
     }
+    public String getFeeSymbol() {
+        return feeSymbol;
+    }
 
     public void setFeeSymbol(String feeSymbol) {
         this.feeSymbol = feeSymbol;
+    }
+    public List<String> getBlockchainIds() {
+        return blockchainIds;
+    }
+
+    public void setBlockchainIds(List<String> blockchainIds) {
+        this.blockchainIds = blockchainIds;
+    }
+    public String getTransactionId() {
+        return transactionId;
     }
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
+    public String getDestinationSymbol() {
+        return destinationSymbol;
+    }
 
     public void setDestinationSymbol(String destinationSymbol) {
         this.destinationSymbol = destinationSymbol;
+    }
+    public EstimatedNetworkFees getEstimatedNetworkFees() {
+        return estimatedNetworkFees;
     }
 
     public void setEstimatedNetworkFees(EstimatedNetworkFees estimatedNetworkFees) {
         this.estimatedNetworkFees = estimatedNetworkFees;
     }
+    public String getNetwork() {
+        return network;
+    }
 
     public void setNetwork(String network) {
         this.network = network;
+    }
+    public List<AssetChange> getEstimatedAssetChanges() {
+        return estimatedAssetChanges;
+    }
+
+    public void setEstimatedAssetChanges(List<AssetChange> estimatedAssetChanges) {
+        this.estimatedAssetChanges = estimatedAssetChanges;
+    }
+    public TransactionMetadata getMetadata() {
+        return metadata;
     }
 
     public void setMetadata(TransactionMetadata metadata) {
         this.metadata = metadata;
     }
+    public String getIdempotencyKey() {
+        return idempotencyKey;
+    }
 
     public void setIdempotencyKey(String idempotencyKey) {
         this.idempotencyKey = idempotencyKey;
+    }
+    public OnchainTransactionDetails getOnchainDetails() {
+        return onchainDetails;
     }
 
     public void setOnchainDetails(OnchainTransactionDetails onchainDetails) {
         this.onchainDetails = onchainDetails;
     }
+    public Network getNetworkInfo() {
+        return networkInfo;
+    }
 
     public void setNetworkInfo(Network networkInfo) {
         this.networkInfo = networkInfo;
     }
-
     public static class Builder {
         private String id;
 
@@ -310,6 +341,8 @@ public class Transaction {
 
         private String feeSymbol;
 
+        private List<String> blockchainIds;
+
         private String transactionId;
 
         private String destinationSymbol;
@@ -317,6 +350,8 @@ public class Transaction {
         private EstimatedNetworkFees estimatedNetworkFees;
 
         private String network;
+
+        private List<AssetChange> estimatedAssetChanges;
 
         private TransactionMetadata metadata;
 
@@ -396,6 +431,11 @@ public class Transaction {
             return this;
         }
 
+        public Builder blockchainIds(List<String> blockchainIds) {
+            this.blockchainIds = blockchainIds;
+            return this;
+        }
+
         public Builder transactionId(String transactionId) {
             this.transactionId = transactionId;
             return this;
@@ -413,6 +453,11 @@ public class Transaction {
 
         public Builder network(String network) {
             this.network = network;
+            return this;
+        }
+
+        public Builder estimatedAssetChanges(List<AssetChange> estimatedAssetChanges) {
+            this.estimatedAssetChanges = estimatedAssetChanges;
             return this;
         }
 
@@ -441,3 +486,4 @@ public class Transaction {
         }
     }
 }
+

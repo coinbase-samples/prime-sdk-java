@@ -1,17 +1,21 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
+
+import com.coinbase.prime.model.enums.ActivityCategory;
+import com.coinbase.prime.model.ActivityMetadataAccount;
+import com.coinbase.prime.model.ActivityMetadataTransactions;
+import com.coinbase.prime.model.enums.ActivitySecondaryType;
+import com.coinbase.prime.model.enums.ActivityStatus;
+import com.coinbase.prime.model.ActivityType;
+import com.coinbase.prime.model.enums.HierarchyType;
+import com.coinbase.prime.model.UserAction;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Activity {
     /**
@@ -19,8 +23,22 @@ public class Activity {
      */
     private String id;
 
+    /**
+     * A reference for orders and transactions, n/a for other category types
+     */
     private String referenceId;
 
+    private ActivityCategory category;
+
+    private ActivityType type;
+
+    private ActivitySecondaryType secondaryType;
+
+    private ActivityStatus status;
+
+    /**
+     * Id of user who created the activity
+     */
     private String createdBy;
 
     /**
@@ -33,15 +51,33 @@ public class Activity {
      */
     private String description;
 
+    /**
+     * Actions related to the Activity
+     */
+    private List<UserAction> userActions;
+
     private ActivityMetadataTransactions transactionsMetadata;
 
     private ActivityMetadataAccount accountMetadata;
 
     private Object ordersMetadata;
 
+    /**
+     * List of currencies included in an activity
+     */
+    private List<String> symbols;
+
+    /**
+     * Time activity was created at
+     */
     private String createdAt;
 
+    /**
+     * Time for latest status update of account activity
+     */
     private String updatedAt;
+
+    private HierarchyType hierarchyType;
 
     public Activity() {
     }
@@ -49,100 +85,153 @@ public class Activity {
     public Activity(Builder builder) {
         this.id = builder.id;
         this.referenceId = builder.referenceId;
+        this.category = builder.category;
+        this.type = builder.type;
+        this.secondaryType = builder.secondaryType;
+        this.status = builder.status;
         this.createdBy = builder.createdBy;
         this.title = builder.title;
         this.description = builder.description;
+        this.userActions = builder.userActions;
         this.transactionsMetadata = builder.transactionsMetadata;
         this.accountMetadata = builder.accountMetadata;
         this.ordersMetadata = builder.ordersMetadata;
+        this.symbols = builder.symbols;
         this.createdAt = builder.createdAt;
         this.updatedAt = builder.updatedAt;
+        this.hierarchyType = builder.hierarchyType;
     }
-
     public String getId() {
         return id;
-    }
-
-    public String getReferenceId() {
-        return referenceId;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public ActivityMetadataTransactions getTransactionsMetadata() {
-        return transactionsMetadata;
-    }
-
-    public ActivityMetadataAccount getAccountMetadata() {
-        return accountMetadata;
-    }
-
-    public Object getOrdersMetadata() {
-        return ordersMetadata;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
     }
 
     public void setId(String id) {
         this.id = id;
     }
+    public String getReferenceId() {
+        return referenceId;
+    }
 
     public void setReferenceId(String referenceId) {
         this.referenceId = referenceId;
+    }
+    public ActivityCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ActivityCategory category) {
+        this.category = category;
+    }
+    public ActivityType getType() {
+        return type;
+    }
+
+    public void setType(ActivityType type) {
+        this.type = type;
+    }
+    public ActivitySecondaryType getSecondaryType() {
+        return secondaryType;
+    }
+
+    public void setSecondaryType(ActivitySecondaryType secondaryType) {
+        this.secondaryType = secondaryType;
+    }
+    public ActivityStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ActivityStatus status) {
+        this.status = status;
+    }
+    public String getCreatedBy() {
+        return createdBy;
     }
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
+    public String getTitle() {
+        return title;
+    }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
+    public List<UserAction> getUserActions() {
+        return userActions;
+    }
+
+    public void setUserActions(List<UserAction> userActions) {
+        this.userActions = userActions;
+    }
+    public ActivityMetadataTransactions getTransactionsMetadata() {
+        return transactionsMetadata;
+    }
 
     public void setTransactionsMetadata(ActivityMetadataTransactions transactionsMetadata) {
         this.transactionsMetadata = transactionsMetadata;
+    }
+    public ActivityMetadataAccount getAccountMetadata() {
+        return accountMetadata;
     }
 
     public void setAccountMetadata(ActivityMetadataAccount accountMetadata) {
         this.accountMetadata = accountMetadata;
     }
+    public Object getOrdersMetadata() {
+        return ordersMetadata;
+    }
 
     public void setOrdersMetadata(Object ordersMetadata) {
         this.ordersMetadata = ordersMetadata;
+    }
+    public List<String> getSymbols() {
+        return symbols;
+    }
+
+    public void setSymbols(List<String> symbols) {
+        this.symbols = symbols;
+    }
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
+    public HierarchyType getHierarchyType() {
+        return hierarchyType;
+    }
 
+    public void setHierarchyType(HierarchyType hierarchyType) {
+        this.hierarchyType = hierarchyType;
+    }
     public static class Builder {
         private String id;
 
         private String referenceId;
+
+        private ActivityCategory category;
+
+        private ActivityType type;
+
+        private ActivitySecondaryType secondaryType;
+
+        private ActivityStatus status;
 
         private String createdBy;
 
@@ -150,15 +239,21 @@ public class Activity {
 
         private String description;
 
+        private List<UserAction> userActions;
+
         private ActivityMetadataTransactions transactionsMetadata;
 
         private ActivityMetadataAccount accountMetadata;
 
         private Object ordersMetadata;
 
+        private List<String> symbols;
+
         private String createdAt;
 
         private String updatedAt;
+
+        private HierarchyType hierarchyType;
 
         public Builder id(String id) {
             this.id = id;
@@ -167,6 +262,26 @@ public class Activity {
 
         public Builder referenceId(String referenceId) {
             this.referenceId = referenceId;
+            return this;
+        }
+
+        public Builder category(ActivityCategory category) {
+            this.category = category;
+            return this;
+        }
+
+        public Builder type(ActivityType type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder secondaryType(ActivitySecondaryType secondaryType) {
+            this.secondaryType = secondaryType;
+            return this;
+        }
+
+        public Builder status(ActivityStatus status) {
+            this.status = status;
             return this;
         }
 
@@ -185,6 +300,11 @@ public class Activity {
             return this;
         }
 
+        public Builder userActions(List<UserAction> userActions) {
+            this.userActions = userActions;
+            return this;
+        }
+
         public Builder transactionsMetadata(ActivityMetadataTransactions transactionsMetadata) {
             this.transactionsMetadata = transactionsMetadata;
             return this;
@@ -200,6 +320,11 @@ public class Activity {
             return this;
         }
 
+        public Builder symbols(List<String> symbols) {
+            this.symbols = symbols;
+            return this;
+        }
+
         public Builder createdAt(String createdAt) {
             this.createdAt = createdAt;
             return this;
@@ -210,8 +335,14 @@ public class Activity {
             return this;
         }
 
+        public Builder hierarchyType(HierarchyType hierarchyType) {
+            this.hierarchyType = hierarchyType;
+            return this;
+        }
+
         public Activity build() {
             return new Activity(this);
         }
     }
 }
+

@@ -1,64 +1,84 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.ConversionDetail;
+import com.coinbase.prime.model.ShortCollateral;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Conversion {
+    /**
+     * Conversion details
+     */
+    private List<ConversionDetail> conversionDetails;
+
     private ShortCollateral shortCollateral;
 
+    /**
+     * The UTC date time used for conversion
+     */
     private String conversionDatetime;
 
+    /**
+     * Portfolio Id
+     */
     private String portfolioId;
 
     public Conversion() {
     }
 
     public Conversion(Builder builder) {
+        this.conversionDetails = builder.conversionDetails;
         this.shortCollateral = builder.shortCollateral;
         this.conversionDatetime = builder.conversionDatetime;
         this.portfolioId = builder.portfolioId;
     }
+    public List<ConversionDetail> getConversionDetails() {
+        return conversionDetails;
+    }
 
+    public void setConversionDetails(List<ConversionDetail> conversionDetails) {
+        this.conversionDetails = conversionDetails;
+    }
     public ShortCollateral getShortCollateral() {
         return shortCollateral;
-    }
-
-    public String getConversionDatetime() {
-        return conversionDatetime;
-    }
-
-    public String getPortfolioId() {
-        return portfolioId;
     }
 
     public void setShortCollateral(ShortCollateral shortCollateral) {
         this.shortCollateral = shortCollateral;
     }
+    public String getConversionDatetime() {
+        return conversionDatetime;
+    }
 
     public void setConversionDatetime(String conversionDatetime) {
         this.conversionDatetime = conversionDatetime;
+    }
+    public String getPortfolioId() {
+        return portfolioId;
     }
 
     public void setPortfolioId(String portfolioId) {
         this.portfolioId = portfolioId;
     }
-
     public static class Builder {
+        private List<ConversionDetail> conversionDetails;
+
         private ShortCollateral shortCollateral;
 
         private String conversionDatetime;
 
         private String portfolioId;
+
+        public Builder conversionDetails(List<ConversionDetail> conversionDetails) {
+            this.conversionDetails = conversionDetails;
+            return this;
+        }
 
         public Builder shortCollateral(ShortCollateral shortCollateral) {
             this.shortCollateral = shortCollateral;
@@ -80,3 +100,4 @@ public class Conversion {
         }
     }
 }
+

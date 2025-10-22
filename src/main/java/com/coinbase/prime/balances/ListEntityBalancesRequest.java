@@ -17,7 +17,7 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.prime.common.PrimeListRequest;
-import com.coinbase.prime.model.enums.BalanceType;
+import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

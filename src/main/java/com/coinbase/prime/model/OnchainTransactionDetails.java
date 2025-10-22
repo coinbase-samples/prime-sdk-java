@@ -1,25 +1,25 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.coinbase.prime.model.RiskAssessment;
 import com.coinbase.prime.model.enums.SigningStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
 
 public class OnchainTransactionDetails {
+    /**
+     * The signed transaction data
+     */
     private String signedTransaction;
 
     private RiskAssessment riskAssessment;
 
+    /**
+     * The blockchain network chain ID. Will be empty for Solana transactions.
+     */
     private String chainId;
 
     /**
@@ -27,12 +27,24 @@ public class OnchainTransactionDetails {
      */
     private String nonce;
 
+    /**
+     * The ID of the transaction that this transaction replaced
+     */
     private String replacedTransactionId;
 
+    /**
+     * The destination address for the transaction
+     */
     private String destinationAddress;
 
+    /**
+     * If set to true, the transaction will not be broadcast to the network. You can still retrieve the signed transaction from the GetTransaction endpoint by transaction ID once the transaction is created.
+     */
     private Boolean skipBroadcast;
 
+    /**
+     * Reason for transaction failure if applicable
+     */
     private String failureReason;
 
     private SigningStatus signingStatus;
@@ -51,79 +63,69 @@ public class OnchainTransactionDetails {
         this.failureReason = builder.failureReason;
         this.signingStatus = builder.signingStatus;
     }
-
     public String getSignedTransaction() {
         return signedTransaction;
-    }
-
-    public RiskAssessment getRiskAssessment() {
-        return riskAssessment;
-    }
-
-    public String getChainId() {
-        return chainId;
-    }
-
-    public String getNonce() {
-        return nonce;
-    }
-
-    public String getReplacedTransactionId() {
-        return replacedTransactionId;
-    }
-
-    public String getDestinationAddress() {
-        return destinationAddress;
-    }
-
-    public Boolean isSkipBroadcast() {
-        return skipBroadcast;
-    }
-
-    public String getFailureReason() {
-        return failureReason;
-    }
-
-    public SigningStatus getSigningStatus() {
-        return signingStatus;
     }
 
     public void setSignedTransaction(String signedTransaction) {
         this.signedTransaction = signedTransaction;
     }
+    public RiskAssessment getRiskAssessment() {
+        return riskAssessment;
+    }
 
     public void setRiskAssessment(RiskAssessment riskAssessment) {
         this.riskAssessment = riskAssessment;
+    }
+    public String getChainId() {
+        return chainId;
     }
 
     public void setChainId(String chainId) {
         this.chainId = chainId;
     }
+    public String getNonce() {
+        return nonce;
+    }
 
     public void setNonce(String nonce) {
         this.nonce = nonce;
+    }
+    public String getReplacedTransactionId() {
+        return replacedTransactionId;
     }
 
     public void setReplacedTransactionId(String replacedTransactionId) {
         this.replacedTransactionId = replacedTransactionId;
     }
+    public String getDestinationAddress() {
+        return destinationAddress;
+    }
 
     public void setDestinationAddress(String destinationAddress) {
         this.destinationAddress = destinationAddress;
+    }
+    public Boolean getSkipBroadcast() {
+        return skipBroadcast;
     }
 
     public void setSkipBroadcast(Boolean skipBroadcast) {
         this.skipBroadcast = skipBroadcast;
     }
+    public String getFailureReason() {
+        return failureReason;
+    }
 
     public void setFailureReason(String failureReason) {
         this.failureReason = failureReason;
+    }
+    public SigningStatus getSigningStatus() {
+        return signingStatus;
     }
 
     public void setSigningStatus(SigningStatus signingStatus) {
         this.signingStatus = signingStatus;
     }
-
     public static class Builder {
         private String signedTransaction;
 
@@ -193,3 +195,4 @@ public class OnchainTransactionDetails {
         }
     }
 }
+

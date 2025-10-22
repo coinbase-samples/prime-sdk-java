@@ -1,24 +1,14 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 
 public class OrderEdit {
-    /**
-     * New price for the edited order
-     */
     private String price;
 
     private String baseQuantity;
@@ -51,79 +41,69 @@ public class OrderEdit {
         this.acceptTime = builder.acceptTime;
         this.clientOrderId = builder.clientOrderId;
     }
-
     public String getPrice() {
         return price;
-    }
-
-    public String getBaseQuantity() {
-        return baseQuantity;
-    }
-
-    public String getQuoteValue() {
-        return quoteValue;
-    }
-
-    public String getDisplayBaseSize() {
-        return displayBaseSize;
-    }
-
-    public String getDisplayQuoteSize() {
-        return displayQuoteSize;
-    }
-
-    public String getStopPrice() {
-        return stopPrice;
-    }
-
-    public OffsetDateTime getExpiryTime() {
-        return expiryTime;
-    }
-
-    public OffsetDateTime getAcceptTime() {
-        return acceptTime;
-    }
-
-    public String getClientOrderId() {
-        return clientOrderId;
     }
 
     public void setPrice(String price) {
         this.price = price;
     }
+    public String getBaseQuantity() {
+        return baseQuantity;
+    }
 
     public void setBaseQuantity(String baseQuantity) {
         this.baseQuantity = baseQuantity;
+    }
+    public String getQuoteValue() {
+        return quoteValue;
     }
 
     public void setQuoteValue(String quoteValue) {
         this.quoteValue = quoteValue;
     }
+    public String getDisplayBaseSize() {
+        return displayBaseSize;
+    }
 
     public void setDisplayBaseSize(String displayBaseSize) {
         this.displayBaseSize = displayBaseSize;
+    }
+    public String getDisplayQuoteSize() {
+        return displayQuoteSize;
     }
 
     public void setDisplayQuoteSize(String displayQuoteSize) {
         this.displayQuoteSize = displayQuoteSize;
     }
+    public String getStopPrice() {
+        return stopPrice;
+    }
 
     public void setStopPrice(String stopPrice) {
         this.stopPrice = stopPrice;
+    }
+    public OffsetDateTime getExpiryTime() {
+        return expiryTime;
     }
 
     public void setExpiryTime(OffsetDateTime expiryTime) {
         this.expiryTime = expiryTime;
     }
+    public OffsetDateTime getAcceptTime() {
+        return acceptTime;
+    }
 
     public void setAcceptTime(OffsetDateTime acceptTime) {
         this.acceptTime = acceptTime;
+    }
+    public String getClientOrderId() {
+        return clientOrderId;
     }
 
     public void setClientOrderId(String clientOrderId) {
         this.clientOrderId = clientOrderId;
     }
-
     public static class Builder {
         private String price;
 
@@ -193,3 +173,4 @@ public class OrderEdit {
         }
     }
 }
+

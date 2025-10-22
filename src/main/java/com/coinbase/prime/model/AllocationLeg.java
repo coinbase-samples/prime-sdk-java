@@ -1,21 +1,21 @@
-// Copyright 2025-present Coinbase Global, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
 package com.coinbase.prime.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+
 public class AllocationLeg {
+    /**
+     * The ID of the portfolio of the allocation leg
+     */
     private String allocationLegId;
 
+    /**
+     * The ID of the destination portfolio of the allocation leg
+     */
     private String destinationPortfolioId;
 
     /**
@@ -31,31 +31,27 @@ public class AllocationLeg {
         this.destinationPortfolioId = builder.destinationPortfolioId;
         this.amount = builder.amount;
     }
-
     public String getAllocationLegId() {
         return allocationLegId;
-    }
-
-    public String getDestinationPortfolioId() {
-        return destinationPortfolioId;
-    }
-
-    public String getAmount() {
-        return amount;
     }
 
     public void setAllocationLegId(String allocationLegId) {
         this.allocationLegId = allocationLegId;
     }
+    public String getDestinationPortfolioId() {
+        return destinationPortfolioId;
+    }
 
     public void setDestinationPortfolioId(String destinationPortfolioId) {
         this.destinationPortfolioId = destinationPortfolioId;
+    }
+    public String getAmount() {
+        return amount;
     }
 
     public void setAmount(String amount) {
         this.amount = amount;
     }
-
     public static class Builder {
         private String allocationLegId;
 
@@ -83,3 +79,4 @@ public class AllocationLeg {
         }
     }
 }
+
