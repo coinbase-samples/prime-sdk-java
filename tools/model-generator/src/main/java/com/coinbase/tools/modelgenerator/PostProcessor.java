@@ -43,7 +43,6 @@ public class PostProcessor {
     private final boolean updateAll;
     private final Map<String, JsonNode> schemas = new HashMap<>();
     private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
-    private final ModelTransformer transformer = new ModelTransformer();
     
     private int newModelsCount = 0;
     private int skippedModelsCount = 0;
