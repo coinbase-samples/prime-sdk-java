@@ -33,8 +33,10 @@
 - **Products**
   - `listCandles` - List price candles for products
 - **Staking**
-  - `portfolioStakingInitiate` - Initiate staking for portfolio (renamed from `createStake`)
-  - `portfolioStakingUnstake` - Unstake from portfolio (renamed from `createUnstake`)
+  - `portfolioStakingInitiate` - Initiate staking for portfolio
+  - `portfolioStakingUnstake` - Unstake from portfolio
+  - `createStake` - Create stake
+  - `createUnstake` - Create unstake
   - `claimRewards` - Claim staking rewards
   - `listTransactionValidators` - List validators for transactions
 - **Transactions**
@@ -48,7 +50,7 @@
   - `listWalletAddresses` - List addresses for a wallet
 
 #### New Models
-- **Activities**: `ActivityCreationResponse`, `ActivityMetadataAccount`, `ActivityMetadataConsensus`, `ActivityMetadataOrders`, `ActivityMetadataTransactions`
+- **Activities**: `ActivityMetadataAccount`, `ActivityMetadataConsensus`, `ActivityMetadataOrders`, `ActivityMetadataTransactions`
 - **Address Book**: `AddressBookConfiguration`, `AddressBookMetadata`, `AddressBookSummary`, `AddressEntry`, `TrustedAddressConfiguration`
 - **Allocations**: `AllocationRule`, `AllocationStrategy`, `CreateAllocationResponseBody`, `CreateNetAllocationResponseBody`, `DestinationAlloc`
 - **Commission**: `CommissionCalculation`, `CommissionRate`
@@ -94,14 +96,12 @@
   - `getEntityPaymentMethod` → `getEntityPaymentMethodDetails`
   - `getPortfolioById` → `getPortfolio`
   - `getWalletById` → `getWallet`
-  - `createStake` → `portfolioStakingInitiate`
-  - `createUnstake` → `portfolioStakingUnstake`
 
 #### Models and Serialization
 - Updated request/response models with Jackson annotations
 - Added `PaginationCursor` for paginated responses
 - Updated model field names to match OpenAPI specification
-- Removed `GetOrderPreviewResponse` 
+- Removed `GetOrderPreviewResponse`
 - Removed redundant response wrapper classes
 
 #### Package Structure
