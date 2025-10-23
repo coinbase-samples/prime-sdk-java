@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.products;
 
+import com.coinbase.prime.model.enums.CandlesGranularity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -37,7 +38,7 @@ public class ListCandlesRequest {
     private String endTime;
 
     @JsonProperty(required = true, value = "granularity")
-    private String granularity;
+    private CandlesGranularity granularity;
 
     public ListCandlesRequest() {
     }
@@ -82,11 +83,11 @@ public class ListCandlesRequest {
         this.endTime = endTime;
     }
 
-    public String getGranularity() {
+    public CandlesGranularity getGranularity() {
         return granularity;
     }
 
-    public void setGranularity(String granularity) {
+    public void setGranularity(CandlesGranularity granularity) {
         this.granularity = granularity;
     }
 
@@ -95,7 +96,7 @@ public class ListCandlesRequest {
         private String productId;
         private String startTime;
         private String endTime;
-        private String granularity;
+        private CandlesGranularity granularity;
 
         public Builder() {
         }
@@ -120,7 +121,7 @@ public class ListCandlesRequest {
             return this;
         }
 
-        public Builder granularity(String granularity) {
+        public Builder granularity(CandlesGranularity granularity) {
             this.granularity = granularity;
             return this;
         }
