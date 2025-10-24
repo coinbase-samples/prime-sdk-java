@@ -128,4 +128,24 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
                 List.of(200),
                 new TypeReference<AcceptQuoteResponse>() {});
     }
+
+    @Override
+    public ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/orders/%s/edit_history", request.getPortfolioId(), request.getOrderId()),
+                null,
+                List.of(200),
+                new TypeReference<ListOrderEditHistoryResponse>() {});
+    }
+
+    @Override
+    public EditOrderResponse editOrder(EditOrderRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.PUT,
+                String.format("/portfolios/%s/orders/%s/edit", request.getPortfolioId(), request.getOrderId()),
+                request,
+                List.of(200),
+                new TypeReference<EditOrderResponse>() {});
+    }
 }

@@ -78,3 +78,32 @@ To build the sample library, ensure that Java Development Kit (JDK) 11+ is insta
 ```bash
 mvn clean install
 ```
+
+## Model Generation
+
+The SDK includes an automated model generator that creates Java domain models and enums from the OpenAPI specification. This ensures the SDK stays in sync with the Prime API specification.
+
+The OpenAPI spec is fetched automatically from the live API (`https://api.prime.coinbase.com/v1/openapi.yaml`) during model generation and is not committed to source control.
+
+### Generate Models from Root Directory
+
+To generate new models from the OpenAPI spec:
+
+```bash
+mvn -Pgenerate-models
+```
+
+This command:
+- Runs in **incremental mode** (safe - only creates new models that don't exist)
+- Generates domain models in `src/main/java/com/coinbase/prime/model/`
+- Generates enums in `src/main/java/com/coinbase/prime/model/enums/`
+- Automatically applies SDK conventions (Builder patterns, license headers, etc.)
+
+### Advanced Model Generation
+
+For more control over model generation, see the detailed documentation in [`tools/model-generator/README.md`](tools/model-generator/README.md), which covers:
+
+- Force regenerating all models (dangerous - use with caution)
+- Regenerating specific models
+- Understanding the generation pipeline
+- Troubleshooting generation issues

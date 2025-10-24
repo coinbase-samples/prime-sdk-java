@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -24,10 +24,6 @@ public class ListInvoicesResponse {
     public ListInvoicesResponse() {
     }
 
-    public ListInvoicesResponse(Builder builder) {
-        this.invoices = builder.invoices;
-    }
-
     public Invoice[] getInvoices() {
         return invoices;
     }
@@ -36,16 +32,4 @@ public class ListInvoicesResponse {
         this.invoices = invoices;
     }
 
-    public static class Builder {
-        private Invoice[] invoices;
-
-        public Builder invoices(Invoice[] invoices) {
-            this.invoices = invoices;
-            return this;
-        }
-
-        public ListInvoicesResponse build() {
-            return new ListInvoicesResponse(this);
-        }
-    }
 }

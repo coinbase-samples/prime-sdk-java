@@ -18,7 +18,8 @@ package com.coinbase.prime.orders;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -76,7 +77,7 @@ public class ListPortfolioFillsRequest extends PrimeListRequest {
         private String startDate;
         private String endDate;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder() {

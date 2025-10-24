@@ -26,10 +26,6 @@ public class GetPortfolioBuyingPowerResponse {
     public GetPortfolioBuyingPowerResponse() {
     }
 
-    public GetPortfolioBuyingPowerResponse(Builder builder) {
-        this.buyingPower = builder.buyingPower;
-    }
-
     public BuyingPower getBuyingPower() {
         return buyingPower;
     }
@@ -38,19 +34,4 @@ public class GetPortfolioBuyingPowerResponse {
         this.buyingPower = buyingPower;
     }
 
-    public static class Builder {
-        private BuyingPower buyingPower;
-
-        public Builder() {
-        }
-
-        public Builder buyingPower(BuyingPower buyingPower) {
-            this.buyingPower = buyingPower;
-            return this;
-        }
-
-        public GetPortfolioBuyingPowerResponse build() {
-            return new GetPortfolioBuyingPowerResponse(this);
-        }
-    }
 }

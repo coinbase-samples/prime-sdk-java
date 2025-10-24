@@ -16,16 +16,20 @@
 
 package com.coinbase.prime.onchainaddressbook;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.model.enums.SortDirection;
 
-public class ListOnchainAddressGroupsRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
+/**
+ * Request for listing onchain address groups for a portfolio.
+ */
+public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
     private String portfolioId;
 
     public ListOnchainAddressGroupsRequest() {
     }
 
-    public ListOnchainAddressGroupsRequest(Builder builder) {
+    private ListOnchainAddressGroupsRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
     }
 
@@ -37,14 +41,33 @@ public class ListOnchainAddressGroupsRequest {
         this.portfolioId = portfolioId;
     }
 
+    public String getPath() {
+        return String.format("/v1/portfolios/%s/onchain_address_groups", this.portfolioId);
+    }
+
     public static class Builder {
         private String portfolioId;
-
-        public Builder() {
-        }
+        private String cursor;
+        private SortDirection sortDirection;
+        private Integer limit;
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder cursor(String cursor) {
+            this.cursor = cursor;
+            return this;
+        }
+
+        public Builder sortDirection(SortDirection sortDirection) {
+            this.sortDirection = sortDirection;
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 
@@ -53,3 +76,4 @@ public class ListOnchainAddressGroupsRequest {
         }
     }
 }
+

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.coinbase.prime.transactions;
 
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Transaction;
 
 public class ListWalletTransactionsResponse {
@@ -25,12 +25,6 @@ public class ListWalletTransactionsResponse {
     private ListWalletTransactionsRequest request;
 
     public ListWalletTransactionsResponse() {
-    }
-
-    public ListWalletTransactionsResponse(Builder builder) {
-        this.transactions = builder.transactions;
-        this.pagination = builder.pagination;
-        this.request = builder.request;
     }
 
     public Transaction[] getTransactions() {
@@ -57,31 +51,4 @@ public class ListWalletTransactionsResponse {
         this.request = request;
     }
 
-    public static class Builder {
-        private Transaction[] transactions;
-        private Pagination pagination;
-        private ListWalletTransactionsRequest request;
-
-        public Builder() {
-        }
-
-        public Builder transactions(Transaction[] transactions) {
-            this.transactions = transactions;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public Builder request(ListWalletTransactionsRequest request) {
-            this.request = request;
-            return this;
-        }
-
-        public ListWalletTransactionsResponse build() {
-            return new ListWalletTransactionsResponse(this);
-        }
-    }
 }

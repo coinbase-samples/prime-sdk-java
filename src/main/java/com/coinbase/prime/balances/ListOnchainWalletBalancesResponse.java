@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,26 +16,26 @@
 
 package com.coinbase.prime.balances;
 
-import com.coinbase.prime.model.Pagination;
-import com.coinbase.prime.model.Web3WalletBalance;
+import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.OnchainBalance;
 
+/**
+ * Response object for listing on-chain wallet balances by entity.
+ */
 public class ListOnchainWalletBalancesResponse {
-    private Web3WalletBalance[] balances;
+    /** Array of on-chain wallet balance information */
+    private OnchainBalance[] balances;
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListOnchainWalletBalancesResponse() {
     }
 
-    public ListOnchainWalletBalancesResponse(Builder builder) {
-        this.balances = builder.balances;
-        this.pagination = builder.pagination;
-    }
-
-    public Web3WalletBalance[] getBalances() {
+    public OnchainBalance[] getBalances() {
         return balances;
     }
 
-    public void setBalances(Web3WalletBalance[] balances) {
+    public void setBalances(OnchainBalance[] balances) {
         this.balances = balances;
     }
 
@@ -47,25 +47,4 @@ public class ListOnchainWalletBalancesResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Web3WalletBalance[] balances;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder balances(Web3WalletBalance[] balances) {
-            this.balances = balances;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListOnchainWalletBalancesResponse build() {
-            return new ListOnchainWalletBalancesResponse(this);
-        }
-    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,26 +17,26 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.Balance;
-import com.coinbase.prime.model.TotalBalance;
-import com.coinbase.prime.model.enums.BalanceType;
+import com.coinbase.prime.model.AggregatedFiatBalance;
+import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for listing all balances for a specific portfolio.
+ */
 public class ListPortfolioBalancesResponse {
+    /** Array of portfolio balance information */
     private Balance[] balances;
-    private BalanceType type;
+    /** The type of portfolio balance */
+    private PortfolioBalanceType type;
+    /** Trading-specific balance summary */
     @JsonProperty("trading_balances")
-    private TotalBalance tradingBalances;
+    private AggregatedFiatBalance tradingBalances;
+    /** Vault-specific balance summary */
     @JsonProperty("vault_balances")
-    private TotalBalance vaultBalances;
+    private AggregatedFiatBalance vaultBalances;
 
     public ListPortfolioBalancesResponse() {
-    }
-
-    public ListPortfolioBalancesResponse(Builder builder) {
-        this.balances = builder.balances;
-        this.type = builder.type;
-        this.tradingBalances = builder.tradingBalances;
-        this.vaultBalances = builder.vaultBalances;
     }
 
     public Balance[] getBalances() {
@@ -47,58 +47,28 @@ public class ListPortfolioBalancesResponse {
         this.balances = balances;
     }
 
-    public BalanceType getType() {
+    public PortfolioBalanceType getType() {
         return type;
     }
 
-    public void setType(BalanceType type) {
+    public void setType(PortfolioBalanceType type) {
         this.type = type;
     }
 
-    public TotalBalance getTradingBalances() {
+    public AggregatedFiatBalance getTradingBalances() {
         return tradingBalances;
     }
 
-    public void setTradingBalances(TotalBalance tradingBalances) {
+    public void setTradingBalances(AggregatedFiatBalance tradingBalances) {
         this.tradingBalances = tradingBalances;
     }
 
-    public TotalBalance getVaultBalances() {
+    public AggregatedFiatBalance getVaultBalances() {
         return vaultBalances;
     }
 
-    public void setVaultBalances(TotalBalance vaultBalances) {
+    public void setVaultBalances(AggregatedFiatBalance vaultBalances) {
         this.vaultBalances = vaultBalances;
     }
 
-    public static class Builder {
-        private Balance[] balances;
-        private BalanceType type;
-        private TotalBalance tradingBalances;
-        private TotalBalance vaultBalances;
-
-        public Builder balances(Balance[] balances) {
-            this.balances = balances;
-            return this;
-        }
-
-        public Builder type(BalanceType type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder tradingBalances(TotalBalance tradingBalances) {
-            this.tradingBalances = tradingBalances;
-            return this;
-        }
-
-        public Builder vaultBalances(TotalBalance vaultBalances) {
-            this.vaultBalances = vaultBalances;
-            return this;
-        }
-
-        public ListPortfolioBalancesResponse build() {
-            return new ListPortfolioBalancesResponse(this);
-        }
-    }
 }

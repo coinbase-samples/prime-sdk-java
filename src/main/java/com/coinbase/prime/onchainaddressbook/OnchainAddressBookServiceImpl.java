@@ -19,8 +19,6 @@ package com.coinbase.prime.onchainaddressbook;
 import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
-import com.coinbase.prime.orders.UpdateOnchainAddressBookEntryRequest;
-import com.coinbase.prime.orders.UpdateOnchainAddressBookEntryResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -42,7 +40,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(UpdateOnchainAddressBookEntryRequest request) {
         return this.request(
                 HttpMethod.PUT,
-                String.format("/portfolios/%s/onchain_address_group/%s", request.getPortfolioId(), request.getAddressGroupId()),
+                String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<UpdateOnchainAddressBookEntryResponse>() {});

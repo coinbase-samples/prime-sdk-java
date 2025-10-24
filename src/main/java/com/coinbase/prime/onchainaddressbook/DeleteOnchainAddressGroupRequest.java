@@ -16,12 +16,15 @@
 
 package com.coinbase.prime.onchainaddressbook;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DeleteOnchainAddressGroupRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
     @JsonProperty(required = true, value = "address_group_id")
+    @JsonIgnore
     private String addressGroupId;
 
     public DeleteOnchainAddressGroupRequest() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.coinbase.prime.orders;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
-import com.coinbase.prime.model.enums.TimeInForce;
+import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -44,7 +44,7 @@ public class CreateOrderRequest {
     @JsonProperty("stop_price")
     private String stopPrice;
     @JsonProperty("time_in_force")
-    private TimeInForce timeInForce;
+    private TimeInForceType timeInForce;
     @JsonProperty("start_time")
     private String startTime;
     @JsonProperty("expiry_time")
@@ -155,11 +155,11 @@ public class CreateOrderRequest {
         this.stopPrice = stopPrice;
     }
 
-    public TimeInForce getTimeInForce() {
+    public TimeInForceType getTimeInForce() {
         return timeInForce;
     }
 
-    public void setTimeInForce(TimeInForce timeInForce) {
+    public void setTimeInForce(TimeInForceType timeInForce) {
         this.timeInForce = timeInForce;
     }
 
@@ -229,7 +229,7 @@ public class CreateOrderRequest {
         private String quoteValue;
         private String limitPrice;
         private String stopPrice;
-        private TimeInForce timeInForce;
+        private TimeInForceType timeInForce;
         private String startTime;
         private String expiryTime;
         private String stpId;
@@ -286,7 +286,7 @@ public class CreateOrderRequest {
             return this;
         }
 
-        public Builder timeInForce(TimeInForce timeInForce) {
+        public Builder timeInForce(TimeInForceType timeInForce) {
             this.timeInForce = timeInForce;
             return this;
         }

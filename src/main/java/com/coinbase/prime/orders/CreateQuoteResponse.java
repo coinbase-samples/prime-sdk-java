@@ -18,31 +18,34 @@ package com.coinbase.prime.orders;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for creating a quote request.
+ * 
+ * A Quote Request is the start of the RFQ process. Coinbase Prime sends a Quote Request to
+ * Liquidity Providers (LPs) on behalf of a customer looking to participate in an RFQ trade.
+ */
 public class CreateQuoteResponse {
+  /** Unique identifier for the quote */
   @JsonProperty("quote_id")
   private String quoteId;
 
+  /** Time when the quote expires */
   @JsonProperty("expiration_time")
   private String expirationTime;
 
+  /** Best available price for the quote */
   @JsonProperty("best_price")
   private String bestPrice;
 
+  /** Total quote amount for previewing */
   @JsonProperty("order_total")
   private String orderTotal;
 
+  /** Price inclusive of all fees */
   @JsonProperty("price_inclusive_of_fees")
   private String priceInclusiveOfFees;
 
   public CreateQuoteResponse() {
-  }
-
-  public CreateQuoteResponse(Builder builder) {
-    this.quoteId = builder.quoteId;
-    this.expirationTime = builder.expirationTime;
-    this.bestPrice = builder.bestPrice;
-    this.orderTotal = builder.orderTotal;
-    this.priceInclusiveOfFees = builder.priceInclusiveOfFees;
   }
 
   public String getQuoteId() {
@@ -81,40 +84,7 @@ public class CreateQuoteResponse {
     return priceInclusiveOfFees;
   }
 
-  public static class Builder {
-    private String quoteId;
-    private String expirationTime;
-    private String bestPrice;
-    private String orderTotal;
-    private String priceInclusiveOfFees;
-
-    public Builder quoteId(String quoteId) {
-      this.quoteId = quoteId;
-      return this;
-    }
-
-    public Builder expirationTime(String expirationTime) {
-      this.expirationTime = expirationTime;
-      return this;
-    }
-
-    public Builder bestPrice(String bestPrice) {
-      this.bestPrice = bestPrice;
-      return this;
-    }
-
-    public Builder orderTotal(String orderTotal) {
-      this.orderTotal = orderTotal;
-      return this;
-    }
-
-    public Builder priceInclusiveOfFees(String priceInclusiveOfFees) {
-      this.priceInclusiveOfFees = priceInclusiveOfFees;
-      return this;
-    }
-
-    public CreateQuoteResponse build() {
-      return new CreateQuoteResponse(this);
-    }
+  public void setPriceInclusiveOfFees(String priceInclusiveOfFees) {
+    this.priceInclusiveOfFees = priceInclusiveOfFees;
   }
 }

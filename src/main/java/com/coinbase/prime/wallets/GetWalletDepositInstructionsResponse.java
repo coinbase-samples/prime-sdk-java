@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,56 +16,38 @@
 
 package com.coinbase.prime.wallets;
 
-import com.coinbase.prime.model.CryptoDepositInstructions;
-import com.coinbase.prime.model.FiatDepositInstructions;
+import com.coinbase.prime.model.WalletCryptoDepositInstructions;
+import com.coinbase.prime.model.WalletFiatDepositInstructions;
 
+/**
+ * Response object for retrieving wallet deposit instructions.
+ * 
+ * Contains both crypto and fiat deposit instructions for the specified wallet,
+ * providing the necessary information for users to deposit funds.
+ */
 public class GetWalletDepositInstructionsResponse {
-    CryptoDepositInstructions cryptoDepositInstructions;
-    FiatDepositInstructions fiatDepositInstructions;
+    /** Cryptocurrency deposit instructions for the wallet */
+    WalletCryptoDepositInstructions cryptoDepositInstructions;
+    /** Fiat currency deposit instructions for the wallet */
+    WalletFiatDepositInstructions fiatDepositInstructions;
 
     public GetWalletDepositInstructionsResponse() {
     }
 
-    public GetWalletDepositInstructionsResponse(Builder builder) {
-        this.cryptoDepositInstructions = builder.cryptoDepositInstructions;
-        this.fiatDepositInstructions = builder.fiatDepositInstructions;
-    }
-
-    public CryptoDepositInstructions getCryptoDepositInstructions() {
+    public WalletCryptoDepositInstructions getCryptoDepositInstructions() {
         return cryptoDepositInstructions;
     }
 
-    public void setCryptoDepositInstructions(CryptoDepositInstructions cryptoDepositInstructions) {
+    public void setCryptoDepositInstructions(WalletCryptoDepositInstructions cryptoDepositInstructions) {
         this.cryptoDepositInstructions = cryptoDepositInstructions;
     }
 
-    public FiatDepositInstructions getFiatDepositInstructions() {
+    public WalletFiatDepositInstructions getFiatDepositInstructions() {
         return fiatDepositInstructions;
     }
 
-    public void setFiatDepositInstructions(FiatDepositInstructions fiatDepositInstructions) {
+    public void setFiatDepositInstructions(WalletFiatDepositInstructions fiatDepositInstructions) {
         this.fiatDepositInstructions = fiatDepositInstructions;
     }
 
-    public static class Builder {
-        private CryptoDepositInstructions cryptoDepositInstructions;
-        private FiatDepositInstructions fiatDepositInstructions;
-
-        public Builder() {
-        }
-
-        public Builder cryptoDepositInstructions(CryptoDepositInstructions cryptoDepositInstructions) {
-            this.cryptoDepositInstructions = cryptoDepositInstructions;
-            return this;
-        }
-
-        public Builder fiatDepositInstructions(FiatDepositInstructions fiatDepositInstructions) {
-            this.fiatDepositInstructions = fiatDepositInstructions;
-            return this;
-        }
-
-        public GetWalletDepositInstructionsResponse build() {
-            return new GetWalletDepositInstructionsResponse(this);
-        }
-    }
 }

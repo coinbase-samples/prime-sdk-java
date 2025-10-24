@@ -16,7 +16,7 @@
 
 package com.coinbase.prime.staking;
 
-import com.coinbase.prime.model.StakingInputs;
+import com.coinbase.prime.model.WalletUnstakeInputs;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,7 +32,7 @@ public class CreateUnstakeRequest {
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
-    private StakingInputs inputs;
+    private WalletUnstakeInputs inputs;
 
     public CreateUnstakeRequest() {
     }
@@ -68,11 +68,11 @@ public class CreateUnstakeRequest {
         this.idempotencyKey = idempotencyKey;
     }
 
-    public StakingInputs getInputs() {
+    public WalletUnstakeInputs getInputs() {
         return inputs;
     }
 
-    public void setInputs(StakingInputs inputs) {
+    public void setInputs(WalletUnstakeInputs inputs) {
         this.inputs = inputs;
     }
 
@@ -80,7 +80,7 @@ public class CreateUnstakeRequest {
         private String portfolioId;
         private String walletId;
         private String idempotencyKey;
-        private StakingInputs inputs;
+        private WalletUnstakeInputs inputs;
 
         public Builder() {
         }
@@ -100,7 +100,7 @@ public class CreateUnstakeRequest {
             return this;
         }
 
-        public CreateUnstakeRequest.Builder inputs(StakingInputs inputs) {
+        public CreateUnstakeRequest.Builder inputs(WalletUnstakeInputs inputs) {
             this.inputs = inputs;
             return this;
         }

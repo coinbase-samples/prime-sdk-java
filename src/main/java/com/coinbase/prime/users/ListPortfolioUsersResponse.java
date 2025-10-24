@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,18 +17,13 @@
 package com.coinbase.prime.users;
 
 import com.coinbase.prime.model.EntityUser;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
 public class ListPortfolioUsersResponse {
     private EntityUser[] users;
     private Pagination pagination;
 
     public ListPortfolioUsersResponse() {
-    }
-
-    public ListPortfolioUsersResponse(Builder builder) {
-        this.users = builder.users;
-        this.pagination = builder.pagination;
     }
 
     public EntityUser[] getUsers() {
@@ -47,25 +42,4 @@ public class ListPortfolioUsersResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private EntityUser[] users;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder users(EntityUser[] users) {
-            this.users = users;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioUsersResponse build() {
-            return new ListPortfolioUsersResponse(this);
-        }
-    }
 }

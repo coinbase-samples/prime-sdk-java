@@ -22,10 +22,6 @@ public class SetAutoSweepResponse {
     public SetAutoSweepResponse() {
     }
 
-    public SetAutoSweepResponse(Builder builder) {
-        this.success = builder.success;
-    }
-
     public boolean getSuccess() {
         return success;
     }
@@ -34,19 +30,4 @@ public class SetAutoSweepResponse {
         this.success = success;
     }
 
-    public static class Builder {
-        private boolean success;
-
-        public Builder() {
-        }
-
-        public Builder success(boolean success) {
-            this.success = success;
-            return this;
-        }
-
-        public SetAutoSweepResponse build() {
-            return new SetAutoSweepResponse(this);
-        }
-    }
 }

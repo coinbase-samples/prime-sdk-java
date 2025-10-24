@@ -21,5 +21,6 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface ProductsService {
     // Products
+    ListCandlesResponse listCandles(ListCandlesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

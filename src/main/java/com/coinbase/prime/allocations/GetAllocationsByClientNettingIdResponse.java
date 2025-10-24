@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,14 +18,16 @@ package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
 
+/**
+ * Response object for retrieving net allocations by netting ID.
+ * 
+ * Returns all allocations associated with the specified netting ID within a portfolio.
+ */
 public class GetAllocationsByClientNettingIdResponse {
+    /** Array of allocations associated with the netting ID */
     private Allocation[] allocations;
 
     public GetAllocationsByClientNettingIdResponse() {
-    }
-
-    public GetAllocationsByClientNettingIdResponse(Builder builder) {
-        this.allocations = builder.allocations;
     }
 
     public Allocation[] getAllocations() {
@@ -36,19 +38,4 @@ public class GetAllocationsByClientNettingIdResponse {
         this.allocations = allocations;
     }
 
-    public static class Builder {
-        private Allocation[] allocations;
-
-        public Builder() {
-        }
-
-        public Builder allocations(Allocation[] allocations) {
-            this.allocations = allocations;
-            return this;
-        }
-
-        public GetAllocationsByClientNettingIdResponse build() {
-            return new GetAllocationsByClientNettingIdResponse(this);
-        }
-    }
 }

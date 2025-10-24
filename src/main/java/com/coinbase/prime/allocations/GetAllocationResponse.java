@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,14 +18,16 @@ package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
 
+/**
+ * Response object for retrieving an allocation by allocation ID.
+ * 
+ * Returns the allocation details for the specified allocation ID within a portfolio.
+ */
 public class GetAllocationResponse {
+    /** The allocation details */
     private Allocation allocation;
 
     public GetAllocationResponse() {
-    }
-
-    public GetAllocationResponse(Builder builder) {
-        this.allocation = builder.allocation;
     }
 
     public Allocation getAllocation() {
@@ -36,19 +38,4 @@ public class GetAllocationResponse {
         this.allocation = allocation;
     }
 
-    public static class Builder {
-        private Allocation allocation;
-
-        public Builder() {
-        }
-
-        public Builder allocation(Allocation allocation) {
-            this.allocation = allocation;
-            return this;
-        }
-
-        public GetAllocationResponse build() {
-            return new GetAllocationResponse(this);
-        }
-    }
 }

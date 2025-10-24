@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,18 +17,13 @@
 package com.coinbase.prime.orders;
 
 import com.coinbase.prime.model.Order;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
 public class ListPortfolioOrdersResponse {
     private Order[] orders;
     private Pagination pagination;
 
     public ListPortfolioOrdersResponse() {
-    }
-
-    public ListPortfolioOrdersResponse(Builder builder) {
-        this.orders = builder.orders;
-        this.pagination = builder.pagination;
     }
 
     public Order[] getOrders() {
@@ -47,25 +42,4 @@ public class ListPortfolioOrdersResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Order[] orders;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder orders(Order[] orders) {
-            this.orders = orders;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioOrdersResponse build() {
-            return new ListPortfolioOrdersResponse(this);
-        }
-    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,19 +16,21 @@
 
 package com.coinbase.prime.products;
 
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Product;
 
+/**
+ * Response object for listing tradable products for a given portfolio.
+ * 
+ * List tradable products for a given portfolio.
+ */
 public class ListPortfolioProductsResponse {
+    /** Array of tradable products for the portfolio */
     private Product[] products;
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListPortfolioProductsResponse() {
-    }
-
-    public ListPortfolioProductsResponse(Builder builder) {
-        this.products = builder.products;
-        this.pagination = builder.pagination;
     }
 
     public Product[] getProducts() {
@@ -47,25 +49,4 @@ public class ListPortfolioProductsResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Product[] products;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder products(Product[] products) {
-            this.products = products;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioProductsResponse build() {
-            return new ListPortfolioProductsResponse(this);
-        }
-    }
 }

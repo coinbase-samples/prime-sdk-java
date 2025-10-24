@@ -16,26 +16,21 @@
 
 package com.coinbase.prime.orders;
 
-import com.coinbase.prime.model.OrderFill;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.model.Fill;
+import com.coinbase.prime.common.Pagination;
 
 public class ListPortfolioFillsResponse {
-    private OrderFill[] fills;
+    private Fill[] fills;
     private Pagination pagination;
 
     public ListPortfolioFillsResponse() {
     }
 
-    public ListPortfolioFillsResponse(Builder builder) {
-        this.fills = builder.fills;
-        this.pagination = builder.pagination;
-    }
-
-    public OrderFill[] getFills() {
+    public Fill[] getFills() {
         return fills;
     }
 
-    public void setFills(OrderFill[] fills) {
+    public void setFills(Fill[] fills) {
         this.fills = fills;
     }
 
@@ -47,25 +42,4 @@ public class ListPortfolioFillsResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private OrderFill[] fills;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder fills(OrderFill[] fills) {
-            this.fills = fills;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioFillsResponse build() {
-            return new ListPortfolioFillsResponse(this);
-        }
-    }
 }

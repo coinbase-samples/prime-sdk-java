@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,14 +18,14 @@ package com.coinbase.prime.balances;
 
 import com.coinbase.prime.model.Balance;
 
+/**
+ * Response object for querying balance for a specific wallet.
+ */
 public class GetWalletBalanceResponse {
+    /** The wallet balance information */
     private Balance balance;
 
     public GetWalletBalanceResponse() {
-    }
-
-    public GetWalletBalanceResponse(Builder builder) {
-        this.balance = builder.balance;
     }
 
     public Balance getBalance() {
@@ -36,19 +36,4 @@ public class GetWalletBalanceResponse {
         this.balance = balance;
     }
 
-    public static class Builder {
-        private Balance balance;
-
-        public Builder() {
-        }
-
-        public Builder balance(Balance balance) {
-            this.balance = balance;
-            return this;
-        }
-
-        public GetWalletBalanceResponse build() {
-            return new GetWalletBalanceResponse(this);
-        }
-    }
 }

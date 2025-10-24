@@ -1,9 +1,25 @@
 .idea/*
 *.iml
-.env*
 target/
+dependency-reduced-pom.xml
 *.swp
+*.class
 .classpath
 .project
 .settings
-.claude/
+.claude/settings.local.json
+
+.envrc
+.env
+.env.local
+.env.development
+.env.production
+
+.DS_Store
+
+tmp/
+
+ai-docs/
+
+# OpenAPI spec - fetch dynamically instead of committing
+apiSpec/*.yaml

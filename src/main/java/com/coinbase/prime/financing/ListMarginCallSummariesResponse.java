@@ -26,10 +26,6 @@ public class ListMarginCallSummariesResponse {
     public ListMarginCallSummariesResponse() {
     }
 
-    public ListMarginCallSummariesResponse(Builder builder) {
-        this.marginSummaries = builder.marginSummaries;
-    }
-
     public MarginSummaryHistorical[] getMarginSummaries() {
         return marginSummaries;
     }
@@ -38,19 +34,4 @@ public class ListMarginCallSummariesResponse {
         this.marginSummaries = marginSummaries;
     }
 
-    public static class Builder {
-        private MarginSummaryHistorical[] marginSummaries;
-
-        public Builder() {
-        }
-
-        public Builder marginSummaries(MarginSummaryHistorical[] marginSummaries) {
-            this.marginSummaries = marginSummaries;
-            return this;
-        }
-
-        public ListMarginCallSummariesResponse build() {
-            return new ListMarginCallSummariesResponse(this);
-        }
-    }
 }

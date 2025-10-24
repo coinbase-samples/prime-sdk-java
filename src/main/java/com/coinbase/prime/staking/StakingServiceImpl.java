@@ -47,4 +47,44 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
                 List.of(200),
                 new TypeReference<CreateUnstakeResponse>() {});
     }
+
+    @Override
+    public ListTransactionValidatorsResponse listTransactionValidators(ListTransactionValidatorsRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/transaction-validators/query", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListTransactionValidatorsResponse>() {});
+    }
+
+    @Override
+    public PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/initiate", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<PortfolioStakingInitiateResponse>() {});
+    }
+
+    @Override
+    public PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/staking/unstake", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<PortfolioStakingUnstakeResponse>() {});
+    }
+
+    @Override
+    public ClaimRewardsResponse claimRewards(ClaimRewardsRequest request) {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/staking/claim_rewards", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<ClaimRewardsResponse>() {});
+    }
 }

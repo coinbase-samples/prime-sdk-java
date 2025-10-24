@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,18 +17,21 @@
 package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 
+/**
+ * Response object for listing all activities associated with a given entity.
+ * 
+ * Supports filtering by activity level (portfolio, entity, or all) and various criteria.
+ */
 public class ListEntityActivitiesResponse {
+    /** List of activities associated with the entity */
     private Activity[] activities;
+    
+    /** Pagination information for the response */
     private Pagination pagination;
 
     public ListEntityActivitiesResponse() {
-    }
-
-    public ListEntityActivitiesResponse(Builder builder) {
-        this.activities = builder.activities;
-        this.pagination = builder.pagination;
     }
 
     public Activity[] getActivities() {
@@ -47,22 +50,4 @@ public class ListEntityActivitiesResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Activity[] activities;
-        private Pagination pagination;
-
-        public Builder activities(Activity[] activities) {
-            this.activities = activities;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListEntityActivitiesResponse build() {
-            return new ListEntityActivitiesResponse(this);
-        }
-    }
 }

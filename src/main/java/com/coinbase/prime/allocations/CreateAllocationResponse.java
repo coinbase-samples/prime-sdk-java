@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,22 +18,28 @@ package com.coinbase.prime.allocations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for creating an allocation for a given portfolio.
+ * 
+ * Contains allocation creation result, including success status and allocation identifiers.
+ */
 public class CreateAllocationResponse {
+    /** Indicates whether the allocation creation was successful */
     private boolean success;
+    
+    /** The unique identifier for the created allocation */
     @JsonProperty("allocation_id")
     private String allocationId;
+    
+    /** The reason for allocation creation failure, if applicable */
     @JsonProperty("failure_reason")
     private String failureReason;
+    
+    /** The netting identifier for the allocation */
     @JsonProperty("netting_id")
     private String nettingId;
 
     public CreateAllocationResponse() {
-    }
-
-    public CreateAllocationResponse(Builder builder) {
-        this.success = builder.success;
-        this.allocationId = builder.allocationId;
-        this.failureReason = builder.failureReason;
     }
 
     public boolean isSuccess() {
@@ -60,31 +66,4 @@ public class CreateAllocationResponse {
         this.failureReason = failureReason;
     }
 
-    public static class Builder {
-        private boolean success;
-        private String allocationId;
-        private String failureReason;
-
-        public Builder() {
-        }
-
-        public Builder success(boolean success) {
-            this.success = success;
-            return this;
-        }
-
-        public Builder allocationId(String allocationId) {
-            this.allocationId = allocationId;
-            return this;
-        }
-
-        public Builder failureReason(String failureReason) {
-            this.failureReason = failureReason;
-            return this;
-        }
-
-        public CreateAllocationResponse build() {
-            return new CreateAllocationResponse(this);
-        }
-    }
 }

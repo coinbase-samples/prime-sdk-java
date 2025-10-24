@@ -16,11 +16,11 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.prime.model.Sweep;
+import com.coinbase.prime.model.FCMFuturesSweep;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ListEntityFuturesSweepsResponse {
-    private Sweep[] sweeps;
+    private FCMFuturesSweep[] sweeps;
 
     @JsonProperty("auto_sweep")
     private boolean autoSweep;
@@ -28,16 +28,11 @@ public class ListEntityFuturesSweepsResponse {
     public ListEntityFuturesSweepsResponse() {
     }
 
-    public ListEntityFuturesSweepsResponse(Builder builder) {
-        this.sweeps = builder.sweeps;
-        this.autoSweep = builder.autoSweep;
-    }
-
-    public Sweep[] getSweeps() {
+    public FCMFuturesSweep[] getSweeps() {
         return sweeps;
     }
 
-    public void setSweeps(Sweep[] sweeps) {
+    public void setSweeps(FCMFuturesSweep[] sweeps) {
         this.sweeps = sweeps;
     }
 
@@ -48,26 +43,4 @@ public class ListEntityFuturesSweepsResponse {
     public void setAutoSweep(boolean autoSweep) {
         this.autoSweep = autoSweep;
     }
-
-    public static class Builder {
-        private Sweep[] sweeps;
-        private boolean autoSweep;
-
-        public Builder() {
-        }
-
-        public Builder sweeps(Sweep[] sweeps) {
-            this.sweeps = sweeps;
-            return this;
-        }
-
-        public Builder autoSweep(boolean autoSweep) {
-            this.autoSweep = autoSweep;
-            return this;
-        }
-
-        public ListEntityFuturesSweepsResponse build() {
-            return new ListEntityFuturesSweepsResponse(this);
-        }        
-    }   
 }

@@ -28,11 +28,6 @@ public class ListInterestAccrualsResponse {
     public ListInterestAccrualsResponse() {
     }
 
-    public ListInterestAccrualsResponse(Builder builder) {
-        this.totalNotionalAccrual = builder.totalNotionalAccrual;
-        this.accruals = builder.accruals;
-    }
-
     public String getTotalNotionalAccrual() {
         return totalNotionalAccrual;
     }
@@ -49,25 +44,4 @@ public class ListInterestAccrualsResponse {
         this.accruals = accruals;
     }
 
-    public static class Builder {
-        private String totalNotionalAccrual;
-        private Accrual[] accruals;
-
-        public Builder() {
-        }
-
-        public Builder totalNotionalAccrual(String totalNotionalAccrual) {
-            this.totalNotionalAccrual = totalNotionalAccrual;
-            return this;
-        }
-
-        public Builder accruals(Accrual[] accruals) {
-            this.accruals = accruals;
-            return this;
-        }
-
-        public ListInterestAccrualsResponse build() {
-            return new ListInterestAccrualsResponse(this);
-        }
-    }
 }

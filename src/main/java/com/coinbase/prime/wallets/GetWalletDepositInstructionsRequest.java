@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,16 +17,30 @@
 package com.coinbase.prime.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.enums.WalletDepositInstructionType;
+import com.coinbase.prime.model.enums.NetworkType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetWalletDepositInstructionsRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
+
+    @JsonProperty(required = true, value = "deposit_type")
+    private WalletDepositInstructionType depositType;
+
+    @JsonProperty("network.id")
+    private String networkId;
+
+    @JsonProperty("network.type")
+    private NetworkType networkType;
 
     public GetWalletDepositInstructionsRequest() {
     }
@@ -34,6 +48,9 @@ public class GetWalletDepositInstructionsRequest {
     public GetWalletDepositInstructionsRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
+        this.depositType = builder.depositType;
+        this.networkId = builder.networkId;
+        this.networkType = builder.networkType;
     }
 
     public String getPortfolioId() {
@@ -52,9 +69,36 @@ public class GetWalletDepositInstructionsRequest {
         this.walletId = walletId;
     }
 
+    public WalletDepositInstructionType getDepositType() {
+        return depositType;
+    }
+
+    public void setDepositType(WalletDepositInstructionType depositType) {
+        this.depositType = depositType;
+    }
+
+    public String getNetworkId() {
+        return networkId;
+    }
+
+    public void setNetworkId(String networkId) {
+        this.networkId = networkId;
+    }
+
+    public NetworkType getNetworkType() {
+        return networkType;
+    }
+
+    public void setNetworkType(NetworkType networkType) {
+        this.networkType = networkType;
+    }
+
     public static class Builder {
         private String portfolioId;
         private String walletId;
+        private WalletDepositInstructionType depositType;
+        private String networkId;
+        private NetworkType networkType;
 
         public Builder() {
         }
@@ -66,6 +110,21 @@ public class GetWalletDepositInstructionsRequest {
 
         public GetWalletDepositInstructionsRequest.Builder walletId(String walletId) {
             this.walletId = walletId;
+            return this;
+        }
+
+        public GetWalletDepositInstructionsRequest.Builder depositType(WalletDepositInstructionType depositType) {
+            this.depositType = depositType;
+            return this;
+        }
+
+        public GetWalletDepositInstructionsRequest.Builder networkId(String networkId) {
+            this.networkId = networkId;
+            return this;
+        }
+
+        public GetWalletDepositInstructionsRequest.Builder networkType(NetworkType networkType) {
+            this.networkType = networkType;
             return this;
         }
 
@@ -81,6 +140,10 @@ public class GetWalletDepositInstructionsRequest {
 
             if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId cannot be null");
+            }
+
+            if (this.depositType == null) {
+                throw new CoinbaseClientException("DepositType cannot be null");
             }
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,29 +18,35 @@ package com.coinbase.prime.allocations;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for creating a net allocation for a given portfolio.
+ * 
+ * Contains result information for net allocation creation, including success status and allocation identifiers.
+ */
 public class CreateNetAllocationResponse {
+    /** Indicates whether the net allocation creation was successful */
     private boolean success;
+    
+    /** The netting identifier for the net allocation */
     @JsonProperty("netting_id")
     private String nettingId;
+    
+    /** The allocation identifier for the buy side of the net allocation */
     @JsonProperty("buy_allocation_id")
     private String buyAllocationId;
+    
+    /** The allocation identifier for the sell side of the net allocation */
     @JsonProperty("sell_allocation_id")
     private String sellAllocationId;
+    
+    /** The reason for net allocation creation failure, if applicable */
     @JsonProperty("failure_reason")
     private String failureReason;
 
+    /** The original request that generated this response */
     private CreateNetAllocationRequest request;
 
     public CreateNetAllocationResponse() {
-    }
-
-    public CreateNetAllocationResponse(Builder builder) {
-        this.success = builder.success;
-        this.nettingId = builder.nettingId;
-        this.buyAllocationId = builder.buyAllocationId;
-        this.sellAllocationId = builder.sellAllocationId;
-        this.failureReason = builder.failureReason;
-        this.request = builder.request;
     }
 
     public boolean isSuccess() {
@@ -91,50 +97,4 @@ public class CreateNetAllocationResponse {
         this.request = request;
     }
 
-    public static class Builder {
-        private boolean success;
-        private String nettingId;
-        private String buyAllocationId;
-        private String sellAllocationId;
-        private String failureReason;
-
-        private CreateNetAllocationRequest request;
-
-        public Builder() {
-        }
-
-        public Builder success(boolean success) {
-            this.success = success;
-            return this;
-        }
-
-        public Builder nettingId(String nettingId) {
-            this.nettingId = nettingId;
-            return this;
-        }
-
-        public Builder buyAllocationId(String buyAllocationId) {
-            this.buyAllocationId = buyAllocationId;
-            return this;
-        }
-
-        public Builder sellAllocationId(String sellAllocationId) {
-            this.sellAllocationId = sellAllocationId;
-            return this;
-        }
-
-        public Builder failureReason(String failureReason) {
-            this.failureReason = failureReason;
-            return this;
-        }
-
-        public Builder request(CreateNetAllocationRequest request) {
-            this.request = request;
-            return this;
-        }
-
-        public CreateNetAllocationResponse build() {
-            return new CreateNetAllocationResponse(this);
-        }
-    }
 }

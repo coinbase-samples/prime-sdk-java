@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,14 +18,14 @@ package com.coinbase.prime.assets;
 
 import com.coinbase.prime.model.Asset;
 
+/**
+ * Response object for listing all available assets.
+ */
 public class ListAssetsResponse {
+    /** Array of available asset information */
     private Asset[] assets;
 
     public ListAssetsResponse() {
-    }
-
-    public ListAssetsResponse(Builder builder) {
-        this.assets = builder.assets;
     }
 
     public Asset[] getAssets() {
@@ -36,19 +36,4 @@ public class ListAssetsResponse {
         this.assets = assets;
     }
 
-    public static class Builder {
-        private Asset[] assets;
-
-        public Builder() {
-        }
-
-        public Builder assets(Asset[] assets) {
-            this.assets = assets;
-            return this;
-        }
-
-        public ListAssetsResponse build() {
-            return new ListAssetsResponse(this);
-        }
-    }
 }

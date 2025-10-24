@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,19 +16,22 @@
 
 package com.coinbase.prime.transactions;
 
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Transaction;
 
+/**
+ * Response object for listing transactions for a given portfolio.
+ * 
+ * Contains an array of transactions and pagination information. Only transactions 
+ * that affect balances are accessible.
+ */
 public class ListPortfolioTransactionsResponse {
+    /** Array of transactions for the portfolio */
     private Transaction[] transactions;
+    /** Pagination information for the transaction listing */
     private Pagination pagination;
 
     public ListPortfolioTransactionsResponse() {
-    }
-
-    public ListPortfolioTransactionsResponse(Builder builder) {
-        this.transactions = builder.transactions;
-        this.pagination = builder.pagination;
     }
 
     public Transaction[] getTransactions() {
@@ -47,25 +50,4 @@ public class ListPortfolioTransactionsResponse {
         this.pagination = pagination;
     }
 
-    public static class Builder {
-        private Transaction[] transactions;
-        private Pagination pagination;
-
-        public Builder() {
-        }
-
-        public Builder transactions(Transaction[] transactions) {
-            this.transactions = transactions;
-            return this;
-        }
-
-        public Builder pagination(Pagination pagination) {
-            this.pagination = pagination;
-            return this;
-        }
-
-        public ListPortfolioTransactionsResponse build() {
-            return new ListPortfolioTransactionsResponse(this);
-        }
-    }
 }

@@ -51,13 +51,13 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
     }
 
     @Override
-    public GetPortfolioAllocationsResponse getPortfolioAllocations(GetPortfolioAllocationsRequest request) throws CoinbasePrimeException {
+    public ListPortfolioAllocationsResponse getPortfolioAllocations(ListPortfolioAllocationsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/allocations", request.getPortfolioId()),
                 request,
                 List.of(200),
-                new TypeReference<GetPortfolioAllocationsResponse>() {});
+                new TypeReference<ListPortfolioAllocationsResponse>() {});
     }
 
     @Override
@@ -71,7 +71,7 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
     }
 
     @Override
-    public GetAllocationsByClientNettingIdResponse getNetAllocationsByNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeException {
+    public GetAllocationsByClientNettingIdResponse getAllocationsByClientNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/allocations/net/%s", request.getPortfolioId(), request.getNettingId()),

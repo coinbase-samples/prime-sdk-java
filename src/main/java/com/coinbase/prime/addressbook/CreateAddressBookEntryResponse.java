@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package com.coinbase.prime.addressbook;
 
-import com.coinbase.prime.model.enums.CustodyActivityType;
+import com.coinbase.prime.model.enums.PrimeActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateAddressBookEntryResponse {
     @JsonProperty("activity_type")
-    private CustodyActivityType activityType;
+    private PrimeActivityType activityType;
     @JsonProperty("num_approvals_remaining")
     private Integer numApprovalsRemaining;
     @JsonProperty("activity_id")
@@ -30,25 +30,19 @@ public class CreateAddressBookEntryResponse {
     public CreateAddressBookEntryResponse() {
     }
 
-    public CreateAddressBookEntryResponse(Builder builder) {
-        this.activityType = builder.activityType;
-        this.numApprovalsRemaining = builder.numApprovalsRemaining;
-        this.activityId = builder.activityId;
-    }
-
-    public CustodyActivityType getActivityType() {
+    public PrimeActivityType getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(CustodyActivityType activityType) {
+    public void setActivityType(PrimeActivityType activityType) {
         this.activityType = activityType;
     }
 
-    public int getNumApprovalsRemaining() {
+    public Integer getNumApprovalsRemaining() {
         return numApprovalsRemaining;
     }
 
-    public void setNumApprovalsRemaining(int numApprovalsRemaining) {
+    public void setNumApprovalsRemaining(Integer numApprovalsRemaining) {
         this.numApprovalsRemaining = numApprovalsRemaining;
     }
 
@@ -60,28 +54,4 @@ public class CreateAddressBookEntryResponse {
         this.activityId = activityId;
     }
 
-    public static class Builder {
-        private CustodyActivityType activityType;
-        private Integer numApprovalsRemaining;
-        private String activityId;
-
-        public Builder activityType(CustodyActivityType activityType) {
-            this.activityType = activityType;
-            return this;
-        }
-
-        public Builder numApprovalsRemaining(int numApprovalsRemaining) {
-            this.numApprovalsRemaining = numApprovalsRemaining;
-            return this;
-        }
-
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
-            return this;
-        }
-
-        public CreateAddressBookEntryResponse build() {
-            return new CreateAddressBookEntryResponse(this);
-        }
-    }
 }

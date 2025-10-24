@@ -24,10 +24,6 @@ public class GetTradeFinanceTieredPricingFeesResponse {
     public GetTradeFinanceTieredPricingFeesResponse() {
     }
 
-    public GetTradeFinanceTieredPricingFeesResponse(Builder builder) {
-        this.fees = builder.fees;
-    }
-
     public TieredPricingFee[] getFees() {
         return fees;
     }
@@ -36,19 +32,4 @@ public class GetTradeFinanceTieredPricingFeesResponse {
         this.fees = fees;
     }
 
-    public static class Builder {
-        private TieredPricingFee[] fees;
-
-        public Builder() {
-        }
-
-        public Builder fees(TieredPricingFee[] fees) {
-            this.fees = fees;
-            return this;
-        }
-
-        public GetTradeFinanceTieredPricingFeesResponse build() {
-            return new GetTradeFinanceTieredPricingFeesResponse(this);
-        }
-    }
 }

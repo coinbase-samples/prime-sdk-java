@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,14 +16,19 @@
 
 package com.coinbase.prime.orders;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * Response object for canceling an order.
+ * 
+ * Cancel an order. (Filled orders cannot be canceled.)
+ */
 public class CancelOrderResponse {
+    /** The ID of the canceled order */
+    @JsonProperty("order_id")
     private String id;
 
     public CancelOrderResponse() {
-    }
-
-    public CancelOrderResponse(Builder builder) {
-        this.id = builder.id;
     }
 
     public String getId() {
@@ -34,19 +39,4 @@ public class CancelOrderResponse {
         this.id = id;
     }
 
-    public static class Builder {
-        private String id;
-
-        public Builder() {
-        }
-
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public CancelOrderResponse build() {
-            return new CancelOrderResponse(this);
-        }
-    }
 }

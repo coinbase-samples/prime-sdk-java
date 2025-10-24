@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,8 +18,9 @@ package com.coinbase.prime.transactions;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.TransactionType;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,7 +33,7 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
-    private TransactionType type;
+    private TransactionType[] types;
     @JsonProperty("start_time")
     private String startTime;
     @JsonProperty("end_time")
@@ -45,7 +46,7 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
         super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
-        this.type = builder.type;
+        this.types = builder.types;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
     }
@@ -66,12 +67,12 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
         this.walletId = walletId;
     }
 
-    public TransactionType getType() {
-        return type;
+    public TransactionType[] getTypes() {
+        return types;
     }
 
-    public void setType(TransactionType type) {
-        this.type = type;
+    public void setTypes(TransactionType[] types) {
+        this.types = types;
     }
 
     public String getStartTime() {
@@ -93,11 +94,11 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
     public static class Builder {
         private String portfolioId;
         private String walletId;
-        private TransactionType type;
+        private TransactionType[] types;
         private String startTime;
         private String endTime;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder() {
@@ -113,8 +114,8 @@ public class ListWalletTransactionsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder type(TransactionType type) {
-            this.type = type;
+        public Builder types(TransactionType[] types) {
+            this.types = types;
             return this;
         }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.coinbase.prime.orders;
 
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
-import com.coinbase.prime.model.enums.TimeInForce;
+import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetOrderPreviewResponse {
@@ -39,7 +39,7 @@ public class GetOrderPreviewResponse {
     @JsonProperty("expiry_time")
     private String expiryTime;
     @JsonProperty("time_in_force")
-    private TimeInForce timeInForce;
+    private TimeInForceType timeInForce;
     private String commission;
     private String slippage;
     @JsonProperty("best_bid")
@@ -54,26 +54,6 @@ public class GetOrderPreviewResponse {
     private String historicalPov;
 
     public GetOrderPreviewResponse() {
-    }
-
-    public GetOrderPreviewResponse(Builder builder) {
-        this.portfolioId = builder.portfolioId;
-        this.productId = builder.productId;
-        this.side = builder.side;
-        this.type = builder.type;
-        this.baseQuantity = builder.baseQuantity;
-        this.quoteValue = builder.quoteValue;
-        this.limitPrice = builder.limitPrice;
-        this.startTime = builder.startTime;
-        this.expiryTime = builder.expiryTime;
-        this.timeInForce = builder.timeInForce;
-        this.commission = builder.commission;
-        this.slippage = builder.slippage;
-        this.bestBid = builder.bestBid;
-        this.bestAsk = builder.bestAsk;
-        this.averageFilledPrice = builder.averageFilledPrice;
-        this.orderTotal = builder.orderTotal;
-        this.historicalPov = builder.historicalPov;
     }
 
     public String getPortfolioId() {
@@ -148,11 +128,11 @@ public class GetOrderPreviewResponse {
         this.expiryTime = expiryTime;
     }
 
-    public TimeInForce getTimeInForce() {
+    public TimeInForceType getTimeInForce() {
         return timeInForce;
     }
 
-    public void setTimeInForce(TimeInForce timeInForce) {
+    public void setTimeInForce(TimeInForceType timeInForce) {
         this.timeInForce = timeInForce;
     }
 
@@ -212,115 +192,4 @@ public class GetOrderPreviewResponse {
         this.historicalPov = historicalPov;
     }
 
-    public static class Builder {
-        private String portfolioId;
-        private String productId;
-        private OrderSide side;
-        private OrderType type;
-        private String baseQuantity;
-        private String quoteValue;
-        private String limitPrice;
-        private String startTime;
-        private String expiryTime;
-        private TimeInForce timeInForce;
-        private String commission;
-        private String slippage;
-        private String bestBid;
-        private String bestAsk;
-        private String averageFilledPrice;
-        private String orderTotal;
-        private String historicalPov;
-
-        public Builder() {
-        }
-
-        public Builder portfolioId(String portfolioId) {
-            this.portfolioId = portfolioId;
-            return this;
-        }
-
-        public Builder productId(String productId) {
-            this.productId = productId;
-            return this;
-        }
-
-        public Builder side(OrderSide side) {
-            this.side = side;
-            return this;
-        }
-
-        public Builder type(OrderType type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder baseQuantity(String baseQuantity) {
-            this.baseQuantity = baseQuantity;
-            return this;
-        }
-
-        public Builder quoteValue(String quoteValue) {
-            this.quoteValue = quoteValue;
-            return this;
-        }
-
-        public Builder limitPrice(String limitPrice) {
-            this.limitPrice = limitPrice;
-            return this;
-        }
-
-        public Builder startTime(String startTime) {
-            this.startTime = startTime;
-            return this;
-        }
-
-        public Builder expiryTime(String expiryTime) {
-            this.expiryTime = expiryTime;
-            return this;
-        }
-
-        public Builder timeInForce(TimeInForce timeInForce) {
-            this.timeInForce = timeInForce;
-            return this;
-        }
-
-        public Builder commission(String commission) {
-            this.commission = commission;
-            return this;
-        }
-
-        public Builder slippage(String slippage) {
-            this.slippage = slippage;
-            return this;
-        }
-
-        public Builder bestBid(String bestBid) {
-            this.bestBid = bestBid;
-            return this;
-        }
-
-        public Builder bestAsk(String bestAsk) {
-            this.bestAsk = bestAsk;
-            return this;
-        }
-
-        public Builder averageFilledPrice(String averageFilledPrice) {
-            this.averageFilledPrice = averageFilledPrice;
-            return this;
-        }
-
-        public Builder orderTotal(String orderTotal) {
-            this.orderTotal = orderTotal;
-            return this;
-        }
-
-        public Builder historicalPov(String historicalPov) {
-            this.historicalPov = historicalPov;
-            return this;
-        }
-
-        public GetOrderPreviewResponse build() {
-            return new GetOrderPreviewResponse(this);
-        }
-    }
 }

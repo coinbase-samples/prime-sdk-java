@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,10 +18,11 @@ package com.coinbase.prime.orders;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
-import com.coinbase.prime.model.Pagination;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderStatus;
 import com.coinbase.prime.model.enums.OrderType;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -123,7 +124,7 @@ public class ListPortfolioOrdersRequest extends PrimeListRequest {
         private String startDate;
         private String endDate;
         private String cursor;
-        private String sortDirection;
+        private SortDirection sortDirection;
         private Integer limit;
 
         public Builder() {

@@ -18,15 +18,17 @@ package com.coinbase.prime.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Response object for creating an on-chain transaction.
+ * 
+ * Contains the transaction ID for the newly created on-chain transaction.
+ */
 public class CreateOnchainTransactionResponse {
+    /** Unique identifier for the created transaction */
     @JsonProperty("transaction_id")
     private String transactionId;
 
     public CreateOnchainTransactionResponse() {
-    }
-
-    public CreateOnchainTransactionResponse(Builder builder) {
-        this.transactionId = builder.transactionId;
     }
 
     public String getTransactionId() {
@@ -37,19 +39,4 @@ public class CreateOnchainTransactionResponse {
         this.transactionId = transactionId;
     }
 
-    public static class Builder {
-        private String transactionId;
-
-        public Builder() {
-        }
-
-        public Builder transactionId(String transactionId) {
-            this.transactionId = transactionId;
-            return this;
-        }
-
-        public CreateOnchainTransactionResponse build() {
-            return new CreateOnchainTransactionResponse(this);
-        }
-    }
 }

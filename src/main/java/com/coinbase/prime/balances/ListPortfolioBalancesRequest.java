@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,7 +29,7 @@ public class ListPortfolioBalancesRequest {
     private String portfolioId;
     private String[] symbols;
     @JsonProperty("balance_type")
-    private String balanceType;
+    private PortfolioBalanceType balanceType;
 
     public ListPortfolioBalancesRequest() {
     }
@@ -55,18 +56,18 @@ public class ListPortfolioBalancesRequest {
         this.symbols = symbols;
     }
 
-    public String getBalanceType() {
+    public PortfolioBalanceType getBalanceType() {
         return balanceType;
     }
 
-    public void setBalanceType(String balanceType) {
+    public void setBalanceType(PortfolioBalanceType balanceType) {
         this.balanceType = balanceType;
     }
 
     public static class Builder {
         private String portfolioId;
         private String[] symbols;
-        private String balanceType;
+        private PortfolioBalanceType balanceType;
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -78,7 +79,7 @@ public class ListPortfolioBalancesRequest {
             return this;
         }
 
-        public Builder balanceType(String balanceType) {
+        public Builder balanceType(PortfolioBalanceType balanceType) {
             this.balanceType = balanceType;
             return this;
         }

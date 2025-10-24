@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,14 +18,16 @@ package com.coinbase.prime.orders;
 
 import com.coinbase.prime.model.Order;
 
+/**
+ * Response object for retrieving an order by order ID.
+ * 
+ * Retrieve an order by order ID.
+ */
 public class GetOrderByOrderIdResponse {
+    /** The order details */
     private Order order;
 
     public GetOrderByOrderIdResponse() {
-    }
-
-    public GetOrderByOrderIdResponse(Builder builder) {
-        this.order = builder.order;
     }
 
     public Order getOrder() {
@@ -36,19 +38,4 @@ public class GetOrderByOrderIdResponse {
         this.order = order;
     }
 
-    public static class Builder {
-        private Order order;
-
-        public Builder() {
-        }
-
-        public Builder order(Order order) {
-            this.order = order;
-            return this;
-        }
-
-        public GetOrderByOrderIdResponse build() {
-            return new GetOrderByOrderIdResponse(this);
-        }
-    }
 }

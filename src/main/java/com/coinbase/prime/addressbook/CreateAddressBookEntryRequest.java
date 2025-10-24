@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+import static com.coinbase.core.utils.Utils.*;
 
 public class CreateAddressBookEntryRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -121,8 +121,17 @@ public class CreateAddressBookEntryRequest {
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(portfolioId)) {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
+            }
+            if (isNullOrEmpty(this.address)) {
+                throw new CoinbaseClientException("Address is required");
+            }
+            if (isNullOrEmpty(this.currencySymbol)) {
+                throw new CoinbaseClientException("Currency symbol is required");
+            }
+            if (isNullOrEmpty(this.name)) {
+                throw new CoinbaseClientException("Name is required");
             }
         }
     }
