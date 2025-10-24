@@ -33,77 +33,94 @@ public class Accrual {
     /**
      * The accrual ID
      */
+    @JsonProperty("accrual_id")
     private String accrualId;
 
     /**
      * The date of accrual in UTC
      */
+    @JsonProperty("date")
     private String date;
 
     /**
      * The unique ID of the portfolio
      */
+    @JsonProperty("portfolio_id")
     private String portfolioId;
 
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
+    @JsonProperty("loan_type")
     private LoanType loanType;
 
     /**
      * The daily or annualized interest rate for the loan, see rate_type
      */
+    @JsonProperty("interest_rate")
     private String interestRate;
 
     /**
      * Daily accrual amount in the principal currency
      */
+    @JsonProperty("nominal_accrual")
     private String nominalAccrual;
 
     /**
      * Daily USD accrued interest
      */
+    @JsonProperty("notional_accrual")
     private String notionalAccrual;
 
     /**
      * Accrual rate used to convert from principal to USD accrual
      */
+    @JsonProperty("conversion_rate")
     private String conversionRate;
 
     /**
      * Outstanding principal of the loan
      */
+    @JsonProperty("loan_amount")
     private String loanAmount;
 
+    @JsonProperty("benchmark")
     private Benchmark benchmark;
 
     /**
      * Daily interest rate fetched from the benchmark source
      */
+    @JsonProperty("benchmark_rate")
     private String benchmarkRate;
 
     /**
      * Daily spread offset from the benchmark rate
      */
+    @JsonProperty("spread")
     private String spread;
 
+    @JsonProperty("rate_type")
     private RateType rateType;
 
     /**
      * Outstanding principal of the loan in USD
      */
+    @JsonProperty("loan_amount_notional")
     private String loanAmountNotional;
 
     /**
      * Settled open borrow as of start-of-day in the principal currency
      */
+    @JsonProperty("nominal_open_borrow_sod")
     private String nominalOpenBorrowSod;
 
     /**
      * Settled open borrow as of start-of-day in USD
      */
+    @JsonProperty("notional_open_borrow_sod")
     private String notionalOpenBorrowSod;
 
     public Accrual() {

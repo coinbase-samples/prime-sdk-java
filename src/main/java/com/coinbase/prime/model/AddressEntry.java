@@ -29,10 +29,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AddressEntry {
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("address")
     private String address;
 
+    @JsonProperty("chain_ids")
     private List<String> chainIds;
 
     public AddressEntry() {

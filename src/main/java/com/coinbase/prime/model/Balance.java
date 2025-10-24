@@ -30,66 +30,79 @@ public class Balance {
     /**
      * The display symbol for the asset
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The total amount in whole units with full precision. Includes the &#x60;holds&#x60; amount.
      */
+    @JsonProperty("amount")
     private String amount;
 
     /**
      * Amount that is currently held in obligation to an open order&#39;s position or a pending withdrawal
      */
+    @JsonProperty("holds")
     private String holds;
 
     /**
      * Amount that is currently locked due to bonding/staking, potentially subject to an unbonding period, in whole units
      */
+    @JsonProperty("bonded_amount")
     private String bondedAmount;
 
     /**
      * Amount that must remain in the wallet due to the protocol, in whole units
      */
+    @JsonProperty("reserved_amount")
     private String reservedAmount;
 
     /**
      * Amount that is in the process of unbonding, in whole units
      */
+    @JsonProperty("unbonding_amount")
     private String unbondingAmount;
 
     /**
      * Unrealized amount subject to a vesting schedule, in whole units
      */
+    @JsonProperty("unvested_amount")
     private String unvestedAmount;
 
     /**
      * Pending bonding/staking rewards that have not yet been realized, in whole units
      */
+    @JsonProperty("pending_rewards_amount")
     private String pendingRewardsAmount;
 
     /**
      * Previously realized bonding/staking rewards, in whole units
      */
+    @JsonProperty("past_rewards_amount")
     private String pastRewardsAmount;
 
     /**
      * Amount available for bonding/staking, in whole units
      */
+    @JsonProperty("bondable_amount")
     private String bondableAmount;
 
     /**
      * Amount available to withdraw, in whole units
      */
+    @JsonProperty("withdrawable_amount")
     private String withdrawableAmount;
 
     /**
      * The total amount in fiat unit
      */
+    @JsonProperty("fiat_amount")
     private String fiatAmount;
 
     /**
      * Amount available for unbonding/unstaking, in whole units
      */
+    @JsonProperty("unbondable_amount")
     private String unbondableAmount;
 
     public Balance() {

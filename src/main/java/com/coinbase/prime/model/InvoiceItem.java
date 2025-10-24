@@ -28,20 +28,28 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class InvoiceItem {
+    @JsonProperty("description")
     private String description;
 
+    @JsonProperty("currency_symbol")
     private String currencySymbol;
 
+    @JsonProperty("invoice_type")
     private InvoiceType invoiceType;
 
+    @JsonProperty("rate")
     private Double rate;
 
+    @JsonProperty("quantity")
     private Double quantity;
 
+    @JsonProperty("price")
     private Double price;
 
+    @JsonProperty("average_auc")
     private Double averageAuc;
 
+    @JsonProperty("total")
     private Double total;
 
     public InvoiceItem() {

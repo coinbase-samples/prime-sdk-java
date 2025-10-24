@@ -30,26 +30,31 @@ public class BuyingPower {
     /**
      * The unique ID of the portfolio
      */
+    @JsonProperty("portfolio_id")
     private String portfolioId;
 
     /**
      * The symbol for the base currency
      */
+    @JsonProperty("base_currency")
     private String baseCurrency;
 
     /**
      * The symbol for the quote currency
      */
+    @JsonProperty("quote_currency")
     private String quoteCurrency;
 
     /**
      * The buying power for the base currency
      */
+    @JsonProperty("base_buying_power")
     private String baseBuyingPower;
 
     /**
      * The buying power for the quote currency
      */
+    @JsonProperty("quote_buying_power")
     private String quoteBuyingPower;
 
     public BuyingPower() {

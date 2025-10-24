@@ -30,26 +30,31 @@ public class CreateNetAllocationResponseBody {
     /**
      * The success boolean for the post net allocation
      */
+    @JsonProperty("success")
     private Boolean success;
 
     /**
      * The netting_id for the post net allocation
      */
+    @JsonProperty("netting_id")
     private String nettingId;
 
     /**
      * The allocation id of the buy allocation in net allocation
      */
+    @JsonProperty("buy_allocation_id")
     private String buyAllocationId;
 
     /**
      * The allocation id of the sell allocation in net allocation
      */
+    @JsonProperty("sell_allocation_id")
     private String sellAllocationId;
 
     /**
      * The failure reason for the post net allocation
      */
+    @JsonProperty("failure_reason")
     private String failureReason;
 
     public CreateNetAllocationResponseBody() {

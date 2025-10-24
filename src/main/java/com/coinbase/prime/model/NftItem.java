@@ -30,6 +30,7 @@ public class NFTItem {
     /**
      * NFT item name
      */
+    @JsonProperty("name")
     private String name;
 
     public NFTItem() {

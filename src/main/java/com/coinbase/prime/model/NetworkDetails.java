@@ -28,46 +28,55 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class NetworkDetails {
+    @JsonProperty("network")
     private Network network;
 
     /**
      * The name of the network
      */
+    @JsonProperty("name")
     private String name;
 
     /**
      * The maximum number of decimals supported for this network
      */
+    @JsonProperty("max_decimals")
     private String maxDecimals;
 
     /**
      * Indicates whether this network is the default network for the asset
      */
+    @JsonProperty("default")
     private Boolean _default;
 
     /**
      * Indicates whether this network supports trading
      */
+    @JsonProperty("trading_supported")
     private Boolean tradingSupported;
 
     /**
      * Indicates whether this network supports vault
      */
+    @JsonProperty("vault_supported")
     private Boolean vaultSupported;
 
     /**
      * Indicates whether this network supports prime custody
      */
+    @JsonProperty("prime_custody_supported")
     private Boolean primeCustodySupported;
 
     /**
      * Indicates whether this network requires a destination tag
      */
+    @JsonProperty("destination_tag_required")
     private Boolean destinationTagRequired;
 
     /**
      * Base URL to our recommended block explorer (crypto only)
      */
+    @JsonProperty("network_link")
     private String networkLink;
 
     public NetworkDetails() {

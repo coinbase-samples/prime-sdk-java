@@ -31,13 +31,16 @@ public class MarginSummaryHistorical {
     /**
      * The UTC date time used for conversion
      */
+    @JsonProperty("conversion_datetime")
     private String conversionDatetime;
 
     /**
      * The date used for conversion
      */
+    @JsonProperty("conversion_date")
     private String conversionDate;
 
+    @JsonProperty("margin_summary")
     private MarginSummary marginSummary;
 
     public MarginSummaryHistorical() {

@@ -34,48 +34,58 @@ public class Product {
     /**
      * The product ID, written as &#x60;BASE-QUOTE&#x60;
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * The smallest permitted unit of denomination for the base asset (varies by product)
      */
+    @JsonProperty("base_increment")
     private String baseIncrement;
 
     /**
      * The smallest permitted unit of denomination for the quote asset (varies by product)
      */
+    @JsonProperty("quote_increment")
     private String quoteIncrement;
 
     /**
      * The minimum size (in base asset units) for which an order can be placed
      */
+    @JsonProperty("base_min_size")
     private String baseMinSize;
 
     /**
      * The minimum size (in quote asset units) for which an order can be placed
      */
+    @JsonProperty("quote_min_size")
     private String quoteMinSize;
 
     /**
      * The maximum size (in base asset units) for which an order can be placed
      */
+    @JsonProperty("base_max_size")
     private String baseMaxSize;
 
     /**
      * The maximum size (in quote asset units) for which an order can be placed
      */
+    @JsonProperty("quote_max_size")
     private String quoteMaxSize;
 
     /**
      * Permissions given to the user for a product
      */
+    @JsonProperty("permissions")
     private List<ProductPermissions> permissions;
 
     /**
      * The smallest permitted price increment for the product
      */
+    @JsonProperty("price_increment")
     private String priceIncrement;
 
+    @JsonProperty("rfq_product_details")
     private RFQProductDetails rfqProductDetails;
 
     public Product() {

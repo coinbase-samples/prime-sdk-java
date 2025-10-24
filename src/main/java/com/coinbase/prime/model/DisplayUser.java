@@ -30,16 +30,19 @@ public class DisplayUser {
     /**
      * User UUID
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * User full name
      */
+    @JsonProperty("name")
     private String name;
 
     /**
      * User avatar URL
      */
+    @JsonProperty("avatar_url")
     private String avatarUrl;
 
     public DisplayUser() {

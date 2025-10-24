@@ -28,22 +28,31 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class OrderEdit {
+    @JsonProperty("price")
     private String price;
 
+    @JsonProperty("base_quantity")
     private String baseQuantity;
 
+    @JsonProperty("quote_value")
     private String quoteValue;
 
+    @JsonProperty("display_base_size")
     private String displayBaseSize;
 
+    @JsonProperty("display_quote_size")
     private String displayQuoteSize;
 
+    @JsonProperty("stop_price")
     private String stopPrice;
 
+    @JsonProperty("expiry_time")
     private OffsetDateTime expiryTime;
 
+    @JsonProperty("accept_time")
     private OffsetDateTime acceptTime;
 
+    @JsonProperty("client_order_id")
     private String clientOrderId;
 
     public OrderEdit() {

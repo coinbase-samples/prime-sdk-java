@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class CounterpartyDestination {
+    @JsonProperty("counterparty_id")
     private String counterpartyId;
 
     public CounterpartyDestination() {

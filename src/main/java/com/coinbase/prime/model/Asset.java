@@ -33,31 +33,37 @@ public class Asset {
     /**
      * The name of the asset
      */
+    @JsonProperty("name")
     private String name;
 
     /**
      * The mutable series of letters used to identify the asset
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The number of decimals supported for the asset
      */
+    @JsonProperty("decimal_precision")
     private String decimalPrecision;
 
     /**
      * Indicates whether this asset can be traded
      */
+    @JsonProperty("trading_supported")
     private Boolean tradingSupported;
 
     /**
      * Base URL to our recommended block explorer (crypto only)
      */
+    @JsonProperty("explorer_url")
     private String explorerUrl;
 
     /**
      * List of networks supported by this asset
      */
+    @JsonProperty("networks")
     private List<NetworkDetails> networks;
 
     public Asset() {

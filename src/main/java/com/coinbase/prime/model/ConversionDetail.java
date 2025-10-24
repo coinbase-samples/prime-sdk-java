@@ -30,36 +30,43 @@ public class ConversionDetail {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * Trade finance balance after the conversion
      */
+    @JsonProperty("tf_balance")
     private String tfBalance;
 
     /**
      * Notional trade finance balance after the conversion
      */
+    @JsonProperty("notional_tf_balance")
     private String notionalTfBalance;
 
     /**
      * Converted balance
      */
+    @JsonProperty("converted_balance")
     private String convertedBalance;
 
     /**
      * Notional converted balance
      */
+    @JsonProperty("notional_converted_balance")
     private String notionalConvertedBalance;
 
     /**
      * Interest rate
      */
+    @JsonProperty("interest_rate")
     private String interestRate;
 
     /**
      * Conversion rate
      */
+    @JsonProperty("conversion_rate")
     private String conversionRate;
 
     public ConversionDetail() {

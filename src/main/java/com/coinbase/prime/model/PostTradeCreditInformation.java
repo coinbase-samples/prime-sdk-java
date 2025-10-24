@@ -33,53 +33,64 @@ public class PostTradeCreditInformation {
     /**
      * The unique ID of the portfolio
      */
+    @JsonProperty("portfolio_id")
     private String portfolioId;
 
     /**
      * The currency symbol credit is denoted in
      */
+    @JsonProperty("currency")
     private String currency;
 
     /**
      * The maximum credit limit
      */
+    @JsonProperty("limit")
     private String limit;
 
     /**
      * The amount of credit used
      */
+    @JsonProperty("utilized")
     private String utilized;
 
     /**
      * The amount of credit available
      */
+    @JsonProperty("available")
     private String available;
 
     /**
      * Whether or not a portfolio is frozen due to balance outstanding or other reason
      */
+    @JsonProperty("frozen")
     private Boolean frozen;
 
     /**
      * The reason why the portfolio is frozen
      */
+    @JsonProperty("frozen_reason")
     private String frozenReason;
 
+    @JsonProperty("amounts_due")
     private List<AmountDue> amountsDue;
 
     /**
      * Whether the portfolio has credit enabled
      */
+    @JsonProperty("enabled")
     private Boolean enabled;
 
     /**
      * The amount of adjusted credit used
      */
+    @JsonProperty("adjusted_credit_utilized")
     private String adjustedCreditUtilized;
 
     /**
      * The amount of adjusted portfolio equity
      */
+    @JsonProperty("adjusted_portfolio_equity")
     private String adjustedPortfolioEquity;
 
     public PostTradeCreditInformation() {

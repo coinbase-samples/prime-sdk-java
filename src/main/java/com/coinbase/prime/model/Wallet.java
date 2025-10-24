@@ -31,20 +31,28 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class Wallet {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("symbol")
     private String symbol;
 
+    @JsonProperty("type")
     private WalletType type;
 
+    @JsonProperty("created_at")
     private OffsetDateTime createdAt;
 
+    @JsonProperty("address")
     private String address;
 
+    @JsonProperty("visibility")
     private WalletVisibility visibility;
 
+    @JsonProperty("network")
     private Network network;
 
     public Wallet() {

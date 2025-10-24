@@ -30,26 +30,31 @@ public class MarginCallRecord {
     /**
      * The unique ID of the margin call
      */
+    @JsonProperty("margin_call_id")
     private String marginCallId;
 
     /**
      * The initial margin call amount in notional value
      */
+    @JsonProperty("initial_notional_amount")
     private String initialNotionalAmount;
 
     /**
      * The outstanding margin call amount in notional value
      */
+    @JsonProperty("outstanding_notional_amount")
     private String outstandingNotionalAmount;
 
     /**
      * The time the margin call is created in RFC3330 format
      */
+    @JsonProperty("created_at")
     private String createdAt;
 
     /**
      * The time the margin call is due in RFC3339 format
      */
+    @JsonProperty("due_at")
     private String dueAt;
 
     public MarginCallRecord() {

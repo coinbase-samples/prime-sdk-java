@@ -30,16 +30,19 @@ public class AllocationLeg {
     /**
      * The ID of the portfolio of the allocation leg
      */
+    @JsonProperty("allocation_leg_id")
     private String allocationLegId;
 
     /**
      * The ID of the destination portfolio of the allocation leg
      */
+    @JsonProperty("destination_portfolio_id")
     private String destinationPortfolioId;
 
     /**
      * The amount size for the allocation leg
      */
+    @JsonProperty("amount")
     private String amount;
 
     public AllocationLeg() {

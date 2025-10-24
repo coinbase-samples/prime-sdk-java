@@ -28,16 +28,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class PaymentMethodSummary {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("symbol")
     private String symbol;
 
+    @JsonProperty("payment_method_type")
     private PaymentMethodType paymentMethodType;
 
+    @JsonProperty("bank_name")
     private String bankName;
 
+    @JsonProperty("account_number")
     private String accountNumber;
 
+    @JsonProperty("bank_name_2")
     private String bankName2;
 
     public PaymentMethodSummary() {

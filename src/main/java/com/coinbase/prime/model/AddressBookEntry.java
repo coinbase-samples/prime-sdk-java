@@ -33,60 +33,73 @@ public class AddressBookEntry {
     /**
      * UUID identifying this address book entry
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * Currency symbol
      */
+    @JsonProperty("currency_symbol")
     private String currencySymbol;
 
     /**
      * Name for this address book entry
      */
+    @JsonProperty("name")
     private String name;
 
     /**
      * Cryptocurrency address
      */
+    @JsonProperty("address")
     private String address;
 
     /**
      * Memo or destination tag for currencies which support them
      */
+    @JsonProperty("account_identifier")
     private String accountIdentifier;
 
     /**
      * Name of the account identifier. For instance Destination Tag
      */
+    @JsonProperty("account_identifier_name")
     private String accountIdentifierName;
 
     /**
      * State of this address book entry
      */
+    @JsonProperty("state")
     private String state;
 
     /**
      * Link to a blockchain explorer
      */
+    @JsonProperty("explorer_link")
     private String explorerLink;
 
     /**
      * When this entry was last used for a transaction
      */
+    @JsonProperty("last_used_at")
     private OffsetDateTime lastUsedAt;
 
     /**
      * When this entry was added to the address book
      */
+    @JsonProperty("added_at")
     private OffsetDateTime addedAt;
 
+    @JsonProperty("added_by")
     private DisplayUser addedBy;
 
+    @JsonProperty("type")
     private AddressBookType type;
 
     /**
      * counterparty id
      */
+    @JsonProperty("counterparty_id")
     private String counterpartyId;
 
     public AddressBookEntry() {

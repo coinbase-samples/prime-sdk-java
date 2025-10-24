@@ -27,18 +27,25 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class DetailedAddress {
+    @JsonProperty("address_1")
     private String address1;
 
+    @JsonProperty("address_2")
     private String address2;
 
+    @JsonProperty("address_3")
     private String address3;
 
+    @JsonProperty("city")
     private String city;
 
+    @JsonProperty("state")
     private String state;
 
+    @JsonProperty("country_code")
     private String countryCode;
 
+    @JsonProperty("postal_code")
     private String postalCode;
 
     public DetailedAddress() {

@@ -35,44 +35,55 @@ public class XMMarginCall {
     /**
      * Financing margin call UUID
      */
+    @JsonProperty("margin_call_id")
     private String marginCallId;
 
     /**
      * Margin call currency
      */
+    @JsonProperty("currency")
     private String currency;
 
     /**
      * Call amount (notional) as of the margin call creation
      */
+    @JsonProperty("initial_notional_amount")
     private String initialNotionalAmount;
 
     /**
      * Current outstanding call amount (notional)
      */
+    @JsonProperty("outstanding_notional_amount")
     private String outstandingNotionalAmount;
 
+    @JsonProperty("margin_call_type")
     private XMCallType marginCallType;
 
+    @JsonProperty("margin_call_status")
     private XMCallStatus marginCallStatus;
 
+    @JsonProperty("called_with_margin_level")
     private XMMarginLevel calledWithMarginLevel;
 
+    @JsonProperty("called_with_margin_summary")
     private XMSummary calledWithMarginSummary;
 
     /**
      * Timestamp when the margin call settlement is due
      */
+    @JsonProperty("due_at")
     private OffsetDateTime dueAt;
 
     /**
      * Timestamp when the margin call was created
      */
+    @JsonProperty("created_at")
     private OffsetDateTime createdAt;
 
     /**
      * Timestamp when the margin call was last updated
      */
+    @JsonProperty("updated_at")
     private OffsetDateTime updatedAt;
 
     public XMMarginCall() {

@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class PaymentMethodDestination {
+    @JsonProperty("payment_method_id")
     private String paymentMethodId;
 
     public PaymentMethodDestination() {

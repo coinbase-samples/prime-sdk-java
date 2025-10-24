@@ -30,11 +30,13 @@ public class SweepAmount {
     /**
      * Currency
      */
+    @JsonProperty("currency")
     private String currency;
 
     /**
      * Amount
      */
+    @JsonProperty("amount")
     private String amount;
 
     public SweepAmount() {

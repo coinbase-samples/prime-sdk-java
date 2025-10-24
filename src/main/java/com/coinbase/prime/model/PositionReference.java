@@ -31,8 +31,10 @@ public class PositionReference {
     /**
      * Reference ID
      */
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("type")
     private PositionReferenceType type;
 
     public PositionReference() {

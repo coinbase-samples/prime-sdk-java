@@ -30,28 +30,34 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class FCMMarginCall {
+    @JsonProperty("type")
     private FCMMarginCallType type;
 
+    @JsonProperty("state")
     private FCMMarginCallState state;
 
     /**
      * Initial margin call amount to settle
      */
+    @JsonProperty("initial_amount")
     private String initialAmount;
 
     /**
      * Remaining margin call amount to settle
      */
+    @JsonProperty("remaining_amount")
     private String remainingAmount;
 
     /**
      * Business date when the margin call was opened
      */
+    @JsonProperty("business_date")
     private OffsetDateTime businessDate;
 
     /**
      * The deadline by which the margin call must be satisfied
      */
+    @JsonProperty("cure_deadline")
     private OffsetDateTime cureDeadline;
 
     public FCMMarginCall() {

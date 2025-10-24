@@ -27,8 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class AggregatedFiatBalance {
+    @JsonProperty("total")
     private String total;
 
+    @JsonProperty("holds")
     private String holds;
 
     public AggregatedFiatBalance() {

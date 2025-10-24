@@ -31,43 +31,52 @@ public class XMSummary {
     /**
      * Cross Margin Margin Requirement (XMMR) notional
      */
+    @JsonProperty("margin_requirement")
     private String marginRequirement;
 
     /**
      * Equity notional
      */
+    @JsonProperty("account_equity")
     private String accountEquity;
 
     /**
      * Equity - XMMR (margin excess is &gt; 0)
      */
+    @JsonProperty("margin_excess_shortfall")
     private String marginExcessShortfall;
 
     /**
      * Credit consumed from Cross Margin Credit Limit (XMCL)
      */
+    @JsonProperty("consumed_credit")
     private String consumedCredit;
 
     /**
      * XM Credit Limit (XMCL) is the maximum notional USD of total fiat and digital asset loans
      */
+    @JsonProperty("xm_credit_limit")
     private String xmCreditLimit;
 
     /**
      * XM Margin Limit (XMML) is the maximum notional USD deficit
      */
+    @JsonProperty("xm_margin_limit")
     private String xmMarginLimit;
 
     /**
      * Equity attributed by spot
      */
+    @JsonProperty("spot_equity")
     private String spotEquity;
 
     /**
      * Equity attributed by futures
      */
+    @JsonProperty("futures_equity")
     private String futuresEquity;
 
+    @JsonProperty("risk_netting_info")
     private XMRiskNettingInfo riskNettingInfo;
 
     public XMSummary() {

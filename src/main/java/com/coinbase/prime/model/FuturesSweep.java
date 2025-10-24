@@ -20,7 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.SweepAmount;
-import com.coinbase.prime.model.enums.FcmFuturesSweepStatus;
+import com.coinbase.prime.model.enums.FuturesSweepStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-public class FcmFuturesSweep {
+public class FuturesSweep {
     /**
      * Sweep ID
      */
@@ -46,7 +46,7 @@ public class FcmFuturesSweep {
     private Boolean shouldSweepAll;
 
     @JsonProperty("status")
-    private FcmFuturesSweepStatus status;
+    private FuturesSweepStatus status;
 
     /**
      * Scheduled time
@@ -54,10 +54,10 @@ public class FcmFuturesSweep {
     @JsonProperty("scheduled_time")
     private OffsetDateTime scheduledTime;
 
-    public FcmFuturesSweep() {
+    public FuturesSweep() {
     }
 
-    public FcmFuturesSweep(Builder builder) {
+    public FuturesSweep(Builder builder) {
         this.id = builder.id;
         this.requestedAmount = builder.requestedAmount;
         this.shouldSweepAll = builder.shouldSweepAll;
@@ -85,11 +85,11 @@ public class FcmFuturesSweep {
     public void setShouldSweepAll(Boolean shouldSweepAll) {
         this.shouldSweepAll = shouldSweepAll;
     }
-    public FcmFuturesSweepStatus getStatus() {
+    public FuturesSweepStatus getStatus() {
         return status;
     }
 
-    public void setStatus(FcmFuturesSweepStatus status) {
+    public void setStatus(FuturesSweepStatus status) {
         this.status = status;
     }
     public OffsetDateTime getScheduledTime() {
@@ -106,7 +106,7 @@ public class FcmFuturesSweep {
 
         private Boolean shouldSweepAll;
 
-        private FcmFuturesSweepStatus status;
+        private FuturesSweepStatus status;
 
         private OffsetDateTime scheduledTime;
 
@@ -125,7 +125,7 @@ public class FcmFuturesSweep {
             return this;
         }
 
-        public Builder status(FcmFuturesSweepStatus status) {
+        public Builder status(FuturesSweepStatus status) {
             this.status = status;
             return this;
         }
@@ -135,8 +135,8 @@ public class FcmFuturesSweep {
             return this;
         }
 
-        public FcmFuturesSweep build() {
-            return new FcmFuturesSweep(this);
+        public FuturesSweep build() {
+            return new FuturesSweep(this);
         }
     }
 }

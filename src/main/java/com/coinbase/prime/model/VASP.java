@@ -27,10 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class VASP {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("country_code")
     private String countryCode;
 
+    @JsonProperty("lei_number")
     private String leiNumber;
 
     public VASP() {

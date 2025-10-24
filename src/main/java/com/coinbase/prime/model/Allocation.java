@@ -36,70 +36,85 @@ public class Allocation {
     /**
      * The ID that ties together an allocation and all of its legs.
      */
+    @JsonProperty("root_id")
     private String rootId;
 
     /**
      * The ID of the allocation if this allocation is a reversal. In this case, the root_id would be the original allocation ID.
      */
+    @JsonProperty("reversal_id")
     private String reversalId;
 
     /**
      * Time the final leg of the root allocation was completed.
      */
+    @JsonProperty("allocation_completed_at")
     private OffsetDateTime allocationCompletedAt;
 
     /**
      * The ID of the user that created the allocation.
      */
+    @JsonProperty("user_id")
     private String userId;
 
     /**
      * The ID of the product of the orders allocated.
      */
+    @JsonProperty("product_id")
     private String productId;
 
+    @JsonProperty("side")
     private OrderSide side;
 
     /**
      * Price the allocation was done at.
      */
+    @JsonProperty("avg_price")
     private String avgPrice;
 
     /**
      * Amount allocated in base asset units.
      */
+    @JsonProperty("base_quantity")
     private String baseQuantity;
 
     /**
      * Amount allocated in quote asset units.
      */
+    @JsonProperty("quote_value")
     private String quoteValue;
 
     /**
      * Fees from original trade execution allocated in quote asset units.
      */
+    @JsonProperty("fees_allocated")
     private String feesAllocated;
 
+    @JsonProperty("status")
     private AllocationStatus status;
 
     /**
      * Portfolio ID of the source portfolio.
      */
+    @JsonProperty("source")
     private String source;
 
     /**
      * All order IDs that were aggregated to calculate the avg_price, quantity to allocate in each leg. Each order_id should tie back to the single allocation root_id.
      */
+    @JsonProperty("order_ids")
     private List<String> orderIds;
 
     /**
      * Array of objects, each containing the leg ID, destination portfolio ID and amount in chosen units allocated to each portfolio: [{leg_id, portfolio_id, allocation_base, allocation_quote}, {leg_id, portfolio_id, allocation_base, allocation_quote}...]
      */
+    @JsonProperty("destinations")
     private List<DestinationAlloc> destinations;
 
     /**
      * The netting ID of the allocation, not empty if the allocation was submitted as part of a net allocation
      */
+    @JsonProperty("netting_id")
     private String nettingId;
 
     public Allocation() {

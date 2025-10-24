@@ -33,11 +33,13 @@ public class OnchainTransactionMetadata {
     /**
      * The transaction type label of the confirmed transaction post settlement
      */
+    @JsonProperty("label")
     private String label;
 
     /**
      * The confirmed asset changes (onchain)
      */
+    @JsonProperty("confirmed_asset_changes")
     private List<AssetChange> confirmedAssetChanges;
 
     public OnchainTransactionMetadata() {

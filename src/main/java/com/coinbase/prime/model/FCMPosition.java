@@ -32,38 +32,46 @@ public class FcmPosition {
     /**
      * Product ID
      */
+    @JsonProperty("product_id")
     private String productId;
 
+    @JsonProperty("side")
     private FcmPositionSide side;
 
     /**
      * Number of contracts
      */
+    @JsonProperty("number_of_contracts")
     private String numberOfContracts;
 
     /**
      * Daily realized PNL
      */
+    @JsonProperty("daily_realized_pnl")
     private String dailyRealizedPnl;
 
     /**
      * Unrealized PNL
      */
+    @JsonProperty("unrealized_pnl")
     private String unrealizedPnl;
 
     /**
      * Current price of position
      */
+    @JsonProperty("current_price")
     private String currentPrice;
 
     /**
      * Average entry price
      */
+    @JsonProperty("avg_entry_price")
     private String avgEntryPrice;
 
     /**
      * Expiration time of position
      */
+    @JsonProperty("expiration_time")
     private OffsetDateTime expirationTime;
 
     public FcmPosition() {

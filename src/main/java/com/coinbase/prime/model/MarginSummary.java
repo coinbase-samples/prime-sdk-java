@@ -37,158 +37,190 @@ public class MarginSummary {
     /**
      * The unique ID of the entity
      */
+    @JsonProperty("entity_id")
     private String entityId;
 
     /**
      * The margin equity at the entity level. Margin Equity &#x3D; LMV + SMV + Trading Cash Balance + Short Collateral - Pending Withdrawals
      */
+    @JsonProperty("margin_equity")
     private String marginEquity;
 
     /**
      * USD notional value of required equity in entity portfolios
      */
+    @JsonProperty("margin_requirement")
     private String marginRequirement;
 
     /**
      * margin_equity - margin_requirement
      */
+    @JsonProperty("excess_deficit")
     private String excessDeficit;
 
     /**
      * The raw amount of portfolio margin credit used
      */
+    @JsonProperty("pm_credit_consumed")
     private String pmCreditConsumed;
 
     /**
      * The maximum trade finance credit limit. This field is deprecated and will be removed in the future.
      */
+    @JsonProperty("tf_credit_limit")
     private String tfCreditLimit;
 
     /**
      * The amount of trade finance credit used (USD). This field is deprecated and will be removed in the future.
      */
+    @JsonProperty("tf_credit_consumed")
     private String tfCreditConsumed;
 
     /**
      * TF Asset Adjusted Value (USD). This field is deprecated and will be removed in the future.
      */
+    @JsonProperty("tf_adjusted_asset_value")
     private String tfAdjustedAssetValue;
 
     /**
      * TF Adjusted Liability Value (USD). This field is deprecated and will be removed in the future.
      */
+    @JsonProperty("tf_adjusted_liability_value")
     private String tfAdjustedLiabilityValue;
 
     /**
      * The amount of adjusted credit used. This field is deprecated and will be removed in the future.
      */
+    @JsonProperty("tf_adjusted_credit_consumed")
     private String tfAdjustedCreditConsumed;
 
     /**
      * The amount of adjusted equity. This field is deprecated and will be removed in the future.
      */
+    @JsonProperty("tf_adjusted_equity")
     private String tfAdjustedEquity;
 
     /**
      * Whether or not a entity is frozen due to balance outstanding or other reason
      */
+    @JsonProperty("frozen")
     private Boolean frozen;
 
     /**
      * The reason why a entity is frozen
      */
+    @JsonProperty("frozen_reason")
     private String frozenReason;
 
     /**
      * Whether TF is enabled for the entity. This field is deprecated and will be removed in the future.
      */
+    @JsonProperty("tf_enabled")
     private Boolean tfEnabled;
 
     /**
      * Whether PM is enabled for the entity
      */
+    @JsonProperty("pm_enabled")
     private Boolean pmEnabled;
 
     /**
      * Market rates for the list of assets
      */
+    @JsonProperty("market_rates")
     private List<MarketRate> marketRates;
 
     /**
      * Asset Balances across portfolios
      */
+    @JsonProperty("asset_balances")
     private List<AssetBalance> assetBalances;
 
     /**
      * Trade finance debit loan amounts. This field is deprecated and will be removed in the future.
      */
+    @JsonProperty("tf_loans")
     private List<LoanInfo> tfLoans;
 
     /**
      * Portfolio Margin debit loan amounts
      */
+    @JsonProperty("pm_loans")
     private List<LoanInfo> pmLoans;
 
     /**
      * Short collateral amounts
      */
+    @JsonProperty("short_collateral")
     private List<LoanInfo> shortCollateral;
 
     /**
      * Gross market value (GMV) &#x3D; LMV + Abs (SMV)
      */
+    @JsonProperty("gross_market_value")
     private String grossMarketValue;
 
     /**
      * Net Market Value (NMV) &#x3D; LMV + SMV
      */
+    @JsonProperty("net_market_value")
     private String netMarketValue;
 
     /**
      * Long Market Value (LMV) &#x3D; Sum of positive notional for all assets
      */
+    @JsonProperty("long_market_value")
     private String longMarketValue;
 
     /**
      * Non_Marginable LMV: Sum of positive notional for each non-margin eligible coin
      */
+    @JsonProperty("non_marginable_long_market_value")
     private String nonMarginableLongMarketValue;
 
     /**
      * Short Market Value (SMV) &#x3D; Sum of negative notional for each margin eligible coin
      */
+    @JsonProperty("short_market_value")
     private String shortMarketValue;
 
     /**
      * Gross Leverage &#x3D; GMV / Margin Requirement
      */
+    @JsonProperty("gross_leverage")
     private String grossLeverage;
 
     /**
      * Net Exposure &#x3D; (LMV + SMV) / GMV
      */
+    @JsonProperty("net_exposure")
     private String netExposure;
 
+    @JsonProperty("portfolio_stress_triggered")
     private MarginAddOn portfolioStressTriggered;
 
     /**
      * PM asset info netted across the entity
      */
+    @JsonProperty("pm_asset_info")
     private List<PMAssetInfo> pmAssetInfo;
 
     /**
      * PM limit that monitors gross notional borrowings (crypto + fiat)
      */
+    @JsonProperty("pm_credit_limit")
     private String pmCreditLimit;
 
     /**
      * PM limit that monitors excess deficit
      */
+    @JsonProperty("pm_margin_limit")
     private String pmMarginLimit;
 
     /**
      * The amount of the margin limit that is consumed by the excess deficit
      */
+    @JsonProperty("pm_margin_consumed")
     private String pmMarginConsumed;
 
     public MarginSummary() {

@@ -30,11 +30,13 @@ public class Network {
     /**
      * The network id: base, bitcoin, ethereum, solana etc
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * The network type: mainnet, testnet, etc
      */
+    @JsonProperty("type")
     private String type;
 
     public Network() {

@@ -30,11 +30,13 @@ public class ActivityMetadataConsensus {
     /**
      * Deadline for approval of an activity
      */
+    @JsonProperty("approval_deadline")
     private String approvalDeadline;
 
     /**
      * If activity has passed consensus threshold
      */
+    @JsonProperty("has_passed_consensus")
     private Boolean hasPassedConsensus;
 
     public ActivityMetadataConsensus() {

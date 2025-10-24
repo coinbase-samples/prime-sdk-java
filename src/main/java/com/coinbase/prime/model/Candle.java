@@ -28,31 +28,37 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class Candle {
+    @JsonProperty("timestamp")
     private OffsetDateTime timestamp;
 
     /**
      * Opening price for the period
      */
+    @JsonProperty("open")
     private String open;
 
     /**
      * Highest price during the period
      */
+    @JsonProperty("high")
     private String high;
 
     /**
      * Lowest price during the period
      */
+    @JsonProperty("low")
     private String low;
 
     /**
      * Closing price for the period
      */
+    @JsonProperty("close")
     private String close;
 
     /**
      * Volume traded during the period
      */
+    @JsonProperty("volume")
     private String volume;
 
     public Candle() {

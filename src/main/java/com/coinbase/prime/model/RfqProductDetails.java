@@ -30,36 +30,43 @@ public class RFQProductDetails {
     /**
      * Whether the product is tradable via RFQ
      */
+    @JsonProperty("tradable")
     private Boolean tradable;
 
     /**
      * Deprecated: Value will be an empty string
      */
+    @JsonProperty("min_notional_size")
     private String minNotionalSize;
 
     /**
      * Deprecated: Value will be an empty string
      */
+    @JsonProperty("max_notional_size")
     private String maxNotionalSize;
 
     /**
      * Minimum base size for RFQ
      */
+    @JsonProperty("min_base_size")
     private String minBaseSize;
 
     /**
      * Maximum base size for RFQ
      */
+    @JsonProperty("max_base_size")
     private String maxBaseSize;
 
     /**
      * Minimum quote size for RFQ
      */
+    @JsonProperty("min_quote_size")
     private String minQuoteSize;
 
     /**
      * Maximum quote size for RFQ
      */
+    @JsonProperty("max_quote_size")
     private String maxQuoteSize;
 
     public RFQProductDetails() {
