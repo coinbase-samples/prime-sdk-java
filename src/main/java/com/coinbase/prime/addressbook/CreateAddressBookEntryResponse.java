@@ -19,7 +19,7 @@ package com.coinbase.prime.addressbook;
 import com.coinbase.prime.model.enums.PrimeActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreatePortfolioAddressBookEntryResponse {
+public class CreateAddressBookEntryResponse {
     @JsonProperty("activity_type")
     private PrimeActivityType activityType;
     @JsonProperty("num_approvals_remaining")
@@ -27,7 +27,7 @@ public class CreatePortfolioAddressBookEntryResponse {
     @JsonProperty("activity_id")
     private String activityId;
 
-    public CreatePortfolioAddressBookEntryResponse() {
+    public CreateAddressBookEntryResponse() {
     }
 
     public PrimeActivityType getActivityType() {

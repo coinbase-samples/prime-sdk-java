@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class ListPortfolioAddressBookRequest extends PrimeListRequest {
+public class ListAddressBookRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
@@ -33,10 +33,10 @@ public class ListPortfolioAddressBookRequest extends PrimeListRequest {
     private String currencySymbol;
     private String search;
 
-    public ListPortfolioAddressBookRequest() {
+    public ListAddressBookRequest() {
     }
 
-    public ListPortfolioAddressBookRequest(Builder builder) {
+    public ListAddressBookRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.currencySymbol = builder.currencySymbol;
@@ -100,9 +100,9 @@ public class ListPortfolioAddressBookRequest extends PrimeListRequest {
             return this;
         }
 
-        public ListPortfolioAddressBookRequest build() throws CoinbaseClientException {
+        public ListAddressBookRequest build() throws CoinbaseClientException {
             this.validate();
-            return new ListPortfolioAddressBookRequest(this);
+            return new ListAddressBookRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {

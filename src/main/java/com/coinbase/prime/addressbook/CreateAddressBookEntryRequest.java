@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class CreatePortfolioAddressBookEntryRequest {
+public class CreateAddressBookEntryRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
@@ -33,10 +33,10 @@ public class CreatePortfolioAddressBookEntryRequest {
     @JsonProperty("account_identifier")
     private String accountIdentifier;
 
-    public CreatePortfolioAddressBookEntryRequest() {
+    public CreateAddressBookEntryRequest() {
     }
 
-    public CreatePortfolioAddressBookEntryRequest(Builder builder) {
+    public CreateAddressBookEntryRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.address = builder.address;
         this.currencySymbol = builder.currencySymbol;
@@ -115,9 +115,9 @@ public class CreatePortfolioAddressBookEntryRequest {
             return this;
         }
 
-        public CreatePortfolioAddressBookEntryRequest build() throws CoinbaseClientException {
+        public CreateAddressBookEntryRequest build() throws CoinbaseClientException {
             this.validate();
-            return new CreatePortfolioAddressBookEntryRequest(this);
+            return new CreateAddressBookEntryRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {

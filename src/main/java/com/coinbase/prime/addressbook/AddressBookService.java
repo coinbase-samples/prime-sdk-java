@@ -21,6 +21,6 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface AddressBookService {
     // Address Book Management - OpenAPI spec compliance
-    ListPortfolioAddressBookResponse listPortfolioAddressBook(ListPortfolioAddressBookRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CreatePortfolioAddressBookEntryResponse createPortfolioAddressBookEntry(CreatePortfolioAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListAddressBookResponse listAddressBook(ListAddressBookRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CreateAddressBookEntryResponse createAddressBookEntry(CreateAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

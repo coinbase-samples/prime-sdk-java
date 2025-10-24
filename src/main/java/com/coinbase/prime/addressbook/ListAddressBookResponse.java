@@ -19,11 +19,11 @@ package com.coinbase.prime.addressbook;
 import com.coinbase.prime.model.AddressBookEntry;
 import com.coinbase.prime.common.Pagination;
 
-public class ListPortfolioAddressBookResponse {
+public class ListAddressBookResponse {
     private AddressBookEntry[] addresses;
     private Pagination pagination;
 
-    public ListPortfolioAddressBookResponse() {
+    public ListAddressBookResponse() {
     }
 
     public AddressBookEntry[] getAddresses() {
