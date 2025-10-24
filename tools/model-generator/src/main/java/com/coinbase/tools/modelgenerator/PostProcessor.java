@@ -30,14 +30,6 @@ import java.util.regex.Pattern;
 public class PostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(PostProcessor.class);
 
-    // Common prefixes to strip from generated class names (order matters - longest first)
-    private static final String[] PREFIXES_TO_STRIP = {
-        "CoinbaseBrokerageProxyEventsMaterializedApi",
-        "CoinbasePublicRestApi",
-        "CoinbaseCustodyApi",
-        "PrimeRESTAPI",
-        "PublicRestApi"
-    };
 
     // Special case enum renames: stripped name -> final enum name
     // This handles cases where enums need custom naming beyond simple prefix stripping
@@ -303,29 +295,34 @@ public class PostProcessor {
         return "";
     }
     
+    // Class name replacements (matching prime-sdk-ts filePathReplacements)
+    // These are applied as string replacements - empty strings strip the prefix
+    private static final Map<String, String> CLASS_NAME_REPLACEMENTS = new LinkedHashMap<String, String>() {{
+        put("CoinbaseCustodyApiActivityType", "CustodyActivityType");
+        put("CoinbasePublicRestApiActivityType", "PrimeActivityType");
+        put("CoinbaseBrokerageProxyEventsMaterializedApi", "");
+        put("CoinbasePublicRestApi", "");
+        put("CoinbaseCustodyApi", "");
+        put("PrimeRESTAPI", "");
+        put("PublicRestApi", "");
+        put("RFQ", "RFQ");
+    }};
+
     /**
-     * Strip common prefixes from class names to match prime-sdk-ts behavior.
-     * This ensures consistency across SDKs.
+     * Apply class name replacements to match prime-sdk-ts behavior.
+     * Uses string replacement approach like TypeScript version for consistency.
      */
     private String stripCommonPrefixes(String className) {
-        // Handle special cases first (matching prime-sdk-ts logic)
-        // coinbaseCustodyApiActivityType → CustodyActivityType
-        // coinbasePublicRestApiActivityType → PrimeActivityType
-        if (className.equals("CoinbaseCustodyApiActivityType")) {
-            return "CustodyActivityType";
-        }
-        if (className.equals("CoinbasePublicRestApiActivityType")) {
-            return "PrimeActivityType";
-        }
-
-        // Apply standard prefix stripping
-        for (String prefix : PREFIXES_TO_STRIP) {
-            if (className.startsWith(prefix)) {
-                return className.substring(prefix.length());
+        String result = className;
+        
+        // Apply replacements in order (LinkedHashMap maintains insertion order)
+        for (Map.Entry<String, String> entry : CLASS_NAME_REPLACEMENTS.entrySet()) {
+            if (result.contains(entry.getKey())) {
+                result = result.replace(entry.getKey(), entry.getValue());
             }
         }
         
-        return className;
+        return result;
     }
     
     /**
@@ -333,8 +330,13 @@ public class PostProcessor {
      * Applies to all type references throughout the content.
      */
     private String replaceAllPrefixReferences(String content, String originalClassName, String newClassName) {
-        for (String prefix : PREFIXES_TO_STRIP) {
-            content = content.replaceAll("\\b" + prefix + "(\\w+)", "$1");
+        // Apply all replacements from the map to the content
+        for (Map.Entry<String, String> entry : CLASS_NAME_REPLACEMENTS.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            
+            // Use word boundaries to avoid partial matches
+            content = content.replaceAll("\\b" + key + "\\b", value);
         }
         return content;
     }
