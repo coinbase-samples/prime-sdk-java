@@ -25,7 +25,7 @@
   - `editOrder` - Edit an existing order
   - `listOrderEditHistory` - List order edit history
 - **Payment Methods**
-  - `getEntityPaymentMethodDetails` - Get detailed payment method information (renamed from `getEntityPaymentMethod`)
+  - `getPaymentMethodDetails` - Get detailed payment method information (renamed from `getEntityPaymentMethod`)
 - **Portfolios**
   - `getPortfolio` - Get portfolio by ID with new request structure
   - `getPortfolioCounterpartyId` - Get portfolio counterparty ID
@@ -84,29 +84,69 @@
 
 #### Naming Conventions
 - `Web3WalletAsset` → `OnchainAsset`
-- `Web3WalletBalance` → `OnchainWalletBalance`
 - Replaced "Web3" terminology with "Onchain" throughout codebase
 - Method renames:
   - `getActivityByActivityId` → `getActivity`
-  - `getActivityByActivityIdResponse` → `getActivityResponse`
   - `listActivities` → `listPortfolioActivities`
-  - `getPortfolioAddressBook` → `listPortfolioAddressBook`
-  - `createAddressBookEntry` → `createPortfolioAddressBookEntry`
+  - `getPortfolioAddressBook` → `listAddressBook`
   - `getEntityPositions` → `getPositions`
-  - `getEntityPaymentMethod` → `getEntityPaymentMethodDetails`
+  - `getEntityPaymentMethod` → `getPaymentMethodDetails`
+  - `listEntityPaymentMethods` → `listPaymentMethods`
   - `getPortfolioById` → `getPortfolio`
+  - `getTransactionByTransactionId` → `getTransaction`
+  - `createTransfer` → `createWalletTransfer`
+  - `createWithdrawal` → `createWalletWithdrawal`
+  - `listUsers` → `listEntityUsers`
   - `getWalletById` → `getWallet`
+
+#### Request/Response Class Renames
+- `GetActivityByActivityIdRequest` → `GetActivityRequest`
+- `GetActivityByActivityIdResponse` → `GetPortfolioActivityResponse`
+- `GetEntityActivityByActivityIdResponse` → `GetActivityResponse`
+- `ListActivitiesRequest` → `ListPortfolioActivitiesRequest`
+- `ListActivitiesResponse` → `ListPortfolioActivitiesResponse`
+- `GetPortfolioAddressBookRequest` → `ListAddressBookRequest`
+- `GetPortfolioAddressBookResponse` → `ListAddressBookResponse`
+- `GetPortfolioAllocationsRequest` → `ListPortfolioAllocationsRequest`
+- `GetEntityPaymentMethodRequest` → `GetPaymentMethodDetailsRequest`
+- `GetEntityPaymentMethodResponse` → `GetPaymentMethodDetailsResponse`
+- `ListEntityPaymentMethodsRequest` → `ListPaymentMethodsRequest`
+- `GetPortfolioByIdRequest` → `GetPortfolioRequest`
+- `GetPortfolioByIdResponse` → `GetPortfolioResponse`
+- `GetEntityPositionsRequest` → `GetPositionsRequest`
+- `GetEntityPositionsResponse` → `GetPositionsResponse`
+- `GetTransactionByTransactionIdRequest` → `GetTransactionRequest`
+- `GetTransactionByTransactionIdResponse` → `GetTransactionResponse`
+- `CreateTransferRequest` → `CreateWalletTransferRequest`
+- `CreateTransferResponse` → `CreateWalletTransferResponse`
+- `CreateWithdrawalRequest` → `CreateWalletWithdrawalRequest`
+- `CreateWithdrawalResponse` → `CreateWalletWithdrawalResponse`
+- `ListUsersRequest` → `ListEntityUsersRequest`
+- `ListUsersResponse` → `ListEntityUsersResponse`
+- `GetWalletByIdRequest` → `GetWalletRequest`
+- `GetWalletByIdResponse` → `GetWalletResponse`
+
+#### Model Class Renames
+- `AllocationDestination` → `DestinationAlloc`
+- `ConversionDetails` → `ConversionDetail`
+- `EntityPaymentMethod` → `PaymentMethodSummary`
+- `Web3WalletAsset` → `OnchainAsset`
 
 #### Models and Serialization
 - Updated request/response models with Jackson annotations
 - Added `PaginationCursor` for paginated responses
 - Updated model field names to match OpenAPI specification
-- Removed `GetOrderPreviewResponse`
+- Moved `Pagination` from `com.coinbase.prime.model` to `com.coinbase.prime.common`
 - Removed redundant response wrapper classes
 
 #### Package Structure
 - Created `onchainaddressbook` package for onchain address book operations
+- Created `common` package for shared models like `Pagination`
 - Updated `PrimeServiceFactory` to include new services
+
+#### Removed Classes
+- Models: `AccountMetadata`, `Consensus`, `EvmParams`, `OnchainAddress`, `OnchainDetails`, `OrderFill` (replaced by `Fill`), `PaymentMethod`, `RequestedAmount` (replaced by `RequestAmount`), `Rpc`, `Sweep`, `TotalBalance`, `TransactionsMetadata`, `GetOrderPreviewResponse`, `OrdersMetadata`, `StakingInputs`, `FiatDepositInstructions`
+- Enums: `Role` (replaced by `UserRole`), `SizeType` (replaced by `AllocationSizeType`), `TimeInForce` (replaced by `TimeInForceType`), `UserActionType`, `BalanceType` (replaced by `PortfolioBalanceType`), `DepositType` (replaced by `WalletDepositInstructionType`)
 
 ### Fixed
 - Query parameter handling in list operations
