@@ -28,7 +28,7 @@ import java.util.Date;
 
 import static com.coinbase.core.utils.Utils.*;
 
-public class GetPortfolioAllocationsRequest extends PrimeListRequest {
+public class ListPortfolioAllocationsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
@@ -41,10 +41,10 @@ public class GetPortfolioAllocationsRequest extends PrimeListRequest {
     @JsonProperty("end_date")
     private Date endDate;
 
-    public GetPortfolioAllocationsRequest() {
+    public ListPortfolioAllocationsRequest() {
     }
 
-    public GetPortfolioAllocationsRequest(Builder builder) {
+    public ListPortfolioAllocationsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.productIds = builder.productIds;
@@ -143,9 +143,9 @@ public class GetPortfolioAllocationsRequest extends PrimeListRequest {
             return this;
         }
 
-        public GetPortfolioAllocationsRequest build() throws CoinbaseClientException {
+        public ListPortfolioAllocationsRequest build() throws CoinbaseClientException {
             this.validate();
-            return new GetPortfolioAllocationsRequest(this);
+            return new ListPortfolioAllocationsRequest(this);
         }
 
         public void validate() {

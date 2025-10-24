@@ -24,7 +24,7 @@ import com.coinbase.prime.common.Pagination;
  * 
  * Returns paginated list of allocations with optional filtering by products and allocation IDs.
  */
-public class GetPortfolioAllocationsResponse {
+public class ListPortfolioAllocationsResponse {
     /** List of allocations for the portfolio */
     private Allocation[] allocations;
     
@@ -32,9 +32,9 @@ public class GetPortfolioAllocationsResponse {
     private Pagination pagination;
 
     /** The original request that generated this response */
-    private GetPortfolioAllocationsRequest request;
+    private ListPortfolioAllocationsRequest request;
 
-    public GetPortfolioAllocationsResponse() {
+    public ListPortfolioAllocationsResponse() {
     }
 
     public Allocation[] getAllocations() {
@@ -53,11 +53,11 @@ public class GetPortfolioAllocationsResponse {
         this.pagination = pagination;
     }
 
-    public GetPortfolioAllocationsRequest getRequest() {
+    public ListPortfolioAllocationsRequest getRequest() {
         return request;
     }
 
-    public void setRequest(GetPortfolioAllocationsRequest request) {
+    public void setRequest(ListPortfolioAllocationsRequest request) {
         this.request = request;
     }
 
