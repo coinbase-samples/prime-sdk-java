@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2024-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -21,13 +21,13 @@ import com.coinbase.prime.common.Pagination;
 
 /**
  * Response object for listing all activities associated with a given portfolio.
- * 
+ *
  * Supports filtering by currencies, activity categories, activity statuses, and date ranges.
  */
 public class ListPortfolioActivitiesResponse {
     /** List of activities associated with the portfolio */
     private Activity[] activities;
-    
+
     /** Pagination information for the response */
     private Pagination pagination;
 
