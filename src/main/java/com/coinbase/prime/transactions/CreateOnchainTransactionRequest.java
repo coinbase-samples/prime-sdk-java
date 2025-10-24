@@ -16,7 +16,7 @@
 
 package com.coinbase.prime.transactions;
 
-import com.coinbase.prime.model.CreateOnchainTransactionRequestEvmParams;
+import com.coinbase.prime.model.EvmParams;
 import com.coinbase.prime.model.RpcConfig;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,7 +36,7 @@ public class CreateOnchainTransactionRequest {
     private RpcConfig rpc;
 
     @JsonProperty("evm_params")
-    private CreateOnchainTransactionRequestEvmParams evmParams;
+    private EvmParams evmParams;
 
     public CreateOnchainTransactionRequest() {
     }
@@ -81,11 +81,11 @@ public class CreateOnchainTransactionRequest {
         this.rpc = rpc;
     }
 
-    public CreateOnchainTransactionRequestEvmParams getEvmParams() {
+    public EvmParams getEvmParams() {
         return evmParams;
     }
 
-    public void setEvmParams(CreateOnchainTransactionRequestEvmParams evmParams) {
+    public void setEvmParams(EvmParams evmParams) {
         this.evmParams = evmParams;
     }
 
@@ -94,7 +94,7 @@ public class CreateOnchainTransactionRequest {
         private String walletId;
         private String rawUnsignedTxn;
         private RpcConfig rpc;
-        private CreateOnchainTransactionRequestEvmParams evmParams;
+        private EvmParams evmParams;
 
         public Builder() {
         }
@@ -119,7 +119,7 @@ public class CreateOnchainTransactionRequest {
             return this;
         }
 
-        public Builder evmParams(CreateOnchainTransactionRequestEvmParams evmParams) {
+        public Builder evmParams(EvmParams evmParams) {
             this.evmParams = evmParams;
             return this;
         }

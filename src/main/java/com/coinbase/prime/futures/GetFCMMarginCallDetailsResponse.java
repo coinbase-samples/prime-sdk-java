@@ -19,7 +19,7 @@ package com.coinbase.prime.futures;
 import com.coinbase.prime.model.FCMMarginCall;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetFcmMarginCallDetailsResponse {
+public class GetFCMMarginCallDetailsResponse {
     @JsonProperty("margin_calls")
     private FCMMarginCall[] marginCalls;
 

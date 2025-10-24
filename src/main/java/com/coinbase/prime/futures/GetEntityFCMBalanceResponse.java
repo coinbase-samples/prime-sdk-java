@@ -18,7 +18,7 @@ package com.coinbase.prime.futures;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetEntityFcmBalanceResponse {
+public class GetEntityFCMBalanceResponse {
     @JsonProperty("portfolio_id")
     private String portfolioId;
 
@@ -49,7 +49,7 @@ public class GetEntityFcmBalanceResponse {
     @JsonProperty("cfm_unsettled_accrued_funding_pnl")
     private String cfmUnsettledAccruedFundingPnl;
 
-    public GetEntityFcmBalanceResponse() {
+    public GetEntityFCMBalanceResponse() {
     }
 
     public String getPortfolioId() {

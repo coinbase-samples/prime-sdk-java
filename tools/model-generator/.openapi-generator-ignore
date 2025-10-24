@@ -3,26 +3,26 @@
 # See https://openapi-generator.tech/docs/customization#ignore-file-format
 
 # Request/Response models (service-specific, not in model package)
-*Request.java
-*Response.java
+src/main/java/com/coinbase/prime/model/*Request.java
+src/main/java/com/coinbase/prime/model/*Response.java
 
 # Google infrastructure types
-Google*.java
+src/main/java/com/coinbase/prime/model/Google*.java
 
 # Inline schemas
-RFQ.java
+src/main/java/com/coinbase/prime/model/RFQ.java
 
 # OpenAPI generator artifacts
-*AllOf*.java
-*OneOf*.java
-*AnyOf*.java
+src/main/java/com/coinbase/prime/model/*AllOf*.java
+src/main/java/com/coinbase/prime/model/*OneOf*.java
+src/main/java/com/coinbase/prime/model/*AnyOf*.java
 
 # Malformed class names from spec
-*RequestIsARequestTo*.java
-ChangeOnchainAddressGroupRequestIsARequestToCreateOrUpdateANewOnchainAddressGroup.java
-CreateATransferBetweenTwoWallets.java
+src/main/java/com/coinbase/prime/model/*RequestIsARequestTo*.java
+src/main/java/com/coinbase/prime/model/ChangeOnchainAddressGroupRequestIsARequestToCreateOrUpdateANewOnchainAddressGroup.java
+src/main/java/com/coinbase/prime/model/CreateATransferBetweenTwoWallets.java
 
 # Abstract schemas
-AbstractOpenApiSchema.java
-ModelApiResponse.java
+src/main/java/com/coinbase/prime/model/AbstractOpenApiSchema.java
+src/main/java/com/coinbase/prime/model/ModelApiResponse.java
 

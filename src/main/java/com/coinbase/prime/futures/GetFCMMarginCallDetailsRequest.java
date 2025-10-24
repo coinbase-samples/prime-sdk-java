@@ -22,15 +22,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetFcmMarginCallDetailsRequest {
+public class GetFCMMarginCallDetailsRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
-    public GetFcmMarginCallDetailsRequest() {
+    public GetFCMMarginCallDetailsRequest() {
     }
 
-    public GetFcmMarginCallDetailsRequest(Builder builder) {
+    public GetFCMMarginCallDetailsRequest(Builder builder) {
         this.entityId = builder.entityId;
     }
 
@@ -53,9 +53,9 @@ public class GetFcmMarginCallDetailsRequest {
             return this;
         }
 
-        public GetFcmMarginCallDetailsRequest build() throws CoinbaseClientException {
+        public GetFCMMarginCallDetailsRequest build() throws CoinbaseClientException {
             this.validate();
-            return new GetFcmMarginCallDetailsRequest(this);
+            return new GetFCMMarginCallDetailsRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {

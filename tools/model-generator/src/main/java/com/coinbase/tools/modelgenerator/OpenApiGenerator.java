@@ -44,18 +44,34 @@ public class OpenApiGenerator {
     public void generateModels() throws IOException {
         Path rawOutputDir = outputDir.resolve("raw");
 
-        // Clean and create output directory
-        if (rawOutputDir.toFile().exists()) {
-            FileUtils.deleteDirectory(rawOutputDir.toFile());
-        }
+        // Create output directory
         rawOutputDir.toFile().mkdirs();
-
-        // Copy .openapi-generator-ignore file to output directory
+        
+        // Copy .openapi-generator-ignore file BEFORE cleaning
         Path ignoreFile = findProjectRoot().resolve("tools/model-generator/.openapi-generator-ignore");
         if (ignoreFile.toFile().exists()) {
             Path targetIgnoreFile = rawOutputDir.resolve(".openapi-generator-ignore");
             FileUtils.copyFile(ignoreFile.toFile(), targetIgnoreFile.toFile());
-            logger.info("Copied .openapi-generator-ignore to output directory");
+            logger.info("Copied .openapi-generator-ignore to: {}", targetIgnoreFile);
+        } else {
+            logger.warn(".openapi-generator-ignore not found at: {}", ignoreFile);
+        }
+
+        // Clean output directory (but preserve .openapi-generator-ignore)
+        if (rawOutputDir.toFile().exists()) {
+            File ignoreFileInOutput = rawOutputDir.resolve(".openapi-generator-ignore").toFile();
+            File[] files = rawOutputDir.toFile().listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (!file.equals(ignoreFileInOutput)) {
+                        if (file.isDirectory()) {
+                            FileUtils.deleteDirectory(file);
+                        } else {
+                            file.delete();
+                        }
+                    }
+                }
+            }
         }
 
         // Configure OpenAPI Generator
@@ -111,7 +127,7 @@ public class OpenApiGenerator {
         configurator.setGlobalProperties(globalProperties);
 
         // Run the generator
-        logger.info("Running OpenAPI Generator with custom templates...");
+        logger.info("Running OpenAPI Generator with ignore file...");
         final ClientOptInput input = configurator.toClientOptInput();
         DefaultGenerator generator = new DefaultGenerator();
         generator.opts(input).generate();

@@ -23,7 +23,6 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
-import com.coinbase.prime.futures.models.GetFCMMarginCallDetailsResponse;
 
 public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesService {
     public FuturesServiceImpl(CoinbasePrimeClient client) {
@@ -41,13 +40,13 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     }
 
     @Override
-    public GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbasePrimeException {
+    public GetEntityFCMBalanceResponse getEntityFCMBalance(GetEntityFCMBalanceRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/balance_summary", request.getEntityId()),
                 null,
                 List.of(200),
-                new TypeReference<GetEntityFcmBalanceResponse>() {});
+                new TypeReference<GetEntityFCMBalanceResponse>() {});
     }
 
 
@@ -82,7 +81,7 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     }
 
     @Override
-    public GetFCMMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbasePrimeException {
+    public GetFCMMarginCallDetailsResponse getFCMMarginCallDetails(GetFCMMarginCallDetailsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/margin_call_details", request.getEntityId()),
@@ -92,13 +91,13 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     }
 
     @Override
-    public GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbasePrimeException {
+    public GetFCMRiskLimitsResponse getFCMRiskLimits(GetFCMRiskLimitsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/risk_limits", request.getEntityId()),
                 null,
                 List.of(200),
-                new TypeReference<GetFcmRiskLimitsResponse>() {});
+                new TypeReference<GetFCMRiskLimitsResponse>() {});
     }
 
     @Override
