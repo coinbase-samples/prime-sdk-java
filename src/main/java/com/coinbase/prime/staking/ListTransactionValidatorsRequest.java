@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  * Request object for listing transaction validators.
  */
-public class ListTransactionValidatorsRequest {
+public class ListTransactionValidatorsRequest extends PrimeListRequest {
     @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
     private String portfolioId;
@@ -32,24 +33,13 @@ public class ListTransactionValidatorsRequest {
     @JsonProperty(required = true, value = "transaction_ids")
     private List<String> transactionIds;
 
-    @JsonProperty("cursor")
-    private String cursor;
-
-    @JsonProperty("limit")
-    private Integer limit;
-
-    @JsonProperty("sort_direction")
-    private SortDirection sortDirection;
-
     public ListTransactionValidatorsRequest() {
     }
 
     public ListTransactionValidatorsRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.transactionIds = builder.transactionIds;
-        this.cursor = builder.cursor;
-        this.limit = builder.limit;
-        this.sortDirection = builder.sortDirection;
     }
 
     public String getPortfolioId() {
@@ -66,30 +56,6 @@ public class ListTransactionValidatorsRequest {
 
     public void setTransactionIds(List<String> transactionIds) {
         this.transactionIds = transactionIds;
-    }
-
-    public String getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public SortDirection getSortDirection() {
-        return sortDirection;
-    }
-
-    public void setSortDirection(SortDirection sortDirection) {
-        this.sortDirection = sortDirection;
     }
 
     public static class Builder {

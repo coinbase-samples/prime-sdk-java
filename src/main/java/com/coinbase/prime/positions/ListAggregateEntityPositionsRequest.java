@@ -16,24 +16,21 @@
 
 package com.coinbase.prime.positions;
 
+import com.coinbase.prime.common.PrimeListRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListAggregateEntityPositionsRequest {
+public class ListAggregateEntityPositionsRequest extends PrimeListRequest {
     @JsonProperty("entity_id")
     @JsonIgnore
     private String entityId;
-
-    private String cursor;
-    private Integer limit;
 
     public ListAggregateEntityPositionsRequest() {
     }
 
     public ListAggregateEntityPositionsRequest(Builder builder) {
+        super(builder.cursor, null, builder.limit);
         this.entityId = builder.entityId;
-        this.cursor = builder.cursor;
-        this.limit = builder.limit;
     }
 
     public String getEntityId() {
@@ -42,22 +39,6 @@ public class ListAggregateEntityPositionsRequest {
 
     public void setEntityId(String entityId) {
         this.entityId = entityId;
-    }
-
-    public String getCursor() {
-        return cursor;
-    }
-
-    public void setCursor(String cursor) {
-        this.cursor = cursor;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
     }
 
     public static class Builder {

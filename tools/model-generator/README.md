@@ -1,10 +1,10 @@
 # Model Generator
 
-A code generation tool that produces Java model classes and enums from the Coinbase Prime OpenAPI specification.
+Generates Java model classes and enums from the OpenAPI specification.
 
 ## Purpose
 
-Generates domain models (`com.coinbase.prime.model`) and enums (`com.coinbase.prime.model.enums`) from the OpenAPI spec, maintaining consistency between the API specification and SDK implementation. Request/Response classes are excluded as they are service-specific and maintained separately.
+Generates domain models (`com.coinbase.prime.model`) and enums (`com.coinbase.prime.model.enums`) from the OpenAPI spec. Request/Response classes are excluded and maintained separately in service packages.
 
 ## Architecture
 
@@ -31,34 +31,26 @@ mvn clean package
 
 ### Generate Models
 
-**Incremental mode** (default) - generates only new models, skips existing files:
-
 ```bash
 mvn -Pgenerate
 ```
 
-**Update mode** - regenerates all models from spec:
+Or using the JAR directly:
 
 ```bash
-java -jar target/model-generator-1.0.0.jar --update-all
-```
-
-**Full regeneration** - deletes all existing models/enums and regenerates:
-
-```bash
-java -jar target/model-generator-1.0.0.jar --full-regenerate
+java -jar target/model-generator-1.0.0.jar
 ```
 
 ## Generated Code
 
-Models include:
+Models:
 - Apache 2.0 license headers
-- Jackson annotations (`@JsonProperty`) for JSON serialization
-- Builder pattern with fluent API
-- Standard getters/setters (boolean fields use `is` prefix)
+- Jackson `@JsonProperty` annotations
+- Builder pattern
+- Standard getters/setters (`is` prefix for booleans)
 - No-arg and builder constructors
 
-Enums use `UPPERCASE_WITH_UNDERSCORES` naming convention.
+Enums: `UPPERCASE_WITH_UNDERSCORES` naming.
 
 ## Configuration
 
@@ -92,20 +84,11 @@ The post-processor applies:
 - **Web3→Onchain**: Renames classes/fields containing "Web3" to "Onchain" while preserving `@JsonProperty` mappings
 - **Schema filtering**: Skips schemas matching ignore patterns
 - **Package routing**: Places enums in `model/enums/`, models in `model/`
-- **Incremental logic**: Compares generated files against existing to skip overwrites
-
-### Command Reference
-
-| Command | Behavior |
-|---------|----------|
-| `mvn -Pgenerate` | Incremental generation (safe) |
-| `java -jar target/model-generator-1.0.0.jar` | Incremental generation (safe) |
-| `java -jar target/model-generator-1.0.0.jar --update-all` | Regenerate all models |
-| `java -jar target/model-generator-1.0.0.jar --full-regenerate` | Delete and regenerate everything |
+- **Full regeneration**: Processes all models from the OpenAPI spec, updating existing files and creating new ones as needed
 
 ## Workflow
 
-1. Run generator in incremental mode (automatically fetches the latest OpenAPI spec)
+1. Run generator: `mvn -Pgenerate`
 2. Review generated files
-3. Compile and test: `mvn clean install`
-4. Commit generated models (spec is gitignored and not committed)
+3. Compile: `mvn clean install`
+4. Commit changes

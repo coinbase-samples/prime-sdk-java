@@ -49,21 +49,14 @@ public class PostProcessor {
     private final Path tempDir;
     private final Path outputDir;
     private final Path enumsDir;
-    private final boolean updateAll;
 
     private int newModelsCount = 0;
-    private int skippedModelsCount = 0;
     private int updatedModelsCount = 0;
-    
+
     public PostProcessor(Path tempDir, Path outputDir, Path enumsDir) {
-        this(tempDir, outputDir, enumsDir, false);
-    }
-    
-    public PostProcessor(Path tempDir, Path outputDir, Path enumsDir, boolean updateAll) {
         this.tempDir = tempDir;
         this.outputDir = outputDir;
         this.enumsDir = enumsDir;
-        this.updateAll = updateAll;
     }
     
     public void processModels() throws IOException {
@@ -124,9 +117,7 @@ public class PostProcessor {
         logger.info("Model Generation Summary:");
         logger.info("  New models: {}", newModelsCount);
         logger.info("  Updated models: {}", updatedModelsCount);
-        logger.info("  Skipped models: {}", skippedModelsCount);
         logger.info("  Total processed: {}", modelFiles.size());
-        logger.info("  Mode: {}", updateAll ? "UPDATE ALL" : "INCREMENTAL");
         logger.info("==========================================");
     }
     
@@ -220,20 +211,13 @@ public class PostProcessor {
         
         String fileName = className + ".java";
         Path outputPath = enumsDir.resolve(fileName);
-        
+
         boolean existsBefore = Files.exists(outputPath);
-        
-        // Check if model already exists (unless updateAll is true)
-        if (!updateAll && existsBefore) {
-            logger.info("Skipping existing enum: {}", className);
-            skippedModelsCount++;
-            return;
-        }
-        
+
         // Custom templates already produce correct output - just fix package
         content = content.replace("package com.coinbase.prime.model;", "package com.coinbase.prime.model.enums;");
         Files.writeString(outputPath, content);
-        
+
         if (!existsBefore) {
             logger.info("Generated new enum: {}", className);
             newModelsCount++;
@@ -278,18 +262,11 @@ public class PostProcessor {
         
         Path outputPath = outputDir.resolve(fileName);
         boolean existsBefore = Files.exists(outputPath);
-        
-        // Check if model already exists (unless updateAll is true)
-        if (!updateAll && existsBefore) {
-            logger.info("Skipping existing model: {}", className);
-            skippedModelsCount++;
-            return;
-        }
-        
+
         // Custom templates already produce correct output - just fix enum imports
         content = fixEnumImports(content);
         Files.writeString(outputPath, content);
-        
+
         if (!existsBefore) {
             logger.info("Generated new model: {}", className);
             newModelsCount++;

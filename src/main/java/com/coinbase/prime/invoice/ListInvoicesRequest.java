@@ -78,26 +78,6 @@ public class ListInvoicesRequest extends PrimeListRequest {
         this.billingYear = billingYear;
     }
 
-    @Override
-    public String getCursor() {
-        return super.getCursor();
-    }
-
-    @Override
-    public void setCursor(String cursor) {
-        super.setCursor(cursor);
-    }
-
-    @Override
-    public Integer getLimit() {
-        return super.getLimit();
-    }
-
-    @Override
-    public void setLimit(Integer limit) {
-        super.setLimit(limit);
-    }
-
     public static class Builder {
         private final String entityId;
         private InvoiceState[] states;

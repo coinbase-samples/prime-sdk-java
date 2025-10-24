@@ -108,7 +108,7 @@ Working examples available in `src/main/java/com/coinbase/examples/` including:
 ### AI Agent Code Generation
 
 #### Model Generation - IMPORTANT
-**DO NOT create domain models or enums by hand!** 
+**DO NOT create domain models or enums by hand!**
 
 Use the model generator from the repository root:
 ```bash
@@ -120,7 +120,7 @@ This tool:
 - Generates models and enums from the OpenAPI spec
 - Maintains SDK conventions (Builder pattern, proper annotations)
 - Prevents drift between spec and implementation
-- Only creates new models by default (incremental mode)
+- Processes all models from the spec, updating existing files to catch changes
 - See `tools/model-generator/README.md` for full documentation
 
 **Manual model creation is prohibited.** All domain models in `com.coinbase.prime.model` and enums in `com.coinbase.prime.model.enums` must be generated from the OpenAPI specification.
