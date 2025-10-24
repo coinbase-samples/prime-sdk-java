@@ -30,21 +30,25 @@ public class ShortCollateral {
     /**
      * Existing short collateral balance
      */
+    @JsonProperty("old_balance")
     private String oldBalance;
 
     /**
      * New short collateral balance required
      */
+    @JsonProperty("new_balance")
     private String newBalance;
 
     /**
      * Loan interest rate
      */
+    @JsonProperty("loan_interest_rate")
     private String loanInterestRate;
 
     /**
      * Collateral interest rate
      */
+    @JsonProperty("collateral_interest_rate")
     private String collateralInterestRate;
 
     public ShortCollateral() {

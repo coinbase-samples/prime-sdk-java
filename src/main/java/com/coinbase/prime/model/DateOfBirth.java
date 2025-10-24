@@ -27,10 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class DateOfBirth {
+    @JsonProperty("year")
     private Long year;
 
+    @JsonProperty("month")
     private Long month;
 
+    @JsonProperty("day")
     private Long day;
 
     public DateOfBirth() {

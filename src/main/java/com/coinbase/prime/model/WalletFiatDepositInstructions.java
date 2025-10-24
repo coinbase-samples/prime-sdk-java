@@ -28,16 +28,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class WalletFiatDepositInstructions {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("type")
     private WalletDepositInstructionType type;
 
+    @JsonProperty("account_number")
     private String accountNumber;
 
+    @JsonProperty("routing_number")
     private String routingNumber;
 
+    @JsonProperty("reference_code")
     private String referenceCode;
 
     public WalletFiatDepositInstructions() {

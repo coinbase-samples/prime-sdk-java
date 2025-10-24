@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class ActivityMetadataTransactions {
+    @JsonProperty("consensus")
     private ActivityMetadataConsensus consensus;
 
     public ActivityMetadataTransactions() {

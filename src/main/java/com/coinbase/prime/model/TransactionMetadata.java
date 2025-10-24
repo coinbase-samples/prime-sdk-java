@@ -29,8 +29,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TransactionMetadata {
+    @JsonProperty("match_metadata")
     private MatchMetadata matchMetadata;
 
+    @JsonProperty("web3_transaction_metadata")
     private OnchainTransactionMetadata onchainTransactionMetadata;
 
     public TransactionMetadata() {

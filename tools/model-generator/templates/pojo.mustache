@@ -2,8 +2,8 @@ public class {{classname}} {
 {{#vars}}{{#description}}    /**
      * {{.}}
      */
-{{/description}}{{#jsonProperty}}    @JsonProperty("{{baseName}}")
-{{/jsonProperty}}    private {{{datatype}}} {{name}};
+{{/description}}    @JsonProperty("{{baseName}}")
+    private {{{datatype}}} {{name}};
 
 {{/vars}}
     public {{classname}}() {

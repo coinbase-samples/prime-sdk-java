@@ -31,18 +31,22 @@ public class Position {
     /**
      * Asset symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The long position based on &#39;reference&#39; value
      */
+    @JsonProperty("long")
     private String _long;
 
     /**
      * The short position based on &#39;reference&#39; value
      */
+    @JsonProperty("short")
     private String _short;
 
+    @JsonProperty("position_reference")
     private PositionReference positionReference;
 
     public Position() {

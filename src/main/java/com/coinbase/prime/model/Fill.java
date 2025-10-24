@@ -32,63 +32,76 @@ public class Fill {
     /**
      * The unique ID of the fill
      */
+    @JsonProperty("id")
     private String id;
 
     /**
      * The order ID of the fill
      */
+    @JsonProperty("order_id")
     private String orderId;
 
     /**
      * The product ID of the fill
      */
+    @JsonProperty("product_id")
     private String productId;
 
     /**
      * The client product ID of the fill indictating the settlment currency
      */
+    @JsonProperty("client_product_id")
     private String clientProductId;
 
+    @JsonProperty("side")
     private OrderSide side;
 
     /**
      * Filled size (in base asset units)
      */
+    @JsonProperty("filled_quantity")
     private String filledQuantity;
 
     /**
      * Filled value (in quote asset units)
      */
+    @JsonProperty("filled_value")
     private String filledValue;
 
     /**
      * The price of the fill
      */
+    @JsonProperty("price")
     private String price;
 
     /**
      * The date and time of the fill
      */
+    @JsonProperty("time")
     private OffsetDateTime time;
 
     /**
      * The commission incurred for the fill
      */
+    @JsonProperty("commission")
     private String commission;
 
     /**
      * The name of the venue
      */
+    @JsonProperty("venue")
     private String venue;
 
     /**
      * The venue fees incurred for the fill
      */
+    @JsonProperty("venue_fees")
     private String venueFees;
 
     /**
      * The CES commission incurred for the fill
      */
+    @JsonProperty("ces_commission")
     private String cesCommission;
 
     public Fill() {

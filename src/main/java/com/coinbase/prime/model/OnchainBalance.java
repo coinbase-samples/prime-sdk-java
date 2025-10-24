@@ -29,13 +29,16 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class OnchainBalance {
+    @JsonProperty("asset")
     private OnchainAsset asset;
 
     /**
      * The total amount in whole units with full precision.
      */
+    @JsonProperty("amount")
     private String amount;
 
+    @JsonProperty("visibility_status")
     private VisibilityStatus visibilityStatus;
 
     public OnchainBalance() {

@@ -31,24 +31,34 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TravelRuleEntry {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("blockchain_address")
     private BlockchainAddress blockchainAddress;
 
+    @JsonProperty("originator")
     private TravelRuleParty originator;
 
+    @JsonProperty("beneficiary")
     private TravelRuleParty beneficiary;
 
+    @JsonProperty("vasp")
     private VASP vasp;
 
+    @JsonProperty("wallet_details")
     private TravelRuleWalletDetails walletDetails;
 
+    @JsonProperty("transfer_purpose")
     private String transferPurpose;
 
+    @JsonProperty("is_self_certified")
     private Boolean isSelfCertified;
 
+    @JsonProperty("is_intermediary")
     private Boolean isIntermediary;
 
+    @JsonProperty("is_self")
     private Boolean isSelf;
 
     public TravelRuleEntry() {

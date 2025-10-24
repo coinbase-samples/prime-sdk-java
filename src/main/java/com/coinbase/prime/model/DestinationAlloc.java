@@ -30,26 +30,31 @@ public class DestinationAlloc {
     /**
      * The ID unique to each leg of an allocation.
      */
+    @JsonProperty("leg_id")
     private String legId;
 
     /**
      * Portfolio ID of the source portfolio.
      */
+    @JsonProperty("portfolio_id")
     private String portfolioId;
 
     /**
      * Amount allocated in base asset units.
      */
+    @JsonProperty("allocation_base")
     private String allocationBase;
 
     /**
      * Amount allocated in quote asset units.
      */
+    @JsonProperty("allocation_quote")
     private String allocationQuote;
 
     /**
      * Pro rata fees for each leg. Adding up the fees for each leg will sum up to equal the total allocation level fees.
      */
+    @JsonProperty("fees_allocated_leg")
     private String feesAllocatedLeg;
 
     public DestinationAlloc() {

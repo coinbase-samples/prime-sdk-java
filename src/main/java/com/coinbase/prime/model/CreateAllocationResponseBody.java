@@ -30,16 +30,19 @@ public class CreateAllocationResponseBody {
     /**
      * The success boolean for the post allocation
      */
+    @JsonProperty("success")
     private Boolean success;
 
     /**
      * The allocation id for the post allocation
      */
+    @JsonProperty("allocation_id")
     private String allocationId;
 
     /**
      * The failure reason for the post allocation
      */
+    @JsonProperty("failure_reason")
     private String failureReason;
 
     public CreateAllocationResponseBody() {

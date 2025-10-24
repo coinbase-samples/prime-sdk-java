@@ -35,22 +35,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CrossMarginOverview {
+    @JsonProperty("control_status")
     private XMControlStatus controlStatus;
 
+    @JsonProperty("call_status")
     private XMEntityCallStatus callStatus;
 
+    @JsonProperty("margin_level")
     private XMMarginLevel marginLevel;
 
+    @JsonProperty("margin_summary")
     private XMSummary marginSummary;
 
     /**
      * List of active XM margin calls
      */
+    @JsonProperty("active_margin_calls")
     private List<XMMarginCall> activeMarginCalls;
 
     /**
      * List of active XM loans
      */
+    @JsonProperty("active_loans")
     private List<XMLoan> activeLoans;
 
     public CrossMarginOverview() {

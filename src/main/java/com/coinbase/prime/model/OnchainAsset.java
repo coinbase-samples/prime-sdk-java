@@ -27,26 +27,31 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class OnchainAsset {
+    @JsonProperty("network")
     private String network;
 
     /**
      * Contract Address of this asset (empty for native assets).
      */
+    @JsonProperty("contract_address")
     private String contractAddress;
 
     /**
      * Symbol of this asset.
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * Token ID of this asset (empty for non  NFT assets).
      */
+    @JsonProperty("token_id")
     private String tokenId;
 
     /**
      * Name of this asset, either the name of the crypto token or the NFT collection name.
      */
+    @JsonProperty("name")
     private String name;
 
     public OnchainAsset() {

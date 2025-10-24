@@ -30,126 +30,151 @@ public class XMPosition {
     /**
      * Position currency
      */
+    @JsonProperty("currency")
     private String currency;
 
     /**
      * Current market price
      */
+    @JsonProperty("market_price")
     private String marketPrice;
 
     /**
      * True if margin eligible, false otherwise
      */
+    @JsonProperty("margin_eligible")
     private Boolean marginEligible;
 
     /**
      * Total market capitalization
      */
+    @JsonProperty("market_cap")
     private String marketCap;
 
     /**
      * Average daily volume calculated over a 30-day period
      */
+    @JsonProperty("adv30_days")
     private String adv30Days;
 
     /**
      * Historic volatility calculated over a 5-day period
      */
+    @JsonProperty("hist5d_vol")
     private String hist5dVol;
 
     /**
      * Historic volatility calculated over a 30-day period
      */
+    @JsonProperty("hist30d_vol")
     private String hist30dVol;
 
     /**
      * Historic volatility calculated over a 90-day period
      */
+    @JsonProperty("hist90d_vol")
     private String hist90dVol;
 
     /**
      * Base margin requirement for the specific asset
      */
+    @JsonProperty("margin_requirement")
     private String marginRequirement;
 
     /**
      * XM spot balance nominal
      */
+    @JsonProperty("spot_balance")
     private String spotBalance;
 
     /**
      * XM spot balance notional
      */
+    @JsonProperty("spot_balance_notional")
     private String spotBalanceNotional;
 
     /**
      * Pre-netted spot total position margin
      */
+    @JsonProperty("spot_total_position_margin")
     private String spotTotalPositionMargin;
 
     /**
      * XM futures balance nominal
      */
+    @JsonProperty("futures_balance")
     private String futuresBalance;
 
     /**
      * XM futures balance notional
      */
+    @JsonProperty("futures_balance_notional")
     private String futuresBalanceNotional;
 
     /**
      * Pre-netted futures total position margin
      */
+    @JsonProperty("futures_total_position_margin")
     private String futuresTotalPositionMargin;
 
     /**
      * Basis GMV &#x3D; |futures| + |spot| - |unnetted position|
      */
+    @JsonProperty("gmv_basis")
     private String gmvBasis;
 
     /**
      * Base margin requirement notional
      */
+    @JsonProperty("base_requirement")
     private String baseRequirement;
 
     /**
      * Effective liquidity add-on for the short positions
      */
+    @JsonProperty("liq_shorts_add_on")
     private String liqShortsAddOn;
 
     /**
      * Effective liquidity add-on for the long positions
      */
+    @JsonProperty("liq_longs_add_on")
     private String liqLongsAddOn;
 
     /**
      * Effective volatility add-on for the short positions
      */
+    @JsonProperty("vol_shorts_add_on")
     private String volShortsAddOn;
 
     /**
      * Effective volatility add-on for the long positions
      */
+    @JsonProperty("vol_longs_add_on")
     private String volLongsAddOn;
 
     /**
      * 5-day volatility add-on
      */
+    @JsonProperty("vol5days_add_on")
     private String vol5daysAddOn;
 
     /**
      * 30-day volatility add-on
      */
+    @JsonProperty("vol30days_add_on")
     private String vol30daysAddOn;
 
     /**
      * 90-day volatility add-on
      */
+    @JsonProperty("vol90days_add_on")
     private String vol90daysAddOn;
 
     /**
      * Total margin required
      */
+    @JsonProperty("total_position_margin")
     private String totalPositionMargin;
 
     public XMPosition() {

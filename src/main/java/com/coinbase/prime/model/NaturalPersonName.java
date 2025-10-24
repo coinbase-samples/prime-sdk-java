@@ -27,10 +27,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class NaturalPersonName {
+    @JsonProperty("first_name")
     private String firstName;
 
+    @JsonProperty("middle_name")
     private String middleName;
 
+    @JsonProperty("last_name")
     private String lastName;
 
     public NaturalPersonName() {

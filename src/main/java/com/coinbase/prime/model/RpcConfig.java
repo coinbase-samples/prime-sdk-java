@@ -30,11 +30,13 @@ public class RpcConfig {
     /**
      * If true, transaction will not be broadcast to the network
      */
+    @JsonProperty("skip_broadcast")
     private Boolean skipBroadcast;
 
     /**
      * Custom blockchain node RPC URL. (EVM-only)
      */
+    @JsonProperty("url")
     private String url;
 
     public RpcConfig() {

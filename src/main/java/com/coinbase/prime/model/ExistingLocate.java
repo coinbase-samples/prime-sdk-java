@@ -30,56 +30,67 @@ public class ExistingLocate {
     /**
      * The locate ID
      */
+    @JsonProperty("locate_id")
     private String locateId;
 
     /**
      * The unique ID of the entity
      */
+    @JsonProperty("entity_id")
     private String entityId;
 
     /**
      * The unique ID of the portfolio
      */
+    @JsonProperty("portfolio_id")
     private String portfolioId;
 
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The requested locate amount
      */
+    @JsonProperty("requested_amount")
     private String requestedAmount;
 
     /**
      * The interest rate of PM loan
      */
+    @JsonProperty("interest_rate")
     private String interestRate;
 
     /**
      * The locate status
      */
+    @JsonProperty("status")
     private String status;
 
     /**
      * The approved locate amount
      */
+    @JsonProperty("approved_amount")
     private String approvedAmount;
 
     /**
      * Deprecated: Use locate_date instead
      */
+    @JsonProperty("conversion_date")
     private String conversionDate;
 
     /**
      * The date when the locate was submitted in RFC3339 format
      */
+    @JsonProperty("created_at")
     private String createdAt;
 
     /**
      * The locate date from the CreateNewLocatesRequest in RFC3339 format
      */
+    @JsonProperty("locate_date")
     private String locateDate;
 
     public ExistingLocate() {

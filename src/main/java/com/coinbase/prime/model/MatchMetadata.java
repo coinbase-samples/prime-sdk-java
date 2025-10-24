@@ -30,11 +30,13 @@ public class MatchMetadata {
     /**
      * The reference id of the match
      */
+    @JsonProperty("reference_id")
     private String referenceId;
 
     /**
      * The settlement date of the match
      */
+    @JsonProperty("settlement_date")
     private String settlementDate;
 
     public MatchMetadata() {

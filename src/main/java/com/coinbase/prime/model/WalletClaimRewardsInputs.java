@@ -30,6 +30,7 @@ public class WalletClaimRewardsInputs {
     /**
      * Optional amount to claim rewards (ETH only). If omitted, the wallet will claim the maximum amount available
      */
+    @JsonProperty("amount")
     private String amount;
 
     public WalletClaimRewardsInputs() {

@@ -29,8 +29,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TravelRuleWalletDetails {
+    @JsonProperty("wallet_type")
     private TravelRuleWalletType walletType;
 
+    @JsonProperty("wallet_address")
     private BlockchainAddress walletAddress;
 
     public TravelRuleWalletDetails() {

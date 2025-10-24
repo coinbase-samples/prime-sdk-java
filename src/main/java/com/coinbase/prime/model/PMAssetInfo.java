@@ -30,86 +30,103 @@ public class PMAssetInfo {
     /**
      * The currency symbol
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * Nominal amount of the currency
      */
+    @JsonProperty("amount")
     private String amount;
 
     /**
      * Spot price for the currency
      */
+    @JsonProperty("price")
     private String price;
 
     /**
      * Notional amount of the currency
      */
+    @JsonProperty("notional_amount")
     private String notionalAmount;
 
     /**
      * Asset tier of the currency
      */
+    @JsonProperty("asset_tier")
     private String assetTier;
 
     /**
      * Whether the currency is margin eligible
      */
+    @JsonProperty("margin_eligible")
     private Boolean marginEligible;
 
     /**
      * Base margin requirement of the currency
      */
+    @JsonProperty("base_margin_requirement")
     private String baseMarginRequirement;
 
     /**
      * Notional amount of the currency&#39;s base margin requirement
      */
+    @JsonProperty("base_margin_requirement_notional")
     private String baseMarginRequirementNotional;
 
     /**
      * The 30d adv of the currency
      */
+    @JsonProperty("adv_30d")
     private String adv30d;
 
     /**
      * Historic 5d volatility of the currency
      */
+    @JsonProperty("hist_5d_vol")
     private String hist5dVol;
 
     /**
      * Historic 30d volatility of the currency
      */
+    @JsonProperty("hist_30d_vol")
     private String hist30dVol;
 
     /**
      * Historic 90d volatility of the currency
      */
+    @JsonProperty("hist_90d_vol")
     private String hist90dVol;
 
     /**
      * Volatility margin addon of the currency position
      */
+    @JsonProperty("volatility_addon")
     private String volatilityAddon;
 
     /**
      * Liquidity margin addon of the currency position
      */
+    @JsonProperty("liquidity_addon")
     private String liquidityAddon;
 
     /**
      * Total position margin of the currency
      */
+    @JsonProperty("total_position_margin")
     private String totalPositionMargin;
 
     /**
      * Nominal short position of the currency
      */
+    @JsonProperty("short_nominal")
     private String shortNominal;
 
     /**
      * Nominal long position of the currency
      */
+    @JsonProperty("long_nominal")
     private String longNominal;
 
     public PMAssetInfo() {

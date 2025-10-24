@@ -30,26 +30,31 @@ public class EntityBalance {
     /**
      * The display symbol for the asset
      */
+    @JsonProperty("symbol")
     private String symbol;
 
     /**
      * The long balance
      */
+    @JsonProperty("long_amount")
     private String longAmount;
 
     /**
      * The long balance in notional value
      */
+    @JsonProperty("long_notional")
     private String longNotional;
 
     /**
      * The short balance
      */
+    @JsonProperty("short_amount")
     private String shortAmount;
 
     /**
      * The short balance in notional value
      */
+    @JsonProperty("short_notional")
     private String shortNotional;
 
     public EntityBalance() {

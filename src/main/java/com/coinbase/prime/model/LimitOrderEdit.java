@@ -28,20 +28,28 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class LimitOrderEdit {
+    @JsonProperty("price")
     private String price;
 
+    @JsonProperty("size")
     private String size;
 
+    @JsonProperty("display_size")
     private String displaySize;
 
+    @JsonProperty("stop_price")
     private String stopPrice;
 
+    @JsonProperty("stop_limit_price")
     private String stopLimitPrice;
 
+    @JsonProperty("end_time")
     private OffsetDateTime endTime;
 
+    @JsonProperty("accept_time")
     private OffsetDateTime acceptTime;
 
+    @JsonProperty("client_order_id")
     private String clientOrderId;
 
     public LimitOrderEdit() {

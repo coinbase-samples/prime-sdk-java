@@ -30,14 +30,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
 public class TravelRuleParty {
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("detailed_address")
     private DetailedAddress detailedAddress;
 
+    @JsonProperty("natural_person_name")
     private NaturalPersonName naturalPersonName;
 
+    @JsonProperty("date_of_birth")
     private DateOfBirth dateOfBirth;
 
+    @JsonProperty("telephone_number")
     private String telephoneNumber;
 
     public TravelRuleParty() {

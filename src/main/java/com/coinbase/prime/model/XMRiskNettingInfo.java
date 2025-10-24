@@ -34,68 +34,82 @@ public class XMRiskNettingInfo {
     /**
      * Nodal Margin Requirement (NMR) is the margin requirement for all futures positions, derived from the Nodal model
      */
+    @JsonProperty("nodal_margin_requirement")
     private String nodalMarginRequirement;
 
     /**
      * Portfolio Margin Requirement (PMR) is the margin requirement for all spot positions, derived from the XM model
      */
+    @JsonProperty("portfolio_margin_requirement")
     private String portfolioMarginRequirement;
 
     /**
      * Integrated Portfolio Margin Requirement (IPMR) is the margin requirement for all spot positions + futures positions with underlying assets eligible in Portfolio Margin, via the XM model with one-leg netting
      */
+    @JsonProperty("integrated_portfolio_margin_requirement")
     private String integratedPortfolioMarginRequirement;
 
     /**
      * Ineligible Futures Margin Requirement (IFMR) is the margin requirement for IPMR-ineligible futures contracts
      */
+    @JsonProperty("ineligible_futures_margin_requirement")
     private String ineligibleFuturesMarginRequirement;
 
     /**
      * Position margin requirement for all spot positions
      */
+    @JsonProperty("position_margin_requirement")
     private String positionMarginRequirement;
 
     /**
      * Portfolio margin addon for all spot positions
      */
+    @JsonProperty("portfolio_margin_addon")
     private String portfolioMarginAddon;
 
     /**
      * Position margin requirement for spot + futures positions
      */
+    @JsonProperty("integrated_position_margin_requirement")
     private String integratedPositionMarginRequirement;
 
     /**
      * Portfolio margin addon for spot + futures positions
      */
+    @JsonProperty("integrated_portfolio_margin_addon")
     private String integratedPortfolioMarginAddon;
 
     /**
      * Post-netting USD notional for all futures positions
      */
+    @JsonProperty("netted_futures_notional")
     private String nettedFuturesNotional;
 
     /**
      * Total basis gross market value of all XM-eligible positions (i.e. crypto underliers)
      */
+    @JsonProperty("total_gmv_basis")
     private String totalGmvBasis;
 
     /**
      * Integrated Portfolio Margin cash balance
      */
+    @JsonProperty("ipm_cash_balance")
     private String ipmCashBalance;
 
+    @JsonProperty("integrated_scenario_addon")
     private MarginAddOn integratedScenarioAddon;
 
     /**
      * All integrated scenario add-ons
      */
+    @JsonProperty("all_integrated_scenario_addons")
     private List<MarginAddOn> allIntegratedScenarioAddons;
 
     /**
      * Netted positions used in the model calculation
      */
+    @JsonProperty("xm_positions")
     private List<XMPosition> xmPositions;
 
     public XMRiskNettingInfo() {

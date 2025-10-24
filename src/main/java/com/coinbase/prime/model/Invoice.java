@@ -31,22 +31,31 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Invoice {
+    @JsonProperty("id")
     private String id;
 
+    @JsonProperty("billing_month")
     private Integer billingMonth;
 
+    @JsonProperty("billing_year")
     private Integer billingYear;
 
+    @JsonProperty("due_date")
     private String dueDate;
 
+    @JsonProperty("invoice_number")
     private String invoiceNumber;
 
+    @JsonProperty("state")
     private InvoiceState state;
 
+    @JsonProperty("usd_amount_paid")
     private Double usdAmountPaid;
 
+    @JsonProperty("usd_amount_owed")
     private Double usdAmountOwed;
 
+    @JsonProperty("invoice_items")
     private List<InvoiceItem> invoiceItems;
 
     public Invoice() {

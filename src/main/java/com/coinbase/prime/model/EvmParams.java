@@ -30,26 +30,31 @@ public class EvmParams {
     /**
      * Option to disable dynamic gas price adjustment for EVM transactions prior to signing and broadcast. Defaults to false.
      */
+    @JsonProperty("disable_dynamic_gas")
     private Boolean disableDynamicGas;
 
     /**
      * Option to disable dynamic nonce when creating a transaction. Defaults to false.
      */
+    @JsonProperty("disable_dynamic_nonce")
     private Boolean disableDynamicNonce;
 
     /**
      * Transaction ID to replace (for speed-up/cancel operations). Common use cases: 1) Gas Price Adjustments: When a transaction is stuck due to low gas price, a new transaction with the same nonce but higher gas price can be submitted to replace it. 2) Transaction Cancellation: A user might want to cancel a pending transaction by replacing it with a new transaction (often a 0-value transfer to themselves with higher gas price). Note: When using this field, the disable_dynamic_nonce option must be set to false because the nonce would be automatically managed by the system.
      */
+    @JsonProperty("replaced_transaction_id")
     private String replacedTransactionId;
 
     /**
      * Chain ID for EVM transactions. (EVM-only)
      */
+    @JsonProperty("chain_id")
     private String chainId;
 
     /**
      * Network name for EVM transactions. (EVM-only)
      */
+    @JsonProperty("network_name")
     private String networkName;
 
     public EvmParams() {

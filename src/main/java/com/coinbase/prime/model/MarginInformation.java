@@ -34,8 +34,10 @@ public class MarginInformation {
     /**
      * The current margin call records
      */
+    @JsonProperty("margin_call_records")
     private List<MarginCallRecord> marginCallRecords;
 
+    @JsonProperty("margin_summary")
     private MarginSummary marginSummary;
 
     public MarginInformation() {

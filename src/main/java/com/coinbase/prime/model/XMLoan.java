@@ -32,38 +32,46 @@ public class XMLoan {
     /**
      * Financing loan UUID
      */
+    @JsonProperty("loan_id")
     private String loanId;
 
+    @JsonProperty("loan_party")
     private XMParty loanParty;
 
     /**
      * Loan principal currency
      */
+    @JsonProperty("principal_currency")
     private String principalCurrency;
 
     /**
      * Loan principal currency market price
      */
+    @JsonProperty("principal_currency_market_price")
     private String principalCurrencyMarketPrice;
 
     /**
      * Principal amount (nominal) as of loan initiation
      */
+    @JsonProperty("initial_principal_amount")
     private String initialPrincipalAmount;
 
     /**
      * Current outstanding amount (nominal)
      */
+    @JsonProperty("outstanding_principal_amount")
     private String outstandingPrincipalAmount;
 
     /**
      * Timestamp when the loan was created / initiated
      */
+    @JsonProperty("created_at")
     private OffsetDateTime createdAt;
 
     /**
      * Timestamp when the loan was last updated
      */
+    @JsonProperty("updated_at")
     private OffsetDateTime updatedAt;
 
     public XMLoan() {

@@ -345,6 +345,7 @@ public class PostProcessor {
         put("PrimeRESTAPI", "");
         put("PublicRestApi", "");
         put("rFQ", "RFQ");
+        put("FcmFuturesSweep", "FuturesSweep");
     }};
 
     // Content replacements (matching prime-sdk-ts replacements)
@@ -372,6 +373,7 @@ public class PostProcessor {
         // Simplify verbose model names
         put("CreateOnchainTransactionRequestEvmParams", "EvmParams");
         put("FcmFuturesSweepRequestAmount", "SweepAmount");
+        put("FcmFuturesSweep", "FuturesSweep");
     }};
 
 
