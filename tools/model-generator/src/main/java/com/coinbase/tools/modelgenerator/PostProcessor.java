@@ -191,13 +191,15 @@ public class PostProcessor {
         String content = Files.readString(file);
         String className = extractClassName(content);
         
+        // Apply content replacements to ALL files (matching TS replaceString logic)
+        content = applyContentReplacements(content);
+        
         // Strip prefixes from class name (matching prime-sdk-ts logic)
         String originalClassName = className;
         className = stripCommonPrefixes(className);
         
         if (!className.equals(originalClassName)) {
             content = content.replace("enum " + originalClassName, "enum " + className);
-            content = replaceAllPrefixReferences(content, originalClassName, className);
             logger.info("Transformed enum name: {} -> {}", originalClassName, className);
         }
         
@@ -230,6 +232,9 @@ public class PostProcessor {
             return;
         }
         
+        // Apply content replacements to ALL files (matching TS replaceString logic)
+        content = applyContentReplacements(content);
+        
         // Strip prefixes from class name (matching prime-sdk-ts logic)
         String originalClassName = className;
         className = stripCommonPrefixes(className);
@@ -237,7 +242,6 @@ public class PostProcessor {
         if (!className.equals(originalClassName)) {
             content = content.replace("class " + originalClassName, "class " + className);
             content = content.replace("enum " + originalClassName, "enum " + className);
-            content = replaceAllPrefixReferences(content, originalClassName, className);
             logger.info("Transformed class name: {} -> {}", originalClassName, className);
         }
         
@@ -295,9 +299,9 @@ public class PostProcessor {
         return "";
     }
     
-    // Class name replacements (matching prime-sdk-ts filePathReplacements)
-    // These are applied as string replacements - empty strings strip the prefix
-    private static final Map<String, String> CLASS_NAME_REPLACEMENTS = new LinkedHashMap<String, String>() {{
+    // File path replacements (matching prime-sdk-ts filePathReplacements)
+    // Used for transforming class names and file names
+    private static final Map<String, String> FILE_PATH_REPLACEMENTS = new LinkedHashMap<String, String>() {{
         put("CoinbaseCustodyApiActivityType", "CustodyActivityType");
         put("CoinbasePublicRestApiActivityType", "PrimeActivityType");
         put("CoinbaseBrokerageProxyEventsMaterializedApi", "");
@@ -307,16 +311,36 @@ public class PostProcessor {
         put("PublicRestApi", "");
         put("RFQ", "RFQ");
     }};
+    
+    // Content replacements (matching prime-sdk-ts replacements)
+    // Applied to all file content to strip prefixes from type references
+    private static final Map<String, String> CONTENT_REPLACEMENTS = new LinkedHashMap<String, String>() {{
+        put("coinbaseCustodyApiActivityType", "CustodyActivityType");
+        put("coinbasePublicRestApiActivityType", "PrimeActivityType");
+        put("CoinbaseCustodyApiActivityType", "CustodyActivityType");
+        put("CoinbasePublicRestApiActivityType", "PrimeActivityType");
+        put("CoinbasePublicRestApi", "");
+        put("coinbasePublicRestApi", "");
+        put("PrimeRESTAPI", "");
+        put("primeRESTAPI", "");
+        put("CoinbaseCustodyApi", "");
+        put("coinbaseCustodyApi", "");
+        put("CoinbaseBrokerageProxyEventsMaterializedApi", "");
+        put("coinbaseBrokerageProxyEventsMaterializedApi", "");
+        put("publicRestApi", "");
+        put("PublicRestApi", "");
+    }};
 
+    
     /**
-     * Apply class name replacements to match prime-sdk-ts behavior.
-     * Uses string replacement approach like TypeScript version for consistency.
+     * Apply file path replacements to strip common prefixes from class names.
+     * Matches prime-sdk-ts filePathReplacements behavior.
      */
     private String stripCommonPrefixes(String className) {
         String result = className;
         
         // Apply replacements in order (LinkedHashMap maintains insertion order)
-        for (Map.Entry<String, String> entry : CLASS_NAME_REPLACEMENTS.entrySet()) {
+        for (Map.Entry<String, String> entry : FILE_PATH_REPLACEMENTS.entrySet()) {
             if (result.contains(entry.getKey())) {
                 result = result.replace(entry.getKey(), entry.getValue());
             }
@@ -326,17 +350,18 @@ public class PostProcessor {
     }
     
     /**
-     * Replace all references to prefixed class names with their stripped versions.
-     * Applies to all type references throughout the content.
+     * Apply content replacements to all files to strip prefixes from type references.
+     * Matches prime-sdk-ts replaceString() behavior - uses split/join like TS.
      */
-    private String replaceAllPrefixReferences(String content, String originalClassName, String newClassName) {
-        // Apply all replacements from the map to the content
-        for (Map.Entry<String, String> entry : CLASS_NAME_REPLACEMENTS.entrySet()) {
+    private String applyContentReplacements(String content) {
+        // Apply content replacements (matching TS replacements object)
+        // Uses String.replace() which replaces ALL occurrences (like TS split().join())
+        for (Map.Entry<String, String> entry : CONTENT_REPLACEMENTS.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             
-            // Use word boundaries to avoid partial matches
-            content = content.replaceAll("\\b" + key + "\\b", value);
+            // Simple string replacement - replaces all occurrences
+            content = content.replace(key, value);
         }
         return content;
     }

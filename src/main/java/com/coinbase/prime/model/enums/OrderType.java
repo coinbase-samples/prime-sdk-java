@@ -27,6 +27,7 @@ public enum OrderType {
   BLOCK,
   VWAP,
   STOP_LIMIT,
-  RFQ
+  RFQ,
+  PEG
 }
 
