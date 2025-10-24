@@ -19,7 +19,7 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.FcmFuturesSweepRequestAmount;
+import com.coinbase.prime.model.SweepAmount;
 import com.coinbase.prime.model.enums.FcmFuturesSweepStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,7 +35,7 @@ public class FcmFuturesSweep {
      */
     private String id;
 
-    private FcmFuturesSweepRequestAmount requestedAmount;
+    private SweepAmount requestedAmount;
 
     /**
      * Should sweep all
@@ -66,11 +66,11 @@ public class FcmFuturesSweep {
     public void setId(String id) {
         this.id = id;
     }
-    public FcmFuturesSweepRequestAmount getRequestedAmount() {
+    public SweepAmount getRequestedAmount() {
         return requestedAmount;
     }
 
-    public void setRequestedAmount(FcmFuturesSweepRequestAmount requestedAmount) {
+    public void setRequestedAmount(SweepAmount requestedAmount) {
         this.requestedAmount = requestedAmount;
     }
     public Boolean getShouldSweepAll() {
@@ -97,7 +97,7 @@ public class FcmFuturesSweep {
     public static class Builder {
         private String id;
 
-        private FcmFuturesSweepRequestAmount requestedAmount;
+        private SweepAmount requestedAmount;
 
         private Boolean shouldSweepAll;
 
@@ -110,7 +110,7 @@ public class FcmFuturesSweep {
             return this;
         }
 
-        public Builder requestedAmount(FcmFuturesSweepRequestAmount requestedAmount) {
+        public Builder requestedAmount(SweepAmount requestedAmount) {
             this.requestedAmount = requestedAmount;
             return this;
         }

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class CreateOnchainTransactionRequestEvmParams {
+public class EvmParams {
     /**
      * Option to disable dynamic gas price adjustment for EVM transactions prior to signing and broadcast. Defaults to false.
      */
@@ -52,10 +52,10 @@ public class CreateOnchainTransactionRequestEvmParams {
      */
     private String networkName;
 
-    public CreateOnchainTransactionRequestEvmParams() {
+    public EvmParams() {
     }
 
-    public CreateOnchainTransactionRequestEvmParams(Builder builder) {
+    public EvmParams(Builder builder) {
         this.disableDynamicGas = builder.disableDynamicGas;
         this.disableDynamicNonce = builder.disableDynamicNonce;
         this.replacedTransactionId = builder.replacedTransactionId;
@@ -133,8 +133,8 @@ public class CreateOnchainTransactionRequestEvmParams {
             return this;
         }
 
-        public CreateOnchainTransactionRequestEvmParams build() {
-            return new CreateOnchainTransactionRequestEvmParams(this);
+        public EvmParams build() {
+            return new EvmParams(this);
         }
     }
 }

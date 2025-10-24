@@ -23,6 +23,7 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
+import com.coinbase.prime.futures.models.GetFCMMarginCallDetailsResponse;
 
 public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesService {
     public FuturesServiceImpl(CoinbasePrimeClient client) {

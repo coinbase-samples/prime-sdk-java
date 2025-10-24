@@ -375,6 +375,9 @@ public class PostProcessor {
         put("XmLoan", "XMLoan");
         put("XmMarginCall", "XMMarginCall");
         put("XmSummary", "XMSummary");
+        // Simplify verbose model names
+        put("CreateOnchainTransactionRequestEvmParams", "EvmParams");
+        put("FcmFuturesSweepRequestAmount", "SweepAmount");
     }};
 
     

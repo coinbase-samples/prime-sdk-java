@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class FcmFuturesSweepRequestAmount {
+public class SweepAmount {
     /**
      * Currency
      */
@@ -37,10 +37,10 @@ public class FcmFuturesSweepRequestAmount {
      */
     private String amount;
 
-    public FcmFuturesSweepRequestAmount() {
+    public SweepAmount() {
     }
 
-    public FcmFuturesSweepRequestAmount(Builder builder) {
+    public SweepAmount(Builder builder) {
         this.currency = builder.currency;
         this.amount = builder.amount;
     }
@@ -73,8 +73,8 @@ public class FcmFuturesSweepRequestAmount {
             return this;
         }
 
-        public FcmFuturesSweepRequestAmount build() {
-            return new FcmFuturesSweepRequestAmount(this);
+        public SweepAmount build() {
+            return new SweepAmount(this);
         }
     }
 }
