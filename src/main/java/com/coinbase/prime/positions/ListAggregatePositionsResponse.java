@@ -19,15 +19,15 @@ package com.coinbase.prime.positions;
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Position;
 
-public class ListAggregateEntityPositionsResponse {
+public class ListAggregatePositionsResponse {
     private Position[] positions;
 
     private Pagination pagination;
 
-    public ListAggregateEntityPositionsResponse() {
+    public ListAggregatePositionsResponse() {
     }
 
-    public ListAggregateEntityPositionsResponse(Position[] positions, Pagination pagination) {
+    public ListAggregatePositionsResponse(Position[] positions, Pagination pagination) {
         this.positions = positions;
         this.pagination = pagination;
     }

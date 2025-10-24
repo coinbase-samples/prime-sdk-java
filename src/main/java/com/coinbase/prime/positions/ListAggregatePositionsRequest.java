@@ -17,38 +17,34 @@
 package com.coinbase.prime.positions;
 
 import com.coinbase.prime.common.PrimeListRequest;
-import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListEntityPositionsRequest extends PrimeListRequest {
+public class ListAggregatePositionsRequest extends PrimeListRequest {
     @JsonProperty("entity_id")
     @JsonIgnore
     private String entityId;
 
-
-    public ListEntityPositionsRequest() {
+    public ListAggregatePositionsRequest() {
     }
 
-    public ListEntityPositionsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
+    public ListAggregatePositionsRequest(Builder builder) {
+        super(builder.cursor, null, builder.limit);
         this.entityId = builder.entityId;
     }
 
-    public String getEntityId() {
+    public String getId() {
         return entityId;
     }
 
-    public void setEntityId(String entityId) {
+    public void setId(String entityId) {
         this.entityId = entityId;
     }
-
 
     public static class Builder {
         private String entityId;
         private String cursor;
         private Integer limit;
-        private SortDirection sortDirection;
 
         public Builder entityId(String entityId) {
             this.entityId = entityId;
@@ -65,13 +61,8 @@ public class ListEntityPositionsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder sortDirection(SortDirection sortDirection) {
-            this.sortDirection = sortDirection;
-            return this;
-        }
-
-        public ListEntityPositionsRequest build() {
-            return new ListEntityPositionsRequest(this);
+        public ListAggregatePositionsRequest build() {
+            return new ListAggregatePositionsRequest(this);
         }
     }
 }

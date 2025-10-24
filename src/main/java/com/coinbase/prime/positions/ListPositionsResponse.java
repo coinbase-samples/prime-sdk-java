@@ -22,17 +22,17 @@ import com.coinbase.prime.model.Position;
 /**
  * Response object for listing positions for a specific entity.
  */
-public class ListEntityPositionsResponse {
+public class ListPositionsResponse {
     /** Array of position information for the entity */
     private Position[] positions;
 
     /** Pagination information for the response */
     private Pagination pagination;
 
-    public ListEntityPositionsResponse() {
+    public ListPositionsResponse() {
     }
 
-    public ListEntityPositionsResponse(Position[] positions, Pagination pagination) {
+    public ListPositionsResponse(Position[] positions, Pagination pagination) {
         this.positions = positions;
         this.pagination = pagination;
     }
