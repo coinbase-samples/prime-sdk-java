@@ -23,7 +23,7 @@ public class GetFCMMarginCallDetailsResponse {
     @JsonProperty("margin_calls")
     private FCMMarginCall[] marginCalls;
 
-    public GetFcmMarginCallDetailsResponse() {
+    public GetFCMMarginCallDetailsResponse() {
     }
 
     public FCMMarginCall[] getMarginCalls() {
