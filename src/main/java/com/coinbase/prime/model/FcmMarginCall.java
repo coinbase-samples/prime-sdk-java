@@ -19,8 +19,8 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.enums.FcmMarginCallState;
-import com.coinbase.prime.model.enums.FcmMarginCallType;
+import com.coinbase.prime.model.enums.FCMMarginCallState;
+import com.coinbase.prime.model.enums.FCMMarginCallType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -30,9 +30,9 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 public class FCMMarginCall {
-    private FcmMarginCallType type;
+    private FCMMarginCallType type;
 
-    private FcmMarginCallState state;
+    private FCMMarginCallState state;
 
     /**
      * Initial margin call amount to settle
@@ -65,18 +65,18 @@ public class FCMMarginCall {
         this.businessDate = builder.businessDate;
         this.cureDeadline = builder.cureDeadline;
     }
-    public FcmMarginCallType getType() {
+    public FCMMarginCallType getType() {
         return type;
     }
 
-    public void setType(FcmMarginCallType type) {
+    public void setType(FCMMarginCallType type) {
         this.type = type;
     }
-    public FcmMarginCallState getState() {
+    public FCMMarginCallState getState() {
         return state;
     }
 
-    public void setState(FcmMarginCallState state) {
+    public void setState(FCMMarginCallState state) {
         this.state = state;
     }
     public String getInitialAmount() {
@@ -108,9 +108,9 @@ public class FCMMarginCall {
         this.cureDeadline = cureDeadline;
     }
     public static class Builder {
-        private FcmMarginCallType type;
+        private FCMMarginCallType type;
 
-        private FcmMarginCallState state;
+        private FCMMarginCallState state;
 
         private String initialAmount;
 
@@ -120,12 +120,12 @@ public class FCMMarginCall {
 
         private OffsetDateTime cureDeadline;
 
-        public Builder type(FcmMarginCallType type) {
+        public Builder type(FCMMarginCallType type) {
             this.type = type;
             return this;
         }
 
-        public Builder state(FcmMarginCallState state) {
+        public Builder state(FCMMarginCallState state) {
             this.state = state;
             return this;
         }

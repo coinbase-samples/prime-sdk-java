@@ -72,6 +72,7 @@ public class CancelOrderRequest {
         }
 
         public CancelOrderRequest build() {
+            validate();
             return new CancelOrderRequest(this);
         }
 

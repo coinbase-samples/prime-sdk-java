@@ -203,10 +203,30 @@ public class PostProcessor {
             logger.info("Transformed enum name: {} -> {}", originalClassName, className);
         }
         
+        // Extract final class name after all transformations (for correct filename)
+        className = extractClassName(content);
         String fileName = className + ".java";
         Path outputPath = enumsDir.resolve(fileName);
 
         boolean existsBefore = Files.exists(outputPath);
+        
+        // Handle case-only filename changes on case-insensitive filesystems
+        final String finalFileName = fileName;
+        try {
+            Files.list(enumsDir)
+                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName) && 
+                            !p.getFileName().toString().equals(finalFileName))
+                .forEach(p -> {
+                    try {
+                        Files.delete(p);
+                        logger.info("Deleted old enum file with different casing: {}", p.getFileName());
+                    } catch (IOException e) {
+                        logger.warn("Could not delete old enum file: {}", p);
+                    }
+                });
+        } catch (IOException e) {
+            logger.warn("Could not check for enum case variants: {}", e.getMessage());
+        }
 
         // Custom templates already produce correct output - just fix package
         content = content.replace("package com.coinbase.prime.model;", "package com.coinbase.prime.model.enums;");
@@ -248,6 +268,8 @@ public class PostProcessor {
         // Apply Web3 to Onchain transformation
         content = applyWeb3ToOnchainTransformation(content, className);
         
+        // Extract final class name after all transformations (for correct filename)
+        className = extractClassName(content);
         String fileName = className + ".java";
         
         // Apply Web3 to Onchain transformation to filename
@@ -258,6 +280,25 @@ public class PostProcessor {
         
         Path outputPath = outputDir.resolve(fileName);
         boolean existsBefore = Files.exists(outputPath);
+        
+        // Handle case-only filename changes on case-insensitive filesystems
+        // Check if there's a file with different casing that needs to be deleted
+        final String finalFileName = fileName;
+        try {
+            Files.list(outputDir)
+                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName) && 
+                            !p.getFileName().toString().equals(finalFileName))
+                .forEach(p -> {
+                    try {
+                        Files.delete(p);
+                        logger.info("Deleted old file with different casing: {}", p.getFileName());
+                    } catch (IOException e) {
+                        logger.warn("Could not delete old file: {}", p);
+                    }
+                });
+        } catch (IOException e) {
+            logger.warn("Could not check for case variants: {}", e.getMessage());
+        }
 
         // Custom templates already produce correct output - just fix enum imports
         content = fixEnumImports(content);
@@ -309,7 +350,7 @@ public class PostProcessor {
         put("CoinbaseCustodyApi", "");
         put("PrimeRESTAPI", "");
         put("PublicRestApi", "");
-        put("RFQ", "RFQ");
+        put("rFQ", "RFQ");
     }};
     
     // Content replacements (matching prime-sdk-ts replacements)
@@ -329,6 +370,11 @@ public class PostProcessor {
         put("coinbaseBrokerageProxyEventsMaterializedApi", "");
         put("publicRestApi", "");
         put("PublicRestApi", "");
+        // Preserve all-caps acronym casing to match TypeScript SDK
+        put("FcmMarginCall", "FCMMarginCall");
+        put("XmLoan", "XMLoan");
+        put("XmMarginCall", "XMMarginCall");
+        put("XmSummary", "XMSummary");
     }};
 
     
