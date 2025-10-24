@@ -16,22 +16,22 @@
 
 package com.coinbase.prime.paymentmethods;
 
-import com.coinbase.prime.model.PaymentMethodDetails;
+import com.coinbase.prime.model.PaymentMethodSummary;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetEntityPaymentMethodDetailsResponse {
-    @JsonProperty("details")
-    private PaymentMethodDetails details;
+public class ListPaymentMethodsResponse {
+    @JsonProperty("payment_methods")
+    private PaymentMethodSummary[] paymentMethods;
 
-    public GetEntityPaymentMethodDetailsResponse() {
+    public ListPaymentMethodsResponse() {
     }
 
-    public PaymentMethodDetails getDetails() {
-        return details;
+    public PaymentMethodSummary[] getPaymentMethods() {
+        return paymentMethods;
     }
 
-    public void setDetails(PaymentMethodDetails details) {
-        this.details = details;
+    public void setPaymentMethods(PaymentMethodSummary[] paymentMethods) {
+        this.paymentMethods = paymentMethods;
     }
 
 }
