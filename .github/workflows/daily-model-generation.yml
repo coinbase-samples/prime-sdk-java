@@ -1,6 +1,9 @@
 name: Daily Model Generation
 
 on:
+  push:
+    branches:
+      - actions
   schedule:
     # Run at 1 AM UTC every day
     - cron: '0 1 * * *'
