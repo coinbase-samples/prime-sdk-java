@@ -20,7 +20,7 @@
 
 package com.coinbase.prime.model.enums;
 
-public enum FCMMarginCallState {
+public enum FcmMarginCallState {
   FCM_MARGIN_CALL_STATE_UNSPECIFIED,
   FCM_MARGIN_CALL_STATE_CLOSED,
   FCM_MARGIN_CALL_STATE_ROLLED_OVER,

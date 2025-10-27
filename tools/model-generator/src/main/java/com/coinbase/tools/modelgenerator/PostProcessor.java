@@ -365,11 +365,6 @@ public class PostProcessor {
         put("coinbaseBrokerageProxyEventsMaterializedApi", "");
         put("publicRestApi", "");
         put("PublicRestApi", "");
-        // Preserve all-caps acronym casing to match TypeScript SDK
-        put("FcmMarginCall", "FCMMarginCall");
-        put("XmLoan", "XMLoan");
-        put("XmMarginCall", "XMMarginCall");
-        put("XmSummary", "XMSummary");
         // Simplify verbose model names
         put("CreateOnchainTransactionRequestEvmParams", "EvmParams");
         put("FcmFuturesSweepRequestAmount", "SweepAmount");
