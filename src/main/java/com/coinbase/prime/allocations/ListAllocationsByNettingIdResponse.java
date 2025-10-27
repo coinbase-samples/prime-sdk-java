@@ -20,14 +20,14 @@ import com.coinbase.prime.model.Allocation;
 
 /**
  * Response object for retrieving net allocations by netting ID.
- * 
+ *
  * Returns all allocations associated with the specified netting ID within a portfolio.
  */
-public class GetAllocationsByClientNettingIdResponse {
+public class ListAllocationsByNettingIdResponse {
     /** Array of allocations associated with the netting ID */
     private Allocation[] allocations;
 
-    public GetAllocationsByClientNettingIdResponse() {
+    public ListAllocationsByNettingIdResponse() {
     }
 
     public Allocation[] getAllocations() {

@@ -71,12 +71,12 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
     }
 
     @Override
-    public GetAllocationsByClientNettingIdResponse getAllocationsByClientNettingId(GetAllocationsByClientNettingIdRequest request) throws CoinbasePrimeException {
+    public ListAllocationsByNettingIdResponse getAllocationsByNettingId(ListAllocationsByNettingIdRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/allocations/net/%s", request.getPortfolioId(), request.getNettingId()),
                 null,
                 List.of(200),
-                new TypeReference<GetAllocationsByClientNettingIdResponse>() {});
+                new TypeReference<ListAllocationsByNettingIdResponse>() {});
     }
 }

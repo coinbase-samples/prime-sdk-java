@@ -29,8 +29,10 @@ public class ListAddressBookRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty("currency_symbol")
     private String currencySymbol;
+
     private String search;
 
     public ListAddressBookRequest() {

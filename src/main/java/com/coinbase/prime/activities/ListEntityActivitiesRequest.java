@@ -32,13 +32,19 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
+
     @JsonProperty("activity_level")
     private ActivityLevel activityLevel;
+
     private String[] symbols;
+
     private ActivityCategory[] categories;
+
     private ActivityStatus[] statuses;
+
     @JsonProperty("start_time")
     private String startTime;
+
     @JsonProperty("end_time")
     private String endTime;
 

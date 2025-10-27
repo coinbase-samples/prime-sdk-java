@@ -63,7 +63,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                request.getPath(),
+                String.format("/portfolios/%s/activties/%s", request.getPortfolioId(), request.getActivityId()),
                 null,
                 List.of(200),
                 new TypeReference<GetPortfolioActivityResponse>() {});

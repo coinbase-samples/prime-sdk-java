@@ -20,7 +20,7 @@
 
 package com.coinbase.prime.model.enums;
 
-public enum FcmFuturesSweepStatus {
+public enum FCMFuturesSweepStatus {
   FCM_FUTURES_SWEEP_STATUS_UNSPECIFIED,
   FCM_FUTURES_SWEEP_STATUS_PENDING,
   FCM_FUTURES_SWEEP_STATUS_CLOSED,
