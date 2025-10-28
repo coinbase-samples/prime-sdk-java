@@ -17,7 +17,7 @@
 - **GetOrderPreviewResponse**: Added `isRaiseExact` field for raise exact order flag
 - **EditOrderRequest**: Added iceberg and stop order support
   - `displayQuoteSize` - Display size for iceberg orders
-  - `displayBaseSize` - Display size for iceberg orders  
+  - `displayBaseSize` - Display size for iceberg orders
   - `stopPrice` - Stop price at which order activates
 
 #### Futures Service
@@ -30,7 +30,7 @@
 #### Transactions Service
 - **CreateConversionResponse**: Added `transactionId` field - UUID of the conversion transaction
 
-#### Wallets Service  
+#### Wallets Service
 - **CreateWalletResponse**: Added `networkFamily` field for wallet network family
 - **GetWalletDepositInstructionsResponse**: Added proper JSON property annotations
   - `@JsonProperty("crypto_instructions")` for crypto deposit instructions
@@ -50,6 +50,13 @@
 - Fixed missing optional fields across 11 classes in 5 services
 - Added 26 fields total to match OpenAPI spec completely
 - Fixed JSON property mappings for proper snake_case to camelCase conversion
+- Fixed acronym casing in model classes (XM* → Xm*, FCM* → Fcm*) to match Java naming conventions
+- Fixed field naming consistency across Request/Response classes
+- Corrected method signatures and naming:
+  - `getAllocationsByClientNettingId` → `listAllocationsByNettingId`
+  - Updated corresponding request/response classes: `GetAllocationsByClientNettingIdRequest` → `ListAllocationsByNettingIdRequest`
+- Fixed activity type enum: `PrimeActivityType` → `CustodyActivityType`
+- Removed `nettingId` field from `CreateAllocationRequest` to align with API specification
 
 ## [1.4.0] - 2025-10-15
 
