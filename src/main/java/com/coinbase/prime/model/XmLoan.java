@@ -19,7 +19,7 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.XMParty;
+import com.coinbase.prime.model.enums.XmParty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -36,7 +36,7 @@ public class XmLoan {
     private String loanId;
 
     @JsonProperty("loan_party")
-    private XMParty loanParty;
+    private XmParty loanParty;
 
     /**
      * Loan principal currency
@@ -94,11 +94,11 @@ public class XmLoan {
     public void setLoanId(String loanId) {
         this.loanId = loanId;
     }
-    public XMParty getLoanParty() {
+    public XmParty getLoanParty() {
         return loanParty;
     }
 
-    public void setLoanParty(XMParty loanParty) {
+    public void setLoanParty(XmParty loanParty) {
         this.loanParty = loanParty;
     }
     public String getPrincipalCurrency() {
@@ -146,7 +146,7 @@ public class XmLoan {
     public static class Builder {
         private String loanId;
 
-        private XMParty loanParty;
+        private XmParty loanParty;
 
         private String principalCurrency;
 
@@ -165,7 +165,7 @@ public class XmLoan {
             return this;
         }
 
-        public Builder loanParty(XMParty loanParty) {
+        public Builder loanParty(XmParty loanParty) {
             this.loanParty = loanParty;
             return this;
         }

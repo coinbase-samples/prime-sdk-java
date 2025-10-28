@@ -20,7 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.MarginAddOn;
-import com.coinbase.prime.model.XMPosition;
+import com.coinbase.prime.model.XmPosition;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -38,13 +38,13 @@ public class XmRiskNettingInfo {
     private String nodalMarginRequirement;
 
     /**
-     * Portfolio Margin Requirement (PMR) is the margin requirement for all spot positions, derived from the XM model
+     * Portfolio Margin Requirement (PmR) is the margin requirement for all spot positions, derived from the Xm model
      */
     @JsonProperty("portfolio_margin_requirement")
     private String portfolioMarginRequirement;
 
     /**
-     * Integrated Portfolio Margin Requirement (IPMR) is the margin requirement for all spot positions + futures positions with underlying assets eligible in Portfolio Margin, via the XM model with one-leg netting
+     * Integrated Portfolio Margin Requirement (IPMR) is the margin requirement for all spot positions + futures positions with underlying assets eligible in Portfolio Margin, via the Xm model with one-leg netting
      */
     @JsonProperty("integrated_portfolio_margin_requirement")
     private String integratedPortfolioMarginRequirement;
@@ -86,7 +86,7 @@ public class XmRiskNettingInfo {
     private String nettedFuturesNotional;
 
     /**
-     * Total basis gross market value of all XM-eligible positions (i.e. crypto underliers)
+     * Total basis gross market value of all Xm-eligible positions (i.e. crypto underliers)
      */
     @JsonProperty("total_gmv_basis")
     private String totalGmvBasis;
@@ -110,7 +110,7 @@ public class XmRiskNettingInfo {
      * Netted positions used in the model calculation
      */
     @JsonProperty("xm_positions")
-    private List<XMPosition> xmPositions;
+    private List<XmPosition> xmPositions;
 
     public XmRiskNettingInfo() {
     }
@@ -222,11 +222,11 @@ public class XmRiskNettingInfo {
     public void setAllIntegratedScenarioAddons(List<MarginAddOn> allIntegratedScenarioAddons) {
         this.allIntegratedScenarioAddons = allIntegratedScenarioAddons;
     }
-    public List<XMPosition> getXmPositions() {
+    public List<XmPosition> getXmPositions() {
         return xmPositions;
     }
 
-    public void setXmPositions(List<XMPosition> xmPositions) {
+    public void setXmPositions(List<XmPosition> xmPositions) {
         this.xmPositions = xmPositions;
     }
     public static class Builder {
@@ -256,7 +256,7 @@ public class XmRiskNettingInfo {
 
         private List<MarginAddOn> allIntegratedScenarioAddons;
 
-        private List<XMPosition> xmPositions;
+        private List<XmPosition> xmPositions;
 
         public Builder nodalMarginRequirement(String nodalMarginRequirement) {
             this.nodalMarginRequirement = nodalMarginRequirement;
@@ -323,7 +323,7 @@ public class XmRiskNettingInfo {
             return this;
         }
 
-        public Builder xmPositions(List<XMPosition> xmPositions) {
+        public Builder xmPositions(List<XmPosition> xmPositions) {
             this.xmPositions = xmPositions;
             return this;
         }

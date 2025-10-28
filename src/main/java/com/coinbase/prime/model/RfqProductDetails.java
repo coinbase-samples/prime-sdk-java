@@ -28,7 +28,7 @@ import java.util.Arrays;
 
 public class RfqProductDetails {
     /**
-     * Whether the product is tradable via RFQ
+     * Whether the product is tradable via Rfq
      */
     @JsonProperty("tradable")
     private Boolean tradable;
@@ -46,25 +46,25 @@ public class RfqProductDetails {
     private String maxNotionalSize;
 
     /**
-     * Minimum base size for RFQ
+     * Minimum base size for Rfq
      */
     @JsonProperty("min_base_size")
     private String minBaseSize;
 
     /**
-     * Maximum base size for RFQ
+     * Maximum base size for Rfq
      */
     @JsonProperty("max_base_size")
     private String maxBaseSize;
 
     /**
-     * Minimum quote size for RFQ
+     * Minimum quote size for Rfq
      */
     @JsonProperty("min_quote_size")
     private String minQuoteSize;
 
     /**
-     * Maximum quote size for RFQ
+     * Maximum quote size for Rfq
      */
     @JsonProperty("max_quote_size")
     private String maxQuoteSize;

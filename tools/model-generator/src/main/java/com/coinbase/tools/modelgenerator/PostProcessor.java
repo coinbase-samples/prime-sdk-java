@@ -381,6 +381,43 @@ public class PostProcessor {
 
 
     /**
+     * Normalizes acronyms in content (imports, class references, method calls, etc.).
+     * Examples: GetFCMRiskLimits -> GetFcmRiskLimits, XMParty -> XmParty
+     */
+    private String normalizeAcronymsInContent(String content) {
+        // List of known acronyms that should be converted to PascalCase
+        Map<String, String> acronymMap = new LinkedHashMap<>();
+        acronymMap.put("FCM", "Fcm");
+        acronymMap.put("XML", "Xml");
+        acronymMap.put("XM", "Xm");
+        acronymMap.put("PM", "Pm");
+        acronymMap.put("RFQ", "Rfq");
+        acronymMap.put("NFT", "Nft");
+        acronymMap.put("EVM", "Evm");
+        acronymMap.put("VASP", "Vasp");
+        
+        String result = content;
+        for (Map.Entry<String, String> entry : acronymMap.entrySet()) {
+            String acronym = entry.getKey();
+            String normalized = entry.getValue();
+            
+            // Replace acronym in various contexts:
+            // 1. Class names: GetFCMRiskLimits -> GetFcmRiskLimits
+            // 2. Import statements: import ...GetFCMRiskLimits -> import ...GetFcmRiskLimits
+            // 3. Type references: GetFCMRiskLimitsResponse -> GetFcmRiskLimitsResponse
+            // 4. Method names: getFCMMarginCall -> getFcmMarginCall
+            
+            // Match acronym when followed by uppercase letter (word boundary before)
+            result = result.replaceAll("\\b" + acronym + "(?=[A-Z])", normalized);
+            
+            // Also handle acronym at end of identifier (followed by non-letter)
+            result = result.replaceAll("\\b" + acronym + "(?=[^a-zA-Z])", normalized);
+        }
+        
+        return result;
+    }
+    
+    /**
      * Normalizes acronyms in class names to use PascalCase.
      * Examples: FCMMarginCall -> FcmMarginCall, XMLoan -> XmLoan
      */
@@ -453,6 +490,10 @@ public class PostProcessor {
             // Simple string replacement - replaces all occurrences
             content = content.replace(key, value);
         }
+        
+        // Apply acronym normalization to content (class references, imports, etc.)
+        content = normalizeAcronymsInContent(content);
+        
         return content;
     }
 

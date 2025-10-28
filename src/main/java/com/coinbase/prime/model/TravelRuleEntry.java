@@ -22,7 +22,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.model.TravelRuleParty;
 import com.coinbase.prime.model.TravelRuleWalletDetails;
-import com.coinbase.prime.model.VASP;
+import com.coinbase.prime.model.Vasp;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -44,7 +44,7 @@ public class TravelRuleEntry {
     private TravelRuleParty beneficiary;
 
     @JsonProperty("vasp")
-    private VASP vasp;
+    private Vasp vasp;
 
     @JsonProperty("wallet_details")
     private TravelRuleWalletDetails walletDetails;
@@ -104,11 +104,11 @@ public class TravelRuleEntry {
     public void setBeneficiary(TravelRuleParty beneficiary) {
         this.beneficiary = beneficiary;
     }
-    public VASP getVasp() {
+    public Vasp getVasp() {
         return vasp;
     }
 
-    public void setVasp(VASP vasp) {
+    public void setVasp(Vasp vasp) {
         this.vasp = vasp;
     }
     public TravelRuleWalletDetails getWalletDetails() {
@@ -155,7 +155,7 @@ public class TravelRuleEntry {
 
         private TravelRuleParty beneficiary;
 
-        private VASP vasp;
+        private Vasp vasp;
 
         private TravelRuleWalletDetails walletDetails;
 
@@ -187,7 +187,7 @@ public class TravelRuleEntry {
             return this;
         }
 
-        public Builder vasp(VASP vasp) {
+        public Builder vasp(Vasp vasp) {
             this.vasp = vasp;
             return this;
         }

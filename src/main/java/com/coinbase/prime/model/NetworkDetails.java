@@ -79,6 +79,12 @@ public class NetworkDetails {
     @JsonProperty("network_link")
     private String networkLink;
 
+    /**
+     * Indicates the symbol that can be used to query other endpoints, related to transactions, wallets, and activities, to get information particularly for this asset on the network
+     */
+    @JsonProperty("network_scoped_symbol")
+    private String networkScopedSymbol;
+
     public NetworkDetails() {
     }
 
@@ -92,6 +98,7 @@ public class NetworkDetails {
         this.primeCustodySupported = builder.primeCustodySupported;
         this.destinationTagRequired = builder.destinationTagRequired;
         this.networkLink = builder.networkLink;
+        this.networkScopedSymbol = builder.networkScopedSymbol;
     }
     public Network getNetwork() {
         return network;
@@ -156,6 +163,13 @@ public class NetworkDetails {
     public void setNetworkLink(String networkLink) {
         this.networkLink = networkLink;
     }
+    public String getNetworkScopedSymbol() {
+        return networkScopedSymbol;
+    }
+
+    public void setNetworkScopedSymbol(String networkScopedSymbol) {
+        this.networkScopedSymbol = networkScopedSymbol;
+    }
     public static class Builder {
         private Network network;
 
@@ -174,6 +188,8 @@ public class NetworkDetails {
         private Boolean destinationTagRequired;
 
         private String networkLink;
+
+        private String networkScopedSymbol;
 
         public Builder network(Network network) {
             this.network = network;
@@ -217,6 +233,11 @@ public class NetworkDetails {
 
         public Builder networkLink(String networkLink) {
             this.networkLink = networkLink;
+            return this;
+        }
+
+        public Builder networkScopedSymbol(String networkScopedSymbol) {
+            this.networkScopedSymbol = networkScopedSymbol;
             return this;
         }
 

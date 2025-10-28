@@ -28,7 +28,7 @@ import java.util.Arrays;
 
 public class EvmParams {
     /**
-     * Option to disable dynamic gas price adjustment for EVM transactions prior to signing and broadcast. Defaults to false.
+     * Option to disable dynamic gas price adjustment for Evm transactions prior to signing and broadcast. Defaults to false.
      */
     @JsonProperty("disable_dynamic_gas")
     private Boolean disableDynamicGas;
@@ -46,13 +46,13 @@ public class EvmParams {
     private String replacedTransactionId;
 
     /**
-     * Chain ID for EVM transactions. (EVM-only)
+     * Chain ID for Evm transactions. (Evm-only)
      */
     @JsonProperty("chain_id")
     private String chainId;
 
     /**
-     * Network name for EVM transactions. (EVM-only)
+     * Network name for Evm transactions. (Evm-only)
      */
     @JsonProperty("network_name")
     private String networkName;

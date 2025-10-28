@@ -20,7 +20,7 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.ProductPermissions;
-import com.coinbase.prime.model.RFQProductDetails;
+import com.coinbase.prime.model.RfqProductDetails;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -86,7 +86,7 @@ public class Product {
     private String priceIncrement;
 
     @JsonProperty("rfq_product_details")
-    private RFQProductDetails rfqProductDetails;
+    private RfqProductDetails rfqProductDetails;
 
     public Product() {
     }
@@ -166,11 +166,11 @@ public class Product {
     public void setPriceIncrement(String priceIncrement) {
         this.priceIncrement = priceIncrement;
     }
-    public RFQProductDetails getRfqProductDetails() {
+    public RfqProductDetails getRfqProductDetails() {
         return rfqProductDetails;
     }
 
-    public void setRfqProductDetails(RFQProductDetails rfqProductDetails) {
+    public void setRfqProductDetails(RfqProductDetails rfqProductDetails) {
         this.rfqProductDetails = rfqProductDetails;
     }
     public static class Builder {
@@ -192,7 +192,7 @@ public class Product {
 
         private String priceIncrement;
 
-        private RFQProductDetails rfqProductDetails;
+        private RfqProductDetails rfqProductDetails;
 
         public Builder id(String id) {
             this.id = id;
@@ -239,7 +239,7 @@ public class Product {
             return this;
         }
 
-        public Builder rfqProductDetails(RFQProductDetails rfqProductDetails) {
+        public Builder rfqProductDetails(RfqProductDetails rfqProductDetails) {
             this.rfqProductDetails = rfqProductDetails;
             return this;
         }

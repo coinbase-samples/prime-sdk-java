@@ -19,7 +19,7 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.XMRiskNettingInfo;
+import com.coinbase.prime.model.XmRiskNettingInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -29,7 +29,7 @@ import java.util.Arrays;
 
 public class XmSummary {
     /**
-     * Cross Margin Margin Requirement (XMMR) notional
+     * Cross Margin Margin Requirement (XmMR) notional
      */
     @JsonProperty("margin_requirement")
     private String marginRequirement;
@@ -41,25 +41,25 @@ public class XmSummary {
     private String accountEquity;
 
     /**
-     * Equity - XMMR (margin excess is &gt; 0)
+     * Equity - XmMR (margin excess is &gt; 0)
      */
     @JsonProperty("margin_excess_shortfall")
     private String marginExcessShortfall;
 
     /**
-     * Credit consumed from Cross Margin Credit Limit (XMCL)
+     * Credit consumed from Cross Margin Credit Limit (XmCL)
      */
     @JsonProperty("consumed_credit")
     private String consumedCredit;
 
     /**
-     * XM Credit Limit (XMCL) is the maximum notional USD of total fiat and digital asset loans
+     * Xm Credit Limit (XmCL) is the maximum notional USD of total fiat and digital asset loans
      */
     @JsonProperty("xm_credit_limit")
     private String xmCreditLimit;
 
     /**
-     * XM Margin Limit (XMML) is the maximum notional USD deficit
+     * Xm Margin Limit (XmML) is the maximum notional USD deficit
      */
     @JsonProperty("xm_margin_limit")
     private String xmMarginLimit;
@@ -77,7 +77,7 @@ public class XmSummary {
     private String futuresEquity;
 
     @JsonProperty("risk_netting_info")
-    private XMRiskNettingInfo riskNettingInfo;
+    private XmRiskNettingInfo riskNettingInfo;
 
     public XmSummary() {
     }
@@ -149,11 +149,11 @@ public class XmSummary {
     public void setFuturesEquity(String futuresEquity) {
         this.futuresEquity = futuresEquity;
     }
-    public XMRiskNettingInfo getRiskNettingInfo() {
+    public XmRiskNettingInfo getRiskNettingInfo() {
         return riskNettingInfo;
     }
 
-    public void setRiskNettingInfo(XMRiskNettingInfo riskNettingInfo) {
+    public void setRiskNettingInfo(XmRiskNettingInfo riskNettingInfo) {
         this.riskNettingInfo = riskNettingInfo;
     }
     public static class Builder {
@@ -173,7 +173,7 @@ public class XmSummary {
 
         private String futuresEquity;
 
-        private XMRiskNettingInfo riskNettingInfo;
+        private XmRiskNettingInfo riskNettingInfo;
 
         public Builder marginRequirement(String marginRequirement) {
             this.marginRequirement = marginRequirement;
@@ -215,7 +215,7 @@ public class XmSummary {
             return this;
         }
 
-        public Builder riskNettingInfo(XMRiskNettingInfo riskNettingInfo) {
+        public Builder riskNettingInfo(XmRiskNettingInfo riskNettingInfo) {
             this.riskNettingInfo = riskNettingInfo;
             return this;
         }

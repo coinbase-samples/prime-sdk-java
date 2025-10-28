@@ -23,6 +23,6 @@ package com.coinbase.prime.model.enums;
 public enum XmParty {
   XM_PARTY_UNSPECIFIED,
   CBE,
-  FCM
+  Fcm
 }
 

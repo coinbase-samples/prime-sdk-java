@@ -82,13 +82,13 @@ public class XmPosition {
     private String marginRequirement;
 
     /**
-     * XM spot balance nominal
+     * Xm spot balance nominal
      */
     @JsonProperty("spot_balance")
     private String spotBalance;
 
     /**
-     * XM spot balance notional
+     * Xm spot balance notional
      */
     @JsonProperty("spot_balance_notional")
     private String spotBalanceNotional;
@@ -100,13 +100,13 @@ public class XmPosition {
     private String spotTotalPositionMargin;
 
     /**
-     * XM futures balance nominal
+     * Xm futures balance nominal
      */
     @JsonProperty("futures_balance")
     private String futuresBalance;
 
     /**
-     * XM futures balance notional
+     * Xm futures balance notional
      */
     @JsonProperty("futures_balance_notional")
     private String futuresBalanceNotional;
