@@ -189,66 +189,22 @@ public class PostProcessor {
     }
 
     private void processEnumFile(Path file) throws IOException {
-        String content = Files.readString(file);
-        String className = extractClassName(content);
-
-        // Apply content replacements to ALL files (matching TS replaceString logic)
-        content = applyContentReplacements(content);
-
-        // Re-extract class name AFTER content replacements (they may have changed it)
-        String afterReplacementsClassName = extractClassName(content);
-        
-        // Strip prefixes from class name (matching prime-sdk-ts logic)
-        String originalClassName = afterReplacementsClassName;
-        className = stripCommonPrefixes(afterReplacementsClassName);
-
-        if (!className.equals(originalClassName)) {
-            // Replace ALL occurrences of the enum name in the content
-            // Use Pattern.quote to escape any regex special characters
-            content = content.replaceAll("\\b" + Pattern.quote(originalClassName) + "\\b", className);
-            logger.info("Transformed enum name: {} -> {}", originalClassName, className);
-        }
-
-        // Extract final class name after all transformations (for correct filename)
-        className = extractClassName(content);
-        String fileName = className + ".java";
-        Path outputPath = enumsDir.resolve(fileName);
-        boolean existsBefore = Files.exists(outputPath);
-
-        // Handle case-only filename changes on case-insensitive filesystems
-        // Delete ANY file with case-insensitive matching name BEFORE writing
-        final String finalFileName = fileName;
-        try {
-            List<Path> toDelete = Files.list(enumsDir)
-                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName))
-                .collect(java.util.stream.Collectors.toList());
-            
-            for (Path p : toDelete) {
-                Files.delete(p);
-                if (!p.getFileName().toString().equals(finalFileName)) {
-                    logger.info("Deleted old enum file with different casing: {} -> {}", p.getFileName(), finalFileName);
-                }
-            }
-        } catch (IOException e) {
-            logger.warn("Could not delete old enum file variants: {}", e.getMessage());
-        }
-
-        // Custom templates already produce correct output - just fix package
-        content = content.replace("package com.coinbase.prime.model;", "package com.coinbase.prime.model.enums;");
-        Files.writeString(outputPath, content);
-
-        if (!existsBefore) {
-            logger.info("Generated new enum: {}", className);
-            newModelsCount++;
-        } else {
-            logger.info("Updated enum: {}", className);
-            updatedModelsCount++;
-        }
-        logger.debug("Wrote enum file: {}", outputPath);
+        processFile(file, enumsDir, true);
     }
 
     private void processModelFile(Path file) throws IOException {
+        processFile(file, outputDir, false);
+    }
+
+    /**
+     * Unified file processing logic for both enums and models.
+     * @param file Source file to process
+     * @param targetDir Target directory (enumsDir for enums, outputDir for models)
+     * @param isEnum Whether this is an enum file (affects package name and preserves SCREAMING_SNAKE_CASE)
+     */
+    private void processFile(Path file, Path targetDir, boolean isEnum) throws IOException {
         String content = Files.readString(file);
+        String originalFileName = file.getFileName().toString();
         String className = extractClassName(content);
 
         // Apply content replacements to ALL files (matching TS replaceString logic)
@@ -262,58 +218,74 @@ public class PostProcessor {
         className = stripCommonPrefixes(afterReplacementsClassName);
 
         if (!className.equals(originalClassName)) {
-            // Replace ALL occurrences of the class name in the content
-            // Use Pattern.quote to escape any regex special characters
-            content = content.replaceAll("\\b" + Pattern.quote(originalClassName) + "\\b", className);
-            logger.info("Transformed class name: {} -> {}", originalClassName, className);
+            // Replace ALL occurrences of the class/enum name in the content
+            // Use negative lookahead (?!_) to preserve SCREAMING_SNAKE_CASE constants (applies to both enums and models)
+            content = content.replaceAll("\\b" + Pattern.quote(originalClassName) + "\\b(?!_)", className);
+            logger.info("Transformed {} name: {} -> {}", isEnum ? "enum" : "class", originalClassName, className);
         }
 
-        // Apply Web3 to Onchain transformation
-        content = applyWeb3ToOnchainTransformation(content, className);
+        // Apply Web3 to Onchain transformation (models only, but safe for enums too)
+        if (!isEnum) {
+            content = applyWeb3ToOnchainTransformation(content, className);
+        }
 
         // Extract final class name after all transformations (for correct filename)
         className = extractClassName(content);
         String fileName = className + ".java";
 
-        // Apply Web3 to Onchain transformation to filename
-        if (fileName.contains("Web3")) {
+        // Apply Web3 to Onchain transformation to filename (models only)
+        if (!isEnum && fileName.contains("Web3")) {
             fileName = fileName.replace("Web3", "Onchain");
             className = className.replace("Web3", "Onchain");
         }
 
-        Path outputPath = outputDir.resolve(fileName);
+        Path outputPath = targetDir.resolve(fileName);
+        
+        // Log filename transformation if changed
+        if (!originalFileName.equals(fileName)) {
+            logger.info("Transformed {} filename: {} -> {}", isEnum ? "enum" : "model", originalFileName, fileName);
+        }
+        
         boolean existsBefore = Files.exists(outputPath);
 
         // Handle case-only filename changes on case-insensitive filesystems
         // Delete ANY file with case-insensitive matching name BEFORE writing
         final String finalFileName = fileName;
         try {
-            List<Path> toDelete = Files.list(outputDir)
+            List<Path> toDelete = Files.list(targetDir)
                 .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName))
                 .collect(java.util.stream.Collectors.toList());
             
             for (Path p : toDelete) {
                 Files.delete(p);
                 if (!p.getFileName().toString().equals(finalFileName)) {
-                    logger.info("Deleted old file with different casing: {} -> {}", p.getFileName(), finalFileName);
+                    logger.info("Deleted old {} file with different casing: {} -> {}", 
+                        isEnum ? "enum" : "model", p.getFileName(), finalFileName);
                 }
             }
         } catch (IOException e) {
-            logger.warn("Could not delete old file variants: {}", e.getMessage());
+            logger.warn("Could not delete old {} file variants: {}", isEnum ? "enum" : "model", e.getMessage());
         }
 
-        // Custom templates already produce correct output - just fix enum imports
-        content = fixEnumImports(content);
+        // Apply final transformations based on file type
+        if (isEnum) {
+            // Fix package for enums
+            content = content.replace("package com.coinbase.prime.model;", "package com.coinbase.prime.model.enums;");
+        } else {
+            // Fix enum imports for models
+            content = fixEnumImports(content);
+        }
+        
         Files.writeString(outputPath, content);
 
         if (!existsBefore) {
-            logger.info("Generated new model: {}", className);
+            logger.info("Generated new {}: {}", isEnum ? "enum" : "model", className);
             newModelsCount++;
         } else {
-            logger.info("Updated model: {}", className);
+            logger.info("Updated {}: {}", isEnum ? "enum" : "model", className);
             updatedModelsCount++;
         }
-        logger.debug("Wrote model file: {}", outputPath);
+        logger.debug("Wrote {} file: {}", isEnum ? "enum" : "model", outputPath);
     }
 
     private String applyWeb3ToOnchainTransformation(String content, String className) {
@@ -382,7 +354,9 @@ public class PostProcessor {
 
     /**
      * Normalizes acronyms in content (imports, class references, method calls, etc.).
+     * Preserves SCREAMING_SNAKE_CASE enum constants.
      * Examples: GetFCMRiskLimits -> GetFcmRiskLimits, XMParty -> XmParty
+     *           But: FCM_POSITION_SIDE_UNSPECIFIED stays FCM_POSITION_SIDE_UNSPECIFIED
      */
     private String normalizeAcronymsInContent(String content) {
         // List of known acronyms that should be converted to PascalCase
@@ -406,12 +380,15 @@ public class PostProcessor {
             // 2. Import statements: import ...GetFCMRiskLimits -> import ...GetFcmRiskLimits
             // 3. Type references: GetFCMRiskLimitsResponse -> GetFcmRiskLimitsResponse
             // 4. Method names: getFCMMarginCall -> getFcmMarginCall
+            // BUT: preserve SCREAMING_SNAKE_CASE enum constants like FCM_POSITION_SIDE_UNSPECIFIED
             
             // Match acronym when followed by uppercase letter (word boundary before)
-            result = result.replaceAll("\\b" + acronym + "(?=[A-Z])", normalized);
+            // But NOT if it's part of a SCREAMING_SNAKE_CASE identifier (followed by underscore and uppercase)
+            result = result.replaceAll("\\b" + acronym + "(?=[A-Z](?!_))", normalized);
             
-            // Also handle acronym at end of identifier (followed by non-letter)
-            result = result.replaceAll("\\b" + acronym + "(?=[^a-zA-Z])", normalized);
+            // Also handle acronym at end of identifier (followed by non-letter-or-underscore)
+            // This catches cases like "FCM," or "FCM)" but skips "FCM_"
+            result = result.replaceAll("\\b" + acronym + "(?=[^a-zA-Z_])", normalized);
         }
         
         return result;
