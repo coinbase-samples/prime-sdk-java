@@ -20,7 +20,7 @@
 
 package com.coinbase.prime.model.enums;
 
-public enum XMParty {
+public enum XmParty {
   XM_PARTY_UNSPECIFIED,
   CBE,
   FCM

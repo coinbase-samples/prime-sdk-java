@@ -32,12 +32,12 @@ import java.util.Map;
 public class OpenApiGenerator {
     private static final Logger logger = LoggerFactory.getLogger(OpenApiGenerator.class);
     
-    private final Path specPath;
+    private final String specLocation;
     private final Path outputDir;
     private final ObjectMapper objectMapper = new ObjectMapper();
     
-    public OpenApiGenerator(Path specPath, Path outputDir) {
-        this.specPath = specPath;
+    public OpenApiGenerator(String specLocation, Path outputDir) {
+        this.specLocation = specLocation;
         this.outputDir = outputDir;
     }
     
@@ -77,7 +77,7 @@ public class OpenApiGenerator {
         // Configure OpenAPI Generator
         CodegenConfigurator configurator = new CodegenConfigurator();
         configurator.setGeneratorName("java");
-        configurator.setInputSpec(specPath.toString());
+        configurator.setInputSpec(specLocation);  // Can be URL or file path
         configurator.setOutputDir(rawOutputDir.toString());
 
         // Configure custom templates
@@ -136,10 +136,10 @@ public class OpenApiGenerator {
     }
     
     private Path findProjectRoot() {
-        Path current = specPath.getParent();
+        Path current = outputDir.getParent();
         while (current != null) {
             if (current.resolve("pom.xml").toFile().exists() &&
-                current.resolve("apiSpec/prime-public-spec.yaml").toFile().exists()) {
+                current.resolve("src/main/java/com/coinbase/prime").toFile().exists()) {
                 return current;
             }
             current = current.getParent();

@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class XMSummary {
+public class XmSummary {
     /**
      * Cross Margin Margin Requirement (XMMR) notional
      */
@@ -79,10 +79,10 @@ public class XMSummary {
     @JsonProperty("risk_netting_info")
     private XMRiskNettingInfo riskNettingInfo;
 
-    public XMSummary() {
+    public XmSummary() {
     }
 
-    public XMSummary(Builder builder) {
+    public XmSummary(Builder builder) {
         this.marginRequirement = builder.marginRequirement;
         this.accountEquity = builder.accountEquity;
         this.marginExcessShortfall = builder.marginExcessShortfall;
@@ -220,8 +220,8 @@ public class XMSummary {
             return this;
         }
 
-        public XMSummary build() {
-            return new XMSummary(this);
+        public XmSummary build() {
+            return new XmSummary(this);
         }
     }
 }

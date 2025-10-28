@@ -34,24 +34,20 @@ public class Main {
 
             // Find project root
             Path projectRoot = findProjectRoot();
-            Path specPath = projectRoot.resolve("apiSpec/prime-public-spec.yaml");
+            String specUrl = "https://api.prime.coinbase.com/v1/openapi.yaml";
             Path outputDir = projectRoot.resolve("src/main/java/com/coinbase/prime/model");
             Path enumsDir = outputDir.resolve("enums");
             Path tempDir = projectRoot.resolve("generated");
 
             logger.info("Project Root: {}", projectRoot);
-            logger.info("OpenAPI Spec: {}", specPath);
+            logger.info("OpenAPI Spec URL: {}", specUrl);
             logger.info("Output Directory: {}", outputDir);
             logger.info("Enums Directory: {}", enumsDir);
             logger.info("Temp Directory: {}", tempDir);
 
-            if (!specPath.toFile().exists()) {
-                throw new RuntimeException("OpenAPI spec not found at: " + specPath);
-            }
-
             // Phase 1: Generate raw models using OpenAPI Generator
             logger.info("\nPhase 1: Generating raw models with OpenAPI Generator...");
-            OpenApiGenerator generator = new OpenApiGenerator(specPath, tempDir);
+            OpenApiGenerator generator = new OpenApiGenerator(specUrl, tempDir);
             generator.generateModels();
 
             // Phase 2: Post-process models to match existing patterns
@@ -77,7 +73,7 @@ public class Main {
         Path current = Paths.get(System.getProperty("user.dir"));
         while (current != null) {
             if (current.resolve("pom.xml").toFile().exists() &&
-                current.resolve("apiSpec/prime-public-spec.yaml").toFile().exists()) {
+                current.resolve("src/main/java/com/coinbase/prime").toFile().exists()) {
                 return current;
             }
             current = current.getParent();
@@ -89,6 +85,6 @@ public class Main {
             return toolsPath.getParent().getParent();
         }
         
-        throw new RuntimeException("Could not find project root (looking for pom.xml and apiSpec/prime-public-spec.yaml)");
+        throw new RuntimeException("Could not find project root (looking for pom.xml and src/main/java/com/coinbase/prime)");
     }
 }

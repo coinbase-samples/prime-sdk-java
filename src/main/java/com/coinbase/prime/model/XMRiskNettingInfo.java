@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class XMRiskNettingInfo {
+public class XmRiskNettingInfo {
     /**
      * Nodal Margin Requirement (NMR) is the margin requirement for all futures positions, derived from the Nodal model
      */
@@ -112,10 +112,10 @@ public class XMRiskNettingInfo {
     @JsonProperty("xm_positions")
     private List<XMPosition> xmPositions;
 
-    public XMRiskNettingInfo() {
+    public XmRiskNettingInfo() {
     }
 
-    public XMRiskNettingInfo(Builder builder) {
+    public XmRiskNettingInfo(Builder builder) {
         this.nodalMarginRequirement = builder.nodalMarginRequirement;
         this.portfolioMarginRequirement = builder.portfolioMarginRequirement;
         this.integratedPortfolioMarginRequirement = builder.integratedPortfolioMarginRequirement;
@@ -328,8 +328,8 @@ public class XMRiskNettingInfo {
             return this;
         }
 
-        public XMRiskNettingInfo build() {
-            return new XMRiskNettingInfo(this);
+        public XmRiskNettingInfo build() {
+            return new XmRiskNettingInfo(this);
         }
     }
 }

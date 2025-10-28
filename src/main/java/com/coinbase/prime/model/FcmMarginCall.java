@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-public class FCMMarginCall {
+public class FcmMarginCall {
     @JsonProperty("type")
     private FcmMarginCallType type;
 
@@ -60,10 +60,10 @@ public class FCMMarginCall {
     @JsonProperty("cure_deadline")
     private OffsetDateTime cureDeadline;
 
-    public FCMMarginCall() {
+    public FcmMarginCall() {
     }
 
-    public FCMMarginCall(Builder builder) {
+    public FcmMarginCall(Builder builder) {
         this.type = builder.type;
         this.state = builder.state;
         this.initialAmount = builder.initialAmount;
@@ -156,8 +156,8 @@ public class FCMMarginCall {
             return this;
         }
 
-        public FCMMarginCall build() {
-            return new FCMMarginCall(this);
+        public FcmMarginCall build() {
+            return new FcmMarginCall(this);
         }
     }
 }

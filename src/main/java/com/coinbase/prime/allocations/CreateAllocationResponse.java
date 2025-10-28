@@ -20,24 +20,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Response object for creating an allocation for a given portfolio.
- * 
+ *
  * Contains allocation creation result, including success status and allocation identifiers.
  */
 public class CreateAllocationResponse {
     /** Indicates whether the allocation creation was successful */
     private boolean success;
-    
+
     /** The unique identifier for the created allocation */
     @JsonProperty("allocation_id")
     private String allocationId;
-    
+
     /** The reason for allocation creation failure, if applicable */
     @JsonProperty("failure_reason")
     private String failureReason;
-    
-    /** The netting identifier for the allocation */
-    @JsonProperty("netting_id")
-    private String nettingId;
 
     public CreateAllocationResponse() {
     }

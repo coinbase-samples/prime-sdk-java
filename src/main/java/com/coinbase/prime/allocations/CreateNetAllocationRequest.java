@@ -21,20 +21,24 @@ import com.coinbase.prime.model.enums.AllocationSizeType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateNetAllocationRequest {
-    @JsonProperty("allocation_id")
-    private String allocationId;
     @JsonProperty("source_portfolio_id")
     private String sourcePortfolioId;
+
     @JsonProperty("product_id")
     private String productId;
+
     @JsonProperty("order_ids")
     private String[] orderIds;
+
     @JsonProperty("allocation_legs")
     private AllocationLeg[] allocationLegs;
+
     @JsonProperty("size_type")
     private AllocationSizeType sizeType;
+
     @JsonProperty("remainder_destination_portfolio")
     private String remainderDestinationPortfolio;
+
     @JsonProperty("netting_id")
     private String nettingId;
 
@@ -42,7 +46,6 @@ public class CreateNetAllocationRequest {
     }
 
     public CreateNetAllocationRequest(CreateNetAllocationRequest.Builder builder) {
-        this.allocationId = builder.allocationId;
         this.sourcePortfolioId = builder.sourcePortfolioId;
         this.productId = builder.productId;
         this.orderIds = builder.orderIds;
@@ -50,14 +53,6 @@ public class CreateNetAllocationRequest {
         this.sizeType = builder.sizeType;
         this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
         this.nettingId = builder.nettingId;
-    }
-
-    public String getAllocationId() {
-        return allocationId;
-    }
-
-    public void setAllocationId(String allocationId) {
-        this.allocationId = allocationId;
     }
 
     public String getSourcePortfolioId() {
@@ -117,7 +112,6 @@ public class CreateNetAllocationRequest {
     }
 
     public static class Builder {
-        private String allocationId;
         private String sourcePortfolioId;
         private String productId;
         private String[] orderIds;
@@ -127,11 +121,6 @@ public class CreateNetAllocationRequest {
         private String nettingId;
 
         public Builder() {
-        }
-
-        public Builder allocationId(String allocationId) {
-            this.allocationId = allocationId;
-            return this;
         }
 
         public Builder sourcePortfolioId(String sourcePortfolioId) {

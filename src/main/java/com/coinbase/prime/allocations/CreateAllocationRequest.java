@@ -35,8 +35,6 @@ public class CreateAllocationRequest {
     private AllocationSizeType sizeType;
     @JsonProperty("remainder_destination_portfolio")
     private String remainderDestinationPortfolio;
-    @JsonProperty("netting_id")
-    private String nettingId;
 
     public CreateAllocationRequest() {
     }
@@ -49,7 +47,6 @@ public class CreateAllocationRequest {
         this.allocationLegs = builder.allocationLegs;
         this.sizeType = builder.sizeType;
         this.remainderDestinationPortfolio = builder.remainderDestinationPortfolio;
-        this.nettingId = builder.nettingId;
     }
 
     public String getAllocationId() {
@@ -108,14 +105,6 @@ public class CreateAllocationRequest {
         this.remainderDestinationPortfolio = remainderDestinationPortfolio;
     }
 
-    public String getNettingId() {
-        return nettingId;
-    }
-
-    public void setNettingId(String nettingId) {
-        this.nettingId = nettingId;
-    }
-
     public static class Builder {
         private String allocationId;
         private String sourcePortfolioId;
@@ -124,7 +113,6 @@ public class CreateAllocationRequest {
         private AllocationLeg[] allocationLegs;
         private AllocationSizeType sizeType;
         private String remainderDestinationPortfolio;
-        private String nettingId;
 
         public Builder() {
         }
@@ -161,11 +149,6 @@ public class CreateAllocationRequest {
 
         public Builder remainderDestinationPortfolio(String remainderDestinationPortfolio) {
             this.remainderDestinationPortfolio = remainderDestinationPortfolio;
-            return this;
-        }
-
-        public Builder nettingId(String nettingId) {
-            this.nettingId = nettingId;
             return this;
         }
 

@@ -23,7 +23,7 @@ import com.coinbase.prime.model.AssetBalance;
 import com.coinbase.prime.model.LoanInfo;
 import com.coinbase.prime.model.MarginAddOn;
 import com.coinbase.prime.model.MarketRate;
-import com.coinbase.prime.model.PMAssetInfo;
+import com.coinbase.prime.model.PmAssetInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -203,7 +203,7 @@ public class MarginSummary {
      * PM asset info netted across the entity
      */
     @JsonProperty("pm_asset_info")
-    private List<PMAssetInfo> pmAssetInfo;
+    private List<PmAssetInfo> pmAssetInfo;
 
     /**
      * PM limit that monitors gross notional borrowings (crypto + fiat)
@@ -456,11 +456,11 @@ public class MarginSummary {
     public void setPortfolioStressTriggered(MarginAddOn portfolioStressTriggered) {
         this.portfolioStressTriggered = portfolioStressTriggered;
     }
-    public List<PMAssetInfo> getPmAssetInfo() {
+    public List<PmAssetInfo> getPmAssetInfo() {
         return pmAssetInfo;
     }
 
-    public void setPmAssetInfo(List<PMAssetInfo> pmAssetInfo) {
+    public void setPmAssetInfo(List<PmAssetInfo> pmAssetInfo) {
         this.pmAssetInfo = pmAssetInfo;
     }
     public String getPmCreditLimit() {
@@ -541,7 +541,7 @@ public class MarginSummary {
 
         private MarginAddOn portfolioStressTriggered;
 
-        private List<PMAssetInfo> pmAssetInfo;
+        private List<PmAssetInfo> pmAssetInfo;
 
         private String pmCreditLimit;
 
@@ -689,7 +689,7 @@ public class MarginSummary {
             return this;
         }
 
-        public Builder pmAssetInfo(List<PMAssetInfo> pmAssetInfo) {
+        public Builder pmAssetInfo(List<PmAssetInfo> pmAssetInfo) {
             this.pmAssetInfo = pmAssetInfo;
             return this;
         }

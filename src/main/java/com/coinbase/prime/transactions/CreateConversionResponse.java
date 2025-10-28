@@ -28,6 +28,8 @@ public class CreateConversionResponse {
     private String amount;
     private String destination;
     private String source;
+    @JsonProperty("transaction_id")
+    private String transactionId;
 
     public CreateConversionResponse() {
     }
@@ -78,6 +80,14 @@ public class CreateConversionResponse {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
 }

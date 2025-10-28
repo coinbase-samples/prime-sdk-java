@@ -18,7 +18,6 @@ package com.coinbase.prime.balances;
 
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.PortfolioBalanceType;
-import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -38,7 +37,7 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
     }
 
     public ListEntityBalancesRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
+        super(builder.cursor, null, builder.limit);
         this.entityId = builder.entityId;
         this.symbols = builder.symbols;
         this.aggregationType = builder.aggregationType;
@@ -74,7 +73,6 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
         private String symbols;
         private String cursor;
         private Integer limit;
-        private SortDirection sortDirection;
         private PortfolioBalanceType aggregationType;
 
         public Builder() {
@@ -97,11 +95,6 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
 
         public Builder limit(Integer limit) {
             this.limit = limit;
-            return this;
-        }
-
-        public Builder sortDirection(SortDirection sortDirection) {
-            this.sortDirection = sortDirection;
             return this;
         }
 

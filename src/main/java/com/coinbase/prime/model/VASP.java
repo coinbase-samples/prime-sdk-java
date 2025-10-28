@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class VASP {
+public class Vasp {
     @JsonProperty("id")
     private String id;
 
@@ -36,10 +36,10 @@ public class VASP {
     @JsonProperty("lei_number")
     private String leiNumber;
 
-    public VASP() {
+    public Vasp() {
     }
 
-    public VASP(Builder builder) {
+    public Vasp(Builder builder) {
         this.id = builder.id;
         this.countryCode = builder.countryCode;
         this.leiNumber = builder.leiNumber;
@@ -87,8 +87,8 @@ public class VASP {
             return this;
         }
 
-        public VASP build() {
-            return new VASP(this);
+        public Vasp build() {
+            return new Vasp(this);
         }
     }
 }

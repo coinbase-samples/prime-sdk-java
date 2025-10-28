@@ -16,21 +16,21 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.prime.model.FCMMarginCall;
+import com.coinbase.prime.model.FcmMarginCall;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetFCMMarginCallDetailsResponse {
     @JsonProperty("margin_calls")
-    private FCMMarginCall[] marginCalls;
+    private FcmMarginCall[] marginCalls;
 
     public GetFCMMarginCallDetailsResponse() {
     }
 
-    public FCMMarginCall[] getMarginCalls() {
+    public FcmMarginCall[] getMarginCalls() {
         return marginCalls;
     }
 
-    public void setMarginCalls(FCMMarginCall[] marginCalls) {
+    public void setMarginCalls(FcmMarginCall[] marginCalls) {
         this.marginCalls = marginCalls;
     }
 }

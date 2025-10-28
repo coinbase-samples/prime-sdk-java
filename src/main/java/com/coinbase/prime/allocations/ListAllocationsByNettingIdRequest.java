@@ -26,6 +26,7 @@ public class ListAllocationsByNettingIdRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty(required = true, value = "netting_id")
     @JsonIgnore
     private String nettingId;

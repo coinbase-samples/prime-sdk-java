@@ -26,6 +26,7 @@ public class GetAllocationRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty(required = true, value = "allocation_id")
     @JsonIgnore
     private String allocationId;

@@ -19,9 +19,9 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.enums.XMCallStatus;
-import com.coinbase.prime.model.enums.XMCallType;
-import com.coinbase.prime.model.enums.XMMarginLevel;
+import com.coinbase.prime.model.XMCallStatus;
+import com.coinbase.prime.model.XMCallType;
+import com.coinbase.prime.model.XMMarginLevel;
 import com.coinbase.prime.model.XMSummary;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-public class XMMarginCall {
+public class XmMarginCall {
     /**
      * Financing margin call UUID
      */
@@ -86,10 +86,10 @@ public class XMMarginCall {
     @JsonProperty("updated_at")
     private OffsetDateTime updatedAt;
 
-    public XMMarginCall() {
+    public XmMarginCall() {
     }
 
-    public XMMarginCall(Builder builder) {
+    public XmMarginCall(Builder builder) {
         this.marginCallId = builder.marginCallId;
         this.currency = builder.currency;
         this.initialNotionalAmount = builder.initialNotionalAmount;
@@ -257,8 +257,8 @@ public class XMMarginCall {
             return this;
         }
 
-        public XMMarginCall build() {
-            return new XMMarginCall(this);
+        public XmMarginCall build() {
+            return new XmMarginCall(this);
         }
     }
 }

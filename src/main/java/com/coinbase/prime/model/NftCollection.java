@@ -26,17 +26,17 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class NFTCollection {
+public class NftCollection {
     /**
      * NFT collection name
      */
     @JsonProperty("name")
     private String name;
 
-    public NFTCollection() {
+    public NftCollection() {
     }
 
-    public NFTCollection(Builder builder) {
+    public NftCollection(Builder builder) {
         this.name = builder.name;
     }
     public String getName() {
@@ -54,8 +54,8 @@ public class NFTCollection {
             return this;
         }
 
-        public NFTCollection build() {
-            return new NFTCollection(this);
+        public NftCollection build() {
+            return new NftCollection(this);
         }
     }
 }

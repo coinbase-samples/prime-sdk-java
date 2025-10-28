@@ -26,6 +26,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class PostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(PostProcessor.class);
@@ -194,12 +195,17 @@ public class PostProcessor {
         // Apply content replacements to ALL files (matching TS replaceString logic)
         content = applyContentReplacements(content);
 
+        // Re-extract class name AFTER content replacements (they may have changed it)
+        String afterReplacementsClassName = extractClassName(content);
+        
         // Strip prefixes from class name (matching prime-sdk-ts logic)
-        String originalClassName = className;
-        className = stripCommonPrefixes(className);
+        String originalClassName = afterReplacementsClassName;
+        className = stripCommonPrefixes(afterReplacementsClassName);
 
         if (!className.equals(originalClassName)) {
-            content = content.replace("enum " + originalClassName, "enum " + className);
+            // Replace ALL occurrences of the enum name in the content
+            // Use Pattern.quote to escape any regex special characters
+            content = content.replaceAll("\\b" + Pattern.quote(originalClassName) + "\\b", className);
             logger.info("Transformed enum name: {} -> {}", originalClassName, className);
         }
 
@@ -207,25 +213,24 @@ public class PostProcessor {
         className = extractClassName(content);
         String fileName = className + ".java";
         Path outputPath = enumsDir.resolve(fileName);
-
         boolean existsBefore = Files.exists(outputPath);
 
         // Handle case-only filename changes on case-insensitive filesystems
+        // Delete ANY file with case-insensitive matching name BEFORE writing
         final String finalFileName = fileName;
         try {
-            Files.list(enumsDir)
-                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName) &&
-                            !p.getFileName().toString().equals(finalFileName))
-                .forEach(p -> {
-                    try {
-                        Files.delete(p);
-                        logger.info("Deleted old enum file with different casing: {}", p.getFileName());
-                    } catch (IOException e) {
-                        logger.warn("Could not delete old enum file: {}", p);
-                    }
-                });
+            List<Path> toDelete = Files.list(enumsDir)
+                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName))
+                .collect(java.util.stream.Collectors.toList());
+            
+            for (Path p : toDelete) {
+                Files.delete(p);
+                if (!p.getFileName().toString().equals(finalFileName)) {
+                    logger.info("Deleted old enum file with different casing: {} -> {}", p.getFileName(), finalFileName);
+                }
+            }
         } catch (IOException e) {
-            logger.warn("Could not check for enum case variants: {}", e.getMessage());
+            logger.warn("Could not delete old enum file variants: {}", e.getMessage());
         }
 
         // Custom templates already produce correct output - just fix package
@@ -249,13 +254,17 @@ public class PostProcessor {
         // Apply content replacements to ALL files (matching TS replaceString logic)
         content = applyContentReplacements(content);
 
+        // Re-extract class name AFTER content replacements (they may have changed it)
+        String afterReplacementsClassName = extractClassName(content);
+        
         // Strip prefixes from class name (matching prime-sdk-ts logic)
-        String originalClassName = className;
-        className = stripCommonPrefixes(className);
+        String originalClassName = afterReplacementsClassName;
+        className = stripCommonPrefixes(afterReplacementsClassName);
 
         if (!className.equals(originalClassName)) {
-            content = content.replace("class " + originalClassName, "class " + className);
-            content = content.replace("enum " + originalClassName, "enum " + className);
+            // Replace ALL occurrences of the class name in the content
+            // Use Pattern.quote to escape any regex special characters
+            content = content.replaceAll("\\b" + Pattern.quote(originalClassName) + "\\b", className);
             logger.info("Transformed class name: {} -> {}", originalClassName, className);
         }
 
@@ -276,22 +285,21 @@ public class PostProcessor {
         boolean existsBefore = Files.exists(outputPath);
 
         // Handle case-only filename changes on case-insensitive filesystems
-        // Check if there's a file with different casing that needs to be deleted
+        // Delete ANY file with case-insensitive matching name BEFORE writing
         final String finalFileName = fileName;
         try {
-            Files.list(outputDir)
-                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName) &&
-                            !p.getFileName().toString().equals(finalFileName))
-                .forEach(p -> {
-                    try {
-                        Files.delete(p);
-                        logger.info("Deleted old file with different casing: {}", p.getFileName());
-                    } catch (IOException e) {
-                        logger.warn("Could not delete old file: {}", p);
-                    }
-                });
+            List<Path> toDelete = Files.list(outputDir)
+                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName))
+                .collect(java.util.stream.Collectors.toList());
+            
+            for (Path p : toDelete) {
+                Files.delete(p);
+                if (!p.getFileName().toString().equals(finalFileName)) {
+                    logger.info("Deleted old file with different casing: {} -> {}", p.getFileName(), finalFileName);
+                }
+            }
         } catch (IOException e) {
-            logger.warn("Could not check for case variants: {}", e.getMessage());
+            logger.warn("Could not delete old file variants: {}", e.getMessage());
         }
 
         // Custom templates already produce correct output - just fix enum imports
@@ -373,6 +381,45 @@ public class PostProcessor {
 
 
     /**
+     * Normalizes acronyms in class names to use PascalCase.
+     * Examples: FCMMarginCall -> FcmMarginCall, XMLoan -> XmLoan
+     */
+    private String normalizeAcronyms(String className) {
+        // List of known acronyms that should be converted to PascalCase
+        // Using LinkedHashMap to control replacement order (longer acronyms first)
+        Map<String, String> acronymMap = new LinkedHashMap<>();
+        acronymMap.put("FCM", "Fcm");
+        acronymMap.put("XML", "Xml");
+        acronymMap.put("XM", "Xm");
+        acronymMap.put("PM", "Pm");
+        acronymMap.put("RFQ", "Rfq");
+        acronymMap.put("NFT", "Nft");
+        acronymMap.put("EVM", "Evm");
+        acronymMap.put("VASP", "Vasp");
+        
+        String result = className;
+        for (Map.Entry<String, String> entry : acronymMap.entrySet()) {
+            String acronym = entry.getKey();
+            String normalized = entry.getValue();
+            
+            // Replace acronym when:
+            // 1. At the start followed by uppercase letter (FCMMarginCall -> FcmMarginCall)
+            // 2. At the end of the string (just FCM -> Fcm)
+            // 3. In the middle followed by uppercase (EntityFCMBalance -> EntityFcmBalance)
+            
+            // Use word boundary and lookahead to ensure we only replace the acronym part
+            result = result.replaceAll("\\b" + acronym + "(?=[A-Z])", normalized);
+            
+            // Handle end of string
+            if (result.endsWith(acronym)) {
+                result = result.substring(0, result.length() - acronym.length()) + normalized;
+            }
+        }
+        
+        return result;
+    }
+
+    /**
      * Apply file path replacements to strip common prefixes from class names.
      * Matches prime-sdk-ts filePathReplacements behavior.
      */
@@ -385,6 +432,9 @@ public class PostProcessor {
                 result = result.replace(entry.getKey(), entry.getValue());
             }
         }
+        
+        // Normalize acronyms to PascalCase after prefix stripping
+        result = normalizeAcronyms(result);
 
         return result;
     }

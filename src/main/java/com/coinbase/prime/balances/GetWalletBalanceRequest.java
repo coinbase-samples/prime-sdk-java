@@ -26,6 +26,7 @@ public class GetWalletBalanceRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;

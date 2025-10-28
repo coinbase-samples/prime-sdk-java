@@ -32,12 +32,16 @@ public class ListPortfolioAllocationsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty("product_ids")
     private String[] productIds;
+
     @JsonProperty("order_side")
     private OrderSide orderSide;
+
     @JsonProperty("start_date")
     private Date startDate;
+
     @JsonProperty("end_date")
     private Date endDate;
 

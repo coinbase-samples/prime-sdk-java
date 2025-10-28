@@ -19,11 +19,11 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.enums.XMControlStatus;
-import com.coinbase.prime.model.enums.XMEntityCallStatus;
+import com.coinbase.prime.model.XMControlStatus;
+import com.coinbase.prime.model.XMEntityCallStatus;
 import com.coinbase.prime.model.XMLoan;
 import com.coinbase.prime.model.XMMarginCall;
-import com.coinbase.prime.model.enums.XMMarginLevel;
+import com.coinbase.prime.model.XMMarginLevel;
 import com.coinbase.prime.model.XMSummary;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
