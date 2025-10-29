@@ -22,15 +22,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetFCMRiskLimitsRequest {
+public class GetFcmRiskLimitsRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
-    public GetFCMRiskLimitsRequest() {
+    public GetFcmRiskLimitsRequest() {
     }
 
-    public GetFCMRiskLimitsRequest(Builder builder) {
+    public GetFcmRiskLimitsRequest(Builder builder) {
         this.entityId = builder.entityId;
     }
 
@@ -53,9 +53,9 @@ public class GetFCMRiskLimitsRequest {
             return this;
         }
 
-        public GetFCMRiskLimitsRequest build() throws CoinbaseClientException {
+        public GetFcmRiskLimitsRequest build() throws CoinbaseClientException {
             this.validate();
-            return new GetFCMRiskLimitsRequest(this);
+            return new GetFcmRiskLimitsRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {

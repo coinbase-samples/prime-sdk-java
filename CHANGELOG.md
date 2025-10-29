@@ -21,7 +21,7 @@
   - `stopPrice` - Stop price at which order activates
 
 #### Futures Service
-- **GetFCMRiskLimitsResponse**: Added comprehensive FCM margin and PnL fields
+- **GetFcmRiskLimitsResponse**: Added comprehensive FCM margin and PnL fields
   - `cfmTotalMargin` - Total margin required for both positions and open orders
   - `cfmDeltaOte` - Open Trade Equity accrued during current trading session
   - `cfmUnsettledRealizedPnl` - Unsettled realized PNL for positions closed intraday
@@ -126,7 +126,7 @@
 #### New Enums
 - `Action`, `ActivityLevel`, `ActivityType`, `AddressBookCategory`, `AddressBookState`, `AddressValidationStatus`, `AllocationSizeType`
 - `CandlesGranularity`, `CommissionCategory`, `CommissionType`
-- `FcmFuturesSweepStatus`, `FCMMarginCallState`, `FcmMarginCallType`, `FcmPositionSide`, `FeeModel`
+- `FcmFuturesSweepStatus`, `FcmMarginCallState`, `FcmMarginCallType`, `FcmPositionSide`, `FeeModel`
 - `HierarchyType`, `NetworkFamily`, `PortfolioBalanceType`, `PositionSide`, `PositionStatus`, `PositionType`, `ProductPermissions`
 - `SortDirection`, `StakingRewardType`, `StakingStatus`
 - `TimeInForceType`, `TrustedAddressLevel`, `UnbondingStatus`, `UserRole`, `ValidatorStatus`, `Visibility`

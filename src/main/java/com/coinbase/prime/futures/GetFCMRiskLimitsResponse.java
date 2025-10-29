@@ -18,7 +18,7 @@ package com.coinbase.prime.futures;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetFCMRiskLimitsResponse {
+public class GetFcmRiskLimitsResponse {
     /** Risk Limit set for a client */
     @JsonProperty("cfm_risk_limit")
     private String cfmRiskLimit;
@@ -43,7 +43,7 @@ public class GetFCMRiskLimitsResponse {
     @JsonProperty("cfm_unsettled_accrued_funding_pnl")
     private String cfmUnsettledAccruedFundingPnl;
 
-    public GetFCMRiskLimitsResponse() {
+    public GetFcmRiskLimitsResponse() {
     }
 
     public String getCfmRiskLimit() {
