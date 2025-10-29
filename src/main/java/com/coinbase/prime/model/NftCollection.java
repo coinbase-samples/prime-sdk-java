@@ -28,7 +28,7 @@ import java.util.Arrays;
 
 public class NftCollection {
     /**
-     * Nft collection name
+     * NFT collection name
      */
     @JsonProperty("name")
     private String name;

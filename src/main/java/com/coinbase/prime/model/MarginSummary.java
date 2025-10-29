@@ -119,7 +119,7 @@ public class MarginSummary {
     private Boolean tfEnabled;
 
     /**
-     * Whether Pm is enabled for the entity
+     * Whether PM is enabled for the entity
      */
     @JsonProperty("pm_enabled")
     private Boolean pmEnabled;
@@ -200,19 +200,19 @@ public class MarginSummary {
     private MarginAddOn portfolioStressTriggered;
 
     /**
-     * Pm asset info netted across the entity
+     * PM asset info netted across the entity
      */
     @JsonProperty("pm_asset_info")
     private List<PmAssetInfo> pmAssetInfo;
 
     /**
-     * Pm limit that monitors gross notional borrowings (crypto + fiat)
+     * PM limit that monitors gross notional borrowings (crypto + fiat)
      */
     @JsonProperty("pm_credit_limit")
     private String pmCreditLimit;
 
     /**
-     * Pm limit that monitors excess deficit
+     * PM limit that monitors excess deficit
      */
     @JsonProperty("pm_margin_limit")
     private String pmMarginLimit;

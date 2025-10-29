@@ -43,13 +43,13 @@ public class OnchainAsset {
     private String symbol;
 
     /**
-     * Token ID of this asset (empty for non  Nft assets).
+     * Token ID of this asset (empty for non  NFT assets).
      */
     @JsonProperty("token_id")
     private String tokenId;
 
     /**
-     * Name of this asset, either the name of the crypto token or the Nft collection name.
+     * Name of this asset, either the name of the crypto token or the NFT collection name.
      */
     @JsonProperty("name")
     private String name;

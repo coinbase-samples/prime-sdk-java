@@ -58,7 +58,7 @@ public class ExistingLocate {
     private String requestedAmount;
 
     /**
-     * The interest rate of Pm loan
+     * The interest rate of PM loan
      */
     @JsonProperty("interest_rate")
     private String interestRate;

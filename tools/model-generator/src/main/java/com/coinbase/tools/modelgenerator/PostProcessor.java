@@ -354,9 +354,10 @@ public class PostProcessor {
 
     /**
      * Normalizes acronyms in content (imports, class references, method calls, etc.).
-     * Preserves SCREAMING_SNAKE_CASE enum constants.
+     * Preserves SCREAMING_SNAKE_CASE enum constants and standalone acronyms in comments.
      * Examples: GetFCMRiskLimits -> GetFcmRiskLimits, XMParty -> XmParty
      *           But: FCM_POSITION_SIDE_UNSPECIFIED stays FCM_POSITION_SIDE_UNSPECIFIED
+     *           And: "via RFQ" stays "via RFQ" (standalone in comments)
      */
     private String normalizeAcronymsInContent(String content) {
         // List of known acronyms that should be converted to PascalCase
@@ -381,14 +382,16 @@ public class PostProcessor {
             // 3. Type references: GetFCMRiskLimitsResponse -> GetFcmRiskLimitsResponse
             // 4. Method names: getFCMMarginCall -> getFcmMarginCall
             // BUT: preserve SCREAMING_SNAKE_CASE enum constants like FCM_POSITION_SIDE_UNSPECIFIED
+            // AND: preserve standalone acronyms in comments (e.g., "via RFQ" stays "via RFQ")
             
             // Match acronym when followed by uppercase letter (word boundary before)
             // But NOT if it's part of a SCREAMING_SNAKE_CASE identifier (followed by underscore and uppercase)
             result = result.replaceAll("\\b" + acronym + "(?=[A-Z](?!_))", normalized);
             
-            // Also handle acronym at end of identifier (followed by non-letter-or-underscore)
-            // This catches cases like "FCM," or "FCM)" but skips "FCM_"
-            result = result.replaceAll("\\b" + acronym + "(?=[^a-zA-Z_])", normalized);
+            // Also handle acronym at end of identifier when followed by specific punctuation
+            // that indicates it's part of code (comma, semicolon, parenthesis, angle bracket)
+            // This catches cases like "FCM," or "FCM)" but skips "FCM " (standalone in text/comments)
+            result = result.replaceAll("\\b" + acronym + "(?=[,;\\)<>])", normalized);
         }
         
         return result;

@@ -53,13 +53,13 @@ public class XmSummary {
     private String consumedCredit;
 
     /**
-     * Xm Credit Limit (XmCL) is the maximum notional USD of total fiat and digital asset loans
+     * XM Credit Limit (XmCL) is the maximum notional USD of total fiat and digital asset loans
      */
     @JsonProperty("xm_credit_limit")
     private String xmCreditLimit;
 
     /**
-     * Xm Margin Limit (XmML) is the maximum notional USD deficit
+     * XM Margin Limit (XmML) is the maximum notional USD deficit
      */
     @JsonProperty("xm_margin_limit")
     private String xmMarginLimit;

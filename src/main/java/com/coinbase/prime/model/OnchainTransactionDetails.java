@@ -45,7 +45,7 @@ public class OnchainTransactionDetails {
     private String chainId;
 
     /**
-     * The transaction nonce. Only present for Evm-based blockchain transactions.
+     * The transaction nonce. Only present for EVM-based blockchain transactions.
      */
     @JsonProperty("nonce")
     private String nonce;

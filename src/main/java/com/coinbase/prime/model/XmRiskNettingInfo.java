@@ -38,13 +38,13 @@ public class XmRiskNettingInfo {
     private String nodalMarginRequirement;
 
     /**
-     * Portfolio Margin Requirement (PmR) is the margin requirement for all spot positions, derived from the Xm model
+     * Portfolio Margin Requirement (PmR) is the margin requirement for all spot positions, derived from the XM model
      */
     @JsonProperty("portfolio_margin_requirement")
     private String portfolioMarginRequirement;
 
     /**
-     * Integrated Portfolio Margin Requirement (IPMR) is the margin requirement for all spot positions + futures positions with underlying assets eligible in Portfolio Margin, via the Xm model with one-leg netting
+     * Integrated Portfolio Margin Requirement (IPMR) is the margin requirement for all spot positions + futures positions with underlying assets eligible in Portfolio Margin, via the XM model with one-leg netting
      */
     @JsonProperty("integrated_portfolio_margin_requirement")
     private String integratedPortfolioMarginRequirement;
@@ -86,7 +86,7 @@ public class XmRiskNettingInfo {
     private String nettedFuturesNotional;
 
     /**
-     * Total basis gross market value of all Xm-eligible positions (i.e. crypto underliers)
+     * Total basis gross market value of all XM-eligible positions (i.e. crypto underliers)
      */
     @JsonProperty("total_gmv_basis")
     private String totalGmvBasis;

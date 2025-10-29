@@ -44,7 +44,7 @@ public class TravelRuleEntry {
     private TravelRuleParty beneficiary;
 
     @JsonProperty("vasp")
-    private Vasp vasp;
+    private VASP vasp;
 
     @JsonProperty("wallet_details")
     private TravelRuleWalletDetails walletDetails;
@@ -104,11 +104,11 @@ public class TravelRuleEntry {
     public void setBeneficiary(TravelRuleParty beneficiary) {
         this.beneficiary = beneficiary;
     }
-    public Vasp getVasp() {
+    public VASP getVasp() {
         return vasp;
     }
 
-    public void setVasp(Vasp vasp) {
+    public void setVasp(VASP vasp) {
         this.vasp = vasp;
     }
     public TravelRuleWalletDetails getWalletDetails() {
@@ -155,7 +155,7 @@ public class TravelRuleEntry {
 
         private TravelRuleParty beneficiary;
 
-        private Vasp vasp;
+        private VASP vasp;
 
         private TravelRuleWalletDetails walletDetails;
 
@@ -187,7 +187,7 @@ public class TravelRuleEntry {
             return this;
         }
 
-        public Builder vasp(Vasp vasp) {
+        public Builder vasp(VASP vasp) {
             this.vasp = vasp;
             return this;
         }
