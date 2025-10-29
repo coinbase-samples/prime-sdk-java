@@ -354,10 +354,10 @@ public class PostProcessor {
 
     /**
      * Normalizes acronyms in content (imports, class references, method calls, etc.).
-     * Preserves SCREAMING_SNAKE_CASE enum constants and standalone acronyms in comments.
+     * Preserves SCREAMING_SNAKE_CASE enum constants and acronyms within comments.
      * Examples: GetFCMRiskLimits -> GetFcmRiskLimits, XMParty -> XmParty
      *           But: FCM_POSITION_SIDE_UNSPECIFIED stays FCM_POSITION_SIDE_UNSPECIFIED
-     *           And: "via RFQ" stays "via RFQ" (standalone in comments)
+     *           And: "intermediary VASP" in comments stays "intermediary VASP"
      */
     private String normalizeAcronymsInContent(String content) {
         // List of known acronyms that should be converted to PascalCase
@@ -371,7 +371,30 @@ public class PostProcessor {
         acronymMap.put("EVM", "Evm");
         acronymMap.put("VASP", "Vasp");
         
-        String result = content;
+        // Step 1: Extract and replace comments with placeholders to preserve them
+        List<String> preservedComments = new ArrayList<>();
+        int commentIndex = 0;
+        
+        // Pattern to match all comment types: //, /* */, and /** */
+        Pattern commentPattern = Pattern.compile(
+            "//.*?$|/\\*.*?\\*/",
+            Pattern.MULTILINE | Pattern.DOTALL
+        );
+        
+        Matcher commentMatcher = commentPattern.matcher(content);
+        StringBuffer contentWithPlaceholders = new StringBuffer();
+        
+        while (commentMatcher.find()) {
+            String comment = commentMatcher.group();
+            preservedComments.add(comment);
+            commentMatcher.appendReplacement(contentWithPlaceholders, 
+                "___COMMENT_PLACEHOLDER_" + commentIndex + "___");
+            commentIndex++;
+        }
+        commentMatcher.appendTail(contentWithPlaceholders);
+        
+        // Step 2: Perform acronym normalization on non-comment code
+        String result = contentWithPlaceholders.toString();
         for (Map.Entry<String, String> entry : acronymMap.entrySet()) {
             String acronym = entry.getKey();
             String normalized = entry.getValue();
@@ -381,17 +404,32 @@ public class PostProcessor {
             // 2. Import statements: import ...GetFCMRiskLimits -> import ...GetFcmRiskLimits
             // 3. Type references: GetFCMRiskLimitsResponse -> GetFcmRiskLimitsResponse
             // 4. Method names: getFCMMarginCall -> getFcmMarginCall
+            // 5. Standalone type names: private VASP vasp -> private Vasp vasp
             // BUT: preserve SCREAMING_SNAKE_CASE enum constants like FCM_POSITION_SIDE_UNSPECIFIED
-            // AND: preserve standalone acronyms in comments (e.g., "via RFQ" stays "via RFQ")
+            // AND: preserve enum values like "CBE", "FCM" (standalone on their own line)
             
-            // Match acronym when followed by uppercase letter (word boundary before)
-            // But NOT if it's part of a SCREAMING_SNAKE_CASE identifier (followed by underscore and uppercase)
+            // Pattern 1: Match acronym when followed by uppercase letter (word boundary before)
+            // But NOT if it's part of a SCREAMING_SNAKE_CASE identifier (followed by underscore)
             result = result.replaceAll("\\b" + acronym + "(?=[A-Z](?!_))", normalized);
             
-            // Also handle acronym at end of identifier when followed by specific punctuation
-            // that indicates it's part of code (comma, semicolon, parenthesis, angle bracket)
-            // This catches cases like "FCM," or "FCM)" but skips "FCM " (standalone in text/comments)
-            result = result.replaceAll("\\b" + acronym + "(?=[,;\\)<>])", normalized);
+            // Pattern 2: Match acronym as standalone type (followed by lowercase identifier)
+            // This catches: "private VASP vasp", "VASP getVasp()", etc.
+            // But NOT enum values (standalone on their own line)
+            result = result.replaceAll("\\b" + acronym + "(?=[\\s]+[a-z])", normalized);
+            
+            // Pattern 3: Match acronym in generics, method calls, and imports
+            // This catches: "List<VASP>", "new VASP(", "import ...VASP;", etc.
+            // But NOT enum values (which are typically just "FCM," or "FCM\n")
+            result = result.replaceAll("\\b" + acronym + "(?=[\\(\\)<>;])", normalized);
+            
+            // Pattern 4: Match acronym at end of identifier name (before .)
+            // This catches: "VASP.class", but avoids enum constants with underscores
+            result = result.replaceAll("\\b" + acronym + "(?=\\.)", normalized);
+        }
+        
+        // Step 3: Restore original comments with acronyms preserved
+        for (int i = 0; i < preservedComments.size(); i++) {
+            result = result.replace("___COMMENT_PLACEHOLDER_" + i + "___", preservedComments.get(i));
         }
         
         return result;

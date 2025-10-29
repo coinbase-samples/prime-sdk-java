@@ -38,7 +38,7 @@ public class XmRiskNettingInfo {
     private String nodalMarginRequirement;
 
     /**
-     * Portfolio Margin Requirement (PmR) is the margin requirement for all spot positions, derived from the XM model
+     * Portfolio Margin Requirement (PMR) is the margin requirement for all spot positions, derived from the XM model
      */
     @JsonProperty("portfolio_margin_requirement")
     private String portfolioMarginRequirement;

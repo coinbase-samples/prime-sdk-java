@@ -29,7 +29,7 @@ import java.util.Arrays;
 
 public class XmSummary {
     /**
-     * Cross Margin Margin Requirement (XmMR) notional
+     * Cross Margin Margin Requirement (XMMR) notional
      */
     @JsonProperty("margin_requirement")
     private String marginRequirement;
@@ -41,25 +41,25 @@ public class XmSummary {
     private String accountEquity;
 
     /**
-     * Equity - XmMR (margin excess is &gt; 0)
+     * Equity - XMMR (margin excess is &gt; 0)
      */
     @JsonProperty("margin_excess_shortfall")
     private String marginExcessShortfall;
 
     /**
-     * Credit consumed from Cross Margin Credit Limit (XmCL)
+     * Credit consumed from Cross Margin Credit Limit (XMCL)
      */
     @JsonProperty("consumed_credit")
     private String consumedCredit;
 
     /**
-     * XM Credit Limit (XmCL) is the maximum notional USD of total fiat and digital asset loans
+     * XM Credit Limit (XMCL) is the maximum notional USD of total fiat and digital asset loans
      */
     @JsonProperty("xm_credit_limit")
     private String xmCreditLimit;
 
     /**
-     * XM Margin Limit (XmML) is the maximum notional USD deficit
+     * XM Margin Limit (XMML) is the maximum notional USD deficit
      */
     @JsonProperty("xm_margin_limit")
     private String xmMarginLimit;
