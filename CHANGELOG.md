@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.1] - 2025-10-30
+
+### Fixed
+- Fixed casing in FCM, XM, and PM class files due to git case sensitivity miss
+
 ## [1.5.0] - 2025-10-28
 
 ### Added
