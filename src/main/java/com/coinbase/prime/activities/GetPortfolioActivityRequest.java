@@ -17,12 +17,19 @@
 package com.coinbase.prime.activities;
 
 import com.coinbase.prime.common.PrimeListRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Request for getting a portfolio activity by activity ID.
  */
 public class GetPortfolioActivityRequest extends PrimeListRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
+
+    @JsonProperty(required = true, value = "activity_id")
+    @JsonIgnore
     private String activityId;
 
     public GetPortfolioActivityRequest() {

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class XMPosition {
+public class XmPosition {
     /**
      * Position currency
      */
@@ -177,10 +177,10 @@ public class XMPosition {
     @JsonProperty("total_position_margin")
     private String totalPositionMargin;
 
-    public XMPosition() {
+    public XmPosition() {
     }
 
-    public XMPosition(Builder builder) {
+    public XmPosition(Builder builder) {
         this.currency = builder.currency;
         this.marketPrice = builder.marketPrice;
         this.marginEligible = builder.marginEligible;
@@ -558,8 +558,8 @@ public class XMPosition {
             return this;
         }
 
-        public XMPosition build() {
-            return new XMPosition(this);
+        public XmPosition build() {
+            return new XmPosition(this);
         }
     }
 }

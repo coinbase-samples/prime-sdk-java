@@ -51,6 +51,19 @@ public class GetOrderPreviewRequest {
     private boolean isRaiseExact;
     @JsonProperty("historical_pov")
     private String historicalPov;
+    @JsonProperty("settl_currency")
+    private String settlCurrency;
+    @JsonProperty("postOnly")
+    private Boolean postOnly;
+    @JsonProperty("display_quote_size")
+    private String displayQuoteSize;
+    @JsonProperty("display_base_size")
+    private String displayBaseSize;
+    @JsonProperty("peg_offset_type")
+    private String pegOffsetType;
+    private String offset;
+    @JsonProperty("wig_level")
+    private String wigLevel;
 
     public GetOrderPreviewRequest() {
     }
@@ -69,6 +82,13 @@ public class GetOrderPreviewRequest {
         this.expiryTime = builder.expiryTime;
         this.isRaiseExact = builder.isRaiseExact;
         this.historicalPov = builder.historicalPov;
+        this.settlCurrency = builder.settlCurrency;
+        this.postOnly = builder.postOnly;
+        this.displayQuoteSize = builder.displayQuoteSize;
+        this.displayBaseSize = builder.displayBaseSize;
+        this.pegOffsetType = builder.pegOffsetType;
+        this.offset = builder.offset;
+        this.wigLevel = builder.wigLevel;
     }
 
     public String getPortfolioId() {
@@ -175,6 +195,62 @@ public class GetOrderPreviewRequest {
         this.historicalPov = historicalPov;
     }
 
+    public String getSettlCurrency() {
+        return settlCurrency;
+    }
+
+    public void setSettlCurrency(String settlCurrency) {
+        this.settlCurrency = settlCurrency;
+    }
+
+    public Boolean getPostOnly() {
+        return postOnly;
+    }
+
+    public void setPostOnly(Boolean postOnly) {
+        this.postOnly = postOnly;
+    }
+
+    public String getDisplayQuoteSize() {
+        return displayQuoteSize;
+    }
+
+    public void setDisplayQuoteSize(String displayQuoteSize) {
+        this.displayQuoteSize = displayQuoteSize;
+    }
+
+    public String getDisplayBaseSize() {
+        return displayBaseSize;
+    }
+
+    public void setDisplayBaseSize(String displayBaseSize) {
+        this.displayBaseSize = displayBaseSize;
+    }
+
+    public String getPegOffsetType() {
+        return pegOffsetType;
+    }
+
+    public void setPegOffsetType(String pegOffsetType) {
+        this.pegOffsetType = pegOffsetType;
+    }
+
+    public String getOffset() {
+        return offset;
+    }
+
+    public void setOffset(String offset) {
+        this.offset = offset;
+    }
+
+    public String getWigLevel() {
+        return wigLevel;
+    }
+
+    public void setWigLevel(String wigLevel) {
+        this.wigLevel = wigLevel;
+    }
+
     public static class Builder {
         private String portfolioId;
         private String productId;
@@ -189,6 +265,13 @@ public class GetOrderPreviewRequest {
         private String expiryTime;
         private boolean isRaiseExact;
         private String historicalPov;
+        private String settlCurrency;
+        private Boolean postOnly;
+        private String displayQuoteSize;
+        private String displayBaseSize;
+        private String pegOffsetType;
+        private String offset;
+        private String wigLevel;
 
         public Builder() {
         }
@@ -255,6 +338,41 @@ public class GetOrderPreviewRequest {
 
         public Builder historicalPov(String historicalPov) {
             this.historicalPov = historicalPov;
+            return this;
+        }
+
+        public Builder settlCurrency(String settlCurrency) {
+            this.settlCurrency = settlCurrency;
+            return this;
+        }
+
+        public Builder postOnly(Boolean postOnly) {
+            this.postOnly = postOnly;
+            return this;
+        }
+
+        public Builder displayQuoteSize(String displayQuoteSize) {
+            this.displayQuoteSize = displayQuoteSize;
+            return this;
+        }
+
+        public Builder displayBaseSize(String displayBaseSize) {
+            this.displayBaseSize = displayBaseSize;
+            return this;
+        }
+
+        public Builder pegOffsetType(String pegOffsetType) {
+            this.pegOffsetType = pegOffsetType;
+            return this;
+        }
+
+        public Builder offset(String offset) {
+            this.offset = offset;
+            return this;
+        }
+
+        public Builder wigLevel(String wigLevel) {
+            this.wigLevel = wigLevel;
             return this;
         }
 

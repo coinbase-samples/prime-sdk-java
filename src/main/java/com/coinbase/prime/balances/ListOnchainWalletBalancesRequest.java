@@ -30,9 +30,11 @@ public class ListOnchainWalletBalancesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
+
     @JsonProperty("visibility_statuses")
     private VisibilityStatus[] visibilityStatuses;
 

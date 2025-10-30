@@ -23,18 +23,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Response object for retrieving cross margin overview for an entity.
  */
 public class GetCrossMarginOverviewResponse {
-    @JsonProperty("cross_margin_overview")
-    private CrossMarginOverview crossMarginOverview;
+    @JsonProperty("overview")
+    private CrossMarginOverview overview;
 
     public GetCrossMarginOverviewResponse() {
     }
 
-    public CrossMarginOverview getCrossMarginOverview() {
-        return crossMarginOverview;
+    public CrossMarginOverview getOverview() {
+        return overview;
     }
 
-    public void setCrossMarginOverview(CrossMarginOverview crossMarginOverview) {
-        this.crossMarginOverview = crossMarginOverview;
+    public void setOverview(CrossMarginOverview overview) {
+        this.overview = overview;
     }
 }
 

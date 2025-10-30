@@ -20,8 +20,8 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.enums.AssetChangeType;
-import com.coinbase.prime.model.NFTCollection;
-import com.coinbase.prime.model.NFTItem;
+import com.coinbase.prime.model.NftCollection;
+import com.coinbase.prime.model.NftItem;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -46,10 +46,10 @@ public class AssetChange {
     private String amount;
 
     @JsonProperty("collection")
-    private NFTCollection collection;
+    private NftCollection collection;
 
     @JsonProperty("item")
-    private NFTItem item;
+    private NftItem item;
 
     public AssetChange() {
     }
@@ -82,18 +82,18 @@ public class AssetChange {
     public void setAmount(String amount) {
         this.amount = amount;
     }
-    public NFTCollection getCollection() {
+    public NftCollection getCollection() {
         return collection;
     }
 
-    public void setCollection(NFTCollection collection) {
+    public void setCollection(NftCollection collection) {
         this.collection = collection;
     }
-    public NFTItem getItem() {
+    public NftItem getItem() {
         return item;
     }
 
-    public void setItem(NFTItem item) {
+    public void setItem(NftItem item) {
         this.item = item;
     }
     public static class Builder {
@@ -103,9 +103,9 @@ public class AssetChange {
 
         private String amount;
 
-        private NFTCollection collection;
+        private NftCollection collection;
 
-        private NFTItem item;
+        private NftItem item;
 
         public Builder type(AssetChangeType type) {
             this.type = type;
@@ -122,12 +122,12 @@ public class AssetChange {
             return this;
         }
 
-        public Builder collection(NFTCollection collection) {
+        public Builder collection(NftCollection collection) {
             this.collection = collection;
             return this;
         }
 
-        public Builder item(NFTItem item) {
+        public Builder item(NftItem item) {
             this.item = item;
             return this;
         }

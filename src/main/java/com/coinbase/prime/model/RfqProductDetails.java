@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class RFQProductDetails {
+public class RfqProductDetails {
     /**
      * Whether the product is tradable via RFQ
      */
@@ -69,10 +69,10 @@ public class RFQProductDetails {
     @JsonProperty("max_quote_size")
     private String maxQuoteSize;
 
-    public RFQProductDetails() {
+    public RfqProductDetails() {
     }
 
-    public RFQProductDetails(Builder builder) {
+    public RfqProductDetails(Builder builder) {
         this.tradable = builder.tradable;
         this.minNotionalSize = builder.minNotionalSize;
         this.maxNotionalSize = builder.maxNotionalSize;
@@ -180,8 +180,8 @@ public class RFQProductDetails {
             return this;
         }
 
-        public RFQProductDetails build() {
-            return new RFQProductDetails(this);
+        public RfqProductDetails build() {
+            return new RfqProductDetails(this);
         }
     }
 }

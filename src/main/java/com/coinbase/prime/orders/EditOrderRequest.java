@@ -63,6 +63,18 @@ public class EditOrderRequest {
     /** The expiry time of the order */
     @JsonProperty("expiry_time")
     private String expiryTime;
+    
+    /** The maximum order size that will show up on venue order books (iceberg orders) */
+    @JsonProperty("display_quote_size")
+    private String displayQuoteSize;
+    
+    /** The maximum order size that will show up on venue order books (iceberg orders) */
+    @JsonProperty("display_base_size")
+    private String displayBaseSize;
+    
+    /** Specifies the stop price at which the order activates */
+    @JsonProperty("stop_price")
+    private String stopPrice;
 
     public EditOrderRequest() {
     }
@@ -77,6 +89,9 @@ public class EditOrderRequest {
         this.quoteValue = builder.quoteValue;
         this.limitPrice = builder.limitPrice;
         this.expiryTime = builder.expiryTime;
+        this.displayQuoteSize = builder.displayQuoteSize;
+        this.displayBaseSize = builder.displayBaseSize;
+        this.stopPrice = builder.stopPrice;
     }
 
     public String getPortfolioId() {
@@ -151,6 +166,30 @@ public class EditOrderRequest {
         this.expiryTime = expiryTime;
     }
 
+    public String getDisplayQuoteSize() {
+        return displayQuoteSize;
+    }
+
+    public void setDisplayQuoteSize(String displayQuoteSize) {
+        this.displayQuoteSize = displayQuoteSize;
+    }
+
+    public String getDisplayBaseSize() {
+        return displayBaseSize;
+    }
+
+    public void setDisplayBaseSize(String displayBaseSize) {
+        this.displayBaseSize = displayBaseSize;
+    }
+
+    public String getStopPrice() {
+        return stopPrice;
+    }
+
+    public void setStopPrice(String stopPrice) {
+        this.stopPrice = stopPrice;
+    }
+
     public static class Builder {
         private String portfolioId;
         private String orderId;
@@ -161,6 +200,9 @@ public class EditOrderRequest {
         private String quoteValue;
         private String limitPrice;
         private String expiryTime;
+        private String displayQuoteSize;
+        private String displayBaseSize;
+        private String stopPrice;
 
         public Builder() {
         }
@@ -207,6 +249,21 @@ public class EditOrderRequest {
 
         public Builder expiryTime(String expiryTime) {
             this.expiryTime = expiryTime;
+            return this;
+        }
+
+        public Builder displayQuoteSize(String displayQuoteSize) {
+            this.displayQuoteSize = displayQuoteSize;
+            return this;
+        }
+
+        public Builder displayBaseSize(String displayBaseSize) {
+            this.displayBaseSize = displayBaseSize;
+            return this;
+        }
+
+        public Builder stopPrice(String stopPrice) {
+            this.stopPrice = stopPrice;
             return this;
         }
 

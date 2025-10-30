@@ -19,7 +19,7 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.enums.XMParty;
+import com.coinbase.prime.model.enums.XmParty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-public class XMLoan {
+public class XmLoan {
     /**
      * Financing loan UUID
      */
@@ -36,7 +36,7 @@ public class XMLoan {
     private String loanId;
 
     @JsonProperty("loan_party")
-    private XMParty loanParty;
+    private XmParty loanParty;
 
     /**
      * Loan principal currency
@@ -74,10 +74,10 @@ public class XMLoan {
     @JsonProperty("updated_at")
     private OffsetDateTime updatedAt;
 
-    public XMLoan() {
+    public XmLoan() {
     }
 
-    public XMLoan(Builder builder) {
+    public XmLoan(Builder builder) {
         this.loanId = builder.loanId;
         this.loanParty = builder.loanParty;
         this.principalCurrency = builder.principalCurrency;
@@ -94,11 +94,11 @@ public class XMLoan {
     public void setLoanId(String loanId) {
         this.loanId = loanId;
     }
-    public XMParty getLoanParty() {
+    public XmParty getLoanParty() {
         return loanParty;
     }
 
-    public void setLoanParty(XMParty loanParty) {
+    public void setLoanParty(XmParty loanParty) {
         this.loanParty = loanParty;
     }
     public String getPrincipalCurrency() {
@@ -146,7 +146,7 @@ public class XMLoan {
     public static class Builder {
         private String loanId;
 
-        private XMParty loanParty;
+        private XmParty loanParty;
 
         private String principalCurrency;
 
@@ -165,7 +165,7 @@ public class XMLoan {
             return this;
         }
 
-        public Builder loanParty(XMParty loanParty) {
+        public Builder loanParty(XmParty loanParty) {
             this.loanParty = loanParty;
             return this;
         }
@@ -200,8 +200,8 @@ public class XMLoan {
             return this;
         }
 
-        public XMLoan build() {
-            return new XMLoan(this);
+        public XmLoan build() {
+            return new XmLoan(this);
         }
     }
 }

@@ -19,10 +19,10 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.enums.XMCallStatus;
-import com.coinbase.prime.model.enums.XMCallType;
-import com.coinbase.prime.model.enums.XMMarginLevel;
-import com.coinbase.prime.model.XMSummary;
+import com.coinbase.prime.model.enums.XmCallStatus;
+import com.coinbase.prime.model.enums.XmCallType;
+import com.coinbase.prime.model.enums.XmMarginLevel;
+import com.coinbase.prime.model.XmSummary;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
-public class XMMarginCall {
+public class XmMarginCall {
     /**
      * Financing margin call UUID
      */
@@ -57,16 +57,16 @@ public class XMMarginCall {
     private String outstandingNotionalAmount;
 
     @JsonProperty("margin_call_type")
-    private XMCallType marginCallType;
+    private XmCallType marginCallType;
 
     @JsonProperty("margin_call_status")
-    private XMCallStatus marginCallStatus;
+    private XmCallStatus marginCallStatus;
 
     @JsonProperty("called_with_margin_level")
-    private XMMarginLevel calledWithMarginLevel;
+    private XmMarginLevel calledWithMarginLevel;
 
     @JsonProperty("called_with_margin_summary")
-    private XMSummary calledWithMarginSummary;
+    private XmSummary calledWithMarginSummary;
 
     /**
      * Timestamp when the margin call settlement is due
@@ -86,10 +86,10 @@ public class XMMarginCall {
     @JsonProperty("updated_at")
     private OffsetDateTime updatedAt;
 
-    public XMMarginCall() {
+    public XmMarginCall() {
     }
 
-    public XMMarginCall(Builder builder) {
+    public XmMarginCall(Builder builder) {
         this.marginCallId = builder.marginCallId;
         this.currency = builder.currency;
         this.initialNotionalAmount = builder.initialNotionalAmount;
@@ -130,32 +130,32 @@ public class XMMarginCall {
     public void setOutstandingNotionalAmount(String outstandingNotionalAmount) {
         this.outstandingNotionalAmount = outstandingNotionalAmount;
     }
-    public XMCallType getMarginCallType() {
+    public XmCallType getMarginCallType() {
         return marginCallType;
     }
 
-    public void setMarginCallType(XMCallType marginCallType) {
+    public void setMarginCallType(XmCallType marginCallType) {
         this.marginCallType = marginCallType;
     }
-    public XMCallStatus getMarginCallStatus() {
+    public XmCallStatus getMarginCallStatus() {
         return marginCallStatus;
     }
 
-    public void setMarginCallStatus(XMCallStatus marginCallStatus) {
+    public void setMarginCallStatus(XmCallStatus marginCallStatus) {
         this.marginCallStatus = marginCallStatus;
     }
-    public XMMarginLevel getCalledWithMarginLevel() {
+    public XmMarginLevel getCalledWithMarginLevel() {
         return calledWithMarginLevel;
     }
 
-    public void setCalledWithMarginLevel(XMMarginLevel calledWithMarginLevel) {
+    public void setCalledWithMarginLevel(XmMarginLevel calledWithMarginLevel) {
         this.calledWithMarginLevel = calledWithMarginLevel;
     }
-    public XMSummary getCalledWithMarginSummary() {
+    public XmSummary getCalledWithMarginSummary() {
         return calledWithMarginSummary;
     }
 
-    public void setCalledWithMarginSummary(XMSummary calledWithMarginSummary) {
+    public void setCalledWithMarginSummary(XmSummary calledWithMarginSummary) {
         this.calledWithMarginSummary = calledWithMarginSummary;
     }
     public OffsetDateTime getDueAt() {
@@ -188,13 +188,13 @@ public class XMMarginCall {
 
         private String outstandingNotionalAmount;
 
-        private XMCallType marginCallType;
+        private XmCallType marginCallType;
 
-        private XMCallStatus marginCallStatus;
+        private XmCallStatus marginCallStatus;
 
-        private XMMarginLevel calledWithMarginLevel;
+        private XmMarginLevel calledWithMarginLevel;
 
-        private XMSummary calledWithMarginSummary;
+        private XmSummary calledWithMarginSummary;
 
         private OffsetDateTime dueAt;
 
@@ -222,22 +222,22 @@ public class XMMarginCall {
             return this;
         }
 
-        public Builder marginCallType(XMCallType marginCallType) {
+        public Builder marginCallType(XmCallType marginCallType) {
             this.marginCallType = marginCallType;
             return this;
         }
 
-        public Builder marginCallStatus(XMCallStatus marginCallStatus) {
+        public Builder marginCallStatus(XmCallStatus marginCallStatus) {
             this.marginCallStatus = marginCallStatus;
             return this;
         }
 
-        public Builder calledWithMarginLevel(XMMarginLevel calledWithMarginLevel) {
+        public Builder calledWithMarginLevel(XmMarginLevel calledWithMarginLevel) {
             this.calledWithMarginLevel = calledWithMarginLevel;
             return this;
         }
 
-        public Builder calledWithMarginSummary(XMSummary calledWithMarginSummary) {
+        public Builder calledWithMarginSummary(XmSummary calledWithMarginSummary) {
             this.calledWithMarginSummary = calledWithMarginSummary;
             return this;
         }
@@ -257,8 +257,8 @@ public class XMMarginCall {
             return this;
         }
 
-        public XMMarginCall build() {
-            return new XMMarginCall(this);
+        public XmMarginCall build() {
+            return new XmMarginCall(this);
         }
     }
 }

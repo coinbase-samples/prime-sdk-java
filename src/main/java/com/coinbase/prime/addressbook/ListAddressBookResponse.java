@@ -21,6 +21,7 @@ import com.coinbase.prime.common.Pagination;
 
 public class ListAddressBookResponse {
     private AddressBookEntry[] addresses;
+
     private Pagination pagination;
 
     public ListAddressBookResponse() {

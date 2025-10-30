@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class PMAssetInfo {
+public class PmAssetInfo {
     /**
      * The currency symbol
      */
@@ -129,10 +129,10 @@ public class PMAssetInfo {
     @JsonProperty("long_nominal")
     private String longNominal;
 
-    public PMAssetInfo() {
+    public PmAssetInfo() {
     }
 
-    public PMAssetInfo(Builder builder) {
+    public PmAssetInfo(Builder builder) {
         this.symbol = builder.symbol;
         this.amount = builder.amount;
         this.price = builder.price;
@@ -390,8 +390,8 @@ public class PMAssetInfo {
             return this;
         }
 
-        public PMAssetInfo build() {
-            return new PMAssetInfo(this);
+        public PmAssetInfo build() {
+            return new PmAssetInfo(this);
         }
     }
 }

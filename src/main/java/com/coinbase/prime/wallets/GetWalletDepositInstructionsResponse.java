@@ -18,6 +18,7 @@ package com.coinbase.prime.wallets;
 
 import com.coinbase.prime.model.WalletCryptoDepositInstructions;
 import com.coinbase.prime.model.WalletFiatDepositInstructions;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Response object for retrieving wallet deposit instructions.
@@ -27,8 +28,10 @@ import com.coinbase.prime.model.WalletFiatDepositInstructions;
  */
 public class GetWalletDepositInstructionsResponse {
     /** Cryptocurrency deposit instructions for the wallet */
+    @JsonProperty("crypto_instructions")
     WalletCryptoDepositInstructions cryptoDepositInstructions;
     /** Fiat currency deposit instructions for the wallet */
+    @JsonProperty("fiat_instructions")
     WalletFiatDepositInstructions fiatDepositInstructions;
 
     public GetWalletDepositInstructionsResponse() {

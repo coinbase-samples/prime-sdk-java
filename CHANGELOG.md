@@ -1,5 +1,63 @@
 # Changelog
 
+## [1.5.0] - 2025-10-28
+
+### Added
+
+#### Orders Service - Advanced Order Type Support
+- **CreateOrderRequest**: Added support for advanced order types
+  - `settlCurrency` - Settlement currency for futures contracts
+  - `postOnly` - Post-only flag for maker-only LIMIT orders
+  - `pegOffsetType` - Peg offset type for PEG orders
+  - `offset` - Offset value for PEG orders (0 = peg to best bid/offer)
+  - `wigLevel` - WIG (Would if Good) level for pegged orders
+- **GetOrderPreviewRequest**: Added same advanced order fields as CreateOrderRequest plus:
+  - `displayQuoteSize` - Maximum order size visible on venue books (quote currency) for iceberg orders
+  - `displayBaseSize` - Maximum order size visible on venue books (base currency) for iceberg orders
+- **GetOrderPreviewResponse**: Added `isRaiseExact` field for raise exact order flag
+- **EditOrderRequest**: Added iceberg and stop order support
+  - `displayQuoteSize` - Display size for iceberg orders
+  - `displayBaseSize` - Display size for iceberg orders
+  - `stopPrice` - Stop price at which order activates
+
+#### Futures Service
+- **GetFcmRiskLimitsResponse**: Added comprehensive FCM margin and PnL fields
+  - `cfmTotalMargin` - Total margin required for both positions and open orders
+  - `cfmDeltaOte` - Open Trade Equity accrued during current trading session
+  - `cfmUnsettledRealizedPnl` - Unsettled realized PNL for positions closed intraday
+  - `cfmUnsettledAccruedFundingPnl` - Unsettled accrued funding PNL from last settlement
+
+#### Transactions Service
+- **CreateConversionResponse**: Added `transactionId` field - UUID of the conversion transaction
+
+#### Wallets Service
+- **CreateWalletResponse**: Added `networkFamily` field for wallet network family
+- **GetWalletDepositInstructionsResponse**: Added proper JSON property annotations
+  - `@JsonProperty("crypto_instructions")` for crypto deposit instructions
+  - `@JsonProperty("fiat_instructions")` for fiat deposit instructions
+
+### Changed
+
+#### Breaking Changes
+- **GetCrossMarginOverviewResponse** (Financing Service): Renamed field and methods for OpenAPI alignment
+  - Field: `crossMarginOverview` → `overview`
+  - JSON property: `"cross_margin_overview"` → `"overview"`
+  - Getter: `getCrossMarginOverview()` → `getOverview()`
+  - Setter: `setCrossMarginOverview()` → `setOverview()`
+
+### Fixed
+- Aligned all Request/Response classes with OpenAPI specification v0.1
+- Fixed missing optional fields across 11 classes in 5 services
+- Added 26 fields total to match OpenAPI spec completely
+- Fixed JSON property mappings for proper snake_case to camelCase conversion
+- Fixed acronym casing in model classes (XM* → Xm*, FCM* → Fcm*) to match Java naming conventions
+- Fixed field naming consistency across Request/Response classes
+- Corrected method signatures and naming:
+  - `getAllocationsByClientNettingId` → `listAllocationsByNettingId`
+  - Updated corresponding request/response classes: `GetAllocationsByClientNettingIdRequest` → `ListAllocationsByNettingIdRequest`
+- Fixed activity type enum: `PrimeActivityType` → `CustodyActivityType`
+- Removed `nettingId` field from `CreateAllocationRequest` to align with API specification
+
 ## [1.4.0] - 2025-10-15
 
 ### Added

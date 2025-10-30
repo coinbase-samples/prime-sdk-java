@@ -20,7 +20,7 @@
 
 package com.coinbase.prime.model.enums;
 
-public enum XMMarginLevel {
+public enum XmMarginLevel {
   XM_MARGIN_LEVEL_UNSPECIFIED,
   HEALTHY_THRESHOLD,
   DEFICIT_THRESHOLD,

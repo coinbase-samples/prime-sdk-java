@@ -52,6 +52,8 @@ public class GetOrderPreviewResponse {
     private String orderTotal;
     @JsonProperty("historical_pov")
     private String historicalPov;
+    @JsonProperty("is_raise_exact")
+    private Boolean isRaiseExact;
 
     public GetOrderPreviewResponse() {
     }
@@ -190,6 +192,14 @@ public class GetOrderPreviewResponse {
 
     public void setHistoricalPov(String historicalPov) {
         this.historicalPov = historicalPov;
+    }
+
+    public Boolean getIsRaiseExact() {
+        return isRaiseExact;
+    }
+
+    public void setIsRaiseExact(Boolean isRaiseExact) {
+        this.isRaiseExact = isRaiseExact;
     }
 
 }

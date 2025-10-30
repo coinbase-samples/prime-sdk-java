@@ -23,3 +23,5 @@ ai-docs/
 
 # OpenAPI spec - fetch dynamically instead of committing
 apiSpec/*.yaml
+
+.java-version

@@ -19,12 +19,12 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.enums.XMControlStatus;
-import com.coinbase.prime.model.enums.XMEntityCallStatus;
-import com.coinbase.prime.model.XMLoan;
-import com.coinbase.prime.model.XMMarginCall;
-import com.coinbase.prime.model.enums.XMMarginLevel;
-import com.coinbase.prime.model.XMSummary;
+import com.coinbase.prime.model.enums.XmControlStatus;
+import com.coinbase.prime.model.enums.XmEntityCallStatus;
+import com.coinbase.prime.model.XmLoan;
+import com.coinbase.prime.model.XmMarginCall;
+import com.coinbase.prime.model.enums.XmMarginLevel;
+import com.coinbase.prime.model.XmSummary;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -36,28 +36,28 @@ import java.util.List;
 
 public class CrossMarginOverview {
     @JsonProperty("control_status")
-    private XMControlStatus controlStatus;
+    private XmControlStatus controlStatus;
 
     @JsonProperty("call_status")
-    private XMEntityCallStatus callStatus;
+    private XmEntityCallStatus callStatus;
 
     @JsonProperty("margin_level")
-    private XMMarginLevel marginLevel;
+    private XmMarginLevel marginLevel;
 
     @JsonProperty("margin_summary")
-    private XMSummary marginSummary;
+    private XmSummary marginSummary;
 
     /**
      * List of active XM margin calls
      */
     @JsonProperty("active_margin_calls")
-    private List<XMMarginCall> activeMarginCalls;
+    private List<XmMarginCall> activeMarginCalls;
 
     /**
      * List of active XM loans
      */
     @JsonProperty("active_loans")
-    private List<XMLoan> activeLoans;
+    private List<XmLoan> activeLoans;
 
     public CrossMarginOverview() {
     }
@@ -70,87 +70,87 @@ public class CrossMarginOverview {
         this.activeMarginCalls = builder.activeMarginCalls;
         this.activeLoans = builder.activeLoans;
     }
-    public XMControlStatus getControlStatus() {
+    public XmControlStatus getControlStatus() {
         return controlStatus;
     }
 
-    public void setControlStatus(XMControlStatus controlStatus) {
+    public void setControlStatus(XmControlStatus controlStatus) {
         this.controlStatus = controlStatus;
     }
-    public XMEntityCallStatus getCallStatus() {
+    public XmEntityCallStatus getCallStatus() {
         return callStatus;
     }
 
-    public void setCallStatus(XMEntityCallStatus callStatus) {
+    public void setCallStatus(XmEntityCallStatus callStatus) {
         this.callStatus = callStatus;
     }
-    public XMMarginLevel getMarginLevel() {
+    public XmMarginLevel getMarginLevel() {
         return marginLevel;
     }
 
-    public void setMarginLevel(XMMarginLevel marginLevel) {
+    public void setMarginLevel(XmMarginLevel marginLevel) {
         this.marginLevel = marginLevel;
     }
-    public XMSummary getMarginSummary() {
+    public XmSummary getMarginSummary() {
         return marginSummary;
     }
 
-    public void setMarginSummary(XMSummary marginSummary) {
+    public void setMarginSummary(XmSummary marginSummary) {
         this.marginSummary = marginSummary;
     }
-    public List<XMMarginCall> getActiveMarginCalls() {
+    public List<XmMarginCall> getActiveMarginCalls() {
         return activeMarginCalls;
     }
 
-    public void setActiveMarginCalls(List<XMMarginCall> activeMarginCalls) {
+    public void setActiveMarginCalls(List<XmMarginCall> activeMarginCalls) {
         this.activeMarginCalls = activeMarginCalls;
     }
-    public List<XMLoan> getActiveLoans() {
+    public List<XmLoan> getActiveLoans() {
         return activeLoans;
     }
 
-    public void setActiveLoans(List<XMLoan> activeLoans) {
+    public void setActiveLoans(List<XmLoan> activeLoans) {
         this.activeLoans = activeLoans;
     }
     public static class Builder {
-        private XMControlStatus controlStatus;
+        private XmControlStatus controlStatus;
 
-        private XMEntityCallStatus callStatus;
+        private XmEntityCallStatus callStatus;
 
-        private XMMarginLevel marginLevel;
+        private XmMarginLevel marginLevel;
 
-        private XMSummary marginSummary;
+        private XmSummary marginSummary;
 
-        private List<XMMarginCall> activeMarginCalls;
+        private List<XmMarginCall> activeMarginCalls;
 
-        private List<XMLoan> activeLoans;
+        private List<XmLoan> activeLoans;
 
-        public Builder controlStatus(XMControlStatus controlStatus) {
+        public Builder controlStatus(XmControlStatus controlStatus) {
             this.controlStatus = controlStatus;
             return this;
         }
 
-        public Builder callStatus(XMEntityCallStatus callStatus) {
+        public Builder callStatus(XmEntityCallStatus callStatus) {
             this.callStatus = callStatus;
             return this;
         }
 
-        public Builder marginLevel(XMMarginLevel marginLevel) {
+        public Builder marginLevel(XmMarginLevel marginLevel) {
             this.marginLevel = marginLevel;
             return this;
         }
 
-        public Builder marginSummary(XMSummary marginSummary) {
+        public Builder marginSummary(XmSummary marginSummary) {
             this.marginSummary = marginSummary;
             return this;
         }
 
-        public Builder activeMarginCalls(List<XMMarginCall> activeMarginCalls) {
+        public Builder activeMarginCalls(List<XmMarginCall> activeMarginCalls) {
             this.activeMarginCalls = activeMarginCalls;
             return this;
         }
 
-        public Builder activeLoans(List<XMLoan> activeLoans) {
+        public Builder activeLoans(List<XmLoan> activeLoans) {
             this.activeLoans = activeLoans;
             return this;
         }

@@ -14,22 +14,28 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.assets;
+package com.coinbase.prime.allocations;
 
-import com.coinbase.prime.model.Asset;
+import com.coinbase.prime.model.Allocation;
 
-public class ListEntityAssetsResponse {
-    private Asset[] assets;
+/**
+ * Response object for retrieving net allocations by netting ID.
+ *
+ * Returns all allocations associated with the specified netting ID within a portfolio.
+ */
+public class ListAllocationsByNettingIdResponse {
+    /** Array of allocations associated with the netting ID */
+    private Allocation[] allocations;
 
-    public ListEntityAssetsResponse() {
+    public ListAllocationsByNettingIdResponse() {
     }
 
-    public Asset[] getAssets() {
-        return assets;
+    public Allocation[] getAllocations() {
+        return allocations;
     }
 
-    public void setAssets(Asset[] assets) {
-        this.assets = assets;
+    public void setAllocations(Allocation[] allocations) {
+        this.allocations = allocations;
     }
 
 }

@@ -40,13 +40,13 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     }
 
     @Override
-    public GetEntityFCMBalanceResponse getEntityFCMBalance(GetEntityFCMBalanceRequest request) throws CoinbasePrimeException {
+    public GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/balance_summary", request.getEntityId()),
                 null,
                 List.of(200),
-                new TypeReference<GetEntityFCMBalanceResponse>() {});
+                new TypeReference<GetEntityFcmBalanceResponse>() {});
     }
 
 
@@ -81,23 +81,23 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
     }
 
     @Override
-    public GetFCMMarginCallDetailsResponse getFCMMarginCallDetails(GetFCMMarginCallDetailsRequest request) throws CoinbasePrimeException {
+    public GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/margin_call_details", request.getEntityId()),
                 null,
                 List.of(200),
-                new TypeReference<GetFCMMarginCallDetailsResponse>() {});
+                new TypeReference<GetFcmMarginCallDetailsResponse>() {});
     }
 
     @Override
-    public GetFCMRiskLimitsResponse getFCMRiskLimits(GetFCMRiskLimitsRequest request) throws CoinbasePrimeException {
+    public GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/futures/risk_limits", request.getEntityId()),
                 null,
                 List.of(200),
-                new TypeReference<GetFCMRiskLimitsResponse>() {});
+                new TypeReference<GetFcmRiskLimitsResponse>() {});
     }
 
     @Override

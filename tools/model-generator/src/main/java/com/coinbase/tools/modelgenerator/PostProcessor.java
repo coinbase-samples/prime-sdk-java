@@ -26,6 +26,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class PostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(PostProcessor.class);
@@ -188,124 +189,103 @@ public class PostProcessor {
     }
 
     private void processEnumFile(Path file) throws IOException {
-        String content = Files.readString(file);
-        String className = extractClassName(content);
-
-        // Apply content replacements to ALL files (matching TS replaceString logic)
-        content = applyContentReplacements(content);
-
-        // Strip prefixes from class name (matching prime-sdk-ts logic)
-        String originalClassName = className;
-        className = stripCommonPrefixes(className);
-
-        if (!className.equals(originalClassName)) {
-            content = content.replace("enum " + originalClassName, "enum " + className);
-            logger.info("Transformed enum name: {} -> {}", originalClassName, className);
-        }
-
-        // Extract final class name after all transformations (for correct filename)
-        className = extractClassName(content);
-        String fileName = className + ".java";
-        Path outputPath = enumsDir.resolve(fileName);
-
-        boolean existsBefore = Files.exists(outputPath);
-
-        // Handle case-only filename changes on case-insensitive filesystems
-        final String finalFileName = fileName;
-        try {
-            Files.list(enumsDir)
-                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName) &&
-                            !p.getFileName().toString().equals(finalFileName))
-                .forEach(p -> {
-                    try {
-                        Files.delete(p);
-                        logger.info("Deleted old enum file with different casing: {}", p.getFileName());
-                    } catch (IOException e) {
-                        logger.warn("Could not delete old enum file: {}", p);
-                    }
-                });
-        } catch (IOException e) {
-            logger.warn("Could not check for enum case variants: {}", e.getMessage());
-        }
-
-        // Custom templates already produce correct output - just fix package
-        content = content.replace("package com.coinbase.prime.model;", "package com.coinbase.prime.model.enums;");
-        Files.writeString(outputPath, content);
-
-        if (!existsBefore) {
-            logger.info("Generated new enum: {}", className);
-            newModelsCount++;
-        } else {
-            logger.info("Updated enum: {}", className);
-            updatedModelsCount++;
-        }
-        logger.debug("Wrote enum file: {}", outputPath);
+        processFile(file, enumsDir, true);
     }
 
     private void processModelFile(Path file) throws IOException {
+        processFile(file, outputDir, false);
+    }
+
+    /**
+     * Unified file processing logic for both enums and models.
+     * @param file Source file to process
+     * @param targetDir Target directory (enumsDir for enums, outputDir for models)
+     * @param isEnum Whether this is an enum file (affects package name and preserves SCREAMING_SNAKE_CASE)
+     */
+    private void processFile(Path file, Path targetDir, boolean isEnum) throws IOException {
         String content = Files.readString(file);
+        String originalFileName = file.getFileName().toString();
         String className = extractClassName(content);
 
         // Apply content replacements to ALL files (matching TS replaceString logic)
         content = applyContentReplacements(content);
 
+        // Re-extract class name AFTER content replacements (they may have changed it)
+        String afterReplacementsClassName = extractClassName(content);
+        
         // Strip prefixes from class name (matching prime-sdk-ts logic)
-        String originalClassName = className;
-        className = stripCommonPrefixes(className);
+        String originalClassName = afterReplacementsClassName;
+        className = stripCommonPrefixes(afterReplacementsClassName);
 
         if (!className.equals(originalClassName)) {
-            content = content.replace("class " + originalClassName, "class " + className);
-            content = content.replace("enum " + originalClassName, "enum " + className);
-            logger.info("Transformed class name: {} -> {}", originalClassName, className);
+            // Replace ALL occurrences of the class/enum name in the content
+            // Use negative lookahead (?!_) to preserve SCREAMING_SNAKE_CASE constants (applies to both enums and models)
+            content = content.replaceAll("\\b" + Pattern.quote(originalClassName) + "\\b(?!_)", className);
+            logger.info("Transformed {} name: {} -> {}", isEnum ? "enum" : "class", originalClassName, className);
         }
 
-        // Apply Web3 to Onchain transformation
-        content = applyWeb3ToOnchainTransformation(content, className);
+        // Apply Web3 to Onchain transformation (models only, but safe for enums too)
+        if (!isEnum) {
+            content = applyWeb3ToOnchainTransformation(content, className);
+        }
 
         // Extract final class name after all transformations (for correct filename)
         className = extractClassName(content);
         String fileName = className + ".java";
 
-        // Apply Web3 to Onchain transformation to filename
-        if (fileName.contains("Web3")) {
+        // Apply Web3 to Onchain transformation to filename (models only)
+        if (!isEnum && fileName.contains("Web3")) {
             fileName = fileName.replace("Web3", "Onchain");
             className = className.replace("Web3", "Onchain");
         }
 
-        Path outputPath = outputDir.resolve(fileName);
+        Path outputPath = targetDir.resolve(fileName);
+        
+        // Log filename transformation if changed
+        if (!originalFileName.equals(fileName)) {
+            logger.info("Transformed {} filename: {} -> {}", isEnum ? "enum" : "model", originalFileName, fileName);
+        }
+        
         boolean existsBefore = Files.exists(outputPath);
 
         // Handle case-only filename changes on case-insensitive filesystems
-        // Check if there's a file with different casing that needs to be deleted
+        // Delete ANY file with case-insensitive matching name BEFORE writing
         final String finalFileName = fileName;
         try {
-            Files.list(outputDir)
-                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName) &&
-                            !p.getFileName().toString().equals(finalFileName))
-                .forEach(p -> {
-                    try {
-                        Files.delete(p);
-                        logger.info("Deleted old file with different casing: {}", p.getFileName());
-                    } catch (IOException e) {
-                        logger.warn("Could not delete old file: {}", p);
-                    }
-                });
+            List<Path> toDelete = Files.list(targetDir)
+                .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName))
+                .collect(java.util.stream.Collectors.toList());
+            
+            for (Path p : toDelete) {
+                Files.delete(p);
+                if (!p.getFileName().toString().equals(finalFileName)) {
+                    logger.info("Deleted old {} file with different casing: {} -> {}", 
+                        isEnum ? "enum" : "model", p.getFileName(), finalFileName);
+                }
+            }
         } catch (IOException e) {
-            logger.warn("Could not check for case variants: {}", e.getMessage());
+            logger.warn("Could not delete old {} file variants: {}", isEnum ? "enum" : "model", e.getMessage());
         }
 
-        // Custom templates already produce correct output - just fix enum imports
-        content = fixEnumImports(content);
+        // Apply final transformations based on file type
+        if (isEnum) {
+            // Fix package for enums
+            content = content.replace("package com.coinbase.prime.model;", "package com.coinbase.prime.model.enums;");
+        } else {
+            // Fix enum imports for models
+            content = fixEnumImports(content);
+        }
+        
         Files.writeString(outputPath, content);
 
         if (!existsBefore) {
-            logger.info("Generated new model: {}", className);
+            logger.info("Generated new {}: {}", isEnum ? "enum" : "model", className);
             newModelsCount++;
         } else {
-            logger.info("Updated model: {}", className);
+            logger.info("Updated {}: {}", isEnum ? "enum" : "model", className);
             updatedModelsCount++;
         }
-        logger.debug("Wrote model file: {}", outputPath);
+        logger.debug("Wrote {} file: {}", isEnum ? "enum" : "model", outputPath);
     }
 
     private String applyWeb3ToOnchainTransformation(String content, String className) {
@@ -365,17 +345,134 @@ public class PostProcessor {
         put("coinbaseBrokerageProxyEventsMaterializedApi", "");
         put("publicRestApi", "");
         put("PublicRestApi", "");
-        // Preserve all-caps acronym casing to match TypeScript SDK
-        put("FcmMarginCall", "FCMMarginCall");
-        put("XmLoan", "XMLoan");
-        put("XmMarginCall", "XMMarginCall");
-        put("XmSummary", "XMSummary");
         // Simplify verbose model names
         put("CreateOnchainTransactionRequestEvmParams", "EvmParams");
         put("FcmFuturesSweepRequestAmount", "SweepAmount");
         put("FcmFuturesSweep", "FuturesSweep");
     }};
 
+
+    /**
+     * Normalizes acronyms in content (imports, class references, method calls, etc.).
+     * Preserves SCREAMING_SNAKE_CASE enum constants and acronyms within comments.
+     * Examples: GetFCMRiskLimits -> GetFcmRiskLimits, XMParty -> XmParty
+     *           But: FCM_POSITION_SIDE_UNSPECIFIED stays FCM_POSITION_SIDE_UNSPECIFIED
+     *           And: "intermediary VASP" in comments stays "intermediary VASP"
+     */
+    private String normalizeAcronymsInContent(String content) {
+        // List of known acronyms that should be converted to PascalCase
+        Map<String, String> acronymMap = new LinkedHashMap<>();
+        acronymMap.put("FCM", "Fcm");
+        acronymMap.put("XML", "Xml");
+        acronymMap.put("XM", "Xm");
+        acronymMap.put("PM", "Pm");
+        acronymMap.put("RFQ", "Rfq");
+        acronymMap.put("NFT", "Nft");
+        acronymMap.put("EVM", "Evm");
+        acronymMap.put("VASP", "Vasp");
+        
+        // Step 1: Extract and replace comments with placeholders to preserve them
+        List<String> preservedComments = new ArrayList<>();
+        int commentIndex = 0;
+        
+        // Pattern to match all comment types: //, /* */, and /** */
+        Pattern commentPattern = Pattern.compile(
+            "//.*?$|/\\*.*?\\*/",
+            Pattern.MULTILINE | Pattern.DOTALL
+        );
+        
+        Matcher commentMatcher = commentPattern.matcher(content);
+        StringBuffer contentWithPlaceholders = new StringBuffer();
+        
+        while (commentMatcher.find()) {
+            String comment = commentMatcher.group();
+            preservedComments.add(comment);
+            commentMatcher.appendReplacement(contentWithPlaceholders, 
+                "___COMMENT_PLACEHOLDER_" + commentIndex + "___");
+            commentIndex++;
+        }
+        commentMatcher.appendTail(contentWithPlaceholders);
+        
+        // Step 2: Perform acronym normalization on non-comment code
+        String result = contentWithPlaceholders.toString();
+        for (Map.Entry<String, String> entry : acronymMap.entrySet()) {
+            String acronym = entry.getKey();
+            String normalized = entry.getValue();
+            
+            // Replace acronym in various contexts:
+            // 1. Class names: GetFCMRiskLimits -> GetFcmRiskLimits
+            // 2. Import statements: import ...GetFCMRiskLimits -> import ...GetFcmRiskLimits
+            // 3. Type references: GetFCMRiskLimitsResponse -> GetFcmRiskLimitsResponse
+            // 4. Method names: getFCMMarginCall -> getFcmMarginCall
+            // 5. Standalone type names: private VASP vasp -> private Vasp vasp
+            // BUT: preserve SCREAMING_SNAKE_CASE enum constants like FCM_POSITION_SIDE_UNSPECIFIED
+            // AND: preserve enum values like "CBE", "FCM" (standalone on their own line)
+            
+            // Pattern 1: Match acronym when followed by uppercase letter (word boundary before)
+            // But NOT if it's part of a SCREAMING_SNAKE_CASE identifier (followed by underscore)
+            result = result.replaceAll("\\b" + acronym + "(?=[A-Z](?!_))", normalized);
+            
+            // Pattern 2: Match acronym as standalone type (followed by lowercase identifier)
+            // This catches: "private VASP vasp", "VASP getVasp()", etc.
+            // But NOT enum values (standalone on their own line)
+            result = result.replaceAll("\\b" + acronym + "(?=[\\s]+[a-z])", normalized);
+            
+            // Pattern 3: Match acronym in generics, method calls, and imports
+            // This catches: "List<VASP>", "new VASP(", "import ...VASP;", etc.
+            // But NOT enum values (which are typically just "FCM," or "FCM\n")
+            result = result.replaceAll("\\b" + acronym + "(?=[\\(\\)<>;])", normalized);
+            
+            // Pattern 4: Match acronym at end of identifier name (before .)
+            // This catches: "VASP.class", but avoids enum constants with underscores
+            result = result.replaceAll("\\b" + acronym + "(?=\\.)", normalized);
+        }
+        
+        // Step 3: Restore original comments with acronyms preserved
+        for (int i = 0; i < preservedComments.size(); i++) {
+            result = result.replace("___COMMENT_PLACEHOLDER_" + i + "___", preservedComments.get(i));
+        }
+        
+        return result;
+    }
+    
+    /**
+     * Normalizes acronyms in class names to use PascalCase.
+     * Examples: FCMMarginCall -> FcmMarginCall, XMLoan -> XmLoan
+     */
+    private String normalizeAcronyms(String className) {
+        // List of known acronyms that should be converted to PascalCase
+        // Using LinkedHashMap to control replacement order (longer acronyms first)
+        Map<String, String> acronymMap = new LinkedHashMap<>();
+        acronymMap.put("FCM", "Fcm");
+        acronymMap.put("XML", "Xml");
+        acronymMap.put("XM", "Xm");
+        acronymMap.put("PM", "Pm");
+        acronymMap.put("RFQ", "Rfq");
+        acronymMap.put("NFT", "Nft");
+        acronymMap.put("EVM", "Evm");
+        acronymMap.put("VASP", "Vasp");
+        
+        String result = className;
+        for (Map.Entry<String, String> entry : acronymMap.entrySet()) {
+            String acronym = entry.getKey();
+            String normalized = entry.getValue();
+            
+            // Replace acronym when:
+            // 1. At the start followed by uppercase letter (FCMMarginCall -> FcmMarginCall)
+            // 2. At the end of the string (just FCM -> Fcm)
+            // 3. In the middle followed by uppercase (EntityFCMBalance -> EntityFcmBalance)
+            
+            // Use word boundary and lookahead to ensure we only replace the acronym part
+            result = result.replaceAll("\\b" + acronym + "(?=[A-Z])", normalized);
+            
+            // Handle end of string
+            if (result.endsWith(acronym)) {
+                result = result.substring(0, result.length() - acronym.length()) + normalized;
+            }
+        }
+        
+        return result;
+    }
 
     /**
      * Apply file path replacements to strip common prefixes from class names.
@@ -390,6 +487,9 @@ public class PostProcessor {
                 result = result.replace(entry.getKey(), entry.getValue());
             }
         }
+        
+        // Normalize acronyms to PascalCase after prefix stripping
+        result = normalizeAcronyms(result);
 
         return result;
     }
@@ -408,6 +508,10 @@ public class PostProcessor {
             // Simple string replacement - replaces all occurrences
             content = content.replace(key, value);
         }
+        
+        // Apply acronym normalization to content (class references, imports, etc.)
+        content = normalizeAcronymsInContent(content);
+        
         return content;
     }
 

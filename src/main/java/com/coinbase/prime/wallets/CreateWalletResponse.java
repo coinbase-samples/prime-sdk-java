@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.wallets;
 
+import com.coinbase.prime.model.enums.NetworkFamily;
 import com.coinbase.prime.model.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -39,6 +40,10 @@ public class CreateWalletResponse {
     /** The wallet type (VAULT, TRADING, or WALLET_TYPE_OTHER) */
     @JsonProperty("wallet_type")
     private WalletType type;
+
+    /** The network family for the wallet */
+    @JsonProperty("network_family")
+    private NetworkFamily networkFamily;
 
     public CreateWalletResponse() {
     }
@@ -73,5 +78,13 @@ public class CreateWalletResponse {
 
     public void setType(WalletType type) {
         this.type = type;
+    }
+
+    public NetworkFamily getNetworkFamily() {
+        return networkFamily;
+    }
+
+    public void setNetworkFamily(NetworkFamily networkFamily) {
+        this.networkFamily = networkFamily;
     }
 }
