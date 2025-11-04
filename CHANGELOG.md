@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.2] - 2025-11-04
+
+### Changed
+- Updated Core-Java to 1.0.2 which includes support for deserializing advanced Java Time modules
+
+### Added
+- Unit tests for serialization/deserialization specifically around Orders as well as more general tests
+
 ## [1.5.1] - 2025-10-30
 
 ### Fixed

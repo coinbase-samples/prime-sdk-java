@@ -27,7 +27,7 @@ import com.coinbase.prime.orders.CreateOrderResponse;
 import com.coinbase.prime.orders.GetOrderByOrderIdRequest;
 import com.coinbase.prime.orders.GetOrderByOrderIdResponse;
 import com.coinbase.prime.orders.OrdersService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
 import java.util.UUID;
 
@@ -50,7 +50,7 @@ public class CreateOrder {
               .clientOrderId(UUID.randomUUID().toString())
               .build());
 
-      System.out.println(new ObjectMapper().writeValueAsString(orderResponse));
+      System.out.println(Utils.getObjectMapper().writeValueAsString(orderResponse));
 
       // Wait for the order to be processed
       Thread.sleep(1000);
@@ -69,7 +69,7 @@ public class CreateOrder {
             .orderId(orderId)
             .build());
 
-    System.out.println(new ObjectMapper().writeValueAsString(getOrderResponse));
+    System.out.println(Utils.getObjectMapper().writeValueAsString(getOrderResponse));
 
     while (getOrderResponse.getOrder().getStatus() == OrderStatus.OPEN
         || getOrderResponse.getOrder().getStatus() == OrderStatus.PENDING) {
