@@ -44,7 +44,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/cross_margin", request.getEntityId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetCrossMarginOverviewResponse>() {});
     }
@@ -64,7 +64,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/margin", request.getEntityId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetMarginInformationResponse>() {});
     }
@@ -84,7 +84,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/credit", request.getPortfolioId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetPortfolioCreditInformationResponse>() {});
     }

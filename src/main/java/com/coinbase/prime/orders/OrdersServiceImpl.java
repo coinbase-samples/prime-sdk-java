@@ -74,7 +74,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders/%s", request.getPortfolioId(), request.getOrderId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetOrderByOrderIdResponse>() {});
     }
@@ -84,7 +84,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/orders/%s/cancel", request.getPortfolioId(), request.getOrderId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<CancelOrderResponse>() {});
     }
@@ -134,7 +134,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders/%s/edit_history", request.getPortfolioId(), request.getOrderId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<ListOrderEditHistoryResponse>() {});
     }

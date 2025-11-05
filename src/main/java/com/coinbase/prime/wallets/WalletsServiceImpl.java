@@ -54,7 +54,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetWalletResponse>() {});
     }
@@ -64,7 +64,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(), request.getWalletId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetWalletDepositInstructionsResponse>() {});
     }

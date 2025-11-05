@@ -31,17 +31,10 @@ public class CommissionServiceImpl extends CoinbaseServiceImpl implements Commis
 
     @Override
     public GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbasePrimeException {
-        String path = String.format("/portfolios/%s/commission", request.getPortfolioId());
-        
-        // Add query parameter if productId is provided
-        if (request.getProductId() != null && !request.getProductId().trim().isEmpty()) {
-            path += "?product_id=" + request.getProductId();
-        }
-        
         return this.request(
                 HttpMethod.GET,
-                path,
-                null,
+                String.format("/portfolios/%s/commission", request.getPortfolioId()),
+                request,
                 List.of(200),
                 new TypeReference<GetPortfolioCommissionResponse>() {});
     }

@@ -24,10 +24,12 @@ public class GetActivityRequest {
     @JsonIgnore
     private String activityId;
 
+    public GetActivityRequest() {
+    }
+
     public GetActivityRequest(String activityId) {
         this.activityId = activityId;
     }
-
 
     public String getActivityId() {
         return activityId;
