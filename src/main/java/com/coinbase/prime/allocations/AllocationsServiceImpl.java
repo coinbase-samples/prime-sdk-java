@@ -75,7 +75,7 @@ public class AllocationsServiceImpl extends CoinbaseServiceImpl implements Alloc
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/allocations/net/%s", request.getPortfolioId(), request.getNettingId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<ListAllocationsByNettingIdResponse>() {});
     }

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.3] - 2025-11-05
+
+### Fixed
+- Fixed not passing request in GetWalletDepositInstructions
+
+### Added
+- Unit tests and examples for several endpoints
+
 ## [1.5.2] - 2025-11-04
 
 ### Changed
