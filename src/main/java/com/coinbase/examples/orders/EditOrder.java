@@ -47,10 +47,7 @@ public class EditOrder {
       String limitPrice = args[4];
       String newClientOrderId = UUID.randomUUID().toString();
 
-      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId);
-      System.out.println("Original Client Order ID: " + origClientOrderId);
-      System.out.println("New Client Order ID: " + newClientOrderId);
-      System.out.println("Edit parameters: " + quantityType + " = " + amount + ", limit_price = " + limitPrice);
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId + ", Original Client Order ID: " + origClientOrderId + ", New Client Order ID: " + newClientOrderId + ", Edit parameters: " + quantityType + " = " + amount + ", limit_price = " + limitPrice);
 
       EditOrderRequest.Builder builder = new EditOrderRequest.Builder()
           .portfolioId(portfolioId)
