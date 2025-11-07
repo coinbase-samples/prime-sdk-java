@@ -37,8 +37,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
                 String.format("/portfolios/%s/wallets", request.getPortfolioId()),
                 request,
                 List.of(200),
-                new TypeReference<ListWalletsResponse>() {
-                });
+                new TypeReference<ListWalletsResponse>() {});
     }
 
     @Override
@@ -48,8 +47,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
                 String.format("/portfolios/%s/wallets", request.getPortfolioId()),
                 request,
                 List.of(200),
-                new TypeReference<CreateWalletResponse>() {
-                });
+                new TypeReference<CreateWalletResponse>() {});
     }
 
     @Override
@@ -57,10 +55,9 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
-                new TypeReference<GetWalletResponse>() {
-                });
+                new TypeReference<GetWalletResponse>() {});
     }
 
     @Override
@@ -70,10 +67,9 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(),
                         request.getWalletId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
-                new TypeReference<GetWalletDepositInstructionsResponse>() {
-                });
+                new TypeReference<GetWalletDepositInstructionsResponse>() {});
     }
 
     @Override
@@ -82,10 +78,9 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
-                new TypeReference<ListWalletAddressesResponse>() {
-                });
+                new TypeReference<ListWalletAddressesResponse>() {});
     }
 
     @Override
@@ -94,9 +89,8 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
-                new TypeReference<CreateWalletDepositAddressResponse>() {
-                });
+                new TypeReference<CreateWalletDepositAddressResponse>() {});
     }
 }
