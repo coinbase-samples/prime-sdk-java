@@ -14,18 +14,15 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples;
+package com.coinbase.examples.orders;
 
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.OrderSide;
-import com.coinbase.prime.model.enums.OrderStatus;
 import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.orders.CreateOrderRequest;
 import com.coinbase.prime.orders.CreateOrderResponse;
-import com.coinbase.prime.orders.GetOrderByOrderIdRequest;
-import com.coinbase.prime.orders.GetOrderByOrderIdResponse;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.utils.Utils;
 
@@ -36,11 +33,12 @@ public class CreateOrder {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId);
+
       OrdersService ordersService = PrimeServiceFactory.createOrdersService(client);
-      CreateOrderResponse orderResponse = ordersService.createOrder(
+      CreateOrderResponse response = ordersService.createOrder(
           new CreateOrderRequest.Builder()
               .portfolioId(portfolioId)
               .productId("ADA-USD")
@@ -50,35 +48,9 @@ public class CreateOrder {
               .clientOrderId(UUID.randomUUID().toString())
               .build());
 
-      System.out.println(Utils.getObjectMapper().writeValueAsString(orderResponse));
-
-      // Wait for the order to be processed
-      Thread.sleep(1000);
-      checkOrderStatus(ordersService, portfolioId, orderResponse.getOrderId());
-
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
-    }
-  }
-
-  private static void checkOrderStatus(OrdersService ordersService, String portfolioId, String orderId)
-      throws Exception {
-    GetOrderByOrderIdResponse getOrderResponse = ordersService.getOrderByOrderId(
-        new GetOrderByOrderIdRequest.Builder()
-            .portfolioId(portfolioId)
-            .orderId(orderId)
-            .build());
-
-    System.out.println(Utils.getObjectMapper().writeValueAsString(getOrderResponse));
-
-    while (getOrderResponse.getOrder().getStatus() == OrderStatus.OPEN
-        || getOrderResponse.getOrder().getStatus() == OrderStatus.PENDING) {
-      Thread.sleep(1000);
-      getOrderResponse = ordersService.getOrderByOrderId(
-          new GetOrderByOrderIdRequest.Builder()
-              .portfolioId(portfolioId)
-              .orderId(orderId)
-              .build());
     }
   }
 }

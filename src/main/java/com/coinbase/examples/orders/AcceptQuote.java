@@ -14,53 +14,40 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples;
+package com.coinbase.examples.orders;
 
 import com.coinbase.prime.client.CoinbasePrimeClient;
-import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
+import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.model.enums.OrderSide;
-import com.coinbase.prime.orders.*;
+import com.coinbase.prime.orders.AcceptQuoteRequest;
+import com.coinbase.prime.orders.AcceptQuoteResponse;
 import com.coinbase.prime.orders.OrdersService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
 import java.util.UUID;
 
-public class CreateRfq {
+public class AcceptQuote {
   public static void main(String[] args) {
-    String credsStringBlob = System.getenv("COINBASE_PRIME_CREDENTIALS");
-    ObjectMapper mapper = new ObjectMapper();
-
     try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(credsStringBlob);
+      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-
-      OrdersService ordersService = PrimeServiceFactory.createOrdersService(client);
-
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String quoteId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_QUOTE_ID");
 
-      // Create and Accept RFQ
-      CreateQuoteResponse quoteResponse = ordersService.createQuote(
-          new CreateQuoteRequest.Builder()
-              .portfolioId(portfolioId)
-              .productId("ETH-USD")
-              .side(OrderSide.BUY)
-              .baseQuantity("0.007")
-              .limitPrice("3000.00")
-              .clientQuoteId(UUID.randomUUID().toString())
-              .build());
-      System.out.println(mapper.writeValueAsString(quoteResponse));
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Quote ID: " + quoteId);
 
-      AcceptQuoteResponse acceptQuoteResponse = ordersService.acceptQuote(
+      OrdersService service = PrimeServiceFactory.createOrdersService(client);
+      AcceptQuoteResponse response = service.acceptQuote(
           new AcceptQuoteRequest.Builder()
               .portfolioId(portfolioId)
-              .quoteId(quoteResponse.getQuoteId())
+              .quoteId(quoteId)
               .productId("ETH-USD")
               .side(OrderSide.BUY)
               .clientOrderId(UUID.randomUUID().toString())
               .build());
-      System.out.println(mapper.writeValueAsString(acceptQuoteResponse));
 
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

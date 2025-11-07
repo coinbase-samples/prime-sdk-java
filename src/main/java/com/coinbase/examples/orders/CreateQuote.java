@@ -19,25 +19,36 @@ package com.coinbase.examples.orders;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.orders.ListOpenOrdersRequest;
-import com.coinbase.prime.orders.ListOpenOrdersResponse;
+import com.coinbase.prime.model.enums.OrderSide;
+import com.coinbase.prime.orders.CreateQuoteRequest;
+import com.coinbase.prime.orders.CreateQuoteResponse;
 import com.coinbase.prime.orders.OrdersService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListOpenOrdersExample {
+import java.util.UUID;
+
+public class CreateQuote {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-      OrdersService service = PrimeServiceFactory.createOrdersService(client);
-      ListOpenOrdersResponse response = service.listOpenOrders(
-          new ListOpenOrdersRequest.Builder()
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId);
+
+      OrdersService ordersService = PrimeServiceFactory.createOrdersService(client);
+      CreateQuoteResponse response = ordersService.createQuote(
+          new CreateQuoteRequest.Builder()
               .portfolioId(portfolioId)
+              .productId("ETH-USD")
+              .side(OrderSide.BUY)
+              .baseQuantity("0.007")
+              .limitPrice("4000.00")
+              .clientQuoteId(UUID.randomUUID().toString())
               .build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+
     } catch (Exception e) {
       e.printStackTrace();
     }

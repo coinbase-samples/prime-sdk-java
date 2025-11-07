@@ -31,11 +31,9 @@ public class ListPortfolioFillsRequest extends PrimeListRequest {
     private String portfolioId;
 
     @JsonProperty("start_date")
-    @JsonIgnore
     private String startDate;
 
     @JsonProperty("end_date")
-    @JsonIgnore
     private String endDate;
 
     public ListPortfolioFillsRequest() {
