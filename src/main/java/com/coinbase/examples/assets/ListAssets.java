@@ -14,28 +14,26 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.commission;
+package com.coinbase.examples.assets;
 
+import com.coinbase.prime.assets.AssetsService;
+import com.coinbase.prime.assets.ListAssetsRequest;
+import com.coinbase.prime.assets.ListAssetsResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
-import com.coinbase.prime.commission.CommissionService;
-import com.coinbase.prime.commission.GetPortfolioCommissionRequest;
-import com.coinbase.prime.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class GetPortfolioCommissionExample {
+public class ListAssets {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
-      CommissionService service = PrimeServiceFactory.createCommissionService(client);
-      GetPortfolioCommissionResponse response = service.getPortfolioCommission(
-          new GetPortfolioCommissionRequest.Builder()
-              .portfolioId(portfolioId)
-              .build());
+      AssetsService service = PrimeServiceFactory.createAssetsService(client);
+      ListAssetsResponse response = service.listAssets(
+          new ListAssetsRequest.Builder(entityId).build());
 
       System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

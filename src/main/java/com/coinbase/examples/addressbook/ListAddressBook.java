@@ -14,28 +14,31 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.assets;
+package com.coinbase.examples.addressbook;
 
-import com.coinbase.prime.assets.AssetsService;
-import com.coinbase.prime.assets.ListAssetsRequest;
-import com.coinbase.prime.assets.ListAssetsResponse;
+import com.coinbase.prime.addressbook.AddressBookService;
+import com.coinbase.prime.addressbook.ListAddressBookRequest;
+import com.coinbase.prime.addressbook.ListAddressBookResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListAssetsExample {
+public class ListAddressBook {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-      String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-      AssetsService service = PrimeServiceFactory.createAssetsService(client);
-      ListAssetsResponse response = service.listAssets(
-          new ListAssetsRequest.Builder(entityId).build());
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId);
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
+      ListAddressBookResponse response = service.listAddressBook(
+          new ListAddressBookRequest.Builder(portfolioId)
+              .build());
+
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

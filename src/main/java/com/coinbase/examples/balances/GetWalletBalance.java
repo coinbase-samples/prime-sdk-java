@@ -17,27 +17,31 @@
 package com.coinbase.examples.balances;
 
 import com.coinbase.prime.balances.BalancesService;
-import com.coinbase.prime.balances.ListPortfolioBalancesRequest;
-import com.coinbase.prime.balances.ListPortfolioBalancesResponse;
+import com.coinbase.prime.balances.GetWalletBalanceRequest;
+import com.coinbase.prime.balances.GetWalletBalanceResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListPortfolioBalancesExample {
+public class GetWalletBalance {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID");
+
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
       BalancesService service = PrimeServiceFactory.createBalancesService(client);
-      ListPortfolioBalancesResponse response = service.listPortfolioBalances(
-          new ListPortfolioBalancesRequest.Builder()
+      GetWalletBalanceResponse response = service.getWalletBalance(
+          new GetWalletBalanceRequest.Builder()
               .portfolioId(portfolioId)
+              .walletId(walletId)
               .build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
