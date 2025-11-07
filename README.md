@@ -79,6 +79,60 @@ To build the sample library, ensure that Java Development Kit (JDK) 11+ is insta
 mvn clean install
 ```
 
+## Running Examples
+
+The SDK includes several example classes demonstrating how to use various endpoints. 
+
+### Setup Environment Variables
+
+First, set up your credentials as environment variables:
+
+```bash
+export COINBASE_PRIME_CREDENTIALS='{"accessKey":"your-access-key","passphrase":"your-passphrase","signingKey":"your-signing-key"}'
+export COINBASE_PRIME_PORTFOLIO_ID="your-portfolio-id"
+```
+
+### Option 1: Using Maven directly
+
+```bash
+mvn exec:java -Dexec.mainClass="com.coinbase.examples.transactions.ListPortfolioTransactions"
+```
+
+**Note:** Make sure the environment variables are exported in your current shell session before running the examples.
+
+### Available Examples
+
+**Transactions:**
+- `com.coinbase.examples.transactions.ListPortfolioTransactions` - List portfolio transactions
+
+**Wallets:**
+- `com.coinbase.examples.wallets.ListPortfolioWallets` - List all wallets in a portfolio
+- `com.coinbase.examples.wallets.GetWallet <wallet-id>` - Get wallet details
+- `com.coinbase.examples.wallets.ListWalletAddresses <wallet-id> <network-id>` - List addresses for a wallet
+- `com.coinbase.examples.wallets.GetWalletDepositInstructions <wallet-id> [deposit-type]` - Get deposit instructions (deposit-type: CRYPTO, WIRE, SEN, SWIFT, SEPA)
+
+**Other:**
+- `com.coinbase.examples.Main` - Comprehensive example with multiple API calls
+
+**Example Usage:**
+
+```bash
+# List all wallets
+mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.ListPortfolioWallets"
+
+# Get specific wallet details
+mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWallet" -Dexec.args="wallet-id-here"
+
+# List wallet addresses
+mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.ListWalletAddresses" -Dexec.args="wallet-id network-id"
+
+# Get deposit instructions (defaults to CRYPTO)
+mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositInstructions" -Dexec.args="wallet-id"
+
+# Get deposit instructions for WIRE
+mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositInstructions" -Dexec.args="wallet-id WIRE"
+```
+
 ## Model Generation
 
 The SDK includes an automated model generator that creates Java domain models and enums from the OpenAPI specification. This ensures the SDK stays in sync with the Prime API specification.

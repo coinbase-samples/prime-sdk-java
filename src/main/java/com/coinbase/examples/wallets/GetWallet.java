@@ -14,34 +14,31 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples;
+package com.coinbase.examples.wallets;
 
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.model.enums.WalletType;
-import com.coinbase.prime.wallets.ListWalletsRequest;
-import com.coinbase.prime.wallets.ListWalletsResponse;
+import com.coinbase.prime.wallets.GetWalletRequest;
+import com.coinbase.prime.wallets.GetWalletResponse;
 import com.coinbase.prime.wallets.WalletsService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListWallets {
+public class GetWallet {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID") != null ? System.getenv("COINBASE_PRIME_WALLET_ID") : "wallet-id-here";
 
-      WalletsService walletsService = PrimeServiceFactory.createWalletsService(client);
-      ListWalletsResponse response = walletsService.listWallets(
-          new ListWalletsRequest.Builder()
-              .portfolioId(portfolioId)
-              .type(WalletType.VAULT)
-              .symbols(new String[] { "ADA" })
-              .build());
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
-      System.out.println(new ObjectMapper().writeValueAsString(response));
+      WalletsService service = PrimeServiceFactory.createWalletsService(client);
+      GetWalletResponse response = service.getWallet(
+          new GetWalletRequest.Builder(portfolioId, walletId).build());
+
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
