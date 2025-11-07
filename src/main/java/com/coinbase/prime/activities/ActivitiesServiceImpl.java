@@ -20,6 +20,7 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
+import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/activities", request.getPortfolioId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<ListPortfolioActivitiesResponse>() {});
     }
@@ -44,7 +45,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
         return this.request(
                 HttpMethod.GET,
                 String.format("/activities/%s", request.getActivityId()),
-                null,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<GetActivityResponse>() {});
     }
@@ -54,7 +55,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/activities", request.getEntityId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<ListEntityActivitiesResponse>() {});
     }
@@ -64,7 +65,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
-                null,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<GetPortfolioActivityResponse>() {});
     }
