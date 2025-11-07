@@ -14,30 +14,31 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.commission;
+package com.coinbase.examples.addressbook;
 
+import com.coinbase.prime.addressbook.AddressBookService;
+import com.coinbase.prime.addressbook.ListAddressBookRequest;
+import com.coinbase.prime.addressbook.ListAddressBookResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
-import com.coinbase.prime.commission.CommissionService;
-import com.coinbase.prime.commission.GetPortfolioCommissionRequest;
-import com.coinbase.prime.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class GetPortfolioCommissionExample {
+public class ListAddressBook {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-      CommissionService service = PrimeServiceFactory.createCommissionService(client);
-      GetPortfolioCommissionResponse response = service.getPortfolioCommission(
-          new GetPortfolioCommissionRequest.Builder()
-              .portfolioId(portfolioId)
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId);
+
+      AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
+      ListAddressBookResponse response = service.listAddressBook(
+          new ListAddressBookRequest.Builder(portfolioId)
               .build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

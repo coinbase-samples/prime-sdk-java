@@ -17,27 +17,37 @@
 package com.coinbase.examples.balances;
 
 import com.coinbase.prime.balances.BalancesService;
-import com.coinbase.prime.balances.ListPortfolioBalancesRequest;
-import com.coinbase.prime.balances.ListPortfolioBalancesResponse;
+import com.coinbase.prime.balances.ListOnchainWalletBalancesRequest;
+import com.coinbase.prime.balances.ListOnchainWalletBalancesResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListPortfolioBalancesExample {
+public class ListOnchainWalletBalances {
   public static void main(String[] args) {
     try {
+      if (args.length < 1) {
+        System.err.println("Usage: ListOnchainWalletBalances <wallet_id>");
+        System.err.println("Example: ListOnchainWalletBalances abc123-def456-ghi789");
+        System.exit(1);
+      }
+
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String walletId = args[0];
+
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
       BalancesService service = PrimeServiceFactory.createBalancesService(client);
-      ListPortfolioBalancesResponse response = service.listPortfolioBalances(
-          new ListPortfolioBalancesRequest.Builder()
+      ListOnchainWalletBalancesResponse response = service.listOnchainWalletBalances(
+          new ListOnchainWalletBalancesRequest.Builder()
               .portfolioId(portfolioId)
+              .walletId(walletId)
               .build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
