@@ -17,26 +17,30 @@
 package com.coinbase.examples.activities;
 
 import com.coinbase.prime.activities.ActivitiesService;
-import com.coinbase.prime.activities.GetActivityRequest;
-import com.coinbase.prime.activities.GetActivityResponse;
+import com.coinbase.prime.activities.ListEntityActivitiesRequest;
+import com.coinbase.prime.activities.ListEntityActivitiesResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class GetActivityExample {
+public class ListEntityActivities {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-      String activityId = args.length > 0 ? args[0] : "activity-id";
+      String entityId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_ENTITY_ID");
+
+      System.out.println("Using Entity ID: " + entityId);
 
       ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
-      GetActivityResponse response = service.getActivity(new GetActivityRequest(activityId));
+      ListEntityActivitiesResponse response = service.listEntityActivities(
+          new ListEntityActivitiesRequest.Builder(entityId).build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
+
