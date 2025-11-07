@@ -22,22 +22,25 @@ import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.paymentmethods.ListPaymentMethodsRequest;
 import com.coinbase.prime.paymentmethods.ListPaymentMethodsResponse;
 import com.coinbase.prime.paymentmethods.PaymentMethodsService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListPaymentMethodsExample {
-  public static void main(String[] args) {
-    try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-      String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
+public class ListPaymentMethods {
+    public static void main(String[] args) {
+        try {
+            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(
+                    System.getenv("COINBASE_PRIME_CREDENTIALS"));
+            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+            String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
-      PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
-      ListPaymentMethodsResponse response = service.listPaymentMethods(
-          new ListPaymentMethodsRequest.Builder(entityId).build());
+            System.out.println("Using Entity ID: " + entityId);
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-    } catch (Exception e) {
-      e.printStackTrace();
+            PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
+            ListPaymentMethodsResponse response = service.listPaymentMethods(
+                    new ListPaymentMethodsRequest.Builder(entityId).build());
+
+            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-  }
 }
