@@ -16,21 +16,43 @@
 
 package com.coinbase.prime.wallets;
 
-import com.coinbase.prime.model.BlockchainAddress;
+import com.coinbase.prime.model.Network;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateWalletDepositAddressResponse {
     @JsonProperty("address")
-    private BlockchainAddress address;
+    private String address;
+
+    @JsonProperty("account_identifier")
+    private String accountIdentifier;
+
+    @JsonProperty("network")
+    private Network network;
 
     public CreateWalletDepositAddressResponse() {
     }
 
-    public BlockchainAddress getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(BlockchainAddress address) {
+    public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getAccountIdentifier() {
+        return accountIdentifier;
+    }
+
+    public void setAccountIdentifier(String accountIdentifier) {
+        this.accountIdentifier = accountIdentifier;
+    }
+
+    public Network getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(Network network) {
+        this.network = network;
     }
 }
