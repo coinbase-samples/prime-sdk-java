@@ -27,16 +27,10 @@ import com.coinbase.prime.utils.Utils;
 public class GetWalletBalance {
   public static void main(String[] args) {
     try {
-      if (args.length < 1) {
-        System.err.println("Usage: GetWalletBalance <wallet_id>");
-        System.err.println("Example: GetWalletBalance abc123-def456-ghi789");
-        System.exit(1);
-      }
-
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      String walletId = args[0];
+      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID");
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
