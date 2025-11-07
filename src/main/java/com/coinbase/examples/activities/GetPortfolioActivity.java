@@ -14,36 +14,38 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples;
+package com.coinbase.examples.activities;
 
+import com.coinbase.prime.activities.ActivitiesService;
+import com.coinbase.prime.activities.GetPortfolioActivityRequest;
+import com.coinbase.prime.activities.GetPortfolioActivityResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.model.enums.WalletType;
-import com.coinbase.prime.wallets.ListWalletsRequest;
-import com.coinbase.prime.wallets.ListWalletsResponse;
-import com.coinbase.prime.wallets.WalletsService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListWallets {
+public class GetPortfolioActivity {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String activityId = args.length > 0 ? args[0] : "ACTIVITY_ID_HERE";
 
-      WalletsService walletsService = PrimeServiceFactory.createWalletsService(client);
-      ListWalletsResponse response = walletsService.listWallets(
-          new ListWalletsRequest.Builder()
+      System.out.println("Using Portfolio ID: " + portfolioId);
+      System.out.println("Using Activity ID: " + activityId);
+
+      ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
+      GetPortfolioActivityResponse response = service.getPortfolioActivity(
+          new GetPortfolioActivityRequest.Builder()
               .portfolioId(portfolioId)
-              .type(WalletType.VAULT)
-              .symbols(new String[] { "ADA" })
+              .activityId(activityId)
               .build());
 
-      System.out.println(new ObjectMapper().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
+

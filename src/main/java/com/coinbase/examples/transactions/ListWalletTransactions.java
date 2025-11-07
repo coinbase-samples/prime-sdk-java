@@ -14,31 +14,37 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.wallets;
+package com.coinbase.examples.transactions;
 
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.wallets.GetWalletRequest;
-import com.coinbase.prime.wallets.GetWalletResponse;
-import com.coinbase.prime.wallets.WalletsService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.transactions.ListWalletTransactionsRequest;
+import com.coinbase.prime.transactions.ListWalletTransactionsResponse;
+import com.coinbase.prime.transactions.TransactionsService;
+import com.coinbase.prime.utils.Utils;
 
-public class GetWalletExample {
+public class ListWalletTransactions {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      String walletId = args.length > 0 ? args[0] : "wallet-id";
+      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID");
 
-      WalletsService service = PrimeServiceFactory.createWalletsService(client);
-      GetWalletResponse response = service.getWallet(
-          new GetWalletRequest.Builder(portfolioId, walletId).build());
+      System.out.println("Listing wallet transactions: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
+      ListWalletTransactionsResponse response = service.listWalletTransactions(
+          new ListWalletTransactionsRequest.Builder()
+              .portfolioId(portfolioId)
+              .walletId(walletId)
+              .build());
+
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
+

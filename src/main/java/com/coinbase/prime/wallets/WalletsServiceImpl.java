@@ -20,6 +20,7 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
+import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<GetWalletResponse>() {});
     }
@@ -64,7 +65,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/deposit_instructions", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<GetWalletDepositInstructionsResponse>() {});
     }
@@ -74,7 +75,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<ListWalletAddressesResponse>() {});
     }
@@ -84,7 +85,7 @@ public class WalletsServiceImpl extends CoinbaseServiceImpl implements WalletsSe
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/addresses", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<CreateWalletDepositAddressResponse>() {});
     }

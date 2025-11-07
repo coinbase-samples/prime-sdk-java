@@ -14,27 +14,31 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.activities;
+package com.coinbase.examples.wallets;
 
-import com.coinbase.prime.activities.ActivitiesService;
-import com.coinbase.prime.activities.GetActivityRequest;
-import com.coinbase.prime.activities.GetActivityResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.wallets.GetWalletRequest;
+import com.coinbase.prime.wallets.GetWalletResponse;
+import com.coinbase.prime.wallets.WalletsService;
+import com.coinbase.prime.utils.Utils;
 
-public class GetActivityExample {
+public class GetWallet {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-      String activityId = args.length > 0 ? args[0] : "activity-id";
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID") != null ? System.getenv("COINBASE_PRIME_WALLET_ID") : "wallet-id-here";
 
-      ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
-      GetActivityResponse response = service.getActivity(new GetActivityRequest(activityId));
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      WalletsService service = PrimeServiceFactory.createWalletsService(client);
+      GetWalletResponse response = service.getWallet(
+          new GetWalletRequest.Builder(portfolioId, walletId).build());
+
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

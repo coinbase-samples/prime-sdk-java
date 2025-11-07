@@ -14,32 +14,35 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.transactions;
+package com.coinbase.examples.wallets;
 
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.transactions.ListPortfolioTransactionsRequest;
-import com.coinbase.prime.transactions.ListPortfolioTransactionsResponse;
-import com.coinbase.prime.transactions.TransactionsService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.wallets.ListWalletsRequest;
+import com.coinbase.prime.wallets.ListWalletsResponse;
+import com.coinbase.prime.wallets.WalletsService;
+import com.coinbase.prime.utils.Utils;
 
-public class ListPortfolioTransactionsExample {
+public class ListPortfolioWallets {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-      TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
-      ListPortfolioTransactionsResponse response = service.listPortfolioTransactions(
-          new ListPortfolioTransactionsRequest.Builder()
+      System.out.println("Using Portfolio ID: " + portfolioId);
+
+      WalletsService service = PrimeServiceFactory.createWalletsService(client);
+      ListWalletsResponse response = service.listWallets(
+          new ListWalletsRequest.Builder()
               .portfolioId(portfolioId)
               .build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
+
