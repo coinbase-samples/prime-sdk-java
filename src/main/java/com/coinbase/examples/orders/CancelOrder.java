@@ -27,10 +27,16 @@ import com.coinbase.prime.utils.Utils;
 public class CancelOrder {
   public static void main(String[] args) {
     try {
+      if (args.length < 1) {
+        System.err.println("Usage: CancelOrder <order_id>");
+        System.err.println("Example: CancelOrder abc123-def456-ghi789");
+        System.exit(1);
+      }
+
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      String orderId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_ORDER_ID");
+      String orderId = args[0];
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId);
 

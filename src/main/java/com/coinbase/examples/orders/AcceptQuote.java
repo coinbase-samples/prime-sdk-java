@@ -30,10 +30,16 @@ import java.util.UUID;
 public class AcceptQuote {
   public static void main(String[] args) {
     try {
+      if (args.length < 1) {
+        System.err.println("Usage: AcceptQuote <quote_id>");
+        System.err.println("Example: AcceptQuote 9039fdc1-9f04-447b-bd96-05a1d26f8010");
+        System.exit(1);
+      }
+
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      String quoteId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_QUOTE_ID");
+      String quoteId = args[0];
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Quote ID: " + quoteId);
 

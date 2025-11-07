@@ -32,25 +32,47 @@ import java.util.UUID;
 public class CreateAndAcceptQuote {
   public static void main(String[] args) {
     try {
+      if (args.length < 5) {
+        System.err.println("Usage: CreateAndAcceptQuote <product_id> <side> <basequantity|quotevalue> <amount> <limit_price>");
+        System.err.println("Example: CreateAndAcceptQuote ETH-USD BUY basequantity 0.007 3500.00");
+        System.err.println("Example: CreateAndAcceptQuote BTC-USD SELL quotevalue 1000.00 95000.00");
+        System.exit(1);
+      }
+
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
+      String productId = args[0];
+      OrderSide side = OrderSide.valueOf(args[1].toUpperCase());
+      String quantityType = args[2].toLowerCase();
+      String amount = args[3];
+      String limitPrice = args[4];
+
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
+      System.out.println("Quote parameters: " + productId + " " + side + " " + quantityType + "=" + amount + " limit_price=" + limitPrice);
 
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
 
       // Step 1: Create Quote
       System.out.println("\n=== Creating Quote ===");
-      CreateQuoteResponse quoteResponse = service.createQuote(
-          new CreateQuoteRequest.Builder()
-              .portfolioId(portfolioId)
-              .productId("ETH-USD")
-              .side(OrderSide.BUY)
-              .baseQuantity("0.007")
-              .limitPrice("3500.00")
-              .clientQuoteId(UUID.randomUUID().toString())
-              .build());
+      CreateQuoteRequest.Builder quoteBuilder = new CreateQuoteRequest.Builder()
+          .portfolioId(portfolioId)
+          .productId(productId)
+          .side(side)
+          .limitPrice(limitPrice)
+          .clientQuoteId(UUID.randomUUID().toString());
+
+      if (quantityType.equals("basequantity")) {
+        quoteBuilder.baseQuantity(amount);
+      } else if (quantityType.equals("quotevalue")) {
+        quoteBuilder.quoteValue(amount);
+      } else {
+        System.err.println("Error: Third argument must be either 'basequantity' or 'quotevalue'");
+        System.exit(1);
+      }
+
+      CreateQuoteResponse quoteResponse = service.createQuote(quoteBuilder.build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(quoteResponse));
       System.out.println("\nQuote ID: " + quoteResponse.getQuoteId());
@@ -61,8 +83,8 @@ public class CreateAndAcceptQuote {
           new AcceptQuoteRequest.Builder()
               .portfolioId(portfolioId)
               .quoteId(quoteResponse.getQuoteId())
-              .productId("ETH-USD")
-              .side(OrderSide.BUY)
+              .productId(productId)
+              .side(side)
               .clientOrderId(UUID.randomUUID().toString())
               .build());
 

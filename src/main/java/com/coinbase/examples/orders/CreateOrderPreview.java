@@ -29,21 +29,43 @@ import com.coinbase.prime.utils.Utils;
 public class CreateOrderPreview {
   public static void main(String[] args) {
     try {
+      if (args.length < 5) {
+        System.err.println("Usage: CreateOrderPreview <product_id> <side> <type> <basequantity|quotevalue> <amount>");
+        System.err.println("Example: CreateOrderPreview BTC-USD BUY MARKET basequantity 0.001");
+        System.err.println("Example: CreateOrderPreview ETH-USD SELL LIMIT quotevalue 1000.00");
+        System.exit(1);
+      }
+
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
+      String productId = args[0];
+      OrderSide side = OrderSide.valueOf(args[1].toUpperCase());
+      OrderType type = OrderType.valueOf(args[2].toUpperCase());
+      String quantityType = args[3].toLowerCase();
+      String amount = args[4];
+
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
+      System.out.println("Order parameters: " + productId + " " + side + " " + type + " " + quantityType + "=" + amount);
+
+      GetOrderPreviewRequest.Builder builder = new GetOrderPreviewRequest.Builder()
+          .portfolioId(portfolioId)
+          .productId(productId)
+          .side(side)
+          .type(type);
+
+      if (quantityType.equals("basequantity")) {
+        builder.baseQuantity(amount);
+      } else if (quantityType.equals("quotevalue")) {
+        builder.quoteValue(amount);
+      } else {
+        System.err.println("Error: Fourth argument must be either 'basequantity' or 'quotevalue'");
+        System.exit(1);
+      }
 
       OrdersService ordersService = PrimeServiceFactory.createOrdersService(client);
-      GetOrderPreviewResponse response = ordersService.getOrderPreview(
-          new GetOrderPreviewRequest.Builder()
-              .portfolioId(portfolioId)
-              .productId("ADA-USD")
-              .side(OrderSide.BUY)
-              .type(OrderType.MARKET)
-              .baseQuantity("10.0")
-              .build());
+      GetOrderPreviewResponse response = ordersService.getOrderPreview(builder.build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

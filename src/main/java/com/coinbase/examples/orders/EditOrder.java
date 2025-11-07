@@ -29,22 +29,22 @@ import java.util.UUID;
 public class EditOrder {
   public static void main(String[] args) {
     try {
-      if (args.length < 3) {
-        System.err.println("Usage: EditOrder <quotevalue|basequantity> <amount> <limit_price>");
-        System.err.println("Example: EditOrder basequantity 15.0 51000.00");
-        System.err.println("Example: EditOrder quotevalue 1000.00 51000.00");
+      if (args.length < 5) {
+        System.err.println("Usage: EditOrder <order_id> <orig_client_order_id> <quotevalue|basequantity> <amount> <limit_price>");
+        System.err.println("Example: EditOrder abc123 orig-uuid-456 basequantity 15.0 51000.00");
+        System.err.println("Example: EditOrder abc123 orig-uuid-456 quotevalue 1000.00 51000.00");
         System.exit(1);
       }
 
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      String orderId = System.getenv("COINBASE_PRIME_ORDER_ID");
-      String origClientOrderId = System.getenv("COINBASE_PRIME_ORIG_CLIENT_ORDER_ID");
+      String orderId = args[0];
+      String origClientOrderId = args[1];
 
-      String quantityType = args[0].toLowerCase();
-      String amount = args[1];
-      String limitPrice = args[2];
+      String quantityType = args[2].toLowerCase();
+      String amount = args[3];
+      String limitPrice = args[4];
       String newClientOrderId = UUID.randomUUID().toString();
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId);
