@@ -22,6 +22,7 @@ import com.coinbase.prime.balances.ListEntityBalancesResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
+import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.coinbase.prime.utils.Utils;
 
 public class ListEntityBalances {
@@ -31,13 +32,37 @@ public class ListEntityBalances {
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
+      // Optional args: [symbol1,symbol2,...] [aggregation_type]
+      String symbols = null;
+      PortfolioBalanceType aggregationType = null;
+
+      if (args.length > 0 && !args[0].isEmpty()) {
+        symbols = args[0];
+      }
+      if (args.length > 1 && !args[1].isEmpty()) {
+        aggregationType = PortfolioBalanceType.valueOf(args[1].toUpperCase());
+      }
+
       System.out.println("Using IDs: Entity ID: " + entityId);
+      if (symbols != null) {
+        System.out.println("Filtering symbols: " + symbols);
+      }
+      if (aggregationType != null) {
+        System.out.println("Aggregation type: " + aggregationType);
+      }
+
+      ListEntityBalancesRequest.Builder builder = new ListEntityBalancesRequest.Builder()
+          .entityId(entityId);
+
+      if (symbols != null) {
+        builder.symbols(symbols);
+      }
+      if (aggregationType != null) {
+        builder.aggregationType(aggregationType);
+      }
 
       BalancesService service = PrimeServiceFactory.createBalancesService(client);
-      ListEntityBalancesResponse response = service.listEntityBalances(
-          new ListEntityBalancesRequest.Builder()
-              .entityId(entityId)
-              .build());
+      ListEntityBalancesResponse response = service.listEntityBalances(builder.build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

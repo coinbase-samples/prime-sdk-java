@@ -22,6 +22,7 @@ import com.coinbase.prime.balances.ListPortfolioBalancesResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
+import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.coinbase.prime.utils.Utils;
 
 public class ListPortfolioBalances {
@@ -31,13 +32,37 @@ public class ListPortfolioBalances {
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
+      // Optional args: [symbol1,symbol2,...] [balance_type]
+      String[] symbols = null;
+      PortfolioBalanceType balanceType = null;
+
+      if (args.length > 0 && !args[0].isEmpty()) {
+        symbols = args[0].split(",");
+      }
+      if (args.length > 1 && !args[1].isEmpty()) {
+        balanceType = PortfolioBalanceType.valueOf(args[1].toUpperCase());
+      }
+
       System.out.println("Using IDs: Portfolio ID: " + portfolioId);
+      if (symbols != null) {
+        System.out.println("Filtering symbols: " + String.join(",", symbols));
+      }
+      if (balanceType != null) {
+        System.out.println("Balance type: " + balanceType);
+      }
+
+      ListPortfolioBalancesRequest.Builder builder = new ListPortfolioBalancesRequest.Builder()
+          .portfolioId(portfolioId);
+
+      if (symbols != null) {
+        builder.symbols(symbols);
+      }
+      if (balanceType != null) {
+        builder.balanceType(balanceType);
+      }
 
       BalancesService service = PrimeServiceFactory.createBalancesService(client);
-      ListPortfolioBalancesResponse response = service.listPortfolioBalances(
-          new ListPortfolioBalancesRequest.Builder()
-              .portfolioId(portfolioId)
-              .build());
+      ListPortfolioBalancesResponse response = service.listPortfolioBalances(builder.build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
