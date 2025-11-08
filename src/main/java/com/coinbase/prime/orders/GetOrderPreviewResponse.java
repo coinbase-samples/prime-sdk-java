@@ -54,6 +54,14 @@ public class GetOrderPreviewResponse {
     private String historicalPov;
     @JsonProperty("is_raise_exact")
     private Boolean isRaiseExact;
+    @JsonProperty("stop_price")
+    private String stopPrice;
+    @JsonProperty("display_size")
+    private String displaySize;
+    @JsonProperty("display_quote_size")
+    private String displayQuoteSize;
+    @JsonProperty("display_base_size")
+    private String displayBaseSize;
 
     public GetOrderPreviewResponse() {
     }
@@ -200,6 +208,38 @@ public class GetOrderPreviewResponse {
 
     public void setIsRaiseExact(Boolean isRaiseExact) {
         this.isRaiseExact = isRaiseExact;
+    }
+
+    public String getStopPrice() {
+        return stopPrice;
+    }
+
+    public void setStopPrice(String stopPrice) {
+        this.stopPrice = stopPrice;
+    }
+
+    public String getDisplaySize() {
+        return displaySize;
+    }
+
+    public void setDisplaySize(String displaySize) {
+        this.displaySize = displaySize;
+    }
+
+    public String getDisplayQuoteSize() {
+        return displayQuoteSize;
+    }
+
+    public void setDisplayQuoteSize(String displayQuoteSize) {
+        this.displayQuoteSize = displayQuoteSize;
+    }
+
+    public String getDisplayBaseSize() {
+        return displayBaseSize;
+    }
+
+    public void setDisplayBaseSize(String displayBaseSize) {
+        this.displayBaseSize = displayBaseSize;
     }
 
 }

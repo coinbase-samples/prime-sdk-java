@@ -19,25 +19,35 @@ package com.coinbase.examples.orders;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.orders.ListOpenOrdersRequest;
-import com.coinbase.prime.orders.ListOpenOrdersResponse;
+import com.coinbase.prime.orders.GetOrderByOrderIdRequest;
+import com.coinbase.prime.orders.GetOrderByOrderIdResponse;
 import com.coinbase.prime.orders.OrdersService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListOpenOrdersExample {
+public class GetOrderById {
   public static void main(String[] args) {
     try {
+      if (args.length < 1) {
+        System.err.println("Usage: GetOrderById <order_id>");
+        System.err.println("Example: GetOrderById abc123-def456-ghi789");
+        System.exit(1);
+      }
+
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String orderId = args[0];
+
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId);
 
       OrdersService service = PrimeServiceFactory.createOrdersService(client);
-      ListOpenOrdersResponse response = service.listOpenOrders(
-          new ListOpenOrdersRequest.Builder()
+      GetOrderByOrderIdResponse response = service.getOrderByOrderId(
+          new GetOrderByOrderIdRequest.Builder()
               .portfolioId(portfolioId)
+              .orderId(orderId)
               .build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
