@@ -22,21 +22,21 @@ import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.portfolios.ListPortfoliosRequest;
 import com.coinbase.prime.portfolios.ListPortfoliosResponse;
 import com.coinbase.prime.portfolios.PortfoliosService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListPortfoliosExample {
-  public static void main(String[] args) {
-    try {
-      CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
-      CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+public class ListPortfolios {
+    public static void main(String[] args) {
+        try {
+            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(
+                    System.getenv("COINBASE_PRIME_CREDENTIALS"));
+            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
 
-      PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
-      ListPortfoliosResponse response = service.listPortfolios(
-          new ListPortfoliosRequest.Builder().build());
+            PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
+            ListPortfoliosResponse response = service.listPortfolios(new ListPortfoliosRequest.Builder().build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-    } catch (Exception e) {
-      e.printStackTrace();
+            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-  }
 }
