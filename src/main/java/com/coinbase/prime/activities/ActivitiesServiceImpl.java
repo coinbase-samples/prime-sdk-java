@@ -31,11 +31,12 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     }
 
     @Override
-    public ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request) throws CoinbasePrimeException {
+    public ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request)
+            throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/activities", request.getPortfolioId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<ListPortfolioActivitiesResponse>() {});
     }
@@ -45,27 +46,29 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
         return this.request(
                 HttpMethod.GET,
                 String.format("/activities/%s", request.getActivityId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<GetActivityResponse>() {});
     }
 
     @Override
-    public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbasePrimeException {
+    public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request)
+            throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/activities", request.getEntityId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<ListEntityActivitiesResponse>() {});
     }
 
     @Override
-    public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request) throws CoinbasePrimeException {
+    public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request)
+            throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<GetPortfolioActivityResponse>() {});
     }

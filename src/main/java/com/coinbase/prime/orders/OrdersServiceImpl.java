@@ -20,7 +20,6 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -61,7 +60,8 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     }
 
     @Override
-    public ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbasePrimeException {
+    public ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request)
+            throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders", request.getPortfolioId()),
@@ -75,7 +75,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders/%s", request.getPortfolioId(), request.getOrderId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<GetOrderByOrderIdResponse>() {});
     }
@@ -85,7 +85,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/orders/%s/cancel", request.getPortfolioId(), request.getOrderId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<CancelOrderResponse>() {});
     }
@@ -95,13 +95,14 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders/%s/fills", request.getPortfolioId(), request.getOrderId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<ListOrderFillsResponse>() {});
     }
 
     @Override
-    public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbasePrimeException {
+    public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request)
+            throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/fills", request.getPortfolioId()),
@@ -131,11 +132,12 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     }
 
     @Override
-    public ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request) throws CoinbasePrimeException {
+    public ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request)
+            throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders/%s/edit_history", request.getPortfolioId(), request.getOrderId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<ListOrderEditHistoryResponse>() {});
     }

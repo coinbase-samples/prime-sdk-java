@@ -19,6 +19,8 @@ package com.coinbase.prime.products;
 import com.coinbase.prime.model.enums.CandlesGranularity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.core.errors.CoinbaseClientException;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
  * Request object for listing public product candles.
@@ -31,10 +33,10 @@ public class ListCandlesRequest {
     @JsonProperty(required = true, value = "product_id")
     private String productId;
 
-    @JsonProperty("start_time")
+    @JsonProperty(required = true, value = "start_time")
     private String startTime;
 
-    @JsonProperty("end_time")
+    @JsonProperty(required = true, value = "end_time")
     private String endTime;
 
     @JsonProperty(required = true, value = "granularity")
@@ -127,8 +129,26 @@ public class ListCandlesRequest {
         }
 
         public ListCandlesRequest build() {
+            this.validate();
             return new ListCandlesRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId cannot be null");
+            }
+            if (isNullOrEmpty(this.productId)) {
+                throw new CoinbaseClientException("ProductId cannot be null");
+            }
+            if (isNullOrEmpty(this.startTime)) {
+                throw new CoinbaseClientException("StartTime cannot be null");
+            }
+            if (isNullOrEmpty(this.endTime)) {
+                throw new CoinbaseClientException("EndTime cannot be null");
+            }
+            if (this.granularity == null) {
+                throw new CoinbaseClientException("Granularity cannot be null");
+            }
         }
     }
 }
-

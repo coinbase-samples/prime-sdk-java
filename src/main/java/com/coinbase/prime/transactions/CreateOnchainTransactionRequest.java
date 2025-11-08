@@ -21,6 +21,9 @@ import com.coinbase.prime.model.RpcConfig;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.coinbase.core.errors.CoinbaseClientException;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 public class CreateOnchainTransactionRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -125,7 +128,24 @@ public class CreateOnchainTransactionRequest {
         }
 
         public CreateOnchainTransactionRequest build() {
+            this.validate();
             return new CreateOnchainTransactionRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId cannot be null");
+            }
+            if (isNullOrEmpty(this.walletId)) {
+                throw new CoinbaseClientException("WalletId cannot be null");
+            }
+
+            if (isNullOrEmpty(this.rawUnsignedTxn)) {
+                throw new CoinbaseClientException("RawUnsignedTxn cannot be null");
+            }
+            if (this.rpc == null) {
+                throw new CoinbaseClientException("Rpc cannot be null");
+            }
         }
     }
 }

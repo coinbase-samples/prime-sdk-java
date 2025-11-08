@@ -20,6 +20,8 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class CreateConversionRequest {
@@ -156,6 +158,9 @@ public class CreateConversionRequest {
 
         public CreateConversionRequest build() throws CoinbaseClientException {
             this.validate();
+            if (isNullOrEmpty(this.idempotencyKey)) {
+                this.idempotencyKey(UUID.randomUUID().toString());
+            }
             return new CreateConversionRequest(this);
         }
 
@@ -166,6 +171,12 @@ public class CreateConversionRequest {
 
             if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId cannot be null");
+            }
+            if (isNullOrEmpty(this.amount)) {
+                throw new CoinbaseClientException("Amount cannot be null");
+            }
+            if (isNullOrEmpty(this.destination)) {
+                throw new CoinbaseClientException("Destination cannot be null");
             }
         }
     }

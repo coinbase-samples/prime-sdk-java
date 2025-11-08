@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.*;
+import java.util.UUID;
 
 public class CreateWalletWithdrawalRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -186,6 +187,9 @@ public class CreateWalletWithdrawalRequest {
 
         public CreateWalletWithdrawalRequest build() throws CoinbaseClientException {
             this.validate();
+            if (isNullOrEmpty(this.idempotencyKey)) {
+                this.idempotencyKey(UUID.randomUUID().toString());
+            }
             return new CreateWalletWithdrawalRequest(this);
         }
 
@@ -204,9 +208,6 @@ public class CreateWalletWithdrawalRequest {
             }
             if (this.destinationType == null) {
                 throw new CoinbaseClientException("Destination type is required");
-            }
-            if (isNullOrEmpty(this.idempotencyKey)) {
-                throw new CoinbaseClientException("Idempotency key is required");
             }
         }
     }

@@ -19,6 +19,8 @@ package com.coinbase.prime.activities;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.core.errors.CoinbaseClientException;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
  * Request for getting a portfolio activity by activity ID.
@@ -75,7 +77,17 @@ public class GetPortfolioActivityRequest extends PrimeListRequest {
         }
 
         public GetPortfolioActivityRequest build() {
+            this.validate();
             return new GetPortfolioActivityRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId cannot be null");
+            }
+            if (isNullOrEmpty(this.activityId)) {
+                throw new CoinbaseClientException("ActivityId cannot be null");
+            }
         }
     }
 }

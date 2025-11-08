@@ -385,6 +385,18 @@ public class GetOrderPreviewRequest {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
+            if (isNullOrEmpty(this.productId)) {
+                throw new CoinbaseClientException("ProductId is required");
+            }
+            if (this.side == null) {
+                throw new CoinbaseClientException("Side is required");
+            }
+            if (this.type == null) {
+                throw new CoinbaseClientException("Type is required");
+            }
+            if (isNullOrEmpty(this.baseQuantity) && isNullOrEmpty(this.quoteValue)) {
+                throw new CoinbaseClientException("BaseQuantity or QuoteValue is required");
+            }
         }
     }
 }

@@ -27,8 +27,8 @@ public enum CandlesGranularity {
   ONE_HOUR,
   SIX_HOURS,
   ONE_DAY,
-  THIRTY_MINUTE,
-  TWO_HOUR,
-  FOUR_HOUR
+  THIRTY_MINUTES,
+  TWO_HOURS,
+  FOUR_HOURS
 }
 

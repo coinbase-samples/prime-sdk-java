@@ -183,7 +183,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("PortfolioId is required");
+                throw new CoinbaseClientException("EntityId is required");
             }
         }
     }
