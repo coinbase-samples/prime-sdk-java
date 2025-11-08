@@ -14,32 +14,39 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.balances;
+package com.coinbase.examples.wallets;
 
-import com.coinbase.prime.balances.BalancesService;
-import com.coinbase.prime.balances.ListPortfolioBalancesRequest;
-import com.coinbase.prime.balances.ListPortfolioBalancesResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.wallets.CreateWalletDepositAddressRequest;
+import com.coinbase.prime.wallets.CreateWalletDepositAddressResponse;
+import com.coinbase.prime.wallets.WalletsService;
+import com.coinbase.prime.utils.Utils;
 
-public class ListPortfolioBalancesExample {
+public class CreateWalletDepositAddress {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID");
+      String networkId = args.length > 1 ? args[1] : "ethereum-mainnet";
 
-      BalancesService service = PrimeServiceFactory.createBalancesService(client);
-      ListPortfolioBalancesResponse response = service.listPortfolioBalances(
-          new ListPortfolioBalancesRequest.Builder()
+      System.out.println("Creating deposit address: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId + ", Network ID: " + networkId);
+
+      WalletsService service = PrimeServiceFactory.createWalletsService(client);
+      CreateWalletDepositAddressResponse response = service.createWalletDepositAddress(
+          new CreateWalletDepositAddressRequest.Builder()
               .portfolioId(portfolioId)
+              .walletId(walletId)
+              .networkId(networkId)
               .build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
+

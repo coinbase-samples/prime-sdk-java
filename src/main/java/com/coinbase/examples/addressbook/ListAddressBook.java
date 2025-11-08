@@ -14,27 +14,31 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.activities;
+package com.coinbase.examples.addressbook;
 
-import com.coinbase.prime.activities.ActivitiesService;
-import com.coinbase.prime.activities.GetActivityRequest;
-import com.coinbase.prime.activities.GetActivityResponse;
+import com.coinbase.prime.addressbook.AddressBookService;
+import com.coinbase.prime.addressbook.ListAddressBookRequest;
+import com.coinbase.prime.addressbook.ListAddressBookResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class GetActivityExample {
+public class ListAddressBook {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-      String activityId = args.length > 0 ? args[0] : "activity-id";
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-      ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
-      GetActivityResponse response = service.getActivity(new GetActivityRequest(activityId));
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId);
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      AddressBookService service = PrimeServiceFactory.createAddressBookService(client);
+      ListAddressBookResponse response = service.listAddressBook(
+          new ListAddressBookRequest.Builder(portfolioId)
+              .build());
+
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -14,28 +14,32 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.paymentmethods;
+package com.coinbase.examples.transactions;
 
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.paymentmethods.ListPaymentMethodsRequest;
-import com.coinbase.prime.paymentmethods.ListPaymentMethodsResponse;
-import com.coinbase.prime.paymentmethods.PaymentMethodsService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.transactions.ListPortfolioTransactionsRequest;
+import com.coinbase.prime.transactions.ListPortfolioTransactionsResponse;
+import com.coinbase.prime.transactions.TransactionsService;
+import com.coinbase.prime.utils.Utils;
 
-public class ListPaymentMethodsExample {
+public class ListPortfolioTransactions {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-      String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-      PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
-      ListPaymentMethodsResponse response = service.listPaymentMethods(
-          new ListPaymentMethodsRequest.Builder(entityId).build());
+      System.out.println("Using Portfolio ID: " + portfolioId);
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
+      ListPortfolioTransactionsResponse response = service.listPortfolioTransactions(
+          new ListPortfolioTransactionsRequest.Builder()
+              .portfolioId(portfolioId)
+              .build());
+
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

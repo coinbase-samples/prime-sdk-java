@@ -14,27 +14,34 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.portfolios;
+package com.coinbase.examples.balances;
 
+import com.coinbase.prime.balances.BalancesService;
+import com.coinbase.prime.balances.GetWalletBalanceRequest;
+import com.coinbase.prime.balances.GetWalletBalanceResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.portfolios.ListPortfoliosRequest;
-import com.coinbase.prime.portfolios.ListPortfoliosResponse;
-import com.coinbase.prime.portfolios.PortfoliosService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class ListPortfoliosExample {
+public class GetWalletBalance {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID");
 
-      PortfoliosService service = PrimeServiceFactory.createPortfoliosService(client);
-      ListPortfoliosResponse response = service.listPortfolios(
-          new ListPortfoliosRequest.Builder().build());
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId);
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      BalancesService service = PrimeServiceFactory.createBalancesService(client);
+      GetWalletBalanceResponse response = service.getWalletBalance(
+          new GetWalletBalanceRequest.Builder()
+              .portfolioId(portfolioId)
+              .walletId(walletId)
+              .build());
+
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }

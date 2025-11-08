@@ -20,6 +20,7 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
+import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId()),
-                null,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<GetTransactionResponse>() {});
     }
@@ -44,7 +45,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<CreateConversionResponse>() {});
     }
@@ -54,7 +55,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/transactions", request.getPortfolioId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<ListPortfolioTransactionsResponse>() {});
     }
@@ -64,7 +65,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<ListWalletTransactionsResponse>() {});
     }
@@ -74,7 +75,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<CreateWalletTransferResponse>() {});
     }
@@ -84,7 +85,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<CreateWalletWithdrawalResponse>() {});
     }
@@ -94,7 +95,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(), request.getWalletId()),
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<CreateOnchainTransactionResponse>() {});
     }

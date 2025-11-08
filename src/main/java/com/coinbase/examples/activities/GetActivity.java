@@ -14,28 +14,27 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.commission;
+package com.coinbase.examples.activities;
 
+import com.coinbase.prime.activities.ActivitiesService;
+import com.coinbase.prime.activities.GetActivityRequest;
+import com.coinbase.prime.activities.GetActivityResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
-import com.coinbase.prime.commission.CommissionService;
-import com.coinbase.prime.commission.GetPortfolioCommissionRequest;
-import com.coinbase.prime.commission.GetPortfolioCommissionResponse;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class GetPortfolioCommissionExample {
+public class GetActivity {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      String activityId = args.length > 0 ? args[0] : "ACTIVITY_ID_HERE";
 
-      CommissionService service = PrimeServiceFactory.createCommissionService(client);
-      GetPortfolioCommissionResponse response = service.getPortfolioCommission(
-          new GetPortfolioCommissionRequest.Builder()
-              .portfolioId(portfolioId)
-              .build());
+      System.out.println("Using Activity ID: " + activityId);
+
+      ActivitiesService service = PrimeServiceFactory.createActivitiesService(client);
+      GetActivityResponse response = service.getActivity(new GetActivityRequest(activityId));
 
       System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {

@@ -20,6 +20,7 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
+import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
         return this.request(
                 HttpMethod.GET,
                 "/portfolios",
-                request,
+                Utils.getRequestForSerialization(request),
                 List.of(200),
                 new TypeReference<ListPortfoliosResponse>() {});
     }
@@ -50,10 +51,11 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
     }
 
     @Override
-    public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
+    public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request)
+            throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/counterparty_id", request.getPortfolioId()),
+                String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
                 null,
                 List.of(200),
                 new TypeReference<GetPortfolioCounterpartyIdResponse>() {});

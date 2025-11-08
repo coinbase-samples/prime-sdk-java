@@ -19,26 +19,34 @@ package com.coinbase.examples.wallets;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.wallets.GetWalletRequest;
-import com.coinbase.prime.wallets.GetWalletResponse;
+import com.coinbase.prime.wallets.ListWalletAddressesRequest;
+import com.coinbase.prime.wallets.ListWalletAddressesResponse;
 import com.coinbase.prime.wallets.WalletsService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.coinbase.prime.utils.Utils;
 
-public class GetWalletExample {
+public class ListWalletAddresses {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      String walletId = args.length > 0 ? args[0] : "wallet-id";
+      String walletId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_WALLET_ID");
+      String networkId = args.length > 1 ? args[1] : "ethereum-mainnet";
+
+      System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Wallet ID: " + walletId + ", Network ID: " + networkId);
 
       WalletsService service = PrimeServiceFactory.createWalletsService(client);
-      GetWalletResponse response = service.getWallet(
-          new GetWalletRequest.Builder(portfolioId, walletId).build());
+      ListWalletAddressesResponse response = service.listWalletAddresses(
+          new ListWalletAddressesRequest.Builder()
+              .portfolioId(portfolioId)
+              .walletId(walletId)
+              .networkId(networkId)
+              .build());
 
-      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
+      System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
+

@@ -14,30 +14,28 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples;
+package com.coinbase.examples.assets;
 
+import com.coinbase.prime.assets.AssetsService;
+import com.coinbase.prime.assets.ListAssetsRequest;
+import com.coinbase.prime.assets.ListAssetsResponse;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.portfolios.GetPortfolioRequest;
-import com.coinbase.prime.portfolios.GetPortfolioResponse;
-import com.coinbase.prime.portfolios.PortfoliosService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class GetPortfolio {
+public class ListAssets {
   public static void main(String[] args) {
     try {
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
+      String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
 
-      String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+      AssetsService service = PrimeServiceFactory.createAssetsService(client);
+      ListAssetsResponse response = service.listAssets(
+          new ListAssetsRequest.Builder(entityId).build());
 
-      PortfoliosService portfoliosService = PrimeServiceFactory.createPortfoliosService(client);
-      GetPortfolioResponse response = portfoliosService.getPortfolio(
-          new GetPortfolioRequest.Builder(portfolioId)
-              .build());
-
-      System.out.println(new ObjectMapper().writeValueAsString(response));
+      System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
       e.printStackTrace();
     }
