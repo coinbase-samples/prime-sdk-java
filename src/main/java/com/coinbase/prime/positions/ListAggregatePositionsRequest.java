@@ -20,6 +20,9 @@ import com.coinbase.prime.common.PrimeListRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.coinbase.core.errors.CoinbaseClientException;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 public class ListAggregatePositionsRequest extends PrimeListRequest {
     @JsonProperty("entity_id")
     @JsonIgnore
@@ -62,7 +65,14 @@ public class ListAggregatePositionsRequest extends PrimeListRequest {
         }
 
         public ListAggregatePositionsRequest build() {
+            this.validate();
             return new ListAggregatePositionsRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }

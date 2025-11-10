@@ -20,6 +20,8 @@ import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.core.errors.CoinbaseClientException;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class ListEntityBalancesRequest extends PrimeListRequest {
     @JsonProperty("entity_id")
@@ -28,7 +30,6 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
 
     @JsonProperty("symbols")
     private String symbols;
-
 
     @JsonProperty("aggregation_type")
     private PortfolioBalanceType aggregationType;
@@ -58,7 +59,6 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
     public void setSymbols(String symbols) {
         this.symbols = symbols;
     }
-
 
     public PortfolioBalanceType getAggregationType() {
         return aggregationType;
@@ -104,7 +104,14 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
         }
 
         public ListEntityBalancesRequest build() {
+            this.validate();
             return new ListEntityBalancesRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }

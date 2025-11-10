@@ -35,7 +35,7 @@ public class AssetsServiceImpl extends CoinbaseServiceImpl implements AssetsServ
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/assets", request.getEntityId()),
-                Utils.getRequestForSerialization(request),
+                request,
                 List.of(200),
                 new TypeReference<ListAssetsResponse>() {});
     }

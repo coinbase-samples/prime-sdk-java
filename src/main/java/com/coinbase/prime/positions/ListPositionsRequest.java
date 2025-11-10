@@ -21,11 +21,13 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.coinbase.core.errors.CoinbaseClientException;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 public class ListPositionsRequest extends PrimeListRequest {
     @JsonProperty("entity_id")
     @JsonIgnore
     private String entityId;
-
 
     public ListPositionsRequest() {
     }
@@ -42,7 +44,6 @@ public class ListPositionsRequest extends PrimeListRequest {
     public void setId(String entityId) {
         this.entityId = entityId;
     }
-
 
     public static class Builder {
         private String entityId;
@@ -71,7 +72,14 @@ public class ListPositionsRequest extends PrimeListRequest {
         }
 
         public ListPositionsRequest build() {
+            this.validate();
             return new ListPositionsRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }

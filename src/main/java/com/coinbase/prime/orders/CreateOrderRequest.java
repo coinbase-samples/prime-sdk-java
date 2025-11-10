@@ -23,6 +23,8 @@ import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class CreateOrderRequest {
@@ -412,12 +414,27 @@ public class CreateOrderRequest {
 
         public CreateOrderRequest build() throws CoinbaseClientException {
             this.validate();
+            if (isNullOrEmpty(this.clientOrderId)) {
+                this.clientOrderId(UUID.randomUUID().toString());
+            }
             return new CreateOrderRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
+            }
+            if (isNullOrEmpty(this.productId)) {
+                throw new CoinbaseClientException("ProductId is required");
+            }
+            if (this.side == null) {
+                throw new CoinbaseClientException("Side is required");
+            }
+            if (this.type == null) {
+                throw new CoinbaseClientException("Type is required");
+            }
+            if (isNullOrEmpty(this.baseQuantity) && isNullOrEmpty(this.quoteValue)) {
+                throw new CoinbaseClientException("BaseQuantity or QuoteValue is required");
             }
         }
     }

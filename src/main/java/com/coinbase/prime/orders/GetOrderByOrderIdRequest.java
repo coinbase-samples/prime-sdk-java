@@ -72,6 +72,7 @@ public class GetOrderByOrderIdRequest {
         }
 
         public GetOrderByOrderIdRequest build() {
+            this.validate();
             return new GetOrderByOrderIdRequest(this);
         }
 

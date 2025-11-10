@@ -143,7 +143,6 @@ public class AcceptQuoteRequest {
       if (isNullOrEmpty(this.quoteId)) {
         throw new CoinbaseClientException("QuoteId is required");
       }
-
     }
   }
 }

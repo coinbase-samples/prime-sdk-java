@@ -35,7 +35,8 @@ public class CreateWalletRequest {
     @JsonProperty("wallet_type")
     private WalletType type;
 
-    public CreateWalletRequest() {}
+    public CreateWalletRequest() {
+    }
 
     public CreateWalletRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
@@ -82,7 +83,8 @@ public class CreateWalletRequest {
         private String symbol;
         private WalletType type;
 
-        public Builder() {}
+        public Builder() {
+        }
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -112,6 +114,15 @@ public class CreateWalletRequest {
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("Portfolio ID is required");
+            }
+            if (isNullOrEmpty(this.name)) {
+                throw new CoinbaseClientException("Name is required");
+            }
+            if (isNullOrEmpty(this.symbol)) {
+                throw new CoinbaseClientException("Symbol is required");
+            }
+            if (this.type == null) {
+                throw new CoinbaseClientException("Type is required");
             }
         }
     }

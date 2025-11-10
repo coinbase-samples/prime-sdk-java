@@ -16,12 +16,7 @@
 
 package com.coinbase.prime.utils;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 
 public final class Utils {
     private static final ObjectMapper OBJECT_MAPPER = configureObjectMapper();
@@ -45,35 +40,5 @@ public final class Utils {
      */
     public static ObjectMapper getObjectMapper() {
         return OBJECT_MAPPER;
-    }
-
-    /**
-     * Helper method to determine if a request object has any serializable fields.
-     * Returns null if all fields are @JsonIgnore (path params only), otherwise
-     * returns the request.
-     * This prevents serialization errors when requests only contain path
-     * parameters.
-     *
-     * @param request
-     *            The request object to check
-     * @param <T>
-     *            The type of the request object
-     * @return The request object if it has serializable fields, null otherwise
-     */
-    public static <T> T getRequestForSerialization(T request) {
-        if (request == null) {
-            return null;
-        }
-
-        // Check if any field is NOT marked with @JsonIgnore
-        boolean hasSerializableFields = Arrays.stream(request.getClass().getDeclaredFields())
-                .anyMatch(field -> !field.isAnnotationPresent(JsonIgnore.class));
-
-        return hasSerializableFields ? request : null;
-    }
-
-    public static String formatDate(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        return sdf.format(date);
     }
 }
