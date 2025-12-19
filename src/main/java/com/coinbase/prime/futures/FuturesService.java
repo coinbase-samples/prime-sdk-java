@@ -29,4 +29,6 @@ public interface FuturesService {
     ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(ScheduleEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -216,6 +216,24 @@ public class Order {
     @JsonProperty("display_base_size")
     private String displayBaseSize;
 
+    /**
+     * The peg offset type for PEG orders (PRICE, BASIS_POINTS, or CUMULATIVE_DEPTH_IN_BASE_UNITS)
+     */
+    @JsonProperty("peg_offset_type")
+    private String pegOffsetType;
+
+    /**
+     * The offset value for PEG orders
+     */
+    @JsonProperty("offset")
+    private String offset;
+
+    /**
+     * The wig (would if good) level for PEG orders - best price opposite to limit_price
+     */
+    @JsonProperty("wig_level")
+    private String wigLevel;
+
     public Order() {
     }
 
@@ -252,6 +270,9 @@ public class Order {
         this.editHistory = builder.editHistory;
         this.displayQuoteSize = builder.displayQuoteSize;
         this.displayBaseSize = builder.displayBaseSize;
+        this.pegOffsetType = builder.pegOffsetType;
+        this.offset = builder.offset;
+        this.wigLevel = builder.wigLevel;
     }
     public String getId() {
         return id;
@@ -477,6 +498,27 @@ public class Order {
     public void setDisplayBaseSize(String displayBaseSize) {
         this.displayBaseSize = displayBaseSize;
     }
+    public String getPegOffsetType() {
+        return pegOffsetType;
+    }
+
+    public void setPegOffsetType(String pegOffsetType) {
+        this.pegOffsetType = pegOffsetType;
+    }
+    public String getOffset() {
+        return offset;
+    }
+
+    public void setOffset(String offset) {
+        this.offset = offset;
+    }
+    public String getWigLevel() {
+        return wigLevel;
+    }
+
+    public void setWigLevel(String wigLevel) {
+        this.wigLevel = wigLevel;
+    }
     public static class Builder {
         private String id;
 
@@ -541,6 +583,12 @@ public class Order {
         private String displayQuoteSize;
 
         private String displayBaseSize;
+
+        private String pegOffsetType;
+
+        private String offset;
+
+        private String wigLevel;
 
         public Builder id(String id) {
             this.id = id;
@@ -699,6 +747,21 @@ public class Order {
 
         public Builder displayBaseSize(String displayBaseSize) {
             this.displayBaseSize = displayBaseSize;
+            return this;
+        }
+
+        public Builder pegOffsetType(String pegOffsetType) {
+            this.pegOffsetType = pegOffsetType;
+            return this;
+        }
+
+        public Builder offset(String offset) {
+            this.offset = offset;
+            return this;
+        }
+
+        public Builder wigLevel(String wigLevel) {
+            this.wigLevel = wigLevel;
             return this;
         }
 
