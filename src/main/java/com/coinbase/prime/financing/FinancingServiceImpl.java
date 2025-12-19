@@ -160,13 +160,13 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
     }
 
     @Override
-    public ListTFObligationsResponse listTFObligations(ListTFObligationsRequest request) throws CoinbasePrimeException {
+    public ListTfObligationsResponse listTfObligations(ListTfObligationsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/tf_obligations", request.getEntityId()),
                 request,
                 List.of(200),
-                new TypeReference<ListTFObligationsResponse>() {});
+                new TypeReference<ListTfObligationsResponse>() {});
     }
 
     @Override

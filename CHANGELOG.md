@@ -18,7 +18,7 @@
 #### New Models
 - `ProcessRequirements` - Travel rule status requirements for transactions
 - `RewardMetadata` - Staking reward metadata
-- `TFAsset` - Trade finance asset with adjustment factors
+- `TfAsset` - Trade finance asset with adjustment factors
 - `TFObligation` - Trade finance obligation details
 - `UnstakingStatus` - Unstaking status with estimated completion times
 - `ValidatorUnstakingInfo` - Validator-specific unstaking information

@@ -19,15 +19,15 @@ package com.coinbase.prime.financing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListTFObligationsRequest {
+public class ListTfObligationsRequest {
     @JsonIgnore
     @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
-    public ListTFObligationsRequest() {
+    public ListTfObligationsRequest() {
     }
 
-    public ListTFObligationsRequest(Builder builder) {
+    public ListTfObligationsRequest(Builder builder) {
         this.entityId = builder.entityId;
     }
 
@@ -50,8 +50,8 @@ public class ListTFObligationsRequest {
             return this;
         }
 
-        public ListTFObligationsRequest build() {
-            return new ListTFObligationsRequest(this);
+        public ListTfObligationsRequest build() {
+            return new ListTfObligationsRequest(this);
         }
     }
 }

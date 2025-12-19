@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class TFAsset {
+public class TfAsset {
     /**
      * The asset symbol
      */
@@ -45,10 +45,10 @@ public class TFAsset {
     @JsonProperty("liability_adjustment")
     private String liabilityAdjustment;
 
-    public TFAsset() {
+    public TfAsset() {
     }
 
-    public TFAsset(Builder builder) {
+    public TfAsset(Builder builder) {
         this.symbol = builder.symbol;
         this.assetAdjustment = builder.assetAdjustment;
         this.liabilityAdjustment = builder.liabilityAdjustment;
@@ -96,8 +96,8 @@ public class TFAsset {
             return this;
         }
 
-        public TFAsset build() {
-            return new TFAsset(this);
+        public TfAsset build() {
+            return new TfAsset(this);
         }
     }
 }

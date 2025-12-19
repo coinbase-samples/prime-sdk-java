@@ -33,6 +33,6 @@ public interface FinancingService {
     ListInterestAccrualsForPortfolioResponse listInterestAccrualsForPortfolio(ListInterestAccrualsForPortfolioRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListMarginCallSummariesResponse listMarginCallSummaries(ListMarginCallSummariesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListMarginConversionsResponse listMarginConversions(ListMarginConversionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListTFObligationsResponse listTFObligations(ListTFObligationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListTfObligationsResponse listTfObligations(ListTfObligationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListFinancingEligibleAssetsResponse listFinancingEligibleAssets(ListFinancingEligibleAssetsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

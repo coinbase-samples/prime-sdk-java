@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 
-public class TFObligation {
+public class TfObligation {
     /**
      * The unique ID of the portfolio
      */
@@ -57,10 +57,10 @@ public class TFObligation {
     @JsonProperty("due_date")
     private String dueDate;
 
-    public TFObligation() {
+    public TfObligation() {
     }
 
-    public TFObligation(Builder builder) {
+    public TfObligation(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.symbol = builder.symbol;
         this.amountDue = builder.amountDue;
@@ -138,8 +138,8 @@ public class TFObligation {
             return this;
         }
 
-        public TFObligation build() {
-            return new TFObligation(this);
+        public TfObligation build() {
+            return new TfObligation(this);
         }
     }
 }
