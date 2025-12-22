@@ -1,5 +1,57 @@
 # Changelog
 
+## [1.6.1] - 2025-12-18
+
+### Added
+
+#### New Endpoints
+- **Staking Service**
+  - `previewUnstake` - Preview unstaking operation to get estimated amounts
+  - `getUnstakingStatus` - Get unstaking status and estimated completion times for validators
+- **Futures Service**
+  - `getFcmSettings` - Get FCM settings including target derivatives excess
+  - `setFcmSettings` - Update FCM settings
+- **Financing Service**
+  - `listTFObligations` - List trade finance obligations for an entity
+  - `listFinancingEligibleAssets` - List assets eligible for trade finance
+
+#### New Models
+- `ProcessRequirements` - Travel rule status requirements for transactions
+- `RewardMetadata` - Staking reward metadata
+- `TfAsset` - Trade finance asset with adjustment factors
+- `TFObligation` - Trade finance obligation details
+- `UnstakingStatus` - Unstaking status with estimated completion times
+- `ValidatorUnstakingInfo` - Validator-specific unstaking information
+
+#### New Enums
+- `EstimateType` - Estimate confidence types for unstaking
+- `RewardSubtype` - Reward subtypes for staking
+- `TravelRuleStatus` - Travel rule submission status
+- `UnstakeType` - Unstaking operation types
+
+#### New Examples
+- **Staking Examples** (8 new)
+  - `PortfolioStakingInitiate.java`
+  - `PortfolioStakingUnstake.java`
+  - `CreateStake.java`
+  - `CreateUnstake.java`
+  - `ClaimRewards.java`
+  - `ListTransactionValidators.java`
+  - `PreviewUnstake.java`
+  - `GetUnstakingStatus.java`
+- **Futures Examples** (2 new)
+  - `GetFcmSettings.java`
+  - `SetFcmSettings.java`
+- **Financing Examples** (2 new)
+  - `ListTFObligations.java`
+  - `ListFinancingEligibleAssets.java`
+
+### Changed
+- Updated `Order` model with PEG order fields (pegOffsetType, offset, wigLevel)
+- Updated `Transaction` model with processRequirements field
+- Updated `TransactionMetadata` model with spec changes
+- Updated `UserRole`, `XmCallType`, `XmEntityCallStatus` enums with new values
+
 ## [1.5.3] - 2025-11-05
 
 ### Fixed

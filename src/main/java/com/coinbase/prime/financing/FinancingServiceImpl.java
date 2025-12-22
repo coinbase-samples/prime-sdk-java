@@ -158,4 +158,24 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
                 List.of(200),
                 new TypeReference<ListMarginConversionsResponse>() {});
     }
+
+    @Override
+    public ListTfObligationsResponse listTfObligations(ListTfObligationsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/tf_obligations", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListTfObligationsResponse>() {});
+    }
+
+    @Override
+    public ListFinancingEligibleAssetsResponse listFinancingEligibleAssets(ListFinancingEligibleAssetsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                "/financing/eligible-assets",
+                request,
+                List.of(200),
+                new TypeReference<ListFinancingEligibleAssetsResponse>() {});
+    }
 }

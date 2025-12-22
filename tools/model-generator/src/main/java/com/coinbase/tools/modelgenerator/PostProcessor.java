@@ -212,7 +212,7 @@ public class PostProcessor {
 
         // Re-extract class name AFTER content replacements (they may have changed it)
         String afterReplacementsClassName = extractClassName(content);
-        
+
         // Strip prefixes from class name (matching prime-sdk-ts logic)
         String originalClassName = afterReplacementsClassName;
         className = stripCommonPrefixes(afterReplacementsClassName);
@@ -240,12 +240,12 @@ public class PostProcessor {
         }
 
         Path outputPath = targetDir.resolve(fileName);
-        
+
         // Log filename transformation if changed
         if (!originalFileName.equals(fileName)) {
             logger.info("Transformed {} filename: {} -> {}", isEnum ? "enum" : "model", originalFileName, fileName);
         }
-        
+
         boolean existsBefore = Files.exists(outputPath);
 
         // Handle case-only filename changes on case-insensitive filesystems
@@ -255,11 +255,11 @@ public class PostProcessor {
             List<Path> toDelete = Files.list(targetDir)
                 .filter(p -> p.getFileName().toString().equalsIgnoreCase(finalFileName))
                 .collect(java.util.stream.Collectors.toList());
-            
+
             for (Path p : toDelete) {
                 Files.delete(p);
                 if (!p.getFileName().toString().equals(finalFileName)) {
-                    logger.info("Deleted old {} file with different casing: {} -> {}", 
+                    logger.info("Deleted old {} file with different casing: {} -> {}",
                         isEnum ? "enum" : "model", p.getFileName(), finalFileName);
                 }
             }
@@ -275,7 +275,7 @@ public class PostProcessor {
             // Fix enum imports for models
             content = fixEnumImports(content);
         }
-        
+
         Files.writeString(outputPath, content);
 
         if (!existsBefore) {
@@ -370,35 +370,36 @@ public class PostProcessor {
         acronymMap.put("NFT", "Nft");
         acronymMap.put("EVM", "Evm");
         acronymMap.put("VASP", "Vasp");
-        
+        acronymMap.put("TF", "Tf");
+
         // Step 1: Extract and replace comments with placeholders to preserve them
         List<String> preservedComments = new ArrayList<>();
         int commentIndex = 0;
-        
+
         // Pattern to match all comment types: //, /* */, and /** */
         Pattern commentPattern = Pattern.compile(
             "//.*?$|/\\*.*?\\*/",
             Pattern.MULTILINE | Pattern.DOTALL
         );
-        
+
         Matcher commentMatcher = commentPattern.matcher(content);
         StringBuffer contentWithPlaceholders = new StringBuffer();
-        
+
         while (commentMatcher.find()) {
             String comment = commentMatcher.group();
             preservedComments.add(comment);
-            commentMatcher.appendReplacement(contentWithPlaceholders, 
+            commentMatcher.appendReplacement(contentWithPlaceholders,
                 "___COMMENT_PLACEHOLDER_" + commentIndex + "___");
             commentIndex++;
         }
         commentMatcher.appendTail(contentWithPlaceholders);
-        
+
         // Step 2: Perform acronym normalization on non-comment code
         String result = contentWithPlaceholders.toString();
         for (Map.Entry<String, String> entry : acronymMap.entrySet()) {
             String acronym = entry.getKey();
             String normalized = entry.getValue();
-            
+
             // Replace acronym in various contexts:
             // 1. Class names: GetFCMRiskLimits -> GetFcmRiskLimits
             // 2. Import statements: import ...GetFCMRiskLimits -> import ...GetFcmRiskLimits
@@ -407,34 +408,34 @@ public class PostProcessor {
             // 5. Standalone type names: private VASP vasp -> private Vasp vasp
             // BUT: preserve SCREAMING_SNAKE_CASE enum constants like FCM_POSITION_SIDE_UNSPECIFIED
             // AND: preserve enum values like "CBE", "FCM" (standalone on their own line)
-            
+
             // Pattern 1: Match acronym when followed by uppercase letter (word boundary before)
             // But NOT if it's part of a SCREAMING_SNAKE_CASE identifier (followed by underscore)
             result = result.replaceAll("\\b" + acronym + "(?=[A-Z](?!_))", normalized);
-            
+
             // Pattern 2: Match acronym as standalone type (followed by lowercase identifier)
             // This catches: "private VASP vasp", "VASP getVasp()", etc.
             // But NOT enum values (standalone on their own line)
             result = result.replaceAll("\\b" + acronym + "(?=[\\s]+[a-z])", normalized);
-            
+
             // Pattern 3: Match acronym in generics, method calls, and imports
             // This catches: "List<VASP>", "new VASP(", "import ...VASP;", etc.
             // But NOT enum values (which are typically just "FCM," or "FCM\n")
             result = result.replaceAll("\\b" + acronym + "(?=[\\(\\)<>;])", normalized);
-            
+
             // Pattern 4: Match acronym at end of identifier name (before .)
             // This catches: "VASP.class", but avoids enum constants with underscores
             result = result.replaceAll("\\b" + acronym + "(?=\\.)", normalized);
         }
-        
+
         // Step 3: Restore original comments with acronyms preserved
         for (int i = 0; i < preservedComments.size(); i++) {
             result = result.replace("___COMMENT_PLACEHOLDER_" + i + "___", preservedComments.get(i));
         }
-        
+
         return result;
     }
-    
+
     /**
      * Normalizes acronyms in class names to use PascalCase.
      * Examples: FCMMarginCall -> FcmMarginCall, XMLoan -> XmLoan
@@ -451,26 +452,26 @@ public class PostProcessor {
         acronymMap.put("NFT", "Nft");
         acronymMap.put("EVM", "Evm");
         acronymMap.put("VASP", "Vasp");
-        
+
         String result = className;
         for (Map.Entry<String, String> entry : acronymMap.entrySet()) {
             String acronym = entry.getKey();
             String normalized = entry.getValue();
-            
+
             // Replace acronym when:
             // 1. At the start followed by uppercase letter (FCMMarginCall -> FcmMarginCall)
             // 2. At the end of the string (just FCM -> Fcm)
             // 3. In the middle followed by uppercase (EntityFCMBalance -> EntityFcmBalance)
-            
+
             // Use word boundary and lookahead to ensure we only replace the acronym part
             result = result.replaceAll("\\b" + acronym + "(?=[A-Z])", normalized);
-            
+
             // Handle end of string
             if (result.endsWith(acronym)) {
                 result = result.substring(0, result.length() - acronym.length()) + normalized;
             }
         }
-        
+
         return result;
     }
 
@@ -487,7 +488,7 @@ public class PostProcessor {
                 result = result.replace(entry.getKey(), entry.getValue());
             }
         }
-        
+
         // Normalize acronyms to PascalCase after prefix stripping
         result = normalizeAcronyms(result);
 
@@ -508,10 +509,10 @@ public class PostProcessor {
             // Simple string replacement - replaces all occurrences
             content = content.replace(key, value);
         }
-        
+
         // Apply acronym normalization to content (class references, imports, etc.)
         content = normalizeAcronymsInContent(content);
-        
+
         return content;
     }
 

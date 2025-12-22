@@ -29,6 +29,7 @@ public enum UserRole {
   TRADER,
   FULL_TRADER,
   TEAM_MANAGER,
-  APPROVER
+  APPROVER,
+  TAX_MANAGER
 }
 

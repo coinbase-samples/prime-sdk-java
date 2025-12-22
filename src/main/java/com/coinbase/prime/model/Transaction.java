@@ -23,6 +23,7 @@ import com.coinbase.prime.model.AssetChange;
 import com.coinbase.prime.model.EstimatedNetworkFees;
 import com.coinbase.prime.model.Network;
 import com.coinbase.prime.model.OnchainTransactionDetails;
+import com.coinbase.prime.model.ProcessRequirements;
 import com.coinbase.prime.model.TransactionMetadata;
 import com.coinbase.prime.model.enums.TransactionStatus;
 import com.coinbase.prime.model.enums.TransactionType;
@@ -158,6 +159,9 @@ public class Transaction {
     @JsonProperty("network_info")
     private Network networkInfo;
 
+    @JsonProperty("process_requirements")
+    private ProcessRequirements processRequirements;
+
     public Transaction() {
     }
 
@@ -186,6 +190,7 @@ public class Transaction {
         this.idempotencyKey = builder.idempotencyKey;
         this.onchainDetails = builder.onchainDetails;
         this.networkInfo = builder.networkInfo;
+        this.processRequirements = builder.processRequirements;
     }
     public String getId() {
         return id;
@@ -355,6 +360,13 @@ public class Transaction {
     public void setNetworkInfo(Network networkInfo) {
         this.networkInfo = networkInfo;
     }
+    public ProcessRequirements getProcessRequirements() {
+        return processRequirements;
+    }
+
+    public void setProcessRequirements(ProcessRequirements processRequirements) {
+        this.processRequirements = processRequirements;
+    }
     public static class Builder {
         private String id;
 
@@ -403,6 +415,8 @@ public class Transaction {
         private OnchainTransactionDetails onchainDetails;
 
         private Network networkInfo;
+
+        private ProcessRequirements processRequirements;
 
         public Builder id(String id) {
             this.id = id;
@@ -521,6 +535,11 @@ public class Transaction {
 
         public Builder networkInfo(Network networkInfo) {
             this.networkInfo = networkInfo;
+            return this;
+        }
+
+        public Builder processRequirements(ProcessRequirements processRequirements) {
+            this.processRequirements = processRequirements;
             return this;
         }
 
