@@ -22,6 +22,7 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.DateOfBirth;
 import com.coinbase.prime.model.DetailedAddress;
 import com.coinbase.prime.model.NaturalPersonName;
+import com.coinbase.prime.model.enums.TravelRuleWalletType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -45,6 +46,15 @@ public class TravelRuleParty {
     @JsonProperty("telephone_number")
     private String telephoneNumber;
 
+    @JsonProperty("wallet_type")
+    private TravelRuleWalletType walletType;
+
+    @JsonProperty("vasp_id")
+    private String vaspId;
+
+    @JsonProperty("vasp_name")
+    private String vaspName;
+
     public TravelRuleParty() {
     }
 
@@ -54,6 +64,9 @@ public class TravelRuleParty {
         this.naturalPersonName = builder.naturalPersonName;
         this.dateOfBirth = builder.dateOfBirth;
         this.telephoneNumber = builder.telephoneNumber;
+        this.walletType = builder.walletType;
+        this.vaspId = builder.vaspId;
+        this.vaspName = builder.vaspName;
     }
     public String getName() {
         return name;
@@ -90,6 +103,27 @@ public class TravelRuleParty {
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
+    public TravelRuleWalletType getWalletType() {
+        return walletType;
+    }
+
+    public void setWalletType(TravelRuleWalletType walletType) {
+        this.walletType = walletType;
+    }
+    public String getVaspId() {
+        return vaspId;
+    }
+
+    public void setVaspId(String vaspId) {
+        this.vaspId = vaspId;
+    }
+    public String getVaspName() {
+        return vaspName;
+    }
+
+    public void setVaspName(String vaspName) {
+        this.vaspName = vaspName;
+    }
     public static class Builder {
         private String name;
 
@@ -100,6 +134,12 @@ public class TravelRuleParty {
         private DateOfBirth dateOfBirth;
 
         private String telephoneNumber;
+
+        private TravelRuleWalletType walletType;
+
+        private String vaspId;
+
+        private String vaspName;
 
         public Builder name(String name) {
             this.name = name;
@@ -123,6 +163,21 @@ public class TravelRuleParty {
 
         public Builder telephoneNumber(String telephoneNumber) {
             this.telephoneNumber = telephoneNumber;
+            return this;
+        }
+
+        public Builder walletType(TravelRuleWalletType walletType) {
+            this.walletType = walletType;
+            return this;
+        }
+
+        public Builder vaspId(String vaspId) {
+            this.vaspId = vaspId;
+            return this;
+        }
+
+        public Builder vaspName(String vaspName) {
+            this.vaspName = vaspName;
             return this;
         }
 
