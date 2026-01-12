@@ -34,13 +34,13 @@ public class Main {
 
             // Find project root
             Path projectRoot = findProjectRoot();
-            String specUrl = "https://api.prime.coinbase.com/v1/openapi.yaml";
+            String specUrl = args.length > 0 ? args[0] : "https://api.prime.coinbase.com/v1/openapi.yaml";
             Path outputDir = projectRoot.resolve("src/main/java/com/coinbase/prime/model");
             Path enumsDir = outputDir.resolve("enums");
             Path tempDir = projectRoot.resolve("generated");
 
             logger.info("Project Root: {}", projectRoot);
-            logger.info("OpenAPI Spec URL: {}", specUrl);
+            logger.info("OpenAPI Spec: {}", specUrl);
             logger.info("Output Directory: {}", outputDir);
             logger.info("Enums Directory: {}", enumsDir);
             logger.info("Temp Directory: {}", tempDir);

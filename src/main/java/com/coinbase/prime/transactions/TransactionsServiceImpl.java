@@ -105,4 +105,21 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
                 List.of(200),
                 new TypeReference<CreateOnchainTransactionResponse>() {});
     }
+
+    /**
+     * Submit travel rule data for an existing deposit transaction.
+     * <p>
+     * <b>Beta:</b> This endpoint is in Beta. Contact your account manager for more information.
+     */
+    @Override
+    public SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request)
+            throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/transactions/%s/travel_rule/deposit", request.getPortfolioId(),
+                        request.getTransactionId()),
+                request,
+                List.of(200),
+                new TypeReference<SubmitDepositTravelRuleDataResponse>() {});
+    }
 }

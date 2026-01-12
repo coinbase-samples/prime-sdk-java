@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.2] - 2026-01-12
+
+### Added
+
+#### New Endpoints
+- **Transactions Service**
+  - `submitDepositTravelRuleData` - Submit travel rule data for deposit transactions (Beta)
+
+#### New Models
+- `TravelRuleData` - Travel rule compliance data with beneficiary/originator info
+
+#### Changed
+- `CreateWalletWithdrawalRequest` - Added `travelRuleData` field for withdrawal travel rule compliance
+- `TravelRuleParty` - Updated with additional fields for party details
+
 ## [1.6.1] - 2025-12-18
 
 ### Added

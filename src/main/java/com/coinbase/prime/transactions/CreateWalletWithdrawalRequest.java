@@ -20,6 +20,7 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.model.CounterpartyDestination;
 import com.coinbase.prime.model.PaymentMethodDestination;
+import com.coinbase.prime.model.TravelRuleData;
 import com.coinbase.prime.model.enums.DestinationType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,6 +47,8 @@ public class CreateWalletWithdrawalRequest {
     @JsonProperty("blockchain_address")
     private BlockchainAddress blockchainAddress;
     private CounterpartyDestination counterparty;
+    @JsonProperty("travel_rule_data")
+    private TravelRuleData travelRuleData;
 
     public CreateWalletWithdrawalRequest() {
     }
@@ -60,6 +63,7 @@ public class CreateWalletWithdrawalRequest {
         this.paymentMethod = builder.paymentMethod;
         this.blockchainAddress = builder.blockchainAddress;
         this.counterparty = builder.counterparty;
+        this.travelRuleData = builder.travelRuleData;
     }
 
     public String getPortfolioId() {
@@ -134,6 +138,14 @@ public class CreateWalletWithdrawalRequest {
         this.counterparty = counterparty;
     }
 
+    public TravelRuleData getTravelRuleData() {
+        return travelRuleData;
+    }
+
+    public void setTravelRuleData(TravelRuleData travelRuleData) {
+        this.travelRuleData = travelRuleData;
+    }
+
     public static class Builder {
         private final String portfolioId;
         private final String walletId;
@@ -144,6 +156,7 @@ public class CreateWalletWithdrawalRequest {
         private PaymentMethodDestination paymentMethod;
         private BlockchainAddress blockchainAddress;
         private CounterpartyDestination counterparty;
+        private TravelRuleData travelRuleData;
 
         public Builder(String portfolioId, String walletId) {
             this.portfolioId = portfolioId;
@@ -182,6 +195,11 @@ public class CreateWalletWithdrawalRequest {
 
         public Builder counterparty(CounterpartyDestination counterparty) {
             this.counterparty = counterparty;
+            return this;
+        }
+
+        public Builder travelRuleData(TravelRuleData travelRuleData) {
+            this.travelRuleData = travelRuleData;
             return this;
         }
 
