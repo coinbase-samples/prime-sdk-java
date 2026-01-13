@@ -105,6 +105,12 @@ public class Balance {
     @JsonProperty("unbondable_amount")
     private String unbondableAmount;
 
+    /**
+     * ETH staking rewards currently available to claim, in whole units. This field is returned only in GetWalletBalance responses for ETH wallets. It is omitted or empty for portfolio-level responses and for non-ETH assets; use pending_rewards_amount where applicable.
+     */
+    @JsonProperty("claimable_rewards_amount")
+    private String claimableRewardsAmount;
+
     public Balance() {
     }
 
@@ -122,6 +128,7 @@ public class Balance {
         this.withdrawableAmount = builder.withdrawableAmount;
         this.fiatAmount = builder.fiatAmount;
         this.unbondableAmount = builder.unbondableAmount;
+        this.claimableRewardsAmount = builder.claimableRewardsAmount;
     }
     public String getSymbol() {
         return symbol;
@@ -214,6 +221,13 @@ public class Balance {
     public void setUnbondableAmount(String unbondableAmount) {
         this.unbondableAmount = unbondableAmount;
     }
+    public String getClaimableRewardsAmount() {
+        return claimableRewardsAmount;
+    }
+
+    public void setClaimableRewardsAmount(String claimableRewardsAmount) {
+        this.claimableRewardsAmount = claimableRewardsAmount;
+    }
     public static class Builder {
         private String symbol;
 
@@ -240,6 +254,8 @@ public class Balance {
         private String fiatAmount;
 
         private String unbondableAmount;
+
+        private String claimableRewardsAmount;
 
         public Builder symbol(String symbol) {
             this.symbol = symbol;
@@ -303,6 +319,11 @@ public class Balance {
 
         public Builder unbondableAmount(String unbondableAmount) {
             this.unbondableAmount = unbondableAmount;
+            return this;
+        }
+
+        public Builder claimableRewardsAmount(String claimableRewardsAmount) {
+            this.claimableRewardsAmount = claimableRewardsAmount;
             return this;
         }
 
