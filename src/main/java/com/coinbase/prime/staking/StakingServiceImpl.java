@@ -107,4 +107,14 @@ public class StakingServiceImpl extends CoinbaseServiceImpl implements StakingSe
                 List.of(200),
                 new TypeReference<GetUnstakingStatusResponse>() {});
     }
+
+    @Override
+    public GetStakingStatusResponse getStakingStatus(GetStakingStatusRequest request) {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/wallets/%s/staking/status", request.getPortfolioId(), request.getWalletId()),
+                request,
+                List.of(200),
+                new TypeReference<GetStakingStatusResponse>() {});
+    }
 }

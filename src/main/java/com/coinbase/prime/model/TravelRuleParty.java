@@ -19,7 +19,6 @@
  */
 
 package com.coinbase.prime.model;
-import com.coinbase.prime.model.DateOfBirth;
 import com.coinbase.prime.model.DetailedAddress;
 import com.coinbase.prime.model.NaturalPersonName;
 import com.coinbase.prime.model.enums.TravelRuleWalletType;
@@ -34,17 +33,11 @@ public class TravelRuleParty {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("detailed_address")
-    private DetailedAddress detailedAddress;
-
     @JsonProperty("natural_person_name")
     private NaturalPersonName naturalPersonName;
 
-    @JsonProperty("date_of_birth")
-    private DateOfBirth dateOfBirth;
-
-    @JsonProperty("telephone_number")
-    private String telephoneNumber;
+    @JsonProperty("address")
+    private DetailedAddress address;
 
     @JsonProperty("wallet_type")
     private TravelRuleWalletType walletType;
@@ -60,10 +53,8 @@ public class TravelRuleParty {
 
     public TravelRuleParty(Builder builder) {
         this.name = builder.name;
-        this.detailedAddress = builder.detailedAddress;
         this.naturalPersonName = builder.naturalPersonName;
-        this.dateOfBirth = builder.dateOfBirth;
-        this.telephoneNumber = builder.telephoneNumber;
+        this.address = builder.address;
         this.walletType = builder.walletType;
         this.vaspId = builder.vaspId;
         this.vaspName = builder.vaspName;
@@ -75,13 +66,6 @@ public class TravelRuleParty {
     public void setName(String name) {
         this.name = name;
     }
-    public DetailedAddress getDetailedAddress() {
-        return detailedAddress;
-    }
-
-    public void setDetailedAddress(DetailedAddress detailedAddress) {
-        this.detailedAddress = detailedAddress;
-    }
     public NaturalPersonName getNaturalPersonName() {
         return naturalPersonName;
     }
@@ -89,19 +73,12 @@ public class TravelRuleParty {
     public void setNaturalPersonName(NaturalPersonName naturalPersonName) {
         this.naturalPersonName = naturalPersonName;
     }
-    public DateOfBirth getDateOfBirth() {
-        return dateOfBirth;
+    public DetailedAddress getAddress() {
+        return address;
     }
 
-    public void setDateOfBirth(DateOfBirth dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setAddress(DetailedAddress address) {
+        this.address = address;
     }
     public TravelRuleWalletType getWalletType() {
         return walletType;
@@ -127,13 +104,9 @@ public class TravelRuleParty {
     public static class Builder {
         private String name;
 
-        private DetailedAddress detailedAddress;
-
         private NaturalPersonName naturalPersonName;
 
-        private DateOfBirth dateOfBirth;
-
-        private String telephoneNumber;
+        private DetailedAddress address;
 
         private TravelRuleWalletType walletType;
 
@@ -146,23 +119,13 @@ public class TravelRuleParty {
             return this;
         }
 
-        public Builder detailedAddress(DetailedAddress detailedAddress) {
-            this.detailedAddress = detailedAddress;
-            return this;
-        }
-
         public Builder naturalPersonName(NaturalPersonName naturalPersonName) {
             this.naturalPersonName = naturalPersonName;
             return this;
         }
 
-        public Builder dateOfBirth(DateOfBirth dateOfBirth) {
-            this.dateOfBirth = dateOfBirth;
-            return this;
-        }
-
-        public Builder telephoneNumber(String telephoneNumber) {
-            this.telephoneNumber = telephoneNumber;
+        public Builder address(DetailedAddress address) {
+            this.address = address;
             return this;
         }
 
