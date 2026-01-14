@@ -22,6 +22,7 @@ import com.coinbase.prime.factory.PrimeServiceFactory;
 import com.coinbase.prime.wallets.ListWalletsRequest;
 import com.coinbase.prime.wallets.ListWalletsResponse;
 import com.coinbase.prime.wallets.WalletsService;
+import com.coinbase.prime.model.enums.WalletType;
 import com.coinbase.prime.utils.Utils;
 
 public class ListPortfolioWallets {
@@ -31,13 +32,18 @@ public class ListPortfolioWallets {
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
 
-      System.out.println("Using Portfolio ID: " + portfolioId);
+      // Parse optional args: symbols (comma-separated) and type (VAULT/TRADING)
+      String[] symbols = args.length > 0 && !args[0].isEmpty() ? args[0].split(",") : null;
+      WalletType type = args.length > 1 ? WalletType.valueOf(args[1]) : null;
+
+      System.out.println("Portfolio: " + portfolioId + ", Symbols: " + (symbols != null ? String.join(",", symbols) : "all") + ", Type: " + (type != null ? type : "all"));
 
       WalletsService service = PrimeServiceFactory.createWalletsService(client);
-      ListWalletsResponse response = service.listWallets(
-          new ListWalletsRequest.Builder()
-              .portfolioId(portfolioId)
-              .build());
+      ListWalletsRequest.Builder builder = new ListWalletsRequest.Builder().portfolioId(portfolioId);
+      if (symbols != null) builder.symbols(symbols);
+      if (type != null) builder.type(type);
+
+      ListWalletsResponse response = service.listWallets(builder.build());
 
       System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
     } catch (Exception e) {
