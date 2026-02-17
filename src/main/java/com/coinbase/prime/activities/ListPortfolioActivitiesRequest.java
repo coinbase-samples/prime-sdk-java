@@ -38,6 +38,8 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
     private String startTime;
     @JsonProperty("end_time")
     private String endTime;
+    @JsonProperty("get_network_unified_activities")
+    private Boolean getNetworkUnifiedActivities;
 
     public ListPortfolioActivitiesRequest() {
     }
@@ -50,6 +52,7 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
         this.statuses = builder.statuses;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
+        this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
     }
 
     public String getPortfolioId() {
@@ -100,6 +103,14 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
         this.endTime = endTime;
     }
 
+    public Boolean getGetNetworkUnifiedActivities() {
+        return getNetworkUnifiedActivities;
+    }
+
+    public void setGetNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
+        this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
+    }
+
     public static class Builder {
         private final String portfolioId;
         private String[] symbols;
@@ -107,6 +118,7 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
         private ActivityStatus[] statuses;
         private String startTime;
         private String endTime;
+        private Boolean getNetworkUnifiedActivities;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
@@ -137,6 +149,11 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
 
         public Builder endTime(String endTime) {
             this.endTime = endTime;
+            return this;
+        }
+
+        public Builder getNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
+            this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
             return this;
         }
 

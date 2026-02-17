@@ -28,6 +28,9 @@ public class CreateNewLocatesRequest {
 
   private String amount;
 
+  @JsonProperty("conversion_date")
+  private String conversionDate;
+
   @JsonProperty("locate_date")
   private String locateDate;
 
@@ -38,6 +41,7 @@ public class CreateNewLocatesRequest {
     this.portfolioId = builder.portfolioId;
     this.symbol = builder.symbol;
     this.amount = builder.amount;
+    this.conversionDate = builder.conversionDate;
     this.locateDate = builder.locateDate;
   }
 
@@ -65,6 +69,14 @@ public class CreateNewLocatesRequest {
     this.amount = amount;
   }
 
+  public String getConversionDate() {
+    return conversionDate;
+  }
+
+  public void setConversionDate(String conversionDate) {
+    this.conversionDate = conversionDate;
+  }
+
   public String getLocateDate() {
     return locateDate;
   }
@@ -77,6 +89,7 @@ public class CreateNewLocatesRequest {
     private String portfolioId;
     private String symbol;
     private String amount;
+    private String conversionDate;
     private String locateDate;
 
     public Builder() {
@@ -94,6 +107,11 @@ public class CreateNewLocatesRequest {
 
     public Builder amount(String amount) {
       this.amount = amount;
+      return this;
+    }
+
+    public Builder conversionDate(String conversionDate) {
+      this.conversionDate = conversionDate;
       return this;
     }
 

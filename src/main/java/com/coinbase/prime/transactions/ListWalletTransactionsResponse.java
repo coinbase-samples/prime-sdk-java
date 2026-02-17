@@ -22,7 +22,6 @@ import com.coinbase.prime.model.Transaction;
 public class ListWalletTransactionsResponse {
     private Transaction[] transactions;
     private Pagination pagination;
-    private ListWalletTransactionsRequest request;
 
     public ListWalletTransactionsResponse() {
     }
@@ -41,14 +40,6 @@ public class ListWalletTransactionsResponse {
 
     public void setPagination(Pagination pagination) {
         this.pagination = pagination;
-    }
-
-    public ListWalletTransactionsRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListWalletTransactionsRequest request) {
-        this.request = request;
     }
 
 }

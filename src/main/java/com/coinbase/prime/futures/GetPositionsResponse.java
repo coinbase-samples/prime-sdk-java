@@ -16,14 +16,14 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.prime.model.Position;
+import com.coinbase.prime.model.FcmPosition;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Response containing  positions for an entity.
  */
 public class GetPositionsResponse {
-    private Position[] positions;
+    private FcmPosition[] positions;
 
     @JsonProperty("clearing_account_id")
     private String clearingAccountId;
@@ -31,11 +31,11 @@ public class GetPositionsResponse {
     public GetPositionsResponse() {
     }
 
-    public Position[] getPositions() {
+    public FcmPosition[] getPositions() {
         return positions;
     }
 
-    public void setPositions(Position[] positions) {
+    public void setPositions(FcmPosition[] positions) {
         this.positions = positions;
     }
 

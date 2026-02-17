@@ -44,11 +44,11 @@ public class UpdateOnchainAddressBookEntryRequest {
         this.portfolioId = portfolioId;
     }
 
-    public AddressGroup getAddressGroupId() {
+    public AddressGroup getAddressGroup() {
         return addressGroup;
     }
 
-    public void setAddressGroupId(AddressGroup addressGroup) {
+    public void setAddressGroup(AddressGroup addressGroup) {
         this.addressGroup = addressGroup;
     }
 

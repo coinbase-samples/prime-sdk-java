@@ -16,8 +16,6 @@
 
 package com.coinbase.prime.orders;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Response object for canceling an order.
  * 
@@ -25,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CancelOrderResponse {
     /** The ID of the canceled order */
-    @JsonProperty("order_id")
     private String id;
 
     public CancelOrderResponse() {

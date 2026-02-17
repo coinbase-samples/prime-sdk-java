@@ -48,6 +48,9 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
     @JsonProperty("end_time")
     private String endTime;
 
+    @JsonProperty("get_network_unified_activities")
+    private Boolean getNetworkUnifiedActivities;
+
     public ListEntityActivitiesRequest(String entityId) {
         this.entityId = entityId;
     }
@@ -61,6 +64,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         this.statuses = builder.statuses;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
+        this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
     }
 
     public String getEntityId() {
@@ -119,6 +123,14 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         this.endTime = endTime;
     }
 
+    public Boolean getGetNetworkUnifiedActivities() {
+        return this.getNetworkUnifiedActivities;
+    }
+
+    public void setGetNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
+        this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
+    }
+
     public static class Builder {
         private final String entityId;
         private ActivityLevel activityLevel;
@@ -127,6 +139,7 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
         private ActivityStatus[] statuses;
         private String startTime;
         private String endTime;
+        private Boolean getNetworkUnifiedActivities;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
@@ -162,6 +175,11 @@ public class ListEntityActivitiesRequest extends PrimeListRequest {
 
         public ListEntityActivitiesRequest.Builder endTime(String endTime) {
             this.endTime = endTime;
+            return this;
+        }
+
+        public ListEntityActivitiesRequest.Builder getNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
+            this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
             return this;
         }
 

@@ -16,19 +16,19 @@
 
 package com.coinbase.prime.financing;
 
-import com.coinbase.prime.model.Locate;
+import com.coinbase.prime.model.ExistingLocate;
 
 public class ListExistingLocatesResponse {
-    private Locate[] locates;
+    private ExistingLocate[] locates;
 
     public ListExistingLocatesResponse() {
     }
 
-    public Locate[] getLocates() {
+    public ExistingLocate[] getLocates() {
         return locates;
     }
 
-    public void setLocates(Locate[] locates) {
+    public void setLocates(ExistingLocate[] locates) {
         this.locates = locates;
     }
 

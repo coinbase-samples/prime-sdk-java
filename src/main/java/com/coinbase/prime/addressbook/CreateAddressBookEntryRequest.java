@@ -37,6 +37,9 @@ public class CreateAddressBookEntryRequest {
     @JsonProperty("account_identifier")
     private String accountIdentifier;
 
+    @JsonProperty("chain_ids")
+    private String[] chainIds;
+
     public CreateAddressBookEntryRequest() {
     }
 
@@ -46,6 +49,7 @@ public class CreateAddressBookEntryRequest {
         this.currencySymbol = builder.currencySymbol;
         this.name = builder.name;
         this.accountIdentifier = builder.accountIdentifier;
+        this.chainIds = builder.chainIds;
     }
 
     public String getPortfolioId() {
@@ -88,12 +92,21 @@ public class CreateAddressBookEntryRequest {
         this.accountIdentifier = accountIdentifier;
     }
 
+    public String[] getChainIds() {
+        return chainIds;
+    }
+
+    public void setChainIds(String[] chainIds) {
+        this.chainIds = chainIds;
+    }
+
     public static class Builder {
         private final String portfolioId;
         private String address;
         private String currencySymbol;
         private String name;
         private String accountIdentifier;
+        private String[] chainIds;
 
         public Builder(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -116,6 +129,11 @@ public class CreateAddressBookEntryRequest {
 
         public Builder accountIdentifier(String accountIdentifier) {
             this.accountIdentifier = accountIdentifier;
+            return this;
+        }
+
+        public Builder chainIds(String[] chainIds) {
+            this.chainIds = chainIds;
             return this;
         }
 

@@ -143,9 +143,6 @@ public class CreateOnchainTransactionRequest {
             if (isNullOrEmpty(this.rawUnsignedTxn)) {
                 throw new CoinbaseClientException("RawUnsignedTxn cannot be null");
             }
-            if (this.rpc == null) {
-                throw new CoinbaseClientException("Rpc cannot be null");
-            }
         }
     }
 }

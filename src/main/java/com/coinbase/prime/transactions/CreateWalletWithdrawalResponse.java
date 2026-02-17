@@ -18,7 +18,6 @@ package com.coinbase.prime.transactions;
 
 import com.coinbase.prime.model.BlockchainAddress;
 import com.coinbase.prime.model.CounterpartyDestination;
-import com.coinbase.prime.model.enums.DestinationType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateWalletWithdrawalResponse {
@@ -30,9 +29,9 @@ public class CreateWalletWithdrawalResponse {
     private String amount;
     private String fee;
     @JsonProperty("destination_type")
-    private DestinationType destinationType;
+    private String destinationType;
     @JsonProperty("source_type")
-    private DestinationType sourceType;
+    private String sourceType;
     @JsonProperty("blockchain_destination")
     private BlockchainAddress blockchainDestination;
     @JsonProperty("counterparty_destination")
@@ -85,19 +84,19 @@ public class CreateWalletWithdrawalResponse {
         this.fee = fee;
     }
 
-    public DestinationType getDestinationType() {
+    public String getDestinationType() {
         return destinationType;
     }
 
-    public void setDestinationType(DestinationType destinationType) {
+    public void setDestinationType(String destinationType) {
         this.destinationType = destinationType;
     }
 
-    public DestinationType getSourceType() {
+    public String getSourceType() {
         return sourceType;
     }
 
-    public void setSourceType(DestinationType sourceType) {
+    public void setSourceType(String sourceType) {
         this.sourceType = sourceType;
     }
 

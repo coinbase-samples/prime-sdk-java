@@ -35,6 +35,9 @@ public class ListWalletsRequest extends PrimeListRequest {
 
     private String[] symbols;
 
+    @JsonProperty("get_network_unified_wallets")
+    private Boolean getNetworkUnifiedWallets;
+
     public ListWalletsRequest() {}
 
     public ListWalletsRequest(Builder builder) {
@@ -42,6 +45,7 @@ public class ListWalletsRequest extends PrimeListRequest {
         this.portfolioId = builder.portfolioId;
         this.type = builder.type;
         this.symbols = builder.symbols;
+        this.getNetworkUnifiedWallets = builder.getNetworkUnifiedWallets;
     }
 
     public String getPortfolioId() {
@@ -68,10 +72,19 @@ public class ListWalletsRequest extends PrimeListRequest {
         this.symbols = symbols;
     }
 
+    public Boolean getGetNetworkUnifiedWallets() {
+        return getNetworkUnifiedWallets;
+    }
+
+    public void setGetNetworkUnifiedWallets(Boolean getNetworkUnifiedWallets) {
+        this.getNetworkUnifiedWallets = getNetworkUnifiedWallets;
+    }
+
     public static class Builder {
         private String portfolioId;
         private WalletType type;
         private String[] symbols;
+        private Boolean getNetworkUnifiedWallets;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
@@ -90,6 +103,11 @@ public class ListWalletsRequest extends PrimeListRequest {
 
         public Builder symbols(String[] symbols) {
             this.symbols = symbols;
+            return this;
+        }
+
+        public Builder getNetworkUnifiedWallets(Boolean getNetworkUnifiedWallets) {
+            this.getNetworkUnifiedWallets = getNetworkUnifiedWallets;
             return this;
         }
 

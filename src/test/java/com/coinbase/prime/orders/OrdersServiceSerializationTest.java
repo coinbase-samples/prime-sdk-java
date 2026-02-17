@@ -261,7 +261,7 @@ public class OrdersServiceSerializationTest {
 
     @Test
     public void testCancelOrderResponseDeserialization() throws JsonProcessingException {
-        String json = "{\"order_id\":\"order-789\"}";
+        String json = "{\"id\":\"order-789\"}";
 
         CancelOrderResponse response = objectMapper.readValue(json, CancelOrderResponse.class);
 

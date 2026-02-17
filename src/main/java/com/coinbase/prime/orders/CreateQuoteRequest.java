@@ -39,6 +39,8 @@ public class CreateQuoteRequest {
   private String quoteValue;
   @JsonProperty(required = true, value = "limit_price")
   private String limitPrice;
+  @JsonProperty("settl_currency")
+  private String settlCurrency;
 
   public CreateQuoteRequest() {
   }
@@ -51,6 +53,7 @@ public class CreateQuoteRequest {
     this.baseQuantity = builder.baseQuantity;
     this.quoteValue = builder.quoteValue;
     this.limitPrice = builder.limitPrice;
+    this.settlCurrency = builder.settlCurrency;
   }
 
   public String getPortfolioId() {
@@ -109,6 +112,14 @@ public class CreateQuoteRequest {
     this.limitPrice = limitPrice;
   }
 
+  public String getSettlCurrency() {
+    return settlCurrency;
+  }
+
+  public void setSettlCurrency(String settlCurrency) {
+    this.settlCurrency = settlCurrency;
+  }
+
   public static class Builder {
     private String portfolioId;
     private String productId;
@@ -117,6 +128,7 @@ public class CreateQuoteRequest {
     private String baseQuantity;
     private String quoteValue;
     private String limitPrice;
+    private String settlCurrency;
 
     public Builder() {
     }
@@ -153,6 +165,11 @@ public class CreateQuoteRequest {
 
     public Builder limitPrice(String limitPrice) {
       this.limitPrice = limitPrice;
+      return this;
+    }
+
+    public Builder settlCurrency(String settlCurrency) {
+      this.settlCurrency = settlCurrency;
       return this;
     }
 

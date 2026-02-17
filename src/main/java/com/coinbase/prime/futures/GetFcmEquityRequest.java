@@ -22,23 +22,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ScheduleEntityFuturesSweepRequest {
+public class GetFcmEquityRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
-    private String amount;
-
-    @JsonProperty(required = true)
-    private String currency;
-
-    public ScheduleEntityFuturesSweepRequest() {
+    public GetFcmEquityRequest() {
     }
 
-    public ScheduleEntityFuturesSweepRequest(Builder builder) {
+    public GetFcmEquityRequest(Builder builder) {
         this.entityId = builder.entityId;
-        this.amount = builder.amount;
-        this.currency = builder.currency;
     }
 
     public String getEntityId() {
@@ -49,26 +42,8 @@ public class ScheduleEntityFuturesSweepRequest {
         this.entityId = entityId;
     }
 
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public static class Builder {
         private String entityId;
-        private String amount;
-        private String currency;
 
         public Builder() {
         }
@@ -78,27 +53,14 @@ public class ScheduleEntityFuturesSweepRequest {
             return this;
         }
 
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder currency(String currency) {
-            this.currency = currency;
-            return this;
-        }
-
-        public ScheduleEntityFuturesSweepRequest build() throws CoinbaseClientException {
+        public GetFcmEquityRequest build() throws CoinbaseClientException {
             this.validate();
-            return new ScheduleEntityFuturesSweepRequest(this);
+            return new GetFcmEquityRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
                 throw new CoinbaseClientException("Entity ID is required");
-            }
-            if (isNullOrEmpty(this.currency)) {
-                throw new CoinbaseClientException("Currency is required");
             }
         }
     }
