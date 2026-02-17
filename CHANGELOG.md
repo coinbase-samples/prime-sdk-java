@@ -1,5 +1,68 @@
 # Changelog
 
+## [1.7.0] - 2026-02-17
+
+### Added
+
+#### New Endpoints
+- **Futures Service**
+  - `getFcmEquity` - Get FCM equity information for an entity
+
+#### New Models
+- `ValidatorAllocation` - Validator-level allocation for ETH V2 unstaking
+
+#### New Enums
+- `PegOffsetType` - Peg offset types for PEG orders (PRICE, BPS, DEPTH)
+- `NetworkFamily` - Network family types for wallet creation
+
+#### New Examples
+- `GetFcmEquity.java` - FCM equity retrieval example
+
+### Changed
+
+#### Breaking Changes
+- `ListOpenOrdersRequest` - `startDate`/`endDate` type changed from `Date` to `String` to match spec
+- `CreateOrderRequest` / `GetOrderPreviewRequest` - `pegOffsetType` changed from `String` to `PegOffsetType` enum
+- `CreateWalletTransferResponse` / `CreateWalletWithdrawalResponse` - `destinationType`/`sourceType` changed from `DestinationType` enum to `String` to match spec
+- `ListPortfolioUsersResponse` - Changed from `EntityUser[]` to `PortfolioUser[]` to match spec
+- `GetPositionsResponse` - Changed from `Position[]` to `FcmPosition[]` to match spec
+- `ListExistingLocatesResponse` - Changed from `Locate[]` to `ExistingLocate[]` to match spec
+- `CancelOrderResponse` - JSON field mapping changed from `order_id` to `id` to match spec
+- `SubmitDepositTravelRuleDataRequest` - Removed `isIntermediary` field (not in spec)
+- `ListWalletTransactionsResponse` - Removed `request` field
+- `UpdateOnchainAddressBookEntryRequest` - Renamed `getAddressGroupId`/`setAddressGroupId` to `getAddressGroup`/`setAddressGroup`
+
+#### New Fields
+- `ListEntityActivitiesRequest` / `ListPortfolioActivitiesRequest` - Added `getNetworkUnifiedActivities`
+- `CreateAddressBookEntryRequest` - Added `chainIds`
+- `ListOnchainWalletBalancesResponse` - Added `defiBalances`
+- `ListPortfolioBalancesResponse` - Added `primeCustodyBalances`
+- `CreateNewLocatesRequest` - Added `conversionDate`
+- `GetPortfolioCreditInformationResponse` - Added `@JsonProperty("post_trade_credit")` annotation
+- `ScheduleEntityFuturesSweepRequest` - Added `amount` and `currency` builder methods
+- `TravelRuleData` - Added `attestVerifiedWalletOwnership`
+- `TravelRuleParty` - Added `personalId`, `dateOfBirth`, `telephoneNumber`, `accountId`
+- `WalletUnstakeInputs` - Added `validatorAllocations`
+- `ListOnchainAddressGroupsRequest` - Added `@JsonProperty`/`@JsonIgnore` annotations on `portfolioId`
+- `AcceptQuoteRequest` / `CreateQuoteRequest` - Added `settlCurrency`
+- `ListPortfolioTransactionsRequest` - Added `getNetworkUnifiedTransactions`, `travelRuleStatus`
+- `CreateWalletRequest` - Added `idempotencyKey`, `networkFamily`, `network`
+- `ListWalletsRequest` - Added `getNetworkUnifiedWallets`
+- `ListWalletAddressesRequest` - Added `limit` builder method
+- `RewardSubtype` enum - Added `BUIDL_DIVIDEND`
+
+#### Relaxed Validations
+- `CreateWalletRequest` - `wallet_type` no longer required (optional per spec)
+- `ListWalletAddressesRequest` - `networkId` no longer required (optional per spec)
+- `CreateOnchainTransactionRequest` - `rpc` no longer required (optional per spec)
+
+### Fixed
+- `FinancingServiceImpl` - Fixed URL path from `/entities/{id}/locates/locates_availability` to `/entities/{id}/locates_availability`
+- `ListInterestAccrualsForPortfolioRequest` - Fixed typo `prtfolioId` → `portfolioId` in builder method
+- `ListInterestAccrualsForPortfolioRequest` - Added missing `build()` method to Builder
+- `GetPortfolioActivityRequest` - Removed incorrect `PrimeListRequest` inheritance (single-item request, not a list)
+- `GetWalletDepositInstructionsRequest` - Changed `networkType` from `NetworkType` enum to `String` to match spec
+
 ## [1.6.2] - 2026-01-12
 
 ### Added
