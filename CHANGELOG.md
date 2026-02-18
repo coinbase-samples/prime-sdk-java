@@ -10,10 +10,7 @@
 
 #### New Models
 - `ValidatorAllocation` - Validator-level allocation for ETH V2 unstaking
-
-#### New Enums
-- `PegOffsetType` - Peg offset types for PEG orders (PRICE, BPS, DEPTH)
-- `NetworkFamily` - Network family types for wallet creation
+- `GoogleTypeDate` - Google date type for travel rule date of birth fields
 
 #### New Examples
 - `GetFcmEquity.java` - FCM equity retrieval example
@@ -38,7 +35,6 @@
 - `ListOnchainWalletBalancesResponse` - Added `defiBalances`
 - `ListPortfolioBalancesResponse` - Added `primeCustodyBalances`
 - `CreateNewLocatesRequest` - Added `conversionDate`
-- `GetPortfolioCreditInformationResponse` - Added `@JsonProperty("post_trade_credit")` annotation
 - `ScheduleEntityFuturesSweepRequest` - Added `amount` and `currency` builder methods
 - `TravelRuleData` - Added `attestVerifiedWalletOwnership`
 - `TravelRuleParty` - Added `personalId`, `dateOfBirth`, `telephoneNumber`, `accountId`
@@ -57,6 +53,7 @@
 - `CreateOnchainTransactionRequest` - `rpc` no longer required (optional per spec)
 
 ### Fixed
+- `GetPortfolioCreditInformationResponse` - Added missing `@JsonProperty("post_trade_credit")` annotation for correct deserialization
 - `FinancingServiceImpl` - Fixed URL path from `/entities/{id}/locates/locates_availability` to `/entities/{id}/locates_availability`
 - `ListInterestAccrualsForPortfolioRequest` - Fixed typo `prtfolioId` → `portfolioId` in builder method
 - `ListInterestAccrualsForPortfolioRequest` - Added missing `build()` method to Builder
