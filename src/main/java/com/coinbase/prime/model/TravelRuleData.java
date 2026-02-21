@@ -35,22 +35,22 @@ public class TravelRuleData {
     private TravelRuleParty originator;
 
     @JsonProperty("is_self")
-    private Boolean isSelf;
+    private boolean isSelf;
 
     /**
      * True if Coinbase is being used as an intermediary for a customer transfer.
      */
     @JsonProperty("is_intermediary")
-    private Boolean isIntermediary;
+    private boolean isIntermediary;
 
     @JsonProperty("opt_out_of_ownership_verification")
-    private Boolean optOutOfOwnershipVerification;
+    private boolean optOutOfOwnershipVerification;
 
     /**
      * Whether the originating VASP attests to verified wallet ownership. When true with is_intermediary, enables automatic VASP data enrichment from the legal entity.
      */
     @JsonProperty("attest_verified_wallet_ownership")
-    private Boolean attestVerifiedWalletOwnership;
+    private boolean attestVerifiedWalletOwnership;
 
     public TravelRuleData() {
     }
@@ -77,32 +77,32 @@ public class TravelRuleData {
     public void setOriginator(TravelRuleParty originator) {
         this.originator = originator;
     }
-    public Boolean getIsSelf() {
+    public boolean getIsSelf() {
         return isSelf;
     }
 
-    public void setIsSelf(Boolean isSelf) {
+    public void setIsSelf(boolean isSelf) {
         this.isSelf = isSelf;
     }
-    public Boolean getIsIntermediary() {
+    public boolean getIsIntermediary() {
         return isIntermediary;
     }
 
-    public void setIsIntermediary(Boolean isIntermediary) {
+    public void setIsIntermediary(boolean isIntermediary) {
         this.isIntermediary = isIntermediary;
     }
-    public Boolean getOptOutOfOwnershipVerification() {
+    public boolean getOptOutOfOwnershipVerification() {
         return optOutOfOwnershipVerification;
     }
 
-    public void setOptOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
+    public void setOptOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
         this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
     }
-    public Boolean getAttestVerifiedWalletOwnership() {
+    public boolean getAttestVerifiedWalletOwnership() {
         return attestVerifiedWalletOwnership;
     }
 
-    public void setAttestVerifiedWalletOwnership(Boolean attestVerifiedWalletOwnership) {
+    public void setAttestVerifiedWalletOwnership(boolean attestVerifiedWalletOwnership) {
         this.attestVerifiedWalletOwnership = attestVerifiedWalletOwnership;
     }
     public static class Builder {
@@ -110,13 +110,13 @@ public class TravelRuleData {
 
         private TravelRuleParty originator;
 
-        private Boolean isSelf;
+        private boolean isSelf;
 
-        private Boolean isIntermediary;
+        private boolean isIntermediary;
 
-        private Boolean optOutOfOwnershipVerification;
+        private boolean optOutOfOwnershipVerification;
 
-        private Boolean attestVerifiedWalletOwnership;
+        private boolean attestVerifiedWalletOwnership;
 
         public Builder beneficiary(TravelRuleParty beneficiary) {
             this.beneficiary = beneficiary;
@@ -128,22 +128,22 @@ public class TravelRuleData {
             return this;
         }
 
-        public Builder isSelf(Boolean isSelf) {
+        public Builder isSelf(boolean isSelf) {
             this.isSelf = isSelf;
             return this;
         }
 
-        public Builder isIntermediary(Boolean isIntermediary) {
+        public Builder isIntermediary(boolean isIntermediary) {
             this.isIntermediary = isIntermediary;
             return this;
         }
 
-        public Builder optOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
+        public Builder optOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
             this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
             return this;
         }
 
-        public Builder attestVerifiedWalletOwnership(Boolean attestVerifiedWalletOwnership) {
+        public Builder attestVerifiedWalletOwnership(boolean attestVerifiedWalletOwnership) {
             this.attestVerifiedWalletOwnership = attestVerifiedWalletOwnership;
             return this;
         }

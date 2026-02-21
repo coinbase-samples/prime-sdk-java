@@ -61,7 +61,7 @@ public class PmAssetInfo {
      * Whether the currency is margin eligible
      */
     @JsonProperty("margin_eligible")
-    private Boolean marginEligible;
+    private boolean marginEligible;
 
     /**
      * Base margin requirement of the currency
@@ -186,11 +186,11 @@ public class PmAssetInfo {
     public void setAssetTier(String assetTier) {
         this.assetTier = assetTier;
     }
-    public Boolean getMarginEligible() {
+    public boolean getMarginEligible() {
         return marginEligible;
     }
 
-    public void setMarginEligible(Boolean marginEligible) {
+    public void setMarginEligible(boolean marginEligible) {
         this.marginEligible = marginEligible;
     }
     public String getBaseMarginRequirement() {
@@ -281,7 +281,7 @@ public class PmAssetInfo {
 
         private String assetTier;
 
-        private Boolean marginEligible;
+        private boolean marginEligible;
 
         private String baseMarginRequirement;
 
@@ -330,7 +330,7 @@ public class PmAssetInfo {
             return this;
         }
 
-        public Builder marginEligible(Boolean marginEligible) {
+        public Builder marginEligible(boolean marginEligible) {
             this.marginEligible = marginEligible;
             return this;
         }

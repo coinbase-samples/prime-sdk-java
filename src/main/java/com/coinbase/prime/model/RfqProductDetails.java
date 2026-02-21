@@ -31,7 +31,7 @@ public class RfqProductDetails {
      * Whether the product is tradable via RFQ
      */
     @JsonProperty("tradable")
-    private Boolean tradable;
+    private boolean tradable;
 
     /**
      * Deprecated: Value will be an empty string
@@ -81,11 +81,11 @@ public class RfqProductDetails {
         this.minQuoteSize = builder.minQuoteSize;
         this.maxQuoteSize = builder.maxQuoteSize;
     }
-    public Boolean getTradable() {
+    public boolean getTradable() {
         return tradable;
     }
 
-    public void setTradable(Boolean tradable) {
+    public void setTradable(boolean tradable) {
         this.tradable = tradable;
     }
     public String getMinNotionalSize() {
@@ -131,7 +131,7 @@ public class RfqProductDetails {
         this.maxQuoteSize = maxQuoteSize;
     }
     public static class Builder {
-        private Boolean tradable;
+        private boolean tradable;
 
         private String minNotionalSize;
 
@@ -145,7 +145,7 @@ public class RfqProductDetails {
 
         private String maxQuoteSize;
 
-        public Builder tradable(Boolean tradable) {
+        public Builder tradable(boolean tradable) {
             this.tradable = tradable;
             return this;
         }
