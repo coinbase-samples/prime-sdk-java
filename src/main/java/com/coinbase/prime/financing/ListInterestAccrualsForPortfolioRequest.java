@@ -71,7 +71,7 @@ public class ListInterestAccrualsForPortfolioRequest {
         public Builder() {
         }
 
-        public Builder portfolioId(String portfolioId) {
+        public Builder prtfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
             return this;
         }
@@ -86,8 +86,6 @@ public class ListInterestAccrualsForPortfolioRequest {
             return this;
         }
 
-        public ListInterestAccrualsForPortfolioRequest build() {
-            return new ListInterestAccrualsForPortfolioRequest(this);
-        }
+
     }
 }

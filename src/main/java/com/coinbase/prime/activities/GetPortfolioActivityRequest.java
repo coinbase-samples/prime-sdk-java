@@ -16,6 +16,7 @@
 
 package com.coinbase.prime.activities;
 
+import com.coinbase.prime.common.PrimeListRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.coinbase.core.errors.CoinbaseClientException;
@@ -24,7 +25,7 @@ import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 /**
  * Request for getting a portfolio activity by activity ID.
  */
-public class GetPortfolioActivityRequest {
+public class GetPortfolioActivityRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;

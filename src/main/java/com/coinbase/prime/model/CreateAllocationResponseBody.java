@@ -31,7 +31,7 @@ public class CreateAllocationResponseBody {
      * The success boolean for the post allocation
      */
     @JsonProperty("success")
-    private boolean success;
+    private Boolean success;
 
     /**
      * The allocation id for the post allocation
@@ -53,11 +53,11 @@ public class CreateAllocationResponseBody {
         this.allocationId = builder.allocationId;
         this.failureReason = builder.failureReason;
     }
-    public boolean getSuccess() {
+    public Boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
+    public void setSuccess(Boolean success) {
         this.success = success;
     }
     public String getAllocationId() {
@@ -75,13 +75,13 @@ public class CreateAllocationResponseBody {
         this.failureReason = failureReason;
     }
     public static class Builder {
-        private boolean success;
+        private Boolean success;
 
         private String allocationId;
 
         private String failureReason;
 
-        public Builder success(boolean success) {
+        public Builder success(Boolean success) {
             this.success = success;
             return this;
         }

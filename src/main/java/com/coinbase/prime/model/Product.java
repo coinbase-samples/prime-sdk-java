@@ -19,7 +19,10 @@
  */
 
 package com.coinbase.prime.model;
+import com.coinbase.prime.model.FcmTradingSessionDetails;
+import com.coinbase.prime.model.FutureProductDetails;
 import com.coinbase.prime.model.enums.ProductPermissions;
+import com.coinbase.prime.model.enums.ProductType;
 import com.coinbase.prime.model.RfqProductDetails;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -88,6 +91,15 @@ public class Product {
     @JsonProperty("rfq_product_details")
     private RfqProductDetails rfqProductDetails;
 
+    @JsonProperty("product_type")
+    private ProductType productType;
+
+    @JsonProperty("fcm_trading_session_details")
+    private FcmTradingSessionDetails fcmTradingSessionDetails;
+
+    @JsonProperty("future_product_details")
+    private FutureProductDetails futureProductDetails;
+
     public Product() {
     }
 
@@ -102,6 +114,9 @@ public class Product {
         this.permissions = builder.permissions;
         this.priceIncrement = builder.priceIncrement;
         this.rfqProductDetails = builder.rfqProductDetails;
+        this.productType = builder.productType;
+        this.fcmTradingSessionDetails = builder.fcmTradingSessionDetails;
+        this.futureProductDetails = builder.futureProductDetails;
     }
     public String getId() {
         return id;
@@ -173,6 +188,27 @@ public class Product {
     public void setRfqProductDetails(RfqProductDetails rfqProductDetails) {
         this.rfqProductDetails = rfqProductDetails;
     }
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+    public FcmTradingSessionDetails getFcmTradingSessionDetails() {
+        return fcmTradingSessionDetails;
+    }
+
+    public void setFcmTradingSessionDetails(FcmTradingSessionDetails fcmTradingSessionDetails) {
+        this.fcmTradingSessionDetails = fcmTradingSessionDetails;
+    }
+    public FutureProductDetails getFutureProductDetails() {
+        return futureProductDetails;
+    }
+
+    public void setFutureProductDetails(FutureProductDetails futureProductDetails) {
+        this.futureProductDetails = futureProductDetails;
+    }
     public static class Builder {
         private String id;
 
@@ -193,6 +229,12 @@ public class Product {
         private String priceIncrement;
 
         private RfqProductDetails rfqProductDetails;
+
+        private ProductType productType;
+
+        private FcmTradingSessionDetails fcmTradingSessionDetails;
+
+        private FutureProductDetails futureProductDetails;
 
         public Builder id(String id) {
             this.id = id;
@@ -241,6 +283,21 @@ public class Product {
 
         public Builder rfqProductDetails(RfqProductDetails rfqProductDetails) {
             this.rfqProductDetails = rfqProductDetails;
+            return this;
+        }
+
+        public Builder productType(ProductType productType) {
+            this.productType = productType;
+            return this;
+        }
+
+        public Builder fcmTradingSessionDetails(FcmTradingSessionDetails fcmTradingSessionDetails) {
+            this.fcmTradingSessionDetails = fcmTradingSessionDetails;
+            return this;
+        }
+
+        public Builder futureProductDetails(FutureProductDetails futureProductDetails) {
+            this.futureProductDetails = futureProductDetails;
             return this;
         }
 

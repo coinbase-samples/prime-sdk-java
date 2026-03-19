@@ -1,5 +1,5 @@
 /*
- * Copyright 2026-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,19 +19,35 @@ package com.coinbase.prime.futures;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetFcmEquityResponse {
+    @JsonProperty("available_to_sweep")
+    private String availableToSweep;
+
+    @JsonProperty("current_excess_deficit")
+    private String currentExcessDeficit;
+
     @JsonProperty("eod_account_equity")
     private String eodAccountEquity;
 
     @JsonProperty("eod_unrealized_pnl")
     private String eodUnrealizedPnl;
 
-    @JsonProperty("current_excess_deficit")
-    private String currentExcessDeficit;
-
-    @JsonProperty("available_to_sweep")
-    private String availableToSweep;
-
     public GetFcmEquityResponse() {
+    }
+
+    public String getAvailableToSweep() {
+        return availableToSweep;
+    }
+
+    public void setAvailableToSweep(String availableToSweep) {
+        this.availableToSweep = availableToSweep;
+    }
+
+    public String getCurrentExcessDeficit() {
+        return currentExcessDeficit;
+    }
+
+    public void setCurrentExcessDeficit(String currentExcessDeficit) {
+        this.currentExcessDeficit = currentExcessDeficit;
     }
 
     public String getEodAccountEquity() {
@@ -48,21 +64,5 @@ public class GetFcmEquityResponse {
 
     public void setEodUnrealizedPnl(String eodUnrealizedPnl) {
         this.eodUnrealizedPnl = eodUnrealizedPnl;
-    }
-
-    public String getCurrentExcessDeficit() {
-        return currentExcessDeficit;
-    }
-
-    public void setCurrentExcessDeficit(String currentExcessDeficit) {
-        this.currentExcessDeficit = currentExcessDeficit;
-    }
-
-    public String getAvailableToSweep() {
-        return availableToSweep;
-    }
-
-    public void setAvailableToSweep(String availableToSweep) {
-        this.availableToSweep = availableToSweep;
     }
 }

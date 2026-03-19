@@ -31,7 +31,7 @@ public class RpcConfig {
      * If true, transaction will not be broadcast to the network
      */
     @JsonProperty("skip_broadcast")
-    private boolean skipBroadcast;
+    private Boolean skipBroadcast;
 
     /**
      * Custom blockchain node RPC URL. (EVM-only)
@@ -46,11 +46,11 @@ public class RpcConfig {
         this.skipBroadcast = builder.skipBroadcast;
         this.url = builder.url;
     }
-    public boolean getSkipBroadcast() {
+    public Boolean getSkipBroadcast() {
         return skipBroadcast;
     }
 
-    public void setSkipBroadcast(boolean skipBroadcast) {
+    public void setSkipBroadcast(Boolean skipBroadcast) {
         this.skipBroadcast = skipBroadcast;
     }
     public String getUrl() {
@@ -61,11 +61,11 @@ public class RpcConfig {
         this.url = url;
     }
     public static class Builder {
-        private boolean skipBroadcast;
+        private Boolean skipBroadcast;
 
         private String url;
 
-        public Builder skipBroadcast(boolean skipBroadcast) {
+        public Builder skipBroadcast(Boolean skipBroadcast) {
             this.skipBroadcast = skipBroadcast;
             return this;
         }

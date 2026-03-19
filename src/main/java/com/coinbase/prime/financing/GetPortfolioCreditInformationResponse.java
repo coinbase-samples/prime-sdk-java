@@ -17,10 +17,8 @@
 package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.PostTradeCreditInformation;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GetPortfolioCreditInformationResponse {
-    @JsonProperty("post_trade_credit")
     private PostTradeCreditInformation postTradeCredit;
 
     public GetPortfolioCreditInformationResponse() {

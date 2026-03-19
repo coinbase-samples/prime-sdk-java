@@ -53,7 +53,7 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
     public GetEntityLocateAvailabilitiesResponse getEntityLocateAvailabilities(GetEntityLocateAvailabilitiesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/locates_availability", request.getEntityId()),
+                String.format("/entities/%s/locates/locates_availability", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetEntityLocateAvailabilitiesResponse>() {});

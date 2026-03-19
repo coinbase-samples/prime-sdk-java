@@ -78,16 +78,6 @@ public class ScheduleEntityFuturesSweepRequest {
             return this;
         }
 
-        public Builder amount(String amount) {
-            this.amount = amount;
-            return this;
-        }
-
-        public Builder currency(String currency) {
-            this.currency = currency;
-            return this;
-        }
-
         public ScheduleEntityFuturesSweepRequest build() throws CoinbaseClientException {
             this.validate();
             return new ScheduleEntityFuturesSweepRequest(this);

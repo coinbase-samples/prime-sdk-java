@@ -35,9 +35,6 @@ public class ListPortfolioBalancesResponse {
     /** Vault-specific balance summary */
     @JsonProperty("vault_balances")
     private AggregatedFiatBalance vaultBalances;
-    /** Prime custody balance summary */
-    @JsonProperty("prime_custody_balances")
-    private AggregatedFiatBalance primeCustodyBalances;
 
     public ListPortfolioBalancesResponse() {
     }
@@ -72,14 +69,6 @@ public class ListPortfolioBalancesResponse {
 
     public void setVaultBalances(AggregatedFiatBalance vaultBalances) {
         this.vaultBalances = vaultBalances;
-    }
-
-    public AggregatedFiatBalance getPrimeCustodyBalances() {
-        return primeCustodyBalances;
-    }
-
-    public void setPrimeCustodyBalances(AggregatedFiatBalance primeCustodyBalances) {
-        this.primeCustodyBalances = primeCustodyBalances;
     }
 
 }

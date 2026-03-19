@@ -31,7 +31,7 @@ public class CreateNetAllocationResponseBody {
      * The success boolean for the post net allocation
      */
     @JsonProperty("success")
-    private boolean success;
+    private Boolean success;
 
     /**
      * The netting_id for the post net allocation
@@ -67,11 +67,11 @@ public class CreateNetAllocationResponseBody {
         this.sellAllocationId = builder.sellAllocationId;
         this.failureReason = builder.failureReason;
     }
-    public boolean getSuccess() {
+    public Boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
+    public void setSuccess(Boolean success) {
         this.success = success;
     }
     public String getNettingId() {
@@ -103,7 +103,7 @@ public class CreateNetAllocationResponseBody {
         this.failureReason = failureReason;
     }
     public static class Builder {
-        private boolean success;
+        private Boolean success;
 
         private String nettingId;
 
@@ -113,7 +113,7 @@ public class CreateNetAllocationResponseBody {
 
         private String failureReason;
 
-        public Builder success(boolean success) {
+        public Builder success(Boolean success) {
             this.success = success;
             return this;
         }

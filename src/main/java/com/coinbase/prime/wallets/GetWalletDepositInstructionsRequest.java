@@ -18,6 +18,7 @@ package com.coinbase.prime.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
+import com.coinbase.prime.model.enums.NetworkType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -39,7 +40,7 @@ public class GetWalletDepositInstructionsRequest {
     private String networkId;
 
     @JsonProperty("network.type")
-    private String networkType;
+    private NetworkType networkType;
 
     public GetWalletDepositInstructionsRequest() {
     }
@@ -84,11 +85,11 @@ public class GetWalletDepositInstructionsRequest {
         this.networkId = networkId;
     }
 
-    public String getNetworkType() {
+    public NetworkType getNetworkType() {
         return networkType;
     }
 
-    public void setNetworkType(String networkType) {
+    public void setNetworkType(NetworkType networkType) {
         this.networkType = networkType;
     }
 
@@ -97,7 +98,7 @@ public class GetWalletDepositInstructionsRequest {
         private String walletId;
         private WalletDepositInstructionType depositType;
         private String networkId;
-        private String networkType;
+        private NetworkType networkType;
 
         public Builder() {
         }
@@ -122,7 +123,7 @@ public class GetWalletDepositInstructionsRequest {
             return this;
         }
 
-        public GetWalletDepositInstructionsRequest.Builder networkType(String networkType) {
+        public GetWalletDepositInstructionsRequest.Builder networkType(NetworkType networkType) {
             this.networkType = networkType;
             return this;
         }

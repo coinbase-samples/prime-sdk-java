@@ -22,7 +22,6 @@ package com.coinbase.prime.model;
 import com.coinbase.prime.model.DetailedAddress;
 import com.coinbase.prime.model.NaturalPersonName;
 import com.coinbase.prime.model.enums.TravelRuleWalletType;
-import com.coinbase.prime.model.GoogleTypeDate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -56,7 +55,7 @@ public class TravelRuleParty {
     private String personalId;
 
     @JsonProperty("date_of_birth")
-    private GoogleTypeDate dateOfBirth;
+    private DateOfBirth dateOfBirth;
 
     /**
      * Telephone number for contact purposes.
@@ -134,11 +133,11 @@ public class TravelRuleParty {
     public void setPersonalId(String personalId) {
         this.personalId = personalId;
     }
-    public GoogleTypeDate getDateOfBirth() {
+    public DateOfBirth getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(GoogleTypeDate dateOfBirth) {
+    public void setDateOfBirth(DateOfBirth dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     public String getTelephoneNumber() {
@@ -170,7 +169,7 @@ public class TravelRuleParty {
 
         private String personalId;
 
-        private GoogleTypeDate dateOfBirth;
+        private DateOfBirth dateOfBirth;
 
         private String telephoneNumber;
 
@@ -211,7 +210,7 @@ public class TravelRuleParty {
             return this;
         }
 
-        public Builder dateOfBirth(GoogleTypeDate dateOfBirth) {
+        public Builder dateOfBirth(DateOfBirth dateOfBirth) {
             this.dateOfBirth = dateOfBirth;
             return this;
         }

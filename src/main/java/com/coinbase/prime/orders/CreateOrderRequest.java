@@ -19,7 +19,6 @@ package com.coinbase.prime.orders;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
-import com.coinbase.prime.model.enums.PegOffsetType;
 import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -67,7 +66,7 @@ public class CreateOrderRequest {
     @JsonProperty("post_only")
     private Boolean postOnly;
     @JsonProperty("peg_offset_type")
-    private PegOffsetType pegOffsetType;
+    private String pegOffsetType;
     private String offset;
     @JsonProperty("wig_level")
     private String wigLevel;
@@ -252,11 +251,11 @@ public class CreateOrderRequest {
         this.postOnly = postOnly;
     }
 
-    public PegOffsetType getPegOffsetType() {
+    public String getPegOffsetType() {
         return pegOffsetType;
     }
 
-    public void setPegOffsetType(PegOffsetType pegOffsetType) {
+    public void setPegOffsetType(String pegOffsetType) {
         this.pegOffsetType = pegOffsetType;
     }
 
@@ -296,7 +295,7 @@ public class CreateOrderRequest {
         private String historicalPov;
         private String settlCurrency;
         private Boolean postOnly;
-        private PegOffsetType pegOffsetType;
+        private String pegOffsetType;
         private String offset;
         private String wigLevel;
 
@@ -398,7 +397,7 @@ public class CreateOrderRequest {
             return this;
         }
 
-        public Builder pegOffsetType(PegOffsetType pegOffsetType) {
+        public Builder pegOffsetType(String pegOffsetType) {
             this.pegOffsetType = pegOffsetType;
             return this;
         }

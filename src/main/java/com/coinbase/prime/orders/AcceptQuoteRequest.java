@@ -35,8 +35,6 @@ public class AcceptQuoteRequest {
   private String clientOrderId;
   @JsonProperty(required = true, value = "quote_id")
   private String quoteId;
-  @JsonProperty("settl_currency")
-  private String settlCurrency;
 
   public AcceptQuoteRequest() {
   }
@@ -47,7 +45,6 @@ public class AcceptQuoteRequest {
     this.side = builder.side;
     this.clientOrderId = builder.clientOrderId;
     this.quoteId = builder.quoteId;
-    this.settlCurrency = builder.settlCurrency;
   }
 
   public String getPortfolioId() {
@@ -90,21 +87,12 @@ public class AcceptQuoteRequest {
     this.quoteId = quoteId;
   }
 
-  public String getSettlCurrency() {
-    return settlCurrency;
-  }
-
-  public void setSettlCurrency(String settlCurrency) {
-    this.settlCurrency = settlCurrency;
-  }
-
   public static class Builder {
     private String portfolioId;
     private String productId;
     private OrderSide side;
     private String clientOrderId;
     private String quoteId;
-    private String settlCurrency;
 
     public Builder() {
     }
@@ -131,11 +119,6 @@ public class AcceptQuoteRequest {
 
     public Builder quoteId(String quoteId) {
       this.quoteId = quoteId;
-      return this;
-    }
-
-    public Builder settlCurrency(String settlCurrency) {
-      this.settlCurrency = settlCurrency;
       return this;
     }
 

@@ -20,7 +20,6 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.TransactionType;
-import com.coinbase.prime.model.enums.TravelRuleStatus;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -37,10 +36,6 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
     private String startTime;
     @JsonProperty("end_time")
     private String endTime;
-    @JsonProperty("get_network_unified_transactions")
-    private Boolean getNetworkUnifiedTransactions;
-    @JsonProperty("travel_rule_status")
-    private TravelRuleStatus[] travelRuleStatus;
 
     public ListPortfolioTransactionsRequest() {
     }
@@ -52,8 +47,6 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         this.types = builder.types;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
-        this.getNetworkUnifiedTransactions = builder.getNetworkUnifiedTransactions;
-        this.travelRuleStatus = builder.travelRuleStatus;
     }
 
     public String getPortfolioId() {
@@ -96,30 +89,12 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         this.endTime = endTime;
     }
 
-    public Boolean getGetNetworkUnifiedTransactions() {
-        return getNetworkUnifiedTransactions;
-    }
-
-    public void setGetNetworkUnifiedTransactions(Boolean getNetworkUnifiedTransactions) {
-        this.getNetworkUnifiedTransactions = getNetworkUnifiedTransactions;
-    }
-
-    public TravelRuleStatus[] getTravelRuleStatus() {
-        return travelRuleStatus;
-    }
-
-    public void setTravelRuleStatus(TravelRuleStatus[] travelRuleStatus) {
-        this.travelRuleStatus = travelRuleStatus;
-    }
-
     public static class Builder {
         private String portfolioId;
         private String[] symbols;
         private TransactionType[] types;
         private String startTime;
         private String endTime;
-        private Boolean getNetworkUnifiedTransactions;
-        private TravelRuleStatus[] travelRuleStatus;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
@@ -149,16 +124,6 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
 
         public Builder endTime(String endTime) {
             this.endTime = endTime;
-            return this;
-        }
-
-        public Builder getNetworkUnifiedTransactions(Boolean getNetworkUnifiedTransactions) {
-            this.getNetworkUnifiedTransactions = getNetworkUnifiedTransactions;
-            return this;
-        }
-
-        public Builder travelRuleStatus(TravelRuleStatus[] travelRuleStatus) {
-            this.travelRuleStatus = travelRuleStatus;
             return this;
         }
 

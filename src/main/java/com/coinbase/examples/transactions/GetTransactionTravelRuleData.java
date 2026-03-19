@@ -14,27 +14,31 @@
  *  limitations under the License.
  */
 
-package com.coinbase.examples.futures;
+package com.coinbase.examples.transactions;
 
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.futures.FuturesService;
-import com.coinbase.prime.futures.GetFcmEquityRequest;
-import com.coinbase.prime.futures.GetFcmEquityResponse;
+import com.coinbase.prime.transactions.GetTransactionTravelRuleDataRequest;
+import com.coinbase.prime.transactions.GetTransactionTravelRuleDataResponse;
+import com.coinbase.prime.transactions.TransactionsService;
 import com.coinbase.prime.utils.Utils;
 
-public class GetFcmEquity {
+public class GetTransactionTravelRuleData {
     public static void main(String[] args) {
         try {
             CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
             CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
+            String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
+            String transactionId = args.length > 0 ? args[0] : "TRANSACTION_ID_HERE";
 
-            FuturesService service = PrimeServiceFactory.createFuturesService(client);
-            GetFcmEquityResponse response = service.getFcmEquity(
-                    new GetFcmEquityRequest.Builder()
-                            .entityId(entityId)
+            System.out.println("Getting travel rule data: Portfolio ID: " + portfolioId + ", Transaction ID: " + transactionId);
+
+            TransactionsService service = PrimeServiceFactory.createTransactionsService(client);
+            GetTransactionTravelRuleDataResponse response = service.getTransactionTravelRuleData(
+                    new GetTransactionTravelRuleDataRequest.Builder()
+                            .portfolioId(portfolioId)
+                            .transactionId(transactionId)
                             .build());
 
             System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));

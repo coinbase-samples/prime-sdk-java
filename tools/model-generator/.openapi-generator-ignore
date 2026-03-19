@@ -6,9 +6,8 @@
 src/main/java/com/coinbase/prime/model/*Request.java
 src/main/java/com/coinbase/prime/model/*Response.java
 
-# Google infrastructure types (except GoogleTypeDate which is used)
-src/main/java/com/coinbase/prime/model/GoogleProtobuf*.java
-src/main/java/com/coinbase/prime/model/GoogleRpc*.java
+# Google infrastructure types
+src/main/java/com/coinbase/prime/model/Google*.java
 
 # Inline schemas
 src/main/java/com/coinbase/prime/model/RFQ.java
@@ -22,7 +21,6 @@ src/main/java/com/coinbase/prime/model/*AnyOf*.java
 src/main/java/com/coinbase/prime/model/*RequestIsARequestTo*.java
 src/main/java/com/coinbase/prime/model/ChangeOnchainAddressGroupRequestIsARequestToCreateOrUpdateANewOnchainAddressGroup.java
 src/main/java/com/coinbase/prime/model/CreateATransferBetweenTwoWallets.java
-src/main/java/com/coinbase/prime/model/RequestToSubmitTravelRuleDataForAnExistingDepositTransaction.java
 
 # Abstract schemas
 src/main/java/com/coinbase/prime/model/AbstractOpenApiSchema.java

@@ -16,21 +16,21 @@
 
 package com.coinbase.prime.users;
 
-import com.coinbase.prime.model.PortfolioUser;
+import com.coinbase.prime.model.EntityUser;
 import com.coinbase.prime.common.Pagination;
 
 public class ListPortfolioUsersResponse {
-    private PortfolioUser[] users;
+    private EntityUser[] users;
     private Pagination pagination;
 
     public ListPortfolioUsersResponse() {
     }
 
-    public PortfolioUser[] getUsers() {
+    public EntityUser[] getUsers() {
         return users;
     }
 
-    public void setUsers(PortfolioUser[] users) {
+    public void setUsers(EntityUser[] users) {
         this.users = users;
     }
 

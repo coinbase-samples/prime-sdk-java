@@ -46,6 +46,9 @@ public class SubmitDepositTravelRuleDataRequest {
     @JsonProperty("is_self")
     private Boolean isSelf;
 
+    @JsonProperty("is_intermediary")
+    private Boolean isIntermediary;
+
     @JsonProperty("opt_out_of_ownership_verification")
     private Boolean optOutOfOwnershipVerification;
 
@@ -58,6 +61,7 @@ public class SubmitDepositTravelRuleDataRequest {
         this.originator = builder.originator;
         this.beneficiary = builder.beneficiary;
         this.isSelf = builder.isSelf;
+        this.isIntermediary = builder.isIntermediary;
         this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
     }
 
@@ -101,6 +105,14 @@ public class SubmitDepositTravelRuleDataRequest {
         this.isSelf = isSelf;
     }
 
+    public Boolean getIsIntermediary() {
+        return isIntermediary;
+    }
+
+    public void setIsIntermediary(Boolean isIntermediary) {
+        this.isIntermediary = isIntermediary;
+    }
+
     public Boolean getOptOutOfOwnershipVerification() {
         return optOutOfOwnershipVerification;
     }
@@ -115,6 +127,7 @@ public class SubmitDepositTravelRuleDataRequest {
         private TravelRuleParty originator;
         private TravelRuleParty beneficiary;
         private Boolean isSelf;
+        private Boolean isIntermediary;
         private Boolean optOutOfOwnershipVerification;
 
         public Builder() {
@@ -142,6 +155,11 @@ public class SubmitDepositTravelRuleDataRequest {
 
         public Builder isSelf(Boolean isSelf) {
             this.isSelf = isSelf;
+            return this;
+        }
+
+        public Builder isIntermediary(Boolean isIntermediary) {
+            this.isIntermediary = isIntermediary;
             return this;
         }
 

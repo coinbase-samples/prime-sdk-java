@@ -37,7 +37,7 @@ public class ActivityMetadataConsensus {
      * If activity has passed consensus threshold
      */
     @JsonProperty("has_passed_consensus")
-    private boolean hasPassedConsensus;
+    private Boolean hasPassedConsensus;
 
     public ActivityMetadataConsensus() {
     }
@@ -53,24 +53,24 @@ public class ActivityMetadataConsensus {
     public void setApprovalDeadline(String approvalDeadline) {
         this.approvalDeadline = approvalDeadline;
     }
-    public boolean getHasPassedConsensus() {
+    public Boolean getHasPassedConsensus() {
         return hasPassedConsensus;
     }
 
-    public void setHasPassedConsensus(boolean hasPassedConsensus) {
+    public void setHasPassedConsensus(Boolean hasPassedConsensus) {
         this.hasPassedConsensus = hasPassedConsensus;
     }
     public static class Builder {
         private String approvalDeadline;
 
-        private boolean hasPassedConsensus;
+        private Boolean hasPassedConsensus;
 
         public Builder approvalDeadline(String approvalDeadline) {
             this.approvalDeadline = approvalDeadline;
             return this;
         }
 
-        public Builder hasPassedConsensus(boolean hasPassedConsensus) {
+        public Builder hasPassedConsensus(Boolean hasPassedConsensus) {
             this.hasPassedConsensus = hasPassedConsensus;
             return this;
         }

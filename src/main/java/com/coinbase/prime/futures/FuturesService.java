@@ -23,7 +23,6 @@ public interface FuturesService {
     // Futures
     SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetPositionsResponse getPositions(GetPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
@@ -32,4 +31,5 @@ public interface FuturesService {
     GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

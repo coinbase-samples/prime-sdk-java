@@ -18,15 +18,11 @@ package com.coinbase.prime.onchainaddressbook;
 
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Request for listing onchain address groups for a portfolio.
  */
 public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
-    @JsonProperty(required = true, value = "portfolio_id")
-    @JsonIgnore
     private String portfolioId;
 
     public ListOnchainAddressGroupsRequest() {

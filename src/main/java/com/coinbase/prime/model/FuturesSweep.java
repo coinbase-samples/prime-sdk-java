@@ -43,7 +43,7 @@ public class FuturesSweep {
      * Should sweep all
      */
     @JsonProperty("should_sweep_all")
-    private boolean shouldSweepAll;
+    private Boolean shouldSweepAll;
 
     @JsonProperty("status")
     private FuturesSweepStatus status;
@@ -78,11 +78,11 @@ public class FuturesSweep {
     public void setRequestedAmount(SweepAmount requestedAmount) {
         this.requestedAmount = requestedAmount;
     }
-    public boolean getShouldSweepAll() {
+    public Boolean getShouldSweepAll() {
         return shouldSweepAll;
     }
 
-    public void setShouldSweepAll(boolean shouldSweepAll) {
+    public void setShouldSweepAll(Boolean shouldSweepAll) {
         this.shouldSweepAll = shouldSweepAll;
     }
     public FuturesSweepStatus getStatus() {
@@ -104,7 +104,7 @@ public class FuturesSweep {
 
         private SweepAmount requestedAmount;
 
-        private boolean shouldSweepAll;
+        private Boolean shouldSweepAll;
 
         private FuturesSweepStatus status;
 
@@ -120,7 +120,7 @@ public class FuturesSweep {
             return this;
         }
 
-        public Builder shouldSweepAll(boolean shouldSweepAll) {
+        public Builder shouldSweepAll(Boolean shouldSweepAll) {
             this.shouldSweepAll = shouldSweepAll;
             return this;
         }

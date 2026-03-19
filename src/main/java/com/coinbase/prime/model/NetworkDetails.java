@@ -47,31 +47,31 @@ public class NetworkDetails {
      * Indicates whether this network is the default network for the asset
      */
     @JsonProperty("default")
-    private boolean _default;
+    private Boolean _default;
 
     /**
      * Indicates whether this network supports trading
      */
     @JsonProperty("trading_supported")
-    private boolean tradingSupported;
+    private Boolean tradingSupported;
 
     /**
      * Indicates whether this network supports vault
      */
     @JsonProperty("vault_supported")
-    private boolean vaultSupported;
+    private Boolean vaultSupported;
 
     /**
      * Indicates whether this network supports prime custody
      */
     @JsonProperty("prime_custody_supported")
-    private boolean primeCustodySupported;
+    private Boolean primeCustodySupported;
 
     /**
      * Indicates whether this network requires a destination tag
      */
     @JsonProperty("destination_tag_required")
-    private boolean destinationTagRequired;
+    private Boolean destinationTagRequired;
 
     /**
      * Base URL to our recommended block explorer (crypto only)
@@ -121,39 +121,39 @@ public class NetworkDetails {
     public void setMaxDecimals(String maxDecimals) {
         this.maxDecimals = maxDecimals;
     }
-    public boolean getDefault() {
+    public Boolean getDefault() {
         return _default;
     }
 
-    public void setDefault(boolean _default) {
+    public void setDefault(Boolean _default) {
         this._default = _default;
     }
-    public boolean getTradingSupported() {
+    public Boolean getTradingSupported() {
         return tradingSupported;
     }
 
-    public void setTradingSupported(boolean tradingSupported) {
+    public void setTradingSupported(Boolean tradingSupported) {
         this.tradingSupported = tradingSupported;
     }
-    public boolean getVaultSupported() {
+    public Boolean getVaultSupported() {
         return vaultSupported;
     }
 
-    public void setVaultSupported(boolean vaultSupported) {
+    public void setVaultSupported(Boolean vaultSupported) {
         this.vaultSupported = vaultSupported;
     }
-    public boolean getPrimeCustodySupported() {
+    public Boolean getPrimeCustodySupported() {
         return primeCustodySupported;
     }
 
-    public void setPrimeCustodySupported(boolean primeCustodySupported) {
+    public void setPrimeCustodySupported(Boolean primeCustodySupported) {
         this.primeCustodySupported = primeCustodySupported;
     }
-    public boolean getDestinationTagRequired() {
+    public Boolean getDestinationTagRequired() {
         return destinationTagRequired;
     }
 
-    public void setDestinationTagRequired(boolean destinationTagRequired) {
+    public void setDestinationTagRequired(Boolean destinationTagRequired) {
         this.destinationTagRequired = destinationTagRequired;
     }
     public String getNetworkLink() {
@@ -177,15 +177,15 @@ public class NetworkDetails {
 
         private String maxDecimals;
 
-        private boolean _default;
+        private Boolean _default;
 
-        private boolean tradingSupported;
+        private Boolean tradingSupported;
 
-        private boolean vaultSupported;
+        private Boolean vaultSupported;
 
-        private boolean primeCustodySupported;
+        private Boolean primeCustodySupported;
 
-        private boolean destinationTagRequired;
+        private Boolean destinationTagRequired;
 
         private String networkLink;
 
@@ -206,27 +206,27 @@ public class NetworkDetails {
             return this;
         }
 
-        public Builder _default(boolean _default) {
+        public Builder _default(Boolean _default) {
             this._default = _default;
             return this;
         }
 
-        public Builder tradingSupported(boolean tradingSupported) {
+        public Builder tradingSupported(Boolean tradingSupported) {
             this.tradingSupported = tradingSupported;
             return this;
         }
 
-        public Builder vaultSupported(boolean vaultSupported) {
+        public Builder vaultSupported(Boolean vaultSupported) {
             this.vaultSupported = vaultSupported;
             return this;
         }
 
-        public Builder primeCustodySupported(boolean primeCustodySupported) {
+        public Builder primeCustodySupported(Boolean primeCustodySupported) {
             this.primeCustodySupported = primeCustodySupported;
             return this;
         }
 
-        public Builder destinationTagRequired(boolean destinationTagRequired) {
+        public Builder destinationTagRequired(Boolean destinationTagRequired) {
             this.destinationTagRequired = destinationTagRequired;
             return this;
         }

@@ -106,11 +106,6 @@ public class ListWalletAddressesRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
         public ListWalletAddressesRequest build() throws CoinbaseClientException {
             this.validate();
             return new ListWalletAddressesRequest(this);
@@ -122,6 +117,9 @@ public class ListWalletAddressesRequest extends PrimeListRequest {
             }
             if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("Wallet ID is required");
+            }
+            if (isNullOrEmpty(this.networkId)) {
+                throw new CoinbaseClientException("Network ID is required");
             }
         }
     }

@@ -31,13 +31,13 @@ public class RiskAssessment {
      * Indicates if the transaction has been flagged for compliance concerns
      */
     @JsonProperty("compliance_risk_detected")
-    private boolean complianceRiskDetected;
+    private Boolean complianceRiskDetected;
 
     /**
      * Indicates if the transaction has been flagged for security concerns
      */
     @JsonProperty("security_risk_detected")
-    private boolean securityRiskDetected;
+    private Boolean securityRiskDetected;
 
     public RiskAssessment() {
     }
@@ -46,31 +46,31 @@ public class RiskAssessment {
         this.complianceRiskDetected = builder.complianceRiskDetected;
         this.securityRiskDetected = builder.securityRiskDetected;
     }
-    public boolean getComplianceRiskDetected() {
+    public Boolean getComplianceRiskDetected() {
         return complianceRiskDetected;
     }
 
-    public void setComplianceRiskDetected(boolean complianceRiskDetected) {
+    public void setComplianceRiskDetected(Boolean complianceRiskDetected) {
         this.complianceRiskDetected = complianceRiskDetected;
     }
-    public boolean getSecurityRiskDetected() {
+    public Boolean getSecurityRiskDetected() {
         return securityRiskDetected;
     }
 
-    public void setSecurityRiskDetected(boolean securityRiskDetected) {
+    public void setSecurityRiskDetected(Boolean securityRiskDetected) {
         this.securityRiskDetected = securityRiskDetected;
     }
     public static class Builder {
-        private boolean complianceRiskDetected;
+        private Boolean complianceRiskDetected;
 
-        private boolean securityRiskDetected;
+        private Boolean securityRiskDetected;
 
-        public Builder complianceRiskDetected(boolean complianceRiskDetected) {
+        public Builder complianceRiskDetected(Boolean complianceRiskDetected) {
             this.complianceRiskDetected = complianceRiskDetected;
             return this;
         }
 
-        public Builder securityRiskDetected(boolean securityRiskDetected) {
+        public Builder securityRiskDetected(Boolean securityRiskDetected) {
             this.securityRiskDetected = securityRiskDetected;
             return this;
         }

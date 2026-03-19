@@ -1,5 +1,5 @@
 /*
- * Copyright 2026-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,15 +16,12 @@
 
 package com.coinbase.prime.futures;
 
-import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.isNullOrEmpty;
-
 public class GetFcmEquityRequest {
-    @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
+    @JsonProperty(required = true, value = "entity_id")
     private String entityId;
 
     public GetFcmEquityRequest() {
@@ -53,15 +50,8 @@ public class GetFcmEquityRequest {
             return this;
         }
 
-        public GetFcmEquityRequest build() throws CoinbaseClientException {
-            this.validate();
+        public GetFcmEquityRequest build() {
             return new GetFcmEquityRequest(this);
-        }
-
-        private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("Entity ID is required");
-            }
         }
     }
 }

@@ -18,6 +18,8 @@ package com.coinbase.prime.factory;
 
 import com.coinbase.prime.activities.ActivitiesService;
 import com.coinbase.prime.activities.ActivitiesServiceImpl;
+import com.coinbase.prime.advancedtransfers.AdvancedTransfersService;
+import com.coinbase.prime.advancedtransfers.AdvancedTransfersServiceImpl;
 import com.coinbase.prime.addressbook.AddressBookService;
 import com.coinbase.prime.addressbook.AddressBookServiceImpl;
 import com.coinbase.prime.allocations.AllocationsService;
@@ -59,6 +61,10 @@ import com.coinbase.prime.wallets.WalletsServiceImpl;
 public class PrimeServiceFactory {
     public static ActivitiesService createActivitiesService(CoinbasePrimeClient client) {
         return new ActivitiesServiceImpl(client);
+    }
+
+    public static AdvancedTransfersService createAdvancedTransfersService(CoinbasePrimeClient client) {
+        return new AdvancedTransfersServiceImpl(client);
     }
 
     public static AddressBookService createAddressBookService(CoinbasePrimeClient client) {

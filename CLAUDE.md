@@ -296,7 +296,6 @@ Each OpenAPI operation should generate:
 #### Naming Conventions
 - **Classes**: PascalCase (e.g., `CreateAllocationRequest`)
 - **Properties**: camelCase with Jackson annotation mapping (e.g., `@JsonProperty("portfolio_id") private String portfolioId`)
-- **Booleans**: Use primitive `boolean` (not `Boolean` wrapper). The model generator is configured with `typeMappings("boolean" -> "boolean")` to enforce this for generated models. Hand-crafted request/response classes should follow the same convention.
 - **Enums**: Use standard OpenAPI names (e.g., `FCM_MARGIN_CALL_STATE_CLOSED`) - Jackson handles serialization
 - **Methods**: camelCase matching operation name
 

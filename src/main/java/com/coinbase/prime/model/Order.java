@@ -20,10 +20,12 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.LimitOrderEdit;
+import com.coinbase.prime.model.CommissionDetailTotal;
 import com.coinbase.prime.model.OrderEdit;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderStatus;
 import com.coinbase.prime.model.enums.OrderType;
+import com.coinbase.prime.model.enums.ProductType;
 import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -178,7 +180,7 @@ public class Order {
      * Post-only flag - indicates whether the order was placed as post-only
      */
     @JsonProperty("post_only")
-    private boolean postOnly;
+    private Boolean postOnly;
 
     /**
      * The history of order edits (deprecated: use edit_history instead)
@@ -190,7 +192,7 @@ public class Order {
      * Indicates if this was a raise exact order (size inclusive of fees for sell orders in quote)
      */
     @JsonProperty("is_raise_exact")
-    private boolean isRaiseExact;
+    private Boolean isRaiseExact;
 
     /**
      * Display size for the order
@@ -234,6 +236,12 @@ public class Order {
     @JsonProperty("wig_level")
     private String wigLevel;
 
+    @JsonProperty("product_type")
+    private ProductType productType;
+
+    @JsonProperty("commission_detail_total")
+    private CommissionDetailTotal commissionDetailTotal;
+
     public Order() {
     }
 
@@ -273,6 +281,8 @@ public class Order {
         this.pegOffsetType = builder.pegOffsetType;
         this.offset = builder.offset;
         this.wigLevel = builder.wigLevel;
+        this.productType = builder.productType;
+        this.commissionDetailTotal = builder.commissionDetailTotal;
     }
     public String getId() {
         return id;
@@ -449,11 +459,11 @@ public class Order {
     public void setClientProductId(String clientProductId) {
         this.clientProductId = clientProductId;
     }
-    public boolean getPostOnly() {
+    public Boolean getPostOnly() {
         return postOnly;
     }
 
-    public void setPostOnly(boolean postOnly) {
+    public void setPostOnly(Boolean postOnly) {
         this.postOnly = postOnly;
     }
     public List<LimitOrderEdit> getOrderEditHistory() {
@@ -463,11 +473,11 @@ public class Order {
     public void setOrderEditHistory(List<LimitOrderEdit> orderEditHistory) {
         this.orderEditHistory = orderEditHistory;
     }
-    public boolean getIsRaiseExact() {
+    public Boolean getIsRaiseExact() {
         return isRaiseExact;
     }
 
-    public void setIsRaiseExact(boolean isRaiseExact) {
+    public void setIsRaiseExact(Boolean isRaiseExact) {
         this.isRaiseExact = isRaiseExact;
     }
     public String getDisplaySize() {
@@ -518,6 +528,20 @@ public class Order {
 
     public void setWigLevel(String wigLevel) {
         this.wigLevel = wigLevel;
+    }
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+    public CommissionDetailTotal getCommissionDetailTotal() {
+        return commissionDetailTotal;
+    }
+
+    public void setCommissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
+        this.commissionDetailTotal = commissionDetailTotal;
     }
     public static class Builder {
         private String id;
@@ -570,11 +594,11 @@ public class Order {
 
         private String clientProductId;
 
-        private boolean postOnly;
+        private Boolean postOnly;
 
         private List<LimitOrderEdit> orderEditHistory;
 
-        private boolean isRaiseExact;
+        private Boolean isRaiseExact;
 
         private String displaySize;
 
@@ -589,6 +613,10 @@ public class Order {
         private String offset;
 
         private String wigLevel;
+
+        private ProductType productType;
+
+        private CommissionDetailTotal commissionDetailTotal;
 
         public Builder id(String id) {
             this.id = id;
@@ -715,7 +743,7 @@ public class Order {
             return this;
         }
 
-        public Builder postOnly(boolean postOnly) {
+        public Builder postOnly(Boolean postOnly) {
             this.postOnly = postOnly;
             return this;
         }
@@ -725,7 +753,7 @@ public class Order {
             return this;
         }
 
-        public Builder isRaiseExact(boolean isRaiseExact) {
+        public Builder isRaiseExact(Boolean isRaiseExact) {
             this.isRaiseExact = isRaiseExact;
             return this;
         }
@@ -762,6 +790,16 @@ public class Order {
 
         public Builder wigLevel(String wigLevel) {
             this.wigLevel = wigLevel;
+            return this;
+        }
+
+        public Builder productType(ProductType productType) {
+            this.productType = productType;
+            return this;
+        }
+
+        public Builder commissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
+            this.commissionDetailTotal = commissionDetailTotal;
             return this;
         }
 

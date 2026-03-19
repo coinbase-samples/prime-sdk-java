@@ -25,6 +25,8 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Date;
+
 import static com.coinbase.core.utils.Utils.*;
 
 public class ListOpenOrdersRequest extends PrimeListRequest {
@@ -36,11 +38,11 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
     @JsonProperty("order_type")
     private OrderType orderType;
     @JsonProperty("start_date")
-    private String startDate;
+    private Date startDate;
     @JsonProperty("order_side")
     private OrderSide orderSide;
     @JsonProperty("end_date")
-    private String endDate;
+    private Date endDate;
 
     public ListOpenOrdersRequest() {
     }
@@ -79,11 +81,11 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
         this.orderType = orderType;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
@@ -95,11 +97,11 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
         this.orderSide = orderSide;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -107,9 +109,9 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
         private String portfolioId;
         private String[] productIds;
         private OrderType orderType;
-        private String startDate;
+        private Date startDate;
         private OrderSide orderSide;
-        private String endDate;
+        private Date endDate;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
@@ -132,7 +134,7 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder startDate(String startDate) {
+        public Builder startDate(Date startDate) {
             this.startDate = startDate;
             return this;
         }
@@ -142,7 +144,7 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder endDate(String endDate) {
+        public Builder endDate(Date endDate) {
             this.endDate = endDate;
             return this;
         }

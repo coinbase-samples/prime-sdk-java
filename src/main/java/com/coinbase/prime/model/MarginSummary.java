@@ -104,7 +104,7 @@ public class MarginSummary {
      * Whether or not a entity is frozen due to balance outstanding or other reason
      */
     @JsonProperty("frozen")
-    private boolean frozen;
+    private Boolean frozen;
 
     /**
      * The reason why a entity is frozen
@@ -116,13 +116,13 @@ public class MarginSummary {
      * Whether TF is enabled for the entity. This field is deprecated and will be removed in the future.
      */
     @JsonProperty("tf_enabled")
-    private boolean tfEnabled;
+    private Boolean tfEnabled;
 
     /**
      * Whether PM is enabled for the entity
      */
     @JsonProperty("pm_enabled")
-    private boolean pmEnabled;
+    private Boolean pmEnabled;
 
     /**
      * Market rates for the list of assets
@@ -337,11 +337,11 @@ public class MarginSummary {
     public void setTfAdjustedEquity(String tfAdjustedEquity) {
         this.tfAdjustedEquity = tfAdjustedEquity;
     }
-    public boolean getFrozen() {
+    public Boolean getFrozen() {
         return frozen;
     }
 
-    public void setFrozen(boolean frozen) {
+    public void setFrozen(Boolean frozen) {
         this.frozen = frozen;
     }
     public String getFrozenReason() {
@@ -351,18 +351,18 @@ public class MarginSummary {
     public void setFrozenReason(String frozenReason) {
         this.frozenReason = frozenReason;
     }
-    public boolean getTfEnabled() {
+    public Boolean getTfEnabled() {
         return tfEnabled;
     }
 
-    public void setTfEnabled(boolean tfEnabled) {
+    public void setTfEnabled(Boolean tfEnabled) {
         this.tfEnabled = tfEnabled;
     }
-    public boolean getPmEnabled() {
+    public Boolean getPmEnabled() {
         return pmEnabled;
     }
 
-    public void setPmEnabled(boolean pmEnabled) {
+    public void setPmEnabled(Boolean pmEnabled) {
         this.pmEnabled = pmEnabled;
     }
     public List<MarketRate> getMarketRates() {
@@ -507,13 +507,13 @@ public class MarginSummary {
 
         private String tfAdjustedEquity;
 
-        private boolean frozen;
+        private Boolean frozen;
 
         private String frozenReason;
 
-        private boolean tfEnabled;
+        private Boolean tfEnabled;
 
-        private boolean pmEnabled;
+        private Boolean pmEnabled;
 
         private List<MarketRate> marketRates;
 
@@ -604,7 +604,7 @@ public class MarginSummary {
             return this;
         }
 
-        public Builder frozen(boolean frozen) {
+        public Builder frozen(Boolean frozen) {
             this.frozen = frozen;
             return this;
         }
@@ -614,12 +614,12 @@ public class MarginSummary {
             return this;
         }
 
-        public Builder tfEnabled(boolean tfEnabled) {
+        public Builder tfEnabled(Boolean tfEnabled) {
             this.tfEnabled = tfEnabled;
             return this;
         }
 
-        public Builder pmEnabled(boolean pmEnabled) {
+        public Builder pmEnabled(Boolean pmEnabled) {
             this.pmEnabled = pmEnabled;
             return this;
         }

@@ -43,7 +43,7 @@ public class XmPosition {
      * True if margin eligible, false otherwise
      */
     @JsonProperty("margin_eligible")
-    private boolean marginEligible;
+    private Boolean marginEligible;
 
     /**
      * Total market capitalization
@@ -221,11 +221,11 @@ public class XmPosition {
     public void setMarketPrice(String marketPrice) {
         this.marketPrice = marketPrice;
     }
-    public boolean getMarginEligible() {
+    public Boolean getMarginEligible() {
         return marginEligible;
     }
 
-    public void setMarginEligible(boolean marginEligible) {
+    public void setMarginEligible(Boolean marginEligible) {
         this.marginEligible = marginEligible;
     }
     public String getMarketCap() {
@@ -387,7 +387,7 @@ public class XmPosition {
 
         private String marketPrice;
 
-        private boolean marginEligible;
+        private Boolean marginEligible;
 
         private String marketCap;
 
@@ -443,7 +443,7 @@ public class XmPosition {
             return this;
         }
 
-        public Builder marginEligible(boolean marginEligible) {
+        public Builder marginEligible(Boolean marginEligible) {
             this.marginEligible = marginEligible;
             return this;
         }

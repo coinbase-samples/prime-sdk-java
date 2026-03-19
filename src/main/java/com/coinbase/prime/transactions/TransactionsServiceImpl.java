@@ -106,6 +106,18 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
                 new TypeReference<CreateOnchainTransactionResponse>() {});
     }
 
+    @Override
+    public ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request)
+            throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/advanced_transfers/%s/transactions", request.getPortfolioId(),
+                        request.getAdvancedTransferId()),
+                request,
+                List.of(200),
+                new TypeReference<ListAdvancedTransferTransactionsResponse>() {});
+    }
+
     /**
      * Submit travel rule data for an existing deposit transaction.
      * <p>
@@ -121,5 +133,17 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
                 request,
                 List.of(200),
                 new TypeReference<SubmitDepositTravelRuleDataResponse>() {});
+    }
+
+    @Override
+    public GetTransactionTravelRuleDataResponse getTransactionTravelRuleData(GetTransactionTravelRuleDataRequest request)
+            throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/transactions/%s/travel_rule", request.getPortfolioId(),
+                        request.getTransactionId()),
+                request,
+                List.of(200),
+                new TypeReference<GetTransactionTravelRuleDataResponse>() {});
     }
 }
