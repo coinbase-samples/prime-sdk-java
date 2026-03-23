@@ -1,64 +1,58 @@
 # Changelog
 
-## [1.7.0] - 2026-02-17
+## [1.7.0] - 2026-03-19
 
 ### Added
+
+#### New Services
+- **Advanced Transfers Service** (`advancedtransfers` package)
+  - `listAdvancedTransfers` - List advanced transfers for an entity
+  - `createAdvancedTransfer` - Create a new advanced transfer
+  - `cancelAdvancedTransfer` - Cancel an existing advanced transfer
 
 #### New Endpoints
 - **Futures Service**
   - `getFcmEquity` - Get FCM equity information for an entity
+- **Transactions Service**
+  - `getTransactionTravelRuleData` - Get travel rule data for a transaction (moved from removed `travelrule` package)
+  - `listAdvancedTransferTransactions` - List transactions associated with an advanced transfer
 
 #### New Models
-- `ValidatorAllocation` - Validator-level allocation for ETH V2 unstaking
-- `GoogleTypeDate` - Google date type for travel rule date of birth fields
+- `AdvancedTransfer` - Advanced transfer details including state, type, and fund movements
+- `BlindMatchMetadata` - Metadata for blind match advanced transfers
+- `CommissionDetailTotal` - Commission detail totals for orders and fills
+- `EntityUser` - Entity user information
+- `FcmScheduledMaintenance` - FCM scheduled maintenance details
+- `FcmTradingSessionDetails` - FCM trading session information including state and maintenance schedules
+- `FundMovement` - Fund movement details within advanced transfers
+- `FutureProductDetails` - Futures product details including contract specifications
+- `GoogleTypeDate` - Date representation using Google's date type
+- `PerpetualProductDetails` - Perpetual product details
+- `PortfolioUser` - Portfolio user association data
+- `RequestToSubmitTravelRuleDataForAnExistingDepositTransaction` - Travel rule submission request model
+- `ValidatorAllocation` - Validator allocation details for staking
+
+#### New Enums
+- `AdvancedTransferState` - Advanced transfer lifecycle states
+- `AdvancedTransferType` - Advanced transfer types (e.g., `ADVANCED_TRANSFER_TYPE_BLIND_MATCH`)
+- `ContractExpiryType` - Contract expiry types for futures products
+- `ExpiringContractStatus` - Status of expiring futures contracts
+- `FcmMarginHealthState` - FCM margin health states
+- `FcmTradingSessionClosedReason` - Reasons for FCM trading session closure
+- `FcmTradingSessionState` - FCM trading session states
+- `ProductType` - Product types (spot, futures, perpetuals, etc.)
+- `RiskManagementType` - Risk management types
+- `SecondaryPermission` - Secondary permission types
 
 #### New Examples
-- `GetFcmEquity.java` - FCM equity retrieval example
+- `GetTransactionTravelRuleData.java` - Retrieve travel rule data for a transaction
 
 ### Changed
-
-#### Breaking Changes
-- `ListOpenOrdersRequest` - `startDate`/`endDate` type changed from `Date` to `String` to match spec
-- `CreateOrderRequest` / `GetOrderPreviewRequest` - `pegOffsetType` changed from `String` to `PegOffsetType` enum
-- `CreateWalletTransferResponse` / `CreateWalletWithdrawalResponse` - `destinationType`/`sourceType` changed from `DestinationType` enum to `String` to match spec
-- `ListPortfolioUsersResponse` - Changed from `EntityUser[]` to `PortfolioUser[]` to match spec
-- `GetPositionsResponse` - Changed from `Position[]` to `FcmPosition[]` to match spec
-- `ListExistingLocatesResponse` - Changed from `Locate[]` to `ExistingLocate[]` to match spec
-- `CancelOrderResponse` - JSON field mapping changed from `order_id` to `id` to match spec
-- `SubmitDepositTravelRuleDataRequest` - Removed `isIntermediary` field (not in spec)
-- `ListWalletTransactionsResponse` - Removed `request` field
-- `UpdateOnchainAddressBookEntryRequest` - Renamed `getAddressGroupId`/`setAddressGroupId` to `getAddressGroup`/`setAddressGroup`
-
-#### New Fields
-- `ListEntityActivitiesRequest` / `ListPortfolioActivitiesRequest` - Added `getNetworkUnifiedActivities`
-- `CreateAddressBookEntryRequest` - Added `chainIds`
-- `ListOnchainWalletBalancesResponse` - Added `defiBalances`
-- `ListPortfolioBalancesResponse` - Added `primeCustodyBalances`
-- `CreateNewLocatesRequest` - Added `conversionDate`
-- `ScheduleEntityFuturesSweepRequest` - Added `amount` and `currency` builder methods
-- `TravelRuleData` - Added `attestVerifiedWalletOwnership`
-- `TravelRuleParty` - Added `personalId`, `dateOfBirth`, `telephoneNumber`, `accountId`
-- `WalletUnstakeInputs` - Added `validatorAllocations`
-- `ListOnchainAddressGroupsRequest` - Added `@JsonProperty`/`@JsonIgnore` annotations on `portfolioId`
-- `AcceptQuoteRequest` / `CreateQuoteRequest` - Added `settlCurrency`
-- `ListPortfolioTransactionsRequest` - Added `getNetworkUnifiedTransactions`, `travelRuleStatus`
-- `CreateWalletRequest` - Added `idempotencyKey`, `networkFamily`, `network`
-- `ListWalletsRequest` - Added `getNetworkUnifiedWallets`
-- `ListWalletAddressesRequest` - Added `limit` builder method
-- `RewardSubtype` enum - Added `BUIDL_DIVIDEND`
-
-#### Relaxed Validations
-- `CreateWalletRequest` - `wallet_type` no longer required (optional per spec)
-- `ListWalletAddressesRequest` - `networkId` no longer required (optional per spec)
-- `CreateOnchainTransactionRequest` - `rpc` no longer required (optional per spec)
-
-### Fixed
-- `GetPortfolioCreditInformationResponse` - Added missing `@JsonProperty("post_trade_credit")` annotation for correct deserialization
-- `FinancingServiceImpl` - Fixed URL path from `/entities/{id}/locates/locates_availability` to `/entities/{id}/locates_availability`
-- `ListInterestAccrualsForPortfolioRequest` - Fixed typo `prtfolioId` → `portfolioId` in builder method
-- `ListInterestAccrualsForPortfolioRequest` - Added missing `build()` method to Builder
-- `GetPortfolioActivityRequest` - Removed incorrect `PrimeListRequest` inheritance (single-item request, not a list)
-- `GetWalletDepositInstructionsRequest` - Changed `networkType` from `NetworkType` enum to `String` to match spec
+- Moved `getTransactionTravelRuleData` from `TravelRuleService` into `TransactionsService`; removed the `travelrule` package and `PrimeServiceFactory.createTravelRuleService`
+- `Order` - Added `productType` and `commissionDetailTotal` fields
+- `Fill` - Added `productType` and `commissionDetailTotal` fields
+- `Product` - Added `productType`, `fcmTradingSessionDetails`, and `futureProductDetails` fields
+- Boolean fields in generated models updated from `Boolean` wrapper to primitive `boolean` type
 
 ## [1.6.2] - 2026-01-12
 
