@@ -116,6 +116,11 @@ public class OpenApiGenerator {
 
         configurator.setAdditionalProperties(additionalProperties);
 
+        // Map OpenAPI boolean type to Java primitive boolean (not Boolean wrapper)
+        Map<String, String> typeMappings = new HashMap<>();
+        typeMappings.put("Boolean", "boolean");
+        configurator.setTypeMappings(typeMappings);
+
         // Generate only models (not APIs)
         configurator.setGenerateAliasAsModel(true);
 

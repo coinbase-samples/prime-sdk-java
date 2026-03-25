@@ -19,7 +19,9 @@
  */
 
 package com.coinbase.prime.model;
+import com.coinbase.prime.model.CommissionDetailTotal;
 import com.coinbase.prime.model.enums.OrderSide;
+import com.coinbase.prime.model.enums.ProductType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -104,6 +106,12 @@ public class Fill {
     @JsonProperty("ces_commission")
     private String cesCommission;
 
+    @JsonProperty("product_type")
+    private ProductType productType;
+
+    @JsonProperty("commission_detail_total")
+    private CommissionDetailTotal commissionDetailTotal;
+
     public Fill() {
     }
 
@@ -121,6 +129,8 @@ public class Fill {
         this.venue = builder.venue;
         this.venueFees = builder.venueFees;
         this.cesCommission = builder.cesCommission;
+        this.productType = builder.productType;
+        this.commissionDetailTotal = builder.commissionDetailTotal;
     }
     public String getId() {
         return id;
@@ -213,6 +223,20 @@ public class Fill {
     public void setCesCommission(String cesCommission) {
         this.cesCommission = cesCommission;
     }
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+    public CommissionDetailTotal getCommissionDetailTotal() {
+        return commissionDetailTotal;
+    }
+
+    public void setCommissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
+        this.commissionDetailTotal = commissionDetailTotal;
+    }
     public static class Builder {
         private String id;
 
@@ -239,6 +263,10 @@ public class Fill {
         private String venueFees;
 
         private String cesCommission;
+
+        private ProductType productType;
+
+        private CommissionDetailTotal commissionDetailTotal;
 
         public Builder id(String id) {
             this.id = id;
@@ -302,6 +330,16 @@ public class Fill {
 
         public Builder cesCommission(String cesCommission) {
             this.cesCommission = cesCommission;
+            return this;
+        }
+
+        public Builder productType(ProductType productType) {
+            this.productType = productType;
+            return this;
+        }
+
+        public Builder commissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
+            this.commissionDetailTotal = commissionDetailTotal;
             return this;
         }
 

@@ -1,5 +1,59 @@
 # Changelog
 
+## [1.7.0] - 2026-03-19
+
+### Added
+
+#### New Services
+- **Advanced Transfers Service** (`advancedtransfers` package)
+  - `listAdvancedTransfers` - List advanced transfers for an entity
+  - `createAdvancedTransfer` - Create a new advanced transfer
+  - `cancelAdvancedTransfer` - Cancel an existing advanced transfer
+
+#### New Endpoints
+- **Futures Service**
+  - `getFcmEquity` - Get FCM equity information for an entity
+- **Transactions Service**
+  - `getTransactionTravelRuleData` - Get travel rule data for a transaction (moved from removed `travelrule` package)
+  - `listAdvancedTransferTransactions` - List transactions associated with an advanced transfer
+
+#### New Models
+- `AdvancedTransfer` - Advanced transfer details including state, type, and fund movements
+- `BlindMatchMetadata` - Metadata for blind match advanced transfers
+- `CommissionDetailTotal` - Commission detail totals for orders and fills
+- `EntityUser` - Entity user information
+- `FcmScheduledMaintenance` - FCM scheduled maintenance details
+- `FcmTradingSessionDetails` - FCM trading session information including state and maintenance schedules
+- `FundMovement` - Fund movement details within advanced transfers
+- `FutureProductDetails` - Futures product details including contract specifications
+- `GoogleTypeDate` - Date representation using Google's date type
+- `PerpetualProductDetails` - Perpetual product details
+- `PortfolioUser` - Portfolio user association data
+- `RequestToSubmitTravelRuleDataForAnExistingDepositTransaction` - Travel rule submission request model
+- `ValidatorAllocation` - Validator allocation details for staking
+
+#### New Enums
+- `AdvancedTransferState` - Advanced transfer lifecycle states
+- `AdvancedTransferType` - Advanced transfer types (e.g., `ADVANCED_TRANSFER_TYPE_BLIND_MATCH`)
+- `ContractExpiryType` - Contract expiry types for futures products
+- `ExpiringContractStatus` - Status of expiring futures contracts
+- `FcmMarginHealthState` - FCM margin health states
+- `FcmTradingSessionClosedReason` - Reasons for FCM trading session closure
+- `FcmTradingSessionState` - FCM trading session states
+- `ProductType` - Product types (spot, futures, perpetuals, etc.)
+- `RiskManagementType` - Risk management types
+- `SecondaryPermission` - Secondary permission types
+
+#### New Examples
+- `GetTransactionTravelRuleData.java` - Retrieve travel rule data for a transaction
+
+### Changed
+- Moved `getTransactionTravelRuleData` from `TravelRuleService` into `TransactionsService`; removed the `travelrule` package and `PrimeServiceFactory.createTravelRuleService`
+- `Order` - Added `productType` and `commissionDetailTotal` fields
+- `Fill` - Added `productType` and `commissionDetailTotal` fields
+- `Product` - Added `productType`, `fcmTradingSessionDetails`, and `futureProductDetails` fields
+- Boolean fields in generated models updated from `Boolean` wrapper to primitive `boolean` type
+
 ## [1.6.2] - 2026-01-12
 
 ### Added

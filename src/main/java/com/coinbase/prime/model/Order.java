@@ -20,10 +20,12 @@
 
 package com.coinbase.prime.model;
 import com.coinbase.prime.model.LimitOrderEdit;
+import com.coinbase.prime.model.CommissionDetailTotal;
 import com.coinbase.prime.model.OrderEdit;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderStatus;
 import com.coinbase.prime.model.enums.OrderType;
+import com.coinbase.prime.model.enums.ProductType;
 import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -234,6 +236,12 @@ public class Order {
     @JsonProperty("wig_level")
     private String wigLevel;
 
+    @JsonProperty("product_type")
+    private ProductType productType;
+
+    @JsonProperty("commission_detail_total")
+    private CommissionDetailTotal commissionDetailTotal;
+
     public Order() {
     }
 
@@ -273,6 +281,8 @@ public class Order {
         this.pegOffsetType = builder.pegOffsetType;
         this.offset = builder.offset;
         this.wigLevel = builder.wigLevel;
+        this.productType = builder.productType;
+        this.commissionDetailTotal = builder.commissionDetailTotal;
     }
     public String getId() {
         return id;
@@ -519,6 +529,20 @@ public class Order {
     public void setWigLevel(String wigLevel) {
         this.wigLevel = wigLevel;
     }
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+    public CommissionDetailTotal getCommissionDetailTotal() {
+        return commissionDetailTotal;
+    }
+
+    public void setCommissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
+        this.commissionDetailTotal = commissionDetailTotal;
+    }
     public static class Builder {
         private String id;
 
@@ -589,6 +613,10 @@ public class Order {
         private String offset;
 
         private String wigLevel;
+
+        private ProductType productType;
+
+        private CommissionDetailTotal commissionDetailTotal;
 
         public Builder id(String id) {
             this.id = id;
@@ -762,6 +790,16 @@ public class Order {
 
         public Builder wigLevel(String wigLevel) {
             this.wigLevel = wigLevel;
+            return this;
+        }
+
+        public Builder productType(ProductType productType) {
+            this.productType = productType;
+            return this;
+        }
+
+        public Builder commissionDetailTotal(CommissionDetailTotal commissionDetailTotal) {
+            this.commissionDetailTotal = commissionDetailTotal;
             return this;
         }
 

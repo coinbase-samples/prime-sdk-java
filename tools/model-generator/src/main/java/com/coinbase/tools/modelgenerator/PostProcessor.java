@@ -274,6 +274,8 @@ public class PostProcessor {
         } else {
             // Fix enum imports for models
             content = fixEnumImports(content);
+            // Ensure boolean fields use primitive type, not Boolean wrapper
+            content = applyBooleanPrimitiveConversion(content);
         }
 
         Files.writeString(outputPath, content);
@@ -513,6 +515,16 @@ public class PostProcessor {
         // Apply acronym normalization to content (class references, imports, etc.)
         content = normalizeAcronymsInContent(content);
 
+        return content;
+    }
+
+    private String applyBooleanPrimitiveConversion(String content) {
+        // Field declarations: private Boolean foo; -> private boolean foo;
+        content = content.replaceAll("\\bprivate Boolean (\\w)", "private boolean $1");
+        // Getter return types: public Boolean getFoo() -> public boolean getFoo()
+        content = content.replaceAll("\\bpublic Boolean (get|is)(\\w)", "public boolean $1$2");
+        // Setter and builder method params: (Boolean foo) -> (boolean foo)
+        content = content.replaceAll("\\(Boolean (\\w)", "(boolean $1");
         return content;
     }
 

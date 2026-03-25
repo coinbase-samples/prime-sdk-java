@@ -31,4 +31,5 @@ public interface FuturesService {
     GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

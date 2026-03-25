@@ -19,13 +19,16 @@
  */
 
 package com.coinbase.prime.model;
+import com.coinbase.prime.model.enums.SecondaryPermission;
 import com.coinbase.prime.model.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class EntityUser {
     /**
@@ -55,6 +58,18 @@ public class EntityUser {
     @JsonProperty("role")
     private UserRole role;
 
+    /**
+     * All primary roles assigned to the user.
+     */
+    @JsonProperty("roles")
+    private List<UserRole> roles;
+
+    /**
+     * All secondary permissions assigned to the user.
+     */
+    @JsonProperty("secondary_permissions")
+    private List<SecondaryPermission> secondaryPermissions;
+
     public EntityUser() {
     }
 
@@ -64,6 +79,8 @@ public class EntityUser {
         this.email = builder.email;
         this.entityId = builder.entityId;
         this.role = builder.role;
+        this.roles = builder.roles;
+        this.secondaryPermissions = builder.secondaryPermissions;
     }
     public String getId() {
         return id;
@@ -100,6 +117,20 @@ public class EntityUser {
     public void setRole(UserRole role) {
         this.role = role;
     }
+    public List<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<UserRole> roles) {
+        this.roles = roles;
+    }
+    public List<SecondaryPermission> getSecondaryPermissions() {
+        return secondaryPermissions;
+    }
+
+    public void setSecondaryPermissions(List<SecondaryPermission> secondaryPermissions) {
+        this.secondaryPermissions = secondaryPermissions;
+    }
     public static class Builder {
         private String id;
 
@@ -110,6 +141,10 @@ public class EntityUser {
         private String entityId;
 
         private UserRole role;
+
+        private List<UserRole> roles;
+
+        private List<SecondaryPermission> secondaryPermissions;
 
         public Builder id(String id) {
             this.id = id;
@@ -133,6 +168,16 @@ public class EntityUser {
 
         public Builder role(UserRole role) {
             this.role = role;
+            return this;
+        }
+
+        public Builder roles(List<UserRole> roles) {
+            this.roles = roles;
+            return this;
+        }
+
+        public Builder secondaryPermissions(List<SecondaryPermission> secondaryPermissions) {
+            this.secondaryPermissions = secondaryPermissions;
             return this;
         }
 

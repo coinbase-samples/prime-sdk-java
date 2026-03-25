@@ -14,31 +14,29 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.activities;
+package com.coinbase.prime.advancedtransfers;
 
+import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.AdvancedTransfer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.coinbase.core.errors.CoinbaseClientException;
+
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-/**
- * Request for getting a portfolio activity by activity ID.
- */
-public class GetPortfolioActivityRequest {
+public class CreateAdvancedTransferRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty(required = true, value = "activity_id")
-    @JsonIgnore
-    private String activityId;
+    @JsonProperty("advanced_transfer")
+    private AdvancedTransfer advancedTransfer;
 
-    public GetPortfolioActivityRequest() {
+    public CreateAdvancedTransferRequest() {
     }
 
-    private GetPortfolioActivityRequest(Builder builder) {
+    public CreateAdvancedTransferRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
-        this.activityId = builder.activityId;
+        this.advancedTransfer = builder.advancedTransfer;
     }
 
     public String getPortfolioId() {
@@ -49,43 +47,39 @@ public class GetPortfolioActivityRequest {
         this.portfolioId = portfolioId;
     }
 
-    public String getActivityId() {
-        return activityId;
+    public AdvancedTransfer getAdvancedTransfer() {
+        return advancedTransfer;
     }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
-
-    public String getPath() {
-        return String.format("/v1/portfolios/%s/activities/%s", this.portfolioId, this.activityId);
+    public void setAdvancedTransfer(AdvancedTransfer advancedTransfer) {
+        this.advancedTransfer = advancedTransfer;
     }
 
     public static class Builder {
         private String portfolioId;
-        private String activityId;
+        private AdvancedTransfer advancedTransfer;
+
+        public Builder() {
+        }
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
             return this;
         }
 
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
+        public Builder advancedTransfer(AdvancedTransfer advancedTransfer) {
+            this.advancedTransfer = advancedTransfer;
             return this;
         }
 
-        public GetPortfolioActivityRequest build() {
+        public CreateAdvancedTransferRequest build() throws CoinbaseClientException {
             this.validate();
-            return new GetPortfolioActivityRequest(this);
+            return new CreateAdvancedTransferRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
-            }
-            if (isNullOrEmpty(this.activityId)) {
-                throw new CoinbaseClientException("ActivityId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
         }
     }

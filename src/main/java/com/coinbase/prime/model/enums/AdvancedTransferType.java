@@ -20,13 +20,7 @@
 
 package com.coinbase.prime.model.enums;
 
-public enum RewardSubtype {
-  MEV_REWARD,
-  INFLATION_REWARD,
-  BLOCK_REWARD,
-  VALIDATOR_REWARD,
-  TRANSACTION_REWARD,
-  STAKING_FEE_REBATE_REWARD,
-  BUIDL_DIVIDEND
+public enum AdvancedTransferType {
+  ADVANCED_TRANSFER_TYPE_BLIND_MATCH
 }
 

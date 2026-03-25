@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2026-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,31 +14,29 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.activities;
+package com.coinbase.prime.transactions;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.coinbase.core.errors.CoinbaseClientException;
+
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-/**
- * Request for getting a portfolio activity by activity ID.
- */
-public class GetPortfolioActivityRequest {
+public class GetTransactionTravelRuleDataRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty(required = true, value = "activity_id")
+    @JsonProperty(required = true, value = "transaction_id")
     @JsonIgnore
-    private String activityId;
+    private String transactionId;
 
-    public GetPortfolioActivityRequest() {
+    public GetTransactionTravelRuleDataRequest() {
     }
 
-    private GetPortfolioActivityRequest(Builder builder) {
+    public GetTransactionTravelRuleDataRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
-        this.activityId = builder.activityId;
+        this.transactionId = builder.transactionId;
     }
 
     public String getPortfolioId() {
@@ -49,43 +47,42 @@ public class GetPortfolioActivityRequest {
         this.portfolioId = portfolioId;
     }
 
-    public String getActivityId() {
-        return activityId;
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
-
-    public String getPath() {
-        return String.format("/v1/portfolios/%s/activities/%s", this.portfolioId, this.activityId);
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     public static class Builder {
         private String portfolioId;
-        private String activityId;
+        private String transactionId;
+
+        public Builder() {
+        }
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
             return this;
         }
 
-        public Builder activityId(String activityId) {
-            this.activityId = activityId;
+        public Builder transactionId(String transactionId) {
+            this.transactionId = transactionId;
             return this;
         }
 
-        public GetPortfolioActivityRequest build() {
-            this.validate();
-            return new GetPortfolioActivityRequest(this);
+        public GetTransactionTravelRuleDataRequest build() throws CoinbaseClientException {
+            validate();
+            return new GetTransactionTravelRuleDataRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.activityId)) {
-                throw new CoinbaseClientException("ActivityId cannot be null");
+            if (isNullOrEmpty(this.transactionId)) {
+                throw new CoinbaseClientException("TransactionId is required");
             }
         }
     }

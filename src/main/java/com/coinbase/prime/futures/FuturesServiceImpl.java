@@ -129,4 +129,14 @@ public class FuturesServiceImpl extends CoinbaseServiceImpl implements FuturesSe
                 List.of(200),
                 new TypeReference<SetFcmSettingsResponse>() {});
     }
+
+    @Override
+    public GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/futures/equity", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<GetFcmEquityResponse>() {});
+    }
 }

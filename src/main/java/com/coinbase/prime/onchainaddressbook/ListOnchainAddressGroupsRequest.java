@@ -18,6 +18,8 @@ package com.coinbase.prime.onchainaddressbook;
 
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.model.enums.SortDirection;
+import com.coinbase.core.errors.CoinbaseClientException;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
  * Request for listing onchain address groups for a portfolio.
@@ -72,6 +74,9 @@ public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
         }
 
         public ListOnchainAddressGroupsRequest build() {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId cannot be null");
+            }
             return new ListOnchainAddressGroupsRequest(this);
         }
     }

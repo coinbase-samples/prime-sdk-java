@@ -48,6 +48,27 @@ public class TravelRuleParty {
     @JsonProperty("vasp_name")
     private String vaspName;
 
+    /**
+     * Personal identifier for travel rule compliance. For individuals: passport number, national ID, driver&#39;s license. For institutions: LEI (Legal Entity Identifier).
+     */
+    @JsonProperty("personal_id")
+    private String personalId;
+
+    @JsonProperty("date_of_birth")
+    private DateOfBirth dateOfBirth;
+
+    /**
+     * Telephone number for contact purposes.
+     */
+    @JsonProperty("telephone_number")
+    private String telephoneNumber;
+
+    /**
+     * Account identifier for travel rule compliance. If not provided, defaults to portfolio ID.
+     */
+    @JsonProperty("account_id")
+    private String accountId;
+
     public TravelRuleParty() {
     }
 
@@ -58,6 +79,10 @@ public class TravelRuleParty {
         this.walletType = builder.walletType;
         this.vaspId = builder.vaspId;
         this.vaspName = builder.vaspName;
+        this.personalId = builder.personalId;
+        this.dateOfBirth = builder.dateOfBirth;
+        this.telephoneNumber = builder.telephoneNumber;
+        this.accountId = builder.accountId;
     }
     public String getName() {
         return name;
@@ -101,6 +126,34 @@ public class TravelRuleParty {
     public void setVaspName(String vaspName) {
         this.vaspName = vaspName;
     }
+    public String getPersonalId() {
+        return personalId;
+    }
+
+    public void setPersonalId(String personalId) {
+        this.personalId = personalId;
+    }
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(DateOfBirth dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
     public static class Builder {
         private String name;
 
@@ -113,6 +166,14 @@ public class TravelRuleParty {
         private String vaspId;
 
         private String vaspName;
+
+        private String personalId;
+
+        private DateOfBirth dateOfBirth;
+
+        private String telephoneNumber;
+
+        private String accountId;
 
         public Builder name(String name) {
             this.name = name;
@@ -141,6 +202,26 @@ public class TravelRuleParty {
 
         public Builder vaspName(String vaspName) {
             this.vaspName = vaspName;
+            return this;
+        }
+
+        public Builder personalId(String personalId) {
+            this.personalId = personalId;
+            return this;
+        }
+
+        public Builder dateOfBirth(DateOfBirth dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
+        public Builder telephoneNumber(String telephoneNumber) {
+            this.telephoneNumber = telephoneNumber;
+            return this;
+        }
+
+        public Builder accountId(String accountId) {
+            this.accountId = accountId;
             return this;
         }
 
