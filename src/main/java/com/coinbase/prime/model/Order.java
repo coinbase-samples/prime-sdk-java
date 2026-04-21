@@ -180,7 +180,7 @@ public class Order {
      * Post-only flag - indicates whether the order was placed as post-only
      */
     @JsonProperty("post_only")
-    private Boolean postOnly;
+    private boolean postOnly;
 
     /**
      * The history of order edits (deprecated: use edit_history instead)
@@ -192,7 +192,7 @@ public class Order {
      * Indicates if this was a raise exact order (size inclusive of fees for sell orders in quote)
      */
     @JsonProperty("is_raise_exact")
-    private Boolean isRaiseExact;
+    private boolean isRaiseExact;
 
     /**
      * Display size for the order
@@ -459,11 +459,11 @@ public class Order {
     public void setClientProductId(String clientProductId) {
         this.clientProductId = clientProductId;
     }
-    public Boolean getPostOnly() {
+    public boolean getPostOnly() {
         return postOnly;
     }
 
-    public void setPostOnly(Boolean postOnly) {
+    public void setPostOnly(boolean postOnly) {
         this.postOnly = postOnly;
     }
     public List<LimitOrderEdit> getOrderEditHistory() {
@@ -473,11 +473,11 @@ public class Order {
     public void setOrderEditHistory(List<LimitOrderEdit> orderEditHistory) {
         this.orderEditHistory = orderEditHistory;
     }
-    public Boolean getIsRaiseExact() {
+    public boolean getIsRaiseExact() {
         return isRaiseExact;
     }
 
-    public void setIsRaiseExact(Boolean isRaiseExact) {
+    public void setIsRaiseExact(boolean isRaiseExact) {
         this.isRaiseExact = isRaiseExact;
     }
     public String getDisplaySize() {
@@ -594,11 +594,11 @@ public class Order {
 
         private String clientProductId;
 
-        private Boolean postOnly;
+        private boolean postOnly;
 
         private List<LimitOrderEdit> orderEditHistory;
 
-        private Boolean isRaiseExact;
+        private boolean isRaiseExact;
 
         private String displaySize;
 
@@ -743,7 +743,7 @@ public class Order {
             return this;
         }
 
-        public Builder postOnly(Boolean postOnly) {
+        public Builder postOnly(boolean postOnly) {
             this.postOnly = postOnly;
             return this;
         }
@@ -753,7 +753,7 @@ public class Order {
             return this;
         }
 
-        public Builder isRaiseExact(Boolean isRaiseExact) {
+        public Builder isRaiseExact(boolean isRaiseExact) {
             this.isRaiseExact = isRaiseExact;
             return this;
         }

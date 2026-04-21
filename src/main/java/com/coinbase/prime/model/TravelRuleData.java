@@ -77,28 +77,28 @@ public class TravelRuleData {
     public void setOriginator(TravelRuleParty originator) {
         this.originator = originator;
     }
-    public boolean isIsSelf() {
+    public boolean getIsSelf() {
         return isSelf;
     }
 
     public void setIsSelf(boolean isSelf) {
         this.isSelf = isSelf;
     }
-    public boolean isIsIntermediary() {
+    public boolean getIsIntermediary() {
         return isIntermediary;
     }
 
     public void setIsIntermediary(boolean isIntermediary) {
         this.isIntermediary = isIntermediary;
     }
-    public boolean isOptOutOfOwnershipVerification() {
+    public boolean getOptOutOfOwnershipVerification() {
         return optOutOfOwnershipVerification;
     }
 
     public void setOptOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
         this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
     }
-    public boolean isAttestVerifiedWalletOwnership() {
+    public boolean getAttestVerifiedWalletOwnership() {
         return attestVerifiedWalletOwnership;
     }
 

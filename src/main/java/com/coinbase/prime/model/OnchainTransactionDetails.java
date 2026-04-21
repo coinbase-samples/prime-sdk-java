@@ -66,7 +66,7 @@ public class OnchainTransactionDetails {
      * If set to true, the transaction will not be broadcast to the network. You can still retrieve the signed transaction from the GetTransaction endpoint by transaction ID once the transaction is created.
      */
     @JsonProperty("skip_broadcast")
-    private Boolean skipBroadcast;
+    private boolean skipBroadcast;
 
     /**
      * Reason for transaction failure if applicable
@@ -133,11 +133,11 @@ public class OnchainTransactionDetails {
     public void setDestinationAddress(String destinationAddress) {
         this.destinationAddress = destinationAddress;
     }
-    public Boolean getSkipBroadcast() {
+    public boolean getSkipBroadcast() {
         return skipBroadcast;
     }
 
-    public void setSkipBroadcast(Boolean skipBroadcast) {
+    public void setSkipBroadcast(boolean skipBroadcast) {
         this.skipBroadcast = skipBroadcast;
     }
     public String getFailureReason() {
@@ -167,7 +167,7 @@ public class OnchainTransactionDetails {
 
         private String destinationAddress;
 
-        private Boolean skipBroadcast;
+        private boolean skipBroadcast;
 
         private String failureReason;
 
@@ -203,7 +203,7 @@ public class OnchainTransactionDetails {
             return this;
         }
 
-        public Builder skipBroadcast(Boolean skipBroadcast) {
+        public Builder skipBroadcast(boolean skipBroadcast) {
             this.skipBroadcast = skipBroadcast;
             return this;
         }

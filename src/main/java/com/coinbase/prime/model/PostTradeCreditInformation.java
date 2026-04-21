@@ -64,7 +64,7 @@ public class PostTradeCreditInformation {
      * Whether or not a portfolio is frozen due to balance outstanding or other reason
      */
     @JsonProperty("frozen")
-    private Boolean frozen;
+    private boolean frozen;
 
     /**
      * The reason why the portfolio is frozen
@@ -79,7 +79,7 @@ public class PostTradeCreditInformation {
      * Whether the portfolio has credit enabled
      */
     @JsonProperty("enabled")
-    private Boolean enabled;
+    private boolean enabled;
 
     /**
      * The amount of adjusted credit used
@@ -144,11 +144,11 @@ public class PostTradeCreditInformation {
     public void setAvailable(String available) {
         this.available = available;
     }
-    public Boolean getFrozen() {
+    public boolean getFrozen() {
         return frozen;
     }
 
-    public void setFrozen(Boolean frozen) {
+    public void setFrozen(boolean frozen) {
         this.frozen = frozen;
     }
     public String getFrozenReason() {
@@ -165,11 +165,11 @@ public class PostTradeCreditInformation {
     public void setAmountsDue(List<AmountDue> amountsDue) {
         this.amountsDue = amountsDue;
     }
-    public Boolean getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Boolean enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
     public String getAdjustedCreditUtilized() {
@@ -197,13 +197,13 @@ public class PostTradeCreditInformation {
 
         private String available;
 
-        private Boolean frozen;
+        private boolean frozen;
 
         private String frozenReason;
 
         private List<AmountDue> amountsDue;
 
-        private Boolean enabled;
+        private boolean enabled;
 
         private String adjustedCreditUtilized;
 
@@ -234,7 +234,7 @@ public class PostTradeCreditInformation {
             return this;
         }
 
-        public Builder frozen(Boolean frozen) {
+        public Builder frozen(boolean frozen) {
             this.frozen = frozen;
             return this;
         }
@@ -249,7 +249,7 @@ public class PostTradeCreditInformation {
             return this;
         }
 
-        public Builder enabled(Boolean enabled) {
+        public Builder enabled(boolean enabled) {
             this.enabled = enabled;
             return this;
         }

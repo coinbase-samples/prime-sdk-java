@@ -52,7 +52,7 @@ public class Asset {
      * Indicates whether this asset can be traded
      */
     @JsonProperty("trading_supported")
-    private Boolean tradingSupported;
+    private boolean tradingSupported;
 
     /**
      * Base URL to our recommended block explorer (crypto only)
@@ -98,11 +98,11 @@ public class Asset {
     public void setDecimalPrecision(String decimalPrecision) {
         this.decimalPrecision = decimalPrecision;
     }
-    public Boolean getTradingSupported() {
+    public boolean getTradingSupported() {
         return tradingSupported;
     }
 
-    public void setTradingSupported(Boolean tradingSupported) {
+    public void setTradingSupported(boolean tradingSupported) {
         this.tradingSupported = tradingSupported;
     }
     public String getExplorerUrl() {
@@ -126,7 +126,7 @@ public class Asset {
 
         private String decimalPrecision;
 
-        private Boolean tradingSupported;
+        private boolean tradingSupported;
 
         private String explorerUrl;
 
@@ -147,7 +147,7 @@ public class Asset {
             return this;
         }
 
-        public Builder tradingSupported(Boolean tradingSupported) {
+        public Builder tradingSupported(boolean tradingSupported) {
             this.tradingSupported = tradingSupported;
             return this;
         }

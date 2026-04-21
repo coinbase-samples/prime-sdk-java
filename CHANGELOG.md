@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.7.1] - 2026-04-21
+
+### Added
+
+#### New Models
+- `ActiveLiquidationSummary` - Active liquidation summary on cross-margin overview
+- `ValidatorUnstakePreview` - Per-validator unstake preview data
+
+#### New Enums
+- `XmLiquidationStatus` - Cross-margin liquidation status
+
+#### New Examples
+- `GetCrossMarginOverviewExample` - Entity cross-margin overview
+- `ListMarginCallSummariesExample` - Entity margin call summaries
+- `GetPortfolioCreditInformationExample` - Portfolio post-trade credit
+- `ListEntityFuturesSweepsExample` - Entity futures sweeps
+- `GetStakingStatus` - Wallet staking status
+
+### Changed
+- Regenerated `com.coinbase.prime.model` and `model.enums` from latest Prime OpenAPI spec (`https://api.prime.coinbase.com/v1/openapi.yaml`)
+- **Model generator** (`PostProcessor`): map `GoogleTypeDate` to `DateOfBirth` so `TravelRuleParty.date_of_birth` compiles when `Google*` types are excluded
+- `ActivityMetadataConsensus`, `Asset`, `CreateAllocationResponseBody`, `CreateNetAllocationResponseBody`, `CrossMarginOverview`, `EvmParams`, `FcmTradingSessionDetails`, `FuturesSweep`, `MarginSummary`, `NetworkDetails`, `OnchainTransactionDetails`, `Order`, `PmAssetInfo`, `PostTradeCreditInformation`, `RequestToSubmitTravelRuleDataForAnExistingDepositTransaction`, `RfqProductDetails`, `RiskAssessment`, `RpcConfig`, `TravelRuleData`, `TravelRuleParty`, `XmPosition`, `XmRiskNettingInfo`, `UserRole` - field updates per spec
+
+#### Examples
+- `GetOrderById`, `ListOrderEditHistory`, `ListOrderFills` - when no `order_id` arg or `COINBASE_PRIME_ORDER_ID`, use first order from `listPortfolioOrders` (limit 1)
+
 ## [1.7.0] - 2026-03-19
 
 ### Added
