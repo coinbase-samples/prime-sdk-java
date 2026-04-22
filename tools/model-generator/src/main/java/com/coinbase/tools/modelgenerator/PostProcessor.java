@@ -351,6 +351,8 @@ public class PostProcessor {
         put("CreateOnchainTransactionRequestEvmParams", "EvmParams");
         put("FcmFuturesSweepRequestAmount", "SweepAmount");
         put("FcmFuturesSweep", "FuturesSweep");
+        // google.type.Date is excluded as Google*; map to existing DateOfBirth (same year/month/day shape)
+        put("GoogleTypeDate", "DateOfBirth");
     }};
 
 

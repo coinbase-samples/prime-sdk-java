@@ -31,13 +31,13 @@ public class EvmParams {
      * Option to disable dynamic gas price adjustment for EVM transactions prior to signing and broadcast. Defaults to false.
      */
     @JsonProperty("disable_dynamic_gas")
-    private Boolean disableDynamicGas;
+    private boolean disableDynamicGas;
 
     /**
      * Option to disable dynamic nonce when creating a transaction. Defaults to false.
      */
     @JsonProperty("disable_dynamic_nonce")
-    private Boolean disableDynamicNonce;
+    private boolean disableDynamicNonce;
 
     /**
      * Transaction ID to replace (for speed-up/cancel operations). Common use cases: 1) Gas Price Adjustments: When a transaction is stuck due to low gas price, a new transaction with the same nonce but higher gas price can be submitted to replace it. 2) Transaction Cancellation: A user might want to cancel a pending transaction by replacing it with a new transaction (often a 0-value transfer to themselves with higher gas price). Note: When using this field, the disable_dynamic_nonce option must be set to false because the nonce would be automatically managed by the system.
@@ -67,18 +67,18 @@ public class EvmParams {
         this.chainId = builder.chainId;
         this.networkName = builder.networkName;
     }
-    public Boolean getDisableDynamicGas() {
+    public boolean getDisableDynamicGas() {
         return disableDynamicGas;
     }
 
-    public void setDisableDynamicGas(Boolean disableDynamicGas) {
+    public void setDisableDynamicGas(boolean disableDynamicGas) {
         this.disableDynamicGas = disableDynamicGas;
     }
-    public Boolean getDisableDynamicNonce() {
+    public boolean getDisableDynamicNonce() {
         return disableDynamicNonce;
     }
 
-    public void setDisableDynamicNonce(Boolean disableDynamicNonce) {
+    public void setDisableDynamicNonce(boolean disableDynamicNonce) {
         this.disableDynamicNonce = disableDynamicNonce;
     }
     public String getReplacedTransactionId() {
@@ -103,9 +103,9 @@ public class EvmParams {
         this.networkName = networkName;
     }
     public static class Builder {
-        private Boolean disableDynamicGas;
+        private boolean disableDynamicGas;
 
-        private Boolean disableDynamicNonce;
+        private boolean disableDynamicNonce;
 
         private String replacedTransactionId;
 
@@ -113,12 +113,12 @@ public class EvmParams {
 
         private String networkName;
 
-        public Builder disableDynamicGas(Boolean disableDynamicGas) {
+        public Builder disableDynamicGas(boolean disableDynamicGas) {
             this.disableDynamicGas = disableDynamicGas;
             return this;
         }
 
-        public Builder disableDynamicNonce(Boolean disableDynamicNonce) {
+        public Builder disableDynamicNonce(boolean disableDynamicNonce) {
             this.disableDynamicNonce = disableDynamicNonce;
             return this;
         }

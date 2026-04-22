@@ -19,28 +19,36 @@ package com.coinbase.examples.orders;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
 import com.coinbase.prime.factory.PrimeServiceFactory;
+import com.coinbase.prime.model.Order;
 import com.coinbase.prime.orders.GetOrderByOrderIdRequest;
 import com.coinbase.prime.orders.GetOrderByOrderIdResponse;
+import com.coinbase.prime.orders.ListPortfolioOrdersRequest;
+import com.coinbase.prime.orders.ListPortfolioOrdersResponse;
 import com.coinbase.prime.orders.OrdersService;
 import com.coinbase.prime.utils.Utils;
 
 public class GetOrderById {
   public static void main(String[] args) {
     try {
-      if (args.length < 1) {
-        System.err.println("Usage: GetOrderById <order_id>");
-        System.err.println("Example: GetOrderById abc123-def456-ghi789");
-        System.exit(1);
-      }
-
       CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(System.getenv("COINBASE_PRIME_CREDENTIALS"));
       CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
       String portfolioId = System.getenv("COINBASE_PRIME_PORTFOLIO_ID");
-      String orderId = args[0];
+      String orderId = args.length > 0 ? args[0] : System.getenv("COINBASE_PRIME_ORDER_ID");
+
+      OrdersService service = PrimeServiceFactory.createOrdersService(client);
+      if (orderId == null || orderId.isEmpty()) {
+        ListPortfolioOrdersResponse listed = service.listPortfolioOrders(
+            new ListPortfolioOrdersRequest.Builder().portfolioId(portfolioId).limit(1).build());
+        Order[] orders = listed.getOrders();
+        if (orders == null || orders.length == 0) {
+          System.err.println("No orders found; pass order_id, set COINBASE_PRIME_ORDER_ID, or ensure portfolio has orders.");
+          return;
+        }
+        orderId = orders[0].getId();
+      }
 
       System.out.println("Using IDs: Portfolio ID: " + portfolioId + ", Order ID: " + orderId);
 
-      OrdersService service = PrimeServiceFactory.createOrdersService(client);
       GetOrderByOrderIdResponse response = service.getOrderByOrderId(
           new GetOrderByOrderIdRequest.Builder()
               .portfolioId(portfolioId)

@@ -32,7 +32,7 @@ import java.util.List;
 
 public class XmRiskNettingInfo {
     /**
-     * Nodal Margin Requirement (NMR) is the margin requirement for all futures positions, derived from the Nodal model
+     * Derivatives Clearing Organization Margin Requirement (DMR) is the margin requirement for all futures positions, derived from the Derivatives Clearing Organization model
      */
     @JsonProperty("nodal_margin_requirement")
     private String nodalMarginRequirement;

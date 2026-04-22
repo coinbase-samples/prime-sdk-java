@@ -35,7 +35,7 @@ public class FcmTradingSessionDetails {
      * Whether the trading session is currently open
      */
     @JsonProperty("session_open")
-    private Boolean sessionOpen;
+    private boolean sessionOpen;
 
     /**
      * Trading session open time
@@ -56,7 +56,7 @@ public class FcmTradingSessionDetails {
      * Whether after-hours order entry is disabled
      */
     @JsonProperty("after_hours_order_entry_disabled")
-    private Boolean afterHoursOrderEntryDisabled;
+    private boolean afterHoursOrderEntryDisabled;
 
     @JsonProperty("closed_reason")
     private FcmTradingSessionClosedReason closedReason;
@@ -90,11 +90,11 @@ public class FcmTradingSessionDetails {
         this.settlementTimestamp = builder.settlementTimestamp;
         this.settlementPrice = builder.settlementPrice;
     }
-    public Boolean getSessionOpen() {
+    public boolean getSessionOpen() {
         return sessionOpen;
     }
 
-    public void setSessionOpen(Boolean sessionOpen) {
+    public void setSessionOpen(boolean sessionOpen) {
         this.sessionOpen = sessionOpen;
     }
     public OffsetDateTime getOpenTime() {
@@ -118,11 +118,11 @@ public class FcmTradingSessionDetails {
     public void setSessionState(FcmTradingSessionState sessionState) {
         this.sessionState = sessionState;
     }
-    public Boolean getAfterHoursOrderEntryDisabled() {
+    public boolean getAfterHoursOrderEntryDisabled() {
         return afterHoursOrderEntryDisabled;
     }
 
-    public void setAfterHoursOrderEntryDisabled(Boolean afterHoursOrderEntryDisabled) {
+    public void setAfterHoursOrderEntryDisabled(boolean afterHoursOrderEntryDisabled) {
         this.afterHoursOrderEntryDisabled = afterHoursOrderEntryDisabled;
     }
     public FcmTradingSessionClosedReason getClosedReason() {
@@ -154,7 +154,7 @@ public class FcmTradingSessionDetails {
         this.settlementPrice = settlementPrice;
     }
     public static class Builder {
-        private Boolean sessionOpen;
+        private boolean sessionOpen;
 
         private OffsetDateTime openTime;
 
@@ -162,7 +162,7 @@ public class FcmTradingSessionDetails {
 
         private FcmTradingSessionState sessionState;
 
-        private Boolean afterHoursOrderEntryDisabled;
+        private boolean afterHoursOrderEntryDisabled;
 
         private FcmTradingSessionClosedReason closedReason;
 
@@ -172,7 +172,7 @@ public class FcmTradingSessionDetails {
 
         private String settlementPrice;
 
-        public Builder sessionOpen(Boolean sessionOpen) {
+        public Builder sessionOpen(boolean sessionOpen) {
             this.sessionOpen = sessionOpen;
             return this;
         }
@@ -192,7 +192,7 @@ public class FcmTradingSessionDetails {
             return this;
         }
 
-        public Builder afterHoursOrderEntryDisabled(Boolean afterHoursOrderEntryDisabled) {
+        public Builder afterHoursOrderEntryDisabled(boolean afterHoursOrderEntryDisabled) {
             this.afterHoursOrderEntryDisabled = afterHoursOrderEntryDisabled;
             return this;
         }

@@ -19,6 +19,7 @@
  */
 
 package com.coinbase.prime.model;
+import com.coinbase.prime.model.ActiveLiquidationSummary;
 import com.coinbase.prime.model.enums.XmControlStatus;
 import com.coinbase.prime.model.enums.XmEntityCallStatus;
 import com.coinbase.prime.model.XmLoan;
@@ -59,6 +60,9 @@ public class CrossMarginOverview {
     @JsonProperty("active_loans")
     private List<XmLoan> activeLoans;
 
+    @JsonProperty("active_liquidation")
+    private ActiveLiquidationSummary activeLiquidation;
+
     public CrossMarginOverview() {
     }
 
@@ -69,6 +73,7 @@ public class CrossMarginOverview {
         this.marginSummary = builder.marginSummary;
         this.activeMarginCalls = builder.activeMarginCalls;
         this.activeLoans = builder.activeLoans;
+        this.activeLiquidation = builder.activeLiquidation;
     }
     public XmControlStatus getControlStatus() {
         return controlStatus;
@@ -112,6 +117,13 @@ public class CrossMarginOverview {
     public void setActiveLoans(List<XmLoan> activeLoans) {
         this.activeLoans = activeLoans;
     }
+    public ActiveLiquidationSummary getActiveLiquidation() {
+        return activeLiquidation;
+    }
+
+    public void setActiveLiquidation(ActiveLiquidationSummary activeLiquidation) {
+        this.activeLiquidation = activeLiquidation;
+    }
     public static class Builder {
         private XmControlStatus controlStatus;
 
@@ -124,6 +136,8 @@ public class CrossMarginOverview {
         private List<XmMarginCall> activeMarginCalls;
 
         private List<XmLoan> activeLoans;
+
+        private ActiveLiquidationSummary activeLiquidation;
 
         public Builder controlStatus(XmControlStatus controlStatus) {
             this.controlStatus = controlStatus;
@@ -152,6 +166,11 @@ public class CrossMarginOverview {
 
         public Builder activeLoans(List<XmLoan> activeLoans) {
             this.activeLoans = activeLoans;
+            return this;
+        }
+
+        public Builder activeLiquidation(ActiveLiquidationSummary activeLiquidation) {
+            this.activeLiquidation = activeLiquidation;
             return this;
         }
 

@@ -35,10 +35,10 @@ public class RequestToSubmitTravelRuleDataForAnExistingDepositTransaction {
     private TravelRuleParty beneficiary;
 
     @JsonProperty("is_self")
-    private Boolean isSelf;
+    private boolean isSelf;
 
     @JsonProperty("opt_out_of_ownership_verification")
-    private Boolean optOutOfOwnershipVerification;
+    private boolean optOutOfOwnershipVerification;
 
     public RequestToSubmitTravelRuleDataForAnExistingDepositTransaction() {
     }
@@ -63,18 +63,18 @@ public class RequestToSubmitTravelRuleDataForAnExistingDepositTransaction {
     public void setBeneficiary(TravelRuleParty beneficiary) {
         this.beneficiary = beneficiary;
     }
-    public Boolean getIsSelf() {
+    public boolean getIsSelf() {
         return isSelf;
     }
 
-    public void setIsSelf(Boolean isSelf) {
+    public void setIsSelf(boolean isSelf) {
         this.isSelf = isSelf;
     }
-    public Boolean getOptOutOfOwnershipVerification() {
+    public boolean getOptOutOfOwnershipVerification() {
         return optOutOfOwnershipVerification;
     }
 
-    public void setOptOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
+    public void setOptOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
         this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
     }
     public static class Builder {
@@ -82,9 +82,9 @@ public class RequestToSubmitTravelRuleDataForAnExistingDepositTransaction {
 
         private TravelRuleParty beneficiary;
 
-        private Boolean isSelf;
+        private boolean isSelf;
 
-        private Boolean optOutOfOwnershipVerification;
+        private boolean optOutOfOwnershipVerification;
 
         public Builder originator(TravelRuleParty originator) {
             this.originator = originator;
@@ -96,12 +96,12 @@ public class RequestToSubmitTravelRuleDataForAnExistingDepositTransaction {
             return this;
         }
 
-        public Builder isSelf(Boolean isSelf) {
+        public Builder isSelf(boolean isSelf) {
             this.isSelf = isSelf;
             return this;
         }
 
-        public Builder optOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
+        public Builder optOutOfOwnershipVerification(boolean optOutOfOwnershipVerification) {
             this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
             return this;
         }
