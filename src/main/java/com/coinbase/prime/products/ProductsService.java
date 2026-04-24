@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,7 +20,8 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface ProductsService {
-    // Products
-    ListCandlesResponse listCandles(ListCandlesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Portfolio Products */
     ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Public Product Candles (Beta) */
+    GetCandlesResponse getCandles(GetCandlesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

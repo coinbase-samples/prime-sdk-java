@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,11 +20,16 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface WalletsService {
-    // Wallets - OpenAPI spec compliance
+    /** List Portfolio Wallets */
     ListWalletsResponse listWallets(ListWalletsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Wallet */
     CreateWalletResponse createWallet(CreateWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Wallet by Wallet ID */
     GetWalletResponse getWallet(GetWalletRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Wallet Addresses */
     ListWalletAddressesResponse listWalletAddresses(ListWalletAddressesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Wallet Deposit Address */
     CreateWalletDepositAddressResponse createWalletDepositAddress(CreateWalletDepositAddressRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Wallet Deposit Instructions */
     GetWalletDepositInstructionsResponse getWalletDepositInstructions(GetWalletDepositInstructionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

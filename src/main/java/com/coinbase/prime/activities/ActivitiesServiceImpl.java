@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -31,14 +30,23 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     }
 
     @Override
-    public ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request)
-            throws CoinbasePrimeException {
+    public ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/activities", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPortfolioActivitiesResponse>() {});
+    }
+
+    @Override
+    public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/activities", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListEntityActivitiesResponse>() {});
     }
 
     @Override
@@ -52,19 +60,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     }
 
     @Override
-    public ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/entities/%s/activities", request.getEntityId()),
-                request,
-                List.of(200),
-                new TypeReference<ListEntityActivitiesResponse>() {});
-    }
-
-    @Override
-    public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request)
-            throws CoinbasePrimeException {
+    public GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
@@ -72,4 +68,5 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
                 List.of(200),
                 new TypeReference<GetPortfolioActivityResponse>() {});
     }
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,26 +20,22 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface TransactionsService {
-    // Transactions - OpenAPI spec compliance
+    /** List Portfolio Transactions */
     ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Transaction by Transaction ID */
     GetTransactionResponse getTransaction(GetTransactionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Conversion */
     CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Onchain Transaction */
     CreateOnchainTransactionResponse createOnchainTransaction(CreateOnchainTransactionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Wallet Transactions */
     ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Transfer */
     CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Withdrawal */
     CreateWalletWithdrawalResponse createWalletWithdrawal(CreateWalletWithdrawalRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-
-    /**
-     * Submit travel rule data for an existing deposit transaction.
-     * <p>
-     * <b>Beta:</b> This endpoint is in Beta. Contact your account manager for more information.
-     *
-     * @param request The request containing portfolio ID, transaction ID, and travel rule data
-     * @return Response indicating whether ownership verification is required
-     * @throws CoinbaseClientException if there is a client-side error
-     * @throws CoinbasePrimeException if there is a server-side error
-     */
-    SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Transaction Travel Rule Data */
     GetTransactionTravelRuleDataResponse getTransactionTravelRuleData(GetTransactionTravelRuleDataRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Submit Deposit Travel Rule Data */
+    SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

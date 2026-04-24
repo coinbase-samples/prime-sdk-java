@@ -19,29 +19,39 @@ package com.coinbase.prime.wallets;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.model.enums.WalletType;
 import com.coinbase.prime.model.enums.SortDirection;
+import com.coinbase.prime.model.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Portfolio Wallets
+ */
 public class ListWalletsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("type")
     private WalletType type;
 
+    @JsonProperty("symbols")
     private String[] symbols;
 
-    public ListWalletsRequest() {}
+    @JsonProperty("get_network_unified_wallets")
+    private Boolean getNetworkUnifiedWallets;
+
+    public ListWalletsRequest() {
+    }
 
     public ListWalletsRequest(Builder builder) {
         super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.type = builder.type;
         this.symbols = builder.symbols;
+        this.getNetworkUnifiedWallets = builder.getNetworkUnifiedWallets;
     }
 
     public String getPortfolioId() {
@@ -68,15 +78,25 @@ public class ListWalletsRequest extends PrimeListRequest {
         this.symbols = symbols;
     }
 
+    public Boolean getGetNetworkUnifiedWallets() {
+        return getNetworkUnifiedWallets;
+    }
+
+    public void setGetNetworkUnifiedWallets(Boolean getNetworkUnifiedWallets) {
+        this.getNetworkUnifiedWallets = getNetworkUnifiedWallets;
+    }
+
     public static class Builder {
         private String portfolioId;
         private WalletType type;
         private String[] symbols;
+        private Boolean getNetworkUnifiedWallets;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
 
-        public Builder() {}
+        public Builder() {
+        }
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -93,9 +113,8 @@ public class ListWalletsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+        public Builder getNetworkUnifiedWallets(Boolean getNetworkUnifiedWallets) {
+            this.getNetworkUnifiedWallets = getNetworkUnifiedWallets;
             return this;
         }
 
@@ -104,8 +123,14 @@ public class ListWalletsRequest extends PrimeListRequest {
             return this;
         }
 
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
         public ListWalletsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListWalletsRequest(this);
         }
 

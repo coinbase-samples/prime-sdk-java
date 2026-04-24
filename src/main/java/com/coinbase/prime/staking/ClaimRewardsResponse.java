@@ -18,16 +18,16 @@ package com.coinbase.prime.staking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Claim Wallet Staking Rewards (Alpha)
+ */
 public class ClaimRewardsResponse {
-    /** The wallet ID */
     @JsonProperty("wallet_id")
     private String walletId;
-    
-    /** ID of the newly created transaction, can be used to fetch details of the current state of execution */
+
     @JsonProperty("transaction_id")
     private String transactionId;
-    
-    /** The ID for the activity generated for this request */
+
     @JsonProperty("activity_id")
     private String activityId;
 

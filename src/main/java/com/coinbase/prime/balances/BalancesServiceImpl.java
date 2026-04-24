@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetWalletBalanceResponse>() {});
     }
@@ -68,4 +68,5 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
                 List.of(200),
                 new TypeReference<ListOnchainWalletBalancesResponse>() {});
     }
+
 }

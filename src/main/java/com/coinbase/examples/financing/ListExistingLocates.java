@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2026-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,21 +14,14 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.financing;
+package com.coinbase.examples.financing;
 
-public class ListFinancingEligibleAssetsRequest {
-    public ListFinancingEligibleAssetsRequest() {
-    }
-
-    public ListFinancingEligibleAssetsRequest(Builder builder) {
-    }
-
-    public static class Builder {
-        public Builder() {
-        }
-
-        public ListFinancingEligibleAssetsRequest build() {
-            return new ListFinancingEligibleAssetsRequest(this);
-        }
+/**
+ * Example stub for ListExistingLocates (GET /v1/portfolios/{portfolio_id}/locates).
+ * Replace with a real example using requests from this package.
+ */
+public class ListExistingLocates {
+    public static void main(String[] args) {
+        System.out.println("TODO: implement example for ListExistingLocates");
     }
 }

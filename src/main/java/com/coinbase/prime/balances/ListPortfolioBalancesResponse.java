@@ -16,25 +16,29 @@
 
 package com.coinbase.prime.balances;
 
-import com.coinbase.prime.model.Balance;
 import com.coinbase.prime.model.AggregatedFiatBalance;
+import com.coinbase.prime.model.Balance;
 import com.coinbase.prime.model.enums.PortfolioBalanceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing all balances for a specific portfolio.
+ * List Portfolio Balances
  */
 public class ListPortfolioBalancesResponse {
-    /** Array of portfolio balance information */
+    @JsonProperty("balances")
     private Balance[] balances;
-    /** The type of portfolio balance */
+
+    @JsonProperty("type")
     private PortfolioBalanceType type;
-    /** Trading-specific balance summary */
+
     @JsonProperty("trading_balances")
     private AggregatedFiatBalance tradingBalances;
-    /** Vault-specific balance summary */
+
     @JsonProperty("vault_balances")
     private AggregatedFiatBalance vaultBalances;
+
+    @JsonProperty("prime_custody_balances")
+    private AggregatedFiatBalance primeCustodyBalances;
 
     public ListPortfolioBalancesResponse() {
     }
@@ -69,6 +73,14 @@ public class ListPortfolioBalancesResponse {
 
     public void setVaultBalances(AggregatedFiatBalance vaultBalances) {
         this.vaultBalances = vaultBalances;
+    }
+
+    public AggregatedFiatBalance getPrimeCustodyBalances() {
+        return primeCustodyBalances;
+    }
+
+    public void setPrimeCustodyBalances(AggregatedFiatBalance primeCustodyBalances) {
+        this.primeCustodyBalances = primeCustodyBalances;
     }
 
 }

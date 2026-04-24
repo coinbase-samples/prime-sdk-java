@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -30,11 +30,11 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
     }
 
     @Override
-    public ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request) throws CoinbasePrimeException {
+    public ListPortfoliosResponse listPortfolios() throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 "/portfolios",
-                request,
+                null,
                 List.of(200),
                 new TypeReference<ListPortfoliosResponse>() {});
     }
@@ -44,20 +44,9 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s", request.getPortfolioId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetPortfolioResponse>() {});
-    }
-
-    @Override
-    public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
-                null,
-                List.of(200),
-                new TypeReference<GetPortfolioCounterpartyIdResponse>() {});
     }
 
 }

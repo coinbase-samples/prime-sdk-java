@@ -16,16 +16,22 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Preview Unstake
+ */
 public class PreviewUnstakeRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
-    @JsonIgnore
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
 
     @JsonProperty("amount")
@@ -87,8 +93,18 @@ public class PreviewUnstakeRequest {
             return this;
         }
 
-        public PreviewUnstakeRequest build() {
+        public PreviewUnstakeRequest build() throws CoinbaseClientException {
+            validate();
             return new PreviewUnstakeRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+            if (isNullOrEmpty(this.walletId)) {
+                throw new CoinbaseClientException("WalletId is required");
+            }
         }
     }
 }

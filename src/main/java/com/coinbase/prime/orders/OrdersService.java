@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,17 +20,28 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface OrdersService {
-    // Orders - OpenAPI spec compliance
+    /** Accept Quote */
     AcceptQuoteResponse acceptQuote(AcceptQuoteRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Portfolio Fills */
     ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CreateQuoteResponse createQuote(CreateQuoteRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Open Orders */
+    ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Order */
+    CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Order Preview */
+    GetOrderPreviewResponse getOrderPreview(GetOrderPreviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Portfolio Orders */
+    ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Order by Order ID */
+    GetOrderByOrderIdResponse getOrderByOrderId(GetOrderByOrderIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Cancel Order */
+    CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Edit Order (Beta) */
     EditOrderResponse editOrder(EditOrderRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Order Edit History */
+    ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Order Fills */
+    ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Quote Request */
+    CreateQuoteResponse createQuote(CreateQuoteRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

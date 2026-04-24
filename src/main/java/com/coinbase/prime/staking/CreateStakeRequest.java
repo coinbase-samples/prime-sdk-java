@@ -16,22 +16,29 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.WalletStakeInputs;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Request to stake or delegate a wallet
+ */
 public class CreateStakeRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
-    @JsonIgnore
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
 
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
+    @JsonProperty("inputs")
     private WalletStakeInputs inputs;
 
     public CreateStakeRequest() {
@@ -105,8 +112,18 @@ public class CreateStakeRequest {
             return this;
         }
 
-        public CreateStakeRequest build() {
+        public CreateStakeRequest build() throws CoinbaseClientException {
+            validate();
             return new CreateStakeRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+            if (isNullOrEmpty(this.walletId)) {
+                throw new CoinbaseClientException("WalletId is required");
+            }
         }
     }
 }

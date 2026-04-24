@@ -21,45 +21,73 @@ import com.coinbase.prime.model.enums.OrderType;
 import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Get Order Preview
+ */
 public class GetOrderPreviewResponse {
     @JsonProperty("portfolio_id")
     private String portfolioId;
+
     @JsonProperty("product_id")
     private String productId;
+
+    @JsonProperty("side")
     private OrderSide side;
+
+    @JsonProperty("type")
     private OrderType type;
+
     @JsonProperty("base_quantity")
     private String baseQuantity;
+
     @JsonProperty("quote_value")
     private String quoteValue;
+
     @JsonProperty("limit_price")
     private String limitPrice;
+
     @JsonProperty("start_time")
     private String startTime;
+
     @JsonProperty("expiry_time")
     private String expiryTime;
+
     @JsonProperty("time_in_force")
     private TimeInForceType timeInForce;
+
+    @JsonProperty("commission")
     private String commission;
+
+    @JsonProperty("slippage")
     private String slippage;
+
     @JsonProperty("best_bid")
     private String bestBid;
+
     @JsonProperty("best_ask")
     private String bestAsk;
+
     @JsonProperty("average_filled_price")
     private String averageFilledPrice;
+
     @JsonProperty("order_total")
     private String orderTotal;
+
     @JsonProperty("historical_pov")
     private String historicalPov;
+
     @JsonProperty("is_raise_exact")
     private Boolean isRaiseExact;
+
     @JsonProperty("stop_price")
     private String stopPrice;
+
     @JsonProperty("display_size")
     private String displaySize;
+
     @JsonProperty("display_quote_size")
     private String displayQuoteSize;
+
     @JsonProperty("display_base_size")
     private String displayBaseSize;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2026-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,25 +14,14 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.portfolios;
+package com.coinbase.examples.allocations;
 
 /**
- * List all portfolios associated with a given entity.
+ * Example stub for CreateNetAllocation (POST /v1/allocations/net).
+ * Replace with a real example using requests from this package.
  */
-public class ListPortfoliosRequest {
-    // No parameters required for listing all portfolios
-    // This is a simple GET request to /v1/portfolios with no path or query parameters
-
-    public ListPortfoliosRequest() {
-    }
-
-    public static class Builder {
-
-        public Builder() {
-        }
-
-        public ListPortfoliosRequest build() {
-            return new ListPortfoliosRequest();
-        }
+public class CreateNetAllocation {
+    public static void main(String[] args) {
+        System.out.println("TODO: implement example for CreateNetAllocation");
     }
 }

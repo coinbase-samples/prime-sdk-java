@@ -19,20 +19,22 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.TfAsset;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
+/**
+ * List Financing Eligible Assets
+ */
 public class ListFinancingEligibleAssetsResponse {
     @JsonProperty("assets")
-    private List<TfAsset> assets;
+    private TfAsset[] assets;
 
     public ListFinancingEligibleAssetsResponse() {
     }
 
-    public List<TfAsset> getAssets() {
+    public TfAsset[] getAssets() {
         return assets;
     }
 
-    public void setAssets(List<TfAsset> assets) {
+    public void setAssets(TfAsset[] assets) {
         this.assets = assets;
     }
+
 }

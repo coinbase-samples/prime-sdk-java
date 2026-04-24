@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -30,6 +30,26 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     }
 
     @Override
+    public AcceptQuoteResponse acceptQuote(AcceptQuoteRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/accept_quote", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<AcceptQuoteResponse>() {});
+    }
+
+    @Override
+    public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/fills", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioFillsResponse>() {});
+    }
+
+    @Override
     public ListOpenOrdersResponse listOpenOrders(ListOpenOrdersRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
@@ -45,7 +65,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
                 HttpMethod.POST,
                 String.format("/portfolios/%s/order", request.getPortfolioId()),
                 request,
-                List.of(200),
+                List.of(201, 200),
                 new TypeReference<CreateOrderResponse>() {});
     }
 
@@ -60,8 +80,7 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     }
 
     @Override
-    public ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request)
-            throws CoinbasePrimeException {
+    public ListPortfolioOrdersResponse listPortfolioOrders(ListPortfolioOrdersRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/orders", request.getPortfolioId()),
@@ -91,6 +110,26 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     }
 
     @Override
+    public EditOrderResponse editOrder(EditOrderRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.PUT,
+                String.format("/portfolios/%s/orders/%s/edit", request.getPortfolioId(), request.getOrderId()),
+                request,
+                List.of(200),
+                new TypeReference<EditOrderResponse>() {});
+    }
+
+    @Override
+    public ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/orders/%s/edit_history", request.getPortfolioId(), request.getOrderId()),
+                request,
+                List.of(200),
+                new TypeReference<ListOrderEditHistoryResponse>() {});
+    }
+
+    @Override
     public ListOrderFillsResponse listOrderFills(ListOrderFillsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
@@ -101,54 +140,13 @@ public class OrdersServiceImpl extends CoinbaseServiceImpl implements OrdersServ
     }
 
     @Override
-    public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/fills", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListPortfolioFillsResponse>() {});
-    }
-
-    @Override
     public CreateQuoteResponse createQuote(CreateQuoteRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/rfq", request.getPortfolioId()),
                 request,
-                List.of(200),
+                List.of(201, 200),
                 new TypeReference<CreateQuoteResponse>() {});
     }
 
-    @Override
-    public AcceptQuoteResponse acceptQuote(AcceptQuoteRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/accept_quote", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<AcceptQuoteResponse>() {});
-    }
-
-    @Override
-    public ListOrderEditHistoryResponse listOrderEditHistory(ListOrderEditHistoryRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/orders/%s/edit_history", request.getPortfolioId(), request.getOrderId()),
-                request,
-                List.of(200),
-                new TypeReference<ListOrderEditHistoryResponse>() {});
-    }
-
-    @Override
-    public EditOrderResponse editOrder(EditOrderRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.PUT,
-                String.format("/portfolios/%s/orders/%s/edit", request.getPortfolioId(), request.getOrderId()),
-                request,
-                List.of(200),
-                new TypeReference<EditOrderResponse>() {});
-    }
 }

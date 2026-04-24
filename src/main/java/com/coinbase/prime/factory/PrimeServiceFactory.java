@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,17 +18,16 @@ package com.coinbase.prime.factory;
 
 import com.coinbase.prime.activities.ActivitiesService;
 import com.coinbase.prime.activities.ActivitiesServiceImpl;
-import com.coinbase.prime.advancedtransfers.AdvancedTransfersService;
-import com.coinbase.prime.advancedtransfers.AdvancedTransfersServiceImpl;
 import com.coinbase.prime.addressbook.AddressBookService;
 import com.coinbase.prime.addressbook.AddressBookServiceImpl;
+import com.coinbase.prime.advancedtransfer.AdvancedTransferService;
+import com.coinbase.prime.advancedtransfer.AdvancedTransferServiceImpl;
 import com.coinbase.prime.allocations.AllocationsService;
 import com.coinbase.prime.allocations.AllocationsServiceImpl;
 import com.coinbase.prime.assets.AssetsService;
 import com.coinbase.prime.assets.AssetsServiceImpl;
 import com.coinbase.prime.balances.BalancesService;
 import com.coinbase.prime.balances.BalancesServiceImpl;
-import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.commission.CommissionService;
 import com.coinbase.prime.commission.CommissionServiceImpl;
 import com.coinbase.prime.financing.FinancingService;
@@ -57,18 +56,19 @@ import com.coinbase.prime.users.UsersService;
 import com.coinbase.prime.users.UsersServiceImpl;
 import com.coinbase.prime.wallets.WalletsService;
 import com.coinbase.prime.wallets.WalletsServiceImpl;
+import com.coinbase.prime.client.CoinbasePrimeClient;
 
 public class PrimeServiceFactory {
     public static ActivitiesService createActivitiesService(CoinbasePrimeClient client) {
         return new ActivitiesServiceImpl(client);
     }
 
-    public static AdvancedTransfersService createAdvancedTransfersService(CoinbasePrimeClient client) {
-        return new AdvancedTransfersServiceImpl(client);
-    }
-
     public static AddressBookService createAddressBookService(CoinbasePrimeClient client) {
         return new AddressBookServiceImpl(client);
+    }
+
+    public static AdvancedTransferService createAdvancedTransferService(CoinbasePrimeClient client) {
+        return new AdvancedTransferServiceImpl(client);
     }
 
     public static AllocationsService createAllocationsService(CoinbasePrimeClient client) {
@@ -138,4 +138,5 @@ public class PrimeServiceFactory {
     public static WalletsService createWalletsService(CoinbasePrimeClient client) {
         return new WalletsServiceImpl(client);
     }
+
 }

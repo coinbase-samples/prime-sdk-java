@@ -17,12 +17,13 @@
 package com.coinbase.prime.assets;
 
 import com.coinbase.prime.model.Asset;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing all available assets.
+ * List Assets
  */
 public class ListAssetsResponse {
-    /** Array of available asset information */
+    @JsonProperty("assets")
     private Asset[] assets;
 
     public ListAssetsResponse() {

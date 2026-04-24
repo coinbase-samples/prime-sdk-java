@@ -18,6 +18,9 @@ package com.coinbase.prime.staking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Request to stake currency in a portfolio
+ */
 public class PortfolioStakingInitiateResponse {
     @JsonProperty("activity_id")
     private String activityId;

@@ -20,12 +20,16 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Wallet by Wallet ID
+ */
 public class GetWalletRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
@@ -55,16 +59,24 @@ public class GetWalletRequest {
     }
 
     public static class Builder {
-        private final String portfolioId;
-        private final String walletId;
+        private String portfolioId;
+        private String walletId;
 
-        public Builder(String portfolioId, String walletId) {
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder walletId(String walletId) {
             this.walletId = walletId;
+            return this;
         }
 
         public GetWalletRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetWalletRequest(this);
         }
 

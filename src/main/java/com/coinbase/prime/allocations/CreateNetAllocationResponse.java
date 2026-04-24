@@ -16,85 +16,25 @@
 
 package com.coinbase.prime.allocations;
 
+import com.coinbase.prime.model.CreateNetAllocationResponseBody;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for creating a net allocation for a given portfolio.
- * 
- * Contains result information for net allocation creation, including success status and allocation identifiers.
+ * Create Portfolio Net Allocations
  */
 public class CreateNetAllocationResponse {
-    /** Indicates whether the net allocation creation was successful */
-    private boolean success;
-    
-    /** The netting identifier for the net allocation */
-    @JsonProperty("netting_id")
-    private String nettingId;
-    
-    /** The allocation identifier for the buy side of the net allocation */
-    @JsonProperty("buy_allocation_id")
-    private String buyAllocationId;
-    
-    /** The allocation identifier for the sell side of the net allocation */
-    @JsonProperty("sell_allocation_id")
-    private String sellAllocationId;
-    
-    /** The reason for net allocation creation failure, if applicable */
-    @JsonProperty("failure_reason")
-    private String failureReason;
-
-    /** The original request that generated this response */
-    private CreateNetAllocationRequest request;
+    @JsonProperty("body")
+    private CreateNetAllocationResponseBody body;
 
     public CreateNetAllocationResponse() {
     }
 
-    public boolean isSuccess() {
-        return success;
+    public CreateNetAllocationResponseBody getBody() {
+        return body;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getNettingId() {
-        return nettingId;
-    }
-
-    public void setNettingId(String nettingId) {
-        this.nettingId = nettingId;
-    }
-
-    public String getBuyAllocationId() {
-        return buyAllocationId;
-    }
-
-    public void setBuyAllocationId(String buyAllocationId) {
-        this.buyAllocationId = buyAllocationId;
-    }
-
-    public String getSellAllocationId() {
-        return sellAllocationId;
-    }
-
-    public void setSellAllocationId(String sellAllocationId) {
-        this.sellAllocationId = sellAllocationId;
-    }
-
-    public String getFailureReason() {
-        return failureReason;
-    }
-
-    public void setFailureReason(String failureReason) {
-        this.failureReason = failureReason;
-    }
-
-    public CreateNetAllocationRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(CreateNetAllocationRequest request) {
-        this.request = request;
+    public void setBody(CreateNetAllocationResponseBody body) {
+        this.body = body;
     }
 
 }

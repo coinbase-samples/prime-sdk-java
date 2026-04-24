@@ -25,24 +25,30 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-import static com.coinbase.core.utils.Utils.*;
-
+/**
+ * List Open Orders
+ */
 public class ListOpenOrdersRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty("product_ids")
     private String[] productIds;
+
     @JsonProperty("order_type")
     private OrderType orderType;
+
     @JsonProperty("start_date")
-    private Date startDate;
+    private String startDate;
+
     @JsonProperty("order_side")
     private OrderSide orderSide;
+
     @JsonProperty("end_date")
-    private Date endDate;
+    private String endDate;
 
     public ListOpenOrdersRequest() {
     }
@@ -81,11 +87,11 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
         this.orderType = orderType;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
@@ -97,11 +103,11 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
         this.orderSide = orderSide;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -109,9 +115,9 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
         private String portfolioId;
         private String[] productIds;
         private OrderType orderType;
-        private Date startDate;
+        private String startDate;
         private OrderSide orderSide;
-        private Date endDate;
+        private String endDate;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
@@ -134,7 +140,7 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder startDate(Date startDate) {
+        public Builder startDate(String startDate) {
             this.startDate = startDate;
             return this;
         }
@@ -144,8 +150,13 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder endDate(Date endDate) {
+        public Builder endDate(String endDate) {
             this.endDate = endDate;
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 
@@ -155,13 +166,8 @@ public class ListOpenOrdersRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
         public ListOpenOrdersRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListOpenOrdersRequest(this);
         }
 

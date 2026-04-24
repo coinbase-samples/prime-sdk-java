@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -44,8 +44,9 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements Pa
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetPaymentMethodDetailsResponse>() {});
     }
+
 }

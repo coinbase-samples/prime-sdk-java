@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,10 +20,14 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface AllocationsService {
-    // Allocations
+    /** Create Portfolio Allocations */
     CreateAllocationResponse createAllocation(CreateAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Portfolio Net Allocations */
     CreateNetAllocationResponse createNetAllocation(CreateNetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Portfolio Allocations */
+    ListPortfolioAllocationsResponse listPortfolioAllocations(ListPortfolioAllocationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Net Allocations by Netting ID */
     ListAllocationsByNettingIdResponse listAllocationsByNettingId(ListAllocationsByNettingIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListPortfolioAllocationsResponse getPortfolioAllocations(ListPortfolioAllocationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Allocation by ID */
+    GetAllocationResponse getAllocation(GetAllocationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

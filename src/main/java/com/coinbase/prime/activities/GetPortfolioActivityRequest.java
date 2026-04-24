@@ -16,13 +16,14 @@
 
 package com.coinbase.prime.activities;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.coinbase.core.errors.CoinbaseClientException;
+
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Request for getting a portfolio activity by activity ID.
+ * Get Portfolio Activity by Activity ID
  */
 public class GetPortfolioActivityRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -36,7 +37,7 @@ public class GetPortfolioActivityRequest {
     public GetPortfolioActivityRequest() {
     }
 
-    private GetPortfolioActivityRequest(Builder builder) {
+    public GetPortfolioActivityRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.activityId = builder.activityId;
     }
@@ -57,13 +58,12 @@ public class GetPortfolioActivityRequest {
         this.activityId = activityId;
     }
 
-    public String getPath() {
-        return String.format("/v1/portfolios/%s/activities/%s", this.portfolioId, this.activityId);
-    }
-
     public static class Builder {
         private String portfolioId;
         private String activityId;
+
+        public Builder() {
+        }
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -75,17 +75,17 @@ public class GetPortfolioActivityRequest {
             return this;
         }
 
-        public GetPortfolioActivityRequest build() {
-            this.validate();
+        public GetPortfolioActivityRequest build() throws CoinbaseClientException {
+            validate();
             return new GetPortfolioActivityRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
             if (isNullOrEmpty(this.activityId)) {
-                throw new CoinbaseClientException("ActivityId cannot be null");
+                throw new CoinbaseClientException("ActivityId is required");
             }
         }
     }

@@ -18,17 +18,16 @@ package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
 import com.coinbase.prime.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing all activities associated with a given entity.
- * 
- * Supports filtering by activity level (portfolio, entity, or all) and various criteria.
+ * List Entity Activities
  */
 public class ListEntityActivitiesResponse {
-    /** List of activities associated with the entity */
+    @JsonProperty("activities")
     private Activity[] activities;
-    
-    /** Pagination information for the response */
+
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListEntityActivitiesResponse() {

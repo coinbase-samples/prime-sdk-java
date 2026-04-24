@@ -18,6 +18,9 @@ package com.coinbase.prime.staking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Request to unstake currency across a portfolio
+ */
 public class PortfolioStakingUnstakeResponse {
     @JsonProperty("activity_id")
     private String activityId;

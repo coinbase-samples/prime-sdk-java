@@ -16,12 +16,18 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * List Interest Accruals
+ */
 public class ListInterestAccrualsRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
 
     @JsonProperty("portfolio_id")
@@ -104,8 +110,15 @@ public class ListInterestAccrualsRequest {
             return this;
         }
 
-        public ListInterestAccrualsRequest build() {
+        public ListInterestAccrualsRequest build() throws CoinbaseClientException {
+            validate();
             return new ListInterestAccrualsRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }

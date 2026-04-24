@@ -22,16 +22,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Portfolio Credit Information
+ */
 public class GetPortfolioCreditInformationRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
     public GetPortfolioCreditInformationRequest() {
-    }
-
-    public GetPortfolioCreditInformationRequest(String portfolioId) {
-        this.portfolioId = portfolioId;
     }
 
     public GetPortfolioCreditInformationRequest(Builder builder) {
@@ -58,13 +57,13 @@ public class GetPortfolioCreditInformationRequest {
         }
 
         public GetPortfolioCreditInformationRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetPortfolioCreditInformationRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
         }
     }

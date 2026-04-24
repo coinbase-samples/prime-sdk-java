@@ -23,12 +23,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Retrieve all active FCM positions for a given entity.
+ * Get Entity Positions
  */
 public class GetPositionsRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
+
     @JsonProperty("product_id")
     private String productId;
 
@@ -74,13 +75,13 @@ public class GetPositionsRequest {
         }
 
         public GetPositionsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetPositionsRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("Entity ID is required");
+                throw new CoinbaseClientException("EntityId is required");
             }
         }
     }

@@ -18,23 +18,19 @@ package com.coinbase.prime.positions;
 
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Position;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing positions for a specific entity.
+ * List Entity Positions
  */
 public class ListPositionsResponse {
-    /** Array of position information for the entity */
+    @JsonProperty("positions")
     private Position[] positions;
 
-    /** Pagination information for the response */
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListPositionsResponse() {
-    }
-
-    public ListPositionsResponse(Position[] positions, Pagination pagination) {
-        this.positions = positions;
-        this.pagination = pagination;
     }
 
     public Position[] getPositions() {

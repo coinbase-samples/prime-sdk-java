@@ -16,12 +16,18 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * List Margin Conversions
+ */
 public class ListMarginConversionsRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
     @JsonProperty("start_date")
@@ -86,8 +92,15 @@ public class ListMarginConversionsRequest {
             return this;
         }
 
-        public ListMarginConversionsRequest build() {
+        public ListMarginConversionsRequest build() throws CoinbaseClientException {
+            validate();
             return new ListMarginConversionsRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

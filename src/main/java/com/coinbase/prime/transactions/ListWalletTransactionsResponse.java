@@ -18,11 +18,17 @@ package com.coinbase.prime.transactions;
 
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Transaction;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * List Wallet Transactions
+ */
 public class ListWalletTransactionsResponse {
+    @JsonProperty("transactions")
     private Transaction[] transactions;
+
+    @JsonProperty("pagination")
     private Pagination pagination;
-    private ListWalletTransactionsRequest request;
 
     public ListWalletTransactionsResponse() {
     }
@@ -41,14 +47,6 @@ public class ListWalletTransactionsResponse {
 
     public void setPagination(Pagination pagination) {
         this.pagination = pagination;
-    }
-
-    public ListWalletTransactionsRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListWalletTransactionsRequest request) {
-        this.request = request;
     }
 
 }

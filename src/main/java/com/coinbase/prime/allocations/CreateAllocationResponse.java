@@ -16,50 +16,25 @@
 
 package com.coinbase.prime.allocations;
 
+import com.coinbase.prime.model.CreateAllocationResponseBody;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for creating an allocation for a given portfolio.
- *
- * Contains allocation creation result, including success status and allocation identifiers.
+ * Create Portfolio Allocations
  */
 public class CreateAllocationResponse {
-    /** Indicates whether the allocation creation was successful */
-    private boolean success;
-
-    /** The unique identifier for the created allocation */
-    @JsonProperty("allocation_id")
-    private String allocationId;
-
-    /** The reason for allocation creation failure, if applicable */
-    @JsonProperty("failure_reason")
-    private String failureReason;
+    @JsonProperty("body")
+    private CreateAllocationResponseBody body;
 
     public CreateAllocationResponse() {
     }
 
-    public boolean isSuccess() {
-        return success;
+    public CreateAllocationResponseBody getBody() {
+        return body;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getAllocationId() {
-        return allocationId;
-    }
-
-    public void setAllocationId(String allocationId) {
-        this.allocationId = allocationId;
-    }
-
-    public String getFailureReason() {
-        return failureReason;
-    }
-
-    public void setFailureReason(String failureReason) {
-        this.failureReason = failureReason;
+    public void setBody(CreateAllocationResponseBody body) {
+        this.body = body;
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2026-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,31 +16,12 @@
 
 package com.coinbase.examples.paymentmethods;
 
-import com.coinbase.prime.client.CoinbasePrimeClient;
-import com.coinbase.prime.credentials.CoinbasePrimeCredentials;
-import com.coinbase.prime.factory.PrimeServiceFactory;
-import com.coinbase.prime.paymentmethods.ListPaymentMethodsRequest;
-import com.coinbase.prime.paymentmethods.ListPaymentMethodsResponse;
-import com.coinbase.prime.paymentmethods.PaymentMethodsService;
-import com.coinbase.prime.utils.Utils;
-
+/**
+ * Example stub for ListPaymentMethods (GET /v1/entities/{entity_id}/payment-methods).
+ * Replace with a real example using requests from this package.
+ */
 public class ListPaymentMethods {
     public static void main(String[] args) {
-        try {
-            CoinbasePrimeCredentials credentials = new CoinbasePrimeCredentials(
-                    System.getenv("COINBASE_PRIME_CREDENTIALS"));
-            CoinbasePrimeClient client = new CoinbasePrimeClient(credentials);
-            String entityId = System.getenv("COINBASE_PRIME_ENTITY_ID");
-
-            System.out.println("Using Entity ID: " + entityId);
-
-            PaymentMethodsService service = PrimeServiceFactory.createPaymentMethodsService(client);
-            ListPaymentMethodsResponse response = service.listPaymentMethods(
-                    new ListPaymentMethodsRequest.Builder(entityId).build());
-
-            System.out.println(Utils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.println("TODO: implement example for ListPaymentMethods");
     }
 }

@@ -16,15 +16,20 @@
 
 package com.coinbase.prime.positions;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.coinbase.core.errors.CoinbaseClientException;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Aggregate Entity Positions
+ */
 public class ListAggregatePositionsRequest extends PrimeListRequest {
-    @JsonProperty("entity_id")
+    @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
@@ -32,30 +37,29 @@ public class ListAggregatePositionsRequest extends PrimeListRequest {
     }
 
     public ListAggregatePositionsRequest(Builder builder) {
-        super(builder.cursor, null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.entityId = builder.entityId;
     }
 
-    public String getId() {
+    public String getEntityId() {
         return entityId;
     }
 
-    public void setId(String entityId) {
+    public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
 
     public static class Builder {
         private String entityId;
         private String cursor;
+        private SortDirection sortDirection;
         private Integer limit;
+
+        public Builder() {
+        }
 
         public Builder entityId(String entityId) {
             this.entityId = entityId;
-            return this;
-        }
-
-        public Builder cursor(String cursor) {
-            this.cursor = cursor;
             return this;
         }
 
@@ -64,8 +68,14 @@ public class ListAggregatePositionsRequest extends PrimeListRequest {
             return this;
         }
 
-        public ListAggregatePositionsRequest build() {
-            this.validate();
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public ListAggregatePositionsRequest build() throws CoinbaseClientException {
+            validate();
             return new ListAggregatePositionsRequest(this);
         }
 

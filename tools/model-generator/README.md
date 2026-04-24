@@ -1,94 +1,65 @@
-# Model Generator
+# Prime Java SDK generator
 
-Generates Java model classes and enums from the OpenAPI specification.
+Generates the majority of the Prime Java SDK from the published OpenAPI spec, aligned with `prime-sdk-dotnet` (shared JSON config in `config/`).
 
-## Purpose
+## What it generates
 
-Generates domain models (`com.coinbase.prime.model`) and enums (`com.coinbase.prime.model.enums`) from the OpenAPI spec. Request/Response classes are excluded and maintained separately in service packages.
-
-## Architecture
-
-The generator implements a three-stage pipeline:
-
-1. **OpenAPI Generator** (`OpenApiGenerator.java`) - Generates raw POJOs from the OpenAPI spec using the OpenAPI Generator library
-2. **Post-Processor** (`PostProcessor.java`) - Applies transformations (Web3→Onchain renaming, schema filtering, file routing)
-3. **Model Transformer** (`ModelTransformer.java`) - Uses JavaPoet to generate final models with builder pattern, license headers, and proper annotations
-
-## Usage
-
-### Prerequisites
-
-- Java 11+
-- Maven 3.6+
-- Network access to fetch the OpenAPI spec from `https://api.prime.coinbase.com/v1/openapi.yaml`
-
-### Build
-
-```bash
-cd tools/model-generator
-mvn clean package
-```
-
-### Generate Models
-
-```bash
-mvn -Pgenerate
-```
-
-Or using the JAR directly:
-
-```bash
-java -jar target/model-generator-1.0.0.jar
-```
-
-## Generated Code
-
-Models:
-- Apache 2.0 license headers
-- Jackson `@JsonProperty` annotations
-- Builder pattern
-- Standard getters/setters (`is` prefix for booleans)
-- No-arg and builder constructors
-
-Enums: `UPPERCASE_WITH_UNDERSCORES` naming.
+1. **Models & enums** — OpenAPI Generator (`OpenApiGenerator`) → `PostProcessor` → `com.coinbase.prime.model` / `model.enums`
+2. **Client surface** — `SdkGeneratorMain` / `ClientSurfacePhase`: per-operation `*Request`, `*Response`, `*Service`, `*ServiceImpl` under `com.coinbase.prime.<tagFolder>/`
+3. **Factory** — `com.coinbase.prime.factory.PrimeServiceFactory`
+4. **Examples** — If `com.coinbase.examples/<folder>/<SdkMethod>.java` does not exist, a minimal stub is created (existing files are never overwritten)
 
 ## Configuration
 
-### Input
-- OpenAPI spec: Fetched automatically from `https://api.prime.coinbase.com/v1/openapi.yaml` during generation
+| File | Purpose |
+|------|---------|
+| `config/generator-config.json` | `specUrl`, renames, acronym mappings, `tagToFolderOverrides`, `serviceMethodOrderOverrides`, `statusCodeOverrides` (HTTP names: `OK`, `CREATED`, …) |
+| `config/operations-overrides.json` | Per-`operationId` overrides: `sdkMethod`, `service`, `omitRequest`, `forcePaginated`, `paramTypeOverrides` (Java types) |
+| [`../.openapi-generator-ignore`](.openapi-generator-ignore) | OpenAPI Generator ignore patterns for the **model** pass (under `model/`) |
 
-### Output
-- Models: `src/main/java/com/coinbase/prime/model/`
-- Enums: `src/main/java/com/coinbase/prime/model/enums/`
+## Usage
 
-### Filtering
+```bash
+cd tools/model-generator
+mvn -q -Pgenerate
+# optional:
+mvn -q compile exec:java@generate-models -Dgenerator.args=--dry-run
+mvn -q compile exec:java@generate-models -Dgenerator.args=--diff
+```
 
-The `.openapi-generator-ignore` file excludes:
-- `*Request.java` - service-specific requests
-- `*Response.java` - service-specific responses
-- `Google*.java` - infrastructure types
-- `RFQ.java` - inline schemas
-- `*AllOf*.java` - composition artifacts
+Or from the **repository root**:
 
-## Technical Details
+```bash
+mvn -Pgenerate
+mvn -Pgenerate -Dgenerator.args=--diff
+```
 
-### Dependencies
-- OpenAPI Generator 7.x
-- Palantir JavaPoet (code generation)
-- Jackson (JSON annotations)
-- SnakeYAML (spec parsing)
+The root profile runs `mvn` in this module with `-Pgenerate` and forwards `generator.args`.
 
-### Transformations
+**Wrapper:** `./tools/model-generator/generate.sh` (builds then runs the generator entrypoint).
 
-The post-processor applies:
-- **Web3→Onchain**: Renames classes/fields containing "Web3" to "Onchain" while preserving `@JsonProperty` mappings
-- **Schema filtering**: Skips schemas matching ignore patterns
-- **Package routing**: Places enums in `model/enums/`, models in `model/`
-- **Full regeneration**: Processes all models from the OpenAPI spec, updating existing files and creating new ones as needed
+## Entry points
 
-## Workflow
+- **`com.coinbase.tools.sdkgenerator.SdkGeneratorMain`** — default `main` for the shaded JAR and `exec-maven-plugin`
+- **`com.coinbase.tools.modelgenerator.Main`** — delegates to `SdkGeneratorMain` (legacy)
 
-1. Run generator: `mvn -Pgenerate`
-2. Review generated files
-3. Compile: `mvn clean install`
-4. Commit changes
+## Phases (conceptual)
+
+1. Download spec to `../generated/openapi.yaml`
+2. Parse YAML to `JsonNode` (`SpecParser`); build operation bindings (`OperationBindingGenerator` + `operations-overrides.json`)
+3. Run model/enum generation unless `--dry-run` / `--diff`
+4. Emit request/response/service and write files (`ClientSurfacePhase`)
+5. Emit missing example stubs (`ExamplePhase`)
+6. Regenerate `PrimeServiceFactory` (`FactoryPhase`)
+
+## Tests
+
+```bash
+mvn test
+```
+
+## Dependencies
+
+- OpenAPI Generator 7.x (models)
+- Jackson (YAML + JSON for config and spec)
+- JUnit 5 (tests)

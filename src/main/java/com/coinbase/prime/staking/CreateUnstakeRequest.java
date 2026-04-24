@@ -16,28 +16,35 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.WalletUnstakeInputs;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Request to unstake a wallet
+ */
 public class CreateUnstakeRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
-    @JsonIgnore
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
 
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
+    @JsonProperty("inputs")
     private WalletUnstakeInputs inputs;
 
     public CreateUnstakeRequest() {
     }
 
-    public CreateUnstakeRequest(CreateUnstakeRequest.Builder builder) {
+    public CreateUnstakeRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.walletId = builder.walletId;
         this.idempotencyKey = builder.idempotencyKey;
@@ -85,28 +92,38 @@ public class CreateUnstakeRequest {
         public Builder() {
         }
 
-        public CreateUnstakeRequest.Builder portfolioId(String portfolioId) {
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
             return this;
         }
 
-        public CreateUnstakeRequest.Builder walletId(String walletId) {
+        public Builder walletId(String walletId) {
             this.walletId = walletId;
             return this;
         }
 
-        public CreateUnstakeRequest.Builder idempotencyKey(String idempotencyKey) {
+        public Builder idempotencyKey(String idempotencyKey) {
             this.idempotencyKey = idempotencyKey;
             return this;
         }
 
-        public CreateUnstakeRequest.Builder inputs(WalletUnstakeInputs inputs) {
+        public Builder inputs(WalletUnstakeInputs inputs) {
             this.inputs = inputs;
             return this;
         }
 
-        public CreateUnstakeRequest build() {
+        public CreateUnstakeRequest build() throws CoinbaseClientException {
+            validate();
             return new CreateUnstakeRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+            if (isNullOrEmpty(this.walletId)) {
+                throw new CoinbaseClientException("WalletId is required");
+            }
         }
     }
 }

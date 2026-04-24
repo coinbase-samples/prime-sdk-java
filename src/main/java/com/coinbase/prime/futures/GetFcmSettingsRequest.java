@@ -16,12 +16,18 @@
 
 package com.coinbase.prime.futures;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Get FCM Settings
+ */
 public class GetFcmSettingsRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
 
     public GetFcmSettingsRequest() {
@@ -50,8 +56,15 @@ public class GetFcmSettingsRequest {
             return this;
         }
 
-        public GetFcmSettingsRequest build() {
+        public GetFcmSettingsRequest build() throws CoinbaseClientException {
+            validate();
             return new GetFcmSettingsRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }

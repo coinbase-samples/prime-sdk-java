@@ -20,7 +20,7 @@ import com.coinbase.prime.model.CrossMarginOverview;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving cross margin overview for an entity.
+ * Get Cross Margin Overview
  */
 public class GetCrossMarginOverviewResponse {
     @JsonProperty("overview")
@@ -36,5 +36,5 @@ public class GetCrossMarginOverviewResponse {
     public void setOverview(CrossMarginOverview overview) {
         this.overview = overview;
     }
-}
 
+}

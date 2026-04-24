@@ -22,13 +22,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Set Auto Sweep
+ */
 public class SetAutoSweepRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
     @JsonProperty("auto_sweep")
-    private boolean autoSweep;
+    private Boolean autoSweep;
 
     public SetAutoSweepRequest() {
     }
@@ -46,17 +49,17 @@ public class SetAutoSweepRequest {
         this.entityId = entityId;
     }
 
-    public boolean getAutoSweep() {
+    public Boolean getAutoSweep() {
         return autoSweep;
     }
 
-    public void setAutoSweep(boolean autoSweep) {
+    public void setAutoSweep(Boolean autoSweep) {
         this.autoSweep = autoSweep;
     }
 
     public static class Builder {
         private String entityId;
-        private boolean autoSweep;
+        private Boolean autoSweep;
 
         public Builder() {
         }
@@ -66,19 +69,19 @@ public class SetAutoSweepRequest {
             return this;
         }
 
-        public Builder autoSweep(boolean autoSweep) {
+        public Builder autoSweep(Boolean autoSweep) {
             this.autoSweep = autoSweep;
             return this;
         }
 
         public SetAutoSweepRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new SetAutoSweepRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("Entity ID is required");
+                throw new CoinbaseClientException("EntityId is required");
             }
         }
     }

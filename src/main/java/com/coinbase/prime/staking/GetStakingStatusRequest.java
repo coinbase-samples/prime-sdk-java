@@ -1,5 +1,5 @@
 /*
- * Copyright 2026-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,16 +16,22 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Get Staking Status
+ */
 public class GetStakingStatusRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
-    @JsonIgnore
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
 
     public GetStakingStatusRequest() {
@@ -69,8 +75,18 @@ public class GetStakingStatusRequest {
             return this;
         }
 
-        public GetStakingStatusRequest build() {
+        public GetStakingStatusRequest build() throws CoinbaseClientException {
+            validate();
             return new GetStakingStatusRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+            if (isNullOrEmpty(this.walletId)) {
+                throw new CoinbaseClientException("WalletId is required");
+            }
         }
     }
 }

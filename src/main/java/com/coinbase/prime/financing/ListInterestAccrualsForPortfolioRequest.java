@@ -16,12 +16,18 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * List Interest Accruals For Portfolio
+ */
 public class ListInterestAccrualsForPortfolioRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
     @JsonProperty("start_date")
@@ -71,7 +77,7 @@ public class ListInterestAccrualsForPortfolioRequest {
         public Builder() {
         }
 
-        public Builder prtfolioId(String portfolioId) {
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
             return this;
         }
@@ -86,6 +92,15 @@ public class ListInterestAccrualsForPortfolioRequest {
             return this;
         }
 
+        public ListInterestAccrualsForPortfolioRequest build() throws CoinbaseClientException {
+            validate();
+            return new ListInterestAccrualsForPortfolioRequest(this);
+        }
 
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+        }
     }
 }

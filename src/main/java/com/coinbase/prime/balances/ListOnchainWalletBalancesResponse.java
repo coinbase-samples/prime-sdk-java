@@ -16,17 +16,23 @@
 
 package com.coinbase.prime.balances;
 
-import com.coinbase.prime.common.Pagination;
+import com.coinbase.prime.model.DefiBalance;
 import com.coinbase.prime.model.OnchainBalance;
+import com.coinbase.prime.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing on-chain wallet balances by entity.
+ * List Onchain Wallet Balances
  */
 public class ListOnchainWalletBalancesResponse {
-    /** Array of on-chain wallet balance information */
+    @JsonProperty("balances")
     private OnchainBalance[] balances;
-    /** Pagination information for the response */
+
+    @JsonProperty("pagination")
     private Pagination pagination;
+
+    @JsonProperty("defi_balances")
+    private DefiBalance[] defiBalances;
 
     public ListOnchainWalletBalancesResponse() {
     }
@@ -45,6 +51,14 @@ public class ListOnchainWalletBalancesResponse {
 
     public void setPagination(Pagination pagination) {
         this.pagination = pagination;
+    }
+
+    public DefiBalance[] getDefiBalances() {
+        return defiBalances;
+    }
+
+    public void setDefiBalances(DefiBalance[] defiBalances) {
+        this.defiBalances = defiBalances;
     }
 
 }

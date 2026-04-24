@@ -19,17 +19,19 @@ package com.coinbase.prime.orders;
 import com.coinbase.prime.model.LimitOrderEdit;
 import com.coinbase.prime.model.OrderEdit;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
 
+/**
+ * List Order Edit History
+ */
 public class ListOrderEditHistoryResponse {
     @JsonProperty("order_id")
     private String orderId;
 
     @JsonProperty("order_edit_history")
-    private List<LimitOrderEdit> orderEditHistory;
+    private LimitOrderEdit[] orderEditHistory;
 
     @JsonProperty("edit_history")
-    private List<OrderEdit> editHistory;
+    private OrderEdit[] editHistory;
 
     public ListOrderEditHistoryResponse() {
     }
@@ -42,19 +44,20 @@ public class ListOrderEditHistoryResponse {
         this.orderId = orderId;
     }
 
-    public List<LimitOrderEdit> getOrderEditHistory() {
+    public LimitOrderEdit[] getOrderEditHistory() {
         return orderEditHistory;
     }
 
-    public void setOrderEditHistory(List<LimitOrderEdit> orderEditHistory) {
+    public void setOrderEditHistory(LimitOrderEdit[] orderEditHistory) {
         this.orderEditHistory = orderEditHistory;
     }
 
-    public List<OrderEdit> getEditHistory() {
+    public OrderEdit[] getEditHistory() {
         return editHistory;
     }
 
-    public void setEditHistory(List<OrderEdit> editHistory) {
+    public void setEditHistory(OrderEdit[] editHistory) {
         this.editHistory = editHistory;
     }
+
 }

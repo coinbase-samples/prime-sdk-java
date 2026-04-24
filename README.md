@@ -133,31 +133,18 @@ mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositIn
 mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositInstructions" -Dexec.args="wallet-id WIRE"
 ```
 
-## Model Generation
+## Code generation
 
-The SDK includes an automated model generator that creates Java domain models and enums from the OpenAPI specification. This ensures the SDK stays in sync with the Prime API specification.
+The SDK is generated from the published OpenAPI spec (`https://api.prime.coinbase.com/v1/openapi.yaml`). The spec is downloaded at generation time (not committed).
 
-The OpenAPI spec is fetched automatically from the live API (`https://api.prime.coinbase.com/v1/openapi.yaml`) during model generation and is not committed to source control.
-
-### Generate Models from Root Directory
-
-To generate new models from the OpenAPI spec:
+From the repository root:
 
 ```bash
-mvn -Pgenerate-models
+mvn -Pgenerate
 ```
 
-This command:
-- Runs in **incremental mode** (safe - only creates new models that don't exist)
-- Generates domain models in `src/main/java/com/coinbase/prime/model/`
-- Generates enums in `src/main/java/com/coinbase/prime/model/enums/`
-- Automatically applies SDK conventions (Builder patterns, license headers, etc.)
+Optional: compare without writing files: `mvn -Pgenerate -Dgenerator.args=--diff`, or dry run: `-Dgenerator.args=--dry-run`.
 
-### Advanced Model Generation
+This regenerates domain models and enums, per-operation `*Request` / `*Response` types, `*Service` / `*ServiceImpl`, `PrimeServiceFactory`, and adds missing example stubs only when an example file does not already exist.
 
-For more control over model generation, see the detailed documentation in [`tools/model-generator/README.md`](tools/model-generator/README.md), which covers:
-
-- Force regenerating all models (dangerous - use with caution)
-- Regenerating specific models
-- Understanding the generation pipeline
-- Troubleshooting generation issues
+See [`tools/model-generator/README.md`](tools/model-generator/README.md) for configuration (`config/generator-config.json`, `operations-overrides.json`) and module details.

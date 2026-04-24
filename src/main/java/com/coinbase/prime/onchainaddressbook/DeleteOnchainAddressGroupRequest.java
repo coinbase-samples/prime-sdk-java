@@ -16,13 +16,20 @@
 
 package com.coinbase.prime.onchainaddressbook;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Delete Onchain Address Group
+ */
 public class DeleteOnchainAddressGroupRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty(required = true, value = "address_group_id")
     @JsonIgnore
     private String addressGroupId;
@@ -68,8 +75,18 @@ public class DeleteOnchainAddressGroupRequest {
             return this;
         }
 
-        public DeleteOnchainAddressGroupRequest build() {
+        public DeleteOnchainAddressGroupRequest build() throws CoinbaseClientException {
+            validate();
             return new DeleteOnchainAddressGroupRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+            if (isNullOrEmpty(this.addressGroupId)) {
+                throw new CoinbaseClientException("AddressGroupId is required");
+            }
         }
     }
 }

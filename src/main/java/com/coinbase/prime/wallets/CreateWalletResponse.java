@@ -21,27 +21,21 @@ import com.coinbase.prime.model.enums.WalletType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for the create wallet operation.
- * 
- * Creates a new wallet for the specified portfolio. Note that the first ONCHAIN wallet 
- * for each network family must be created through the Prime UI.
+ * Create Wallet
  */
 public class CreateWalletResponse {
-    /** The ID of the activity associated with the wallet creation */
     @JsonProperty("activity_id")
     private String activityId;
 
-    /** The name of the wallet */
+    @JsonProperty("name")
     private String name;
 
-    /** The asset symbol stored in the wallet */
+    @JsonProperty("symbol")
     private String symbol;
 
-    /** The wallet type (VAULT, TRADING, or WALLET_TYPE_OTHER) */
     @JsonProperty("wallet_type")
-    private WalletType type;
+    private WalletType walletType;
 
-    /** The network family for the wallet */
     @JsonProperty("network_family")
     private NetworkFamily networkFamily;
 
@@ -72,12 +66,12 @@ public class CreateWalletResponse {
         this.symbol = symbol;
     }
 
-    public WalletType getType() {
-        return type;
+    public WalletType getWalletType() {
+        return walletType;
     }
 
-    public void setType(WalletType type) {
-        this.type = type;
+    public void setWalletType(WalletType walletType) {
+        this.walletType = walletType;
     }
 
     public NetworkFamily getNetworkFamily() {
@@ -87,4 +81,5 @@ public class CreateWalletResponse {
     public void setNetworkFamily(NetworkFamily networkFamily) {
         this.networkFamily = networkFamily;
     }
+
 }

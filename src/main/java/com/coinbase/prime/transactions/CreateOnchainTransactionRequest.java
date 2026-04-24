@@ -16,14 +16,17 @@
 
 package com.coinbase.prime.transactions;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.EvmParams;
 import com.coinbase.prime.model.RpcConfig;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.coinbase.core.errors.CoinbaseClientException;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Create Onchain Transaction
+ */
 public class CreateOnchainTransactionRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -36,6 +39,7 @@ public class CreateOnchainTransactionRequest {
     @JsonProperty("raw_unsigned_txn")
     private String rawUnsignedTxn;
 
+    @JsonProperty("rpc")
     private RpcConfig rpc;
 
     @JsonProperty("evm_params")
@@ -127,24 +131,17 @@ public class CreateOnchainTransactionRequest {
             return this;
         }
 
-        public CreateOnchainTransactionRequest build() {
-            this.validate();
+        public CreateOnchainTransactionRequest build() throws CoinbaseClientException {
+            validate();
             return new CreateOnchainTransactionRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
             if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId cannot be null");
-            }
-
-            if (isNullOrEmpty(this.rawUnsignedTxn)) {
-                throw new CoinbaseClientException("RawUnsignedTxn cannot be null");
-            }
-            if (this.rpc == null) {
-                throw new CoinbaseClientException("Rpc cannot be null");
+                throw new CoinbaseClientException("WalletId is required");
             }
         }
     }

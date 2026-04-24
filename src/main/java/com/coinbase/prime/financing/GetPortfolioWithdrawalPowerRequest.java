@@ -16,15 +16,21 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Get Portfolio Withdrawal Power
+ */
 public class GetPortfolioWithdrawalPowerRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty(required = true)
+    @JsonProperty("symbol")
     private String symbol;
 
     public GetPortfolioWithdrawalPowerRequest() {
@@ -68,8 +74,15 @@ public class GetPortfolioWithdrawalPowerRequest {
             return this;
         }
 
-        public GetPortfolioWithdrawalPowerRequest build() {
+        public GetPortfolioWithdrawalPowerRequest build() throws CoinbaseClientException {
+            validate();
             return new GetPortfolioWithdrawalPowerRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

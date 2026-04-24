@@ -16,12 +16,18 @@
 
 package com.coinbase.prime.futures;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Set FCM Settings
+ */
 public class SetFcmSettingsRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
 
     @JsonProperty("target_derivatives_excess")
@@ -68,8 +74,15 @@ public class SetFcmSettingsRequest {
             return this;
         }
 
-        public SetFcmSettingsRequest build() {
+        public SetFcmSettingsRequest build() throws CoinbaseClientException {
+            validate();
             return new SetFcmSettingsRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }

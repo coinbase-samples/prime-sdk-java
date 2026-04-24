@@ -22,11 +22,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Order Edit History
+ */
 public class ListOrderEditHistoryRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
-    @JsonProperty("order_id")
+
+    @JsonProperty(required = true, value = "order_id")
     @JsonIgnore
     private String orderId;
 
@@ -72,16 +76,16 @@ public class ListOrderEditHistoryRequest {
         }
 
         public ListOrderEditHistoryRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListOrderEditHistoryRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("Portfolio ID is required");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
             if (isNullOrEmpty(this.orderId)) {
-                throw new CoinbaseClientException("Order ID is required");
+                throw new CoinbaseClientException("OrderId is required");
             }
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -30,16 +30,6 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
     }
 
     @Override
-    public ListCandlesResponse listCandles(ListCandlesRequest request) throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/candles", request.getPortfolioId()),
-                request,
-                List.of(200),
-                new TypeReference<ListCandlesResponse>() {});
-    }
-
-    @Override
     public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
@@ -48,4 +38,15 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
                 List.of(200),
                 new TypeReference<ListPortfolioProductsResponse>() {});
     }
+
+    @Override
+    public GetCandlesResponse getCandles(GetCandlesRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/candles", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<GetCandlesResponse>() {});
+    }
+
 }

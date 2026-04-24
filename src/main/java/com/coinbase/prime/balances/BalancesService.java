@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -20,9 +20,12 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface BalancesService {
-    // Balances
+    /** List Entity Balances */
     ListEntityBalancesResponse listEntityBalances(ListEntityBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Portfolio Balances */
     ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Wallet Balance */
     GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Onchain Wallet Balances */
     ListOnchainWalletBalancesResponse listOnchainWalletBalances(ListOnchainWalletBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

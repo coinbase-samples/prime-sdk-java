@@ -1,5 +1,5 @@
 /*
- * Copyright 2026-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Request to submit travel rule data for an existing deposit transaction.
- * <p>
- * <b>Beta:</b> This endpoint is in Beta. Contact your account manager for more information.
+ * Submit Deposit Travel Rule Data
  */
 public class SubmitDepositTravelRuleDataRequest {
     @JsonProperty(required = true, value = "portfolio_id")
@@ -46,9 +44,6 @@ public class SubmitDepositTravelRuleDataRequest {
     @JsonProperty("is_self")
     private Boolean isSelf;
 
-    @JsonProperty("is_intermediary")
-    private Boolean isIntermediary;
-
     @JsonProperty("opt_out_of_ownership_verification")
     private Boolean optOutOfOwnershipVerification;
 
@@ -61,7 +56,6 @@ public class SubmitDepositTravelRuleDataRequest {
         this.originator = builder.originator;
         this.beneficiary = builder.beneficiary;
         this.isSelf = builder.isSelf;
-        this.isIntermediary = builder.isIntermediary;
         this.optOutOfOwnershipVerification = builder.optOutOfOwnershipVerification;
     }
 
@@ -105,14 +99,6 @@ public class SubmitDepositTravelRuleDataRequest {
         this.isSelf = isSelf;
     }
 
-    public Boolean getIsIntermediary() {
-        return isIntermediary;
-    }
-
-    public void setIsIntermediary(Boolean isIntermediary) {
-        this.isIntermediary = isIntermediary;
-    }
-
     public Boolean getOptOutOfOwnershipVerification() {
         return optOutOfOwnershipVerification;
     }
@@ -127,7 +113,6 @@ public class SubmitDepositTravelRuleDataRequest {
         private TravelRuleParty originator;
         private TravelRuleParty beneficiary;
         private Boolean isSelf;
-        private Boolean isIntermediary;
         private Boolean optOutOfOwnershipVerification;
 
         public Builder() {
@@ -158,27 +143,22 @@ public class SubmitDepositTravelRuleDataRequest {
             return this;
         }
 
-        public Builder isIntermediary(Boolean isIntermediary) {
-            this.isIntermediary = isIntermediary;
-            return this;
-        }
-
         public Builder optOutOfOwnershipVerification(Boolean optOutOfOwnershipVerification) {
             this.optOutOfOwnershipVerification = optOutOfOwnershipVerification;
             return this;
         }
 
         public SubmitDepositTravelRuleDataRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new SubmitDepositTravelRuleDataRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
             if (isNullOrEmpty(this.transactionId)) {
-                throw new CoinbaseClientException("TransactionId cannot be null");
+                throw new CoinbaseClientException("TransactionId is required");
             }
         }
     }

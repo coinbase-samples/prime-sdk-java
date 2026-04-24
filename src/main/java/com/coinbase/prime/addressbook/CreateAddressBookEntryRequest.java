@@ -20,22 +20,30 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Create Address Book Entry
+ */
 public class CreateAddressBookEntryRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
+    @JsonProperty("address")
     private String address;
 
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
+    @JsonProperty("name")
     private String name;
 
     @JsonProperty("account_identifier")
     private String accountIdentifier;
+
+    @JsonProperty("chain_ids")
+    private String[] chainIds;
 
     public CreateAddressBookEntryRequest() {
     }
@@ -46,6 +54,7 @@ public class CreateAddressBookEntryRequest {
         this.currencySymbol = builder.currencySymbol;
         this.name = builder.name;
         this.accountIdentifier = builder.accountIdentifier;
+        this.chainIds = builder.chainIds;
     }
 
     public String getPortfolioId() {
@@ -88,15 +97,28 @@ public class CreateAddressBookEntryRequest {
         this.accountIdentifier = accountIdentifier;
     }
 
+    public String[] getChainIds() {
+        return chainIds;
+    }
+
+    public void setChainIds(String[] chainIds) {
+        this.chainIds = chainIds;
+    }
+
     public static class Builder {
-        private final String portfolioId;
+        private String portfolioId;
         private String address;
         private String currencySymbol;
         private String name;
         private String accountIdentifier;
+        private String[] chainIds;
 
-        public Builder(String portfolioId) {
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
         }
 
         public Builder address(String address) {
@@ -119,23 +141,19 @@ public class CreateAddressBookEntryRequest {
             return this;
         }
 
+        public Builder chainIds(String[] chainIds) {
+            this.chainIds = chainIds;
+            return this;
+        }
+
         public CreateAddressBookEntryRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new CreateAddressBookEntryRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.address)) {
-                throw new CoinbaseClientException("Address is required");
-            }
-            if (isNullOrEmpty(this.currencySymbol)) {
-                throw new CoinbaseClientException("Currency symbol is required");
-            }
-            if (isNullOrEmpty(this.name)) {
-                throw new CoinbaseClientException("Name is required");
             }
         }
     }

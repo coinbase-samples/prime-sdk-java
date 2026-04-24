@@ -17,12 +17,13 @@
 package com.coinbase.prime.commission;
 
 import com.coinbase.prime.model.Commission;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving commission information for a specific portfolio.
+ * Get Portfolio Commission
  */
 public class GetPortfolioCommissionResponse {
-    /** The commission information for the portfolio */
+    @JsonProperty("commission")
     private Commission commission;
 
     public GetPortfolioCommissionResponse() {

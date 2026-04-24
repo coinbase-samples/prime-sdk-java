@@ -16,11 +16,27 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.prime.model.ValidatorUnstakePreview;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Preview Unstake
+ */
 public class PreviewUnstakeResponse {
     @JsonProperty("estimated_amount")
     private String estimatedAmount;
+
+    @JsonProperty("wallet_id")
+    private String walletId;
+
+    @JsonProperty("wallet_address")
+    private String walletAddress;
+
+    @JsonProperty("current_timestamp")
+    private String currentTimestamp;
+
+    @JsonProperty("validators")
+    private ValidatorUnstakePreview[] validators;
 
     public PreviewUnstakeResponse() {
     }
@@ -32,4 +48,37 @@ public class PreviewUnstakeResponse {
     public void setEstimatedAmount(String estimatedAmount) {
         this.estimatedAmount = estimatedAmount;
     }
+
+    public String getWalletId() {
+        return walletId;
+    }
+
+    public void setWalletId(String walletId) {
+        this.walletId = walletId;
+    }
+
+    public String getWalletAddress() {
+        return walletAddress;
+    }
+
+    public void setWalletAddress(String walletAddress) {
+        this.walletAddress = walletAddress;
+    }
+
+    public String getCurrentTimestamp() {
+        return currentTimestamp;
+    }
+
+    public void setCurrentTimestamp(String currentTimestamp) {
+        this.currentTimestamp = currentTimestamp;
+    }
+
+    public ValidatorUnstakePreview[] getValidators() {
+        return validators;
+    }
+
+    public void setValidators(ValidatorUnstakePreview[] validators) {
+        this.validators = validators;
+    }
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -30,6 +30,16 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     }
 
     @Override
+    public ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/transactions", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<ListPortfolioTransactionsResponse>() {});
+    }
+
+    @Override
     public GetTransactionResponse getTransaction(GetTransactionRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
@@ -45,36 +55,32 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId()),
                 request,
-                List.of(200),
+                List.of(201, 200),
                 new TypeReference<CreateConversionResponse>() {});
     }
 
     @Override
-    public ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request)
-            throws CoinbasePrimeException {
+    public CreateOnchainTransactionResponse createOnchainTransaction(CreateOnchainTransactionRequest request) throws CoinbasePrimeException {
         return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/transactions", request.getPortfolioId()),
+                HttpMethod.POST,
+                String.format("/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(), request.getWalletId()),
                 request,
-                List.of(200),
-                new TypeReference<ListPortfolioTransactionsResponse>() {});
+                List.of(201, 200),
+                new TypeReference<CreateOnchainTransactionResponse>() {});
     }
 
     @Override
-    public ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request)
-            throws CoinbasePrimeException {
+    public ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(),
-                        request.getWalletId()),
+                String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
                 new TypeReference<ListWalletTransactionsResponse>() {});
     }
 
     @Override
-    public CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request)
-            throws CoinbasePrimeException {
+    public CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
@@ -84,8 +90,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     }
 
     @Override
-    public CreateWalletWithdrawalResponse createWalletWithdrawal(CreateWalletWithdrawalRequest request)
-            throws CoinbasePrimeException {
+    public CreateWalletWithdrawalResponse createWalletWithdrawal(CreateWalletWithdrawalRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
                 String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
@@ -95,55 +100,23 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     }
 
     @Override
-    public CreateOnchainTransactionResponse createOnchainTransaction(CreateOnchainTransactionRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(),
-                        request.getWalletId()),
-                request,
-                List.of(200),
-                new TypeReference<CreateOnchainTransactionResponse>() {});
-    }
-
-    @Override
-    public ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request)
-            throws CoinbasePrimeException {
+    public GetTransactionTravelRuleDataResponse getTransactionTravelRuleData(GetTransactionTravelRuleDataRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/advanced_transfers/%s/transactions", request.getPortfolioId(),
-                        request.getAdvancedTransferId()),
-                request,
-                List.of(200),
-                new TypeReference<ListAdvancedTransferTransactionsResponse>() {});
-    }
-
-    /**
-     * Submit travel rule data for an existing deposit transaction.
-     * <p>
-     * <b>Beta:</b> This endpoint is in Beta. Contact your account manager for more information.
-     */
-    @Override
-    public SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.POST,
-                String.format("/portfolios/%s/transactions/%s/travel_rule/deposit", request.getPortfolioId(),
-                        request.getTransactionId()),
-                request,
-                List.of(200),
-                new TypeReference<SubmitDepositTravelRuleDataResponse>() {});
-    }
-
-    @Override
-    public GetTransactionTravelRuleDataResponse getTransactionTravelRuleData(GetTransactionTravelRuleDataRequest request)
-            throws CoinbasePrimeException {
-        return this.request(
-                HttpMethod.GET,
-                String.format("/portfolios/%s/transactions/%s/travel_rule", request.getPortfolioId(),
-                        request.getTransactionId()),
+                String.format("/portfolios/%s/transactions/%s/travel_rule", request.getPortfolioId(), request.getTransactionId()),
                 request,
                 List.of(200),
                 new TypeReference<GetTransactionTravelRuleDataResponse>() {});
     }
+
+    @Override
+    public SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.POST,
+                String.format("/portfolios/%s/transactions/%s/travel_rule/deposit", request.getPortfolioId(), request.getTransactionId()),
+                request,
+                List.of(201, 200),
+                new TypeReference<SubmitDepositTravelRuleDataResponse>() {});
+    }
+
 }

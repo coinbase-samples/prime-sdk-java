@@ -19,6 +19,9 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.BuyingPower;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Get Portfolio Buying Power
+ */
 public class GetPortfolioBuyingPowerResponse {
     @JsonProperty("buying_power")
     private BuyingPower buyingPower;

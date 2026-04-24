@@ -25,6 +25,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Users
+ */
 public class ListEntityUsersRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
@@ -47,18 +50,16 @@ public class ListEntityUsersRequest extends PrimeListRequest {
     }
 
     public static class Builder {
-        private final String entityId;
+        private String entityId;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
 
-        public Builder(String entityId) {
-            this.entityId = entityId;
+        public Builder() {
         }
 
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+        public Builder entityId(String entityId) {
+            this.entityId = entityId;
             return this;
         }
 
@@ -67,8 +68,14 @@ public class ListEntityUsersRequest extends PrimeListRequest {
             return this;
         }
 
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
         public ListEntityUsersRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListEntityUsersRequest(this);
         }
 

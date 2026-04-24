@@ -19,6 +19,7 @@ package com.coinbase.prime.positions;
 import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
+import com.coinbase.prime.errors.CoinbasePrimeException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -29,22 +30,23 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     }
 
     @Override
-    public ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) {
+    public ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/aggregate_positions", request.getId()),
+                String.format("/entities/%s/aggregate_positions", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListAggregatePositionsResponse>() {});
     }
 
     @Override
-    public ListPositionsResponse listPositions(ListPositionsRequest request) {
+    public ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/positions", request.getId()),
+                String.format("/entities/%s/positions", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPositionsResponse>() {});
     }
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
 
 package com.coinbase.prime.paymentmethods;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface PaymentMethodsService {
-    // Payment Methods
-    ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request) throws CoinbasePrimeException;
-    GetPaymentMethodDetailsResponse getPaymentMethodDetails(GetPaymentMethodDetailsRequest request) throws CoinbasePrimeException;
+    /** List Entity Payment Methods */
+    ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Entity Payment Method */
+    GetPaymentMethodDetailsResponse getPaymentMethodDetails(GetPaymentMethodDetailsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

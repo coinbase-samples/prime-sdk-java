@@ -18,18 +18,19 @@ package com.coinbase.prime.positions;
 
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Position;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * List Aggregate Entity Positions
+ */
 public class ListAggregatePositionsResponse {
+    @JsonProperty("positions")
     private Position[] positions;
 
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListAggregatePositionsResponse() {
-    }
-
-    public ListAggregatePositionsResponse(Position[] positions, Pagination pagination) {
-        this.positions = positions;
-        this.pagination = pagination;
     }
 
     public Position[] getPositions() {

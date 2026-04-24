@@ -24,10 +24,11 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-import static com.coinbase.core.utils.Utils.*;
-
+/**
+ * List Portfolio Allocations
+ */
 public class ListPortfolioAllocationsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -40,10 +41,10 @@ public class ListPortfolioAllocationsRequest extends PrimeListRequest {
     private OrderSide orderSide;
 
     @JsonProperty("start_date")
-    private Date startDate;
+    private String startDate;
 
     @JsonProperty("end_date")
-    private Date endDate;
+    private String endDate;
 
     public ListPortfolioAllocationsRequest() {
     }
@@ -81,19 +82,19 @@ public class ListPortfolioAllocationsRequest extends PrimeListRequest {
         this.orderSide = orderSide;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -101,14 +102,13 @@ public class ListPortfolioAllocationsRequest extends PrimeListRequest {
         private String portfolioId;
         private String[] productIds;
         private OrderSide orderSide;
-        private Date startDate;
-        private Date endDate;
+        private String startDate;
+        private String endDate;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
 
-        public Builder(String portfolioId) {
-            this.portfolioId = portfolioId;
+        public Builder() {
         }
 
         public Builder portfolioId(String portfolioId) {
@@ -126,13 +126,18 @@ public class ListPortfolioAllocationsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder startDate(Date startDate) {
+        public Builder startDate(String startDate) {
             this.startDate = startDate;
             return this;
         }
 
-        public Builder endDate(Date endDate) {
+        public Builder endDate(String endDate) {
             this.endDate = endDate;
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 
@@ -142,18 +147,13 @@ public class ListPortfolioAllocationsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
         public ListPortfolioAllocationsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListPortfolioAllocationsRequest(this);
         }
 
-        public void validate() {
-            if (isNullOrEmpty(portfolioId)) {
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
         }

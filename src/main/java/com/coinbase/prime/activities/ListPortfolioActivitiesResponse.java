@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,17 +18,16 @@ package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
 import com.coinbase.prime.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing all activities associated with a given portfolio.
- *
- * Supports filtering by currencies, activity categories, activity statuses, and date ranges.
+ * List Activities
  */
 public class ListPortfolioActivitiesResponse {
-    /** List of activities associated with the portfolio */
+    @JsonProperty("activities")
     private Activity[] activities;
 
-    /** Pagination information for the response */
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListPortfolioActivitiesResponse() {

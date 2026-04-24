@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -45,7 +45,8 @@ public class AddressBookServiceImpl extends CoinbaseServiceImpl implements Addre
                 HttpMethod.POST,
                 String.format("/portfolios/%s/address_book", request.getPortfolioId()),
                 request,
-                List.of(200),
+                List.of(201, 200),
                 new TypeReference<CreateAddressBookEntryResponse>() {});
     }
+
 }

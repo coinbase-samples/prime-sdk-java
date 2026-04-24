@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Entity Payment Methods
+ */
 public class ListPaymentMethodsRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
@@ -43,20 +46,24 @@ public class ListPaymentMethodsRequest {
     }
 
     public static class Builder {
-        private final String entityId;
+        private String entityId;
 
-        public Builder (String entityId) {
+        public Builder() {
+        }
+
+        public Builder entityId(String entityId) {
             this.entityId = entityId;
+            return this;
         }
 
         public ListPaymentMethodsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListPaymentMethodsRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("EntityId cannot be null");
+                throw new CoinbaseClientException("EntityId is required");
             }
         }
     }

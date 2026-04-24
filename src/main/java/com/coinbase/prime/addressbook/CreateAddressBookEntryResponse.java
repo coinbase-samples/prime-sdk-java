@@ -19,6 +19,9 @@ package com.coinbase.prime.addressbook;
 import com.coinbase.prime.model.enums.CustodyActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Create Address Book Entry
+ */
 public class CreateAddressBookEntryResponse {
     @JsonProperty("activity_type")
     private CustodyActivityType activityType;

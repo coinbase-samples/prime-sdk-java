@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Cancel Entity Futures Sweep
+ */
 public class CancelEntityFuturesSweepRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
@@ -54,13 +57,13 @@ public class CancelEntityFuturesSweepRequest {
         }
 
         public CancelEntityFuturesSweepRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new CancelEntityFuturesSweepRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("Entity ID is required");
+                throw new CoinbaseClientException("EntityId is required");
             }
         }
     }

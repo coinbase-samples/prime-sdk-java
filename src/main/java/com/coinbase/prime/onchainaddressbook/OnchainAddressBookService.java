@@ -20,8 +20,12 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface OnchainAddressBookService {
-    CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(CreateOnchainAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(DeleteOnchainAddressGroupRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Update Onchain Address Book Entry */
     UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(UpdateOnchainAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create Onchain Address Book Entry */
+    CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(CreateOnchainAddressBookEntryRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Delete Onchain Address Group */
+    DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(DeleteOnchainAddressGroupRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Onchain Address Groups */
+    ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

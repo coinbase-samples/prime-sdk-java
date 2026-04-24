@@ -16,20 +16,26 @@
 
 package com.coinbase.prime.balances;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.PortfolioBalanceType;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.coinbase.core.errors.CoinbaseClientException;
+
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Entity Balances
+ */
 public class ListEntityBalancesRequest extends PrimeListRequest {
-    @JsonProperty("entity_id")
+    @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
     @JsonProperty("symbols")
-    private String symbols;
+    private String[] symbols;
 
     @JsonProperty("aggregation_type")
     private PortfolioBalanceType aggregationType;
@@ -38,7 +44,7 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
     }
 
     public ListEntityBalancesRequest(Builder builder) {
-        super(builder.cursor, null, builder.limit);
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.entityId = builder.entityId;
         this.symbols = builder.symbols;
         this.aggregationType = builder.aggregationType;
@@ -52,11 +58,11 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
         this.entityId = entityId;
     }
 
-    public String getSymbols() {
+    public String[] getSymbols() {
         return symbols;
     }
 
-    public void setSymbols(String symbols) {
+    public void setSymbols(String[] symbols) {
         this.symbols = symbols;
     }
 
@@ -70,10 +76,11 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
 
     public static class Builder {
         private String entityId;
-        private String symbols;
-        private String cursor;
-        private Integer limit;
+        private String[] symbols;
         private PortfolioBalanceType aggregationType;
+        private String cursor;
+        private SortDirection sortDirection;
+        private Integer limit;
 
         public Builder() {
         }
@@ -83,18 +90,8 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder symbols(String symbols) {
+        public Builder symbols(String[] symbols) {
             this.symbols = symbols;
-            return this;
-        }
-
-        public Builder cursor(String cursor) {
-            this.cursor = cursor;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
             return this;
         }
 
@@ -103,8 +100,19 @@ public class ListEntityBalancesRequest extends PrimeListRequest {
             return this;
         }
 
-        public ListEntityBalancesRequest build() {
-            this.validate();
+        public Builder limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
+        public ListEntityBalancesRequest build() throws CoinbaseClientException {
+            validate();
             return new ListEntityBalancesRequest(this);
         }
 

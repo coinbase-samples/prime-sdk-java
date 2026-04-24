@@ -16,10 +16,16 @@
 
 package com.coinbase.prime.onchainaddressbook;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.AddressGroup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Update Onchain Address Book Entry
+ */
 public class UpdateOnchainAddressBookEntryRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -44,11 +50,11 @@ public class UpdateOnchainAddressBookEntryRequest {
         this.portfolioId = portfolioId;
     }
 
-    public AddressGroup getAddressGroupId() {
+    public AddressGroup getAddressGroup() {
         return addressGroup;
     }
 
-    public void setAddressGroupId(AddressGroup addressGroup) {
+    public void setAddressGroup(AddressGroup addressGroup) {
         this.addressGroup = addressGroup;
     }
 
@@ -69,8 +75,15 @@ public class UpdateOnchainAddressBookEntryRequest {
             return this;
         }
 
-        public UpdateOnchainAddressBookEntryRequest build() {
+        public UpdateOnchainAddressBookEntryRequest build() throws CoinbaseClientException {
+            validate();
             return new UpdateOnchainAddressBookEntryRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

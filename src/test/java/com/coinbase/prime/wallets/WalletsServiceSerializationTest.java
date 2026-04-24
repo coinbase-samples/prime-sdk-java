@@ -99,15 +99,6 @@ public class WalletsServiceSerializationTest {
 
     @Test
     public void testCreateWalletDepositAddressRequestBuilderValidation() {
-        // Missing required fields should throw
-        assertThrows(CoinbaseClientException.class, () -> {
-            new CreateWalletDepositAddressRequest.Builder()
-                    .portfolioId("portfolio-123")
-                    .walletId("wallet-123")
-                    // missing networkId
-                    .build();
-        });
-
         assertThrows(CoinbaseClientException.class, () -> {
             new CreateWalletDepositAddressRequest.Builder()
                     .portfolioId("portfolio-123")
@@ -141,8 +132,8 @@ public class WalletsServiceSerializationTest {
 
         assertNotNull(response);
         assertNotNull(response.getAddresses());
-        assertEquals(2, response.getAddresses().size());
-        assertEquals("0xabc123", response.getAddresses().get(0).getAddress());
-        assertEquals("0xdef456", response.getAddresses().get(1).getAddress());
+        assertEquals(2, response.getAddresses().length);
+        assertEquals("0xabc123", response.getAddresses()[0].getAddress());
+        assertEquals("0xdef456", response.getAddresses()[1].getAddress());
     }
 }

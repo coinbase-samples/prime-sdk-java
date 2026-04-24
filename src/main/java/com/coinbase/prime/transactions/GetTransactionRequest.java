@@ -20,12 +20,16 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Transaction by Transaction ID
+ */
 public class GetTransactionRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty(required = true, value = "transaction_id")
     @JsonIgnore
     private String transactionId;
@@ -55,16 +59,24 @@ public class GetTransactionRequest {
     }
 
     public static class Builder {
-        private final String portfolioId;
-        private final String transactionId;
+        private String portfolioId;
+        private String transactionId;
 
-        public Builder(String portfolioId, String transactionId) {
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder transactionId(String transactionId) {
             this.transactionId = transactionId;
+            return this;
         }
 
         public GetTransactionRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetTransactionRequest(this);
         }
 

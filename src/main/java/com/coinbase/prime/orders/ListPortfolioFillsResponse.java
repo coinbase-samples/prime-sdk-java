@@ -18,9 +18,16 @@ package com.coinbase.prime.orders;
 
 import com.coinbase.prime.model.Fill;
 import com.coinbase.prime.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * List Portfolio Fills
+ */
 public class ListPortfolioFillsResponse {
+    @JsonProperty("fills")
     private Fill[] fills;
+
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListPortfolioFillsResponse() {

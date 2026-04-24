@@ -26,22 +26,31 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Portfolio Orders
+ */
 public class ListPortfolioOrdersRequest extends PrimeListRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty("order_statuses")
     private OrderStatus[] orderStatuses;
+
     @JsonProperty("product_ids")
     private String[] productIds;
+
     @JsonProperty("order_type")
     private OrderType orderType;
+
     @JsonProperty("order_side")
     private OrderSide orderSide;
+
     @JsonProperty("start_date")
     private String startDate;
+
     @JsonProperty("end_date")
     private String endDate;
 
@@ -165,19 +174,19 @@ public class ListPortfolioOrdersRequest extends PrimeListRequest {
             return this;
         }
 
+        public Builder limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
         public Builder pagination(Pagination pagination) {
             this.cursor = pagination.getNextCursor();
             this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
         public ListPortfolioOrdersRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListPortfolioOrdersRequest(this);
         }
 

@@ -25,8 +25,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Portfolio Fills
+ */
 public class ListPortfolioFillsRequest extends PrimeListRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
 
@@ -96,30 +99,26 @@ public class ListPortfolioFillsRequest extends PrimeListRequest {
             return this;
         }
 
+        public Builder limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
         public Builder pagination(Pagination pagination) {
             this.cursor = pagination.getNextCursor();
             this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
         public ListPortfolioFillsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListPortfolioFillsRequest(this);
         }
 
-        public void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-            if (isNullOrEmpty(this.startDate)) {
-                throw new CoinbaseClientException("StartDate is required");
-            }
-
         }
     }
 }

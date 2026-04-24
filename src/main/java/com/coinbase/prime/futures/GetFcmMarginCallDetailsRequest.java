@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get FCM Margin Call Details
+ */
 public class GetFcmMarginCallDetailsRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
@@ -54,13 +57,13 @@ public class GetFcmMarginCallDetailsRequest {
         }
 
         public GetFcmMarginCallDetailsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetFcmMarginCallDetailsRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("Entity ID is required");
+                throw new CoinbaseClientException("EntityId is required");
             }
         }
     }

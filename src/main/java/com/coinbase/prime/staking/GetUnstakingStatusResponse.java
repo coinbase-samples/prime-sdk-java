@@ -19,8 +19,9 @@ package com.coinbase.prime.staking;
 import com.coinbase.prime.model.ValidatorUnstakingInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
+/**
+ * Get Unstaking Status
+ */
 public class GetUnstakingStatusResponse {
     @JsonProperty("portfolio_id")
     private String portfolioId;
@@ -35,7 +36,7 @@ public class GetUnstakingStatusResponse {
     private String currentTimestamp;
 
     @JsonProperty("validators")
-    private List<ValidatorUnstakingInfo> validators;
+    private ValidatorUnstakingInfo[] validators;
 
     public GetUnstakingStatusResponse() {
     }
@@ -72,11 +73,12 @@ public class GetUnstakingStatusResponse {
         this.currentTimestamp = currentTimestamp;
     }
 
-    public List<ValidatorUnstakingInfo> getValidators() {
+    public ValidatorUnstakingInfo[] getValidators() {
         return validators;
     }
 
-    public void setValidators(List<ValidatorUnstakingInfo> validators) {
+    public void setValidators(ValidatorUnstakingInfo[] validators) {
         this.validators = validators;
     }
+
 }

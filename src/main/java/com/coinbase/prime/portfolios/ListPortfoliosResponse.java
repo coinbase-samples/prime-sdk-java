@@ -17,15 +17,17 @@
 package com.coinbase.prime.portfolios;
 
 import com.coinbase.prime.model.Portfolio;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListPortfoliosResponse{
+/**
+ * List Portfolios
+ */
+public class ListPortfoliosResponse {
+    @JsonProperty("portfolios")
     private Portfolio[] portfolios;
 
-    public ListPortfoliosResponse(Portfolio[] portfolios) {
-        this.portfolios = portfolios;
+    public ListPortfoliosResponse() {
     }
-
-    public ListPortfoliosResponse() {}
 
     public Portfolio[] getPortfolios() {
         return portfolios;
@@ -34,4 +36,5 @@ public class ListPortfoliosResponse{
     public void setPortfolios(Portfolio[] portfolios) {
         this.portfolios = portfolios;
     }
+
 }

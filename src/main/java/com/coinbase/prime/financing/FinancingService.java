@@ -20,19 +20,36 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface FinancingService {
-    CreateNewLocatesResponse createNewLocates(CreateNewLocatesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetCrossMarginOverviewResponse getCrossMarginOverview(GetCrossMarginOverviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetEntityLocateAvailabilitiesResponse getEntityLocateAvailabilities(GetEntityLocateAvailabilitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetMarginInformationResponse getMarginInformation(GetMarginInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetPortfolioBuyingPowerResponse getPortfolioBuyingPower(GetPortfolioBuyingPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetPortfolioWithdrawalPowerResponse getPortfolioWithdrawalPower(GetPortfolioWithdrawalPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetTradeFinanceTieredPricingFeesResponse getTradeFinanceTieredPricingFees(GetTradeFinanceTieredPricingFeesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListExistingLocatesResponse listExistingLocates(ListExistingLocatesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Interest Accruals */
     ListInterestAccrualsResponse listInterestAccruals(ListInterestAccrualsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListInterestAccrualsForPortfolioResponse listInterestAccrualsForPortfolio(ListInterestAccrualsForPortfolioRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Cross Margin Overview */
+    GetCrossMarginOverviewResponse getCrossMarginOverview(GetCrossMarginOverviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Entity Locate Availabilities */
+    GetEntityLocateAvailabilitiesResponse getEntityLocateAvailabilities(GetEntityLocateAvailabilitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Margin Information */
+    GetMarginInformationResponse getMarginInformation(GetMarginInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Margin Call Summaries */
     ListMarginCallSummariesResponse listMarginCallSummaries(ListMarginCallSummariesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Trade Finance Obligations */
+    ListTradeFinanceObligationsResponse listTradeFinanceObligations(ListTradeFinanceObligationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Trade Finance Tiered Pricing Fees */
+    GetTradeFinanceTieredPricingFeesResponse getTradeFinanceTieredPricingFees(GetTradeFinanceTieredPricingFeesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Financing Eligible Assets */
+    ListFinancingEligibleAssetsResponse listFinancingEligibleAssets() throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Interest Accruals For Portfolio */
+    ListInterestAccrualsForPortfolioResponse listInterestAccrualsForPortfolio(ListInterestAccrualsForPortfolioRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Portfolio Buying Power */
+    GetPortfolioBuyingPowerResponse getPortfolioBuyingPower(GetPortfolioBuyingPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Portfolio Credit Information */
+    GetPortfolioCreditInformationResponse getPortfolioCreditInformation(GetPortfolioCreditInformationRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Existing Locates */
+    ListExistingLocatesResponse listExistingLocates(ListExistingLocatesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Create New Locates */
+    CreateNewLocatesResponse createNewLocates(CreateNewLocatesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Margin Conversions */
     ListMarginConversionsResponse listMarginConversions(ListMarginConversionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListTfObligationsResponse listTfObligations(ListTfObligationsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListFinancingEligibleAssetsResponse listFinancingEligibleAssets(ListFinancingEligibleAssetsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Portfolio Withdrawal Power */
+    GetPortfolioWithdrawalPowerResponse getPortfolioWithdrawalPower(GetPortfolioWithdrawalPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Update Funding Settings (Beta) */
+    UpdateFundingSettingsResponse updateFundingSettings(UpdateFundingSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

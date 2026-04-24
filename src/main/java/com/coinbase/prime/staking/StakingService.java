@@ -20,13 +20,22 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface StakingService {
+    /** Claim Wallet Staking Rewards (Alpha) */
     ClaimRewardsResponse claimRewards(ClaimRewardsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Request to stake or delegate a wallet */
     CreateStakeResponse createStake(CreateStakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Request to unstake a wallet */
     CreateUnstakeResponse createUnstake(CreateUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** List Transaction Validators */
     ListTransactionValidatorsResponse listTransactionValidators(ListTransactionValidatorsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Request to stake currency in a portfolio */
     PortfolioStakingInitiateResponse portfolioStakingInitiate(PortfolioStakingInitiateRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Request to unstake currency across a portfolio */
     PortfolioStakingUnstakeResponse portfolioStakingUnstake(PortfolioStakingUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    PreviewUnstakeResponse previewUnstake(PreviewUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetUnstakingStatusResponse getUnstakingStatus(GetUnstakingStatusRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Staking Status */
     GetStakingStatusResponse getStakingStatus(GetStakingStatusRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Get Unstaking Status */
+    GetUnstakingStatusResponse getUnstakingStatus(GetUnstakingStatusRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    /** Preview Unstake */
+    PreviewUnstakeResponse previewUnstake(PreviewUnstakeRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

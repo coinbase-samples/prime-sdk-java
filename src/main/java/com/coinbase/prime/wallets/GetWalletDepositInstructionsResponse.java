@@ -21,36 +21,32 @@ import com.coinbase.prime.model.WalletFiatDepositInstructions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving wallet deposit instructions.
- * 
- * Contains both crypto and fiat deposit instructions for the specified wallet,
- * providing the necessary information for users to deposit funds.
+ * Get Wallet Deposit Instructions
  */
 public class GetWalletDepositInstructionsResponse {
-    /** Cryptocurrency deposit instructions for the wallet */
     @JsonProperty("crypto_instructions")
-    WalletCryptoDepositInstructions cryptoDepositInstructions;
-    /** Fiat currency deposit instructions for the wallet */
+    private WalletCryptoDepositInstructions cryptoInstructions;
+
     @JsonProperty("fiat_instructions")
-    WalletFiatDepositInstructions fiatDepositInstructions;
+    private WalletFiatDepositInstructions fiatInstructions;
 
     public GetWalletDepositInstructionsResponse() {
     }
 
-    public WalletCryptoDepositInstructions getCryptoDepositInstructions() {
-        return cryptoDepositInstructions;
+    public WalletCryptoDepositInstructions getCryptoInstructions() {
+        return cryptoInstructions;
     }
 
-    public void setCryptoDepositInstructions(WalletCryptoDepositInstructions cryptoDepositInstructions) {
-        this.cryptoDepositInstructions = cryptoDepositInstructions;
+    public void setCryptoInstructions(WalletCryptoDepositInstructions cryptoInstructions) {
+        this.cryptoInstructions = cryptoInstructions;
     }
 
-    public WalletFiatDepositInstructions getFiatDepositInstructions() {
-        return fiatDepositInstructions;
+    public WalletFiatDepositInstructions getFiatInstructions() {
+        return fiatInstructions;
     }
 
-    public void setFiatDepositInstructions(WalletFiatDepositInstructions fiatDepositInstructions) {
-        this.fiatDepositInstructions = fiatDepositInstructions;
+    public void setFiatInstructions(WalletFiatDepositInstructions fiatInstructions) {
+        this.fiatInstructions = fiatInstructions;
     }
 
 }

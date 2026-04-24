@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Allocation by ID
+ */
 public class GetAllocationRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -56,16 +59,24 @@ public class GetAllocationRequest {
     }
 
     public static class Builder {
-        private final String portfolioId;
-        private final String allocationId;
+        private String portfolioId;
+        private String allocationId;
 
-        public Builder(String portfolioId, String allocationId) {
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder allocationId(String allocationId) {
             this.allocationId = allocationId;
+            return this;
         }
 
         public GetAllocationRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetAllocationRequest(this);
         }
 
@@ -73,7 +84,6 @@ public class GetAllocationRequest {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-
             if (isNullOrEmpty(this.allocationId)) {
                 throw new CoinbaseClientException("AllocationId is required");
             }

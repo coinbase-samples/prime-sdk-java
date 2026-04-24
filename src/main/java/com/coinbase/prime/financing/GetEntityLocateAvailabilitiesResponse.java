@@ -17,8 +17,13 @@
 package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.Locate;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Get Entity Locate Availabilities
+ */
 public class GetEntityLocateAvailabilitiesResponse {
+    @JsonProperty("locates")
     private Locate[] locates;
 
     public GetEntityLocateAvailabilitiesResponse() {

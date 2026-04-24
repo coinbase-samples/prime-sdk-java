@@ -261,7 +261,7 @@ public class OrdersServiceSerializationTest {
 
     @Test
     public void testCancelOrderResponseDeserialization() throws JsonProcessingException {
-        String json = "{\"order_id\":\"order-789\"}";
+        String json = "{\"id\":\"order-789\"}";
 
         CancelOrderResponse response = objectMapper.readValue(json, CancelOrderResponse.class);
 
@@ -468,7 +468,7 @@ public class OrdersServiceSerializationTest {
         assertNotNull(response);
         assertEquals("order-456", response.getOrderId());
         assertNotNull(response.getEditHistory());
-        assertEquals(2, response.getEditHistory().size());
+        assertEquals(2, response.getEditHistory().length);
     }
 
     // ==================== Builder Validation Tests ====================

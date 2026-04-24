@@ -1,5 +1,5 @@
 /*
- * Copyright 2026-present Coinbase Global, Inc.
+ * Copyright 2025-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,8 +19,9 @@ package com.coinbase.prime.staking;
 import com.coinbase.prime.model.ValidatorStakingInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
+/**
+ * Get Staking Status
+ */
 public class GetStakingStatusResponse {
     @JsonProperty("portfolio_id")
     private String portfolioId;
@@ -35,7 +36,7 @@ public class GetStakingStatusResponse {
     private String currentTimestamp;
 
     @JsonProperty("validators")
-    private List<ValidatorStakingInfo> validators;
+    private ValidatorStakingInfo[] validators;
 
     public GetStakingStatusResponse() {
     }
@@ -72,11 +73,12 @@ public class GetStakingStatusResponse {
         this.currentTimestamp = currentTimestamp;
     }
 
-    public List<ValidatorStakingInfo> getValidators() {
+    public ValidatorStakingInfo[] getValidators() {
         return validators;
     }
 
-    public void setValidators(List<ValidatorStakingInfo> validators) {
+    public void setValidators(ValidatorStakingInfo[] validators) {
         this.validators = validators;
     }
+
 }

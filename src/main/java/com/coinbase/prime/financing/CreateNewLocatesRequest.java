@@ -16,94 +16,127 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Create New Locates
+ */
 public class CreateNewLocatesRequest {
-  @JsonIgnore
-  @JsonProperty(required = true, value = "portfolio_id")
-  private String portfolioId;
-
-  private String symbol;
-
-  private String amount;
-
-  @JsonProperty("locate_date")
-  private String locateDate;
-
-  public CreateNewLocatesRequest() {
-  }
-
-  public CreateNewLocatesRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.symbol = builder.symbol;
-    this.amount = builder.amount;
-    this.locateDate = builder.locateDate;
-  }
-
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getSymbol() {
-    return symbol;
-  }
-
-  public void setSymbol(String symbol) {
-    this.symbol = symbol;
-  }
-
-  public String getAmount() {
-    return amount;
-  }
-
-  public void setAmount(String amount) {
-    this.amount = amount;
-  }
-
-  public String getLocateDate() {
-    return locateDate;
-  }
-
-  public void setLocateDate(String locateDate) {
-    this.locateDate = locateDate;
-  }
-
-  public static class Builder {
+    @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
+
+    @JsonProperty("symbol")
     private String symbol;
+
+    @JsonProperty("amount")
     private String amount;
+
+    @JsonProperty("conversion_date")
+    private String conversionDate;
+
+    @JsonProperty("locate_date")
     private String locateDate;
 
-    public Builder() {
+    public CreateNewLocatesRequest() {
     }
 
-    public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
-      return this;
+    public CreateNewLocatesRequest(Builder builder) {
+        this.portfolioId = builder.portfolioId;
+        this.symbol = builder.symbol;
+        this.amount = builder.amount;
+        this.conversionDate = builder.conversionDate;
+        this.locateDate = builder.locateDate;
     }
 
-    public Builder symbol(String symbol) {
-      this.symbol = symbol;
-      return this;
+    public String getPortfolioId() {
+        return portfolioId;
     }
 
-    public Builder amount(String amount) {
-      this.amount = amount;
-      return this;
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
     }
 
-    public Builder locateDate(String locateDate) {
-      this.locateDate = locateDate;
-      return this;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public CreateNewLocatesRequest build() {
-      return new CreateNewLocatesRequest(this);
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
-  }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getConversionDate() {
+        return conversionDate;
+    }
+
+    public void setConversionDate(String conversionDate) {
+        this.conversionDate = conversionDate;
+    }
+
+    public String getLocateDate() {
+        return locateDate;
+    }
+
+    public void setLocateDate(String locateDate) {
+        this.locateDate = locateDate;
+    }
+
+    public static class Builder {
+        private String portfolioId;
+        private String symbol;
+        private String amount;
+        private String conversionDate;
+        private String locateDate;
+
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
+            this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder symbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
+
+        public Builder amount(String amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public Builder conversionDate(String conversionDate) {
+            this.conversionDate = conversionDate;
+            return this;
+        }
+
+        public Builder locateDate(String locateDate) {
+            this.locateDate = locateDate;
+            return this;
+        }
+
+        public CreateNewLocatesRequest build() throws CoinbaseClientException {
+            validate();
+            return new CreateNewLocatesRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+        }
+    }
 }

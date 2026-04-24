@@ -18,16 +18,28 @@ package com.coinbase.prime.transactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Create Conversion
+ */
 public class CreateConversionResponse {
     @JsonProperty("activity_id")
     private String activityId;
+
     @JsonProperty("source_symbol")
     private String sourceSymbol;
+
     @JsonProperty("destination_symbol")
     private String destinationSymbol;
+
+    @JsonProperty("amount")
     private String amount;
+
+    @JsonProperty("destination")
     private String destination;
+
+    @JsonProperty("source")
     private String source;
+
     @JsonProperty("transaction_id")
     private String transactionId;
 

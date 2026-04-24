@@ -16,41 +16,39 @@
 
 package com.coinbase.prime.transactions;
 
-import com.coinbase.prime.model.enums.DestinationType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for creating a wallet transfer.
- * 
- * Contains the details of the transfer request including activity ID, approval URL,
- * transfer amounts, addresses, and transaction information.
+ * Create Transfer
  */
 public class CreateWalletTransferResponse {
-    /** The activity ID for the transfer */
     @JsonProperty("activity_id")
     private String activityId;
-    /** A URL to the activity associated with this transfer for approval */
+
     @JsonProperty("approval_url")
     private String approvalUrl;
-    /** The symbol of the transferred asset */
+
+    @JsonProperty("symbol")
     private String symbol;
-    /** The amount being transferred */
+
+    @JsonProperty("amount")
     private String amount;
-    /** The fee associated with the transfer */
+
+    @JsonProperty("fee")
     private String fee;
-    /** The destination address for the transfer */
+
     @JsonProperty("destination_address")
     private String destinationAddress;
-    /** The type of the destination (e.g., WALLET, EXCHANGE) */
+
     @JsonProperty("destination_type")
-    private DestinationType destinationType;
-    /** The source address for the transfer */
+    private String destinationType;
+
     @JsonProperty("source_address")
     private String sourceAddress;
-    /** The type of the source (e.g., WALLET, EXCHANGE) */
+
     @JsonProperty("source_type")
-    private DestinationType sourceType;
-    /** The unique identifier for the transfer transaction */
+    private String sourceType;
+
     @JsonProperty("transaction_id")
     private String transactionId;
 
@@ -105,11 +103,11 @@ public class CreateWalletTransferResponse {
         this.destinationAddress = destinationAddress;
     }
 
-    public DestinationType getDestinationType() {
+    public String getDestinationType() {
         return destinationType;
     }
 
-    public void setDestinationType(DestinationType destinationType) {
+    public void setDestinationType(String destinationType) {
         this.destinationType = destinationType;
     }
 
@@ -121,11 +119,11 @@ public class CreateWalletTransferResponse {
         this.sourceAddress = sourceAddress;
     }
 
-    public DestinationType getSourceType() {
+    public String getSourceType() {
         return sourceType;
     }
 
-    public void setSourceType(DestinationType sourceType) {
+    public void setSourceType(String sourceType) {
         this.sourceType = sourceType;
     }
 

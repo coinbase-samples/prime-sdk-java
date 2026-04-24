@@ -16,16 +16,20 @@
 
 package com.coinbase.prime.positions;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.coinbase.core.errors.CoinbaseClientException;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Entity Positions
+ */
 public class ListPositionsRequest extends PrimeListRequest {
-    @JsonProperty("entity_id")
+    @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
@@ -37,27 +41,25 @@ public class ListPositionsRequest extends PrimeListRequest {
         this.entityId = builder.entityId;
     }
 
-    public String getId() {
+    public String getEntityId() {
         return entityId;
     }
 
-    public void setId(String entityId) {
+    public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
 
     public static class Builder {
         private String entityId;
         private String cursor;
-        private Integer limit;
         private SortDirection sortDirection;
+        private Integer limit;
+
+        public Builder() {
+        }
 
         public Builder entityId(String entityId) {
             this.entityId = entityId;
-            return this;
-        }
-
-        public Builder cursor(String cursor) {
-            this.cursor = cursor;
             return this;
         }
 
@@ -66,13 +68,14 @@ public class ListPositionsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder sortDirection(SortDirection sortDirection) {
-            this.sortDirection = sortDirection;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
-        public ListPositionsRequest build() {
-            this.validate();
+        public ListPositionsRequest build() throws CoinbaseClientException {
+            validate();
             return new ListPositionsRequest(this);
         }
 

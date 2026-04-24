@@ -17,14 +17,13 @@
 package com.coinbase.prime.activities;
 
 import com.coinbase.prime.model.Activity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving an activity by its activity ID.
- * 
- * This endpoint can retrieve both portfolio and entity activities when passed the appropriate API key.
+ * Get Activity by Activity ID
  */
 public class GetActivityResponse {
-    /** The activity details */
+    @JsonProperty("activity")
     private Activity activity;
 
     public GetActivityResponse() {

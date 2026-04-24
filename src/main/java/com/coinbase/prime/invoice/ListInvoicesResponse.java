@@ -17,8 +17,13 @@
 package com.coinbase.prime.invoice;
 
 import com.coinbase.prime.model.Invoice;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * List Invoices
+ */
 public class ListInvoicesResponse {
+    @JsonProperty("invoices")
     private Invoice[] invoices;
 
     public ListInvoicesResponse() {

@@ -19,6 +19,9 @@ package com.coinbase.prime.wallets;
 import com.coinbase.prime.model.Network;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Create Wallet Deposit Address
+ */
 public class CreateWalletDepositAddressResponse {
     @JsonProperty("address")
     private String address;
@@ -55,4 +58,5 @@ public class CreateWalletDepositAddressResponse {
     public void setNetwork(Network network) {
         this.network = network;
     }
+
 }
