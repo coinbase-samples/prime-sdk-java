@@ -16,17 +16,23 @@
 
 package com.coinbase.prime.futures;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * Set Auto Sweep
+ */
 public class SetAutoSweepResponse {
-    private boolean success;
+    @JsonProperty("success")
+    private Boolean success;
 
     public SetAutoSweepResponse() {
     }
 
-    public boolean getSuccess() {
+    public Boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
+    public void setSuccess(Boolean success) {
         this.success = success;
     }
 

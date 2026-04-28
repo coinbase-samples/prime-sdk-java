@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: Test
+  version: 1.0.0
+paths:
+  /v1/entities/{entity_id}/foo:
+    get:
+      operationId: PrimeRESTAPI_GetFoo
+      summary: List entity foo
+      tags:
+        - Test Tag
+      parameters:
+        - name: entity_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FooResponse'
+components:
+  schemas:
+    FooItem:
+      type: object
+      properties:
+        name:
+          type: string
+    FooResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FooItem'
+        has_next:
+          type: boolean

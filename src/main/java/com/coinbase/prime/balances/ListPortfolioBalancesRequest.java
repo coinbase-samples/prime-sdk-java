@@ -17,17 +17,26 @@
 package com.coinbase.prime.balances;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.PortfolioBalanceType;
+import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListPortfolioBalancesRequest {
-    @JsonProperty("portfolio_id")
+/**
+ * List Portfolio Balances
+ */
+public class ListPortfolioBalancesRequest extends PrimeListRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
+    @JsonProperty("symbols")
     private String[] symbols;
+
     @JsonProperty("balance_type")
     private PortfolioBalanceType balanceType;
 
@@ -35,6 +44,7 @@ public class ListPortfolioBalancesRequest {
     }
 
     public ListPortfolioBalancesRequest(Builder builder) {
+        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.symbols = builder.symbols;
         this.balanceType = builder.balanceType;
@@ -68,6 +78,12 @@ public class ListPortfolioBalancesRequest {
         private String portfolioId;
         private String[] symbols;
         private PortfolioBalanceType balanceType;
+        private String cursor;
+        private SortDirection sortDirection;
+        private Integer limit;
+
+        public Builder() {
+        }
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
@@ -84,8 +100,19 @@ public class ListPortfolioBalancesRequest {
             return this;
         }
 
+        public Builder limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
         public ListPortfolioBalancesRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListPortfolioBalancesRequest(this);
         }
 

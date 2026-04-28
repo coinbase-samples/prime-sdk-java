@@ -23,126 +23,139 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Accept Quote
+ */
 public class AcceptQuoteRequest {
-  @JsonProperty(required = true, value = "portfolio_id")
-  @JsonIgnore
-  private String portfolioId;
-  @JsonProperty(required = true, value = "product_id")
-  private String productId;
-  @JsonProperty(required = true, value = "side")
-  private OrderSide side;
-  @JsonProperty(required = true, value = "client_order_id")
-  private String clientOrderId;
-  @JsonProperty(required = true, value = "quote_id")
-  private String quoteId;
-
-  public AcceptQuoteRequest() {
-  }
-
-  public AcceptQuoteRequest(Builder builder) {
-    this.portfolioId = builder.portfolioId;
-    this.productId = builder.productId;
-    this.side = builder.side;
-    this.clientOrderId = builder.clientOrderId;
-    this.quoteId = builder.quoteId;
-  }
-
-  public String getPortfolioId() {
-    return portfolioId;
-  }
-
-  public void setPortfolioId(String portfolioId) {
-    this.portfolioId = portfolioId;
-  }
-
-  public String getProductId() {
-    return productId;
-  }
-
-  public void setProductId(String productId) {
-    this.productId = productId;
-  }
-
-  public OrderSide getSide() {
-    return side;
-  }
-
-  public void setSide(OrderSide side) {
-    this.side = side;
-  }
-
-  public String getClientOrderId() {
-    return clientOrderId;
-  }
-
-  public void setClientOrderId(String clientOrderId) {
-    this.clientOrderId = clientOrderId;
-  }
-
-  public String getQuoteId() {
-    return quoteId;
-  }
-
-  public void setQuoteId(String quoteId) {
-    this.quoteId = quoteId;
-  }
-
-  public static class Builder {
+    @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
+
+    @JsonProperty("product_id")
     private String productId;
+
+    @JsonProperty("side")
     private OrderSide side;
+
+    @JsonProperty("client_order_id")
     private String clientOrderId;
+
+    @JsonProperty("quote_id")
     private String quoteId;
 
-    public Builder() {
+    @JsonProperty("settl_currency")
+    private String settlCurrency;
+
+    public AcceptQuoteRequest() {
     }
 
-    public Builder portfolioId(String portfolioId) {
-      this.portfolioId = portfolioId;
-      return this;
+    public AcceptQuoteRequest(Builder builder) {
+        this.portfolioId = builder.portfolioId;
+        this.productId = builder.productId;
+        this.side = builder.side;
+        this.clientOrderId = builder.clientOrderId;
+        this.quoteId = builder.quoteId;
+        this.settlCurrency = builder.settlCurrency;
     }
 
-    public Builder productId(String productId) {
-      this.productId = productId;
-      return this;
+    public String getPortfolioId() {
+        return portfolioId;
     }
 
-    public Builder side(OrderSide side) {
-      this.side = side;
-      return this;
+    public void setPortfolioId(String portfolioId) {
+        this.portfolioId = portfolioId;
     }
 
-    public Builder clientOrderId(String clientOrderId) {
-      this.clientOrderId = clientOrderId;
-      return this;
+    public String getProductId() {
+        return productId;
     }
 
-    public Builder quoteId(String quoteId) {
-      this.quoteId = quoteId;
-      return this;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public AcceptQuoteRequest build() throws CoinbaseClientException {
-      this.validate();
-      return new AcceptQuoteRequest(this);
+    public OrderSide getSide() {
+        return side;
     }
 
-    private void validate() throws CoinbaseClientException {
-      if (isNullOrEmpty(this.portfolioId)) {
-        throw new CoinbaseClientException("PortfolioId is required");
-      }
-      if (isNullOrEmpty(this.productId)) {
-        throw new CoinbaseClientException("ProductId is required");
-      }
-      if (this.side == null) {
-        throw new CoinbaseClientException("Side is required");
-      }
-      if (isNullOrEmpty(this.clientOrderId)) {
-        throw new CoinbaseClientException("ClientOrderId is required");
-      }
-      if (isNullOrEmpty(this.quoteId)) {
-        throw new CoinbaseClientException("QuoteId is required");
-      }
+    public void setSide(OrderSide side) {
+        this.side = side;
     }
-  }
+
+    public String getClientOrderId() {
+        return clientOrderId;
+    }
+
+    public void setClientOrderId(String clientOrderId) {
+        this.clientOrderId = clientOrderId;
+    }
+
+    public String getQuoteId() {
+        return quoteId;
+    }
+
+    public void setQuoteId(String quoteId) {
+        this.quoteId = quoteId;
+    }
+
+    public String getSettlCurrency() {
+        return settlCurrency;
+    }
+
+    public void setSettlCurrency(String settlCurrency) {
+        this.settlCurrency = settlCurrency;
+    }
+
+    public static class Builder {
+        private String portfolioId;
+        private String productId;
+        private OrderSide side;
+        private String clientOrderId;
+        private String quoteId;
+        private String settlCurrency;
+
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
+            this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder productId(String productId) {
+            this.productId = productId;
+            return this;
+        }
+
+        public Builder side(OrderSide side) {
+            this.side = side;
+            return this;
+        }
+
+        public Builder clientOrderId(String clientOrderId) {
+            this.clientOrderId = clientOrderId;
+            return this;
+        }
+
+        public Builder quoteId(String quoteId) {
+            this.quoteId = quoteId;
+            return this;
+        }
+
+        public Builder settlCurrency(String settlCurrency) {
+            this.settlCurrency = settlCurrency;
+            return this;
+        }
+
+        public AcceptQuoteRequest build() throws CoinbaseClientException {
+            validate();
+            return new AcceptQuoteRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
+        }
+    }
 }

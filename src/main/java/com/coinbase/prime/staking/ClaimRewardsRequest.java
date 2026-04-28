@@ -16,32 +16,28 @@
 
 package com.coinbase.prime.staking;
 
-import com.coinbase.prime.model.WalletClaimRewardsInputs;
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.prime.model.WalletClaimRewardsInputs;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Creates a request to claim the pending staking rewards from the specified wallet.
+ * Claim Wallet Staking Rewards (Alpha)
  */
 public class ClaimRewardsRequest {
-    /** The portfolio ID */
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
-    /** The wallet ID */
-    @JsonIgnore
     @JsonProperty(required = true, value = "wallet_id")
+    @JsonIgnore
     private String walletId;
 
-    /** The client generated idempotency key for requested execution. Any subsequent requests with the same key will return the original response */
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
 
-    /** Custom inputs for claim rewards operations on a wallet. Requirements and supported fields vary by asset type. */
     @JsonProperty("inputs")
     private WalletClaimRewardsInputs inputs;
 
@@ -117,7 +113,7 @@ public class ClaimRewardsRequest {
         }
 
         public ClaimRewardsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ClaimRewardsRequest(this);
         }
 
@@ -127,9 +123,6 @@ public class ClaimRewardsRequest {
             }
             if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
-            }
-            if (isNullOrEmpty(this.idempotencyKey)) {
-                throw new CoinbaseClientException("IdempotencyKey is required");
             }
         }
     }

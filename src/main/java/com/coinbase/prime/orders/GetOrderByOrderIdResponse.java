@@ -17,14 +17,13 @@
 package com.coinbase.prime.orders;
 
 import com.coinbase.prime.model.Order;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving an order by order ID.
- * 
- * Retrieve an order by order ID.
+ * Get Order by Order ID
  */
 public class GetOrderByOrderIdResponse {
-    /** The order details */
+    @JsonProperty("order")
     private Order order;
 
     public GetOrderByOrderIdResponse() {

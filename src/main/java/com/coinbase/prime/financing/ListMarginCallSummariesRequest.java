@@ -16,12 +16,18 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * List Margin Call Summaries
+ */
 public class ListMarginCallSummariesRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
 
     @JsonProperty("start_date")
@@ -86,8 +92,15 @@ public class ListMarginCallSummariesRequest {
             return this;
         }
 
-        public ListMarginCallSummariesRequest build() {
+        public ListMarginCallSummariesRequest build() throws CoinbaseClientException {
+            validate();
             return new ListMarginCallSummariesRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }

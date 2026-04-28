@@ -25,19 +25,33 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Activities
+ */
 public class ListPortfolioActivitiesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
+    @JsonProperty("symbols")
     private String[] symbols;
+
+    @JsonProperty("categories")
     private ActivityCategory[] categories;
+
+    @JsonProperty("statuses")
     private ActivityStatus[] statuses;
+
     @JsonProperty("start_time")
     private String startTime;
+
     @JsonProperty("end_time")
     private String endTime;
+
+    @JsonProperty("get_network_unified_activities")
+    private Boolean getNetworkUnifiedActivities;
 
     public ListPortfolioActivitiesRequest() {
     }
@@ -50,6 +64,7 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
         this.statuses = builder.statuses;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
+        this.getNetworkUnifiedActivities = builder.getNetworkUnifiedActivities;
     }
 
     public String getPortfolioId() {
@@ -100,19 +115,32 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
         this.endTime = endTime;
     }
 
+    public Boolean getGetNetworkUnifiedActivities() {
+        return getNetworkUnifiedActivities;
+    }
+
+    public void setGetNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
+        this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
+    }
+
     public static class Builder {
-        private final String portfolioId;
+        private String portfolioId;
         private String[] symbols;
         private ActivityCategory[] categories;
         private ActivityStatus[] statuses;
         private String startTime;
         private String endTime;
+        private Boolean getNetworkUnifiedActivities;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
 
-        public Builder(String portfolioId) {
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
         }
 
         public Builder symbols(String[] symbols) {
@@ -140,6 +168,11 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
             return this;
         }
 
+        public Builder getNetworkUnifiedActivities(Boolean getNetworkUnifiedActivities) {
+            this.getNetworkUnifiedActivities = getNetworkUnifiedActivities;
+            return this;
+        }
+
         public Builder limit(Integer limit) {
             this.limit = limit;
             return this;
@@ -152,7 +185,7 @@ public class ListPortfolioActivitiesRequest extends PrimeListRequest {
         }
 
         public ListPortfolioActivitiesRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListPortfolioActivitiesRequest(this);
         }
 

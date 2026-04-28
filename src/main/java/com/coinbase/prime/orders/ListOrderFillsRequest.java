@@ -25,11 +25,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Order Fills
+ */
 public class ListOrderFillsRequest extends PrimeListRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
-    @JsonProperty("order_id")
+
+    @JsonProperty(required = true, value = "order_id")
     @JsonIgnore
     private String orderId;
 
@@ -78,27 +82,26 @@ public class ListOrderFillsRequest extends PrimeListRequest {
             return this;
         }
 
+        public Builder limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
         public Builder pagination(Pagination pagination) {
             this.cursor = pagination.getNextCursor();
             this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
         public ListOrderFillsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListOrderFillsRequest(this);
         }
 
-        public void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-
             if (isNullOrEmpty(this.orderId)) {
                 throw new CoinbaseClientException("OrderId is required");
             }

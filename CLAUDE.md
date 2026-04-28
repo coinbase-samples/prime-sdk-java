@@ -30,14 +30,14 @@ This is a Maven-based Java project (Java 11+). Common development commands:
 This is the **Coinbase Prime Java SDK** - a sample library for interacting with Coinbase Prime REST APIs. Key architectural patterns:
 
 ### Service Layer Pattern
-- **PrimeServiceFactory**: Factory class that creates service instances for different API domains
-- **Service interfaces**: Each API domain (Orders, Portfolios, Wallets, etc.) has a corresponding service interface
-- **Service implementations**: Concrete implementations ending with `ServiceImpl` that handle HTTP communication
+- **PrimeServiceFactory**: Factory class that creates service instances for different API domains (regenerate with `tools/model-generator`; do not hand-edit)
+- **Service interfaces**: Each API domain (Orders, Portfolios, Wallets, etc.) has a corresponding service interface (**generated**)
+- **Service implementations**: Concrete implementations ending with `ServiceImpl` that handle HTTP communication (**generated**)
 
 ### Core Components
 - **CoinbasePrimeClient**: Main HTTP client that extends `CoinbaseNetHttpClient` from `coinbase-core-java` 
 - **CoinbasePrimeCredentials**: Handles API authentication using access key, passphrase, and signing key
-- **Request/Response pattern**: Each API operation has dedicated request and response classes using Builder patterns
+- **Request/Response pattern**: Each API operation has dedicated request and response classes using Builder patterns (**generated**; do not hand-write)
 
 ### Package Structure
 - `com.coinbase.prime.client`: Core HTTP client
@@ -107,17 +107,28 @@ Working examples available in `src/main/java/com/coinbase/examples/` including:
 
 ### AI Agent Code Generation
 
-#### Model Generation - IMPORTANT
-**DO NOT create domain models or enums by hand!**
+#### SDK code generation - IMPORTANT
+**Do not hand-write domain models, enums, per-operation `*Request`/`*Response`, or `*Service`/`*ServiceImpl` files** — they are produced by the holistic generator in `tools/model-generator` (see `com.coinbase.tools.sdkgenerator`). Configuration mirrors the .NET generator: `tools/model-generator/config/generator-config.json` and `operations-overrides.json`.
 
-Use the model generator from the repository root:
+From the **repository root** (recommended):
 ```bash
-cd tools/model-generator
 mvn -Pgenerate
 ```
 
+Optional: `--dry-run` or `--diff` (no writes; compare to disk):
+```bash
+mvn -Pgenerate -Dgenerator.args=--diff
+```
+
+From `tools/model-generator` only:
+```bash
+mvn -Pgenerate
+# or: mvn -q compile exec:java@generate-models -Dgenerator.args=--diff
+```
+
 This tool:
-- Generates models and enums from the OpenAPI spec
+- Downloads the OpenAPI spec, generates models and enums (OpenAPI Generator + `PostProcessor`)
+- Generates `*Request`, `*Response`, `*Service`, `*ServiceImpl` per tag/operation and `PrimeServiceFactory`
 - Maintains SDK conventions (Builder pattern, proper annotations)
 - Prevents drift between spec and implementation
 - Processes all models from the spec, updating existing files to catch changes
@@ -125,55 +136,16 @@ This tool:
 
 **Manual model creation is prohibited.** All domain models in `com.coinbase.prime.model` and enums in `com.coinbase.prime.model.enums` must be generated from the OpenAPI specification.
 
-**Exception**: Request/Response classes in service packages (e.g., `orders/GetOrderRequest.java`) are hand-crafted and co-located with their service.
-
-#### Speed Optimization for Service Generation
-**PRIORITY: Execute quickly, validate afterwards**
-
-**Parallelized Fast Generation Strategy:**
-1. **Analyze entire OpenAPI spec** first to identify all missing endpoints
-2. **Run model generator first** - `cd tools/model-generator && mvn -Pgenerate`
-3. **Plan batches by domain** - group related services together (e.g., FCM, Staking, Orders)
-4. **Execute multiple Task agents in parallel** - generate 5-10 services simultaneously across domains
-5. **NO premature validation** - generate ALL files first, validate once at the end
-6. **Template-based rapid creation** - copy existing files and modify rather than create from scratch
-7. **Single build validation** - run `mvn compile` only after all generation is complete
-
-**Parallelization Implementation:**
-```
-// Execute multiple Task agents simultaneously in a single message
-Task 1: Generate FCM models (3 files)
-Task 2: Generate Staking models (5 files) 
-Task 3: Generate Invoice models (5 files)
-Task 4: Generate Margin models (7 files)
-Task 5: Generate Misc models (7 files)
-Task 6: Generate Wallet models (3 files)
-Task 7: Generate Order models (3 files)
-Task 8: Generate Service A
-Task 9: Generate Service B
-```
-
-**Fast Template-Based Approach:**
-1. **Use existing files as templates** - copy/modify instead of creating from scratch
-2. **Batch creation** - generate 5-10 files rapidly per task
-3. **Focus on compilation first** - get objects created and building, refine schema compliance later
-4. **Template pattern**: Copy existing request/response pair → Search/replace service names → Adjust properties
-
-**Template Locations:**
-- Request template: `activities/ListActivitiesRequest.java` 
-- Response template: `activities/ListActivitiesResponse.java`
-- Single object response: `activities/GetActivityResponse.java`
-- Service interface: `activities/ActivitiesService.java`
-- Service implementation: `activities/ActivitiesServiceImpl.java`
+The profile id was formerly `generate-models`; use **`mvn -Pgenerate`** from the repo root.
 
 ### Development Workflow
-When implementing new endpoints, pull endpoint definitions directly from the OpenAPI specification:
+When the OpenAPI spec adds or changes operations:
 
-1. **Reference OpenAPI spec**: Use `apiSpec/prime-public-spec.yaml` as the source of truth for all endpoint definitions
-2. **Extract by tags**: Organize endpoints by their OpenAPI tags to determine package structure
-3. **Follow Java patterns**: Use existing service implementations as templates
-4. **Generate classes**: Create Request/Response classes using Builder patterns
-5. **Update factory**: Add new services to `PrimeServiceFactory`
+1. **Reference the live spec** (or `apiSpec/prime-public-spec.yaml` when fetched) as the source of truth
+2. **Run the holistic generator** from the repo root: `mvn -Pgenerate` (or `-Dgenerator.args=--diff` to compare without writing)
+3. **Build**: `mvn clean install` and fix any generator gaps in `tools/model-generator` (not by editing generated Java by hand, except where noted below)
+
+Hand-maintained (not overwritten by the generator) includes: `com.coinbase.prime.common` (e.g. `PrimeListRequest`, `Pagination`), credentials/client/utils, and **curated** examples under `com.coinbase.examples`
 
 ### Endpoint Discovery
 To identify available endpoints:

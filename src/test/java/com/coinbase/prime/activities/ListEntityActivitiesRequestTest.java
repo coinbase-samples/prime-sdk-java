@@ -32,7 +32,8 @@ public class ListEntityActivitiesRequestTest {
     @Test
     public void testBuilderWithEnums() throws CoinbaseClientException {
         // Test that the builder accepts enum types
-        ListEntityActivitiesRequest request = new ListEntityActivitiesRequest.Builder("entity-123")
+        ListEntityActivitiesRequest request = new ListEntityActivitiesRequest.Builder()
+                .entityId("entity-123")
                 .activityLevel(ActivityLevel.ACTIVITY_LEVEL_ALL)
                 .categories(new ActivityCategory[]{
                         ActivityCategory.ACTIVITY_CATEGORY_ORDER,
@@ -65,7 +66,8 @@ public class ListEntityActivitiesRequestTest {
 
     @Test
     public void testSettersWithEnums() {
-        ListEntityActivitiesRequest request = new ListEntityActivitiesRequest("entity-456");
+        ListEntityActivitiesRequest request = new ListEntityActivitiesRequest();
+        request.setEntityId("entity-456");
 
         // Test that setters accept enum types
         request.setActivityLevel(ActivityLevel.ACTIVITY_LEVEL_PORTFOLIO);
@@ -81,7 +83,8 @@ public class ListEntityActivitiesRequestTest {
     @Test
     public void testJsonSerialization() throws Exception {
         // Test that enums serialize correctly to JSON
-        ListEntityActivitiesRequest request = new ListEntityActivitiesRequest.Builder("entity-789")
+        ListEntityActivitiesRequest request = new ListEntityActivitiesRequest.Builder()
+                .entityId("entity-789")
                 .activityLevel(ActivityLevel.ACTIVITY_LEVEL_ENTITY)
                 .categories(new ActivityCategory[]{ActivityCategory.ACTIVITY_CATEGORY_LENDING})
                 .statuses(new ActivityStatus[]{ActivityStatus.ACTIVITY_STATUS_CANCELLED})
@@ -99,11 +102,11 @@ public class ListEntityActivitiesRequestTest {
     public void testBuilderRequiresEntityId() {
         // Test that validation works
         assertThrows(CoinbaseClientException.class, () -> {
-            new ListEntityActivitiesRequest.Builder(null).build();
+            new ListEntityActivitiesRequest.Builder().entityId(null).build();
         });
 
         assertThrows(CoinbaseClientException.class, () -> {
-            new ListEntityActivitiesRequest.Builder("").build();
+            new ListEntityActivitiesRequest.Builder().entityId("").build();
         });
     }
 }

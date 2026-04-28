@@ -1,0 +1,166 @@
+[
+  {
+    "operationId": "PrimeRESTAPI_CancelFuturesSweep",
+    "sdkMethod": "CancelEntityFuturesSweep"
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateOnchainAddressGroup",
+    "sdkMethod": "CreateOnchainAddressBookEntry"
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreatePortfolioAddressBookEntry",
+    "sdkMethod": "CreateAddressBookEntry"
+  },
+  {
+    "operationId": "PrimeRESTAPI_CreateQuoteRequest",
+    "sdkMethod": "CreateQuote"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetAllocationsByClientNettingId",
+    "sdkMethod": "ListAllocationsByNettingId"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityActivities",
+    "paramTypeOverrides": {
+      "categories": "ActivityCategory[]",
+      "statuses": "ActivityStatus[]",
+      "activity_level": "ActivityLevel"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityAssets",
+    "sdkMethod": "ListAssets"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityPaymentMethodDetails",
+    "sdkMethod": "GetPaymentMethodDetails"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetEntityPaymentMethods",
+    "sdkMethod": "ListPaymentMethods"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetFcmBalance",
+    "sdkMethod": "GetEntityFcmBalance"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetFuturesSweeps",
+    "sdkMethod": "ListEntityFuturesSweeps"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetLocateAvailabilities",
+    "sdkMethod": "GetEntityLocateAvailabilities"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetMarginSummaries",
+    "sdkMethod": "ListMarginCallSummaries"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOpenOrders",
+    "paramTypeOverrides": {
+      "order_type": "OrderType",
+      "order_side": "OrderSide"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOrders",
+    "sdkMethod": "ListPortfolioOrders",
+    "paramTypeOverrides": {
+      "order_type": "OrderType",
+      "order_side": "OrderSide"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetOrder",
+    "sdkMethod": "GetOrderByOrderId"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioActivities",
+    "paramTypeOverrides": {
+      "categories": "ActivityCategory[]",
+      "statuses": "ActivityStatus[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioAddressBook",
+    "sdkMethod": "ListAddressBook"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioAllocations",
+    "paramTypeOverrides": {
+      "order_side": "OrderSide"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioBalances",
+    "forcePaginated": true,
+    "paramTypeOverrides": {
+      "balance_type": "PortfolioBalanceType",
+      "symbols": "String[]"
+    }
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioCounterpartyID",
+    "sdkMethod": "GetPortfolioCounterpartyId"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPortfolioInterestAccruals",
+    "sdkMethod": "ListInterestAccrualsForPortfolio"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetPostTradeCredit",
+    "sdkMethod": "GetPortfolioCreditInformation"
+  },
+  {
+    "operationId": "PrimeRESTAPI_GetTFTieredPricingFees",
+    "sdkMethod": "GetTradeFinanceTieredPricingFees"
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListAdvancedTransferTransactions",
+    "service": "advancedtransfer"
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListAggregateEntityPositions",
+    "sdkMethod": "ListAggregatePositions"
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListEntityPositions",
+    "sdkMethod": "ListPositions"
+  },
+  {
+    "operationId": "PrimeRESTAPI_ListTFObligations",
+    "sdkMethod": "ListTradeFinanceObligations"
+  },
+  {
+    "operationId": "PrimeRESTAPI_OrderPreview",
+    "sdkMethod": "GetOrderPreview"
+  },
+  {
+    "operationId": "PrimeRESTAPI_PortfolioStakingInitiate",
+    "sdkMethod": "PortfolioStakingInitiate"
+  },
+  {
+    "operationId": "PrimeRESTAPI_PortfolioStakingUnstake",
+    "sdkMethod": "PortfolioStakingUnstake"
+  },
+  {
+    "operationId": "PrimeRESTAPI_ScheduleFuturesSweep",
+    "sdkMethod": "ScheduleEntityFuturesSweep"
+  },
+  {
+    "operationId": "PrimeRESTAPI_StakingClaimRewards",
+    "sdkMethod": "ClaimRewards"
+  },
+  {
+    "operationId": "PrimeRESTAPI_StakingInitiate",
+    "sdkMethod": "CreateStake"
+  },
+  {
+    "operationId": "PrimeRESTAPI_StakingUnstake",
+    "sdkMethod": "CreateUnstake"
+  },
+  {
+    "operationId": "PrimeRESTAPI_UpdateOnchainAddressGroup",
+    "sdkMethod": "UpdateOnchainAddressBookEntry"
+  }
+]

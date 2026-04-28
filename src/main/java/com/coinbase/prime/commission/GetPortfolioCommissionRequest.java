@@ -22,11 +22,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Portfolio Commission
+ */
 public class GetPortfolioCommissionRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
-    
+
     @JsonProperty("product_id")
     private String productId;
 
@@ -72,13 +75,13 @@ public class GetPortfolioCommissionRequest {
         }
 
         public GetPortfolioCommissionRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetPortfolioCommissionRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("Portfolio ID is required");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
         }
     }

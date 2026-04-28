@@ -16,22 +16,24 @@
 
 package com.coinbase.prime.onchainaddressbook;
 
-import com.coinbase.prime.common.PrimeListRequest;
-import com.coinbase.prime.model.enums.SortDirection;
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Request for listing onchain address groups for a portfolio.
+ * List Onchain Address Groups
  */
-public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
+public class ListOnchainAddressGroupsRequest {
+    @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
     public ListOnchainAddressGroupsRequest() {
     }
 
-    private ListOnchainAddressGroupsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
+    public ListOnchainAddressGroupsRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
     }
 
@@ -43,42 +45,26 @@ public class ListOnchainAddressGroupsRequest extends PrimeListRequest {
         this.portfolioId = portfolioId;
     }
 
-    public String getPath() {
-        return String.format("/v1/portfolios/%s/onchain_address_groups", this.portfolioId);
-    }
-
     public static class Builder {
         private String portfolioId;
-        private String cursor;
-        private SortDirection sortDirection;
-        private Integer limit;
+
+        public Builder() {
+        }
 
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
             return this;
         }
 
-        public Builder cursor(String cursor) {
-            this.cursor = cursor;
-            return this;
-        }
-
-        public Builder sortDirection(SortDirection sortDirection) {
-            this.sortDirection = sortDirection;
-            return this;
-        }
-
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
-        public ListOnchainAddressGroupsRequest build() {
-            if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
-            }
+        public ListOnchainAddressGroupsRequest build() throws CoinbaseClientException {
+            validate();
             return new ListOnchainAddressGroupsRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }
-

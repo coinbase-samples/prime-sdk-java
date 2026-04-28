@@ -16,32 +16,36 @@
 
 package com.coinbase.prime.futures;
 
+import com.coinbase.prime.model.enums.FcmMarginHealthState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Get FCM Risk Limits
+ */
 public class GetFcmRiskLimitsResponse {
-    /** Risk Limit set for a client */
     @JsonProperty("cfm_risk_limit")
     private String cfmRiskLimit;
 
-    /** Limit utilization calculated based on total margin and PnLs */
     @JsonProperty("cfm_risk_limit_utilization")
     private String cfmRiskLimitUtilization;
 
-    /** The total margin required for both positions and open orders */
     @JsonProperty("cfm_total_margin")
     private String cfmTotalMargin;
 
-    /** Open Trade Equity accrued during the current trading session */
     @JsonProperty("cfm_delta_ote")
     private String cfmDeltaOte;
 
-    /** Unsettled realized PNL for positions closed intraday */
     @JsonProperty("cfm_unsettled_realized_pnl")
     private String cfmUnsettledRealizedPnl;
 
-    /** Unsettled accrued funding PNL from the last settlement */
     @JsonProperty("cfm_unsettled_accrued_funding_pnl")
     private String cfmUnsettledAccruedFundingPnl;
+
+    @JsonProperty("margin_utilization_percent")
+    private String marginUtilizationPercent;
+
+    @JsonProperty("margin_health_state")
+    private FcmMarginHealthState marginHealthState;
 
     public GetFcmRiskLimitsResponse() {
     }
@@ -93,4 +97,21 @@ public class GetFcmRiskLimitsResponse {
     public void setCfmUnsettledAccruedFundingPnl(String cfmUnsettledAccruedFundingPnl) {
         this.cfmUnsettledAccruedFundingPnl = cfmUnsettledAccruedFundingPnl;
     }
+
+    public String getMarginUtilizationPercent() {
+        return marginUtilizationPercent;
+    }
+
+    public void setMarginUtilizationPercent(String marginUtilizationPercent) {
+        this.marginUtilizationPercent = marginUtilizationPercent;
+    }
+
+    public FcmMarginHealthState getMarginHealthState() {
+        return marginHealthState;
+    }
+
+    public void setMarginHealthState(FcmMarginHealthState marginHealthState) {
+        this.marginHealthState = marginHealthState;
+    }
+
 }

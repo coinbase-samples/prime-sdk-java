@@ -18,21 +18,17 @@ package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
 import com.coinbase.prime.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing historical allocations for a given portfolio.
- * 
- * Returns paginated list of allocations with optional filtering by products and allocation IDs.
+ * List Portfolio Allocations
  */
 public class ListPortfolioAllocationsResponse {
-    /** List of allocations for the portfolio */
+    @JsonProperty("allocations")
     private Allocation[] allocations;
-    
-    /** Pagination information for the response */
-    private Pagination pagination;
 
-    /** The original request that generated this response */
-    private ListPortfolioAllocationsRequest request;
+    @JsonProperty("pagination")
+    private Pagination pagination;
 
     public ListPortfolioAllocationsResponse() {
     }
@@ -51,14 +47,6 @@ public class ListPortfolioAllocationsResponse {
 
     public void setPagination(Pagination pagination) {
         this.pagination = pagination;
-    }
-
-    public ListPortfolioAllocationsRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListPortfolioAllocationsRequest request) {
-        this.request = request;
     }
 
 }

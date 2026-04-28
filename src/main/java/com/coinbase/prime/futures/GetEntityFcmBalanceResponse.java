@@ -18,6 +18,9 @@ package com.coinbase.prime.futures;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Get Entity FCM Balance
+ */
 public class GetEntityFcmBalanceResponse {
     @JsonProperty("portfolio_id")
     private String portfolioId;
@@ -131,4 +134,5 @@ public class GetEntityFcmBalanceResponse {
     public void setCfmUnsettledAccruedFundingPnl(String cfmUnsettledAccruedFundingPnl) {
         this.cfmUnsettledAccruedFundingPnl = cfmUnsettledAccruedFundingPnl;
     }
+
 }

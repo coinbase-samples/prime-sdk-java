@@ -20,7 +20,6 @@ import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.prime.client.CoinbasePrimeClient;
 import com.coinbase.prime.errors.CoinbasePrimeException;
-import com.coinbase.prime.utils.Utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -39,4 +38,5 @@ public class AssetsServiceImpl extends CoinbaseServiceImpl implements AssetsServ
                 List.of(200),
                 new TypeReference<ListAssetsResponse>() {});
     }
+
 }

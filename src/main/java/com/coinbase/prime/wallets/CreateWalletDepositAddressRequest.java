@@ -22,13 +22,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Create Wallet Deposit Address
+ */
 public class CreateWalletDepositAddressRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
-    @JsonProperty("wallet_id")
+
+    @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
+
     @JsonProperty("network_id")
     private String networkId;
 
@@ -89,19 +94,16 @@ public class CreateWalletDepositAddressRequest {
         }
 
         public CreateWalletDepositAddressRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new CreateWalletDepositAddressRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("Portfolio ID is required");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
             if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("Wallet ID is required");
-            }
-            if (isNullOrEmpty(this.networkId)) {
-                throw new CoinbaseClientException("Network ID is required");
+                throw new CoinbaseClientException("WalletId is required");
             }
         }
     }

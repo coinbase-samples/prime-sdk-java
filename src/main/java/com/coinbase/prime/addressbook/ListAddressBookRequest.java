@@ -23,8 +23,11 @@ import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Address Book
+ */
 public class ListAddressBookRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -33,6 +36,7 @@ public class ListAddressBookRequest extends PrimeListRequest {
     @JsonProperty("currency_symbol")
     private String currencySymbol;
 
+    @JsonProperty("search")
     private String search;
 
     public ListAddressBookRequest() {
@@ -70,15 +74,19 @@ public class ListAddressBookRequest extends PrimeListRequest {
     }
 
     public static class Builder {
-        private final String portfolioId;
+        private String portfolioId;
         private String currencySymbol;
         private String search;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
 
-        public Builder(String portfolioId) {
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
         }
 
         public Builder currencySymbol(String currencySymbol) {
@@ -103,7 +111,7 @@ public class ListAddressBookRequest extends PrimeListRequest {
         }
 
         public ListAddressBookRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListAddressBookRequest(this);
         }
 

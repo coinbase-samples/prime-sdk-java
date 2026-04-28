@@ -16,30 +16,42 @@
 
 package com.coinbase.prime.staking;
 
-import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * Request object for listing transaction validators.
+ * List Transaction Validators
  */
-public class ListTransactionValidatorsRequest extends PrimeListRequest {
-    @JsonIgnore
+public class ListTransactionValidatorsRequest {
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty(required = true, value = "transaction_ids")
-    private List<String> transactionIds;
+    @JsonProperty("transaction_ids")
+    private String[] transactionIds;
+
+    @JsonProperty("cursor")
+    private String cursor;
+
+    @JsonProperty("limit")
+    private Integer limit;
+
+    @JsonProperty("sort_direction")
+    private SortDirection sortDirection;
 
     public ListTransactionValidatorsRequest() {
     }
 
     public ListTransactionValidatorsRequest(Builder builder) {
-        super(builder.cursor, builder.sortDirection, builder.limit);
         this.portfolioId = builder.portfolioId;
         this.transactionIds = builder.transactionIds;
+        this.cursor = builder.cursor;
+        this.limit = builder.limit;
+        this.sortDirection = builder.sortDirection;
     }
 
     public String getPortfolioId() {
@@ -50,17 +62,41 @@ public class ListTransactionValidatorsRequest extends PrimeListRequest {
         this.portfolioId = portfolioId;
     }
 
-    public List<String> getTransactionIds() {
+    public String[] getTransactionIds() {
         return transactionIds;
     }
 
-    public void setTransactionIds(List<String> transactionIds) {
+    public void setTransactionIds(String[] transactionIds) {
         this.transactionIds = transactionIds;
+    }
+
+    public String getCursor() {
+        return cursor;
+    }
+
+    public void setCursor(String cursor) {
+        this.cursor = cursor;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public SortDirection getSortDirection() {
+        return sortDirection;
+    }
+
+    public void setSortDirection(SortDirection sortDirection) {
+        this.sortDirection = sortDirection;
     }
 
     public static class Builder {
         private String portfolioId;
-        private List<String> transactionIds;
+        private String[] transactionIds;
         private String cursor;
         private Integer limit;
         private SortDirection sortDirection;
@@ -73,7 +109,7 @@ public class ListTransactionValidatorsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder transactionIds(List<String> transactionIds) {
+        public Builder transactionIds(String[] transactionIds) {
             this.transactionIds = transactionIds;
             return this;
         }
@@ -93,9 +129,15 @@ public class ListTransactionValidatorsRequest extends PrimeListRequest {
             return this;
         }
 
-        public ListTransactionValidatorsRequest build() {
+        public ListTransactionValidatorsRequest build() throws CoinbaseClientException {
+            validate();
             return new ListTransactionValidatorsRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }
-

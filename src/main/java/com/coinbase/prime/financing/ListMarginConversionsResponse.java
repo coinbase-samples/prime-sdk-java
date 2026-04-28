@@ -17,8 +17,13 @@
 package com.coinbase.prime.financing;
 
 import com.coinbase.prime.model.Conversion;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * List Margin Conversions
+ */
 public class ListMarginConversionsResponse {
+    @JsonProperty("conversions")
     private Conversion[] conversions;
 
     public ListMarginConversionsResponse() {

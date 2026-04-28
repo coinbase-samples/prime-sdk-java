@@ -25,6 +25,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Portfolio Users
+ */
 public class ListPortfolioUsersRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -52,8 +55,16 @@ public class ListPortfolioUsersRequest extends PrimeListRequest {
         private SortDirection sortDirection;
         private Integer limit;
 
+        public Builder() {
+        }
+
         public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 
@@ -63,19 +74,14 @@ public class ListPortfolioUsersRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
         public ListPortfolioUsersRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListPortfolioUsersRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
         }
     }

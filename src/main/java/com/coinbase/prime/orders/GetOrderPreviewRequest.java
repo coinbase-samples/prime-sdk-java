@@ -19,49 +19,75 @@ package com.coinbase.prime.orders;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.OrderSide;
 import com.coinbase.prime.model.enums.OrderType;
+import com.coinbase.prime.model.enums.PegOffsetType;
 import com.coinbase.prime.model.enums.TimeInForceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Order Preview
+ */
 public class GetOrderPreviewRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty("product_id")
     private String productId;
+
+    @JsonProperty("side")
     private OrderSide side;
+
+    @JsonProperty("type")
     private OrderType type;
+
     @JsonProperty("base_quantity")
     private String baseQuantity;
+
     @JsonProperty("quote_value")
     private String quoteValue;
+
     @JsonProperty("limit_price")
     private String limitPrice;
-    @JsonProperty("stop_price")
-    private String stopPrice;
-    @JsonProperty("time_in_force")
-    private TimeInForceType timeInForce;
+
     @JsonProperty("start_time")
     private String startTime;
+
     @JsonProperty("expiry_time")
     private String expiryTime;
+
+    @JsonProperty("time_in_force")
+    private TimeInForceType timeInForce;
+
     @JsonProperty("is_raise_exact")
-    private boolean isRaiseExact;
+    private Boolean isRaiseExact;
+
     @JsonProperty("historical_pov")
     private String historicalPov;
+
+    @JsonProperty("stop_price")
+    private String stopPrice;
+
     @JsonProperty("settl_currency")
     private String settlCurrency;
+
     @JsonProperty("postOnly")
     private Boolean postOnly;
+
     @JsonProperty("display_quote_size")
     private String displayQuoteSize;
+
     @JsonProperty("display_base_size")
     private String displayBaseSize;
+
     @JsonProperty("peg_offset_type")
-    private String pegOffsetType;
+    private PegOffsetType pegOffsetType;
+
+    @JsonProperty("offset")
     private String offset;
+
     @JsonProperty("wig_level")
     private String wigLevel;
 
@@ -76,12 +102,12 @@ public class GetOrderPreviewRequest {
         this.baseQuantity = builder.baseQuantity;
         this.quoteValue = builder.quoteValue;
         this.limitPrice = builder.limitPrice;
-        this.stopPrice = builder.stopPrice;
-        this.timeInForce = builder.timeInForce;
         this.startTime = builder.startTime;
         this.expiryTime = builder.expiryTime;
+        this.timeInForce = builder.timeInForce;
         this.isRaiseExact = builder.isRaiseExact;
         this.historicalPov = builder.historicalPov;
+        this.stopPrice = builder.stopPrice;
         this.settlCurrency = builder.settlCurrency;
         this.postOnly = builder.postOnly;
         this.displayQuoteSize = builder.displayQuoteSize;
@@ -147,22 +173,6 @@ public class GetOrderPreviewRequest {
         this.limitPrice = limitPrice;
     }
 
-    public String getStopPrice() {
-        return stopPrice;
-    }
-
-    public void setStopPrice(String stopPrice) {
-        this.stopPrice = stopPrice;
-    }
-
-    public TimeInForceType getTimeInForce() {
-        return timeInForce;
-    }
-
-    public void setTimeInForce(TimeInForceType timeInForce) {
-        this.timeInForce = timeInForce;
-    }
-
     public String getStartTime() {
         return startTime;
     }
@@ -179,12 +189,20 @@ public class GetOrderPreviewRequest {
         this.expiryTime = expiryTime;
     }
 
-    public boolean isRaiseExact() {
+    public TimeInForceType getTimeInForce() {
+        return timeInForce;
+    }
+
+    public void setTimeInForce(TimeInForceType timeInForce) {
+        this.timeInForce = timeInForce;
+    }
+
+    public Boolean getIsRaiseExact() {
         return isRaiseExact;
     }
 
-    public void setRaiseExact(boolean raiseExact) {
-        isRaiseExact = raiseExact;
+    public void setIsRaiseExact(Boolean isRaiseExact) {
+        this.isRaiseExact = isRaiseExact;
     }
 
     public String getHistoricalPov() {
@@ -193,6 +211,14 @@ public class GetOrderPreviewRequest {
 
     public void setHistoricalPov(String historicalPov) {
         this.historicalPov = historicalPov;
+    }
+
+    public String getStopPrice() {
+        return stopPrice;
+    }
+
+    public void setStopPrice(String stopPrice) {
+        this.stopPrice = stopPrice;
     }
 
     public String getSettlCurrency() {
@@ -227,11 +253,11 @@ public class GetOrderPreviewRequest {
         this.displayBaseSize = displayBaseSize;
     }
 
-    public String getPegOffsetType() {
+    public PegOffsetType getPegOffsetType() {
         return pegOffsetType;
     }
 
-    public void setPegOffsetType(String pegOffsetType) {
+    public void setPegOffsetType(PegOffsetType pegOffsetType) {
         this.pegOffsetType = pegOffsetType;
     }
 
@@ -259,17 +285,17 @@ public class GetOrderPreviewRequest {
         private String baseQuantity;
         private String quoteValue;
         private String limitPrice;
-        private String stopPrice;
-        private TimeInForceType timeInForce;
         private String startTime;
         private String expiryTime;
-        private boolean isRaiseExact;
+        private TimeInForceType timeInForce;
+        private Boolean isRaiseExact;
         private String historicalPov;
+        private String stopPrice;
         private String settlCurrency;
         private Boolean postOnly;
         private String displayQuoteSize;
         private String displayBaseSize;
-        private String pegOffsetType;
+        private PegOffsetType pegOffsetType;
         private String offset;
         private String wigLevel;
 
@@ -311,16 +337,6 @@ public class GetOrderPreviewRequest {
             return this;
         }
 
-        public Builder stopPrice(String stopPrice) {
-            this.stopPrice = stopPrice;
-            return this;
-        }
-
-        public Builder timeInForce(TimeInForceType timeInForce) {
-            this.timeInForce = timeInForce;
-            return this;
-        }
-
         public Builder startTime(String startTime) {
             this.startTime = startTime;
             return this;
@@ -331,13 +347,23 @@ public class GetOrderPreviewRequest {
             return this;
         }
 
-        public Builder isRaiseExact(boolean isRaiseExact) {
+        public Builder timeInForce(TimeInForceType timeInForce) {
+            this.timeInForce = timeInForce;
+            return this;
+        }
+
+        public Builder isRaiseExact(Boolean isRaiseExact) {
             this.isRaiseExact = isRaiseExact;
             return this;
         }
 
         public Builder historicalPov(String historicalPov) {
             this.historicalPov = historicalPov;
+            return this;
+        }
+
+        public Builder stopPrice(String stopPrice) {
+            this.stopPrice = stopPrice;
             return this;
         }
 
@@ -361,7 +387,7 @@ public class GetOrderPreviewRequest {
             return this;
         }
 
-        public Builder pegOffsetType(String pegOffsetType) {
+        public Builder pegOffsetType(PegOffsetType pegOffsetType) {
             this.pegOffsetType = pegOffsetType;
             return this;
         }
@@ -377,25 +403,13 @@ public class GetOrderPreviewRequest {
         }
 
         public GetOrderPreviewRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetOrderPreviewRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
-            }
-            if (isNullOrEmpty(this.productId)) {
-                throw new CoinbaseClientException("ProductId is required");
-            }
-            if (this.side == null) {
-                throw new CoinbaseClientException("Side is required");
-            }
-            if (this.type == null) {
-                throw new CoinbaseClientException("Type is required");
-            }
-            if (isNullOrEmpty(this.baseQuantity) && isNullOrEmpty(this.quoteValue)) {
-                throw new CoinbaseClientException("BaseQuantity or QuoteValue is required");
             }
         }
     }

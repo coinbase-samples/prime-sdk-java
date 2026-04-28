@@ -17,14 +17,13 @@
 package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving net allocations by netting ID.
- *
- * Returns all allocations associated with the specified netting ID within a portfolio.
+ * Get Net Allocations by Netting ID
  */
 public class ListAllocationsByNettingIdResponse {
-    /** Array of allocations associated with the netting ID */
+    @JsonProperty("allocations")
     private Allocation[] allocations;
 
     public ListAllocationsByNettingIdResponse() {

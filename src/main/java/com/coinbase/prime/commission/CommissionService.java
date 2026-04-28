@@ -20,6 +20,5 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface CommissionService {
-    // Commission
     GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

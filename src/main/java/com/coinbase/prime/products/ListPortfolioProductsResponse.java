@@ -18,16 +18,16 @@ package com.coinbase.prime.products;
 
 import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.Product;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing tradable products for a given portfolio.
- * 
- * List tradable products for a given portfolio.
+ * List Portfolio Products
  */
 public class ListPortfolioProductsResponse {
-    /** Array of tradable products for the portfolio */
+    @JsonProperty("products")
     private Product[] products;
-    /** Pagination information for the response */
+
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListPortfolioProductsResponse() {

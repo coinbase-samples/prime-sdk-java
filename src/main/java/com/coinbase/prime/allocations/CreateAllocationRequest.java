@@ -16,23 +16,36 @@
 
 package com.coinbase.prime.allocations;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.AllocationLeg;
 import com.coinbase.prime.model.enums.AllocationSizeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Create Portfolio Allocations
+ */
 public class CreateAllocationRequest {
     @JsonProperty("allocation_id")
     private String allocationId;
+
     @JsonProperty("source_portfolio_id")
     private String sourcePortfolioId;
+
     @JsonProperty("product_id")
     private String productId;
+
     @JsonProperty("order_ids")
     private String[] orderIds;
+
     @JsonProperty("allocation_legs")
     private AllocationLeg[] allocationLegs;
+
     @JsonProperty("size_type")
     private AllocationSizeType sizeType;
+
     @JsonProperty("remainder_destination_portfolio")
     private String remainderDestinationPortfolio;
 
@@ -152,8 +165,12 @@ public class CreateAllocationRequest {
             return this;
         }
 
-        public CreateAllocationRequest build() {
+        public CreateAllocationRequest build() throws CoinbaseClientException {
+            validate();
             return new CreateAllocationRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
         }
     }
 }

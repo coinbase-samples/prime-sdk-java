@@ -18,6 +18,9 @@ package com.coinbase.prime.futures;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Get FCM Settings
+ */
 public class GetFcmSettingsResponse {
     @JsonProperty("target_derivatives_excess")
     private String targetDerivativesExcess;
@@ -32,4 +35,5 @@ public class GetFcmSettingsResponse {
     public void setTargetDerivativesExcess(String targetDerivativesExcess) {
         this.targetDerivativesExcess = targetDerivativesExcess;
     }
+
 }

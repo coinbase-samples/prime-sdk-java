@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Wallet Balance
+ */
 public class GetWalletBalanceRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -73,15 +76,14 @@ public class GetWalletBalanceRequest {
         }
 
         public GetWalletBalanceRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetWalletBalanceRequest(this);
         }
 
-        public void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-
             if (isNullOrEmpty(this.walletId)) {
                 throw new CoinbaseClientException("WalletId is required");
             }

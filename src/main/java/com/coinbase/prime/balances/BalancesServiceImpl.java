@@ -54,7 +54,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
         return this.request(
                 HttpMethod.GET,
                 String.format("/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetWalletBalanceResponse>() {});
     }
@@ -68,4 +68,5 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
                 List.of(200),
                 new TypeReference<ListOnchainWalletBalancesResponse>() {});
     }
+
 }

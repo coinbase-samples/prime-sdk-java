@@ -18,6 +18,9 @@ package com.coinbase.prime.staking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Request to unstake a wallet
+ */
 public class CreateUnstakeResponse {
     @JsonProperty("wallet_id")
     private String walletId;

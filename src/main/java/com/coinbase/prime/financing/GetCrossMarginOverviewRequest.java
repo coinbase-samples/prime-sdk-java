@@ -16,15 +16,18 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
 /**
- * Request object for retrieving cross margin overview for an entity.
+ * Get Cross Margin Overview
  */
 public class GetCrossMarginOverviewRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
 
     public GetCrossMarginOverviewRequest() {
@@ -53,9 +56,15 @@ public class GetCrossMarginOverviewRequest {
             return this;
         }
 
-        public GetCrossMarginOverviewRequest build() {
+        public GetCrossMarginOverviewRequest build() throws CoinbaseClientException {
+            validate();
             return new GetCrossMarginOverviewRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }
-

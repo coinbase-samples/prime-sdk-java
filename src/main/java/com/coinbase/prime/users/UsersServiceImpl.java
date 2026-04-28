@@ -48,4 +48,5 @@ public class UsersServiceImpl extends CoinbaseServiceImpl implements UsersServic
                 List.of(200),
                 new TypeReference<ListPortfolioUsersResponse>() {});
     }
+
 }

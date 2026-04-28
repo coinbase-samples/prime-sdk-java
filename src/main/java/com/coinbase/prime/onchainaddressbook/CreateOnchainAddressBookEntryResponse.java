@@ -19,12 +19,15 @@ package com.coinbase.prime.onchainaddressbook;
 import com.coinbase.prime.model.enums.CustodyActivityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Create Onchain Address Book Entry
+ */
 public class CreateOnchainAddressBookEntryResponse {
     @JsonProperty("activity_type")
     private CustodyActivityType activityType;
 
     @JsonProperty("num_approvals_remaining")
-    private int numApprovalsRemaining;
+    private Integer numApprovalsRemaining;
 
     @JsonProperty("activity_id")
     private String activityId;
@@ -40,11 +43,11 @@ public class CreateOnchainAddressBookEntryResponse {
         this.activityType = activityType;
     }
 
-    public int getNumApprovalsRemaining() {
+    public Integer getNumApprovalsRemaining() {
         return numApprovalsRemaining;
     }
 
-    public void setNumApprovalsRemaining(int numApprovalsRemaining) {
+    public void setNumApprovalsRemaining(Integer numApprovalsRemaining) {
         this.numApprovalsRemaining = numApprovalsRemaining;
     }
 

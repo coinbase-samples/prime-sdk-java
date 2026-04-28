@@ -18,22 +18,30 @@ package com.coinbase.prime.invoice;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.InvoiceState;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Invoices
+ */
 public class ListInvoicesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
+
+    @JsonProperty("states")
     private InvoiceState[] states;
-    @JsonProperty("billing_month")
-    private Integer billingMonth;
+
     @JsonProperty("billing_year")
     private Integer billingYear;
+
+    @JsonProperty("billing_month")
+    private Integer billingMonth;
 
     public ListInvoicesRequest() {
     }
@@ -42,8 +50,8 @@ public class ListInvoicesRequest extends PrimeListRequest {
         super(builder.cursor, builder.sortDirection, builder.limit);
         this.entityId = builder.entityId;
         this.states = builder.states;
-        this.billingMonth = builder.billingMonth;
         this.billingYear = builder.billingYear;
+        this.billingMonth = builder.billingMonth;
     }
 
     public String getEntityId() {
@@ -62,14 +70,6 @@ public class ListInvoicesRequest extends PrimeListRequest {
         this.states = states;
     }
 
-    public Integer getBillingMonth() {
-        return billingMonth;
-    }
-
-    public void setBillingMonth(Integer billingMonth) {
-        this.billingMonth = billingMonth;
-    }
-
     public Integer getBillingYear() {
         return billingYear;
     }
@@ -78,26 +78,33 @@ public class ListInvoicesRequest extends PrimeListRequest {
         this.billingYear = billingYear;
     }
 
-    public static class Builder {
-        private final String entityId;
-        private InvoiceState[] states;
-        private Integer billingMonth;
-        private Integer billingYear;
-        private String cursor;
-        private Integer limit;
-        private SortDirection sortDirection;
+    public Integer getBillingMonth() {
+        return billingMonth;
+    }
 
-        public Builder(String entityId) {
+    public void setBillingMonth(Integer billingMonth) {
+        this.billingMonth = billingMonth;
+    }
+
+    public static class Builder {
+        private String entityId;
+        private InvoiceState[] states;
+        private Integer billingYear;
+        private Integer billingMonth;
+        private String cursor;
+        private SortDirection sortDirection;
+        private Integer limit;
+
+        public Builder() {
+        }
+
+        public Builder entityId(String entityId) {
             this.entityId = entityId;
+            return this;
         }
 
         public Builder states(InvoiceState[] states) {
             this.states = states;
-            return this;
-        }
-
-        public Builder billingMonth(Integer billingMonth) {
-            this.billingMonth = billingMonth;
             return this;
         }
 
@@ -106,8 +113,8 @@ public class ListInvoicesRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder cursor(String cursor) {
-            this.cursor = cursor;
+        public Builder billingMonth(Integer billingMonth) {
+            this.billingMonth = billingMonth;
             return this;
         }
 
@@ -116,13 +123,14 @@ public class ListInvoicesRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder sortDirection(SortDirection sortDirection) {
-            this.sortDirection = sortDirection;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
         public ListInvoicesRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListInvoicesRequest(this);
         }
 

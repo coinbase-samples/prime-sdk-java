@@ -19,16 +19,27 @@ package com.coinbase.prime.transactions;
 import com.coinbase.prime.model.TravelRuleParty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Get Transaction Travel Rule Data
+ */
 public class GetTransactionTravelRuleDataResponse {
+    @JsonProperty("fulfilled")
+    private Boolean fulfilled;
+
+    @JsonProperty("is_self")
+    private Boolean isSelf;
+
+    @JsonProperty("originator")
+    private TravelRuleParty originator;
+
+    @JsonProperty("beneficiary")
+    private TravelRuleParty beneficiary;
+
+    @JsonProperty("amount")
     private String amount;
 
     @JsonProperty("amount_currency")
     private String amountCurrency;
-
-    private TravelRuleParty beneficiary;
-
-    @JsonProperty("blockchain_network")
-    private String blockchainNetwork;
 
     @JsonProperty("fiat_amount")
     private String fiatAmount;
@@ -36,62 +47,10 @@ public class GetTransactionTravelRuleDataResponse {
     @JsonProperty("fiat_amount_currency")
     private String fiatAmountCurrency;
 
-    private Boolean fulfilled;
-
-    @JsonProperty("is_self")
-    private Boolean isSelf;
-
-    private TravelRuleParty originator;
+    @JsonProperty("blockchain_network")
+    private String blockchainNetwork;
 
     public GetTransactionTravelRuleDataResponse() {
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getAmountCurrency() {
-        return amountCurrency;
-    }
-
-    public void setAmountCurrency(String amountCurrency) {
-        this.amountCurrency = amountCurrency;
-    }
-
-    public TravelRuleParty getBeneficiary() {
-        return beneficiary;
-    }
-
-    public void setBeneficiary(TravelRuleParty beneficiary) {
-        this.beneficiary = beneficiary;
-    }
-
-    public String getBlockchainNetwork() {
-        return blockchainNetwork;
-    }
-
-    public void setBlockchainNetwork(String blockchainNetwork) {
-        this.blockchainNetwork = blockchainNetwork;
-    }
-
-    public String getFiatAmount() {
-        return fiatAmount;
-    }
-
-    public void setFiatAmount(String fiatAmount) {
-        this.fiatAmount = fiatAmount;
-    }
-
-    public String getFiatAmountCurrency() {
-        return fiatAmountCurrency;
-    }
-
-    public void setFiatAmountCurrency(String fiatAmountCurrency) {
-        this.fiatAmountCurrency = fiatAmountCurrency;
     }
 
     public Boolean getFulfilled() {
@@ -117,4 +76,53 @@ public class GetTransactionTravelRuleDataResponse {
     public void setOriginator(TravelRuleParty originator) {
         this.originator = originator;
     }
+
+    public TravelRuleParty getBeneficiary() {
+        return beneficiary;
+    }
+
+    public void setBeneficiary(TravelRuleParty beneficiary) {
+        this.beneficiary = beneficiary;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getAmountCurrency() {
+        return amountCurrency;
+    }
+
+    public void setAmountCurrency(String amountCurrency) {
+        this.amountCurrency = amountCurrency;
+    }
+
+    public String getFiatAmount() {
+        return fiatAmount;
+    }
+
+    public void setFiatAmount(String fiatAmount) {
+        this.fiatAmount = fiatAmount;
+    }
+
+    public String getFiatAmountCurrency() {
+        return fiatAmountCurrency;
+    }
+
+    public void setFiatAmountCurrency(String fiatAmountCurrency) {
+        this.fiatAmountCurrency = fiatAmountCurrency;
+    }
+
+    public String getBlockchainNetwork() {
+        return blockchainNetwork;
+    }
+
+    public void setBlockchainNetwork(String blockchainNetwork) {
+        this.blockchainNetwork = blockchainNetwork;
+    }
+
 }

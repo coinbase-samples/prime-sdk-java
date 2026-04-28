@@ -44,8 +44,9 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements Pa
         return this.request(
                 HttpMethod.GET,
                 String.format("/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
-                null,
+                request,
                 List.of(200),
                 new TypeReference<GetPaymentMethodDetailsResponse>() {});
     }
+
 }

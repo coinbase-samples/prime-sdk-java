@@ -17,14 +17,13 @@
 package com.coinbase.prime.wallets;
 
 import com.coinbase.prime.model.Wallet;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving a specific wallet by Wallet ID.
- * 
- * Contains the wallet information for the requested wallet.
+ * Get Wallet by Wallet ID
  */
 public class GetWalletResponse {
-    /** The wallet information */
+    @JsonProperty("wallet")
     private Wallet wallet;
 
     public GetWalletResponse() {

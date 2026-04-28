@@ -16,12 +16,18 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Get Entity Locate Availabilities
+ */
 public class GetEntityLocateAvailabilitiesRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "entity_id")
+    @JsonIgnore
     private String entityId;
 
     @JsonProperty("conversion_date")
@@ -86,8 +92,15 @@ public class GetEntityLocateAvailabilitiesRequest {
             return this;
         }
 
-        public GetEntityLocateAvailabilitiesRequest build() {
+        public GetEntityLocateAvailabilitiesRequest build() throws CoinbaseClientException {
+            validate();
             return new GetEntityLocateAvailabilitiesRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.entityId)) {
+                throw new CoinbaseClientException("EntityId is required");
+            }
         }
     }
 }

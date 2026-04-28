@@ -19,15 +19,14 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.WithdrawalPower;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Get Portfolio Withdrawal Power
+ */
 public class GetPortfolioWithdrawalPowerResponse {
     @JsonProperty("withdrawal_power")
     private WithdrawalPower withdrawalPower;
 
     public GetPortfolioWithdrawalPowerResponse() {
-    }
-
-    public GetPortfolioWithdrawalPowerResponse(WithdrawalPower withdrawalPower) {
-        this.withdrawalPower = withdrawalPower;
     }
 
     public WithdrawalPower getWithdrawalPower() {
@@ -37,4 +36,5 @@ public class GetPortfolioWithdrawalPowerResponse {
     public void setWithdrawalPower(WithdrawalPower withdrawalPower) {
         this.withdrawalPower = withdrawalPower;
     }
+
 }

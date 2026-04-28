@@ -18,19 +18,25 @@ package com.coinbase.prime.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
+import com.coinbase.prime.common.Pagination;
 import com.coinbase.prime.model.enums.SortDirection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Wallet Addresses
+ */
 public class ListWalletAddressesRequest extends PrimeListRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
-    @JsonProperty("wallet_id")
+
+    @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
+
     @JsonProperty("network_id")
     private String networkId;
 
@@ -68,14 +74,13 @@ public class ListWalletAddressesRequest extends PrimeListRequest {
         this.networkId = networkId;
     }
 
-
     public static class Builder {
         private String portfolioId;
         private String walletId;
         private String networkId;
         private String cursor;
-        private Integer limit;
         private SortDirection sortDirection;
+        private Integer limit;
 
         public Builder() {
         }
@@ -95,31 +100,28 @@ public class ListWalletAddressesRequest extends PrimeListRequest {
             return this;
         }
 
-
-        public Builder cursor(String cursor) {
-            this.cursor = cursor;
+        public Builder limit(Integer limit) {
+            this.limit = limit;
             return this;
         }
 
-        public Builder sortDirection(SortDirection sortDirection) {
-            this.sortDirection = sortDirection;
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
         public ListWalletAddressesRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListWalletAddressesRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("Portfolio ID is required");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
             if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("Wallet ID is required");
-            }
-            if (isNullOrEmpty(this.networkId)) {
-                throw new CoinbaseClientException("Network ID is required");
+                throw new CoinbaseClientException("WalletId is required");
             }
         }
     }

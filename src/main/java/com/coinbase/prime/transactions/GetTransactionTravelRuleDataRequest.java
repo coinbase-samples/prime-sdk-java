@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Transaction Travel Rule Data
+ */
 public class GetTransactionTravelRuleDataRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore

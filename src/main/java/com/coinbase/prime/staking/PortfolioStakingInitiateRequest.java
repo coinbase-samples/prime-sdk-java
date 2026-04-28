@@ -16,13 +16,19 @@
 
 package com.coinbase.prime.staking;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.PortfolioStakingMetadata;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Request to stake currency in a portfolio
+ */
 public class PortfolioStakingInitiateRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
     @JsonProperty("idempotency_key")
@@ -123,8 +129,15 @@ public class PortfolioStakingInitiateRequest {
             return this;
         }
 
-        public PortfolioStakingInitiateRequest build() {
+        public PortfolioStakingInitiateRequest build() throws CoinbaseClientException {
+            validate();
             return new PortfolioStakingInitiateRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

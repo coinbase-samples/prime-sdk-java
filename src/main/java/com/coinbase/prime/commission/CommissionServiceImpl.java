@@ -38,4 +38,5 @@ public class CommissionServiceImpl extends CoinbaseServiceImpl implements Commis
                 List.of(200),
                 new TypeReference<GetPortfolioCommissionResponse>() {});
     }
+
 }

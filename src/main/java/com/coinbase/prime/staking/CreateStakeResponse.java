@@ -18,6 +18,9 @@ package com.coinbase.prime.staking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Request to stake or delegate a wallet
+ */
 public class CreateStakeResponse {
     @JsonProperty("wallet_id")
     private String walletId;

@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Net Allocations by Netting ID
+ */
 public class ListAllocationsByNettingIdRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -56,16 +59,24 @@ public class ListAllocationsByNettingIdRequest {
     }
 
     public static class Builder {
-        private final String portfolioId;
-        private final String nettingId;
+        private String portfolioId;
+        private String nettingId;
 
-        public Builder(String portfolioId, String nettingId) {
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
+        }
+
+        public Builder nettingId(String nettingId) {
             this.nettingId = nettingId;
+            return this;
         }
 
         public ListAllocationsByNettingIdRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListAllocationsByNettingIdRequest(this);
         }
 
@@ -73,7 +84,6 @@ public class ListAllocationsByNettingIdRequest {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-
             if (isNullOrEmpty(this.nettingId)) {
                 throw new CoinbaseClientException("NettingId is required");
             }

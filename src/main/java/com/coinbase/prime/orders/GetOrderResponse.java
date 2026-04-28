@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2026-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,21 +14,27 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.financing;
+package com.coinbase.prime.orders;
 
-public class ListFinancingEligibleAssetsRequest {
-    public ListFinancingEligibleAssetsRequest() {
+import com.coinbase.prime.model.Order;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * Get Order by Order ID
+ */
+public class GetOrderResponse {
+    @JsonProperty("order")
+    private Order order;
+
+    public GetOrderResponse() {
     }
 
-    public ListFinancingEligibleAssetsRequest(Builder builder) {
+    public Order getOrder() {
+        return order;
     }
 
-    public static class Builder {
-        public Builder() {
-        }
-
-        public ListFinancingEligibleAssetsRequest build() {
-            return new ListFinancingEligibleAssetsRequest(this);
-        }
+    public void setOrder(Order order) {
+        this.order = order;
     }
+
 }

@@ -38,4 +38,5 @@ public class InvoiceServiceImpl extends CoinbaseServiceImpl implements InvoiceSe
                 List.of(200),
                 new TypeReference<ListInvoicesResponse>() {});
     }
+
 }

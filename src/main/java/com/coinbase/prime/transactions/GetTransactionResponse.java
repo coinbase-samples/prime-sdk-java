@@ -17,15 +17,13 @@
 package com.coinbase.prime.transactions;
 
 import com.coinbase.prime.model.Transaction;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving a specific transaction by transaction ID.
- * 
- * Contains the transaction information for the requested transaction ID.
- * Only transactions that affect balances are accessible.
+ * Get Transaction by Transaction ID
  */
 public class GetTransactionResponse {
-    /** The transaction information */
+    @JsonProperty("transaction")
     private Transaction transaction;
 
     public GetTransactionResponse() {

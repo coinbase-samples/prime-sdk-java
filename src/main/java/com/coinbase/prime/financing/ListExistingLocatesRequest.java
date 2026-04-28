@@ -16,22 +16,28 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * List Existing Locates
+ */
 public class ListExistingLocatesRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
     @JsonProperty("locate_ids")
     private String[] locateIds;
 
-    @JsonProperty("locate_date")
-    private String locateDate;
-
     @JsonProperty("conversion_date")
     private String conversionDate;
+
+    @JsonProperty("locate_date")
+    private String locateDate;
 
     public ListExistingLocatesRequest() {
     }
@@ -39,8 +45,8 @@ public class ListExistingLocatesRequest {
     public ListExistingLocatesRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.locateIds = builder.locateIds;
-        this.locateDate = builder.locateDate;
         this.conversionDate = builder.conversionDate;
+        this.locateDate = builder.locateDate;
     }
 
     public String getPortfolioId() {
@@ -59,14 +65,6 @@ public class ListExistingLocatesRequest {
         this.locateIds = locateIds;
     }
 
-    public String getLocateDate() {
-        return locateDate;
-    }
-
-    public void setLocateDate(String locateDate) {
-        this.locateDate = locateDate;
-    }
-
     public String getConversionDate() {
         return conversionDate;
     }
@@ -75,11 +73,19 @@ public class ListExistingLocatesRequest {
         this.conversionDate = conversionDate;
     }
 
+    public String getLocateDate() {
+        return locateDate;
+    }
+
+    public void setLocateDate(String locateDate) {
+        this.locateDate = locateDate;
+    }
+
     public static class Builder {
         private String portfolioId;
         private String[] locateIds;
-        private String locateDate;
         private String conversionDate;
+        private String locateDate;
 
         public Builder() {
         }
@@ -94,18 +100,25 @@ public class ListExistingLocatesRequest {
             return this;
         }
 
-        public Builder locateDate(String locateDate) {
-            this.locateDate = locateDate;
-            return this;
-        }
-
         public Builder conversionDate(String conversionDate) {
             this.conversionDate = conversionDate;
             return this;
         }
 
-        public ListExistingLocatesRequest build() {
+        public Builder locateDate(String locateDate) {
+            this.locateDate = locateDate;
+            return this;
+        }
+
+        public ListExistingLocatesRequest build() throws CoinbaseClientException {
+            validate();
             return new ListExistingLocatesRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

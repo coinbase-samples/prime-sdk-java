@@ -20,16 +20,15 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface FuturesService {
-    // Futures
     SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    GetPositionsResponse getPositions(GetPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(ScheduleEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPositionsResponse getPositions(GetPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(ScheduleEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

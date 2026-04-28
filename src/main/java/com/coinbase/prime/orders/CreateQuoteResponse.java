@@ -19,72 +19,65 @@ package com.coinbase.prime.orders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for creating a quote request.
- * 
- * A Quote Request is the start of the RFQ process. Coinbase Prime sends a Quote Request to
- * Liquidity Providers (LPs) on behalf of a customer looking to participate in an RFQ trade.
+ * Create Quote Request
  */
 public class CreateQuoteResponse {
-  /** Unique identifier for the quote */
-  @JsonProperty("quote_id")
-  private String quoteId;
+    @JsonProperty("quote_id")
+    private String quoteId;
 
-  /** Time when the quote expires */
-  @JsonProperty("expiration_time")
-  private String expirationTime;
+    @JsonProperty("expiration_time")
+    private String expirationTime;
 
-  /** Best available price for the quote */
-  @JsonProperty("best_price")
-  private String bestPrice;
+    @JsonProperty("best_price")
+    private String bestPrice;
 
-  /** Total quote amount for previewing */
-  @JsonProperty("order_total")
-  private String orderTotal;
+    @JsonProperty("order_total")
+    private String orderTotal;
 
-  /** Price inclusive of all fees */
-  @JsonProperty("price_inclusive_of_fees")
-  private String priceInclusiveOfFees;
+    @JsonProperty("price_inclusive_of_fees")
+    private String priceInclusiveOfFees;
 
-  public CreateQuoteResponse() {
-  }
+    public CreateQuoteResponse() {
+    }
 
-  public String getQuoteId() {
-    return quoteId;
-  }
+    public String getQuoteId() {
+        return quoteId;
+    }
 
-  public void setQuoteId(String quoteId) {
-    this.quoteId = quoteId;
-  }
+    public void setQuoteId(String quoteId) {
+        this.quoteId = quoteId;
+    }
 
-  public String getExpirationTime() {
-    return expirationTime;
-  }
+    public String getExpirationTime() {
+        return expirationTime;
+    }
 
-  public void setExpirationTime(String expirationTime) {
-    this.expirationTime = expirationTime;
-  }
+    public void setExpirationTime(String expirationTime) {
+        this.expirationTime = expirationTime;
+    }
 
-  public String getBestPrice() {
-    return bestPrice;
-  }
+    public String getBestPrice() {
+        return bestPrice;
+    }
 
-  public void setBestPrice(String bestPrice) {
-    this.bestPrice = bestPrice;
-  }
+    public void setBestPrice(String bestPrice) {
+        this.bestPrice = bestPrice;
+    }
 
-  public String getOrderTotal() {
-    return orderTotal;
-  }
+    public String getOrderTotal() {
+        return orderTotal;
+    }
 
-  public void setOrderTotal(String orderTotal) {
-    this.orderTotal = orderTotal;
-  }
+    public void setOrderTotal(String orderTotal) {
+        this.orderTotal = orderTotal;
+    }
 
-  public String getPriceInclusiveOfFees() {
-    return priceInclusiveOfFees;
-  }
+    public String getPriceInclusiveOfFees() {
+        return priceInclusiveOfFees;
+    }
 
-  public void setPriceInclusiveOfFees(String priceInclusiveOfFees) {
-    this.priceInclusiveOfFees = priceInclusiveOfFees;
-  }
+    public void setPriceInclusiveOfFees(String priceInclusiveOfFees) {
+        this.priceInclusiveOfFees = priceInclusiveOfFees;
+    }
+
 }

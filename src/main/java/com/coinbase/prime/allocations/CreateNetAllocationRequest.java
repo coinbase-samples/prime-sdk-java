@@ -16,10 +16,17 @@
 
 package com.coinbase.prime.allocations;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.AllocationLeg;
 import com.coinbase.prime.model.enums.AllocationSizeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Create Portfolio Net Allocations
+ */
 public class CreateNetAllocationRequest {
     @JsonProperty("source_portfolio_id")
     private String sourcePortfolioId;
@@ -45,7 +52,7 @@ public class CreateNetAllocationRequest {
     public CreateNetAllocationRequest() {
     }
 
-    public CreateNetAllocationRequest(CreateNetAllocationRequest.Builder builder) {
+    public CreateNetAllocationRequest(Builder builder) {
         this.sourcePortfolioId = builder.sourcePortfolioId;
         this.productId = builder.productId;
         this.orderIds = builder.orderIds;
@@ -158,8 +165,12 @@ public class CreateNetAllocationRequest {
             return this;
         }
 
-        public CreateNetAllocationRequest build() {
+        public CreateNetAllocationRequest build() throws CoinbaseClientException {
+            validate();
             return new CreateNetAllocationRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
         }
     }
 }

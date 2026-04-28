@@ -17,14 +17,13 @@
 package com.coinbase.prime.allocations;
 
 import com.coinbase.prime.model.Allocation;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for retrieving an allocation by allocation ID.
- * 
- * Returns the allocation details for the specified allocation ID within a portfolio.
+ * Get Allocation by ID
  */
 public class GetAllocationResponse {
-    /** The allocation details */
+    @JsonProperty("allocation")
     private Allocation allocation;
 
     public GetAllocationResponse() {

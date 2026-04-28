@@ -19,6 +19,9 @@ package com.coinbase.prime.financing;
 import com.coinbase.prime.model.MarginSummaryHistorical;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * List Margin Call Summaries
+ */
 public class ListMarginCallSummariesResponse {
     @JsonProperty("margin_summaries")
     private MarginSummaryHistorical[] marginSummaries;

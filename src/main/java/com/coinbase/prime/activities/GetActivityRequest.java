@@ -16,9 +16,15 @@
 
 package com.coinbase.prime.activities;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Get Activity by Activity ID
+ */
 public class GetActivityRequest {
     @JsonProperty(required = true, value = "activity_id")
     @JsonIgnore
@@ -27,8 +33,8 @@ public class GetActivityRequest {
     public GetActivityRequest() {
     }
 
-    public GetActivityRequest(String activityId) {
-        this.activityId = activityId;
+    public GetActivityRequest(Builder builder) {
+        this.activityId = builder.activityId;
     }
 
     public String getActivityId() {
@@ -37,5 +43,28 @@ public class GetActivityRequest {
 
     public void setActivityId(String activityId) {
         this.activityId = activityId;
+    }
+
+    public static class Builder {
+        private String activityId;
+
+        public Builder() {
+        }
+
+        public Builder activityId(String activityId) {
+            this.activityId = activityId;
+            return this;
+        }
+
+        public GetActivityRequest build() throws CoinbaseClientException {
+            validate();
+            return new GetActivityRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.activityId)) {
+                throw new CoinbaseClientException("ActivityId is required");
+            }
+        }
     }
 }

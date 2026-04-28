@@ -19,12 +19,9 @@ package com.coinbase.prime.transactions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for creating an on-chain transaction.
- * 
- * Contains the transaction ID for the newly created on-chain transaction.
+ * Create Onchain Transaction
  */
 public class CreateOnchainTransactionResponse {
-    /** Unique identifier for the created transaction */
     @JsonProperty("transaction_id")
     private String transactionId;
 

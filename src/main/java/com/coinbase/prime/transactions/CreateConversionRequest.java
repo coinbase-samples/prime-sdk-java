@@ -20,23 +20,32 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.UUID;
-
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Create Conversion
+ */
 public class CreateConversionRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
     @JsonProperty(required = true, value = "wallet_id")
     @JsonIgnore
     private String walletId;
+
+    @JsonProperty("amount")
     private String amount;
+
+    @JsonProperty("destination")
     private String destination;
+
     @JsonProperty("idempotency_key")
     private String idempotencyKey;
+
     @JsonProperty("source_symbol")
     private String sourceSymbol;
+
     @JsonProperty("destination_symbol")
     private String destinationSymbol;
 
@@ -157,26 +166,16 @@ public class CreateConversionRequest {
         }
 
         public CreateConversionRequest build() throws CoinbaseClientException {
-            this.validate();
-            if (isNullOrEmpty(this.idempotencyKey)) {
-                this.idempotencyKey(UUID.randomUUID().toString());
-            }
+            validate();
             return new CreateConversionRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
-
             if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId cannot be null");
-            }
-            if (isNullOrEmpty(this.amount)) {
-                throw new CoinbaseClientException("Amount cannot be null");
-            }
-            if (isNullOrEmpty(this.destination)) {
-                throw new CoinbaseClientException("Destination cannot be null");
+                throw new CoinbaseClientException("WalletId is required");
             }
         }
     }

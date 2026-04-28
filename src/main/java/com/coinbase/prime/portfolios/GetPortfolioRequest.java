@@ -20,8 +20,11 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Portfolio by Portfolio ID
+ */
 public class GetPortfolioRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -43,14 +46,18 @@ public class GetPortfolioRequest {
     }
 
     public static class Builder {
-        private final String portfolioId;
+        private String portfolioId;
 
-        public Builder(String portfolioId) {
+        public Builder() {
+        }
+
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
+            return this;
         }
 
         public GetPortfolioRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetPortfolioRequest(this);
         }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2025-present Coinbase Global, Inc.
+ * Copyright 2026-present Coinbase Global, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,25 +14,27 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.portfolios;
+package com.coinbase.prime.advancedtransfer;
+
+import com.coinbase.prime.model.Counterparty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * List all portfolios associated with a given entity.
+ * Get Portfolio Counterparty ID
  */
-public class ListPortfoliosRequest {
-    // No parameters required for listing all portfolios
-    // This is a simple GET request to /v1/portfolios with no path or query parameters
+public class GetPortfolioCounterpartyResponse {
+    @JsonProperty("counterparty")
+    private Counterparty counterparty;
 
-    public ListPortfoliosRequest() {
+    public GetPortfolioCounterpartyResponse() {
     }
 
-    public static class Builder {
-
-        public Builder() {
-        }
-
-        public ListPortfoliosRequest build() {
-            return new ListPortfoliosRequest();
-        }
+    public Counterparty getCounterparty() {
+        return counterparty;
     }
+
+    public void setCounterparty(Counterparty counterparty) {
+        this.counterparty = counterparty;
+    }
+
 }

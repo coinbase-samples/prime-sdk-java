@@ -22,11 +22,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Cancel Order
+ */
 public class CancelOrderRequest {
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
-    @JsonProperty("order_id")
+
+    @JsonProperty(required = true, value = "order_id")
     @JsonIgnore
     private String orderId;
 
@@ -71,7 +75,7 @@ public class CancelOrderRequest {
             return this;
         }
 
-        public CancelOrderRequest build() {
+        public CancelOrderRequest build() throws CoinbaseClientException {
             validate();
             return new CancelOrderRequest(this);
         }
@@ -80,7 +84,6 @@ public class CancelOrderRequest {
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
             }
-
             if (isNullOrEmpty(this.orderId)) {
                 throw new CoinbaseClientException("OrderId is required");
             }

@@ -18,12 +18,14 @@ package com.coinbase.prime.wallets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.model.enums.WalletDepositInstructionType;
-import com.coinbase.prime.model.enums.NetworkType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Wallet Deposit Instructions
+ */
 public class GetWalletDepositInstructionsRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -33,14 +35,14 @@ public class GetWalletDepositInstructionsRequest {
     @JsonIgnore
     private String walletId;
 
-    @JsonProperty(required = true, value = "deposit_type")
+    @JsonProperty("deposit_type")
     private WalletDepositInstructionType depositType;
 
     @JsonProperty("network.id")
     private String networkId;
 
     @JsonProperty("network.type")
-    private NetworkType networkType;
+    private String networkType;
 
     public GetWalletDepositInstructionsRequest() {
     }
@@ -85,11 +87,11 @@ public class GetWalletDepositInstructionsRequest {
         this.networkId = networkId;
     }
 
-    public NetworkType getNetworkType() {
+    public String getNetworkType() {
         return networkType;
     }
 
-    public void setNetworkType(NetworkType networkType) {
+    public void setNetworkType(String networkType) {
         this.networkType = networkType;
     }
 
@@ -98,52 +100,47 @@ public class GetWalletDepositInstructionsRequest {
         private String walletId;
         private WalletDepositInstructionType depositType;
         private String networkId;
-        private NetworkType networkType;
+        private String networkType;
 
         public Builder() {
         }
 
-        public GetWalletDepositInstructionsRequest.Builder portfolioId(String portfolioId) {
+        public Builder portfolioId(String portfolioId) {
             this.portfolioId = portfolioId;
             return this;
         }
 
-        public GetWalletDepositInstructionsRequest.Builder walletId(String walletId) {
+        public Builder walletId(String walletId) {
             this.walletId = walletId;
             return this;
         }
 
-        public GetWalletDepositInstructionsRequest.Builder depositType(WalletDepositInstructionType depositType) {
+        public Builder depositType(WalletDepositInstructionType depositType) {
             this.depositType = depositType;
             return this;
         }
 
-        public GetWalletDepositInstructionsRequest.Builder networkId(String networkId) {
+        public Builder networkId(String networkId) {
             this.networkId = networkId;
             return this;
         }
 
-        public GetWalletDepositInstructionsRequest.Builder networkType(NetworkType networkType) {
+        public Builder networkType(String networkType) {
             this.networkType = networkType;
             return this;
         }
 
         public GetWalletDepositInstructionsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new GetWalletDepositInstructionsRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.portfolioId)) {
-                throw new CoinbaseClientException("PortfolioId cannot be null");
+                throw new CoinbaseClientException("PortfolioId is required");
             }
-
             if (isNullOrEmpty(this.walletId)) {
-                throw new CoinbaseClientException("WalletId cannot be null");
-            }
-
-            if (this.depositType == null) {
-                throw new CoinbaseClientException("DepositType cannot be null");
+                throw new CoinbaseClientException("WalletId is required");
             }
         }
     }

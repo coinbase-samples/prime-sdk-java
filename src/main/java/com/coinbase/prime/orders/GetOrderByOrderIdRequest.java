@@ -22,28 +22,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Get Order by Order ID
+ */
 public class GetOrderByOrderIdRequest {
-    @JsonProperty("order_id")
-    @JsonIgnore
-    private String orderId;
-    @JsonProperty("portfolio_id")
+    @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
+    @JsonProperty(required = true, value = "order_id")
+    @JsonIgnore
+    private String orderId;
 
     public GetOrderByOrderIdRequest() {
     }
 
     public GetOrderByOrderIdRequest(Builder builder) {
-        this.orderId = builder.orderId;
         this.portfolioId = builder.portfolioId;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+        this.orderId = builder.orderId;
     }
 
     public String getPortfolioId() {
@@ -54,16 +50,19 @@ public class GetOrderByOrderIdRequest {
         this.portfolioId = portfolioId;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
     public static class Builder {
-        private String orderId;
         private String portfolioId;
+        private String orderId;
 
         public Builder() {
-        }
-
-        public Builder orderId(String orderId) {
-            this.orderId = orderId;
-            return this;
         }
 
         public Builder portfolioId(String portfolioId) {
@@ -71,17 +70,22 @@ public class GetOrderByOrderIdRequest {
             return this;
         }
 
-        public GetOrderByOrderIdRequest build() {
-            this.validate();
+        public Builder orderId(String orderId) {
+            this.orderId = orderId;
+            return this;
+        }
+
+        public GetOrderByOrderIdRequest build() throws CoinbaseClientException {
+            validate();
             return new GetOrderByOrderIdRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
-            if (isNullOrEmpty(this.orderId)) {
-                throw new CoinbaseClientException("OrderId is required");
-            }
             if (isNullOrEmpty(this.portfolioId)) {
                 throw new CoinbaseClientException("PortfolioId is required");
+            }
+            if (isNullOrEmpty(this.orderId)) {
+                throw new CoinbaseClientException("OrderId is required");
             }
         }
     }

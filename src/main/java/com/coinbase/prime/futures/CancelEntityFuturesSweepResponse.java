@@ -18,8 +18,12 @@ package com.coinbase.prime.futures;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Cancel Entity Futures Sweep
+ */
 public class CancelEntityFuturesSweepResponse {
-    private boolean success;
+    @JsonProperty("success")
+    private Boolean success;
 
     @JsonProperty("request_id")
     private String requestId;
@@ -27,11 +31,11 @@ public class CancelEntityFuturesSweepResponse {
     public CancelEntityFuturesSweepResponse() {
     }
 
-    public boolean getSuccess() {
+    public Boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
+    public void setSuccess(Boolean success) {
         this.success = success;
     }
 

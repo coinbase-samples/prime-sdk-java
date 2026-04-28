@@ -19,23 +19,39 @@ package com.coinbase.prime.transactions;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.model.enums.TransactionType;
 import com.coinbase.prime.model.enums.SortDirection;
+import com.coinbase.prime.model.enums.TransactionType;
+import com.coinbase.prime.model.enums.TravelRuleStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.*;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Portfolio Transactions
+ */
 public class ListPortfolioTransactionsRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
+
+    @JsonProperty("symbols")
     private String[] symbols;
+
+    @JsonProperty("types")
     private TransactionType[] types;
+
     @JsonProperty("start_time")
     private String startTime;
+
     @JsonProperty("end_time")
     private String endTime;
+
+    @JsonProperty("get_network_unified_transactions")
+    private Boolean getNetworkUnifiedTransactions;
+
+    @JsonProperty("travel_rule_status")
+    private TravelRuleStatus[] travelRuleStatus;
 
     public ListPortfolioTransactionsRequest() {
     }
@@ -47,6 +63,8 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         this.types = builder.types;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
+        this.getNetworkUnifiedTransactions = builder.getNetworkUnifiedTransactions;
+        this.travelRuleStatus = builder.travelRuleStatus;
     }
 
     public String getPortfolioId() {
@@ -89,12 +107,30 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
         this.endTime = endTime;
     }
 
+    public Boolean getGetNetworkUnifiedTransactions() {
+        return getNetworkUnifiedTransactions;
+    }
+
+    public void setGetNetworkUnifiedTransactions(Boolean getNetworkUnifiedTransactions) {
+        this.getNetworkUnifiedTransactions = getNetworkUnifiedTransactions;
+    }
+
+    public TravelRuleStatus[] getTravelRuleStatus() {
+        return travelRuleStatus;
+    }
+
+    public void setTravelRuleStatus(TravelRuleStatus[] travelRuleStatus) {
+        this.travelRuleStatus = travelRuleStatus;
+    }
+
     public static class Builder {
         private String portfolioId;
         private String[] symbols;
         private TransactionType[] types;
         private String startTime;
         private String endTime;
+        private Boolean getNetworkUnifiedTransactions;
+        private TravelRuleStatus[] travelRuleStatus;
         private String cursor;
         private SortDirection sortDirection;
         private Integer limit;
@@ -127,9 +163,13 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
             return this;
         }
 
-        public Builder pagination(Pagination pagination) {
-            this.cursor = pagination.getNextCursor();
-            this.sortDirection = pagination.getSortDirection();
+        public Builder getNetworkUnifiedTransactions(Boolean getNetworkUnifiedTransactions) {
+            this.getNetworkUnifiedTransactions = getNetworkUnifiedTransactions;
+            return this;
+        }
+
+        public Builder travelRuleStatus(TravelRuleStatus[] travelRuleStatus) {
+            this.travelRuleStatus = travelRuleStatus;
             return this;
         }
 
@@ -138,8 +178,14 @@ public class ListPortfolioTransactionsRequest extends PrimeListRequest {
             return this;
         }
 
+        public Builder pagination(Pagination pagination) {
+            this.cursor = pagination.getNextCursor();
+            this.sortDirection = pagination.getSortDirection();
+            return this;
+        }
+
         public ListPortfolioTransactionsRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListPortfolioTransactionsRequest(this);
         }
 

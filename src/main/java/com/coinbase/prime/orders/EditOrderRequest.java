@@ -23,56 +23,44 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 /**
- * This feature is in beta. Please reach out to your Coinbase Prime account manager for more information.
+ * Edit Order (Beta)
  */
 public class EditOrderRequest {
-    /** The ID of the portfolio that owns the order */
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
     private String portfolioId;
-    
-    /** The ID of the order being edited */
+
     @JsonProperty(required = true, value = "order_id")
     @JsonIgnore
     private String orderId;
-    
-    /** Deprecated: The product ID of the order being edited */
+
     @JsonProperty("product_id")
     private String productId;
-    
-    /** The client order ID of the order being edited */
+
     @JsonProperty("orig_client_order_id")
     private String origClientOrderId;
-    
-    /** The updated version of the client order ID */
+
     @JsonProperty("client_order_id")
     private String clientOrderId;
-    
-    /** Order size in base asset units (either base_quantity or quote_value is required) */
+
     @JsonProperty("base_quantity")
     private String baseQuantity;
-    
-    /** Order size in quote asset units, i.e. the amount the user wants to spend (when buying) or receive (when selling); the quantity in base units will be determined based on the market */
+
     @JsonProperty("quote_value")
     private String quoteValue;
-    
-    /** Order limit price (buy orders are placed at or below this price; sell orders are placed at or above this price) */
+
     @JsonProperty("limit_price")
     private String limitPrice;
-    
-    /** The expiry time of the order */
+
     @JsonProperty("expiry_time")
     private String expiryTime;
-    
-    /** The maximum order size that will show up on venue order books (iceberg orders) */
+
     @JsonProperty("display_quote_size")
     private String displayQuoteSize;
-    
-    /** The maximum order size that will show up on venue order books (iceberg orders) */
+
     @JsonProperty("display_base_size")
     private String displayBaseSize;
-    
-    /** Specifies the stop price at which the order activates */
+
     @JsonProperty("stop_price")
     private String stopPrice;
 
@@ -268,7 +256,7 @@ public class EditOrderRequest {
         }
 
         public EditOrderRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new EditOrderRequest(this);
         }
 
@@ -278,12 +266,6 @@ public class EditOrderRequest {
             }
             if (isNullOrEmpty(this.orderId)) {
                 throw new CoinbaseClientException("OrderId is required");
-            }
-            if (isNullOrEmpty(this.origClientOrderId)) {
-                throw new CoinbaseClientException("OrigClientOrderId is required");
-            }
-            if (isNullOrEmpty(this.clientOrderId)) {
-                throw new CoinbaseClientException("ClientOrderId is required");
             }
         }
     }

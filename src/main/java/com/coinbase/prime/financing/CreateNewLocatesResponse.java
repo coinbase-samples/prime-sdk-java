@@ -18,18 +18,22 @@ package com.coinbase.prime.financing;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Create New Locates
+ */
 public class CreateNewLocatesResponse {
-  @JsonProperty("locate_id")
-  private String locateId;
+    @JsonProperty("locate_id")
+    private String locateId;
 
-  public CreateNewLocatesResponse() {
-  }
+    public CreateNewLocatesResponse() {
+    }
 
-  public String getLocateId() {
-    return locateId;
-  }
+    public String getLocateId() {
+        return locateId;
+    }
 
-  public void setLocateId(String locateId) {
-    this.locateId = locateId;
-  }
+    public void setLocateId(String locateId) {
+        this.locateId = locateId;
+    }
+
 }

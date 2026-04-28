@@ -22,14 +22,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * Schedule Entity Futures Sweep
+ */
 public class ScheduleEntityFuturesSweepRequest {
     @JsonProperty(required = true, value = "entity_id")
     @JsonIgnore
     private String entityId;
 
+    @JsonProperty("amount")
     private String amount;
 
-    @JsonProperty(required = true)
+    @JsonProperty("currency")
     private String currency;
 
     public ScheduleEntityFuturesSweepRequest() {
@@ -78,17 +82,24 @@ public class ScheduleEntityFuturesSweepRequest {
             return this;
         }
 
+        public Builder amount(String amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public Builder currency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
         public ScheduleEntityFuturesSweepRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ScheduleEntityFuturesSweepRequest(this);
         }
 
         private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(this.entityId)) {
-                throw new CoinbaseClientException("Entity ID is required");
-            }
-            if (isNullOrEmpty(this.currency)) {
-                throw new CoinbaseClientException("Currency is required");
+                throw new CoinbaseClientException("EntityId is required");
             }
         }
     }

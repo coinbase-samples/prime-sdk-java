@@ -16,18 +16,24 @@
 
 package com.coinbase.prime.financing;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
+
+/**
+ * Get Portfolio Buying Power
+ */
 public class GetPortfolioBuyingPowerRequest {
-    @JsonIgnore
     @JsonProperty(required = true, value = "portfolio_id")
+    @JsonIgnore
     private String portfolioId;
 
-    @JsonProperty(required = true, value = "base_currency")
+    @JsonProperty("base_currency")
     private String baseCurrency;
 
-    @JsonProperty(required = true, value = "quote_currency")
+    @JsonProperty("quote_currency")
     private String quoteCurrency;
 
     public GetPortfolioBuyingPowerRequest() {
@@ -86,8 +92,15 @@ public class GetPortfolioBuyingPowerRequest {
             return this;
         }
 
-        public GetPortfolioBuyingPowerRequest build() {
+        public GetPortfolioBuyingPowerRequest build() throws CoinbaseClientException {
+            validate();
             return new GetPortfolioBuyingPowerRequest(this);
+        }
+
+        private void validate() throws CoinbaseClientException {
+            if (isNullOrEmpty(this.portfolioId)) {
+                throw new CoinbaseClientException("PortfolioId is required");
+            }
         }
     }
 }

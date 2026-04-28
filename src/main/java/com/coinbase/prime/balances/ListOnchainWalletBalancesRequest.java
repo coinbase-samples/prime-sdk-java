@@ -19,13 +19,16 @@ package com.coinbase.prime.balances;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.common.PrimeListRequest;
 import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.model.enums.VisibilityStatus;
 import com.coinbase.prime.model.enums.SortDirection;
+import com.coinbase.prime.model.enums.VisibilityStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
+/**
+ * List Onchain Wallet Balances
+ */
 public class ListOnchainWalletBalancesRequest extends PrimeListRequest {
     @JsonProperty(required = true, value = "portfolio_id")
     @JsonIgnore
@@ -98,19 +101,19 @@ public class ListOnchainWalletBalancesRequest extends PrimeListRequest {
             return this;
         }
 
+        public Builder limit(Integer limit) {
+            this.limit = limit;
+            return this;
+        }
+
         public Builder pagination(Pagination pagination) {
             this.cursor = pagination.getNextCursor();
             this.sortDirection = pagination.getSortDirection();
             return this;
         }
 
-        public Builder limit(Integer limit) {
-            this.limit = limit;
-            return this;
-        }
-
         public ListOnchainWalletBalancesRequest build() throws CoinbaseClientException {
-            this.validate();
+            validate();
             return new ListOnchainWalletBalancesRequest(this);
         }
 

@@ -45,7 +45,8 @@ public class AddressBookServiceImpl extends CoinbaseServiceImpl implements Addre
                 HttpMethod.POST,
                 String.format("/portfolios/%s/address_book", request.getPortfolioId()),
                 request,
-                List.of(200),
+                List.of(201, 200),
                 new TypeReference<CreateAddressBookEntryResponse>() {});
     }
+
 }

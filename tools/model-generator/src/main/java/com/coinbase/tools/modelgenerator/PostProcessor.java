@@ -278,6 +278,7 @@ public class PostProcessor {
             content = applyBooleanPrimitiveConversion(content);
         }
 
+        content = com.coinbase.tools.sdkgenerator.CopyrightHelper.applyCopyrightYear(outputPath, content);
         Files.writeString(outputPath, content);
 
         if (!existsBefore) {

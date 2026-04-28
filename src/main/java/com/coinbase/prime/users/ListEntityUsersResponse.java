@@ -18,14 +18,16 @@ package com.coinbase.prime.users;
 
 import com.coinbase.prime.model.EntityUser;
 import com.coinbase.prime.common.Pagination;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Response object for listing all users associated with a specific entity.
+ * List Users
  */
 public class ListEntityUsersResponse {
-    /** Array of entity user information */
+    @JsonProperty("users")
     private EntityUser[] users;
-    /** Pagination information for the response */
+
+    @JsonProperty("pagination")
     private Pagination pagination;
 
     public ListEntityUsersResponse() {
