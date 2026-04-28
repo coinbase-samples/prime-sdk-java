@@ -145,6 +145,6 @@ mvn -Pgenerate
 
 Optional: compare without writing files: `mvn -Pgenerate -Dgenerator.args=--diff`, or dry run: `-Dgenerator.args=--dry-run`.
 
-This regenerates domain models and enums, per-operation `*Request` / `*Response` types, `*Service` / `*ServiceImpl`, `PrimeServiceFactory`, and adds missing example stubs only when an example file does not already exist.
+This regenerates domain models and enums, per-operation `*Request` / `*Response` types, `*Service` / `*ServiceImpl`, and `PrimeServiceFactory`. Example programs under `com.coinbase.examples` are maintained separately.
 
 See [`tools/model-generator/README.md`](tools/model-generator/README.md) for configuration (`config/generator-config.json`, `operations-overrides.json`) and module details.

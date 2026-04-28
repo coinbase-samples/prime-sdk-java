@@ -7,7 +7,8 @@ Generates the majority of the Prime Java SDK from the published OpenAPI spec, al
 1. **Models & enums** — OpenAPI Generator (`OpenApiGenerator`) → `PostProcessor` → `com.coinbase.prime.model` / `model.enums`
 2. **Client surface** — `SdkGeneratorMain` / `ClientSurfacePhase`: per-operation `*Request`, `*Response`, `*Service`, `*ServiceImpl` under `com.coinbase.prime.<tagFolder>/`
 3. **Factory** — `com.coinbase.prime.factory.PrimeServiceFactory`
-4. **Examples** — If `com.coinbase.examples/<folder>/<SdkMethod>.java` does not exist, a minimal stub is created (existing files are never overwritten)
+
+Hand-written samples live under `com.coinbase.examples`; the generator does not create or update them.
 
 ## Configuration
 
@@ -49,8 +50,7 @@ The root profile runs `mvn` in this module with `-Pgenerate` and forwards `gener
 2. Parse YAML to `JsonNode` (`SpecParser`); build operation bindings (`OperationBindingGenerator` + `operations-overrides.json`)
 3. Run model/enum generation unless `--dry-run` / `--diff`
 4. Emit request/response/service and write files (`ClientSurfacePhase`)
-5. Emit missing example stubs (`ExamplePhase`)
-6. Regenerate `PrimeServiceFactory` (`FactoryPhase`)
+5. Regenerate `PrimeServiceFactory` (`FactoryPhase`)
 
 ## Tests
 

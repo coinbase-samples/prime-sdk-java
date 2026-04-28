@@ -1,7 +1,6 @@
 package com.coinbase.tools.sdkgenerator;
 
 import com.coinbase.tools.sdkgenerator.phases.ClientSurfacePhase;
-import com.coinbase.tools.sdkgenerator.phases.ExamplePhase;
 import com.coinbase.tools.sdkgenerator.phases.FactoryPhase;
 import com.coinbase.tools.sdkgenerator.phases.ModelEnumPhase;
 import com.coinbase.tools.sdkgenerator.processing.GeneratorConfiguration;
@@ -23,7 +22,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * Holistic Prime Java SDK generator: models, enums, client surface, factory, examples.
+ * Holistic Prime Java SDK generator: models, enums, client surface, factory.
  */
 public final class SdkGeneratorMain {
 
@@ -79,10 +78,6 @@ public final class SdkGeneratorMain {
         ClientSurfacePhase client =
                 new ClientSurfacePhase(log, document, cfg, transforms, primeRoot);
         client.run(operations, dryRun, diffMode);
-
-        Path examplesRoot = projectRoot.resolve("src/main/java/com/coinbase/examples");
-        ExamplePhase examples = new ExamplePhase(log, document, cfg, examplesRoot);
-        examples.run(operations, dryRun, diffMode);
 
         String factory = FactoryPhase.emit(cfg);
         Path factoryPath =

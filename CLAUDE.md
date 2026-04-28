@@ -128,7 +128,7 @@ mvn -Pgenerate
 
 This tool:
 - Downloads the OpenAPI spec, generates models and enums (OpenAPI Generator + `PostProcessor`)
-- Generates `*Request`, `*Response`, `*Service`, `*ServiceImpl` per tag/operation, `PrimeServiceFactory`, and missing example stubs under `com.coinbase.examples`
+- Generates `*Request`, `*Response`, `*Service`, `*ServiceImpl` per tag/operation and `PrimeServiceFactory`
 - Maintains SDK conventions (Builder pattern, proper annotations)
 - Prevents drift between spec and implementation
 - Processes all models from the spec, updating existing files to catch changes
@@ -145,7 +145,7 @@ When the OpenAPI spec adds or changes operations:
 2. **Run the holistic generator** from the repo root: `mvn -Pgenerate` (or `-Dgenerator.args=--diff` to compare without writing)
 3. **Build**: `mvn clean install` and fix any generator gaps in `tools/model-generator` (not by editing generated Java by hand, except where noted below)
 
-Hand-maintained (not overwritten by the generator) includes: `com.coinbase.prime.common` (e.g. `PrimeListRequest`, `Pagination`), credentials/client/utils, and **curated** examples under `com.coinbase.examples` (the generator only adds a missing stub if no file exists)
+Hand-maintained (not overwritten by the generator) includes: `com.coinbase.prime.common` (e.g. `PrimeListRequest`, `Pagination`), credentials/client/utils, and **curated** examples under `com.coinbase.examples`
 
 ### Endpoint Discovery
 To identify available endpoints:
