@@ -1,5 +1,6 @@
 package com.coinbase.tools.sdkgenerator.phases;
 
+import com.coinbase.tools.sdkgenerator.CopyrightHelper;
 import com.coinbase.tools.sdkgenerator.processing.GeneratorConfiguration;
 import com.coinbase.tools.sdkgenerator.processing.NamingResolver;
 import com.coinbase.tools.sdkgenerator.processing.ServiceDefinition;
@@ -104,7 +105,7 @@ public final class ClientSurfacePhase {
 
     private void writeOrDiff(Path path, String content, boolean dryRun, boolean diffMode)
             throws IOException {
-        content = content.replace("\r\n", "\n");
+        content = CopyrightHelper.applyCopyrightYear(path, content).replace("\r\n", "\n");
         if (diffMode) {
             if (!Files.exists(path)) {
                 log.info("DIFF missing file would be created: {}", path);

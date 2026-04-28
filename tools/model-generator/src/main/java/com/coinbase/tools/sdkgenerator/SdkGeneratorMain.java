@@ -45,6 +45,7 @@ public final class SdkGeneratorMain {
         }
 
         Path projectRoot = GeneratorPaths.findProjectRoot();
+        CopyrightHelper.initializeSdkEmittedCopyrightYear(projectRoot);
         GeneratorConfiguration cfg = GeneratorConfiguration.load(projectRoot);
         SharedTransforms transforms = new SharedTransforms(cfg);
 
@@ -82,6 +83,7 @@ public final class SdkGeneratorMain {
         String factory = FactoryPhase.emit(cfg);
         Path factoryPath =
                 projectRoot.resolve("src/main/java/com/coinbase/prime/factory/PrimeServiceFactory.java");
+        factory = CopyrightHelper.applyCopyrightYear(factoryPath, factory);
         if (diffMode) {
             if (!Files.exists(factoryPath)) {
                 log.info("DIFF missing factory would be created: {}", factoryPath);
