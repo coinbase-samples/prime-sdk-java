@@ -20,14 +20,9 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface AdvancedTransferService {
-    /** List Advanced Transfers */
     ListAdvancedTransfersResponse listAdvancedTransfers(ListAdvancedTransfersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Create Advanced Transfer */
     CreateAdvancedTransferResponse createAdvancedTransfer(CreateAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Cancel Advanced Transfer */
     CancelAdvancedTransferResponse cancelAdvancedTransfer(CancelAdvancedTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** List transactions associated with an Advanced Transfer */
     ListAdvancedTransferTransactionsResponse listAdvancedTransferTransactions(ListAdvancedTransferTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get Portfolio Counterparty ID */
     GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -20,12 +20,8 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface ActivitiesService {
-    /** List Activities */
     ListPortfolioActivitiesResponse listPortfolioActivities(ListPortfolioActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** List Entity Activities */
     ListEntityActivitiesResponse listEntityActivities(ListEntityActivitiesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get Activity by Activity ID */
     GetActivityResponse getActivity(GetActivityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get Portfolio Activity by Activity ID */
     GetPortfolioActivityResponse getPortfolioActivity(GetPortfolioActivityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

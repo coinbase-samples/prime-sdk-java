@@ -20,22 +20,13 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface TransactionsService {
-    /** List Portfolio Transactions */
     ListPortfolioTransactionsResponse listPortfolioTransactions(ListPortfolioTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get Transaction by Transaction ID */
     GetTransactionResponse getTransaction(GetTransactionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Create Conversion */
     CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Create Onchain Transaction */
     CreateOnchainTransactionResponse createOnchainTransaction(CreateOnchainTransactionRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** List Wallet Transactions */
     ListWalletTransactionsResponse listWalletTransactions(ListWalletTransactionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Create Transfer */
     CreateWalletTransferResponse createWalletTransfer(CreateWalletTransferRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Create Withdrawal */
     CreateWalletWithdrawalResponse createWalletWithdrawal(CreateWalletWithdrawalRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get Transaction Travel Rule Data */
     GetTransactionTravelRuleDataResponse getTransactionTravelRuleData(GetTransactionTravelRuleDataRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Submit Deposit Travel Rule Data */
     SubmitDepositTravelRuleDataResponse submitDepositTravelRuleData(SubmitDepositTravelRuleDataRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

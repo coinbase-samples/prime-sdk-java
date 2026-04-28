@@ -20,8 +20,6 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface PositionsService {
-    /** List Aggregate Entity Positions */
     ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** List Entity Positions */
     ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

@@ -20,6 +20,5 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface InvoiceService {
-    /** List Invoices */
     ListInvoicesResponse listInvoices(ListInvoicesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

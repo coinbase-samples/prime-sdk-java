@@ -20,12 +20,8 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface BalancesService {
-    /** List Entity Balances */
     ListEntityBalancesResponse listEntityBalances(ListEntityBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** List Portfolio Balances */
     ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get Wallet Balance */
     GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** List Onchain Wallet Balances */
     ListOnchainWalletBalancesResponse listOnchainWalletBalances(ListOnchainWalletBalancesRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

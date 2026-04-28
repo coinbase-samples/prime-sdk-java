@@ -20,26 +20,15 @@ import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface FuturesService {
-    /** Set Auto Sweep */
     SetAutoSweepResponse setAutoSweep(SetAutoSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get Entity FCM Balance */
     GetEntityFcmBalanceResponse getEntityFcmBalance(GetEntityFcmBalanceRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get FCM Margin Call Details */
     GetFcmMarginCallDetailsResponse getFcmMarginCallDetails(GetFcmMarginCallDetailsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get Entity Positions */
     GetPositionsResponse getPositions(GetPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get FCM Risk Limits */
     GetFcmRiskLimitsResponse getFcmRiskLimits(GetFcmRiskLimitsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get FCM Settings */
     GetFcmSettingsResponse getFcmSettings(GetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Set FCM Settings */
     SetFcmSettingsResponse setFcmSettings(SetFcmSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** List Entity Futures Sweeps */
     ListEntityFuturesSweepsResponse listEntityFuturesSweeps(ListEntityFuturesSweepsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Schedule Entity Futures Sweep */
     ScheduleEntityFuturesSweepResponse scheduleEntityFuturesSweep(ScheduleEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Cancel Entity Futures Sweep */
     CancelEntityFuturesSweepResponse cancelEntityFuturesSweep(CancelEntityFuturesSweepRequest request) throws CoinbaseClientException, CoinbasePrimeException;
-    /** Get FCM Equity */
     GetFcmEquityResponse getFcmEquity(GetFcmEquityRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }
