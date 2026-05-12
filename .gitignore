@@ -21,9 +21,6 @@ tmp/
 
 ai-docs/
 
-# OpenAPI spec - fetch dynamically instead of committing
-apiSpec/*.yaml
-
 # SDK generator download + OpenAPI CLI output
 generated/
 
