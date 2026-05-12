@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Removed `tools/model-generator`; models, enums, requests, responses, services, and `PrimeServiceFactory` are hand-maintained against `apiSpec/prime-public-spec.yaml`. Refresh the spec with `make fetch-spec`.
+
 ## [1.7.1] - 2026-04-21
 
 ### Added

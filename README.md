@@ -133,18 +133,12 @@ mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositIn
 mvn exec:java -Dexec.mainClass="com.coinbase.examples.wallets.GetWalletDepositInstructions" -Dexec.args="wallet-id WIRE"
 ```
 
-## Code generation
+## OpenAPI spec
 
-The SDK is generated from the published OpenAPI spec (`https://api.prime.coinbase.com/v1/openapi.yaml`). The spec is downloaded at generation time (not committed).
-
-From the repository root:
+The SDK tracks the published Prime OpenAPI definition in **apiSpec/prime-public-spec.yaml** (source of truth for endpoints and schemas). Refresh the committed file from the live spec:
 
 ```bash
-mvn -Pgenerate
+make fetch-spec
 ```
 
-Optional: compare without writing files: `mvn -Pgenerate -Dgenerator.args=--diff`, or dry run: `-Dgenerator.args=--dry-run`.
-
-This regenerates domain models and enums, per-operation `*Request` / `*Response` types, `*Service` / `*ServiceImpl`, and `PrimeServiceFactory`. Example programs under `com.coinbase.examples` are maintained separately.
-
-See [`tools/model-generator/README.md`](tools/model-generator/README.md) for configuration (`config/generator-config.json`, `operations-overrides.json`) and module details.
+Models, enums, per-operation request/response types, services, and `PrimeServiceFactory` are **hand-maintained** to match that spec. Example programs under `com.coinbase.examples` are maintained separately.

@@ -10,7 +10,7 @@ The `ai-docs/` directory contains detailed analysis and coverage reports maintai
 - **API_COVERAGE_REPORT.md**: Technical coverage analysis with detailed breakdowns
 - **README.md**: Guide to using these documents
 
-Refer to these documents when working on endpoint implementation or troubleshooting model generation.
+Refer to these documents when working on endpoint implementation or troubleshooting spec drift and coverage.
 
 ## Build Commands
 
@@ -30,14 +30,14 @@ This is a Maven-based Java project (Java 11+). Common development commands:
 This is the **Coinbase Prime Java SDK** - a sample library for interacting with Coinbase Prime REST APIs. Key architectural patterns:
 
 ### Service Layer Pattern
-- **PrimeServiceFactory**: Factory class that creates service instances for different API domains (regenerate with `tools/model-generator`; do not hand-edit)
-- **Service interfaces**: Each API domain (Orders, Portfolios, Wallets, etc.) has a corresponding service interface (**generated**)
-- **Service implementations**: Concrete implementations ending with `ServiceImpl` that handle HTTP communication (**generated**)
+- **PrimeServiceFactory**: Factory class that creates service instances for different API domains (update when adding services so it stays in sync with the OpenAPI spec)
+- **Service interfaces**: Each API domain (Orders, Portfolios, Wallets, etc.) has a corresponding service interface
+- **Service implementations**: Concrete implementations ending with `ServiceImpl` that handle HTTP communication
 
 ### Core Components
 - **CoinbasePrimeClient**: Main HTTP client that extends `CoinbaseNetHttpClient` from `coinbase-core-java` 
 - **CoinbasePrimeCredentials**: Handles API authentication using access key, passphrase, and signing key
-- **Request/Response pattern**: Each API operation has dedicated request and response classes using Builder patterns (**generated**; do not hand-write)
+- **Request/Response pattern**: Each API operation has dedicated request and response classes using Builder patterns
 
 ### Package Structure
 - `com.coinbase.prime.client`: Core HTTP client
@@ -97,7 +97,7 @@ Working examples available in `src/main/java/com/coinbase/examples/` including:
 - **Credentials**: Set `COINBASE_PRIME_CREDENTIALS` environment variable with JSON containing `accessKey`, `passphrase`, and `signingKey`
 - **Portfolio ID**: Set `COINBASE_PRIME_PORTFOLIO_ID` for examples that require a specific portfolio
 
-## OpenAPI Specification & Code Generation
+## OpenAPI Specification & SDK maintenance
 
 ### OpenAPI Specification
 - **Primary spec**: `apiSpec/prime-public-spec.yaml` - The authoritative source for all endpoint definitions (committed in-repo; refresh with `make fetch-spec`).
@@ -105,47 +105,18 @@ Working examples available in `src/main/java/com/coinbase/examples/` including:
 - **Server**: https://api.prime.coinbase.com/
 - **Backup spec**: `openapi/prime-public-api-spec.json`
 
-### AI Agent Code Generation
-
-#### SDK code generation - IMPORTANT
-**Do not hand-write domain models, enums, per-operation `*Request`/`*Response`, or `*Service`/`*ServiceImpl` files** — they are produced by the holistic generator in `tools/model-generator` (see `com.coinbase.tools.sdkgenerator`). Configuration mirrors the .NET generator: `tools/model-generator/config/generator-config.json` and `operations-overrides.json`.
-
-From the **repository root** (recommended):
-```bash
-mvn -Pgenerate
-```
-
-Optional: `--dry-run` or `--diff` (no writes; compare to disk):
-```bash
-mvn -Pgenerate -Dgenerator.args=--diff
-```
-
-From `tools/model-generator` only:
-```bash
-mvn -Pgenerate
-# or: mvn -q compile exec:java@generate-models -Dgenerator.args=--diff
-```
-
-This tool:
-- Downloads the OpenAPI spec, generates models and enums (OpenAPI Generator + `PostProcessor`)
-- Generates `*Request`, `*Response`, `*Service`, `*ServiceImpl` per tag/operation and `PrimeServiceFactory`
-- Maintains SDK conventions (Builder pattern, proper annotations)
-- Prevents drift between spec and implementation
-- Processes all models from the spec, updating existing files to catch changes
-- See `tools/model-generator/README.md` for full documentation
-
-**Manual model creation is prohibited.** All domain models in `com.coinbase.prime.model` and enums in `com.coinbase.prime.model.enums` must be generated from the OpenAPI specification.
-
-The profile id was formerly `generate-models`; use **`mvn -Pgenerate`** from the repo root.
+### Spec-driven maintenance
+- Domain models in `com.coinbase.prime.model`, enums in `com.coinbase.prime.model.enums`, per-operation `*Request`/`*Response`, `*Service`/`*ServiceImpl`, and `PrimeServiceFactory` are **hand-maintained** to match the OpenAPI specification and the patterns in this document.
+- Use the `update-sdk-spec` skill in the `ai-prompts` repository for a repeatable spec-update workflow (diff analysis, branching, examples, changelog).
 
 ### Development Workflow
 When the OpenAPI spec adds or changes operations:
 
 1. **Reference the live spec** (or `apiSpec/prime-public-spec.yaml` when fetched) as the source of truth
-2. **Run the holistic generator** from the repo root: `mvn -Pgenerate` (or `-Dgenerator.args=--diff` to compare without writing)
-3. **Build**: `mvn clean install` and fix any generator gaps in `tools/model-generator` (not by editing generated Java by hand, except where noted below)
+2. **Update Java**: add or change models, enums, request/response types, services, and factory wiring
+3. **Build**: `mvn clean install` and fix compile/test failures
 
-Hand-maintained (not overwritten by the generator) includes: `com.coinbase.prime.common` (e.g. `PrimeListRequest`, `Pagination`), credentials/client/utils, and **curated** examples under `com.coinbase.examples`
+**Hand-maintained roots** (extend only where the spec requires): `com.coinbase.prime.common` (e.g. `PrimeListRequest`, `Pagination`), credentials/client/utils, and **curated** examples under `com.coinbase.examples`
 
 ### Endpoint Discovery
 To identify available endpoints:
@@ -205,13 +176,13 @@ For adding new endpoints or updating existing ones using AI agents:
 
 1. **Analyze OpenAPI Specification**: AI agent reads `apiSpec/prime-public-spec.yaml` directly
 2. **Process by Tags**: Group endpoints by OpenAPI tags (e.g., Activities, Wallets, Orders)
-3. **Generate Service Methods**: Create methods following SDK naming conventions (List vs Get)
-4. **Generate Models**: Extract and create request/response models from OpenAPI schemas
-5. **Apply Patterns**: Use established SDK patterns for consistency
-6. **Validate**: Ensure `mvn compile` passes after generation
+3. **Add or update service methods**: Follow SDK naming conventions (List vs Get)
+4. **Add or update models**: Align request/response and component schemas with the spec
+5. **Apply patterns**: Use established SDK patterns for consistency
+6. **Validate**: Ensure `mvn compile` passes after updates
 
 ### Full Coverage Requirement
-**IMPORTANT**: Any code generation request intends for **100% coverage** of the OpenAPI specification. This includes:
+**IMPORTANT**: Spec updates should aim for **100% coverage** of the OpenAPI specification. This includes:
 
 - **All endpoints**: Every operation defined in the OpenAPI spec must be implemented
 - **All models**: Every schema in `components.schemas` must have corresponding Java classes
@@ -219,21 +190,21 @@ For adding new endpoints or updating existing ones using AI agents:
 - **All request/response types**: Complete coverage of all API input/output models
 - **All service domains**: Every OpenAPI tag must have a corresponding service
 
-The SDK should achieve complete feature parity with the OpenAPI specification. When a generation request is made, ALL missing models, endpoints, and changes must be generated - no prioritization or partial implementation.
+The SDK should achieve complete feature parity with the OpenAPI specification. When a spec update is made, ALL missing models, endpoints, and changes should be addressed — no prioritization or partial implementation.
 
 ### Coverage Validation
-When generating or updating code:
+When updating code:
 1. **Endpoint Coverage**: Verify all `operationId` entries from OpenAPI spec are implemented
 2. **Model Coverage**: Verify all `components.schemas` entries have corresponding Java classes
 3. **Service Coverage**: Verify all OpenAPI tags have corresponding service classes
 4. **Missing Features**: Identify and implement any missing Web3, NFT, staking, or advanced trading features
 
-### Rapid Generation Process
+### Rapid update process
 1. Identify ALL missing objects from OpenAPI analysis (not build errors)
 2. Plan parallelized batches by domain (FCM, Staking, Orders, etc.)
 3. Use template files for structure (package, imports, Builder pattern)
-4. Launch multiple generation tasks simultaneously 
-5. Run `mvn compile` ONCE after all generation completes
+4. Apply changes domain by domain
+5. Run `mvn compile` ONCE after substantive edits complete
 6. Fix any compilation errors rapidly in batch
 
 ## Development Patterns
@@ -246,14 +217,14 @@ When adding new functionality, follow the established patterns:
 5. Place domain models in `src/main/java/com/coinbase/prime/model/` package
 6. Place enums in `src/main/java/com/coinbase/prime/model/enums/` package
 
-### Java Generation Guidelines
+### Java implementation guidelines
 
-#### Service Method Generation
-Each OpenAPI operation should generate:
+#### Service methods
+Each OpenAPI operation should have:
 1. **Method**: `{OperationName}({RequestType} request) throws CoinbasePrimeException`
 2. **Builder pattern**: Request classes use Builder pattern for construction
 
-#### Request/Response Model Generation
+#### Request/response types
 - **Request models**: Path parameters and query parameters → `{OperationName}Request` (in service package)
 - **Response models**: Response schema → `{OperationName}Response` (in service package)
 - **Nested models**: Component schemas → individual model classes in `src/main/java/com/coinbase/prime/model/`
