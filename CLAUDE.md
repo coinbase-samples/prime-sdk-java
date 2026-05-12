@@ -100,7 +100,7 @@ Working examples available in `src/main/java/com/coinbase/examples/` including:
 ## OpenAPI Specification & Code Generation
 
 ### OpenAPI Specification
-- **Primary spec**: `apiSpec/prime-public-spec.yaml` - The authoritative source for all endpoint definitions
+- **Primary spec**: `apiSpec/prime-public-spec.yaml` - The authoritative source for all endpoint definitions (committed in-repo; refresh with `make fetch-spec`).
 - **Format**: OpenAPI 3.0.1 specification
 - **Server**: https://api.prime.coinbase.com/
 - **Backup spec**: `openapi/prime-public-api-spec.json`
