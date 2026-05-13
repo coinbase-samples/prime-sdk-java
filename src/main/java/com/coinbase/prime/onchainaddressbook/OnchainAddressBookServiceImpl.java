@@ -31,7 +31,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public CreateOnchainAddressBookEntryResponse createOnchainAddressBookEntry(CreateOnchainAddressBookEntryRequest request) {
         return this.request(
                 HttpMethod.POST,
-                String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/onchain_address_group", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<CreateOnchainAddressBookEntryResponse>() {});
@@ -40,7 +40,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public UpdateOnchainAddressBookEntryResponse updateOnchainAddressBookEntry(UpdateOnchainAddressBookEntryRequest request) {
         return this.request(
                 HttpMethod.PUT,
-                String.format("/portfolios/%s/onchain_address_group", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/onchain_address_group", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<UpdateOnchainAddressBookEntryResponse>() {});
@@ -49,7 +49,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public DeleteOnchainAddressGroupResponse deleteOnchainAddressGroup(DeleteOnchainAddressGroupRequest request) {
         return this.request(
                 HttpMethod.DELETE,
-                String.format("/portfolios/%s/onchain_address_group/%s", request.getPortfolioId(), request.getAddressGroupId()),
+                String.format("/v1/portfolios/%s/onchain_address_group/%s", request.getPortfolioId(), request.getAddressGroupId()),
                 request,
                 List.of(200),
                 new TypeReference<DeleteOnchainAddressGroupResponse>() {});
@@ -58,7 +58,7 @@ public class OnchainAddressBookServiceImpl extends CoinbaseServiceImpl implement
     public ListOnchainAddressGroupsResponse listOnchainAddressGroups(ListOnchainAddressGroupsRequest request) {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/onchain_address_groups", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/onchain_address_groups", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListOnchainAddressGroupsResponse>() {});

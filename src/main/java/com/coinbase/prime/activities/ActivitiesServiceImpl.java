@@ -35,7 +35,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/activities", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/activities", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPortfolioActivitiesResponse>() {});
@@ -45,7 +45,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
     public GetActivityResponse getActivity(GetActivityRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/activities/%s", request.getActivityId()),
+                String.format("/v1/activities/%s", request.getActivityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetActivityResponse>() {});
@@ -56,7 +56,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/activities", request.getEntityId()),
+                String.format("/v1/entities/%s/activities", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListEntityActivitiesResponse>() {});
@@ -67,7 +67,7 @@ public class ActivitiesServiceImpl extends CoinbaseServiceImpl implements Activi
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
+                String.format("/v1/portfolios/%s/activities/%s", request.getPortfolioId(), request.getActivityId()),
                 request,
                 List.of(200),
                 new TypeReference<GetPortfolioActivityResponse>() {});

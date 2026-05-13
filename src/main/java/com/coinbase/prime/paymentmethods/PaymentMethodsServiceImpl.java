@@ -33,7 +33,7 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements Pa
     public ListPaymentMethodsResponse listPaymentMethods(ListPaymentMethodsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/payment-methods", request.getEntityId()),
+                String.format("/v1/entities/%s/payment-methods", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPaymentMethodsResponse>() {});
@@ -43,7 +43,7 @@ public class PaymentMethodsServiceImpl extends CoinbaseServiceImpl implements Pa
     public GetPaymentMethodDetailsResponse getPaymentMethodDetails(GetPaymentMethodDetailsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
+                String.format("/v1/entities/%s/payment-methods/%s", request.getEntityId(), request.getPaymentMethodId()),
                 null,
                 List.of(200),
                 new TypeReference<GetPaymentMethodDetailsResponse>() {});

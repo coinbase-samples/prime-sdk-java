@@ -32,7 +32,7 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     public ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/aggregate_positions", request.getId()),
+                String.format("/v1/entities/%s/aggregate_positions", request.getId()),
                 request,
                 List.of(200),
                 new TypeReference<ListAggregatePositionsResponse>() {});
@@ -42,7 +42,7 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     public ListPositionsResponse listPositions(ListPositionsRequest request) {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/positions", request.getId()),
+                String.format("/v1/entities/%s/positions", request.getId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPositionsResponse>() {});

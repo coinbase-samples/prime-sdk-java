@@ -33,7 +33,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public GetTransactionResponse getTransaction(GetTransactionRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId()),
+                String.format("/v1/portfolios/%s/transactions/%s", request.getPortfolioId(), request.getTransactionId()),
                 request,
                 List.of(200),
                 new TypeReference<GetTransactionResponse>() {});
@@ -43,7 +43,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
     public CreateConversionResponse createConversion(CreateConversionRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId()),
+                String.format("/v1/portfolios/%s/wallets/%s/conversion", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
                 new TypeReference<CreateConversionResponse>() {});
@@ -54,7 +54,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/transactions", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/transactions", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPortfolioTransactionsResponse>() {});
@@ -65,7 +65,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(),
+                String.format("/v1/portfolios/%s/wallets/%s/transactions", request.getPortfolioId(),
                         request.getWalletId()),
                 request,
                 List.of(200),
@@ -77,7 +77,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
+                String.format("/v1/portfolios/%s/wallets/%s/transfers", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
                 new TypeReference<CreateWalletTransferResponse>() {});
@@ -88,7 +88,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
+                String.format("/v1/portfolios/%s/wallets/%s/withdrawals", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
                 new TypeReference<CreateWalletWithdrawalResponse>() {});
@@ -99,7 +99,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(),
+                String.format("/v1/portfolios/%s/wallets/%s/onchain_transaction", request.getPortfolioId(),
                         request.getWalletId()),
                 request,
                 List.of(200),
@@ -111,7 +111,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/advanced_transfers/%s/transactions", request.getPortfolioId(),
+                String.format("/v1/portfolios/%s/advanced_transfers/%s/transactions", request.getPortfolioId(),
                         request.getAdvancedTransferId()),
                 request,
                 List.of(200),
@@ -128,7 +128,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/portfolios/%s/transactions/%s/travel_rule/deposit", request.getPortfolioId(),
+                String.format("/v1/portfolios/%s/transactions/%s/travel_rule/deposit", request.getPortfolioId(),
                         request.getTransactionId()),
                 request,
                 List.of(200),
@@ -140,7 +140,7 @@ public class TransactionsServiceImpl extends CoinbaseServiceImpl implements Tran
             throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/transactions/%s/travel_rule", request.getPortfolioId(),
+                String.format("/v1/portfolios/%s/transactions/%s/travel_rule", request.getPortfolioId(),
                         request.getTransactionId()),
                 request,
                 List.of(200),

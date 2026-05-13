@@ -33,7 +33,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
     public ListEntityBalancesResponse listEntityBalances(ListEntityBalancesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/balances", request.getEntityId()),
+                String.format("/v1/entities/%s/balances", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListEntityBalancesResponse>() {});
@@ -43,7 +43,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
     public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/balances", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/balances", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPortfolioBalancesResponse>() {});
@@ -53,7 +53,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
     public GetWalletBalanceResponse getWalletBalance(GetWalletBalanceRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId()),
+                String.format("/v1/portfolios/%s/wallets/%s/balance", request.getPortfolioId(), request.getWalletId()),
                 null,
                 List.of(200),
                 new TypeReference<GetWalletBalanceResponse>() {});
@@ -63,7 +63,7 @@ public class BalancesServiceImpl extends CoinbaseServiceImpl implements Balances
     public ListOnchainWalletBalancesResponse listOnchainWalletBalances(ListOnchainWalletBalancesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/wallets/%s/web3_balances", request.getPortfolioId(), request.getWalletId()),
+                String.format("/v1/portfolios/%s/wallets/%s/web3_balances", request.getPortfolioId(), request.getWalletId()),
                 request,
                 List.of(200),
                 new TypeReference<ListOnchainWalletBalancesResponse>() {});

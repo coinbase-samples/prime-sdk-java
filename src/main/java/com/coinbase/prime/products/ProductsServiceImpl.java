@@ -33,7 +33,7 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
     public ListCandlesResponse listCandles(ListCandlesRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/candles", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/candles", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListCandlesResponse>() {});
@@ -43,7 +43,7 @@ public class ProductsServiceImpl extends CoinbaseServiceImpl implements Products
     public ListPortfolioProductsResponse listPortfolioProducts(ListPortfolioProductsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/products", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/products", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPortfolioProductsResponse>() {});

@@ -33,7 +33,7 @@ public class UsersServiceImpl extends CoinbaseServiceImpl implements UsersServic
     public ListEntityUsersResponse listEntityUsers(ListEntityUsersRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/entities/%s/users", request.getEntityId()),
+                String.format("/v1/entities/%s/users", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<ListEntityUsersResponse>() {});
@@ -43,7 +43,7 @@ public class UsersServiceImpl extends CoinbaseServiceImpl implements UsersServic
     public ListPortfolioUsersResponse listPortfolioUsers(ListPortfolioUsersRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/users", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/users", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<ListPortfolioUsersResponse>() {});

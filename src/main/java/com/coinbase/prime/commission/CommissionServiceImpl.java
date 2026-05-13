@@ -33,7 +33,7 @@ public class CommissionServiceImpl extends CoinbaseServiceImpl implements Commis
     public GetPortfolioCommissionResponse getPortfolioCommission(GetPortfolioCommissionRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,
-                String.format("/portfolios/%s/commission", request.getPortfolioId()),
+                String.format("/v1/portfolios/%s/commission", request.getPortfolioId()),
                 request,
                 List.of(200),
                 new TypeReference<GetPortfolioCommissionResponse>() {});
