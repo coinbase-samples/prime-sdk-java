@@ -22,4 +22,5 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 public interface PortfoliosService {
     ListPortfoliosResponse listPortfolios() throws CoinbaseClientException, CoinbasePrimeException;
     GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

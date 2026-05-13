@@ -183,10 +183,44 @@ public class FinancingServiceImpl extends CoinbaseServiceImpl implements Financi
     public UpdateFundingSettingsResponse updateFundingSettings(UpdateFundingSettingsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.POST,
-                String.format("/entities/%s/funding-settings", request.getEntityId()),
+                String.format("/entities/%s/funding_settings", request.getEntityId()),
                 request,
                 List.of(200),
                 new TypeReference<UpdateFundingSettingsResponse>() {});
+    }
+
+    @Override
+    public GetCrossMarginRiskParametersResponse getCrossMarginRiskParameters(GetCrossMarginRiskParametersRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/cross_margin/risk_parameters", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<GetCrossMarginRiskParametersResponse>() {});
+    }
+
+    /**
+     * Uses the /v2 path. Requires CoinbasePrimeClient initialized with base URL
+     * "https://api.prime.coinbase.com" (without /v1 suffix).
+     */
+    @Override
+    public GetCrossMarginPrimeOverviewResponse getCrossMarginPrimeOverview(GetCrossMarginPrimeOverviewRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/v2/entities/%s/cross_margin/prime", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<GetCrossMarginPrimeOverviewResponse>() {});
+    }
+
+    @Override
+    public GetMarketDataResponse getMarketData(GetMarketDataRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/market_data", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<GetMarketDataResponse>() {});
     }
 
 }

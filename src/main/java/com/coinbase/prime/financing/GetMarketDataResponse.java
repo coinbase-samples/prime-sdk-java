@@ -14,26 +14,30 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.advancedtransfers;
+package com.coinbase.prime.financing;
 
 import com.coinbase.prime.common.Pagination;
-import com.coinbase.prime.model.AdvancedTransfer;
+import com.coinbase.prime.model.MarketData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ListAdvancedTransfersResponse {
-    @JsonProperty("advanced_transfers")
-    private AdvancedTransfer[] advancedTransfers;
+import java.util.List;
+
+public class GetMarketDataResponse {
+    @JsonProperty("market_data")
+    private List<MarketData> marketData;
+
+    @JsonProperty("pagination")
     private Pagination pagination;
 
-    public ListAdvancedTransfersResponse() {
+    public GetMarketDataResponse() {
     }
 
-    public AdvancedTransfer[] getAdvancedTransfers() {
-        return advancedTransfers;
+    public List<MarketData> getMarketData() {
+        return marketData;
     }
 
-    public void setAdvancedTransfers(AdvancedTransfer[] advancedTransfers) {
-        this.advancedTransfers = advancedTransfers;
+    public void setMarketData(List<MarketData> marketData) {
+        this.marketData = marketData;
     }
 
     public Pagination getPagination() {

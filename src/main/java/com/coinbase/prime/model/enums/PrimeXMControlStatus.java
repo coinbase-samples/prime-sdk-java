@@ -14,22 +14,11 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.advancedtransfers;
+package com.coinbase.prime.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class CancelAdvancedTransferResponse {
-    @JsonProperty("advanced_transfer_id")
-    private String advancedTransferId;
-
-    public CancelAdvancedTransferResponse() {
-    }
-
-    public String getAdvancedTransferId() {
-        return advancedTransferId;
-    }
-
-    public void setAdvancedTransferId(String advancedTransferId) {
-        this.advancedTransferId = advancedTransferId;
-    }
+public enum PrimeXMControlStatus {
+    XM_CONTROL_STATUS_UNSPECIFIED,
+    TRADES_AND_WITHDRAWALS,
+    TRADES_ONLY,
+    SESSION_LOCKED
 }

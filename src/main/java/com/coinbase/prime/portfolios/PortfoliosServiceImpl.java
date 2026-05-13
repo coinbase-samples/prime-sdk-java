@@ -49,4 +49,14 @@ public class PortfoliosServiceImpl extends CoinbaseServiceImpl implements Portfo
                 new TypeReference<GetPortfolioResponse>() {});
     }
 
+    @Override
+    public GetPortfolioCounterpartyIdResponse getPortfolioCounterpartyId(GetPortfolioCounterpartyIdRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/portfolios/%s/counterparty", request.getPortfolioId()),
+                request,
+                List.of(200),
+                new TypeReference<GetPortfolioCounterpartyIdResponse>() {});
+    }
+
 }

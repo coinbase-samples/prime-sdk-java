@@ -14,23 +14,13 @@
  *  limitations under the License.
  */
 
-package com.coinbase.prime.advancedtransfers;
+package com.coinbase.prime.model.enums;
 
-import com.coinbase.prime.model.AdvancedTransfer;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class CreateAdvancedTransferResponse {
-    @JsonProperty("advanced_transfer")
-    private AdvancedTransfer advancedTransfer;
-
-    public CreateAdvancedTransferResponse() {
-    }
-
-    public AdvancedTransfer getAdvancedTransfer() {
-        return advancedTransfer;
-    }
-
-    public void setAdvancedTransfer(AdvancedTransfer advancedTransfer) {
-        this.advancedTransfer = advancedTransfer;
-    }
+public enum PrimeXMMarginLevel {
+    XM_MARGIN_LEVEL_UNSPECIFIED,
+    HEALTHY_THRESHOLD,
+    WARNING_THRESHOLD,
+    URGENT_MARGIN_CALL_THRESHOLD,
+    LIQUIDATION_THRESHOLD,
+    DEFICIT_THRESHOLD
 }

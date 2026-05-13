@@ -21,5 +21,7 @@ import com.coinbase.prime.errors.CoinbasePrimeException;
 
 public interface PositionsService {
     ListAggregatePositionsResponse listAggregatePositions(ListAggregatePositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListAggregateEntityPositionsResponse listAggregateEntityPositions(ListAggregateEntityPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    ListEntityPositionsResponse listEntityPositions(ListEntityPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }

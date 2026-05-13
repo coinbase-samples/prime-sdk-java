@@ -40,6 +40,26 @@ public class PositionsServiceImpl extends CoinbaseServiceImpl implements Positio
     }
 
     @Override
+    public ListAggregateEntityPositionsResponse listAggregateEntityPositions(ListAggregateEntityPositionsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/aggregate_positions", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListAggregateEntityPositionsResponse>() {});
+    }
+
+    @Override
+    public ListEntityPositionsResponse listEntityPositions(ListEntityPositionsRequest request) throws CoinbasePrimeException {
+        return this.request(
+                HttpMethod.GET,
+                String.format("/entities/%s/positions", request.getEntityId()),
+                request,
+                List.of(200),
+                new TypeReference<ListEntityPositionsResponse>() {});
+    }
+
+    @Override
     public ListPositionsResponse listPositions(ListPositionsRequest request) throws CoinbasePrimeException {
         return this.request(
                 HttpMethod.GET,

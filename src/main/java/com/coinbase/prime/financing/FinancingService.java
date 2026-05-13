@@ -36,4 +36,7 @@ public interface FinancingService {
     ListMarginConversionsResponse listMarginConversions(ListMarginConversionsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     GetPortfolioWithdrawalPowerResponse getPortfolioWithdrawalPower(GetPortfolioWithdrawalPowerRequest request) throws CoinbaseClientException, CoinbasePrimeException;
     UpdateFundingSettingsResponse updateFundingSettings(UpdateFundingSettingsRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetCrossMarginRiskParametersResponse getCrossMarginRiskParameters(GetCrossMarginRiskParametersRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetCrossMarginPrimeOverviewResponse getCrossMarginPrimeOverview(GetCrossMarginPrimeOverviewRequest request) throws CoinbaseClientException, CoinbasePrimeException;
+    GetMarketDataResponse getMarketData(GetMarketDataRequest request) throws CoinbaseClientException, CoinbasePrimeException;
 }
