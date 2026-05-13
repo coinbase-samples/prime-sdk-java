@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.7.2] - 2026-05-13
+
+### Changed
+- Moved `/v1` prefix from the base URL constant (`CB_PRIME_BASE_URL`) onto each service implementation path, so the base URL is now `https://api.prime.coinbase.com` without a trailing version segment; all request URIs are unchanged
+
 ## [1.7.1] - 2026-04-21
 
 ### Added
